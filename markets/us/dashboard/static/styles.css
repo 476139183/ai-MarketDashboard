@@ -72,6 +72,11 @@ body {
   gap: 8px;
   align-items: center;
 }
+.field-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
 .actions input,
 .actions select {
   padding: 10px 12px;
