@@ -707,14 +707,9 @@ def compute_intraday_signal(
         setup_name: str,
     ) -> bool:
         nonlocal signal, reason, S, S_key, E_band, T1, T1_key, R1v, stress, side, entry_ready, structure, setup
-        # 趋势闸：空 score≤-2；多 score≥4 且价≥开盘（近样本多头假破多，宁缺）
+        # 短线趋势闸（对称）：多 score≥2，空 score≤-2；胜率可降，优先跟趋势
         sc = st_trend["score"]
-        if long:
-            ok_trend = sc >= 4 and px >= day_o
-            need_txt = "多需score≥4且价≥开盘"
-        else:
-            ok_trend = sc <= -2
-            need_txt = "空需score≤-2"
+        ok_trend = (sc >= 2) if long else (sc <= -2)
         if not ok_trend:
             signal = "观望"
             setup = setup_name
@@ -722,7 +717,7 @@ def compute_intraday_signal(
             E_band = [round(E_lo, 4), round(E_hi, 4)]
             S, S_key, T1, T1_key = S_, Sk, T1_, Tk
             side = "long" if long else "short"
-            reason = f"{why}；但{st_trend['label']} score={sc}，{need_txt}，不开"
+            reason = f"{why}；但{st_trend['label']} score={sc}，需与方向同向(|score|≥2)，不开"
             entry_ready = False
             return False
         if E_hi < E_lo:
@@ -764,56 +759,50 @@ def compute_intraday_signal(
         reason = f"{why}（{trend_tag}）；在带内但风控未过（{note}），不开仓"
         return False
 
-    # 近样本：多头 ORB 假破多 → 默认不做多头突破开仓，只观察
-    if setup is None and above_vwap and broke_up and px >= orb_h:
-        signal = "观望"
-        structure = "多头"
-        setup = "多头突破观察"
-        S = orb_l - buf
-        S_key = f"ORB下沿失效 {orb_l:.2f}"
-        E_band = [round(max(orb_h - 0.1 * orb_w, vwap), 4), round(orb_h + 0.45 * atr_i, 4)]
-        T1 = round(orb_h + max(1.2 * orb_w, 2.0 * atr_i), 4)
-        T1_key = "观察用"
-        reason = (
-            f"{st_trend['label']}·ORB上破仅观察：近样本多头假破多，默认不开多；"
-            f"优先做空头顺势。S参考 {orb_l:.2f}"
-        )
-        entry_ready = False
-        side = "long"
+    # A1. 短线偏多 → ORB 上破开多
+    if setup is None and above_vwap and broke_up and px >= orb_h and px <= orb_h + 0.75 * atr_i:
+        S_ = orb_l - buf
+        E_lo = max(orb_h - 0.15 * orb_w, min(vwap, orb_h))
+        E_hi = orb_h + 0.55 * atr_i
+        T1_ = orb_h + max(1.2 * orb_w, 2.0 * atr_i)
+        _accept(True, E_lo, E_hi, S_, f"ORB下沿失效 {orb_l:.2f}", T1_, "ORB量度",
+                "短线偏多·ORB上破", "多头", "ORB突破多")
 
-    # A2. ORB 下破 + VWAP 下 + 短期偏空（主开仓）
-    if setup is None and below_vwap and broke_down and px <= orb_l and px >= orb_l - 0.7 * atr_i:
+    # A2. 短线偏空 → ORB 下破开空
+    if setup is None and below_vwap and broke_down and px <= orb_l and px >= orb_l - 0.75 * atr_i:
         S_ = orb_h + buf
         E_hi = min(vwap, orb_l + 0.2 * orb_w)
         E_lo = orb_l - 0.55 * atr_i
         T1_ = orb_l - max(1.2 * orb_w, 2.0 * atr_i)
         _accept(False, E_lo, E_hi, S_, f"ORB上沿失效 {orb_h:.2f}", T1_, "ORB量度/前低",
-                "短期偏空·ORB下破", "空头", "ORB突破空")
+                "短线偏空·ORB下破", "空头", "ORB突破空")
 
-    # B：强偏空时允许反抽开空（加笔数）；回踩多只观察
-    if setup is None and trend_down and st_trend["score"] <= -3 and below_vwap and bearish and orb_l - 0.2 * atr_i <= px <= vwap:
+    # B. 趋势续作：|score|≥3 才回踩/反抽（突破用 ≥2；续作更严一点）
+    strong_up = trend_up and st_trend["score"] >= 3
+    strong_down = trend_down and st_trend["score"] <= -3
+    if setup is None and strong_up and above_vwap and bullish and vwap <= px <= orb_h + 0.3 * atr_i:
+        S_ = orb_l - buf
+        E_lo = max(vwap, orb_mid - 0.1 * atr_i)
+        E_hi = min(orb_h + 0.25 * atr_i, vwap + 0.75 * atr_i)
+        T1_ = max(path_h, orb_h) + max(orb_w, 1.8 * atr_i)
+        _accept(True, E_lo, E_hi, S_, f"ORB下沿失效 {orb_l:.2f}", T1_, "趋势延伸",
+                "短线偏多·VWAP回踩续多", "多头", "趋势回踩多")
+    elif setup is None and strong_down and below_vwap and bearish and orb_l - 0.3 * atr_i <= px <= vwap:
         S_ = orb_h + buf
-        E_hi = min(vwap, orb_mid + 0.05 * atr_i)
-        E_lo = max(orb_l - 0.15 * atr_i, vwap - 0.65 * atr_i)
-        T1_ = min(path_l, orb_l) - max(1.0 * orb_w, 1.8 * atr_i)
+        E_hi = min(vwap, orb_mid + 0.1 * atr_i)
+        E_lo = max(orb_l - 0.25 * atr_i, vwap - 0.75 * atr_i)
+        T1_ = min(path_l, orb_l) - max(orb_w, 1.8 * atr_i)
         _accept(False, E_lo, E_hi, S_, f"ORB上沿失效 {orb_h:.2f}", T1_, "趋势延伸",
-                "强偏空·VWAP反抽续空", "空头", "趋势反抽空")
-    elif setup is None and trend_up and above_vwap and bullish and orb_l < px < orb_h + gap:
-        signal = "观望"
-        structure = "多头"
-        setup = "趋势回踩观察"
-        S = orb_l - buf
-        S_key = f"ORB下沿失效 {orb_l:.2f}"
-        E_band = [round(max(vwap, orb_mid), 4), round(min(orb_h + 0.2 * atr_i, vwap + 0.5 * atr_i), 4)]
-        T1 = round(orb_h + max(1.2 * orb_w, 2.0 * atr_i), 4)
-        T1_key = "观察用"
-        reason = f"{st_trend['label']}·回踩多仅观察（默认不做多）"
-        entry_ready = False
-        side = "long"
+                "短线偏空·VWAP反抽续空", "空头", "趋势反抽空")
     elif setup is None and trend_flat and (bullish or bearish or broke_up or broke_down):
         signal = "观望"
         setup = "趋势未明"
-        reason = f"{st_trend['label']}：震荡不做开仓"
+        reason = f"{st_trend['label']}：无短线趋势，不逆势猜方向"
+        entry_ready = False
+    elif setup is None and ((trend_up and not strong_up) or (trend_down and not strong_down)):
+        signal = "观望"
+        setup = "弱趋势观察"
+        reason = f"{st_trend['label']} score={st_trend['score']}：可等 ORB 同向突破；回踩/反抽需 |score|≥3"
         entry_ready = False
 
     # 平仓：结构级失效才喊平（空破 ORB 上 / 多破 ORB 下）
@@ -1058,7 +1047,7 @@ def analyze_many(symbols: Optional[List[str]] = None) -> Dict[str, Any]:
         "generated_bj": now_bj.strftime("%Y-%m-%d %H:%M:%S"),
         "session": session_status(now_bj),
         "source_note": "【美股引擎】现价 Nasdaq→Yahoo；ORB/VWAP 可用缓存。主源见 markets/us/docs/market-data-sources.md；A股勿用本引擎",
-        "rules_note": "短线顺势+ORB/回踩；T1更远；R1≥0.8；结构止损；5x仅参考；非AI",
+        "rules_note": "短线趋势双向(多空对称)；ORB+回踩/反抽；T1远；R1≥0.8；5x仅参考；非AI",
         "items": items,
         "errors": errors,
     }

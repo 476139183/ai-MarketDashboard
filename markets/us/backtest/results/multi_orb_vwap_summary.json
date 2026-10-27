@@ -1,37 +1,39 @@
 [
   {
     "symbol": "SNDK",
-    "n_trades": 6,
-    "win_rate": 100.0,
-    "avg_pnl_pct": 3.282,
-    "sum_eq5x": 98.43,
+    "n_trades": 7,
+    "win_rate": 57.1,
+    "avg_pnl_pct": 0.647,
+    "sum_eq5x": 22.62,
     "exits": {
-      "收盘止盈≥1.5%": 4,
-      "触T1": 2
+      "收盘止盈≥1.5%": 2,
+      "触T1": 2,
+      "触S": 3
     }
   },
   {
     "symbol": "NVDA",
-    "n_trades": 4,
-    "win_rate": 75.0,
-    "avg_pnl_pct": 0.688,
-    "sum_eq5x": 13.73,
+    "n_trades": 7,
+    "win_rate": 28.6,
+    "avg_pnl_pct": -0.447,
+    "sum_eq5x": -15.66,
     "exits": {
+      "触S": 4,
       "触T1": 2,
-      "触S": 1,
       "样本末日": 1
     }
   },
   {
     "symbol": "MU",
-    "n_trades": 6,
-    "win_rate": 83.3,
-    "avg_pnl_pct": 2.237,
-    "sum_eq5x": 67.1,
+    "n_trades": 9,
+    "win_rate": 44.4,
+    "avg_pnl_pct": -0.062,
+    "sum_eq5x": -2.83,
     "exits": {
-      "触T1": 3,
-      "平空": 1,
-      "收盘止盈≥1.5%": 2
+      "触T1": 2,
+      "触S": 4,
+      "收盘止盈≥1.5%": 2,
+      "样本末日": 1
     }
   }
 ]
