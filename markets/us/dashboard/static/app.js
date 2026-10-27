@@ -1,8 +1,10 @@
 const $ = (id) => document.getElementById(id);
 
 const LS_TIMER = "signal_board_timer_on";
-const LS_SEC = "signal_board_timer_sec";
 const LS_INTERVAL = "signal_board_bar_interval";
+/** 美东常规开盘 09:30，定时刷新以此为锚点按 K 线周期对齐 */
+const RTH_OPEN_MIN = 9 * 60 + 30;
+const BAR_CLOSE_LAG_MS = 2500;
 
 let timerId = null;
 let countdownId = null;
@@ -12,6 +14,116 @@ let timerOn = localStorage.getItem(LS_TIMER) === "1";
 function barInterval() {
   const v = ($("bar-interval") && $("bar-interval").value) || "15m";
   return ["1m", "5m", "15m"].includes(v) ? v : "15m";
+}
+
+function barMinutes() {
+  return { "1m": 1, "5m": 5, "15m": 15 }[barInterval()] || 15;
+}
+
+function pad2(n) {
+  return String(n).padStart(2, "0");
+}
+
+/** 美东墙钟拆解 */
+function nyParts(date = new Date()) {
+  const fmt = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  const o = {};
+  for (const p of fmt.formatToParts(date)) {
+    if (p.type !== "literal") o[p.type] = p.value;
+  }
+  return {
+    y: Number(o.year),
+    m: Number(o.month),
+    d: Number(o.day),
+    H: Number(o.hour),
+    M: Number(o.minute),
+    S: Number(o.second),
+  };
+}
+
+/** 把美东墙钟转成 UTC ms（迭代校正夏令时） */
+function nyWallToUtcMs(y, m, d, H, M, S = 0) {
+  let t = Date.UTC(y, m - 1, d, H + 5, M, S);
+  for (let i = 0; i < 4; i++) {
+    const p = nyParts(new Date(t));
+    const wantDay = Date.UTC(y, m - 1, d);
+    const gotDay = Date.UTC(p.y, p.m - 1, p.d);
+    t += wantDay - gotDay;
+    const wantSec = H * 3600 + M * 60 + S;
+    const gotSec = p.H * 3600 + p.M * 60 + p.S;
+    t += (wantSec - gotSec) * 1000;
+  }
+  return t;
+}
+
+function addNyDays(y, m, d, delta) {
+  const dt = new Date(Date.UTC(y, m - 1, d + delta));
+  return { y: dt.getUTCFullYear(), m: dt.getUTCMonth() + 1, d: dt.getUTCDate() };
+}
+
+/**
+ * 下一根 K 线收盘对齐时刻（开盘 09:30 ET 起算）+ 短延迟。
+ * 例：15m → 09:45 / 10:00 / …；5m → 09:35 / 09:40 / …
+ */
+function nextOpenAlignedAt(now = Date.now()) {
+  const step = barMinutes();
+  const p = nyParts(new Date(now));
+  const nowMin = p.H * 60 + p.M;
+  const nowSecTotal = nowMin * 60 + p.S;
+  const openSec = RTH_OPEN_MIN * 60;
+  const stepSec = step * 60;
+
+  let day = { y: p.y, m: p.m, d: p.d };
+  let targetSec;
+
+  if (nowSecTotal < openSec) {
+    // 未到开盘：等到开盘后第一根收盘
+    targetSec = openSec + stepSec;
+  } else {
+    const elapsed = nowSecTotal - openSec;
+    const n = Math.floor(elapsed / stepSec) + 1;
+    targetSec = openSec + n * stepSec;
+    // 跨日（超过午夜按次日开盘第一根）
+    if (targetSec >= 24 * 3600) {
+      day = addNyDays(day.y, day.m, day.d, 1);
+      targetSec = openSec + stepSec;
+    }
+  }
+
+  let H = Math.floor(targetSec / 3600);
+  let M = Math.floor((targetSec % 3600) / 60);
+  let S = targetSec % 60;
+  if (H >= 24) {
+    day = addNyDays(day.y, day.m, day.d, 1);
+    H -= 24;
+  }
+
+  let at = nyWallToUtcMs(day.y, day.m, day.d, H, M, S) + BAR_CLOSE_LAG_MS;
+  if (at <= now + 200) {
+    // 刚好踩在边界上，顺延下一根
+    const again = nextOpenAlignedAt(now + stepSec * 1000);
+    return again;
+  }
+  return at;
+}
+
+function formatNyHm(ms) {
+  return new Intl.DateTimeFormat("zh-CN", {
+    timeZone: "America/New_York",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(new Date(ms));
 }
 
 function signalClass(sig) {
@@ -45,27 +157,27 @@ function tickBeijingClock() {
   $("bj-clock").textContent = `北京 ${text.replace(/\//g, "-")}`;
 }
 
-function timerSeconds() {
-  const v = Number($("timer-sec").value);
-  return Number.isFinite(v) && v > 0 ? v : 60;
-}
-
 function stopTimer() {
-  if (timerId) clearInterval(timerId);
+  if (timerId) clearTimeout(timerId);
   if (countdownId) clearInterval(countdownId);
   timerId = null;
   countdownId = null;
   nextAt = 0;
 }
 
+function armNextTick() {
+  nextAt = nextOpenAlignedAt(Date.now());
+  const delay = Math.max(500, nextAt - Date.now());
+  timerId = setTimeout(async () => {
+    timerId = null;
+    await load();
+    if (timerOn) armNextTick();
+  }, delay);
+}
+
 function startTimer() {
   stopTimer();
-  const ms = timerSeconds() * 1000;
-  nextAt = Date.now() + ms;
-  timerId = setInterval(() => {
-    load();
-    nextAt = Date.now() + ms;
-  }, ms);
+  armNextTick();
   countdownId = setInterval(updateTimerUi, 500);
   updateTimerUi();
 }
@@ -73,7 +185,6 @@ function startTimer() {
 function setTimer(on) {
   timerOn = on;
   localStorage.setItem(LS_TIMER, on ? "1" : "0");
-  localStorage.setItem(LS_SEC, String(timerSeconds()));
   if (on) startTimer();
   else {
     stopTimer();
@@ -158,9 +269,7 @@ function renderCard(item) {
         <li><span class="k">止盈</span><span class="v">待定</span></li>`;
   const tag = item.price_tag ? `<span class="ptag">${item.price_tag}</span>` : "";
   const iv = item.interval || barInterval();
-  const scope = item.struct_scope
-    ? `<p class="scope">${item.struct_scope}</p>`
-    : "";
+  const scope = item.struct_scope ? `<p class="scope">${item.struct_scope}</p>` : "";
   const ready = item.entry_ready
     ? `<span class="ready">已到价</span>`
     : hasPlan
@@ -198,7 +307,9 @@ function updateTimerUi() {
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
-  status.textContent = `每 ${timerSeconds()}s 自动刷新 · ${left}s${meta}`;
+  const iv = barInterval();
+  const nextNy = nextAt ? formatNyHm(nextAt) : "—";
+  status.textContent = `对齐开盘 09:30 ET · ${iv} 收盘刷新 · 下次 ${nextNy} ET · ${left}s${meta}`;
 }
 
 async function load() {
@@ -228,23 +339,15 @@ async function load() {
 
 $("btn-refresh").addEventListener("click", load);
 $("btn-timer").addEventListener("click", () => setTimer(!timerOn));
-$("timer-sec").addEventListener("change", () => {
-  localStorage.setItem(LS_SEC, String(timerSeconds()));
-  if (timerOn) startTimer();
-  else updateTimerUi();
-});
 $("bar-interval").addEventListener("change", () => {
   localStorage.setItem(LS_INTERVAL, barInterval());
   load();
+  if (timerOn) startTimer();
 });
 $("symbols").addEventListener("keydown", (e) => {
   if (e.key === "Enter") load();
 });
 
-const savedSec = localStorage.getItem(LS_SEC);
-if (savedSec && [...$("timer-sec").options].some((o) => o.value === savedSec)) {
-  $("timer-sec").value = savedSec;
-}
 const savedIv = localStorage.getItem(LS_INTERVAL);
 if (savedIv && [...$("bar-interval").options].some((o) => o.value === savedIv)) {
   $("bar-interval").value = savedIv;

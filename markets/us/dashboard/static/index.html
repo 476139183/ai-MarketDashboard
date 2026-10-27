@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/styles.css?v=6" />
+  <link rel="stylesheet" href="/static/styles.css?v=7" />
 </head>
 <body>
   <div class="page">
@@ -23,13 +23,7 @@
           <option value="5m">5分钟</option>
           <option value="15m" selected>15分钟</option>
         </select>
-        <select id="timer-sec" aria-label="刷新间隔">
-          <option value="30">30秒</option>
-          <option value="60" selected>1分</option>
-          <option value="180">3分</option>
-          <option value="300">5分</option>
-        </select>
-        <button id="btn-timer" type="button" class="btn-timer" aria-pressed="false">定时</button>
+        <button id="btn-timer" type="button" class="btn-timer" aria-pressed="false" title="按美东开盘09:30对齐K线收盘刷新">定时</button>
         <button id="btn-refresh" type="button">刷新</button>
       </div>
     </header>
@@ -37,6 +31,6 @@
     <p id="timer-status" class="timer-status"></p>
     <main id="cards" class="cards" aria-live="polite"></main>
   </div>
-  <script src="/static/app.js?v=6"></script>
+  <script src="/static/app.js?v=7"></script>
 </body>
 </html>
