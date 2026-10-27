@@ -51,6 +51,14 @@ body {
   letter-spacing: -0.03em;
   line-height: 1.05;
 }
+.iv {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-left: 6px;
+  letter-spacing: 0;
+}
 .clock-live {
   margin: 8px 0 0;
   font-family: var(--mono);

@@ -2,11 +2,17 @@ const $ = (id) => document.getElementById(id);
 
 const LS_TIMER = "signal_board_timer_on";
 const LS_SEC = "signal_board_timer_sec";
+const LS_INTERVAL = "signal_board_bar_interval";
 
 let timerId = null;
 let countdownId = null;
 let nextAt = 0;
 let timerOn = localStorage.getItem(LS_TIMER) === "1";
+
+function barInterval() {
+  const v = ($("bar-interval") && $("bar-interval").value) || "15m";
+  return ["1m", "5m", "15m"].includes(v) ? v : "15m";
+}
 
 function signalClass(sig) {
   if (sig === "做多") return "long";
@@ -151,7 +157,8 @@ function renderCard(item) {
         <li><span class="k">止损</span><span class="v">待定</span></li>
         <li><span class="k">止盈</span><span class="v">待定</span></li>`;
   const tag = item.price_tag ? `<span class="ptag">${item.price_tag}</span>` : "";
-  const scope = item.struct_scope && item.struct_scope !== "今日RTH"
+  const iv = item.interval || barInterval();
+  const scope = item.struct_scope
     ? `<p class="scope">${item.struct_scope}</p>`
     : "";
   const ready = item.entry_ready
@@ -162,7 +169,7 @@ function renderCard(item) {
   return `
     <article class="card">
       <div class="row">
-        <p class="sym">${item.symbol || "—"}</p>
+        <p class="sym">${item.symbol || "—"} <span class="iv">${iv}</span></p>
         <p class="px">${fmt(item.price)}${chgText(item)}${tag}</p>
       </div>
       <div class="badges">
@@ -197,17 +204,19 @@ function updateTimerUi() {
 async function load() {
   const btn = $("btn-refresh");
   const symbols = $("symbols").value.trim() || "SNDK,MU,NVDA";
+  const interval = barInterval();
   btn.disabled = true;
   try {
     const res = await fetch(
-      `/api/signals?symbols=${encodeURIComponent(symbols)}&_=${Date.now()}`,
+      `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=${encodeURIComponent(interval)}&_=${Date.now()}`,
       { cache: "no-store" }
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     $("cards").innerHTML = (data.items || []).map(renderCard).join("");
     const phase = (data.session && data.session.phase) || "";
-    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"}${phase ? " · " + phase : ""}`;
+    const iv = data.interval || interval;
+    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · ${iv}${phase ? " · " + phase : ""}`;
   } catch (err) {
     $("cards").innerHTML = `<p class="hint">加载失败：${err.message}</p>`;
     lastRefreshMeta = `刷新失败 ${err.message}`;
@@ -224,6 +233,10 @@ $("timer-sec").addEventListener("change", () => {
   if (timerOn) startTimer();
   else updateTimerUi();
 });
+$("bar-interval").addEventListener("change", () => {
+  localStorage.setItem(LS_INTERVAL, barInterval());
+  load();
+});
 $("symbols").addEventListener("keydown", (e) => {
   if (e.key === "Enter") load();
 });
@@ -231,6 +244,10 @@ $("symbols").addEventListener("keydown", (e) => {
 const savedSec = localStorage.getItem(LS_SEC);
 if (savedSec && [...$("timer-sec").options].some((o) => o.value === savedSec)) {
   $("timer-sec").value = savedSec;
+}
+const savedIv = localStorage.getItem(LS_INTERVAL);
+if (savedIv && [...$("bar-interval").options].some((o) => o.value === savedIv)) {
+  $("bar-interval").value = savedIv;
 }
 
 tickBeijingClock();

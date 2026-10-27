@@ -9,7 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from engine import analyze_many
+from engine import INTERVALS, analyze_many, normalize_interval
 
 ROOT = Path(__file__).resolve().parent
 STATIC = ROOT / "static"
@@ -59,8 +59,11 @@ class Handler(BaseHTTPRequestHandler):
             qs = parse_qs(parsed.query)
             raw = (qs.get("symbols") or ["SNDK,MU,NVDA"])[0]
             symbols = [x.strip().upper() for x in raw.split(",") if x.strip()]
+            interval = normalize_interval((qs.get("interval") or ["15m"])[0])
+            if interval not in INTERVALS:
+                interval = "15m"
             try:
-                payload = analyze_many(symbols or ["SNDK"])
+                payload = analyze_many(symbols or ["SNDK"], interval=interval)
                 body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
                 self._send(200, body, "application/json; charset=utf-8")
             except Exception as e:

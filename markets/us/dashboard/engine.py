@@ -25,6 +25,27 @@ UA = (
 )
 DEFAULT_SYMBOLS = ["SNDK", "MU", "NVDA"]
 CACHE_DIR = Path(__file__).resolve().parent / "cache"
+# 短线周期：1m / 5m / 15m（ORB 统一按开盘约 30 分钟）
+INTERVALS = ("1m", "5m", "15m")
+INTERVAL_MINUTES = {"1m": 1, "5m": 5, "15m": 15}
+ORB_WINDOW_MINUTES = 30
+DEFAULT_INTERVAL = "15m"
+
+
+def normalize_interval(interval: Optional[str]) -> str:
+    iv = (interval or DEFAULT_INTERVAL).strip().lower()
+    if iv in ("1", "1min", "1m"):
+        return "1m"
+    if iv in ("5", "5min", "5m"):
+        return "5m"
+    if iv in ("15", "15min", "15m"):
+        return "15m"
+    return DEFAULT_INTERVAL
+
+
+def orb_bar_count(interval: str) -> int:
+    mins = INTERVAL_MINUTES.get(normalize_interval(interval), 15)
+    return max(1, ORB_WINDOW_MINUTES // mins)
 
 
 def _parse_chart(d: dict) -> Tuple[List[dict], dict]:
@@ -65,13 +86,10 @@ def _http_json(url: str, timeout: int = 4, extra_headers: Optional[dict] = None)
 
 
 def _cache_path(symbol: str, interval: str) -> Path:
-    tag = "1d" if interval.endswith("d") and not interval[0].isdigit() else interval
     if interval == "1d":
         tag = "1d"
-    elif interval == "15m":
-        tag = "15m"
-    elif interval == "5m":
-        tag = "5m"
+    elif interval in INTERVALS:
+        tag = interval
     else:
         tag = interval.replace("/", "_")
     return CACHE_DIR / f"{symbol}_{tag}.json"
@@ -80,13 +98,12 @@ def _cache_path(symbol: str, interval: str) -> Path:
 def _load_cache(symbol: str, interval: str) -> Optional[Tuple[List[dict], dict]]:
     fp = _cache_path(symbol, interval)
     if not fp.is_file():
-        # try alternate names
         alts = list(CACHE_DIR.glob(f"{symbol}_*.json")) if CACHE_DIR.is_dir() else []
         for a in alts:
-            if interval == "1d" and "_1d" in a.name:
+            if interval == "1d" and ("_1d" in a.name or a.name.endswith("_1d.json")):
                 fp = a
                 break
-            if interval == "15m" and "15m" in a.name:
+            if interval in INTERVALS and f"_{interval}" in a.name:
                 fp = a
                 break
         else:
@@ -289,26 +306,43 @@ def aggregate_points_to_bars(points: List[dict], minutes: int = 15) -> List[dict
     return rows
 
 
-def fetch_bars_15m(symbol: str, prefer_cache: bool = False) -> Tuple[List[dict], dict, str]:
-    """15m 结构：优先 Nasdaq 分时聚合，其次 Yahoo，最后本地缓存。"""
+def fetch_bars_intraday(
+    symbol: str,
+    interval: str = DEFAULT_INTERVAL,
+    prefer_cache: bool = False,
+) -> Tuple[List[dict], dict, str]:
+    """1m/5m/15m：优先 Nasdaq 分时聚合，其次 Yahoo，最后本地缓存。"""
+    iv = normalize_interval(interval)
+    mins = INTERVAL_MINUTES[iv]
+    yahoo_range = "1d" if iv == "1m" else "5d"
     # 1) Nasdaq（免 Key，盘中可用）
     try:
         pts, meta = fetch_nasdaq_intraday_points(symbol)
-        rows = aggregate_points_to_bars(pts, 15)
-        if len(rows) >= 2:
+        rows = aggregate_points_to_bars(pts, mins)
+        need = max(2, orb_bar_count(iv))
+        if len(rows) >= need:
             return rows, meta, "nasdaq"
     except Exception:
         pass
     # 2) Yahoo
     try:
-        return fetch_chart(symbol, "5d", "15m", prefer_cache=prefer_cache)
+        return fetch_chart(symbol, yahoo_range, iv, prefer_cache=prefer_cache)
     except Exception:
-        pass
+        if iv == "1m":
+            try:
+                return fetch_chart(symbol, "5d", iv, prefer_cache=prefer_cache)
+            except Exception:
+                pass
     # 3) cache only
-    cached = _load_cache(symbol, "15m")
+    cached = _load_cache(symbol, iv)
     if cached:
         return cached[0], cached[1], "cache"
-    raise RuntimeError(f"{symbol} 15m：Nasdaq/Yahoo/缓存均不可用")
+    raise RuntimeError(f"{symbol} {iv}：Nasdaq/Yahoo/缓存均不可用")
+
+
+def fetch_bars_15m(symbol: str, prefer_cache: bool = False) -> Tuple[List[dict], dict, str]:
+    """兼容旧调用。"""
+    return fetch_bars_intraday(symbol, "15m", prefer_cache=prefer_cache)
 
 
 def resolve_display_price(
@@ -549,8 +583,8 @@ def _ema_series(closes: List[float], period: int) -> List[float]:
 
 def short_term_trend(bars: List[dict]) -> Dict[str, Any]:
     """
-    15m 短期趋势：EMA5/EMA13 + 近端高低结构 + 价相对快线。
-    返回 bias: up | down | flat；用于只做顺势开仓以提高胜率。
+    短线趋势（1m/5m/15m 共用）：EMA5/EMA13 + 近端高低结构 + 价相对快线。
+    返回 bias: up | down | flat。
     """
     closes = [float(b["c"]) for b in bars if b.get("c") is not None]
     highs = [float(b["h"]) for b in bars if b.get("h") is not None]
@@ -640,8 +674,8 @@ def compute_intraday_signal(
     bars: List[dict],
 ) -> Dict[str, Any]:
     """
-    ORB + VWAP + 短期趋势：
-    1) 15m 短期趋势定可否开仓（只做顺势）
+    ORB + VWAP + 短期趋势（1m/5m/15m 同一套逻辑）：
+    1) 短线趋势定可否开仓（只做顺势）
     2) VWAP 定偏向；ORB 同向突破为主；趋势强时可做回踩/反抽
     3) 止损在 ORB 对侧；平仓看 ORB 失效
     4) 5x 仅参考，非开仓硬闸
@@ -864,12 +898,14 @@ def compute_intraday_signal(
     }
 
 
-def analyze_symbol(symbol: str) -> Dict[str, Any]:
+def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, Any]:
     import os
 
+    iv = normalize_interval(interval)
+    orb_n = orb_bar_count(iv)
+    min_bars = orb_n + 1
     now_bj = datetime.now(BJ)
     sess_info = session_status(now_bj)
-    # 日线默认缓存；15m：盘中先快速尝试实时，失败回退缓存（避免 Yahoo 卡死看板）
     force_cache = os.environ.get("SIGNAL_CACHE", "").strip() in ("1", "true", "yes")
     prefer_daily_cache = force_cache or os.environ.get("SIGNAL_LIVE", "").strip() not in (
         "1",
@@ -877,10 +913,11 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
         "yes",
     )
     daily, dmeta, src_d = fetch_chart(symbol, "3mo", "1d", prefer_cache=prefer_daily_cache)
-    # 15m：Nasdaq 分时聚合 → Yahoo → 缓存（Yahoo 超时不再卡死）
-    bars15, meta15, src_m = fetch_bars_15m(symbol, prefer_cache=force_cache or prefer_daily_cache)
-    if src_m == "nasdaq" and meta15.get("previousClose") and not dmeta.get("previousClose"):
-        dmeta = {**dmeta, "previousClose": meta15["previousClose"]}
+    bars_iv, meta_iv, src_m = fetch_bars_intraday(
+        symbol, iv, prefer_cache=force_cache or prefer_daily_cache
+    )
+    if src_m == "nasdaq" and meta_iv.get("previousClose") and not dmeta.get("previousClose"):
+        dmeta = {**dmeta, "previousClose": meta_iv["previousClose"]}
 
     atr = atr14(daily)
     closes = [x["c"] for x in daily]
@@ -905,7 +942,6 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
         if prev is None and len(daily) > 1:
             prev = daily[-2]["c"]
         prev = float(prev) if prev is not None else None
-    # 禁止 prev==price 导致 0.00%
     if prev is not None and abs(float(prev) - float(price)) < 1e-9:
         if len(daily) > 1 and abs(daily[-2]["c"] - float(price)) > 1e-9:
             prev = float(daily[-2]["c"])
@@ -915,32 +951,34 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
         chg_pct = (float(price) / float(prev) - 1) * 100
 
     high_vol = bool(atr and price and atr / price > 0.06)
-    sess = regular_session(bars15)
+    sess = regular_session(bars_iv)
     by_day: Dict[Any, List[dict]] = {}
     for b in sess:
         by_day.setdefault(b["dt_ny"].date(), []).append(b)
     days = sorted(by_day)
 
-    # 盘中：优先今日 RTH（≥2 根 15m 即可定 ORB）；否则退回最近完整日
+    # 盘中优先今日 RTH；ORB 用开盘约 30 分钟（随周期换算 bar 数）
     ny_date = now_bj.astimezone(NY).date()
     ref_day = None
-    struct_scope = "今日RTH"
-    if sess_info.get("is_rth") and ny_date in by_day and len(by_day[ny_date]) >= 2:
+    struct_scope = f"今日RTH·{iv}"
+    if sess_info.get("is_rth") and ny_date in by_day and len(by_day[ny_date]) >= orb_n:
         ref_day = ny_date
     else:
         for d in reversed(days):
-            if len(by_day[d]) >= 3:
+            if len(by_day[d]) >= min_bars:
                 ref_day = d
                 if d != ny_date:
-                    struct_scope = f"参照 {d} RTH"
+                    struct_scope = f"参照 {d} RTH·{iv}"
                 elif not sess_info.get("is_rth"):
-                    struct_scope = f"盘前相对 {d} RTH"
+                    struct_scope = f"盘前相对 {d} RTH·{iv}"
+                else:
+                    struct_scope = f"今日RTH·{iv}"
                 break
     today_bars = by_day.get(ref_day, []) if ref_day else []
 
     live_quote = "Nasdaq" in price_src or "fullday" in price_src or "1m" in price_src
     provenance = "live" if live_quote else ("live" if src_d == "live" else "cache")
-    src_label = f"{price_src} · {price_tag}"
+    src_label = f"{price_src} · {price_tag} · {iv}/{src_m}"
     quote_time_bj = now_bj.strftime("%Y-%m-%d %H:%M:%S")
 
     base = {
@@ -950,6 +988,8 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
         "prev_close": round(prev, 4) if prev else None,
         "change_pct": round(chg_pct, 2) if chg_pct is not None else None,
         "price_tag": price_tag,
+        "interval": iv,
+        "orb_bars": orb_n,
         "atr14": round(atr, 4) if atr else None,
         "ma20": round(ma20, 4) if ma20 else None,
         "high_vol": high_vol,
@@ -961,11 +1001,11 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
         "session": sess_info,
     }
 
-    if not atr or not today_bars or len(today_bars) < 3:
+    if not atr or not today_bars or len(today_bars) < min_bars:
         return {
             **base,
             "signal": "观望",
-            "reason": "分钟结构不足或 ATR 不足（休市/数据少时常见）",
+            "reason": f"{iv} 结构不足或 ATR 不足（需至少 {min_bars} 根；休市/数据少时常见）",
             "S": None,
             "S_key": None,
             "E_band": None,
@@ -977,7 +1017,7 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
             "vwap": None,
         }
 
-    orb_bars = today_bars[:2]
+    orb_bars = today_bars[:orb_n]
     orb_h = max(x["h"] for x in orb_bars)
     orb_l = min(x["l"] for x in orb_bars)
     day_o = today_bars[0]["o"]
@@ -1012,7 +1052,9 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
         daily_bias = "日线偏空" if price < ma20 else "日线偏多"
 
     reason = sig["reason"]
-    if struct_scope != "今日RTH" and reason:
+    if reason:
+        reason = f"[{iv}] {reason}"
+    if "今日RTH" not in struct_scope and reason:
         reason = f"[{struct_scope} · 现价{px:.2f}] {reason}"
 
     return {
@@ -1024,14 +1066,18 @@ def analyze_symbol(symbol: str) -> Dict[str, Any]:
     }
 
 
-def analyze_many(symbols: Optional[List[str]] = None) -> Dict[str, Any]:
+def analyze_many(
+    symbols: Optional[List[str]] = None,
+    interval: str = DEFAULT_INTERVAL,
+) -> Dict[str, Any]:
     symbols = symbols or DEFAULT_SYMBOLS
+    iv = normalize_interval(interval)
     now_bj = datetime.now(BJ)
     items = []
     errors = []
     for s in symbols:
         try:
-            items.append(analyze_symbol(s.strip().upper()))
+            items.append(analyze_symbol(s.strip().upper(), interval=iv))
         except Exception as e:
             errors.append({"symbol": s, "error": str(e)})
             items.append(
@@ -1040,14 +1086,16 @@ def analyze_many(symbols: Optional[List[str]] = None) -> Dict[str, Any]:
                     "signal": "观望",
                     "reason": f"取行情失败：{e}",
                     "price": None,
+                    "interval": iv,
                     "error": True,
                 }
             )
     return {
         "generated_bj": now_bj.strftime("%Y-%m-%d %H:%M:%S"),
+        "interval": iv,
         "session": session_status(now_bj),
-        "source_note": "【美股引擎】现价 Nasdaq→Yahoo；ORB/VWAP 可用缓存。主源见 markets/us/docs/market-data-sources.md；A股勿用本引擎",
-        "rules_note": "短线趋势双向(多空对称)；ORB+回踩/反抽；T1远；R1≥0.8；5x仅参考；非AI",
+        "source_note": "【美股引擎】现价 Nasdaq→Yahoo；1m/5m/15m ORB≈开盘30分钟。主源见 markets/us/docs/market-data-sources.md；A股勿用本引擎",
+        "rules_note": f"周期{iv}·短线趋势双向；ORB+回踩/反抽；T1远；R1≥0.8；5x仅参考；非AI",
         "items": items,
         "errors": errors,
     }
