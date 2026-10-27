@@ -187,6 +187,9 @@ def replay_symbol(symbol: str, last_n_days: int = 12) -> Dict[str, Any]:
                         )
                     )
                     open_trade = None
+                    # 止盈后允许同日再做顺势单；打损则当日不再开
+                    if exit_why == "触T1":
+                        entered_day = None
 
             if (
                 open_trade is None
@@ -211,13 +214,13 @@ def replay_symbol(symbol: str, last_n_days: int = 12) -> Dict[str, Any]:
                 }
                 entered_day = d
 
-        # 收盘：浮盈则兑现（提高胜率）；浮亏则跨日拿到结构 S，避免贴脸打损后踏空
+        # 收盘：浮盈≥1.5%才兑现（避免 +0.3% 小止盈）；否则继续拿到 T1/S
         if open_trade is not None and open_trade.get("day") == str(d):
             px = day[-1]["c"]
             t = day[-1]["dt_bj"].strftime("%m-%d %H:%M")
             E, side = open_trade["E"], open_trade["side"]
             unreal = ((px - E) / E * 100) if side == "long" else ((E - px) / E * 100)
-            if unreal > 0:
+            if unreal >= 1.5:
                 trades.append(
                     Trade(
                         day=str(d),
@@ -228,7 +231,7 @@ def replay_symbol(symbol: str, last_n_days: int = 12) -> Dict[str, Any]:
                         T1=open_trade["T1"],
                         exit_t=t,
                         exit=px,
-                        reason="收盘止盈",
+                        reason="收盘止盈≥1.5%",
                         R1=open_trade.get("R1"),
                         pnl_pct=round(unreal, 2),
                         eq5x=round(unreal * 5, 2),
