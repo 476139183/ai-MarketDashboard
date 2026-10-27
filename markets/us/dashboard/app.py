@@ -62,8 +62,10 @@ class Handler(BaseHTTPRequestHandler):
             interval = normalize_interval((qs.get("interval") or ["15m"])[0])
             if interval not in INTERVALS:
                 interval = "15m"
+            multi_raw = (qs.get("multi") or ["1"])[0].strip().lower()
+            multi = multi_raw not in ("0", "false", "no")
             try:
-                payload = analyze_many(symbols or ["SNDK"], interval=interval)
+                payload = analyze_many(symbols or ["SNDK"], interval=interval, multi=multi)
                 body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
                 self._send(200, body, "application/json; charset=utf-8")
             except Exception as e:

@@ -21,11 +21,11 @@ SIGNAL_LIVE=1 python3 app.py
 
 浏览器：http://127.0.0.1:8765  
 
-默认标的：`SNDK,MU,NVDA`。周期可选 **1m / 5m / 15m**（短线趋势同一套；ORB≈开盘 30 分钟）。
+默认标的：`SNDK,MU,NVDA`。**1m / 5m / 15m 同一套策略**，看板同时展示三周期信号并标「一致/分歧」；下拉只选主明细用哪档价位（ORB≈开盘 30 分钟）。
 
-**定时**：以美东开盘 **09:30** 为锚点，按所选周期在每根 K 线收盘后刷新（15m→09:45/10:00…；5m→09:35/09:40…）。
+**定时**：可选，只刷新展示，与信号逻辑无关。
 
-API：`/api/signals?symbols=SNDK&interval=5m`
+API：`/api/signals?symbols=SNDK&interval=15m&multi=1`
 
 ## 说明
 

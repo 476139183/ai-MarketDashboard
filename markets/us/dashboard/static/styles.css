@@ -59,6 +59,22 @@ body {
   margin-left: 6px;
   letter-spacing: 0;
 }
+.tf-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 4px;
+}
+.tf-chip {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--wait-bg);
+  color: var(--wait);
+}
+.tf-chip.long { background: var(--long-bg); color: var(--long); }
+.tf-chip.short { background: var(--short-bg); color: var(--short); }
 .clock-live {
   margin: 8px 0 0;
   font-family: var(--mono);

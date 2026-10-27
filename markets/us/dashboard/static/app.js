@@ -276,13 +276,29 @@ function renderCard(item) {
     : hasPlan
       ? `<span class="wait-entry">未到价</span>`
       : "";
+  const cons = item.consensus || {};
+  const consBias = cons.bias || "flat";
+  const consClass =
+    consBias === "long" ? "long" : consBias === "short" ? "short" : consBias === "mixed" ? "exit" : "wait";
+  const tf = item.tf || {};
+  const tfRow = ["1m", "5m", "15m"]
+    .map((k) => {
+      const cell = tf[k] || {};
+      const b = cell.bias || "flat";
+      const cls = b === "long" ? "long" : b === "short" ? "short" : "wait";
+      const txt = cell.signal || "—";
+      return `<span class="tf-chip ${cls}">${k} ${txt}</span>`;
+    })
+    .join("");
   return `
     <article class="card">
       <div class="row">
-        <p class="sym">${item.symbol || "—"} <span class="iv">${iv}</span></p>
+        <p class="sym">${item.symbol || "—"} <span class="iv">明细 ${iv}</span></p>
         <p class="px">${fmt(item.price)}${chgText(item)}${tag}</p>
       </div>
+      <div class="tf-row">${tfRow}</div>
       <div class="badges">
+        <div class="badge ${consClass}">${cons.label || "多周期"}</div>
         <div class="badge ${structureClass(st)}">结构·${st}</div>
         <div class="badge ${signalClass(item.signal)}">信号·${item.signal || "观望"}</div>
         ${ready}
@@ -303,17 +319,16 @@ function updateTimerUi() {
   btn.setAttribute("aria-pressed", timerOn ? "true" : "false");
   btn.textContent = timerOn ? "停定时" : "不定时";
   btn.title = timerOn
-    ? "关闭自动刷新（改回手动）"
-    : "开启：按美东开盘09:30对齐K线收盘自动刷新";
+    ? "关闭自动刷新（仅展示）"
+    : "开启自动刷新（仅展示，不影响策略）";
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
   if (!timerOn) {
-    status.textContent = `不定时 · 点「刷新」即可${meta}`;
+    status.textContent = `不定时 · 手动刷新 · 1m/5m/15m 同一策略看一致性${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
-  const iv = barInterval();
   const nextNy = nextAt ? formatNyHm(nextAt) : "—";
-  status.textContent = `定时中 · 对齐开盘 09:30 ET · ${iv} 收盘刷新 · 下次 ${nextNy} ET · ${left}s${meta}`;
+  status.textContent = `定时刷新（仅展示）· 下次 ${nextNy} ET · ${left}s${meta}`;
 }
 
 async function load() {
@@ -323,7 +338,7 @@ async function load() {
   btn.disabled = true;
   try {
     const res = await fetch(
-      `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=${encodeURIComponent(interval)}&_=${Date.now()}`,
+      `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=${encodeURIComponent(interval)}&multi=1&_=${Date.now()}`,
       { cache: "no-store" }
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -331,7 +346,7 @@ async function load() {
     $("cards").innerHTML = (data.items || []).map(renderCard).join("");
     const phase = (data.session && data.session.phase) || "";
     const iv = data.interval || interval;
-    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · ${iv}${phase ? " · " + phase : ""}`;
+    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · 明细${iv} · 多周期一致核对${phase ? " · " + phase : ""}`;
   } catch (err) {
     $("cards").innerHTML = `<p class="hint">加载失败：${err.message}</p>`;
     lastRefreshMeta = `刷新失败 ${err.message}`;

@@ -2,7 +2,8 @@
 
 ## ORB + 短线趋势 · 多周期回放
 
-对 `dashboard/engine.py` 的 `compute_intraday_signal` 按 **1m / 5m / 15m** 分开回放（RTH）。
+对 `dashboard/engine.py` 的 `compute_intraday_signal` 按 **1m / 5m / 15m** 分开回放（RTH）。  
+分周期只为统计评估；规则同一套，看板侧重多周期是否同向。
 
 ```bash
 cd markets/us/backtest

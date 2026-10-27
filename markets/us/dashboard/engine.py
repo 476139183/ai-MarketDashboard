@@ -1061,23 +1061,79 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
     }
 
 
+def _signal_bias(item: Dict[str, Any]) -> str:
+    """多周期一致性用：做多/空优先，否则看结构。"""
+    sig = item.get("signal") or ""
+    if sig == "做多":
+        return "long"
+    if sig == "做空":
+        return "short"
+    st = item.get("structure") or ""
+    if "多" in st:
+        return "long"
+    if "空" in st:
+        return "short"
+    return "flat"
+
+
+def _consensus(tf_map: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
+    """1m/5m/15m 同一套规则；一致=同向且非震荡。"""
+    biases = {iv: _signal_bias(tf_map.get(iv) or {}) for iv in INTERVALS}
+    longs = sum(1 for b in biases.values() if b == "long")
+    shorts = sum(1 for b in biases.values() if b == "short")
+    if longs >= 2 and shorts == 0:
+        label, bias = "多头一致", "long"
+    elif shorts >= 2 and longs == 0:
+        label, bias = "空头一致", "short"
+    elif longs and shorts:
+        label, bias = "周期分歧", "mixed"
+    else:
+        label, bias = "未对齐/观望", "flat"
+    return {"bias": bias, "label": label, "by_interval": biases}
+
+
 def analyze_many(
     symbols: Optional[List[str]] = None,
     interval: str = DEFAULT_INTERVAL,
+    multi: bool = True,
 ) -> Dict[str, Any]:
+    """
+    multi=True：同一策略在 1m/5m/15m 各算一遍，主卡片用 interval 明细，并附带一致性格口。
+    分周期回测只为评估，不是三套互相打架的策略。
+    """
     symbols = symbols or DEFAULT_SYMBOLS
     iv = normalize_interval(interval)
     now_bj = datetime.now(BJ)
     items = []
     errors = []
+    tfs = list(INTERVALS) if multi else (iv,)
     for s in symbols:
+        sym = s.strip().upper()
         try:
-            items.append(analyze_symbol(s.strip().upper(), interval=iv))
+            tf_map: Dict[str, Any] = {}
+            for tfi in tfs:
+                tf_map[tfi] = analyze_symbol(sym, interval=tfi)
+            primary = tf_map.get(iv) or next(iter(tf_map.values()))
+            if multi:
+                primary = {
+                    **primary,
+                    "tf": {
+                        k: {
+                            "signal": v.get("signal"),
+                            "structure": v.get("structure"),
+                            "entry_ready": v.get("entry_ready"),
+                            "bias": _signal_bias(v),
+                        }
+                        for k, v in tf_map.items()
+                    },
+                    "consensus": _consensus(tf_map),
+                }
+            items.append(primary)
         except Exception as e:
             errors.append({"symbol": s, "error": str(e)})
             items.append(
                 {
-                    "symbol": s.upper(),
+                    "symbol": sym,
                     "signal": "观望",
                     "reason": f"取行情失败：{e}",
                     "price": None,
@@ -1088,9 +1144,10 @@ def analyze_many(
     return {
         "generated_bj": now_bj.strftime("%Y-%m-%d %H:%M:%S"),
         "interval": iv,
+        "multi": multi,
         "session": session_status(now_bj),
-        "source_note": "【美股引擎】现价 Nasdaq→Yahoo；1m/5m/15m ORB≈开盘30分钟。主源见 markets/us/docs/market-data-sources.md；A股勿用本引擎",
-        "rules_note": f"周期{iv}·短线趋势双向；ORB+回踩/反抽；T1远；R1≥0.8；非AI",
+        "source_note": "【美股引擎】现价 Nasdaq→Yahoo；1m/5m/15m 同一套 ORB+短线趋势，看多周期是否同向。",
+        "rules_note": "同一策略·多周期核对一致性；主明细按所选周期；定时刷新仅展示用；R1≥0.8；非AI",
         "items": items,
         "errors": errors,
     }
