@@ -1,0 +1,77 @@
+{
+  "symbols": [
+    {
+      "symbol": "SNDK",
+      "interval": "5m",
+      "n_days": 40,
+      "day_span": "2026-08-31 → 2026-10-26",
+      "n_trades": 24,
+      "win_rate": 45.8,
+      "avg_pnl_pct": 0.094,
+      "sum_pnl_pct": 2.26,
+      "exits": {
+        "触S": 12,
+        "收盘止盈≥1.5%": 4,
+        "触T1": 7,
+        "样本末日": 1
+      },
+      "setups": {
+        "趋势回踩多": 11,
+        "趋势反抽空": 9,
+        "ORB突破空": 3,
+        "ORB突破多": 1
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "interval": "5m",
+      "n_days": 40,
+      "day_span": "2026-08-31 → 2026-10-26",
+      "n_trades": 28,
+      "win_rate": 53.6,
+      "avg_pnl_pct": 0.479,
+      "sum_pnl_pct": 13.42,
+      "exits": {
+        "触T1": 14,
+        "触S": 8,
+        "收盘止盈≥1.5%": 1,
+        "平多": 3,
+        "平空": 1,
+        "样本末日": 1
+      },
+      "setups": {
+        "ORB突破多": 5,
+        "趋势回踩多": 9,
+        "趋势反抽空": 8,
+        "ORB突破空": 6
+      }
+    },
+    {
+      "symbol": "MU",
+      "interval": "5m",
+      "n_days": 40,
+      "day_span": "2026-08-31 → 2026-10-26",
+      "n_trades": 26,
+      "win_rate": 57.7,
+      "avg_pnl_pct": 0.198,
+      "sum_pnl_pct": 5.14,
+      "exits": {
+        "触S": 10,
+        "触T1": 9,
+        "收盘止盈≥1.5%": 5,
+        "平空": 1,
+        "样本末日": 1
+      },
+      "setups": {
+        "趋势回踩多": 7,
+        "ORB突破空": 6,
+        "趋势反抽空": 8,
+        "ORB突破多": 5
+      }
+    }
+  ],
+  "n_trades_total": 78,
+  "win_rate_pooled": 52.6,
+  "sum_pnl_pct": 20.82,
+  "avg_pnl_per_trade": 0.267
+}
