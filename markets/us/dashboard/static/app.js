@@ -9,6 +9,7 @@ const BAR_CLOSE_LAG_MS = 2500;
 let timerId = null;
 let countdownId = null;
 let nextAt = 0;
+// 默认定时关闭；仅当用户曾打开并写入 localStorage=1 才自动开
 let timerOn = localStorage.getItem(LS_TIMER) === "1";
 
 function barInterval() {
@@ -300,16 +301,19 @@ function updateTimerUi() {
   const status = $("timer-status");
   btn.classList.toggle("on", timerOn);
   btn.setAttribute("aria-pressed", timerOn ? "true" : "false");
-  btn.textContent = timerOn ? "停定时" : "定时";
+  btn.textContent = timerOn ? "停定时" : "不定时";
+  btn.title = timerOn
+    ? "关闭自动刷新（改回手动）"
+    : "开启：按美东开盘09:30对齐K线收盘自动刷新";
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
   if (!timerOn) {
-    status.textContent = meta ? meta.slice(3) : "";
+    status.textContent = `不定时 · 点「刷新」即可${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
   const iv = barInterval();
   const nextNy = nextAt ? formatNyHm(nextAt) : "—";
-  status.textContent = `对齐开盘 09:30 ET · ${iv} 收盘刷新 · 下次 ${nextNy} ET · ${left}s${meta}`;
+  status.textContent = `定时中 · 对齐开盘 09:30 ET · ${iv} 收盘刷新 · 下次 ${nextNy} ET · ${left}s${meta}`;
 }
 
 async function load() {
