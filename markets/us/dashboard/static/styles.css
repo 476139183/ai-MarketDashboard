@@ -1,0 +1,225 @@
+:root {
+  --bg: #f2efe8;
+  --ink: #1a1f24;
+  --muted: #5c6570;
+  --line: #c9c1b2;
+  --card: #fbfaf6;
+  --long: #0b6e4f;
+  --long-bg: #d8f0e6;
+  --short: #9b2226;
+  --short-bg: #f5d6d7;
+  --wait: #6b5c3e;
+  --wait-bg: #efe6d2;
+  --exit: #9a3412;
+  --exit-bg: #ffedd5;
+  --accent: #234e70;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background:
+    radial-gradient(900px 420px at 8% -8%, #dde7ef 0%, transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, #e7ddd0 0%, transparent 50%),
+    var(--bg);
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand-name {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.clock-live {
+  margin: 8px 0 0;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.actions input,
+.actions select {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.actions input { width: min(200px, 40vw); }
+.actions button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #f7fafc;
+  font-weight: 600;
+  cursor: pointer;
+}
+.actions button.btn-timer {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.actions button.btn-timer.on {
+  background: var(--long);
+  border-color: var(--long);
+  color: #f4fff9;
+}
+.actions button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.timer-status {
+  margin: 10px 0 0;
+  min-height: 1.2em;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.sym {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+.px {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: right;
+}
+.ptag {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+.chg {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.chg.up { color: #1a7f4b; }
+.chg.dn { color: #b42318; }
+.scope {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.badge {
+  display: inline-block;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+.badge.long { background: var(--long-bg); color: var(--long); }
+.badge.short { background: var(--short-bg); color: var(--short); }
+.badge.wait { background: var(--wait-bg); color: var(--wait); }
+.badge.exit { background: var(--exit-bg); color: var(--exit); }
+.ready, .wait-entry {
+  align-self: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.ready { background: var(--long-bg); color: var(--long); }
+.wait-entry { background: #eceff3; color: var(--muted); }
+.levels li.entry .k,
+.levels li.entry .v {
+  font-weight: 700;
+  color: var(--accent);
+}
+.levels .sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.levels {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+}
+.levels li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.levels .k { color: var(--muted); }
+.levels .v { font-weight: 500; }
+
+.hint {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
