@@ -4,18 +4,24 @@
 
 ## 启动
 
+仓库根目录：
+
 ```bash
-cd markets/us/dashboard
+./start-dashboard.sh          # 推荐：起服务并打开浏览器
+./start-dashboard.sh --live   # 强制刷新 15m/行情
+./start-dashboard.sh --no-open
+```
+
+或本目录：
+
+```bash
 python3 app.py
+SIGNAL_LIVE=1 python3 app.py
 ```
 
-浏览器：http://127.0.0.1:8765
+浏览器：http://127.0.0.1:8765  
 
-默认标的：`SNDK,MU,NVDA`。约每 60 秒刷新。
-
-```bash
-SIGNAL_LIVE=1 python3 app.py   # 强制刷新图表
-```
+默认标的：`SNDK,MU,NVDA`（15m 短线趋势）。约每 60 秒刷新。
 
 ## 说明
 

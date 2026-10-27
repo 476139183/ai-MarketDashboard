@@ -21,11 +21,13 @@ markets/
   us/                     # 美股：看板、回测、SNDK 工具、美股数据源文档
 ```
 
-## 快速启动（仅美股看板）
+## 快速启动（仅美股看板 · 15m）
 
 ```bash
-cd markets/us/dashboard
-python3 app.py
+./start-dashboard.sh          # 启动并打开浏览器
+./start-dashboard.sh --live   # 强制刷新行情
+./start-dashboard.sh --no-open
 ```
 
+或手动：`cd markets/us/dashboard && python3 app.py`  
 打开 http://127.0.0.1:8765 。**不要**用该引擎分析 A股代码。
