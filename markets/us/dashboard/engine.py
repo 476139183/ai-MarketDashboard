@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""美股盘中信号引擎（勿用于 A股）：关键位 S → E → T1，5x 压测；时间北京。"""
+"""美股盘中信号引擎（勿用于 A股）：关键位 S → E → T1；时间北京。"""
 
 from __future__ import annotations
 
@@ -642,15 +642,12 @@ def short_term_trend(bars: List[dict]) -> Dict[str, Any]:
     }
 
 
-def _risk_ok(E: float, S: float, T1: float, side: str) -> Tuple[Optional[float], Optional[float], bool, str]:
-    """新开条件：价序正确且 R1≥0.8（目标更远）。5x 仅作参考，不再作为硬闸。"""
+def _risk_ok(E: float, S: float, T1: float, side: str) -> Tuple[Optional[float], bool, str]:
+    """新开条件：价序正确且 R1≥0.8。"""
     R = r1(E, S, T1, side)
-    st = 5 * abs(E - S) / E * 100 if E else None
     notes = []
     if R is not None and R < 0.8:
         notes.append(f"R1={R:.2f}<0.8")
-    if st is not None and st >= 35:
-        notes.append(f"参考5x≈{st:.1f}%（非硬闸）")
     ok = R is not None and R >= 0.8
     if side == "long" and not (S < E < T1):
         ok = False
@@ -658,7 +655,7 @@ def _risk_ok(E: float, S: float, T1: float, side: str) -> Tuple[Optional[float],
     if side == "short" and not (T1 < E < S):
         ok = False
         notes.append("价序T1<E<S不成立")
-    return R, st, ok, ("；".join(notes) if notes else "")
+    return R, ok, ("；".join(notes) if notes else "")
 
 
 def compute_intraday_signal(
@@ -678,7 +675,7 @@ def compute_intraday_signal(
     1) 短线趋势定可否开仓（只做顺势）
     2) VWAP 定偏向；ORB 同向突破为主；趋势强时可做回踩/反抽
     3) 止损在 ORB 对侧；平仓看 ORB 失效
-    4) 5x 仅参考，非开仓硬闸
+    4) 不要求当日必须成交
     """
     atr_i = max(atr * 0.35, px * 0.008)
     gap = _min_gap(px, atr_i)
@@ -723,7 +720,7 @@ def compute_intraday_signal(
     S = S_key = None
     E_band = [round(orb_l, 4), round(orb_h, 4)]
     T1 = T1_key = None
-    R1v = stress = None
+    R1v = None
     side = None
     entry_ready = False
     setup = None
@@ -740,7 +737,7 @@ def compute_intraday_signal(
         st_label: str,
         setup_name: str,
     ) -> bool:
-        nonlocal signal, reason, S, S_key, E_band, T1, T1_key, R1v, stress, side, entry_ready, structure, setup
+        nonlocal signal, reason, S, S_key, E_band, T1, T1_key, R1v, side, entry_ready, structure, setup
         # 短线趋势闸（对称）：多 score≥2，空 score≤-2；胜率可降，优先跟趋势
         sc = st_trend["score"]
         ok_trend = (sc >= 2) if long else (sc <= -2)
@@ -770,9 +767,9 @@ def compute_intraday_signal(
         else:
             T1_ = min(T1_, E - 1.2 * atr_i)
             T1_ = max(T1_, E - 3.0 * atr_i)
-        R, st, ok, note = _risk_ok(E, S_, T1_, side_)
+        R, ok, note = _risk_ok(E, S_, T1_, side_)
         E_band = [round(E_lo, 4), round(E_hi, 4)]
-        S, S_key, T1, T1_key, R1v, stress = S_, Sk, T1_, Tk, R, st
+        S, S_key, T1, T1_key, R1v = S_, Sk, T1_, Tk, R
         structure = st_label
         setup = setup_name
         side = side_
@@ -887,7 +884,6 @@ def compute_intraday_signal(
         "T1": round(T1, 4) if T1 is not None else None,
         "T1_key": T1_key,
         "R1": round(R1v, 2) if R1v is not None else None,
-        "stress_5x_pct": round(stress, 2) if stress is not None else None,
         "side": side,
         "short_invalid": short_invalid,
         "long_invalid": long_invalid,
@@ -1011,7 +1007,6 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
             "E_band": None,
             "T1": None,
             "R1": None,
-            "stress_5x_pct": None,
             "structure": "未定",
             "orb": None,
             "vwap": None,
@@ -1095,7 +1090,7 @@ def analyze_many(
         "interval": iv,
         "session": session_status(now_bj),
         "source_note": "【美股引擎】现价 Nasdaq→Yahoo；1m/5m/15m ORB≈开盘30分钟。主源见 markets/us/docs/market-data-sources.md；A股勿用本引擎",
-        "rules_note": f"周期{iv}·短线趋势双向；ORB+回踩/反抽；T1远；R1≥0.8；5x仅参考；非AI",
+        "rules_note": f"周期{iv}·短线趋势双向；ORB+回踩/反抽；T1远；R1≥0.8；非AI",
         "items": items,
         "errors": errors,
     }

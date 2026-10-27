@@ -198,11 +198,11 @@ function shortHint(item) {
   if (item.signal === "平空") return "空单失效：已收复 VWAP → 立刻平空，不要继续拿着";
   if (item.signal === "平多") return "多单失效：已跌破 VWAP → 立刻平多";
   if (item.signal === "做空") {
-    if (r.includes("风控未过")) return "空头结构有，但 R1/5x 未过，不开";
+    if (r.includes("风控未过")) return "空头结构有，但 R1/价序未过，不开";
     return "空头 setup 有效：按入场带做空，结构失效/收复 VWAP 则平";
   }
   if (item.signal === "做多") {
-    if (r.includes("风控未过")) return "多头结构有，但 R1/5x 未过，不开";
+    if (r.includes("风控未过")) return "多头结构有，但 R1/价序未过，不开";
     return "多头 setup 有效：按入场带做多，结构失效/跌破 VWAP 则平";
   }
   if (item.structure === "空头") {

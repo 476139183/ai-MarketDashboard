@@ -304,7 +304,7 @@ def main(argv: List[str]) -> None:
             continue
         print(
             f"日数={r['n_days']} 笔数={r['n_trades']} 胜率={r['win_rate']}% "
-            f"均笔={r['avg_pnl_pct']}% 5x加总={r['sum_eq5x']}% 出场={r['exits']}"
+            f"均笔={r['avg_pnl_pct']}% 出场={r['exits']}"
         )
         for t in r["trades"][-5:]:
             print(
@@ -334,7 +334,7 @@ def main(argv: List[str]) -> None:
         else:
             print(
                 f"{s['symbol']:6} n={s['n_trades']:3} win={s['win_rate']}% "
-                f"avg={s['avg_pnl_pct']:+.2f}% eq5x={s['sum_eq5x']:+.1f}%"
+                f"avg={s['avg_pnl_pct']:+.2f}%"
             )
     print("wrote", summ_path)
 
