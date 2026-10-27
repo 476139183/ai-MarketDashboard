@@ -538,15 +538,15 @@ def _min_gap(px: float, atr_i: float) -> float:
 
 
 def _risk_ok(E: float, S: float, T1: float, side: str) -> Tuple[Optional[float], Optional[float], bool, str]:
-    """R1≥0.8 且 5x 压测<35% 才允许新开。"""
+    """新开条件：价序正确且 R1≥0.7。5x 仅作参考，不再作为硬闸（非默认满仓）。"""
     R = r1(E, S, T1, side)
     st = 5 * abs(E - S) / E * 100 if E else None
     notes = []
-    if R is not None and R < 0.8:
-        notes.append(f"R1={R:.2f}<0.8")
+    if R is not None and R < 0.7:
+        notes.append(f"R1={R:.2f}<0.7")
     if st is not None and st >= 35:
-        notes.append(f"5x≈{st:.1f}%≥35%")
-    ok = R is not None and R >= 0.8 and st is not None and st < 35
+        notes.append(f"参考5x≈{st:.1f}%（非硬闸）")
+    ok = R is not None and R >= 0.7
     if side == "long" and not (S < E < T1):
         ok = False
         notes.append("价序S<E<T1不成立")
@@ -569,21 +569,18 @@ def compute_intraday_signal(
     bars: List[dict],
 ) -> Dict[str, Any]:
     """
-    规范日内框架（ORB + VWAP，通行日交易写法）：
-    1) VWAP 定偏向：上方偏多、下方偏空
-    2) ORB 突破须与 VWAP 同向（多：破上沿且>VWAP；空：破下沿且<VWAP）
-    3) 回踩/反抽：多头回踩 VWAP～ORB 上沿；空头反抽 ORB 下沿～VWAP
-    4) 假突破反转：跌破后又收回区间/VWAP → 多；涨破后又跌回 → 空
-    5) 止损在结构失效侧；收复/跌破 VWAP 对旧仓给出平空/平多
-    参考：ORB+VWAP 同向过滤、假突破回到区间内离场/反手等常见规则。
+    ORB + VWAP（偏波段、防噪音打损）：
+    1) VWAP 定偏向；ORB 同向突破为主
+    2) 止损放在结构真正失效处（空：ORB上沿外侧；多：ORB下沿外侧），避免贴脸止损后踏空
+    3) 平仓：空单须收复 ORB 上沿才平空；多单须跌破 ORB 下沿才平多（不只因刺穿 VWAP）
+    4) 5x 仅参考，非开仓硬闸；不要求当日必须成交
     """
     atr_i = max(atr * 0.35, px * 0.008)
     gap = _min_gap(px, atr_i)
-    buf = min(0.1 * atr, 0.01 * px, 0.5 * atr_i)
+    buf = min(0.12 * atr, 0.012 * px, 0.55 * atr_i)
     orb_mid = (orb_l + orb_h) / 2
     orb_w = max(orb_h - orb_l, gap)
 
-    # 突破用严格不等式；若 ORB 已含极值，改用相对开盘的驱动弱势/强势
     broke_down = path_l < orb_l - 1e-9
     broke_up = path_h > orb_h + 1e-9
     drive_down = (day_o - path_l) >= 0.25 * atr_i and path_l <= min(day_o, orb_mid)
@@ -604,9 +601,9 @@ def compute_intraday_signal(
     else:
         structure = "震荡"
 
-    # 空头叙事：破位或开盘驱动向下后，收复 VWAP → 平空
-    short_invalid = bool(bearish and above_vwap)
-    long_invalid = bool(bullish and below_vwap)
+    # 结构级失效：空单要收复 ORB 上沿；多单要跌破 ORB 下沿（防 VWAP 毛刺打平后踏空）
+    short_invalid = bool(bearish and px > orb_h)
+    long_invalid = bool(bullish and px < orb_l)
 
     signal = "观望"
     reason = "无合格 setup：等 ORB 同向突破、VWAP 回踩/反抽或假突破确认"
@@ -640,12 +637,13 @@ def compute_intraday_signal(
             S_ = max(S_, E_hi + gap * 0.5)
         E = min(max(px, E_lo), E_hi)
         side_ = "long" if long else "short"
+        # 波段目标：允许更远 T1，配合更宽结构止损
         if long:
-            T1_ = max(T1_, E + 0.35 * atr_i)
-            T1_ = min(T1_, E + 1.2 * atr_i)
+            T1_ = max(T1_, E + 0.5 * atr_i)
+            T1_ = min(T1_, E + 2.0 * atr_i)
         else:
-            T1_ = min(T1_, E - 0.35 * atr_i)
-            T1_ = max(T1_, E - 1.2 * atr_i)
+            T1_ = min(T1_, E - 0.5 * atr_i)
+            T1_ = max(T1_, E - 2.0 * atr_i)
         R, st, ok, note = _risk_ok(E, S_, T1_, side_)
         E_band = [round(E_lo, 4), round(E_hi, 4)]
         S, S_key, T1, T1_key, R1v, stress = S_, Sk, T1_, Tk, R, st
@@ -668,85 +666,74 @@ def compute_intraday_signal(
         reason = f"{why}；在带内但风控未过（{note}），不开仓"
         return False
 
-    # A1. ORB 上破 + VWAP 上方 → 只做多（同向）
-    if setup is None and above_vwap and px >= orb_h:
-        S_ = min(orb_mid, vwap) - buf
-        E_lo = max(orb_h - 0.2 * orb_w, S_ + gap)
-        E_hi = orb_h + 0.25 * atr_i
-        T1_ = orb_h + max(orb_w, 0.6 * atr_i)
-        _accept(True, E_lo, E_hi, S_, f"结构失效 {S_:.2f}", T1_, "ORB量度",
+    # A1. ORB 上破 + VWAP 上 → 做多；未追飞；S=ORB下沿外侧（结构失效才死）
+    if setup is None and above_vwap and broke_up and px >= orb_h and px <= orb_h + 0.55 * atr_i:
+        S_ = orb_l - buf
+        E_lo = max(orb_h - 0.1 * orb_w, min(vwap, orb_h))
+        E_hi = orb_h + 0.45 * atr_i
+        T1_ = orb_h + max(orb_w, 1.2 * atr_i)
+        _accept(True, E_lo, E_hi, S_, f"ORB下沿失效 {orb_l:.2f}", T1_, "ORB量度",
                 "ORB上破且价在VWAP上（同向多）", "多头", "ORB突破多")
 
-    # A2. ORB 下破/向下驱动 + VWAP 下方 → 只做空；S 用 ORB 沿/中轴（近），不用过远 VWAP
-    if setup is None and below_vwap and (px <= orb_l or (bearish and px < orb_mid)):
-        S_ = orb_l + buf if px <= orb_l else orb_mid + buf
-        S_ = max(S_, vwap + buf) if px > orb_l - 0.1 * atr_i else S_
-        # 破位后深处：止损回到 ORB 下沿上方即可
-        if px < orb_l:
-            S_ = orb_l + buf
-        E_hi = min(orb_l + 0.2 * orb_w, S_ - gap)
-        E_lo = min(px, orb_l) - 0.05 * atr_i
-        E_lo = max(E_lo, E_hi - 0.5 * atr_i)
-        T1_ = min(path_l, orb_l - max(0.5 * atr_i, 0.8 * orb_w))
-        _accept(False, E_lo, E_hi, S_, f"ORB失效 {S_:.2f}", T1_, "ORB量度/前低",
-                "ORB下破/向下驱动且价在VWAP下（同向空）", "空头", "ORB突破空")
-
-    # B1. VWAP 上方回踩（趋势多延续）
-    if setup is None and above_vwap and bullish and px <= orb_h + gap:
-        S_ = vwap - buf
-        E_lo = vwap
-        E_hi = min(max(vwap + 0.35 * atr_i, orb_h), vwap + 0.6 * atr_i)
-        T1_ = max(path_h, orb_h + 0.5 * atr_i)
-        if px <= E_hi + 0.1 * atr_i:
-            _accept(True, E_lo, E_hi, S_, f"VWAP失效 {vwap:.2f}", T1_, "前高",
-                    "VWAP上方回踩（趋势多）", "多头", "VWAP回踩多")
-
-    # B2. VWAP 下方反抽（趋势空延续）
-    if setup is None and below_vwap and bearish and px >= orb_l - gap:
-        S_ = vwap + buf
-        E_hi = vwap
-        E_lo = max(min(vwap - 0.35 * atr_i, orb_l), vwap - 0.6 * atr_i)
-        T1_ = min(path_l, orb_l - 0.5 * atr_i)
-        if px >= E_lo - 0.1 * atr_i:
-            _accept(False, E_lo, E_hi, S_, f"VWAP失效 {vwap:.2f}", T1_, "前低",
-                    "VWAP下方反抽（趋势空）", "空头", "VWAP反抽空")
-
-    # C1. 假跌破反转多：S 用 ORB 下沿（收回失败才止损），避免绑死远端日低导致 R1 崩
-    if setup is None and bearish and above_vwap and px > orb_l:
-        S_ = orb_l - buf
-        E_lo = orb_l
-        E_hi = min(max(vwap, orb_mid), orb_l + 0.6 * atr_i)
-        T1_ = max(orb_h, day_o, vwap + 0.4 * atr_i)
-        _accept(True, E_lo, E_hi, S_, f"ORB下沿失效 {orb_l:.2f}", T1_, "ORB上沿/前高",
-                "假跌破后收复VWAP（反转多）", "反转多", "假突破反转多")
-
-    # C2. 假涨破反转空
-    if setup is None and bullish and below_vwap and px < orb_h:
+    # A2. ORB 下破 + VWAP 下 → 做空；未追飞；S=ORB上沿外侧
+    if setup is None and below_vwap and broke_down and px <= orb_l and px >= orb_l - 0.55 * atr_i:
         S_ = orb_h + buf
-        E_hi = orb_h
-        E_lo = max(min(vwap, orb_mid), orb_h - 0.6 * atr_i)
-        T1_ = min(orb_l, day_o, vwap - 0.4 * atr_i)
-        _accept(False, E_lo, E_hi, S_, f"ORB上沿失效 {orb_h:.2f}", T1_, "ORB下沿/前低",
-                "假涨破后跌破VWAP（反转空）", "反转空", "假突破反转空")
+        E_hi = min(vwap, orb_l + 0.15 * orb_w)
+        E_lo = orb_l - 0.45 * atr_i
+        T1_ = orb_l - max(orb_w, 1.2 * atr_i)
+        _accept(False, E_lo, E_hi, S_, f"ORB上沿失效 {orb_h:.2f}", T1_, "ORB量度/前低",
+                "ORB下破且价在VWAP下（同向空）；止损在ORB上沿外", "空头", "ORB突破空")
 
-    # 平仓：仅在翻面附近提醒；已明显走出反向突破区则让位给新 setup / 观望
-    near_flip = abs(px - vwap) <= 0.35 * atr_i
-    if signal not in ("做多", "做空") and short_invalid and near_flip:
+    # B/C：只给观察带与说明，默认不开仓（回踩/假突破噪音高，易当日打损后踏空）
+    # 主开仓仅保留 A1/A2 ORB 同向突破，提高胜率与止损合理性。
+    if setup is None and above_vwap and bullish and orb_l < px < orb_h + gap:
+        signal = "观望"
+        structure = "多头"
+        setup = "回踩观察"
+        S = orb_l - buf
+        S_key = f"ORB下沿失效 {orb_l:.2f}"
+        E_band = [round(max(vwap, orb_mid), 4), round(min(orb_h + 0.2 * atr_i, vwap + 0.5 * atr_i), 4)]
+        T1 = round(orb_h + max(orb_w, 0.8 * atr_i), 4)
+        T1_key = "观察用"
+        reason = (
+            f"偏多回踩观察：可等回踩进带，但默认不开；结构止损参考 ORB 下沿 {orb_l:.2f}。"
+            f"优先等清晰 ORB 上破再开多。"
+        )
+        entry_ready = False
+        side = "long"
+    elif setup is None and below_vwap and bearish and orb_l - gap < px < orb_h:
+        signal = "观望"
+        structure = "空头"
+        setup = "反抽观察"
+        S = orb_h + buf
+        S_key = f"ORB上沿失效 {orb_h:.2f}"
+        E_band = [round(max(orb_l - 0.2 * atr_i, vwap - 0.5 * atr_i), 4), round(min(vwap, orb_mid), 4)]
+        T1 = round(orb_l - max(orb_w, 0.8 * atr_i), 4)
+        T1_key = "观察用"
+        reason = (
+            f"偏空反抽观察：可等反抽进带，但默认不开；结构止损参考 ORB 上沿 {orb_h:.2f}。"
+            f"优先等清晰 ORB 下破再开空。"
+        )
+        entry_ready = False
+        side = "short"
+
+    # 平仓：结构级失效才喊平（空破 ORB 上 / 多破 ORB 下）
+    if signal not in ("做多", "做空") and short_invalid:
         signal = "平空"
         entry_ready = False
         side = "cover_short"
-        S = round(vwap + buf, 4)
-        S_key = f"VWAP {vwap:.2f}"
-        reason = f"空头失效：已收复VWAP {vwap:.2f}，先平空。" + (reason or "")
-        setup = setup or "VWAP翻面平空"
-    elif signal not in ("做多", "做空") and long_invalid and near_flip:
+        S = round(orb_h + buf, 4)
+        S_key = f"ORB上沿 {orb_h:.2f}"
+        reason = f"空头结构失效：价已站上ORB上沿 {orb_h:.2f}，先平空。" + (reason or "")
+        setup = setup or "ORB失效平空"
+    elif signal not in ("做多", "做空") and long_invalid:
         signal = "平多"
         entry_ready = False
         side = "cover_long"
-        S = round(vwap - buf, 4)
-        S_key = f"VWAP {vwap:.2f}"
-        reason = f"多头失效：已跌破VWAP {vwap:.2f}，先平多。" + (reason or "")
-        setup = setup or "VWAP翻面平多"
+        S = round(orb_l - buf, 4)
+        S_key = f"ORB下沿 {orb_l:.2f}"
+        reason = f"多头结构失效：价已跌破ORB下沿 {orb_l:.2f}，先平多。" + (reason or "")
+        setup = setup or "ORB失效平多"
 
     entry_low = E_band[0] if E_band else None
     entry_high = E_band[1] if E_band else None
@@ -971,7 +958,7 @@ def analyze_many(symbols: Optional[List[str]] = None) -> Dict[str, Any]:
         "generated_bj": now_bj.strftime("%Y-%m-%d %H:%M:%S"),
         "session": session_status(now_bj),
         "source_note": "【美股引擎】现价 Nasdaq→Yahoo；ORB/VWAP 可用缓存。主源见 markets/us/docs/market-data-sources.md；A股勿用本引擎",
-        "rules_note": "ORB+VWAP：同向突破/回踩反抽/假突破；R1与5x硬闸；平空平多；非AI",
+        "rules_note": "ORB突破为主；结构止损ORB对侧；R1≥0.7；5x仅参考；非强制当日平；非AI",
         "items": items,
         "errors": errors,
     }
