@@ -281,13 +281,14 @@ function renderCard(item) {
   const consClass =
     consBias === "long" ? "long" : consBias === "short" ? "short" : consBias === "mixed" ? "exit" : "wait";
   const tf = item.tf || {};
-  const tfRow = ["1m", "5m", "15m"]
+  const tfRow = ["15m", "5m", "1m"]
     .map((k) => {
       const cell = tf[k] || {};
       const b = cell.bias || "flat";
       const cls = b === "long" ? "long" : b === "short" ? "short" : "wait";
+      const soft = k === "1m" ? " soft" : "";
       const txt = cell.signal || "—";
-      return `<span class="tf-chip ${cls}">${k} ${txt}</span>`;
+      return `<span class="tf-chip ${cls}${soft}">${k}${k === "1m" ? "·参考" : ""} ${txt}</span>`;
     })
     .join("");
   return `
@@ -323,7 +324,7 @@ function updateTimerUi() {
     : "开启自动刷新（仅展示，不影响策略）";
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
   if (!timerOn) {
-    status.textContent = `不定时 · 手动刷新 · 1m/5m/15m 同一策略看一致性${meta}`;
+    status.textContent = `不定时 · 手动刷新 · 优先 15m+5m 一致（1m 参考）${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));

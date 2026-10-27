@@ -1077,19 +1077,30 @@ def _signal_bias(item: Dict[str, Any]) -> str:
 
 
 def _consensus(tf_map: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
-    """1m/5m/15m 同一套规则；一致=同向且非震荡。"""
+    """一致性优先看 15m+5m；1m 仅参考确认，不单独定调。"""
     biases = {iv: _signal_bias(tf_map.get(iv) or {}) for iv in INTERVALS}
-    longs = sum(1 for b in biases.values() if b == "long")
-    shorts = sum(1 for b in biases.values() if b == "short")
-    if longs >= 2 and shorts == 0:
-        label, bias = "多头一致", "long"
-    elif shorts >= 2 and longs == 0:
-        label, bias = "空头一致", "short"
-    elif longs and shorts:
-        label, bias = "周期分歧", "mixed"
+    b15, b5, b1 = biases.get("15m", "flat"), biases.get("5m", "flat"), biases.get("1m", "flat")
+    if b15 == b5 == "long":
+        label = "15+5 多头一致" + (" ·1m同向" if b1 == "long" else (" ·1m未跟" if b1 == "short" else ""))
+        bias = "long"
+    elif b15 == b5 == "short":
+        label = "15+5 空头一致" + (" ·1m同向" if b1 == "short" else (" ·1m未跟" if b1 == "long" else ""))
+        bias = "short"
+    elif b15 in ("long", "short") and b5 in ("long", "short") and b15 != b5:
+        label, bias = "15/5 分歧", "mixed"
+    elif b15 in ("long", "short") and b5 == "flat":
+        label, bias = f"仅15m{'多' if b15 == 'long' else '空'}", b15
+    elif b5 in ("long", "short") and b15 == "flat":
+        label, bias = f"仅5m{'多' if b5 == 'long' else '空'}", b5
     else:
         label, bias = "未对齐/观望", "flat"
-    return {"bias": bias, "label": label, "by_interval": biases}
+    return {
+        "bias": bias,
+        "label": label.strip(),
+        "by_interval": biases,
+        "priority": ("15m", "5m"),
+        "confirm": "1m",
+    }
 
 
 def analyze_many(
@@ -1146,8 +1157,8 @@ def analyze_many(
         "interval": iv,
         "multi": multi,
         "session": session_status(now_bj),
-        "source_note": "【美股引擎】现价 Nasdaq→Yahoo；1m/5m/15m 同一套 ORB+短线趋势，看多周期是否同向。",
-        "rules_note": "同一策略·多周期核对一致性；主明细按所选周期；定时刷新仅展示用；R1≥0.8；非AI",
+        "source_note": "【美股引擎】现价 Nasdaq→Yahoo；同一套 ORB+短线趋势；一致性优先 15m+5m，1m 仅参考。",
+        "rules_note": "同一策略·优先15m/5m一致；1m参考；主明细按所选周期；定时仅展示；R1≥0.8；非AI",
         "items": items,
         "errors": errors,
     }

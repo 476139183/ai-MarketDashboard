@@ -75,6 +75,7 @@ body {
 }
 .tf-chip.long { background: var(--long-bg); color: var(--long); }
 .tf-chip.short { background: var(--short-bg); color: var(--short); }
+.tf-chip.soft { opacity: 0.72; font-size: 0.68rem; }
 .clock-live {
   margin: 8px 0 0;
   font-family: var(--mono);
