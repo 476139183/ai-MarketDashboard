@@ -21,14 +21,14 @@ SIGNAL_LIVE=1 python3 app.py
 
 浏览器：http://127.0.0.1:8765  
 
-默认标的：`SNDK,MU,NVDA`。**同一套策略**；一致性**优先 15m + 5m**，1m 仅参考。下拉选主明细档位（默认 15m；ORB≈开盘 30 分钟）。
+默认标的：`SNDK,MU,NVDA`。**策略仅 15m**（ORB≈开盘 30 分钟）。卡片展示实时现价、日高/日低、VWAP、ORB，避免漏判盘中极值。
 
 **定时**：可选，只刷新展示，与信号逻辑无关。
 
-API：`/api/signals?symbols=SNDK&interval=15m&multi=1`
+API：`/api/signals?symbols=SNDK`
 
 ## 说明
 
-- 现价：Nasdaq quote → Yahoo；分钟线优先 Nasdaq 分时聚合
+- 现价 + 日高/日低：Nasdaq quote（keyStats）；15m：Nasdaq 分时聚合 → Yahoo/缓存
 - 正式主源未选：见 `../docs/market-data-sources.md`
 - 休市多为观望属正常

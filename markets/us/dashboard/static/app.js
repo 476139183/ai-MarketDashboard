@@ -1,8 +1,7 @@
 const $ = (id) => document.getElementById(id);
 
 const LS_TIMER = "signal_board_timer_on";
-const LS_INTERVAL = "signal_board_bar_interval";
-/** 美东常规开盘 09:30，定时刷新以此为锚点按 K 线周期对齐 */
+/** 美东常规开盘 09:30，定时刷新按 15m K 线对齐 */
 const RTH_OPEN_MIN = 9 * 60 + 30;
 const BAR_CLOSE_LAG_MS = 2500;
 
@@ -13,12 +12,11 @@ let nextAt = 0;
 let timerOn = localStorage.getItem(LS_TIMER) === "1";
 
 function barInterval() {
-  const v = ($("bar-interval") && $("bar-interval").value) || "15m";
-  return ["1m", "5m", "15m"].includes(v) ? v : "15m";
+  return "15m";
 }
 
 function barMinutes() {
-  return { "1m": 1, "5m": 5, "15m": 15 }[barInterval()] || 15;
+  return 15;
 }
 
 function pad2(n) {
@@ -195,27 +193,26 @@ function setTimer(on) {
 
 function shortHint(item) {
   const r = item.reason || "";
-  if (item.signal === "平空") return "空单失效：已收复 VWAP → 立刻平空，不要继续拿着";
-  if (item.signal === "平多") return "多单失效：已跌破 VWAP → 立刻平多";
-  if (item.signal === "做空") {
-    if (r.includes("风控未过")) return "空头结构有，但 R1/价序未过，不开";
-    return "空头 setup 有效：按入场带做空，结构失效/收复 VWAP 则平";
+  if (item.signal === "平空" || item.signal === "平多") {
+    return "先平仓：结构失效，暂不开新仓";
   }
-  if (item.signal === "做多") {
-    if (r.includes("风控未过")) return "多头结构有，但 R1/价序未过，不开";
-    return "多头 setup 有效：按入场带做多，结构失效/跌破 VWAP 则平";
+  if (item.actionable || item.signal === "做空" || item.signal === "做多") {
+    const side = item.signal === "做空" ? "做空" : "做多";
+    return `当前可操作：按入场带${side}（最新价 + 15m 结构）`;
   }
   if (item.structure === "空头") {
-    if (r.includes("不追")) return "结构偏空，先等反抽到入场价，勿追空";
-    return "结构偏空，尚未到入场价 → 观望";
+    if (r.includes("不追")) return "当前观望：结构偏空但已离开反抽带，勿追空";
+    if (r.includes("逆势")) return "当前观望：结构空但短线偏多，暂不开空";
+    return "当前观望：结构偏空，等现价回到做空入场带";
   }
   if (item.structure === "多头") {
-    if (r.includes("不追")) return "结构偏多，先等回踩到入场价，勿追多";
-    return "结构偏多，尚未到入场价 → 观望";
+    if (r.includes("不追")) return "当前观望：结构偏多但已离开回踩带，勿追多";
+    if (r.includes("逆势")) return "当前观望：结构多但短线偏空，暂不开多";
+    return "当前观望：结构偏多，等现价回到做多入场带";
   }
-  if (r.includes("震荡")) return "震荡中，等方向明确";
-  if (r.includes("休市") || r.includes("不足")) return "休市或数据不足";
-  return "暂不操作";
+  if (r.includes("震荡")) return "当前观望：震荡，等 15m 方向明确";
+  if (r.includes("休市") || r.includes("不足")) return "当前观望：休市或数据不足";
+  return "当前观望：暂不操作";
 }
 
 function structureClass(st) {
@@ -269,40 +266,28 @@ function renderCard(item) {
         <li><span class="k">止损</span><span class="v">待定</span></li>
         <li><span class="k">止盈</span><span class="v">待定</span></li>`;
   const tag = item.price_tag ? `<span class="ptag">${item.price_tag}</span>` : "";
-  const iv = item.interval || barInterval();
-  const scope = item.struct_scope ? `<p class="scope">${item.struct_scope}</p>` : "";
-  const ready = item.entry_ready
-    ? `<span class="ready">已到价</span>`
-    : hasPlan
-      ? `<span class="wait-entry">未到价</span>`
-      : "";
-  const cons = item.consensus || {};
-  const consBias = cons.bias || "flat";
-  const consClass =
-    consBias === "long" ? "long" : consBias === "short" ? "short" : consBias === "mixed" ? "exit" : "wait";
-  const tf = item.tf || {};
-  const tfRow = ["15m", "5m", "1m"]
-    .map((k) => {
-      const cell = tf[k] || {};
-      const b = cell.bias || "flat";
-      const cls = b === "long" ? "long" : b === "short" ? "short" : "wait";
-      const soft = k === "1m" ? " soft" : "";
-      const txt = cell.signal || "—";
-      return `<span class="tf-chip ${cls}${soft}">${k}${k === "1m" ? "·参考" : ""} ${txt}</span>`;
-    })
-    .join("");
+  const scope = item.struct_scope ? `<p class="scope">${item.struct_scope} · 15m</p>` : "";
+  const actionable = !!item.actionable || item.signal === "做多" || item.signal === "做空";
+  const actionText = item.action_label || (actionable ? "当前可操作" : "当前观望");
+  const actionCls = actionable ? "ready" : item.signal === "平空" || item.signal === "平多" ? "wait-entry" : "wait-entry";
+  const dayHi = item.day_high != null ? fmt(item.day_high) : "—";
+  const dayLo = item.day_low != null ? fmt(item.day_low) : "—";
+  const vwap = item.vwap != null ? fmt(item.vwap) : "—";
+  const orb =
+    item.orb && item.orb.low != null
+      ? `${fmt(item.orb.low)} – ${fmt(item.orb.high)}`
+      : "—";
   return `
     <article class="card">
       <div class="row">
-        <p class="sym">${item.symbol || "—"} <span class="iv">明细 ${iv}</span></p>
+        <p class="sym">${item.symbol || "—"} <span class="iv">15m</span></p>
         <p class="px">${fmt(item.price)}${chgText(item)}${tag}</p>
       </div>
-      <div class="tf-row">${tfRow}</div>
+      <p class="intraday">日高 ${dayHi} · 日低 ${dayLo} · VWAP ${vwap} · ORB ${orb}</p>
       <div class="badges">
-        <div class="badge ${consClass}">${cons.label || "多周期"}</div>
+        <span class="${actionCls}">${actionText}</span>
         <div class="badge ${structureClass(st)}">结构·${st}</div>
         <div class="badge ${signalClass(item.signal)}">信号·${item.signal || "观望"}</div>
-        ${ready}
       </div>
       <ul class="levels">${levels}</ul>
       ${scope}
@@ -324,7 +309,7 @@ function updateTimerUi() {
     : "开启自动刷新（仅展示，不影响策略）";
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
   if (!timerOn) {
-    status.textContent = `不定时 · 手动刷新 · 优先 15m+5m 一致（1m 参考）${meta}`;
+    status.textContent = `不定时 · 手动刷新 · 仅15m策略 · 现价/日高低温实时${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
@@ -335,19 +320,17 @@ function updateTimerUi() {
 async function load() {
   const btn = $("btn-refresh");
   const symbols = $("symbols").value.trim() || "SNDK,MU,NVDA";
-  const interval = barInterval();
   btn.disabled = true;
   try {
     const res = await fetch(
-      `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=${encodeURIComponent(interval)}&multi=1&_=${Date.now()}`,
+      `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=15m&multi=0&_=${Date.now()}`,
       { cache: "no-store" }
     );
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     $("cards").innerHTML = (data.items || []).map(renderCard).join("");
     const phase = (data.session && data.session.phase) || "";
-    const iv = data.interval || interval;
-    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · 明细${iv} · 多周期一致核对${phase ? " · " + phase : ""}`;
+    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · 15m${phase ? " · " + phase : ""}`;
   } catch (err) {
     $("cards").innerHTML = `<p class="hint">加载失败：${err.message}</p>`;
     lastRefreshMeta = `刷新失败 ${err.message}`;
@@ -359,19 +342,9 @@ async function load() {
 
 $("btn-refresh").addEventListener("click", load);
 $("btn-timer").addEventListener("click", () => setTimer(!timerOn));
-$("bar-interval").addEventListener("change", () => {
-  localStorage.setItem(LS_INTERVAL, barInterval());
-  load();
-  if (timerOn) startTimer();
-});
 $("symbols").addEventListener("keydown", (e) => {
   if (e.key === "Enter") load();
 });
-
-const savedIv = localStorage.getItem(LS_INTERVAL);
-if (savedIv && [...$("bar-interval").options].some((o) => o.value === savedIv)) {
-  $("bar-interval").value = savedIv;
-}
 
 tickBeijingClock();
 setInterval(tickBeijingClock, 1000);

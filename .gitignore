@@ -11,3 +11,5 @@ markets/us/dashboard/cache/
 *.log
 .idea/
 .vscode/
+_upstream_MarketDashboard/
+_merge_backup/

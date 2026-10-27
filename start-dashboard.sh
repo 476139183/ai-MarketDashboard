@@ -59,7 +59,7 @@ fi
 
 echo "工作台目录: $DASH"
 echo "打开: $URL"
-echo "默认标的: SNDK, MU, NVDA · 周期可在页内切 1m/5m/15m"
+echo "默认标的: SNDK, MU, NVDA · 策略仅 15m（现价/日高低温实时）"
 echo "Ctrl+C 停止"
 echo
 

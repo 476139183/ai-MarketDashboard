@@ -21,7 +21,7 @@ markets/
   us/                     # 美股：看板、回测、SNDK 工具、美股数据源文档
 ```
 
-## 快速启动（仅美股看板 · 1m / 5m / 15m）
+## 快速启动（仅美股看板 · 15m）
 
 ```bash
 ./start-dashboard.sh          # 启动并打开浏览器
@@ -29,6 +29,6 @@ markets/
 ./start-dashboard.sh --no-open
 ```
 
-看板可切换 **1分钟 / 5分钟 / 15分钟**（ORB≈开盘 30 分钟）。  
+策略仅 **15 分钟**；现价与日高/日低实时更新（ORB≈开盘 30 分钟）。  
 或手动：`cd markets/us/dashboard && python3 app.py` → http://127.0.0.1:8765  
 **不要**用该引擎分析 A股代码。
