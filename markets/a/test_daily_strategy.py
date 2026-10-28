@@ -1,5 +1,5 @@
 import unittest
-from daily_strategy import run
+from daily_strategy import entry_signal, run
 
 
 class DailyStrategyTest(unittest.TestCase):
@@ -45,6 +45,12 @@ class DailyStrategyTest(unittest.TestCase):
         bars.append({'date': '023', 'open': 12.3, 'high': 12.35, 'low': 12.25, 'close': 12.3, 'volume': 100})
         result = run(bars, .2, trading_calendar=[f'{i:03d}' for i in range(24)])
         self.assertIsNone(result['open_position'])
+
+    def test_entry_signal_is_available_independently_of_position(self):
+        bars = [{'date': f'{i:03d}', 'open': 10 + i*.1, 'high': 10.05 + i*.1,
+                 'low': 9.95 + i*.1, 'close': 10 + i*.1, 'volume': 100} for i in range(21)]
+        self.assertTrue(entry_signal(bars, 'breakout'))
+        self.assertFalse(entry_signal(bars[:20], 'breakout'))
 
 
 if __name__ == '__main__':

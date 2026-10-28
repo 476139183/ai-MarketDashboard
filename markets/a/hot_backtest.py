@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import gzip
 import hashlib
 import json
+from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from daily_strategy import from_minutes, run
@@ -18,8 +19,8 @@ RULES = [('breakout', 10), ('breakout', 20), ('reclaim', 10), ('reclaim', 20), (
 
 
 def as_of_date(snapshot_time):
-    # 始终使用榜单采集日前已经结束的日线，不假设采集当日已收盘。
-    return (snapshot_time.date() - timedelta(days=1)).isoformat()
+    # 17:00 后才允许采集当日收盘日线；盘中始终只用此前日期。
+    return (snapshot_time.date() if snapshot_time.hour >= 17 else snapshot_time.date() - timedelta(days=1)).isoformat()
 
 
 def prepare_symbols(stocks):
@@ -38,6 +39,19 @@ def prepare_symbols(stocks):
         except ValueError as exc:
             rejected.append({**stock, 'code': code, 'reason': str(exc)})
     return accepted, rejected
+
+
+def tracking_extras(stocks, records):
+    known = {x['code'] for x in stocks}
+    candidates = []
+    for row in records:
+        if row['code'] in known:
+            continue
+        known.add(row['code'])
+        candidates.append({'code': row['code'], 'name': row['name'],
+                           'exchange': 'BJ' if row.get('board') == '北交所' else None})
+    accepted, _ = prepare_symbols(candidates)
+    return accepted
 
 
 def load(code, end, board):
@@ -88,14 +102,19 @@ def main():
     with open('markets/a/benchmark-results.json', encoding='utf-8') as f:
         benchmark = json.load(f)
     end = as_of_date(datetime.fromisoformat(snapshot['generated_at']))
+    if benchmark.get('requested_end', benchmark['bars'][-1]['date']) < end:
+        raise ValueError('指数日线未更新到本次快照请求日期，请先运行 benchmark.py')
     calendar = [x['date'] for x in benchmark['bars'] if x['date'] <= end]
-    if not calendar or calendar[-1] < end and (datetime.fromisoformat(end).date() - datetime.fromisoformat(calendar[-1]).date()).days > 3:
-        raise ValueError('交易日历未覆盖快照日前的最近交易日，请先更新指数数据')
+    if not calendar:
+        raise ValueError('指数交易日期为空，请先更新指数数据')
     stocks, rejected = prepare_symbols(snapshot['stocks'])
+    ledger = Path('markets/a/candidate-ledger.json')
+    records = json.loads(ledger.read_text(encoding='utf-8')).get('records', []) if ledger.exists() else []
+    extra_stocks = tracking_extras(stocks, records)
     histories, failures, sources = {}, {}, {}
-    print(f'去重后支持股票 {len(stocks)}，不支持 {len(rejected)}', flush=True)
+    print(f'去重后支持股票 {len(stocks)}，额外追踪 {len(extra_stocks)}，不支持 {len(rejected)}', flush=True)
     with ThreadPoolExecutor(max_workers=8) as pool:
-        futures = {pool.submit(load, stock['code'], end, stock['board']): stock for stock in stocks}
+        futures = {pool.submit(load, stock['code'], end, stock['board']): stock for stock in stocks + extra_stocks}
         for i, future in enumerate(as_completed(futures), 1):
             stock = futures[future]
             code = stock['code']
@@ -107,14 +126,16 @@ def main():
             except Exception as exc:
                 failures[code] = {'name': stock.get('name'), 'error': str(exc)}
             if i % 25 == 0 or i == len(futures):
-                print(f'行情 {i}/{len(stocks)}，可回测 {len(histories)}，失败 {len(failures)}', flush=True)
-    metadata = {s['code']: s for s in stocks}
+                print(f'行情 {i}/{len(futures)}，可用 {len(histories)}，失败 {len(failures)}', flush=True)
+    metadata = {s['code']: s for s in stocks + extra_stocks}
+    current_codes = {x['code'] for x in stocks}
+    current_histories = {c: b for c, b in histories.items() if c in current_codes}
     periods = {'2023_2024': ('2023-01-01', '2024-12-31'),
                '2025': ('2025-01-01', '2025-12-31'), '2026': ('2026-01-01', end)}
     rules = {}
     for entry, ma in RULES:
         per_stock, per_period = {}, {k: [] for k in periods}
-        for code, bars in histories.items():
+        for code, bars in current_histories.items():
             board = metadata[code]['board']
             result = run(bars, .3 if board == '北交所' else .2 if board in ('创业板', '科创板') else .1,
                          entry_rule=entry, exit_ma=ma, trading_calendar=calendar)
@@ -123,13 +144,14 @@ def main():
                 for name, (start, stop) in periods.items():
                     if start <= trade['signal_date'] and trade['exit_date'] <= stop:
                         per_period[name].append((code, trade))
-        curve = equity_curve(histories, per_stock) if histories else []
+        curve = equity_curve(current_histories, per_stock) if current_histories else []
         rules[f'{entry}_ma{ma}'] = {'periods': {k: metrics(v) for k, v in per_period.items()},
                                     'portfolio': {k: period_metrics(curve, *v) for k, v in periods.items()},
                                     'by_stock': per_stock, 'curve': curve}
     result = {'universe_snapshot': snapshot['generated_at'], 'scope': '当前人气榜与飙升榜固定股票池的历史回看；并非历史动态热榜',
               'as_of_date': end, 'snapshot_size': len(snapshot['stocks']), 'supported': len(stocks),
-              'tested': len(histories), 'unsupported': rejected, 'failed': failures, 'sources': sources,
+              'tested': len(current_histories), 'tracked_outside_snapshot': [s['code'] for s in extra_stocks],
+              'unsupported': rejected, 'failed': failures, 'sources': sources,
               'metadata': metadata, 'periods': periods, 'rules': rules,
               'limitations': ['当前榜单事后选股导致前视与幸存者偏差', '各股数据范围与复权方式不同，北交所历史代码连续性待核实',
                               '市场日历仅覆盖所下载的指数日期；停牌与历史真实限价未核验',

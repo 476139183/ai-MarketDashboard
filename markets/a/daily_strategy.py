@@ -1,6 +1,25 @@
 """A 股日线研究：只在收盘后决定下一交易日动作。"""
 
 
+def entry_signal(bars, entry_rule='breakout'):
+    if entry_rule not in ('breakout', 'reclaim', 'trend'):
+        raise ValueError('未知入场规则')
+    if len(bars) < 21:
+        return False
+    closes = [float(x['close']) for x in bars[-20:]]
+    close = closes[-1]
+    ma5, ma20 = sum(closes[-5:]) / 5, sum(closes) / 20
+    if not (ma5 > ma20 and close > ma20):
+        return False
+    if entry_rule == 'breakout':
+        return close > max(float(x['high']) for x in bars[-21:-1])
+    if entry_rule == 'reclaim':
+        prior_ma5 = sum(float(x['close']) for x in bars[-6:-1]) / 5
+        return float(bars[-2]['close']) <= prior_ma5 and close > ma5
+    prior_ma20 = sum(float(x['close']) for x in bars[-21:-1]) / 20
+    return float(bars[-2]['close']) <= prior_ma20
+
+
 def run(bars, limit_ratio, fee=0.0015, min_entry_date=None, entry_rule='breakout', exit_ma=10, trading_calendar=None, allowed_signal_dates=None):
     if entry_rule not in ('breakout', 'reclaim', 'trend') or exit_ma not in (10, 20):
         raise ValueError('未知研究规则')
@@ -37,16 +56,11 @@ def run(bars, limit_ratio, fee=0.0015, min_entry_date=None, entry_rule='breakout
         ma5 = sum(closes[-5:]) / 5
         ma10 = sum(closes[-10:]) / 10
         ma20 = sum(closes) / 20
-        previous_high = max(float(x['high']) for x in bars[i-20:i])
-        prior_ma5 = sum(float(x['close']) for x in bars[i-5:i]) / 5
         if position:
             if not pending and (close < (ma10 if exit_ma == 10 else ma20) or close <= position['entry_price'] * .95):
                 pending = {'side': 'sell', 'date': day}
         elif not pending and (min_entry_date is None or day >= min_entry_date) and (allowed_signal_dates is None or day in allowed_signal_dates):
-            entry = (close > previous_high if entry_rule == 'breakout' else
-                     float(bars[i-1]['close']) <= prior_ma5 and close > ma5 if entry_rule == 'reclaim' else
-                     float(bars[i-1]['close']) <= sum(float(x['close']) for x in bars[i-20:i]) / 20)
-            if ma5 > ma20 and close > ma20 and entry:
+            if entry_signal(bars[i-20:i+1], entry_rule):
                 pending = {'side': 'buy', 'date': day}
     return {'trades': trades, 'open_position': position, 'pending': pending, 'skipped_fills': skipped}
 
