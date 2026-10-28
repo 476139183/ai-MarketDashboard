@@ -3,6 +3,7 @@
 from datetime import datetime
 import gzip
 import json
+import math
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from daily_strategy import entry_signal
@@ -20,6 +21,25 @@ def record_timing(signal_date, recorded_at):
     return '信号日记录' if datetime.fromisoformat(recorded_at).date().isoformat() == signal_date else '事后记录'
 
 
+def history_issue(bars, calendar, signal_date):
+    eligible = [day for day in calendar if day <= signal_date]
+    if len(eligible) < 21:
+        return '交易日历不足21日'
+    required = eligible[-21:]
+    required_set = set(required)
+    sample = [bar for bar in bars if bar['date'] in required_set]
+    if [bar['date'] for bar in sample] != required:
+        return '最近21个市场交易日日线不完整'
+    try:
+        for bar in sample:
+            op, high, low, close, volume = (float(bar[k]) for k in ('open', 'high', 'low', 'close', 'volume'))
+            if not all(math.isfinite(x) for x in (op, high, low, close, volume)) or volume <= 0 or low <= 0 or not low <= op <= high or not low <= close <= high:
+                return '最近21日日线价格或成交量异常'
+    except (KeyError, TypeError, ValueError):
+        return '最近21日日线字段缺失'
+    return None
+
+
 def main():
     with open('markets/a/large-universe.json', encoding='utf-8') as f:
         universe = json.load(f)
@@ -35,12 +55,16 @@ def main():
     captured = datetime.now(ZoneInfo('Asia/Shanghai')).isoformat()
     existing = json.loads(LEDGER.read_text(encoding='utf-8')) if LEDGER.exists() else {'records': []}
     known = {(x['signal_date'], x['code']) for x in existing['records']}
-    stale = []
+    stale, quality_excluded = [], {}
     for row in universe['included']:
         code = row['code']
         bars = [x for x in histories[code] if x['date'] <= date]
         if not bars or bars[-1]['date'] != date:
             stale.append(code)
+            continue
+        issue = history_issue(bars, calendar, date)
+        if issue:
+            quality_excluded[code] = issue
             continue
         signals = [rule for rule in ('trend', 'reclaim', 'breakout') if entry_signal(bars, rule)]
         if not signals or (date, code) in known:
@@ -54,6 +78,8 @@ def main():
     next_date = dict(zip(calendar, calendar[1:]))
     for item in existing['records']:
         item['record_timing'] = record_timing(item['signal_date'], item['recorded_at'])
+        if item['signal_date'] == date:
+            item['data_quality'] = quality_excluded.get(item['code'], '数据对齐' if item['code'] not in stale else '当日日线缺失')
         code, next_day = item['code'], next_date.get(item['signal_date'])
         if code not in histories or not next_day:
             item['follow_up'] = {'status': '等待下一交易日行情'}
@@ -73,14 +99,14 @@ def main():
                              'day3': horizon_observation(bars, calendar, next_day, op, 3, ratio),
                              'day5': horizon_observation(bars, calendar, next_day, op, 5, ratio)}
     existing.update(last_signal_date=date, last_run_at=captured, market_pass=market_pass,
-                    universe_snapshot_time=universe['generated_at'], stale_symbols=stale,
+                    universe_snapshot_time=universe['generated_at'], stale_symbols=stale, quality_excluded=quality_excluded,
                     limitations=['本次股票池按当前名称、市值和热榜筛选，历史回看有前视偏差',
                                  '未复权，未完整处理历史ST、除权、停牌和真实涨跌停',
                                  '观察池不等于买入建议；收盘观察价不保证可卖出',
                                  '需要手动刷新行情和运行脚本，本程序不会自动定时'])
     LEDGER.write_text(json.dumps(existing, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     today = [x for x in existing['records'] if x['signal_date'] == date]
-    print(f'{date}: 策略候选 {sum(x["category"] == "策略候选" for x in today)}，观察池 {sum(x["category"] == "观察池" for x in today)}，数据未对齐 {len(stale)}')
+    print(f'{date}: 策略候选 {sum(x["category"] == "策略候选" for x in today)}，观察池 {sum(x["category"] == "观察池" for x in today)}，当日日线缺失 {len(stale)}，历史数据不合格 {len(quality_excluded)}')
 
 
 if __name__ == '__main__':

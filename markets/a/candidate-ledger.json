@@ -16,7 +16,8 @@
       "follow_up": {
         "status": "等待下一交易日行情"
       },
-      "record_timing": "事后记录"
+      "record_timing": "事后记录",
+      "data_quality": "数据对齐"
     },
     {
       "code": "600519",
@@ -34,7 +35,8 @@
       "follow_up": {
         "status": "等待下一交易日行情"
       },
-      "record_timing": "事后记录"
+      "record_timing": "事后记录",
+      "data_quality": "数据对齐"
     },
     {
       "code": "000700",
@@ -52,7 +54,8 @@
       "follow_up": {
         "status": "等待下一交易日行情"
       },
-      "record_timing": "事后记录"
+      "record_timing": "事后记录",
+      "data_quality": "数据对齐"
     },
     {
       "code": "002181",
@@ -70,11 +73,12 @@
       "follow_up": {
         "status": "等待下一交易日行情"
       },
-      "record_timing": "事后记录"
+      "record_timing": "事后记录",
+      "data_quality": "数据对齐"
     }
   ],
   "last_signal_date": "2026-10-27",
-  "last_run_at": "2026-10-28T12:22:12.228042+08:00",
+  "last_run_at": "2026-10-28T14:06:37.978989+08:00",
   "market_pass": false,
   "universe_snapshot_time": "2026-10-28T11:50:39.111082+08:00",
   "stale_symbols": [],
@@ -83,5 +87,8 @@
     "未复权，未完整处理历史ST、除权、停牌和真实涨跌停",
     "观察池不等于买入建议；收盘观察价不保证可卖出",
     "需要手动刷新行情和运行脚本，本程序不会自动定时"
-  ]
+  ],
+  "quality_excluded": {
+    "600825": "最近21个市场交易日日线不完整"
+  }
 }
