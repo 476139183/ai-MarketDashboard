@@ -1,0 +1,1114 @@
+{
+  "note": "相对沪深300日期缺失可能是停牌、上市时间或数据缺口；不能仅据此判定原因。",
+  "stock_count": 109,
+  "stocks_with_missing_dates": 11,
+  "missing_date_total": 113,
+  "invalid_ohlcv_count": 0,
+  "stocks": {
+    "000651": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000338": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000568": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000001": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000725": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000538": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000596": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000333": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000799": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000776": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002074": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002008": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "000858": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002371": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002415": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002384": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002460": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002422": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002472": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002463": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002304": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002475": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002594": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002812": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 912,
+      "index_dates_missing": 10,
+      "missing_dates": [
+        "2025-12-01",
+        "2025-12-02",
+        "2025-12-03",
+        "2025-12-04",
+        "2025-12-05",
+        "2025-12-08",
+        "2025-12-09",
+        "2025-12-10",
+        "2025-12-11",
+        "2025-12-12"
+      ],
+      "invalid_ohlcv": []
+    },
+    "002709": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "002821": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "003816": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300014": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300059": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300124": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300207": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300285": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300390": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300308": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300394": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300450": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300476": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300433": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300502": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300760": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300759": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300604": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300750": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "300857": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "301217": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "301511": {
+      "source": "腾讯前复权日线",
+      "first": "2023-08-17",
+      "last": "2026-10-27",
+      "days": 771,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "301550": {
+      "source": "腾讯前复权日线",
+      "first": "2023-09-15",
+      "last": "2026-10-27",
+      "days": 750,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600011": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600030": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600025": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600036": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600066": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 921,
+      "index_dates_missing": 1,
+      "missing_dates": [
+        "2023-04-17"
+      ],
+      "invalid_ohlcv": []
+    },
+    "600183": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600199": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600522": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600418": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600584": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 917,
+      "index_dates_missing": 5,
+      "missing_dates": [
+        "2024-03-20",
+        "2024-03-21",
+        "2024-03-22",
+        "2024-03-25",
+        "2024-03-26"
+      ],
+      "invalid_ohlcv": []
+    },
+    "600276": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600519": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600660": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600699": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600674": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600795": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600809": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600900": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600919": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600886": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600930": {
+      "source": "腾讯前复权日线",
+      "first": "2025-07-16",
+      "last": "2026-10-27",
+      "days": 310,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600941": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600958": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 912,
+      "index_dates_missing": 10,
+      "missing_dates": [
+        "2026-04-20",
+        "2026-04-21",
+        "2026-04-22",
+        "2026-04-23",
+        "2026-04-24",
+        "2026-04-27",
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-06"
+      ],
+      "invalid_ohlcv": []
+    },
+    "601066": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601138": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601127": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601166": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "600999": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601211": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 903,
+      "index_dates_missing": 19,
+      "missing_dates": [
+        "2024-09-06",
+        "2024-09-09",
+        "2024-09-10",
+        "2024-09-11",
+        "2024-09-12",
+        "2024-09-13",
+        "2024-09-18",
+        "2024-09-19",
+        "2024-09-20",
+        "2024-09-23",
+        "2024-09-24",
+        "2024-09-25",
+        "2024-09-26",
+        "2024-09-27",
+        "2024-09-30",
+        "2024-10-08",
+        "2024-10-09",
+        "2025-02-06",
+        "2025-02-07"
+      ],
+      "invalid_ohlcv": []
+    },
+    "601328": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601288": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601658": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601398": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601688": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601689": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601872": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601939": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601985": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601881": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601988": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "603127": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "603019": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 912,
+      "index_dates_missing": 10,
+      "missing_dates": [
+        "2025-05-26",
+        "2025-05-27",
+        "2025-05-28",
+        "2025-05-29",
+        "2025-05-30",
+        "2025-06-03",
+        "2025-06-04",
+        "2025-06-05",
+        "2025-06-06",
+        "2025-06-09"
+      ],
+      "invalid_ohlcv": []
+    },
+    "601991": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "601995": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 896,
+      "index_dates_missing": 26,
+      "missing_dates": [
+        "2025-11-20",
+        "2025-11-21",
+        "2025-11-24",
+        "2025-11-25",
+        "2025-11-26",
+        "2025-11-27",
+        "2025-11-28",
+        "2025-12-01",
+        "2025-12-02",
+        "2025-12-03",
+        "2025-12-04",
+        "2025-12-05",
+        "2025-12-08",
+        "2025-12-09",
+        "2025-12-10",
+        "2025-12-11",
+        "2025-12-12",
+        "2025-12-15",
+        "2025-12-16",
+        "2025-12-17",
+        "2026-09-15",
+        "2026-09-16",
+        "2026-09-17",
+        "2026-09-18",
+        "2026-09-21",
+        "2026-09-22"
+      ],
+      "invalid_ohlcv": []
+    },
+    "603198": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "603259": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "603369": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "603893": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688012": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 913,
+      "index_dates_missing": 9,
+      "missing_dates": [
+        "2025-12-19",
+        "2025-12-22",
+        "2025-12-23",
+        "2025-12-24",
+        "2025-12-25",
+        "2025-12-26",
+        "2025-12-29",
+        "2025-12-30",
+        "2025-12-31"
+      ],
+      "invalid_ohlcv": []
+    },
+    "688008": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688041": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 912,
+      "index_dates_missing": 10,
+      "missing_dates": [
+        "2025-05-26",
+        "2025-05-27",
+        "2025-05-28",
+        "2025-05-29",
+        "2025-05-30",
+        "2025-06-03",
+        "2025-06-04",
+        "2025-06-05",
+        "2025-06-06",
+        "2025-06-09"
+      ],
+      "invalid_ohlcv": []
+    },
+    "603986": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688146": {
+      "source": "腾讯前复权日线",
+      "first": "2023-04-21",
+      "last": "2026-10-27",
+      "days": 847,
+      "index_dates_missing": 3,
+      "missing_dates": [
+        "2026-06-23",
+        "2026-06-24",
+        "2026-06-25"
+      ],
+      "invalid_ohlcv": []
+    },
+    "688235": {
+      "source": "新浪近期未复权分钟聚合日线；前复权源不可用",
+      "first": "2026-07-23",
+      "last": "2026-10-27",
+      "days": 63,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688072": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 912,
+      "index_dates_missing": 10,
+      "missing_dates": [
+        "2026-06-29",
+        "2026-06-30",
+        "2026-07-01",
+        "2026-07-02",
+        "2026-07-03",
+        "2026-07-06",
+        "2026-07-07",
+        "2026-07-08",
+        "2026-07-09",
+        "2026-07-10"
+      ],
+      "invalid_ohlcv": []
+    },
+    "688795": {
+      "source": "新浪近期未复权分钟聚合日线；前复权源不可用",
+      "first": "2026-07-23",
+      "last": "2026-10-27",
+      "days": 63,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688825": {
+      "source": "新浪近期未复权分钟聚合日线；前复权源不可用",
+      "first": "2026-07-27",
+      "last": "2026-10-27",
+      "days": 61,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688256": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688498": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688271": {
+      "source": "腾讯前复权日线",
+      "first": "2023-01-03",
+      "last": "2026-10-27",
+      "days": 922,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688836": {
+      "source": "新浪近期未复权分钟聚合日线；前复权源不可用",
+      "first": "2026-08-19",
+      "last": "2026-10-27",
+      "days": 44,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    },
+    "688981": {
+      "source": "新浪近期未复权分钟聚合日线；前复权源不可用",
+      "first": "2026-07-23",
+      "last": "2026-10-27",
+      "days": 63,
+      "index_dates_missing": 0,
+      "missing_dates": [],
+      "invalid_ohlcv": []
+    }
+  }
+}
