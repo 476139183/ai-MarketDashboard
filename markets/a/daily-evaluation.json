@@ -1,0 +1,1832 @@
+{
+  "method": "收盘后用MA5、MA20与过去20日最高价生成突破信号，次日开盘买入；收盘低于MA10或低于买价5%后下一交易日开盘退出；单边0.15%成本",
+  "split": "2026-09-25",
+  "early": {
+    "trades": 27,
+    "win_rate_pct": 25.93,
+    "mean_trade_return_pct": -2.21,
+    "median_trade_return_pct": -1.677
+  },
+  "later": {
+    "trades": 25,
+    "win_rate_pct": 24.0,
+    "mean_trade_return_pct": -3.211,
+    "median_trade_return_pct": -1.755
+  },
+  "sectors": [
+    {
+      "name": "银行",
+      "category": "行业",
+      "members": 10,
+      "trades": 17,
+      "win_rate_pct": 41.18,
+      "mean_trade_return_pct": -0.476,
+      "median_trade_return_pct": -0.577
+    },
+    {
+      "name": "证券",
+      "category": "行业",
+      "members": 10,
+      "trades": 1,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -1.444,
+      "median_trade_return_pct": -1.444
+    },
+    {
+      "name": "白酒",
+      "category": "行业",
+      "members": 10,
+      "trades": 2,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -9.215,
+      "median_trade_return_pct": -9.215
+    },
+    {
+      "name": "半导体",
+      "category": "行业",
+      "members": 10,
+      "trades": 1,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -1.66,
+      "median_trade_return_pct": -1.66
+    },
+    {
+      "name": "电池",
+      "category": "行业",
+      "members": 10,
+      "trades": 4,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -3.214,
+      "median_trade_return_pct": -2.428
+    },
+    {
+      "name": "汽车",
+      "category": "行业",
+      "members": 10,
+      "trades": 7,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -8.853,
+      "median_trade_return_pct": -8.727
+    },
+    {
+      "name": "医药生物",
+      "category": "行业",
+      "members": 10,
+      "trades": 6,
+      "win_rate_pct": 33.33,
+      "mean_trade_return_pct": -2.765,
+      "median_trade_return_pct": -3.501
+    },
+    {
+      "name": "电力",
+      "category": "行业",
+      "members": 10,
+      "trades": 13,
+      "win_rate_pct": 46.15,
+      "mean_trade_return_pct": 0.241,
+      "median_trade_return_pct": -0.024
+    },
+    {
+      "name": "人形机器人",
+      "category": "题材",
+      "members": 10,
+      "trades": 2,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -6.748,
+      "median_trade_return_pct": -6.748
+    },
+    {
+      "name": "存储芯片",
+      "category": "题材",
+      "members": 10,
+      "trades": 2,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -6.683,
+      "median_trade_return_pct": -6.683
+    },
+    {
+      "name": "人工智能",
+      "category": "题材",
+      "members": 10,
+      "trades": 4,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -6.129,
+      "median_trade_return_pct": -5.56
+    },
+    {
+      "name": "算力概念",
+      "category": "题材",
+      "members": 10,
+      "trades": 4,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -5.476,
+      "median_trade_return_pct": -5.926
+    },
+    {
+      "name": "新能源车",
+      "category": "题材",
+      "members": 10,
+      "trades": 2,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -4.906,
+      "median_trade_return_pct": -4.906
+    },
+    {
+      "name": "固态电池",
+      "category": "题材",
+      "members": 10,
+      "trades": 4,
+      "win_rate_pct": 0.0,
+      "mean_trade_return_pct": -4.784,
+      "median_trade_return_pct": -4.505
+    }
+  ],
+  "stocks": {
+    "000001": {
+      "trades": [
+        {
+          "signal_date": "2026-08-26",
+          "entry_date": "2026-08-27",
+          "entry_price": 11.7,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 11.66,
+          "return_pct": -0.64
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000333": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000338": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000538": {
+      "trades": [
+        {
+          "signal_date": "2026-09-17",
+          "entry_date": "2026-09-18",
+          "entry_price": 51.3,
+          "exit_signal_date": "2026-09-24",
+          "exit_date": "2026-09-28",
+          "exit_price": 49.87,
+          "return_pct": -3.079
+        },
+        {
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_price": 52.0,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 52.39,
+          "return_pct": 0.448
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000568": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000596": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000651": {
+      "trades": [
+        {
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_price": 39.57,
+          "exit_signal_date": "2026-10-20",
+          "exit_date": "2026-10-21",
+          "exit_price": 38.5,
+          "return_pct": -2.996
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000725": {
+      "trades": [
+        {
+          "signal_date": "2026-09-21",
+          "entry_date": "2026-09-22",
+          "entry_price": 6.12,
+          "exit_signal_date": "2026-09-28",
+          "exit_date": "2026-09-29",
+          "exit_price": 5.72,
+          "return_pct": -6.816
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000776": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 21.77,
+          "exit_signal_date": "2026-09-08",
+          "exit_date": "2026-09-09",
+          "exit_price": 21.52,
+          "return_pct": -1.444
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000799": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "000858": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-16",
+        "entry_date": "2026-10-19",
+        "entry_price": 71.96
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002008": {
+      "trades": [
+        {
+          "signal_date": "2026-09-18",
+          "entry_date": "2026-09-21",
+          "entry_price": 99.67,
+          "exit_signal_date": "2026-09-22",
+          "exit_date": "2026-09-23",
+          "exit_price": 94.73,
+          "return_pct": -5.241
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002074": {
+      "trades": [
+        {
+          "signal_date": "2026-09-29",
+          "entry_date": "2026-09-30",
+          "entry_price": 30.49,
+          "exit_signal_date": "2026-10-13",
+          "exit_date": "2026-10-14",
+          "exit_price": 28.35,
+          "return_pct": -7.297
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002304": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002371": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002384": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002415": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-26",
+        "entry_date": "2026-10-27",
+        "entry_price": 34.79
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002422": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-20",
+        "entry_date": "2026-10-21",
+        "entry_price": 43.1
+      },
+      "pending": {
+        "side": "sell",
+        "date": "2026-10-27"
+      },
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002460": {
+      "trades": [
+        {
+          "signal_date": "2026-08-24",
+          "entry_date": "2026-08-25",
+          "entry_price": 54.6,
+          "exit_signal_date": "2026-08-25",
+          "exit_date": "2026-08-26",
+          "exit_price": 52.7,
+          "return_pct": -3.769
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002463": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002472": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-23",
+        "entry_date": "2026-10-26",
+        "entry_price": 41.0
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002475": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002594": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002709": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002812": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "002821": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "003816": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 4.28,
+          "exit_signal_date": "2026-09-10",
+          "exit_date": "2026-09-11",
+          "exit_price": 4.3,
+          "return_pct": 0.166
+        }
+      ],
+      "open_position": {
+        "signal_date": "2026-10-14",
+        "entry_date": "2026-10-15",
+        "entry_price": 4.53
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300014": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300059": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300124": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-26",
+        "entry_date": "2026-10-27",
+        "entry_price": 54.0
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300207": {
+      "trades": [
+        {
+          "signal_date": "2026-09-16",
+          "entry_date": "2026-09-17",
+          "entry_price": 19.76,
+          "exit_signal_date": "2026-10-12",
+          "exit_date": "2026-10-13",
+          "exit_price": 19.68,
+          "return_pct": -0.703
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300285": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300308": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300390": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300394": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300433": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300450": {
+      "trades": [
+        {
+          "signal_date": "2026-09-30",
+          "entry_date": "2026-10-08",
+          "entry_price": 34.93,
+          "exit_signal_date": "2026-10-13",
+          "exit_date": "2026-10-14",
+          "exit_price": 34.42,
+          "return_pct": -1.755
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300476": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300502": {
+      "trades": [
+        {
+          "signal_date": "2026-09-21",
+          "entry_date": "2026-09-22",
+          "entry_price": 465.99,
+          "exit_signal_date": "2026-09-24",
+          "exit_date": "2026-09-28",
+          "exit_price": 432.39,
+          "return_pct": -7.488
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300604": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300750": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300759": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300760": {
+      "trades": [
+        {
+          "signal_date": "2026-08-25",
+          "entry_date": "2026-08-26",
+          "entry_price": 161.5,
+          "exit_signal_date": "2026-09-09",
+          "exit_date": "2026-09-10",
+          "exit_price": 165.97,
+          "return_pct": 2.46
+        }
+      ],
+      "open_position": {
+        "signal_date": "2026-10-23",
+        "entry_date": "2026-10-26",
+        "entry_price": 176.4
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "300857": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "301217": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "301511": {
+      "trades": [
+        {
+          "signal_date": "2026-09-08",
+          "entry_date": "2026-09-09",
+          "entry_price": 105.0,
+          "exit_signal_date": "2026-09-24",
+          "exit_date": "2026-09-28",
+          "exit_price": 102.05,
+          "return_pct": -3.101
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "301550": {
+      "trades": [
+        {
+          "signal_date": "2026-09-07",
+          "entry_date": "2026-09-08",
+          "entry_price": 99.18,
+          "exit_signal_date": "2026-09-10",
+          "exit_date": "2026-09-11",
+          "exit_price": 91.7,
+          "return_pct": -7.819
+        },
+        {
+          "signal_date": "2026-10-09",
+          "entry_date": "2026-10-12",
+          "entry_price": 102.0,
+          "exit_signal_date": "2026-10-14",
+          "exit_date": "2026-10-15",
+          "exit_price": 90.01,
+          "return_pct": -12.019
+        }
+      ],
+      "open_position": {
+        "signal_date": "2026-10-20",
+        "entry_date": "2026-10-21",
+        "entry_price": 112.49
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600011": {
+      "trades": [
+        {
+          "signal_date": "2026-09-09",
+          "entry_date": "2026-09-10",
+          "entry_price": 7.03,
+          "exit_signal_date": "2026-09-16",
+          "exit_date": "2026-09-17",
+          "exit_price": 6.84,
+          "return_pct": -2.994
+        },
+        {
+          "signal_date": "2026-10-08",
+          "entry_date": "2026-10-09",
+          "entry_price": 7.23,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 7.25,
+          "return_pct": -0.024
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600025": {
+      "trades": [
+        {
+          "signal_date": "2026-10-08",
+          "entry_date": "2026-10-09",
+          "entry_price": 10.09,
+          "exit_signal_date": "2026-10-22",
+          "exit_date": "2026-10-23",
+          "exit_price": 10.23,
+          "return_pct": 1.084
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600030": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600036": {
+      "trades": [
+        {
+          "signal_date": "2026-09-01",
+          "entry_date": "2026-09-02",
+          "entry_price": 40.9,
+          "exit_signal_date": "2026-09-15",
+          "exit_date": "2026-09-16",
+          "exit_price": 41.15,
+          "return_pct": 0.31
+        },
+        {
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_price": 42.66,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 41.87,
+          "return_pct": -2.146
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600066": {
+      "trades": [
+        {
+          "signal_date": "2026-10-19",
+          "entry_date": "2026-10-20",
+          "entry_price": 28.85,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 27.71,
+          "return_pct": -4.239
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600183": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 152.0,
+          "exit_signal_date": "2026-09-03",
+          "exit_date": "2026-09-04",
+          "exit_price": 145.2,
+          "return_pct": -4.76
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600199": {
+      "trades": [
+        {
+          "signal_date": "2026-10-15",
+          "entry_date": "2026-10-16",
+          "entry_price": 7.61,
+          "exit_signal_date": "2026-10-22",
+          "exit_date": "2026-10-23",
+          "exit_price": 6.75,
+          "return_pct": -11.567
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600276": {
+      "trades": [
+        {
+          "signal_date": "2026-09-30",
+          "entry_date": "2026-10-08",
+          "entry_price": 47.2,
+          "exit_signal_date": "2026-10-13",
+          "exit_date": "2026-10-14",
+          "exit_price": 45.29,
+          "return_pct": -4.334
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600418": {
+      "trades": [
+        {
+          "signal_date": "2026-09-23",
+          "entry_date": "2026-09-24",
+          "entry_price": 23.15,
+          "exit_signal_date": "2026-10-09",
+          "exit_date": "2026-10-12",
+          "exit_price": 21.51,
+          "return_pct": -7.363
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600519": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-15",
+        "entry_date": "2026-10-16",
+        "entry_price": 1311.57
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600522": {
+      "trades": [
+        {
+          "signal_date": "2026-09-21",
+          "entry_date": "2026-09-22",
+          "entry_price": 37.54,
+          "exit_signal_date": "2026-09-24",
+          "exit_date": "2026-09-28",
+          "exit_price": 34.5,
+          "return_pct": -8.373
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600584": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600660": {
+      "trades": [
+        {
+          "signal_date": "2026-10-19",
+          "entry_date": "2026-10-20",
+          "entry_price": 55.25,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 50.58,
+          "return_pct": -8.727
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600674": {
+      "trades": [
+        {
+          "signal_date": "2026-09-02",
+          "entry_date": "2026-09-03",
+          "entry_price": 16.0,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 15.57,
+          "return_pct": -2.979
+        },
+        {
+          "signal_date": "2026-09-24",
+          "entry_date": "2026-09-28",
+          "entry_price": 16.24,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 17.18,
+          "return_pct": 5.471
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600699": {
+      "trades": [
+        {
+          "signal_date": "2026-09-24",
+          "entry_date": "2026-09-28",
+          "entry_price": 23.23,
+          "exit_signal_date": "2026-10-08",
+          "exit_date": "2026-10-09",
+          "exit_price": 20.4,
+          "return_pct": -12.446
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600795": {
+      "trades": [
+        {
+          "signal_date": "2026-08-20",
+          "entry_date": "2026-08-21",
+          "entry_price": 5.17,
+          "exit_signal_date": "2026-09-08",
+          "exit_date": "2026-09-09",
+          "exit_price": 5.26,
+          "return_pct": 1.436
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600809": {
+      "trades": [
+        {
+          "signal_date": "2026-10-19",
+          "entry_date": "2026-10-20",
+          "entry_price": 118.51,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 110.71,
+          "return_pct": -6.862
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600886": {
+      "trades": [
+        {
+          "signal_date": "2026-09-10",
+          "entry_date": "2026-09-11",
+          "entry_price": 14.5,
+          "exit_signal_date": "2026-09-18",
+          "exit_date": "2026-09-21",
+          "exit_price": 14.3,
+          "return_pct": -1.675
+        },
+        {
+          "signal_date": "2026-09-24",
+          "entry_date": "2026-09-28",
+          "entry_price": 14.84,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 15.88,
+          "return_pct": 6.688
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600900": {
+      "trades": [
+        {
+          "signal_date": "2026-09-02",
+          "entry_date": "2026-09-03",
+          "entry_price": 28.62,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 27.84,
+          "return_pct": -3.017
+        },
+        {
+          "signal_date": "2026-10-08",
+          "entry_date": "2026-10-09",
+          "entry_price": 28.98,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 29.45,
+          "return_pct": 1.317
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600919": {
+      "trades": [
+        {
+          "signal_date": "2026-08-20",
+          "entry_date": "2026-08-21",
+          "entry_price": 12.06,
+          "exit_signal_date": "2026-09-16",
+          "exit_date": "2026-09-17",
+          "exit_price": 12.16,
+          "return_pct": 0.527
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600930": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600941": {
+      "trades": [
+        {
+          "signal_date": "2026-09-01",
+          "entry_date": "2026-09-02",
+          "entry_price": 99.88,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 98.5,
+          "return_pct": -1.677
+        },
+        {
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_price": 100.08,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 96.0,
+          "return_pct": -4.364
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600958": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "600999": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601066": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601127": {
+      "trades": [
+        {
+          "signal_date": "2026-10-13",
+          "entry_date": "2026-10-14",
+          "entry_price": 51.08,
+          "exit_signal_date": "2026-10-15",
+          "exit_date": "2026-10-16",
+          "exit_price": 46.44,
+          "return_pct": -9.356
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601138": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601166": {
+      "trades": [
+        {
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_price": 18.42,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 18.39,
+          "return_pct": -0.462
+        }
+      ],
+      "open_position": {
+        "signal_date": "2026-10-26",
+        "entry_date": "2026-10-27",
+        "entry_price": 18.54
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601211": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601288": {
+      "trades": [
+        {
+          "signal_date": "2026-09-01",
+          "entry_date": "2026-09-02",
+          "entry_price": 7.09,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 6.79,
+          "return_pct": -4.518
+        },
+        {
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_price": 7.19,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 7.17,
+          "return_pct": -0.577
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601328": {
+      "trades": [
+        {
+          "signal_date": "2026-09-01",
+          "entry_date": "2026-09-02",
+          "entry_price": 7.4,
+          "exit_signal_date": "2026-09-18",
+          "exit_date": "2026-09-21",
+          "exit_price": 7.45,
+          "return_pct": 0.374
+        },
+        {
+          "signal_date": "2026-09-30",
+          "entry_date": "2026-10-08",
+          "entry_price": 7.73,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 8.01,
+          "return_pct": 3.312
+        }
+      ],
+      "open_position": null,
+      "pending": {
+        "side": "buy",
+        "date": "2026-10-27"
+      },
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601398": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 8.04,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 7.97,
+          "return_pct": -1.168
+        },
+        {
+          "signal_date": "2026-10-08",
+          "entry_date": "2026-10-09",
+          "entry_price": 8.33,
+          "exit_signal_date": "2026-10-21",
+          "exit_date": "2026-10-22",
+          "exit_price": 8.46,
+          "return_pct": 1.256
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601658": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 5.24,
+          "exit_signal_date": "2026-09-15",
+          "exit_date": "2026-09-16",
+          "exit_price": 5.37,
+          "return_pct": 2.174
+        },
+        {
+          "signal_date": "2026-10-19",
+          "entry_date": "2026-10-20",
+          "entry_price": 5.67,
+          "exit_signal_date": "2026-10-22",
+          "exit_date": "2026-10-23",
+          "exit_price": 5.59,
+          "return_pct": -1.706
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601688": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601689": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601872": {
+      "trades": [
+        {
+          "signal_date": "2026-08-21",
+          "entry_date": "2026-08-24",
+          "entry_price": 19.76,
+          "exit_signal_date": "2026-08-26",
+          "exit_date": "2026-08-27",
+          "exit_price": 17.8,
+          "return_pct": -10.189
+        },
+        {
+          "signal_date": "2026-09-09",
+          "entry_date": "2026-09-10",
+          "entry_price": 21.41,
+          "exit_signal_date": "2026-09-11",
+          "exit_date": "2026-09-14",
+          "exit_price": 20.55,
+          "return_pct": -4.304
+        },
+        {
+          "signal_date": "2026-09-17",
+          "entry_date": "2026-09-18",
+          "entry_price": 21.61,
+          "exit_signal_date": "2026-09-23",
+          "exit_date": "2026-09-24",
+          "exit_price": 20.98,
+          "return_pct": -3.206
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601881": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601939": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 10.91,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 10.66,
+          "return_pct": -2.584
+        },
+        {
+          "signal_date": "2026-10-12",
+          "entry_date": "2026-10-13",
+          "entry_price": 11.34,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 11.23,
+          "return_pct": -1.267
+        }
+      ],
+      "open_position": null,
+      "pending": {
+        "side": "buy",
+        "date": "2026-10-27"
+      },
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601985": {
+      "trades": [
+        {
+          "signal_date": "2026-09-02",
+          "entry_date": "2026-09-03",
+          "entry_price": 8.98,
+          "exit_signal_date": "2026-09-07",
+          "exit_date": "2026-09-08",
+          "exit_price": 8.9,
+          "return_pct": -1.188
+        },
+        {
+          "signal_date": "2026-10-14",
+          "entry_date": "2026-10-15",
+          "entry_price": 9.42,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 9.34,
+          "return_pct": -1.146
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601988": {
+      "trades": [
+        {
+          "signal_date": "2026-08-31",
+          "entry_date": "2026-09-01",
+          "entry_price": 6.51,
+          "exit_signal_date": "2026-09-08",
+          "exit_date": "2026-09-09",
+          "exit_price": 6.38,
+          "return_pct": -2.29
+        },
+        {
+          "signal_date": "2026-10-08",
+          "entry_date": "2026-10-09",
+          "entry_price": 6.82,
+          "exit_signal_date": "2026-10-23",
+          "exit_date": "2026-10-26",
+          "exit_price": 6.93,
+          "return_pct": 1.309
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601991": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "601995": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-15",
+      "last": "2026-10-27"
+    },
+    "603019": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "603127": {
+      "trades": [
+        {
+          "signal_date": "2026-10-08",
+          "entry_date": "2026-10-09",
+          "entry_price": 52.0,
+          "exit_signal_date": "2026-10-14",
+          "exit_date": "2026-10-15",
+          "exit_price": 47.9,
+          "return_pct": -8.161
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "603198": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-26",
+        "entry_date": "2026-10-27",
+        "entry_price": 42.2
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "603259": {
+      "trades": [
+        {
+          "signal_date": "2026-09-21",
+          "entry_date": "2026-09-22",
+          "entry_price": 167.91,
+          "exit_signal_date": "2026-09-28",
+          "exit_date": "2026-09-29",
+          "exit_price": 161.81,
+          "return_pct": -3.922
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "603369": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-26",
+        "entry_date": "2026-10-27",
+        "entry_price": 31.24
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "603893": {
+      "trades": [
+        {
+          "signal_date": "2026-09-22",
+          "entry_date": "2026-09-23",
+          "entry_price": 218.79,
+          "exit_signal_date": "2026-10-08",
+          "exit_date": "2026-10-09",
+          "exit_price": 198.1,
+          "return_pct": -9.728
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "603986": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688008": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688012": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688041": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688072": {
+      "trades": [
+        {
+          "signal_date": "2026-09-18",
+          "entry_date": "2026-09-21",
+          "entry_price": 725.0,
+          "exit_signal_date": "2026-09-28",
+          "exit_date": "2026-09-29",
+          "exit_price": 664.59,
+          "return_pct": -8.607
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688146": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688235": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-21",
+        "entry_date": "2026-10-22",
+        "entry_price": 272.2
+      },
+      "pending": {
+        "side": "sell",
+        "date": "2026-10-27"
+      },
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688256": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688271": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-20",
+        "entry_date": "2026-10-21",
+        "entry_price": 109.1
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688498": {
+      "trades": [
+        {
+          "signal_date": "2026-09-08",
+          "entry_date": "2026-09-09",
+          "entry_price": 1759.0,
+          "exit_signal_date": "2026-09-23",
+          "exit_date": "2026-09-24",
+          "exit_price": 1735.0,
+          "return_pct": -1.66
+        }
+      ],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688795": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    },
+    "688825": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 61,
+      "first": "2026-07-27",
+      "last": "2026-10-27"
+    },
+    "688836": {
+      "trades": [],
+      "open_position": {
+        "signal_date": "2026-10-23",
+        "entry_date": "2026-10-26",
+        "entry_price": 624.0
+      },
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 44,
+      "first": "2026-08-19",
+      "last": "2026-10-27"
+    },
+    "688981": {
+      "trades": [],
+      "open_position": null,
+      "pending": null,
+      "skipped_fills": 0,
+      "days": 63,
+      "first": "2026-07-23",
+      "last": "2026-10-27"
+    }
+  }
+}
