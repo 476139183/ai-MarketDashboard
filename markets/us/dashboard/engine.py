@@ -31,6 +31,9 @@ INTERVAL_MINUTES = {"15m": 15}
 ORB_WINDOW_MINUTES = 30
 DEFAULT_INTERVAL = "15m"
 
+# 进程内信号时间记忆：symbol → {advice, since_bj}
+_SIGNAL_MEM: Dict[str, Dict[str, str]] = {}
+
 
 def normalize_interval(interval: Optional[str]) -> str:
     """对外只认 15m（兼容旧参数，一律归一）。"""
@@ -568,6 +571,46 @@ def r1(E: float, S: float, T1: float, side: str) -> Optional[float]:
     return reward / risk
 
 
+TARGET_RR = 1.5
+
+
+def _rr_note(target_rr: float, *, ge: bool = False) -> str:
+    s = f"{target_rr:.1f}".rstrip("0").rstrip(".")
+    return f"≥{s}:1" if ge else f"盈亏比{s}:1"
+
+
+def ensure_rr_target(
+    *,
+    side: str,
+    E: float,
+    S: float,
+    T1: float,
+    T1_key: str,
+    target_rr: float = TARGET_RR,
+) -> Tuple[float, str]:
+    """止盈至少做到 target_rr:1（默认≥1.5）；结构位已更远则保留并标注。"""
+    risk = abs(E - S)
+    if risk <= 1e-12:
+        return T1, T1_key
+    if side == "long":
+        ideal = E + target_rr * risk
+        if T1 + 1e-9 < ideal:
+            return round(ideal, 4), _rr_note(target_rr)
+        cur = r1(E, S, T1, "long")
+        note = T1_key or "结构止盈"
+        if cur is not None and cur + 1e-9 >= target_rr:
+            return T1, f"{note}·{_rr_note(target_rr, ge=True)}"
+        return T1, note
+    ideal = E - target_rr * risk
+    if T1 - 1e-9 > ideal:
+        return round(ideal, 4), _rr_note(target_rr)
+    cur = r1(E, S, T1, "short")
+    note = T1_key or "结构止盈"
+    if cur is not None and cur + 1e-9 >= target_rr:
+        return T1, f"{note}·{_rr_note(target_rr, ge=True)}"
+    return T1, note
+
+
 def session_status(now_bj: datetime) -> Dict[str, Any]:
     now_ny = now_bj.astimezone(NY)
     wd = now_ny.weekday()
@@ -668,20 +711,70 @@ def short_term_trend(bars: List[dict]) -> Dict[str, Any]:
     }
 
 
-def _risk_ok(E: float, S: float, T1: float, side: str) -> Tuple[Optional[float], bool, str]:
-    """新开条件：价序正确且 R1≥0.8。"""
-    R = r1(E, S, T1, side)
-    notes = []
-    if R is not None and R < 0.8:
-        notes.append(f"R1={R:.2f}<0.8")
-    ok = R is not None and R >= 0.8
-    if side == "long" and not (S < E < T1):
-        ok = False
-        notes.append("价序S<E<T1不成立")
-    if side == "short" and not (T1 < E < S):
-        ok = False
-        notes.append("价序T1<E<S不成立")
-    return R, ok, ("；".join(notes) if notes else "")
+def _strength_label(n: int) -> str:
+    return {1: "弱", 2: "偏弱", 3: "中", 4: "偏强", 5: "强"}.get(n, "中")
+
+
+def _risk_label(pct: Optional[float]) -> str:
+    if pct is None:
+        return "—"
+    if pct < 1.0:
+        return "低"
+    if pct < 2.5:
+        return "中"
+    return "高"
+
+
+def _score_strength(
+    *,
+    sc: int,
+    side: str,
+    px: float,
+    orb_l: float,
+    orb_h: float,
+    R: Optional[float],
+) -> int:
+    """强度 1–5：|score|、是否站稳 ORB 一侧、R1。"""
+    n = 1
+    abs_sc = abs(sc)
+    if abs_sc >= 2:
+        n += 1
+    if abs_sc >= 3:
+        n += 1
+    if side == "short" and px < orb_l:
+        n += 1
+    elif side == "long" and px > orb_h:
+        n += 1
+    elif side == "short" and px < (orb_l + orb_h) / 2:
+        n += 0
+    if R is not None and R >= TARGET_RR:
+        n += 1
+    elif R is not None and R >= 1.2:
+        n += 1
+    return max(1, min(5, n))
+
+
+def remember_advice(symbol: str, advice: str, now_bj: str) -> Dict[str, Any]:
+    """进程内记录建议变化；同向不刷新本次时间。"""
+    sym = symbol.strip().upper()
+    prev = _SIGNAL_MEM.get(sym)
+    if prev and prev.get("advice") == advice:
+        return {
+            "signal_since_bj": prev["since_bj"],
+            "last_signal_advice": None,
+            "last_signal_bj": None,
+            "last_signal": "本次",
+        }
+    out = {
+        "signal_since_bj": now_bj,
+        "last_signal_advice": prev.get("advice") if prev else None,
+        "last_signal_bj": prev.get("since_bj") if prev else None,
+        "last_signal": (
+            f"{prev['advice']} · {prev['since_bj']}" if prev else "本次"
+        ),
+    }
+    _SIGNAL_MEM[sym] = {"advice": advice, "since_bj": now_bj}
+    return out
 
 
 def compute_intraday_signal(
@@ -698,295 +791,236 @@ def compute_intraday_signal(
     daily_bias: str = "—",
 ) -> Dict[str, Any]:
     """
-    核心问题：用「最近盘中数据 + 15m 技术结构」判断「现在能不能操作」。
+    交易卡片口径：先定趋势 → 建议做多/做空 → 回踩/反抽入场 → 参考价/止损/止盈。
 
-    输入：实时现价、日高/日低、今日 15m ORB/VWAP、近端短线趋势、日线偏向（MA20）。
-    输出：做多/做空 = 当前可开；观望 = 暂不可开（可带入场预案）；平多/平空 = 先处理仓位。
-
-    规则摘要（回溯后口径）：
-    1) 先 15m 给信号，再用日线过滤开仓
-    2) 冲高回落日优先「低位多·洗盘」；普通多/空须 |score|≥2
-    3) 日线偏空：禁止普通多；低位多仍可（标注逆日线）。日线偏多：禁止普通空
-    4) entry_ready 须 R1≥0.8；不追涨杀跌
+    1) 趋势：短线 score + VWAP/ORB；冲高回落（破上沿后跌回 VWAP 下）可定下跌
+    2) 下跌→建议做空；上涨→建议做多；震荡→观望
+    3) 入场带锚定 ORB 上/下半区（反抽空/回踩多），禁止 VWAP 下移后的杀跌到价、禁止追涨
+    4) 到价可执行；盈亏比默认 ≥1.5；平多/平空：ORB 对侧失效
     """
     atr_i = max(atr * 0.35, px * 0.008)
     gap = _min_gap(px, atr_i)
     buf = min(0.15 * atr, 0.015 * max(orb_h, orb_l, px))
-    # 距日高/日低、ORB 沿至少留一截，避免追涨杀跌
     chase_buf = max(0.25 * atr_i, 0.004 * px)
     st_trend = short_term_trend(bars)
     sc = int(st_trend.get("score") or 0)
     trend_tag = st_trend.get("label") or "短期—"
-    daily_bear = daily_bias == "日线偏空"
-    daily_bull = daily_bias == "日线偏多"
     daily_tag = daily_bias if daily_bias and daily_bias != "—" else ""
 
     broke_down = path_l < orb_l - 1e-9
     broke_up = path_h > orb_h + 1e-9
-    dual_break = broke_up and broke_down
     orb_mid = (orb_l + orb_h) / 2.0
+    orb_span = max(orb_h - orb_l, gap)
+    below_mid = px <= min(vwap, orb_mid)
+    above_mid = px >= max(vwap, orb_mid)
 
-    # —— 粘性结构 ——
-    # 宽幅日：|score|≥2 时跟短线，减少 VWAP 来回翻多翻空；否则仍按 VWAP/中轴
-    if dual_break:
-        if sc >= 2 and px > orb_l:
-            structure = "多头"
-        elif sc <= -2 and px < orb_h:
-            structure = "空头"
-        elif px > vwap and px > orb_l:
-            structure = "多头"
-        elif px < vwap and px < orb_h:
-            structure = "空头"
-        elif px >= orb_mid:
-            structure = "多头"
-        else:
-            structure = "空头"
-    elif broke_up and px > vwap and px > orb_l:
-        structure = "多头"
-    elif broke_down and px < vwap and px < orb_h:
-        structure = "空头"
-    elif px > orb_h and px > vwap:
-        structure = "多头"
-    elif px < orb_l and px < vwap:
-        structure = "空头"
+    # —— 先趋势（SNDK 回放验证：不过度放宽冲高转弱）——
+    if broke_up and px < vwap and sc <= 0:
+        trend, structure = "下跌", "空头"
+    elif broke_down and px > vwap and sc >= 0:
+        trend, structure = "上涨", "多头"
+    elif sc <= -2 and below_mid:
+        trend, structure = "下跌", "空头"
+    elif sc >= 2 and above_mid:
+        trend, structure = "上涨", "多头"
     else:
-        structure = "震荡"
-
-    # 冲高回落日（已上破 ORB 后又下破）：回落锁定「低位多」，勿因短线短暂偏空改粘性空去杀
-    # 仅当现价重新跌破 ORB 下沿，才放弃该锁定
-    open_drive_dip = bool(dual_break and broke_up and px > orb_l)
-    if open_drive_dip:
-        structure = "多头"
+        trend, structure = "震荡", "震荡"
 
     short_invalid = bool(broke_down and px > orb_h)
     long_invalid = bool(broke_up and px < orb_l)
 
+    advice = "观望"
     signal = "观望"
     reason = ""
+    setup = "震荡观察"
+    side = None
     S = S_key = None
-    E_band = None
     T1 = T1_key = None
+    E_band = None
     R1v = None
     stress = None
-    side = None
     entry_ready = False
     entry_label = None
-    setup = None
+    at_entry = False
+    ref_price = None
+    stop_note = None
+    strength = 1
+    strength_label = "弱"
+    risk_pct = None
+    risk_label = "—"
 
-    def _qual(R: Optional[float], stress_pct: Optional[float]) -> str:
-        bits = []
-        if R is not None and R < 0.8:
-            bits.append(f"R1={R:.2f}<0.8偏弱")
-        if stress_pct is not None and stress_pct >= 35:
-            bits.append(f"5x≈{stress_pct:.1f}%偏大")
-        return ("；" + "，".join(bits)) if bits else ""
-
-    if structure == "空头":
-        entry_label = "做空入场价"
-        setup = "粘性空·反抽"
+    if trend == "下跌":
+        advice = "做空"
+        signal = "做空"
+        setup = "趋势空·反抽"
         side = "short"
+        entry_label = "做空入场价"
         S = orb_h + buf
-        S_key = f"ORB上沿 {orb_h:.2f} + 缓冲"
-        # 反抽带：靠近 VWAP 的上半段；抬高下沿，禁止贴 ORB下/日低杀跌
-        band_hi = float(min(vwap, orb_h - gap))
-        band_lo = float(orb_l)
+        stop_note = f"ORB上沿 {orb_h:.2f} + 缓冲"
+        S_key = stop_note
+        # 反抽带锚定 ORB 上半区（不随砸盘 VWAP 下移变成杀跌带）
+        band_hi = float(orb_h - gap)
+        band_lo = float(max(orb_mid, orb_h - 0.40 * orb_span))
+        if vwap >= orb_mid:
+            band_lo = max(band_lo, min(float(vwap), band_hi - gap))
         if band_hi < band_lo:
-            band_hi = band_lo + gap * 0.5
-        span = max(band_hi - band_lo, gap)
-        E_max = band_hi
-        E_min = max(band_hi - 0.55 * span, band_lo + chase_buf, path_l + chase_buf)
-        if E_max < E_min:
-            E_min, E_max = band_lo + chase_buf, band_hi
-            if E_max < E_min:
-                E_max = E_min + gap * 0.5
-        S = max(S, E_max + gap)
-        E_band = [round(E_min, 4), round(E_max, 4)]
-        in_e = E_min <= px <= E_max
+            band_lo, band_hi = orb_mid, orb_h - gap
+        S = max(S, band_hi + gap)
+        E_band = [round(band_lo, 4), round(band_hi, 4)]
+        E = (band_lo + band_hi) / 2.0
         near_low = px <= path_l + chase_buf or px <= orb_l + chase_buf
-        E = (E_min + E_max) / 2.0
+        in_upper = px >= orb_mid - 1e-9
+        at_entry = band_lo <= px <= band_hi and not near_low and in_upper
+        chasing = px < band_lo or not in_upper
         T1, T1_key = pick_t1(
             side="short",
             E=E,
             atr_i=atr_i,
-            E_min=E_min,
-            E_max=E_max,
+            E_min=band_lo,
+            E_max=band_hi,
             day_o=day_o,
             bars=bars,
             px=px,
-            in_e=in_e and not near_low,
+            in_e=at_entry,
         )
-        R1v = r1(E, S, T1, "short")
-        stress = 5 * abs(E - S) / E * 100
-        q = _qual(R1v, stress)
-        # 回溯：空须短线确认偏空；禁止在冲高回落洗盘段当空打
-        trend_ok = sc <= -2
-        band = f"[{E_min:.2f},{E_max:.2f}] S={S:.2f} T1={T1:.2f}（{T1_key}）{q}"
-        if in_e and near_low:
-            reason = f"结构空头，但不杀跌（贴近日低/ORB下，{trend_tag}）；做空入场价{band}"
-        elif in_e and not trend_ok:
+        ref_price = round(px if at_entry else E, 4)
+        T1, T1_key = ensure_rr_target(
+            side="short", E=float(ref_price), S=float(S), T1=float(T1), T1_key=T1_key
+        )
+        R1v = r1(ref_price, S, T1, "short")
+        stress = 5 * abs(ref_price - S) / ref_price * 100 if ref_price else None
+        risk_pct = abs(ref_price - S) / ref_price * 100 if ref_price else None
+        strength = _score_strength(
+            sc=sc, side="short", px=px, orb_l=orb_l, orb_h=orb_h, R=R1v
+        )
+        if daily_tag == "日线偏多":
+            strength = max(1, strength - 1)
+        strength_label = _strength_label(strength)
+        risk_label = _risk_label(risk_pct)
+        entry_ready = at_entry
+        r_note = (
+            f"；盈亏比{R1v:.2f}:1"
+            if R1v is not None
+            else ""
+        )
+        if near_low or (not in_upper and px < band_lo):
             reason = (
-                f"结构空头·已到价，但短线未确认偏空 score={sc}（{trend_tag}），不开空；"
-                f"做空入场价{band}"
+                f"下跌趋势，不杀跌；等反抽至ORB上半区[{band_lo:.2f},{band_hi:.2f}]{r_note}"
             )
-        elif in_e and trend_ok:
-            R_px = r1(px, S, T1, "short")
-            if R_px is not None:
-                R1v = R_px
-                q = _qual(R1v, stress)
-                band = f"[{E_min:.2f},{E_max:.2f}] S={S:.2f} T1={T1:.2f}（{T1_key}）{q}"
-            # 日线偏多 → 不做普通空（先盘中信号，再日线闸）
-            if daily_bull:
-                signal = "观望"
-                entry_ready = False
-                reason = (
-                    f"盘中空头信号，但{daily_tag}逆势，不开空；做空入场价{band}"
-                )
-            else:
-                signal = "做空"
-                entry_ready = bool(R_px is not None and R_px >= 0.8)
-                reason = (
-                    f"粘性空·反抽且现价在带内，{'可做空' if entry_ready else 'R1不足仅预案'}"
-                    f"（{trend_tag}{('·'+daily_tag) if daily_tag else ''}）；入场{band}"
-                )
-        elif px < E_min:
-            reason = f"结构空头，但不追空/杀跌（{trend_tag}）；做空入场价{band}"
+            entry_ready = False
+            at_entry = False
+        elif at_entry:
+            reason = f"下跌趋势·反抽到价，可按点位做空（{trend_tag}{('·'+daily_tag) if daily_tag else ''}）{r_note}"
+        elif chasing:
+            reason = f"下跌趋势，未到反抽带；等[{band_lo:.2f},{band_hi:.2f}]{r_note}"
         else:
-            reason = f"结构空头，尚未到价（{trend_tag}）；做空入场价{band}"
+            reason = f"下跌趋势，等反抽入场带[{band_lo:.2f},{band_hi:.2f}]（{trend_tag}）{r_note}"
 
-    elif structure == "多头":
-        entry_label = "做多入场价"
+    elif trend == "上涨":
+        advice = "做多"
+        signal = "做多"
+        setup = "趋势多·回踩"
         side = "long"
+        entry_label = "做多入场价"
         S = orb_l - buf
-        S_key = f"ORB下沿 {orb_l:.2f} − 缓冲"
-        # 冲高回落 / 已上破日：低位做多 = ORB下沿上方 → VWAP（买洗盘，不买新高）
-        # 普通多头日：仍用 VWAP 回踩带上沿远离 ORB/日高
-        if open_drive_dip or (broke_up and dual_break):
-            setup = "低位多·洗盘"
-            band_lo = float(orb_l + chase_buf)
-            band_hi = float(min(vwap, orb_h - chase_buf))
-            if band_hi < band_lo:
-                band_hi = max(band_lo + gap * 0.5, min(vwap, orb_mid))
-            E_min = max(band_lo, path_l + chase_buf * 0.5, S + gap)
-            E_max = min(band_hi, path_h - chase_buf)
-        else:
-            setup = "粘性多·回踩"
-            band_lo = float(max(vwap, S + gap))
-            band_hi = float(max(band_lo + gap * 0.5, orb_h))
-            if band_hi - band_lo < gap:
-                mid = max((band_lo + band_hi) / 2, S + gap + gap * 0.5)
-                band_lo = mid - gap * 0.5
-                band_hi = mid + gap * 0.5
-                band_lo = max(band_lo, S + gap)
-                band_hi = max(band_hi, band_lo + gap * 0.5)
-            span = max(band_hi - band_lo, gap)
-            E_min = band_lo
-            E_max = min(band_lo + 0.55 * span, band_hi - chase_buf, path_h - chase_buf)
-        if E_max < E_min:
-            E_max = E_min + gap * 0.5
-        E_band = [round(E_min, 4), round(E_max, 4)]
-        in_e = E_min <= px <= E_max
+        stop_note = f"ORB下沿 {orb_l:.2f} − 缓冲"
+        S_key = stop_note
+        # 回踩带锚定 ORB 下半区（不追涨）
+        band_lo = float(orb_l + chase_buf)
+        band_hi = float(min(orb_mid, orb_l + 0.40 * orb_span))
+        if vwap <= orb_mid:
+            band_hi = min(band_hi, max(float(vwap), band_lo + gap))
+        if band_hi < band_lo:
+            band_lo, band_hi = orb_l + chase_buf, orb_mid
+        band_lo = max(band_lo, S + gap)
+        if band_hi < band_lo:
+            band_hi = band_lo + gap * 0.5
+        E_band = [round(band_lo, 4), round(band_hi, 4)]
+        E = (band_lo + band_hi) / 2.0
         near_high = px >= path_h - chase_buf or px >= orb_h - chase_buf
-        E = (E_min + E_max) / 2.0
+        in_lower = px <= orb_mid + 1e-9
+        at_entry = band_lo <= px <= band_hi and not near_high and in_lower
+        chasing = px > band_hi or not in_lower
         T1, T1_key = pick_t1(
             side="long",
             E=E,
             atr_i=atr_i,
-            E_min=E_min,
-            E_max=E_max,
+            E_min=band_lo,
+            E_max=band_hi,
             day_o=day_o,
             bars=bars,
             px=px,
-            in_e=in_e and not near_high,
+            in_e=at_entry,
         )
-        is_dip_long = setup == "低位多·洗盘"
-        # 低位多：T1 至少看到 ORB 上沿（冲高回落日的量度目标），避免 T1 贴在 VWAP 附近导致 R1 永久不足
-        if is_dip_long:
-            t1_floor = max(float(orb_h), float(E) + 0.6 * atr_i)
-            if path_h > orb_h:
-                t1_floor = max(t1_floor, min(float(path_h), float(E) + 1.0 * atr_i))
-            if T1 < t1_floor:
-                T1 = t1_floor
-                T1_key = "ORB上沿/日高量度"
-        R1v = r1(E, S, T1, "long")
-        stress = 5 * abs(E - S) / E * 100
-        q = _qual(R1v, stress)
-        # 低位多：冲高回落洗盘段不要求短线 score（深洗时常短暂极负）；普通回踩须 score≥2
-        trend_ok = True if is_dip_long else (sc >= 2)
-        band = f"[{E_min:.2f},{E_max:.2f}] S={S:.2f} T1={T1:.2f}（{T1_key}）{q}"
-        if in_e and near_high:
-            reason = f"结构多头，但不追涨（贴近日高/ORB上，{trend_tag}）；做多入场价{band}"
-        elif in_e and not trend_ok:
-            need = "非强空即可" if is_dip_long else "|score|≥2 偏多"
+        ref_price = round(px if at_entry else E, 4)
+        T1, T1_key = ensure_rr_target(
+            side="long", E=float(ref_price), S=float(S), T1=float(T1), T1_key=T1_key
+        )
+        R1v = r1(ref_price, S, T1, "long")
+        stress = 5 * abs(ref_price - S) / ref_price * 100 if ref_price else None
+        risk_pct = abs(ref_price - S) / ref_price * 100 if ref_price else None
+        strength = _score_strength(
+            sc=sc, side="long", px=px, orb_l=orb_l, orb_h=orb_h, R=R1v
+        )
+        if daily_tag == "日线偏空":
+            strength = max(1, strength - 1)
+        strength_label = _strength_label(strength)
+        risk_label = _risk_label(risk_pct)
+        entry_ready = at_entry
+        r_note = (
+            f"；盈亏比{R1v:.2f}:1"
+            if R1v is not None
+            else ""
+        )
+        if near_high or (not in_lower and px > band_hi):
             reason = (
-                f"结构多头·已到价，但短线未满足（{need}，score={sc}·{trend_tag}），不开多；"
-                f"做多入场价{band}"
+                f"上涨趋势，不追涨；等回踩至ORB下半区[{band_lo:.2f},{band_hi:.2f}]{r_note}"
             )
-        elif in_e and trend_ok:
-            # 用现价算 R1（中枢 E 在宽低位带上会系统性压低盈亏比）
-            R_px = r1(px, S, T1, "long")
-            if R_px is not None:
-                R1v = R_px
-                q = _qual(R1v, stress)
-                band = f"[{E_min:.2f},{E_max:.2f}] S={S:.2f} T1={T1:.2f}（{T1_key}）{q}"
-            # 日线偏空：禁止普通多；低位多·洗盘允许（日内修复，标注逆日线）
-            if daily_bear and not is_dip_long:
-                signal = "观望"
-                entry_ready = False
-                reason = (
-                    f"盘中多头信号，但{daily_tag}逆势，不开普通多；做多入场价{band}"
-                )
-            else:
-                signal = "做多"
-                entry_ready = bool(R_px is not None and R_px >= 0.8)
-                note = trend_tag
-                if daily_bear and is_dip_long:
-                    note = f"{trend_tag}·逆日线低位多"
-                elif daily_tag:
-                    note = f"{trend_tag}·{daily_tag}"
-                reason = (
-                    f"{setup}且现价在入场带，{'可做多' if entry_ready else 'R1不足仅预案'}"
-                    f"（{note}）；入场{band}"
-                )
-        elif px > E_max:
-            reason = f"结构多头，但不追多·等回落低位带（{trend_tag}）；做多入场价{band}"
+            entry_ready = False
+            at_entry = False
+        elif at_entry:
+            reason = f"上涨趋势·回踩到价，可按点位做多（{trend_tag}{('·'+daily_tag) if daily_tag else ''}）{r_note}"
+        elif chasing:
+            reason = f"上涨趋势，未到回踩带；等[{band_lo:.2f},{band_hi:.2f}]{r_note}"
         else:
-            reason = f"结构多头，尚未到价（{trend_tag}）；做多入场价{band}"
+            reason = f"上涨趋势，等回踩入场带[{band_lo:.2f},{band_hi:.2f}]（{trend_tag}）{r_note}"
 
     else:
-        setup = "震荡观察"
+        stop_note = "待趋势明确后定"
+        target_note = None
+        reason = f"震荡（{trend_tag}），暂无开仓建议；等短线|score|≥2 且站稳 VWAP/ORB 一侧"
         if broke_up and px <= vwap:
             reason = (
-                f"曾破日高{path_h:.2f}>ORB高{orb_h:.2f}，但现价已跌回VWAP下→结构震荡"
-                f"（{trend_tag}），等站回VWAP再定多头入场"
+                f"曾破ORB上沿后跌回VWAP下→震荡（{trend_tag}），等方向再定"
             )
         elif broke_down and px >= vwap:
             reason = (
-                f"曾破日低{path_l:.2f}<ORB低{orb_l:.2f}，但已抽回VWAP上→结构震荡"
-                f"（{trend_tag}）"
+                f"曾破ORB下沿后抽回VWAP上→震荡（{trend_tag}），等方向再定"
             )
-        else:
-            reason = f"震荡：无明确做多/做空入场价（{trend_tag}），等突破ORB后再定"
-        S_key = "待突破后定关键止损"
 
-    # ORB 对侧失效 → 平仓提示（不覆盖已开仓信号）
+    # ORB 对侧失效 → 平仓提示（覆盖观望，不覆盖同向开仓建议）
     if signal not in ("做多", "做空") and short_invalid:
-        signal = "平空"
+        advice = signal = "平空"
         entry_ready = False
+        at_entry = False
         side = "cover_short"
         entry_label = "空单失效·先平"
-        S = round(orb_h + buf, 4)
-        S_key = f"ORB上沿 {orb_h:.2f}"
-        reason = f"空头结构失效：价已站上ORB上沿 {orb_h:.2f}，先平空。" + (reason or "")
         setup = "ORB失效平空"
+        S = round(orb_h + buf, 4)
+        stop_note = S_key = f"ORB上沿 {orb_h:.2f}"
+        ref_price = round(px, 4)
+        reason = f"空头结构失效：价已站上ORB上沿 {orb_h:.2f}，先平空。" + (reason or "")
     elif signal not in ("做多", "做空") and long_invalid:
-        signal = "平多"
+        advice = signal = "平多"
         entry_ready = False
+        at_entry = False
         side = "cover_long"
         entry_label = "多单失效·先平"
-        S = round(orb_l - buf, 4)
-        S_key = f"ORB下沿 {orb_l:.2f}"
-        reason = f"多头结构失效：价已跌破ORB下沿 {orb_l:.2f}，先平多。" + (reason or "")
         setup = "ORB失效平多"
+        S = round(orb_l - buf, 4)
+        stop_note = S_key = f"ORB下沿 {orb_l:.2f}"
+        ref_price = round(px, 4)
+        reason = f"多头结构失效：价已跌破ORB下沿 {orb_l:.2f}，先平多。" + (reason or "")
 
     entry_low = E_band[0] if E_band else None
     entry_high = E_band[1] if E_band else None
@@ -995,23 +1029,48 @@ def compute_intraday_signal(
         if entry_low is not None and entry_high is not None
         else None
     )
+    if ref_price is None and entry_mid is not None:
+        ref_price = entry_mid
+
+    stop = round(S, 4) if S is not None else None
+    target = round(T1, 4) if T1 is not None else None
+    if stop is not None and not stop_note:
+        stop_note = S_key
+    if target is not None:
+        target_note = T1_key
+    else:
+        target_note = None
 
     actionable = signal in ("做多", "做空") and entry_ready
     if signal in ("平空", "平多"):
         action_label = "先平仓"
     elif actionable:
-        action_label = "当前可操作"
+        action_label = "可按点位执行"
+    elif signal in ("做多", "做空"):
+        action_label = "等回踩/反抽"
     else:
         action_label = "当前观望"
 
     return {
+        "trend": trend,
+        "advice": advice,
         "signal": signal,
         "reason": reason,
         "structure": structure,
         "setup": setup,
         "actionable": actionable,
         "action_label": action_label,
-        "S": round(S, 4) if S is not None else None,
+        "strength": strength if signal in ("做多", "做空") else None,
+        "strength_label": strength_label if signal in ("做多", "做空") else None,
+        "risk_pct": round(risk_pct, 2) if risk_pct is not None else None,
+        "risk_label": risk_label if risk_pct is not None else None,
+        "ref_price": ref_price,
+        "stop": stop,
+        "stop_note": stop_note if stop is not None else None,
+        "target": target,
+        "target_note": target_note if target is not None else None,
+        "at_entry": at_entry,
+        "S": stop,
         "S_key": S_key,
         "E_band": E_band,
         "entry_label": entry_label,
@@ -1019,7 +1078,7 @@ def compute_intraday_signal(
         "entry_high": entry_high,
         "entry_mid": entry_mid,
         "entry_ready": entry_ready,
-        "T1": round(T1, 4) if T1 is not None else None,
+        "T1": target,
         "T1_key": T1_key,
         "R1": round(R1v, 2) if R1v is not None else None,
         "stress_5x_pct": round(stress, 2) if stress is not None else None,
@@ -1050,30 +1109,56 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
         "true",
         "yes",
     )
-    daily, dmeta, src_d = fetch_chart(symbol, "3mo", "1d", prefer_cache=prefer_daily_cache)
+    daily: List[dict] = []
+    dmeta: dict = {}
+    src_d = "none"
+    try:
+        daily, dmeta, src_d = fetch_chart(
+            symbol, "3mo", "1d", prefer_cache=prefer_daily_cache
+        )
+    except Exception:
+        daily, dmeta, src_d = [], {}, "yahoo_fail"
+
     bars_iv, meta_iv, src_m = fetch_bars_intraday(
         symbol, iv, prefer_cache=force_cache or prefer_daily_cache
     )
     if src_m == "nasdaq" and meta_iv.get("previousClose") and not dmeta.get("previousClose"):
         dmeta = {**dmeta, "previousClose": meta_iv["previousClose"]}
+    if meta_iv.get("regularMarketPrice") and not dmeta.get("regularMarketPrice"):
+        dmeta = {**dmeta, "regularMarketPrice": meta_iv["regularMarketPrice"]}
 
-    atr = atr14(daily)
-    closes = [x["c"] for x in daily]
-    ma20 = sma(closes, 20)
+    atr = atr14(daily) if daily else None
+    closes = [x["c"] for x in daily] if daily else []
+    ma20 = sma(closes, 20) if closes else None
     last = daily[-1] if daily else None
+    # Yahoo 日线不可用时：用分时振幅粗估 ATR，保证票池仍可扫
+    if atr is None and bars_iv:
+        sess_tmp = regular_session(bars_iv)
+        sample = sess_tmp[-24:] if len(sess_tmp) >= 5 else sess_tmp
+        if sample:
+            hs = [float(b["h"]) for b in sample]
+            ls = [float(b["l"]) for b in sample]
+            px0 = float(sample[-1]["c"])
+            atr = max(max(hs) - min(ls), px0 * 0.02)
 
     try:
         price, prev, chg_pct, price_tag, price_src, quote_ts = resolve_display_price(
             symbol, dmeta, sess_info
         )
     except Exception:
-        price = float(dmeta.get("regularMarketPrice") or (last["c"] if last else 0))
-        prev = dmeta.get("previousClose") or dmeta.get("chartPreviousClose")
+        nq = fetch_nasdaq_quote(symbol) or {}
+        price = float(
+            nq.get("price")
+            or dmeta.get("regularMarketPrice")
+            or meta_iv.get("regularMarketPrice")
+            or (last["c"] if last else (bars_iv[-1]["c"] if bars_iv else 0))
+        )
+        prev = nq.get("prev_close") or dmeta.get("previousClose") or dmeta.get("chartPreviousClose")
         if prev is None and len(daily) > 1:
             prev = daily[-2]["c"]
         prev = float(prev) if prev is not None else None
         chg_pct = ((price / prev - 1) * 100) if prev and abs(prev - price) > 1e-9 else None
-        price_tag, price_src, quote_ts = "回退", "cache/yahoo", None
+        price_tag, price_src, quote_ts = "回退", "nasdaq/cache", None
 
     if prev is None:
         prev = dmeta.get("previousClose") or dmeta.get("chartPreviousClose")
@@ -1093,32 +1178,20 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
     by_day: Dict[Any, List[dict]] = {}
     for b in sess:
         by_day.setdefault(b["dt_ny"].date(), []).append(b)
-    days = sorted(by_day)
 
-    # 盘中优先今日 RTH（须满 min_bars=ORB+1）；未满则回退昨完整日，避免开盘后空白观望
+    # 只用今日 RTH 算入场点；未满 ORB+1 根绝不借用旧日结构
     ny_date = now_bj.astimezone(NY).date()
-    ref_day = None
-    struct_scope = f"今日RTH·{iv}"
     today_n = len(by_day.get(ny_date, []))
-    if sess_info.get("is_rth") and today_n >= min_bars:
-        ref_day = ny_date
-    else:
-        for d in reversed(days):
-            if len(by_day[d]) >= min_bars:
-                ref_day = d
-                if d != ny_date:
-                    if sess_info.get("is_rth"):
-                        struct_scope = f"开盘初期·参照 {d} RTH·{iv}（今日仅{today_n}根<{min_bars}）"
-                    elif sess_info.get("phase") and "盘前" in str(sess_info.get("phase")):
-                        struct_scope = f"盘前相对 {d} RTH·{iv}"
-                    else:
-                        struct_scope = f"参照 {d} RTH·{iv}"
-                elif not sess_info.get("is_rth"):
-                    struct_scope = f"盘前相对 {d} RTH·{iv}"
-                else:
-                    struct_scope = f"今日RTH·{iv}"
-                break
-    today_bars = by_day.get(ref_day, []) if ref_day else []
+    today_bars = by_day.get(ny_date, [])
+    struct_scope = f"今日RTH·{iv}"
+    forming = today_n < min_bars
+    if forming:
+        if sess_info.get("is_rth"):
+            struct_scope = f"趋势形成中·今日仅{today_n}根<{min_bars}"
+        elif sess_info.get("phase") and "盘前" in str(sess_info.get("phase")):
+            struct_scope = f"盘前·等待今日ORB（已有{today_n}根）"
+        else:
+            struct_scope = f"非完整今日RTH·{today_n}根"
 
     live_quote = "Nasdaq" in price_src or "fullday" in price_src or "1m" in price_src
     provenance = "live" if live_quote else ("live" if src_d == "live" else "cache")
@@ -1145,11 +1218,31 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
         "session": sess_info,
     }
 
-    if not atr or not today_bars or len(today_bars) < min_bars:
+    if not atr or forming or not today_bars:
+        mem = remember_advice(symbol, "观望", quote_time_bj)
         return {
             **base,
+            **mem,
+            "trend": "震荡",
+            "advice": "观望",
             "signal": "观望",
-            "reason": f"{iv} 结构不足或 ATR 不足（需至少 {min_bars} 根；休市/数据少时常见）",
+            "reason": (
+                f"趋势形成中：今日 {iv} 需至少 {min_bars} 根才给定入场/止损"
+                if forming or not today_bars
+                else f"{iv} ATR 不足"
+            ),
+            "action_label": "趋势形成中",
+            "actionable": False,
+            "strength": None,
+            "strength_label": None,
+            "risk_pct": None,
+            "risk_label": None,
+            "ref_price": round(price, 4) if price else None,
+            "stop": None,
+            "stop_note": None,
+            "target": None,
+            "target_note": None,
+            "at_entry": False,
             "S": None,
             "S_key": None,
             "E_band": None,
@@ -1158,6 +1251,7 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
             "structure": "未定",
             "orb": None,
             "vwap": None,
+            "watch_only": True,
         }
 
     orb_bars = today_bars[:orb_n]
@@ -1202,12 +1296,14 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
     reason = sig["reason"]
     if reason:
         reason = f"[{iv}] {reason}"
-    if "今日RTH" not in struct_scope and reason:
-        reason = f"[{struct_scope} · 现价{px:.2f}] {reason}"
+
+    advice = sig.get("advice") or sig.get("signal") or "观望"
+    mem = remember_advice(symbol, advice, quote_time_bj)
 
     return {
         **base,
         **sig,
+        **mem,
         "reason": reason,
         "daily_bias": daily_bias,
         "bar_time_bj": last_b["dt_bj"].strftime("%Y-%m-%d %H:%M"),
@@ -1292,8 +1388,8 @@ def analyze_many(
         "interval": iv,
         "multi": False,
         "session": session_status(now_bj),
-        "source_note": "【美股】最近现价+日高/日低+15m ORB/VWAP → 判断当前能否操作。",
-        "rules_note": "可操作=15m信号→日线闸→进E带+不追涨杀跌+R1≥0.8；冲高回落优先低位多；非AI",
+        "source_note": "【美股】15m 趋势→回踩/反抽入场→参考价/止损/止盈。",
+        "rules_note": "下跌做空/上涨做多；ORB上半区反抽空、下半区回踩多；≥1.5R；禁杀跌追涨；非AI",
         "items": items,
         "errors": errors,
     }

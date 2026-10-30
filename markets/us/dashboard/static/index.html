@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
   <title>美股信号看板</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/styles.css?v=14" />
+  <link rel="stylesheet" href="/static/styles.css?v=19" />
 </head>
 <body>
   <div class="page">
@@ -18,15 +19,17 @@
       </div>
       <div class="actions">
         <input id="symbols" type="text" value="SNDK,MU,NVDA" spellcheck="false" aria-label="标的" />
-        <span class="field-label" title="用最新价+日高低温+15m结构，判断现在能否操作">15m·当前可否操作</span>
+        <span class="field-label" title="趋势→入场→点位；后台巡检有信号才通知">15m·交易卡片</span>
+        <button id="btn-only" type="button" class="btn-timer" aria-pressed="false" title="只显示到价/平仓信号">全部</button>
         <button id="btn-timer" type="button" class="btn-timer" aria-pressed="false" title="定时只刷新最新价与判断">不定时</button>
         <button id="btn-refresh" type="button">刷新</button>
       </div>
     </header>
 
+    <p id="alert-banner" class="alert-banner" hidden></p>
     <p id="timer-status" class="timer-status"></p>
     <main id="cards" class="cards" aria-live="polite"></main>
   </div>
-  <script src="/static/app.js?v=14"></script>
+  <script src="/static/app.js?v=19"></script>
 </body>
 </html>

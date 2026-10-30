@@ -13,8 +13,28 @@ from engine import analyze_many
 
 ROOT = Path(__file__).resolve().parent
 STATIC = ROOT / "static"
+WATCHLIST = ROOT / "watchlist.txt"
+ALERTS = ROOT / "cache" / "alerts.json"
 HOST = "127.0.0.1"
 PORT = 8765
+
+
+def _load_watchlist() -> list:
+    if not WATCHLIST.is_file():
+        return ["SNDK", "MU", "NVDA"]
+    out = []
+    for line in WATCHLIST.read_text(encoding="utf-8").splitlines():
+        s = line.strip().upper()
+        if not s or s.startswith("#"):
+            continue
+        out.append(s.split()[0].strip(","))
+    seen = set()
+    uniq = []
+    for s in out:
+        if s not in seen:
+            seen.add(s)
+            uniq.append(s)
+    return uniq or ["SNDK", "MU", "NVDA"]
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -55,14 +75,38 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(data)
             return
 
+        if path == "/api/watchlist":
+            wl = _load_watchlist()
+            body = json.dumps(
+                {"symbols": wl, "joined": ",".join(wl)}, ensure_ascii=False
+            ).encode("utf-8")
+            self._send(200, body, "application/json; charset=utf-8")
+            return
+
+        if path == "/api/alerts":
+            if ALERTS.is_file():
+                raw = ALERTS.read_bytes()
+            else:
+                raw = b'{"updated_bj":null,"active":[],"history":[],"new":[],"errors":[]}'
+            self._send(200, raw, "application/json; charset=utf-8")
+            return
+
         if path == "/api/signals":
             qs = parse_qs(parsed.query)
-            raw = (qs.get("symbols") or ["SNDK,MU,NVDA"])[0]
+            raw = (qs.get("symbols") or [",".join(_load_watchlist())])[0]
             symbols = [x.strip().upper() for x in raw.split(",") if x.strip()]
-            # 策略仅 15m；仍返回日高/日低与实时价供盘中判断
+            only = (qs.get("only") or [""])[0].strip().lower() in ("1", "signal", "active")
             interval = "15m"
             try:
                 payload = analyze_many(symbols or ["SNDK"], interval=interval, multi=False)
+                if only:
+                    items = [
+                        it
+                        for it in (payload.get("items") or [])
+                        if (it.get("advice") in ("做多", "做空") and it.get("at_entry"))
+                        or it.get("advice") in ("平多", "平空")
+                    ]
+                    payload = {**payload, "items": items, "only_signals": True}
                 body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
                 self._send(200, body, "application/json; charset=utf-8")
             except Exception as e:

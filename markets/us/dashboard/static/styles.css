@@ -135,6 +135,28 @@ body {
   font-size: 0.8rem;
   color: var(--muted);
 }
+.alert-banner {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--short-bg);
+  color: var(--short);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+.alert-banner[hidden] { display: none; }
+.alert-banner .alert-head {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.alert-banner .alert-list {
+  margin: 0;
+  padding-left: 1.1em;
+  display: grid;
+  gap: 4px;
+}
+.alert-banner .alert-list strong { font-weight: 700; }
 
 .cards {
   display: grid;

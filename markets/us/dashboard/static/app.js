@@ -1,6 +1,7 @@
 const $ = (id) => document.getElementById(id);
 
 const LS_TIMER = "signal_board_timer_on";
+const LS_ONLY = "signal_board_only_signal";
 /** 美东常规开盘 09:30，定时刷新按 15m K 线对齐 */
 const RTH_OPEN_MIN = 9 * 60 + 30;
 const BAR_CLOSE_LAG_MS = 2500;
@@ -9,7 +10,27 @@ let timerId = null;
 let countdownId = null;
 let nextAt = 0;
 // 默认定时关闭；仅当用户曾打开并写入 localStorage=1 才自动开
-let timerOn = localStorage.getItem(LS_TIMER) === "1";
+// URL ?timer=1 / ?timer=0 可强制开/关并写入 localStorage
+const _timerParam = new URLSearchParams(location.search).get("timer");
+let timerOn =
+  _timerParam === "1"
+    ? true
+    : _timerParam === "0"
+      ? false
+      : localStorage.getItem(LS_TIMER) === "1";
+if (_timerParam === "1" || _timerParam === "0") {
+  localStorage.setItem(LS_TIMER, _timerParam);
+}
+const _onlyParam = new URLSearchParams(location.search).get("only");
+let onlySignals =
+  _onlyParam === "1"
+    ? true
+    : _onlyParam === "0"
+      ? false
+      : localStorage.getItem(LS_ONLY) === "1";
+if (_onlyParam === "1" || _onlyParam === "0") {
+  localStorage.setItem(LS_ONLY, _onlyParam);
+}
 
 function barInterval() {
   return "15m";
@@ -193,31 +214,13 @@ function setTimer(on) {
 
 function shortHint(item) {
   const r = item.reason || "";
-  if (item.signal === "平空" || item.signal === "平多") {
-    return "先平仓：结构失效，暂不开新仓";
-  }
-  if (item.actionable || item.signal === "做空" || item.signal === "做多") {
-    const side = item.signal === "做空" ? "做空" : "做多";
-    return `当前可操作：按入场带${side}（最新价 + 15m 结构）`;
-  }
-  if (item.structure === "空头") {
-    if (r.includes("不追")) return "当前观望：结构偏空但已离开反抽带，勿追空";
-    if (r.includes("逆势")) return "当前观望：结构空但短线偏多，暂不开空";
-    return "当前观望：结构偏空，等现价回到做空入场带";
-  }
-  if (item.structure === "多头") {
-    if (r.includes("不追")) return "当前观望：结构偏多但已离开回踩带，勿追多";
-    if (r.includes("逆势")) return "当前观望：结构多但短线偏空，暂不开多";
-    return "当前观望：结构偏多，等现价回到做多入场带";
-  }
-  if (r.includes("震荡")) return "当前观望：震荡，等 15m 方向明确";
-  if (r.includes("休市") || r.includes("不足")) return "当前观望：休市或数据不足";
-  return "当前观望：暂不操作";
+  if (r.length > 120) return r.slice(0, 118) + "…";
+  return r;
 }
 
-function structureClass(st) {
-  if (st === "多头" || st === "偏多" || st === "反转多") return "long";
-  if (st === "空头" || st === "偏空" || st === "反转空") return "short";
+function trendClass(tr) {
+  if (tr === "上涨" || tr === "多头") return "long";
+  if (tr === "下跌" || tr === "空头") return "short";
   return "wait";
 }
 
@@ -229,47 +232,54 @@ function chgText(item) {
 }
 
 function renderCard(item) {
-  const st = item.structure || "未定";
-  const isExit = item.signal === "平空" || item.signal === "平多";
-  const hasPlan =
-    ["空头", "多头", "偏空", "偏多", "反转空", "反转多"].includes(st) ||
-    isExit ||
-    (item.E_band && item.E_band.length === 2);
-  const entryLabel =
-    item.entry_label ||
-    (item.signal === "平空"
-      ? "空单失效·先平"
-      : item.signal === "平多"
-        ? "多单失效·先平"
-        : st === "空头"
-          ? "做空入场价"
-          : st === "多头"
-            ? "做多入场价"
-            : "观察区");
+  const trend = item.trend || item.structure || "震荡";
+  const advice = item.advice || item.signal || "观望";
+  const isExit = advice === "平空" || advice === "平多";
+  const hasSide = advice === "做多" || advice === "做空" || isExit;
   const band =
     item.entry_low != null && item.entry_high != null
       ? `${fmt(item.entry_low)} – ${fmt(item.entry_high)}`
       : item.E_band && item.E_band.length === 2
         ? `${fmt(item.E_band[0])} – ${fmt(item.E_band[1])}`
         : "—";
-  const mid =
-    item.entry_mid != null ? `<li><span class="k">建议挂单</span><span class="v">${fmt(item.entry_mid)}</span></li>` : "";
+  const stop = item.stop != null ? item.stop : item.S;
+  const stopNote = item.stop_note || item.S_key || "";
+  const target = item.target != null ? item.target : item.T1;
+  const targetNote = item.target_note || item.T1_key || "";
+  const ref = item.ref_price != null ? item.ref_price : item.entry_mid;
+  const strength =
+    item.strength != null
+      ? `${item.strength}/5${item.strength_label ? "·" + item.strength_label : ""}`
+      : "—";
+  const risk =
+    item.risk_pct != null
+      ? `${fmt(item.risk_pct)}% · ${item.risk_label || ""}`
+      : "—";
+  const since = item.signal_since_bj || "—";
+  const lastSig = item.last_signal || "本次";
   const hint = shortHint(item);
-  const levels = hasPlan
+  const levels = hasSide
     ? `
-        <li class="entry"><span class="k">${entryLabel}</span><span class="v">${band}</span></li>
-        ${mid}
-        <li><span class="k">止损</span><span class="v">${item.S != null ? fmt(item.S) : "待定"}${item.S_key ? `<span class="sub">${item.S_key}</span>` : ""}</span></li>
-        <li><span class="k">止盈</span><span class="v">${item.T1 != null ? fmt(item.T1) : "待定"}${item.T1_key ? `<span class="sub">${item.T1_key}</span>` : ""}</span></li>`
+        <li class="entry"><span class="k">入场带</span><span class="v">${band}${item.at_entry ? `<span class="sub">现价在带内</span>` : ""}</span></li>
+        <li><span class="k">参考价</span><span class="v">${ref != null ? fmt(ref) : "—"}</span></li>
+        <li><span class="k">建议止损</span><span class="v">${stop != null ? fmt(stop) : "待定"}${stopNote ? `<span class="sub">${stopNote}</span>` : ""}</span></li>
+        <li><span class="k">建议止盈</span><span class="v">${target != null ? fmt(target) : "待定"}${targetNote ? `<span class="sub">${targetNote}</span>` : ""}</span></li>
+        <li><span class="k">盈亏比</span><span class="v">${item.R1 != null ? fmt(item.R1) + " : 1" : "—"}</span></li>
+        <li><span class="k">强度</span><span class="v">${strength}</span></li>
+        <li><span class="k">风险</span><span class="v">${risk}</span></li>
+        <li><span class="k">本次信号</span><span class="v">${since}</span></li>
+        <li><span class="k">上次信号</span><span class="v">${lastSig}</span></li>`
     : `
-        <li><span class="k">观察区</span><span class="v">${band}</span></li>
-        <li><span class="k">止损</span><span class="v">待定</span></li>
-        <li><span class="k">止盈</span><span class="v">待定</span></li>`;
+        <li><span class="k">参考价</span><span class="v">${ref != null ? fmt(ref) : fmt(item.price)}</span></li>
+        <li><span class="k">建议止损</span><span class="v">待定</span></li>
+        <li><span class="k">建议止盈</span><span class="v">待定</span></li>
+        <li><span class="k">本次信号</span><span class="v">${since}</span></li>
+        <li><span class="k">上次信号</span><span class="v">${lastSig}</span></li>`;
   const tag = item.price_tag ? `<span class="ptag">${item.price_tag}</span>` : "";
   const scope = item.struct_scope ? `<p class="scope">${item.struct_scope} · 15m</p>` : "";
-  const actionable = !!item.actionable || item.signal === "做多" || item.signal === "做空";
-  const actionText = item.action_label || (actionable ? "当前可操作" : "当前观望");
-  const actionCls = actionable ? "ready" : item.signal === "平空" || item.signal === "平多" ? "wait-entry" : "wait-entry";
+  const actionable = !!item.actionable;
+  const actionText = item.action_label || (actionable ? "可按点位执行" : "当前观望");
+  const actionCls = actionable ? "ready" : isExit ? "wait-entry" : "wait-entry";
   const dayHi = item.day_high != null ? fmt(item.day_high) : "—";
   const dayLo = item.day_low != null ? fmt(item.day_low) : "—";
   const vwap = item.vwap != null ? fmt(item.vwap) : "—";
@@ -286,8 +296,8 @@ function renderCard(item) {
       <p class="intraday">日高 ${dayHi} · 日低 ${dayLo} · VWAP ${vwap} · ORB ${orb}</p>
       <div class="badges">
         <span class="${actionCls}">${actionText}</span>
-        <div class="badge ${structureClass(st)}">结构·${st}</div>
-        <div class="badge ${signalClass(item.signal)}">信号·${item.signal || "观望"}</div>
+        <div class="badge ${trendClass(trend)}">趋势·${trend}</div>
+        <div class="badge ${signalClass(advice)}">建议·${advice}</div>
       </div>
       <ul class="levels">${levels}</ul>
       ${scope}
@@ -297,6 +307,21 @@ function renderCard(item) {
 }
 
 let lastRefreshMeta = "";
+
+function updateOnlyUi() {
+  const btn = $("btn-only");
+  if (!btn) return;
+  btn.classList.toggle("on", onlySignals);
+  btn.setAttribute("aria-pressed", onlySignals ? "true" : "false");
+  btn.textContent = onlySignals ? "仅信号" : "全部";
+}
+
+function setOnly(on) {
+  onlySignals = on;
+  localStorage.setItem(LS_ONLY, on ? "1" : "0");
+  updateOnlyUi();
+  load();
+}
 
 function updateTimerUi() {
   const btn = $("btn-timer");
@@ -308,32 +333,148 @@ function updateTimerUi() {
     ? "关闭自动刷新（仅展示）"
     : "开启自动刷新（仅展示，不影响策略）";
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
+  const mode = onlySignals ? "仅信号" : "全部标的";
   if (!timerOn) {
-    status.textContent = `不定时 · 手动刷新 · 仅15m策略 · 现价/日高低温实时${meta}`;
+    status.textContent = `不定时 · ${mode} · 15m 趋势卡片 · 后台巡检有信号才通知${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
   const nextNy = nextAt ? formatNyHm(nextAt) : "—";
-  status.textContent = `定时刷新（仅展示）· 下次 ${nextNy} ET · ${left}s${meta}`;
+  status.textContent = `定时刷新 · ${mode} · 下次 ${nextNy} ET · ${left}s${meta}`;
+}
+
+function alertLine(a) {
+  const bits = [
+    `<strong>${a.symbol || "—"}</strong>`,
+    a.advice || "—",
+    a.price != null ? `价${fmt(a.price)}` : null,
+    a.ref_price != null ? `参考${fmt(a.ref_price)}` : null,
+    a.stop != null ? `止损${fmt(a.stop)}` : null,
+    a.target != null ? `止盈${fmt(a.target)}` : null,
+    a.R1 != null ? `R${fmt(a.R1)}` : null,
+  ].filter(Boolean);
+  return bits.join(" · ");
+}
+
+async function fetchJson(url, timeoutMs = 8000) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { cache: "no-store", signal: ctrl.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    if (err && err.name === "AbortError") throw new Error("请求超时");
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function fetchAlerts() {
+  return fetchJson(`/api/alerts?_=${Date.now()}`, 5000);
+}
+
+function renderAlertCards(active) {
+  return active
+    .map((a) =>
+      renderCard({
+        ...a,
+        signal: a.advice,
+        action_label: a.action_label || (a.at_entry ? "可按点位执行" : a.advice),
+        actionable: !!a.at_entry,
+        structure:
+          a.trend === "上涨" ? "多头" : a.trend === "下跌" ? "空头" : "震荡",
+      })
+    )
+    .join("");
+}
+
+function paintAlertBanner(data) {
+  const el = $("alert-banner");
+  if (!el) return;
+  const active = (data && data.active) || [];
+  const updated = (data && data.updated_bj) || "—";
+  if (!active.length) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.innerHTML =
+    `<div class="alert-head">巡检活跃 ${active.length} · 更新 ${updated}</div>` +
+    `<ul class="alert-list">${active.map((a) => `<li>${alertLine(a)}</li>`).join("")}</ul>`;
+}
+
+async function refreshAlertBanner() {
+  const el = $("alert-banner");
+  if (!el) return;
+  try {
+    paintAlertBanner(await fetchAlerts());
+  } catch (err) {
+    el.hidden = false;
+    el.innerHTML = `<div class="alert-head">巡检读取失败：${err.message || err}（可点刷新）</div>`;
+  }
+}
+
+async function loadWatchlistIntoInput() {
+  const input = $("symbols");
+  if (!input) return;
+  try {
+    const res = await fetch("/api/watchlist", { cache: "no-store" });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.joined) input.value = data.joined;
+  } catch (_) {
+    /* keep default */
+  }
+}
+
+async function loadOnlyFromAlerts() {
+  // 仅信号：只读巡检 JSON，不再拉 /api/signals（易超时导致整页 Load failed）
+  const data = await fetchAlerts();
+  const active = data.active || [];
+  paintAlertBanner(data);
+  if (!active.length) {
+    $("cards").innerHTML =
+      `<p class="hint">巡检暂无到价/平仓信号（更新 ${data.updated_bj || "—"}）。后台：./start-watch.sh</p>`;
+    lastRefreshMeta = `巡检 ${data.updated_bj || "—"} · 仅信号 · 0`;
+    return;
+  }
+  $("cards").innerHTML = renderAlertCards(active);
+  lastRefreshMeta = `巡检 ${data.updated_bj || "—"} · 仅信号 · ${active.length}`;
 }
 
 async function load() {
   const btn = $("btn-refresh");
-  const symbols = $("symbols").value.trim() || "SNDK,MU,NVDA";
   btn.disabled = true;
   try {
-    const res = await fetch(
+    if (onlySignals) {
+      await loadOnlyFromAlerts();
+      return;
+    }
+    // 全部模式也限制标的数量，避免一次扫爆
+    const raw = $("symbols").value.trim() || "SNDK,MU,NVDA";
+    const list = raw.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 8);
+    const symbols = list.join(",");
+    const data = await fetchJson(
       `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=15m&multi=0&_=${Date.now()}`,
-      { cache: "no-store" }
+      45000
     );
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    $("cards").innerHTML = (data.items || []).map(renderCard).join("");
+    const items = data.items || [];
+    $("cards").innerHTML = items.map(renderCard).join("");
     const phase = (data.session && data.session.phase) || "";
-    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · 15m${phase ? " · " + phase : ""}`;
+    lastRefreshMeta = `已刷新 ${data.generated_bj || "—"} · 15m${phase ? " · " + phase : ""} · ${list.length}只`;
+    await refreshAlertBanner();
   } catch (err) {
-    $("cards").innerHTML = `<p class="hint">加载失败：${err.message}</p>`;
-    lastRefreshMeta = `刷新失败 ${err.message}`;
+    lastRefreshMeta = `刷新失败 ${err.message || err}`;
+    // 失败时仍尽量显示巡检信号，避免整页空白
+    try {
+      await loadOnlyFromAlerts();
+      lastRefreshMeta += " · 已回退巡检";
+    } catch (e2) {
+      $("cards").innerHTML = `<p class="hint">加载失败：${err.message || err}</p>`;
+    }
   } finally {
     btn.disabled = false;
     updateTimerUi();
@@ -342,12 +483,21 @@ async function load() {
 
 $("btn-refresh").addEventListener("click", load);
 $("btn-timer").addEventListener("click", () => setTimer(!timerOn));
+$("btn-only").addEventListener("click", () => setOnly(!onlySignals));
 $("symbols").addEventListener("keydown", (e) => {
   if (e.key === "Enter") load();
 });
 
 tickBeijingClock();
 setInterval(tickBeijingClock, 1000);
+updateOnlyUi();
 updateTimerUi();
-load();
-if (timerOn) startTimer();
+(async () => {
+  await loadWatchlistIntoInput();
+  await load();
+  if (timerOn) startTimer();
+  setInterval(refreshAlertBanner, 10000);
+  setInterval(() => {
+    if (onlySignals) loadOnlyFromAlerts().catch(() => {});
+  }, 60000);
+})();

@@ -21,11 +21,19 @@ SIGNAL_LIVE=1 python3 app.py
 
 浏览器：http://127.0.0.1:8765  
 
-默认标的：`SNDK,MU,NVDA`。**策略仅 15m**（ORB≈开盘 30 分钟）。卡片展示实时现价、日高/日低、VWAP、ORB，避免漏判盘中极值。
+默认读 [`watchlist.txt`](watchlist.txt) 票池。**策略仅 15m**：趋势 → 建议 → 回踩入场 → 止损/止盈（盈亏比≥1.5）。
 
-**定时**：可选，只刷新展示，与信号逻辑无关。
+**后台巡检**（有信号才 macOS 通知）：
 
-API：`/api/signals?symbols=SNDK`
+```bash
+./start-watch.sh          # 后台
+./start-watch.sh --once   # 扫一轮
+./start-watch.sh --stop
+```
+
+告警写入 `cache/alerts.json`；看板可切「仅信号」。
+
+API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 
 ## 说明
 
