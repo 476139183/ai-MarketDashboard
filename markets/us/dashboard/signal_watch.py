@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 import time
 from datetime import datetime, timedelta
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -64,7 +66,9 @@ def _load_json(path: Path, default: Any) -> Any:
 
 def _save_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    temp = path.with_name(f"{path.name}.{os.getpid()}.tmp")
+    temp.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    temp.replace(path)
 
 
 def notify_macos(title: str, body: str) -> None:
@@ -89,7 +93,7 @@ def is_alertable(item: Dict[str, Any]) -> bool:
     advice = item.get("advice") or item.get("signal") or ""
     if advice in ("平多", "平空"):
         return True
-    if advice in ("做多", "做空") and item.get("at_entry"):
+    if advice in ("做多", "做空") and item.get("at_entry") and item.get("actionable") and (item.get("trend_context") or {}).get("confirmed"):
         return True
     return False
 
@@ -99,6 +103,11 @@ def compact_alert(item: Dict[str, Any], fired_bj: str) -> Dict[str, Any]:
         "symbol": item.get("symbol"),
         "advice": item.get("advice") or item.get("signal"),
         "trend": item.get("trend"),
+        "trend_context": item.get("trend_context"),
+        "actionable": item.get("actionable", False),
+        "exit_long": item.get("exit_long", False),
+        "exit_short": item.get("exit_short", False),
+        "position_rule": item.get("position_rule"),
         "price": item.get("price"),
         "ref_price": item.get("ref_price"),
         "stop": item.get("stop") or item.get("S"),
@@ -139,18 +148,51 @@ def scan_once(
     new_alerts: List[Dict[str, Any]] = []
     errors: List[Dict[str, str]] = []
 
-    for i, sym in enumerate(symbols):
+    hist = _load_json(ALERTS_PATH, {}).get("history") or []
+    started = time.monotonic()
+    scanned = 0
+    observations = []
+
+    def save_progress(scanning):
+        doc = {"updated_bj": now_bj().strftime("%Y-%m-%d %H:%M:%S"),
+               "started_bj": fired_bj, "session": sess, "watch_n": len(symbols),
+               "scanned_n": scanned, "scanning": scanning,
+               "elapsed_seconds": round(time.monotonic() - started, 1),
+               "active": active, "new": new_alerts,
+               "items": observations,
+               "history": (new_alerts + hist)[:40], "errors": errors}
+        _save_json(ALERTS_PATH, doc)
+        return doc
+
+    def analyze(sym):
         try:
-            item = analyze_symbol(sym, interval="15m")
+            return analyze_symbol(sym, interval="15m")
         except Exception as e:
-            errors.append({"symbol": sym, "error": str(e)})
-            item = {"symbol": sym, "advice": "观望", "error": True, "reason": str(e)}
-        if is_alertable(item):
-            row = compact_alert(item, fired_bj)
+            return {"symbol": sym, "advice": "观望", "error": True, "reason": str(e)}
+
+    save_progress(True)
+    # 82 只票限流并发取数；单票失败继续扫描，网页可读取逐票进度。
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        futures = []
+        for i, sym in enumerate(symbols):
+            futures.append(pool.submit(analyze, sym))
+            if pause > 0 and i + 1 < len(symbols):
+                time.sleep(pause)
+        for future in as_completed(futures):
+            item = future.result()
+            scanned += 1
+            observations.append(compact_alert(item, now_bj().strftime("%Y-%m-%d %H:%M:%S")))
+            if item.get("error"):
+                errors.append({"symbol": item.get("symbol"), "error": item.get("reason", "取数失败")})
+            if not is_alertable(item):
+                save_progress(True)
+                continue
+            observed_bj = now_bj().strftime("%Y-%m-%d %H:%M:%S")
+            row = compact_alert(item, observed_bj)
             active.append(row)
             key = fire_key(item, day)
             if key not in fired:
-                fired[key] = {"bj": fired_bj, "advice": row["advice"]}
+                fired[key] = {"bj": observed_bj, "advice": row["advice"]}
                 new_alerts.append(row)
                 if notify:
                     title = f"{row['symbol']} · {row['advice']}"
@@ -161,22 +203,9 @@ def scan_once(
                     )
                     notify_macos(title, body)
                     print(f"[alert] {title} | {body}", flush=True)
-        if pause > 0 and i + 1 < len(symbols):
-            time.sleep(pause)
+            save_progress(True)
 
-    hist = _load_json(ALERTS_PATH, {}).get("history") or []
-    hist = (new_alerts + hist)[:40]
-
-    alerts_doc = {
-        "updated_bj": fired_bj,
-        "session": sess,
-        "watch_n": len(symbols),
-        "active": active,
-        "new": new_alerts,
-        "history": hist,
-        "errors": errors,
-    }
-    _save_json(ALERTS_PATH, alerts_doc)
+    alerts_doc = save_progress(False)
     state = {"fired": fired, "last_scan_bj": fired_bj, "symbols": symbols}
     _save_json(STATE_PATH, state)
 
@@ -195,13 +224,15 @@ def run_loop(*, once: bool = False, notify: bool = True, pause: float = 0.35) ->
         scan_once(symbols, notify=notify, pause=pause)
         return
     while True:
+        symbols = load_watchlist()
+        scan_once(symbols, notify=notify, pause=pause)
         t = now_bj()
         sess = session_status(t)
         # 周末少扫：每小时一次；盘中对齐 15m；其它时段 30m
         if sess.get("phase") == "周末休市":
             delay = 3600
             label = "周末·1h"
-        elif sess.get("is_rth") or (sess.get("phase") and "盘" in str(sess.get("phase"))):
+        elif sess.get("is_rth") or sess.get("phase") in ("盘前", "盘后"):
             nxt = next_quarter(t) + timedelta(seconds=8)  # K 线落定后再扫
             delay = max(5, int((nxt - t).total_seconds()))
             label = f"对齐{nxt.strftime('%H:%M')}BJ"
@@ -210,8 +241,6 @@ def run_loop(*, once: bool = False, notify: bool = True, pause: float = 0.35) ->
             label = "非活跃·30m"
         print(f"[sleep] {delay}s ({label}) now={t.strftime('%H:%M:%S')} {sess.get('phase')}", flush=True)
         time.sleep(delay)
-        symbols = load_watchlist()
-        scan_once(symbols, notify=notify, pause=pause)
 
 
 def main() -> None:

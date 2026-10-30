@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/styles.css?v=19" />
+  <link rel="stylesheet" href="/static/styles.css?v=21" />
 </head>
 <body>
   <div class="page">
@@ -18,18 +18,26 @@
         <p id="bj-clock" class="brand-sub clock-live">北京 —</p>
       </div>
       <div class="actions">
-        <input id="symbols" type="text" value="SNDK,MU,NVDA" spellcheck="false" aria-label="标的" />
-        <span class="field-label" title="趋势→入场→点位；后台巡检有信号才通知">15m·交易卡片</span>
+        <input id="symbols" type="text" value="SNDK,SKHY,MU,NVDA" spellcheck="false" aria-label="标的" />
+        <span class="field-label" title="日线与1小时定方向，15分钟找同向入场">日线 + 1h → 15m 入场</span>
         <button id="btn-only" type="button" class="btn-timer" aria-pressed="false" title="只显示到价/平仓信号">全部</button>
         <button id="btn-timer" type="button" class="btn-timer" aria-pressed="false" title="定时只刷新最新价与判断">不定时</button>
         <button id="btn-refresh" type="button">刷新</button>
+        <a href="/backtest">历史回放</a>
+        <a href="/diagnostics">逐笔诊断</a>
       </div>
     </header>
 
     <p id="alert-banner" class="alert-banner" hidden></p>
     <p id="timer-status" class="timer-status"></p>
+    <p id="watch-status" class="timer-status" aria-live="polite">正在读取巡检状态…</p>
+    <nav id="pagination" class="actions pagination" aria-label="股票分页">
+      <button id="btn-prev" type="button" class="btn-timer" disabled>上一页</button>
+      <span id="page-status" class="field-label" aria-live="polite">正在加载票池…</span>
+      <button id="btn-next" type="button" class="btn-timer" disabled>下一页</button>
+    </nav>
     <main id="cards" class="cards" aria-live="polite"></main>
   </div>
-  <script src="/static/app.js?v=19"></script>
+  <script src="/static/app.js?v=21"></script>
 </body>
 </html>

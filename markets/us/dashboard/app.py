@@ -5,23 +5,26 @@ from __future__ import annotations
 
 import json
 import mimetypes
+import os
+from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from engine import analyze_many
+from engine import BJ
 
 ROOT = Path(__file__).resolve().parent
 STATIC = ROOT / "static"
 WATCHLIST = ROOT / "watchlist.txt"
 ALERTS = ROOT / "cache" / "alerts.json"
 HOST = "127.0.0.1"
-PORT = 8765
+PORT = int(os.environ.get("BOARD_PORT", "8765"))
 
 
 def _load_watchlist() -> list:
     if not WATCHLIST.is_file():
-        return ["SNDK", "MU", "NVDA"]
+        return ["SNDK", "SKHY", "MU", "NVDA"]
     out = []
     for line in WATCHLIST.read_text(encoding="utf-8").splitlines():
         s = line.strip().upper()
@@ -34,7 +37,23 @@ def _load_watchlist() -> list:
         if s not in seen:
             seen.add(s)
             uniq.append(s)
-    return uniq or ["SNDK", "MU", "NVDA"]
+    return uniq or ["SNDK", "SKHY", "MU", "NVDA"]
+
+
+def load_alerts(now: datetime) -> dict:
+    try:
+        data = json.loads(ALERTS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"updated_bj": None, "active": [], "history": [], "new": [], "errors": []}
+    active = []
+    for row in data.get("active", []):
+        try:
+            fired = datetime.strptime(row["fired_bj"], "%Y-%m-%d %H:%M:%S").replace(tzinfo=BJ)
+            if -60 <= (now - fired).total_seconds() <= 1200:
+                active.append(row)
+        except (ValueError, TypeError, KeyError):
+            continue
+    return {**data, "active": active}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -56,6 +75,22 @@ class Handler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html"):
             data = (STATIC / "index.html").read_bytes()
             self._send(200, data, "text/html; charset=utf-8")
+            return
+
+        if path in ("/backtest", "/backtest/"):
+            report = ROOT / "cache" / "trend-trade-report.html"
+            if report.is_file():
+                self._send(200, report.read_bytes(), "text/html; charset=utf-8")
+            else:
+                self._send(404, "尚未生成历史回放报告".encode("utf-8"), "text/plain; charset=utf-8")
+            return
+
+        if path in ("/diagnostics", "/diagnostics/"):
+            report = ROOT / "cache" / "trade-diagnostics-report.html"
+            if report.is_file():
+                self._send(200, report.read_bytes(), "text/html; charset=utf-8")
+            else:
+                self._send(404, "尚未生成逐笔诊断报告".encode("utf-8"), "text/plain; charset=utf-8")
             return
 
         if path.startswith("/static/"):
@@ -84,10 +119,7 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/alerts":
-            if ALERTS.is_file():
-                raw = ALERTS.read_bytes()
-            else:
-                raw = b'{"updated_bj":null,"active":[],"history":[],"new":[],"errors":[]}'
+            raw = json.dumps(load_alerts(datetime.now(timezone.utc)), ensure_ascii=False).encode("utf-8")
             self._send(200, raw, "application/json; charset=utf-8")
             return
 

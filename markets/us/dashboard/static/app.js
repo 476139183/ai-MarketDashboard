@@ -9,6 +9,11 @@ const BAR_CLOSE_LAG_MS = 2500;
 let timerId = null;
 let countdownId = null;
 let nextAt = 0;
+const PAGE_SIZE = 8;
+let pageIndex = 0;
+let symbolCount = 0;
+let previousSymbols = "";
+let loading = false;
 // 默认定时关闭；仅当用户曾打开并写入 localStorage=1 才自动开
 // URL ?timer=1 / ?timer=0 可强制开/关并写入 localStorage
 const _timerParam = new URLSearchParams(location.search).get("timer");
@@ -277,6 +282,12 @@ function renderCard(item) {
         <li><span class="k">上次信号</span><span class="v">${lastSig}</span></li>`;
   const tag = item.price_tag ? `<span class="ptag">${item.price_tag}</span>` : "";
   const scope = item.struct_scope ? `<p class="scope">${item.struct_scope} · 15m</p>` : "";
+  const context = item.trend_context;
+  const direction = context ? `<p class="scope">${context.reason || "方向未确认"} · ${context.confirmed ? "15m仅找同向入场" : "暂停开仓计划"}</p>` : "";
+  const positionRule = item.position_rule ? `<p class="scope">${item.position_rule}</p>` : "";
+  const exits = [item.exit_long ? "若持有多仓：方向或ORB失效，应按规则退出" : "",
+    item.exit_short ? "若持有空仓：方向或ORB失效，应按规则退出" : ""].filter(Boolean);
+  const exitHints = exits.length ? `<p class="scope">${exits.join("；")}</p>` : "";
   const actionable = !!item.actionable;
   const actionText = item.action_label || (actionable ? "可按点位执行" : "当前观望");
   const actionCls = actionable ? "ready" : isExit ? "wait-entry" : "wait-entry";
@@ -299,6 +310,9 @@ function renderCard(item) {
         <div class="badge ${trendClass(trend)}">趋势·${trend}</div>
         <div class="badge ${signalClass(advice)}">建议·${advice}</div>
       </div>
+      ${direction}
+      ${positionRule}
+      ${exitHints}
       <ul class="levels">${levels}</ul>
       ${scope}
       ${hint ? `<p class="hint">${hint}</p>` : ""}
@@ -335,7 +349,7 @@ function updateTimerUi() {
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
   const mode = onlySignals ? "仅信号" : "全部标的";
   if (!timerOn) {
-    status.textContent = `不定时 · ${mode} · 15m 趋势卡片 · 后台巡检有信号才通知${meta}`;
+    status.textContent = `不定时 · ${mode} · 日线+1h定方向 → 15m找入场${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
@@ -391,6 +405,16 @@ function renderAlertCards(active) {
 }
 
 function paintAlertBanner(data) {
+  const status = $("watch-status");
+  if (status) {
+    if (data && data.watch_n != null) {
+      const age = data.updated_bj ? Date.now() - new Date(data.updated_bj.replace(" ", "T") + "+08:00").getTime() : Infinity;
+      const state = age > 3600000 ? "更新已过期" : data.scanning ? "扫描中" : "上轮已完成";
+      status.textContent = `巡检${state} · ${data.scanned_n || 0}/${data.watch_n}只 · 取数失败 ${(data.errors || []).length}只 · 更新 ${data.updated_bj || "—"}`;
+    } else {
+      status.textContent = "尚无巡检记录";
+    }
+  }
   const el = $("alert-banner");
   if (!el) return;
   const active = (data && data.active) || [];
@@ -445,17 +469,38 @@ async function loadOnlyFromAlerts() {
   lastRefreshMeta = `巡检 ${data.updated_bj || "—"} · 仅信号 · ${active.length}`;
 }
 
+function updatePagination() {
+  $("pagination").hidden = onlySignals;
+  const pages = Math.max(1, Math.ceil(symbolCount / PAGE_SIZE));
+  const start = symbolCount ? pageIndex * PAGE_SIZE + 1 : 0;
+  const end = Math.min((pageIndex + 1) * PAGE_SIZE, symbolCount);
+  $("page-status").textContent = `票池 ${symbolCount} 只 · 第 ${pageIndex + 1}/${pages} 页 · 显示 ${start}–${end}`;
+  $("btn-prev").disabled = loading || pageIndex === 0;
+  $("btn-next").disabled = loading || pageIndex + 1 >= pages;
+}
+
 async function load() {
+  if (loading) return;
+  loading = true;
   const btn = $("btn-refresh");
   btn.disabled = true;
+  $("btn-only").disabled = true;
+  updatePagination();
   try {
     if (onlySignals) {
       await loadOnlyFromAlerts();
       return;
     }
-    // 全部模式也限制标的数量，避免一次扫爆
-    const raw = $("symbols").value.trim() || "SNDK,MU,NVDA";
-    const list = raw.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 8);
+    // 每次只分析当前页；完整票池通过翻页访问，避免同时请求所有标的。
+    const raw = $("symbols").value.trim() || "SNDK,SKHY,MU,NVDA";
+    const all = [...new Set(raw.split(",").map((s) => s.trim().toUpperCase()).filter(Boolean))];
+    const normalized = all.join(",");
+    if (normalized !== previousSymbols) pageIndex = 0;
+    previousSymbols = normalized;
+    symbolCount = all.length;
+    pageIndex = Math.min(pageIndex, Math.max(0, Math.ceil(symbolCount / PAGE_SIZE) - 1));
+    updatePagination();
+    const list = all.slice(pageIndex * PAGE_SIZE, (pageIndex + 1) * PAGE_SIZE);
     const symbols = list.join(",");
     const data = await fetchJson(
       `/api/signals?symbols=${encodeURIComponent(symbols)}&interval=15m&multi=0&_=${Date.now()}`,
@@ -476,7 +521,10 @@ async function load() {
       $("cards").innerHTML = `<p class="hint">加载失败：${err.message || err}</p>`;
     }
   } finally {
+    loading = false;
     btn.disabled = false;
+    $("btn-only").disabled = false;
+    updatePagination();
     updateTimerUi();
   }
 }
@@ -484,6 +532,16 @@ async function load() {
 $("btn-refresh").addEventListener("click", load);
 $("btn-timer").addEventListener("click", () => setTimer(!timerOn));
 $("btn-only").addEventListener("click", () => setOnly(!onlySignals));
+$("btn-prev").addEventListener("click", () => {
+  if (loading || pageIndex === 0) return;
+  pageIndex -= 1;
+  return load();
+});
+$("btn-next").addEventListener("click", () => {
+  if (loading || (pageIndex + 1) * PAGE_SIZE >= symbolCount) return;
+  pageIndex += 1;
+  return load();
+});
 $("symbols").addEventListener("keydown", (e) => {
   if (e.key === "Enter") load();
 });

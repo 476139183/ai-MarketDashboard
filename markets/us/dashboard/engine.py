@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -23,7 +24,7 @@ UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
-DEFAULT_SYMBOLS = ["SNDK", "MU", "NVDA"]
+DEFAULT_SYMBOLS = ["SNDK", "SKHY", "MU", "NVDA"]
 CACHE_DIR = Path(__file__).resolve().parent / "cache"
 # 策略周期仅 15m；底层仍用 Nasdaq 分时点聚合 + 日高/日低，避免漏判突破
 INTERVALS = ("15m",)
@@ -127,7 +128,16 @@ def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = Fa
     if prefer_cache:
         cached = _load_cache(symbol, interval)
         if cached:
-            return cached[0], cached[1], "cache"
+            now = datetime.now(NY)
+            expected = now.date() - timedelta(days=1)
+            while expected.weekday() >= 5:
+                expected -= timedelta(days=1)
+            last = cached[0][-1] if cached[0] else None
+            recent = last is not None and last["dt_ny"].date() >= expected
+            if interval in INTERVALS and session_status(now).get("is_rth"):
+                recent = recent and int(last["t"]) + 900 >= now.timestamp() - 1200
+            if recent:
+                return cached[0], cached[1], "cache"
 
     url = (
         f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
@@ -355,7 +365,8 @@ def fetch_bars_intraday(
             except Exception:
                 pass
     if nq_rows and y_rows:
-        merged = _merge_bar_rows(nq_rows, y_rows)
+        # 保留真实 OHLCV，Nasdaq 无量采样仅补缺失时间桶。
+        merged = _merge_bar_rows(y_rows, nq_rows)
         return merged, {**y_meta, **nq_meta, "merged": "nasdaq+yahoo"}, "nasdaq+yahoo"
     if nq_rows and len(nq_rows) >= max(2, orb_bar_count(iv)):
         # 仅 Nasdaq：若跨日不足 min_bars，仍返回（上层可能观望）
@@ -715,6 +726,55 @@ def _strength_label(n: int) -> str:
     return {1: "弱", 2: "偏弱", 3: "中", 4: "偏强", 5: "强"}.get(n, "中")
 
 
+def confirm_trend(daily: List[dict], bars: List[dict], now: datetime) -> Dict[str, Any]:
+    """日线 MA20/斜率与完整 1h EMA5/13 同向才确认；不读取未来或未收盘 K 线。"""
+    ny_now = now.astimezone(NY)
+    prior = sorted((b for b in daily if b["dt_ny"].date() < ny_now.date()), key=lambda b: b["t"])
+    closes = [float(b["c"]) for b in prior]
+    daily_bias = "unknown"
+    ma = slope = None
+    expected = ny_now.date() - timedelta(days=1)
+    while expected.weekday() >= 5:
+        expected -= timedelta(days=1)
+    if len(closes) >= 25 and prior[-1]["dt_ny"].date() >= expected:
+        ma = sma(closes, 20)
+        slope = ma - sma(closes[:-5], 20)
+        daily_bias = "up" if closes[-1] > ma and slope > 0 else (
+            "down" if closes[-1] < ma and slope < 0 else "flat")
+
+    # 从美股 09:30 起算每小时，完整四根 15m 才纳入；15:30–16:00 半小时不冒充 1h。
+    groups: Dict[int, Dict[int, dict]] = {}
+    for b in regular_session(bars):
+        dt = b["dt_ny"]
+        offset = dt.hour * 60 + dt.minute - 570
+        start = dt.replace(hour=9, minute=30, second=0, microsecond=0) + timedelta(hours=offset // 60)
+        key = int(start.timestamp())
+        if key + 3600 <= now.timestamp():
+            groups.setdefault(key, {})[int(b["t"])] = b
+    hourly = []
+    for key, group in sorted(groups.items()):
+        if set(group) != {key + i * 900 for i in range(4)}:
+            continue
+        rows = [group[key + i * 900] for i in range(4)]
+        hourly.append(dict(t=key, o=rows[0]["o"], c=rows[-1]["c"],
+                           h=max(b["h"] for b in rows), l=min(b["l"] for b in rows)))
+    hourly_bias = "unknown"
+    current = short_term_trend(hourly)
+    previous = short_term_trend(hourly[:-1])
+    hourly_max_age = 7200 if session_status(now).get("is_rth") else 5 * 86400
+    if len(hourly) >= 14 and (now.timestamp() - hourly[-1]["t"] - 3600) <= hourly_max_age:
+        hourly_bias = current["bias"] if current["bias"] == previous["bias"] else "flat"
+    confirmed = daily_bias == hourly_bias and daily_bias in ("up", "down")
+    bias = daily_bias if confirmed else "unknown" if "unknown" in (daily_bias, hourly_bias) else "mixed"
+    labels = {"up": "偏多", "down": "偏空", "flat": "震荡", "unknown": "数据不足"}
+    reason = f"日线{labels[daily_bias]} · 1小时{labels[hourly_bias]}"
+    return dict(bias=bias, confirmed=confirmed, daily_bias=daily_bias, hourly_bias=hourly_bias,
+                daily_ma20=round(ma, 4) if ma else None,
+                daily_ma20_slope=round(slope, 4) if slope is not None else None,
+                hourly_score=current["score"], reason=reason,
+                label="总体偏多" if bias == "up" else "总体偏空" if bias == "down" else "方向未确认")
+
+
 def _risk_label(pct: Optional[float]) -> str:
     if pct is None:
         return "—"
@@ -789,6 +849,7 @@ def compute_intraday_signal(
     path_h: float,
     bars: List[dict],
     daily_bias: str = "—",
+    trend_context: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     交易卡片口径：先定趋势 → 建议做多/做空 → 回踩/反抽入场 → 参考价/止损/止盈。
@@ -814,8 +875,12 @@ def compute_intraday_signal(
     below_mid = px <= min(vwap, orb_mid)
     above_mid = px >= max(vwap, orb_mid)
 
-    # —— 先趋势（SNDK 回放验证：不过度放宽冲高转弱）——
-    if broke_up and px < vwap and sc <= 0:
+    # 看板/巡检用日线 + 1h 定方向，15m 只决定是否已出现同向入场形态。
+    # 无上下文的旧研究调用保留原方向算法，不能当作新版策略回测。
+    if trend_context is not None:
+        overall = trend_context.get("bias") if trend_context.get("confirmed") else None
+        trend, structure = {"up": ("上涨", "多头"), "down": ("下跌", "空头")}.get(overall, ("震荡", "震荡"))
+    elif broke_up and px < vwap and sc <= 0:
         trend, structure = "下跌", "空头"
     elif broke_down and px > vwap and sc >= 0:
         trend, structure = "上涨", "多头"
@@ -828,6 +893,14 @@ def compute_intraday_signal(
 
     short_invalid = bool(broke_down and px > orb_h)
     long_invalid = bool(broke_up and px < orb_l)
+    known_context = trend_context is not None and trend_context.get("bias") != "unknown"
+    exit_long = long_invalid or bool(known_context and trend != "上涨")
+    exit_short = short_invalid or bool(known_context and trend != "下跌")
+    long_setup = trend == "上涨" and not long_invalid
+    short_setup = trend == "下跌" and not short_invalid
+    if trend_context is not None:
+        long_setup = long_setup and sc >= 2 and float(bars[-1]["c"]) >= vwap
+        short_setup = short_setup and sc <= -2 and float(bars[-1]["c"]) <= vwap
 
     advice = "观望"
     signal = "观望"
@@ -849,7 +922,7 @@ def compute_intraday_signal(
     risk_pct = None
     risk_label = "—"
 
-    if trend == "下跌":
+    if short_setup:
         advice = "做空"
         signal = "做空"
         setup = "趋势空·反抽"
@@ -865,11 +938,15 @@ def compute_intraday_signal(
             band_lo = max(band_lo, min(float(vwap), band_hi - gap))
         if band_hi < band_lo:
             band_lo, band_hi = orb_mid, orb_h - gap
+        if trend_context is not None:
+            resistance = min(vwap, orb_l) if broke_down else vwap
+            band_lo = resistance - chase_buf
+            band_hi = min(vwap, resistance + chase_buf, S - gap)
         S = max(S, band_hi + gap)
         E_band = [round(band_lo, 4), round(band_hi, 4)]
         E = (band_lo + band_hi) / 2.0
-        near_low = px <= path_l + chase_buf or px <= orb_l + chase_buf
-        in_upper = px >= orb_mid - 1e-9
+        near_low = px <= path_l + chase_buf or (trend_context is None and px <= orb_l + chase_buf)
+        in_upper = px <= vwap if trend_context is not None else px >= orb_mid - 1e-9
         at_entry = band_lo <= px <= band_hi and not near_low and in_upper
         chasing = px < band_lo or not in_upper
         T1, T1_key = pick_t1(
@@ -916,7 +993,7 @@ def compute_intraday_signal(
         else:
             reason = f"下跌趋势，等反抽入场带[{band_lo:.2f},{band_hi:.2f}]（{trend_tag}）{r_note}"
 
-    elif trend == "上涨":
+    elif long_setup:
         advice = "做多"
         signal = "做多"
         setup = "趋势多·回踩"
@@ -935,10 +1012,14 @@ def compute_intraday_signal(
         band_lo = max(band_lo, S + gap)
         if band_hi < band_lo:
             band_hi = band_lo + gap * 0.5
+        if trend_context is not None:
+            support = max(vwap, orb_h) if broke_up else vwap
+            band_lo = max(vwap, support - chase_buf, S + gap)
+            band_hi = support + chase_buf
         E_band = [round(band_lo, 4), round(band_hi, 4)]
         E = (band_lo + band_hi) / 2.0
-        near_high = px >= path_h - chase_buf or px >= orb_h - chase_buf
-        in_lower = px <= orb_mid + 1e-9
+        near_high = px >= path_h - chase_buf or (trend_context is None and px >= orb_h - chase_buf)
+        in_lower = px >= vwap if trend_context is not None else px <= orb_mid + 1e-9
         at_entry = band_lo <= px <= band_hi and not near_high and in_lower
         chasing = px > band_hi or not in_lower
         T1, T1_key = pick_t1(
@@ -998,6 +1079,14 @@ def compute_intraday_signal(
                 f"曾破ORB下沿后抽回VWAP上→震荡（{trend_tag}），等方向再定"
             )
 
+    if trend_context is not None:
+        if signal == "观望":
+            reason = f"{trend_context.get('reason', '方向未确认')}；15m{trend_tag}，等待同向确认后制定入场计划"
+        elif signal in ("做多", "做空"):
+            direction = "多" if signal == "做多" else "空"
+            reason = f"总体偏{direction}（{trend_context.get('reason', '')}）；15m同向，" + (
+                "回踩/反抽到价" if at_entry else "等待回踩/反抽，禁止追价")
+
     # ORB 对侧失效 → 平仓提示（覆盖观望，不覆盖同向开仓建议）
     if signal not in ("做多", "做空") and short_invalid:
         advice = signal = "平空"
@@ -1021,6 +1110,17 @@ def compute_intraday_signal(
         stop_note = S_key = f"ORB下沿 {orb_l:.2f}"
         ref_price = round(px, 4)
         reason = f"多头结构失效：价已跌破ORB下沿 {orb_l:.2f}，先平多。" + (reason or "")
+
+    if signal in ("做多", "做空"):
+        valid = bool(E_band and S is not None and T1 is not None and T1 > 0 and (
+            S < E_band[0] <= E_band[1] < T1 if signal == "做多" else T1 < E_band[0] <= E_band[1] < S))
+        if not valid:
+            advice = signal = "观望"
+            reason = "入场带与止损止盈结构不成立，等待新的同向计划"
+            E_band = S = T1 = S_key = T1_key = R1v = side = None
+            risk_pct = stress = None
+            entry_ready = at_entry = False
+            ref_price = round(px, 4)
 
     entry_low = E_band[0] if E_band else None
     entry_high = E_band[1] if E_band else None
@@ -1053,6 +1153,10 @@ def compute_intraday_signal(
 
     return {
         "trend": trend,
+        "trend_context": trend_context,
+        "exit_long": exit_long,
+        "exit_short": exit_short,
+        "position_rule": "已持仓：ORB止损或日线/1h方向失效则退出；15m回调不单独触发反向",
         "advice": advice,
         "signal": signal,
         "reason": reason,
@@ -1122,6 +1226,10 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
     bars_iv, meta_iv, src_m = fetch_bars_intraday(
         symbol, iv, prefer_cache=force_cache or prefer_daily_cache
     )
+    # 已结束的日线定大方向；已收盘 15m 才能进入小时趋势与入场结构。
+    daily = [b for b in daily if b["dt_ny"].date() < now_bj.astimezone(NY).date()]
+    bars_iv = sorted((b for b in bars_iv if int(b["t"]) + 900 <= now_bj.timestamp()), key=lambda b: b["t"])
+    trend_context = confirm_trend(daily, bars_iv, now_bj)
     if src_m == "nasdaq" and meta_iv.get("previousClose") and not dmeta.get("previousClose"):
         dmeta = {**dmeta, "previousClose": meta_iv["previousClose"]}
     if meta_iv.get("regularMarketPrice") and not dmeta.get("regularMarketPrice"):
@@ -1197,6 +1305,16 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
     provenance = "live" if live_quote else ("live" if src_d == "live" else "cache")
     src_label = f"{price_src} · {price_tag} · {iv}/{src_m}"
     quote_time_bj = now_bj.strftime("%Y-%m-%d %H:%M:%S")
+    quote_at = None
+    if quote_ts:
+        stamp = str(quote_ts).removesuffix(" ET").removesuffix(" EDT").removesuffix(" EST")
+        for fmt in ("%b %d, %Y %I:%M %p", "%b %d, %Y %I:%M:%S %p"):
+            try:
+                quote_at = datetime.strptime(stamp, fmt).replace(tzinfo=NY)
+                break
+            except ValueError:
+                continue
+    quote_fresh = quote_at is not None and -60 <= (now_bj - quote_at).total_seconds() <= 300
 
     base = {
         "symbol": symbol,
@@ -1212,26 +1330,43 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
         "high_vol": high_vol,
         "source": src_label,
         "data_mode": provenance,
-        "quote_time_bj": quote_time_bj,
+        "quote_time_bj": quote_at.astimezone(BJ).strftime("%Y-%m-%d %H:%M:%S") if quote_at else None,
+        "checked_at_bj": quote_time_bj,
+        "quote_fresh": quote_fresh,
         "quote_ts": quote_ts,
         "struct_scope": struct_scope,
         "session": sess_info,
+        "trend_context": trend_context,
     }
 
-    if not atr or forming or not today_bars:
+    block_reason = None
+    if not sess_info.get("is_rth"):
+        block_reason = "当前非美股常规交易时段，仅展示方向，不生成入场计划"
+    elif not today_bars or forming:
+        block_reason = f"趋势形成中：今日已收盘 {iv} 需至少 {min_bars} 根才给定入场/止损"
+    elif now_bj.timestamp() - int(today_bars[-1]["t"]) - 900 > 1200:
+        block_reason = "15m 结构数据过期，暂停入场计划"
+    elif today_bars[0]["dt_ny"].hour != 9 or today_bars[0]["dt_ny"].minute != 30 or any(
+        int(b["t"]) - int(a["t"]) != 900 for a, b in zip(today_bars, today_bars[1:])
+    ):
+        block_reason = "今日15m数据缺失，无法确认开盘区间与趋势"
+    elif any(float(b.get("v") or 0) <= 0 for b in today_bars):
+        block_reason = "缺少可信成交量，无法计算VWAP，暂停入场计划"
+    elif not quote_fresh:
+        block_reason = "报价过期或无法验证报价时间，暂停入场计划"
+    elif not atr:
+        block_reason = "日线ATR不足，暂停入场计划"
+
+    if block_reason:
         mem = remember_advice(symbol, "观望", quote_time_bj)
         return {
             **base,
             **mem,
-            "trend": "震荡",
+            "trend": {"up": "上涨", "down": "下跌"}.get(trend_context["bias"], "震荡"),
             "advice": "观望",
             "signal": "观望",
-            "reason": (
-                f"趋势形成中：今日 {iv} 需至少 {min_bars} 根才给定入场/止损"
-                if forming or not today_bars
-                else f"{iv} ATR 不足"
-            ),
-            "action_label": "趋势形成中",
+            "reason": block_reason,
+            "action_label": "等待确认",
             "actionable": False,
             "strength": None,
             "strength_label": None,
@@ -1291,6 +1426,7 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
         path_h=float(path_h),
         bars=today_bars,
         daily_bias=daily_bias,
+        trend_context=trend_context,
     )
 
     reason = sig["reason"]
@@ -1367,29 +1503,23 @@ def analyze_many(
     now_bj = datetime.now(BJ)
     items = []
     errors = []
-    for s in symbols:
-        sym = s.strip().upper()
-        try:
-            items.append(analyze_symbol(sym, interval=iv))
-        except Exception as e:
-            errors.append({"symbol": s, "error": str(e)})
-            items.append(
-                {
-                    "symbol": sym,
-                    "signal": "观望",
-                    "reason": f"取行情失败：{e}",
-                    "price": None,
-                    "interval": iv,
-                    "error": True,
-                }
-            )
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        futures = [(s, pool.submit(analyze_symbol, s.strip().upper(), interval=iv)) for s in symbols]
+        for s, future in futures:
+            try:
+                items.append(future.result())
+            except Exception as e:
+                errors.append({"symbol": s, "error": str(e)})
+                items.append({"symbol": s.strip().upper(), "signal": "观望",
+                              "reason": f"取行情失败：{e}", "price": None,
+                              "interval": iv, "error": True})
     return {
         "generated_bj": now_bj.strftime("%Y-%m-%d %H:%M:%S"),
         "interval": iv,
         "multi": False,
         "session": session_status(now_bj),
-        "source_note": "【美股】15m 趋势→回踩/反抽入场→参考价/止损/止盈。",
-        "rules_note": "下跌做空/上涨做多；ORB上半区反抽空、下半区回踩多；≥1.5R；禁杀跌追涨；非AI",
+        "source_note": "【美股】日线+1小时确认方向→15m同向回踩/反抽→入场计划。",
+        "rules_note": "日线MA20及斜率与1小时趋势同向；仅用已收盘K线；缺量/缺数据观望；≥1.5R；禁追价",
         "items": items,
         "errors": errors,
     }

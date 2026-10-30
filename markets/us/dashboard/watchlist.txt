@@ -1,5 +1,9 @@
 # 美股监控票池（一行一个；# 开头忽略）
+# 2026-10-30 核验：以下 82 只均有 OKX 正常交易的 USDT 永续合约。
+# 此处仍分析美股原股行情；欧易合约仅为纳入票池的条件。
+# 原有关注标的
 SNDK
+SKHY
 MU
 NVDA
 AMD
@@ -19,3 +23,78 @@ PLTR
 NFLX
 COIN
 INTC
+
+# 半导体、存储、光通信与设备
+WDC
+MRVL
+CRDO
+ALAB
+AAOI
+LITE
+COHR
+GLW
+ON
+TXN
+KLAC
+LRCX
+AMAT
+TER
+
+# AI 算力、服务器与电力
+DELL
+HPE
+NBIS
+CRWV
+VRT
+VST
+CEG
+OKLO
+
+# 软件、云服务与网络安全
+ORCL
+CRM
+NOW
+SNOW
+DDOG
+NET
+CRWD
+PANW
+OKTA
+ADBE
+APP
+
+# 金融科技与数字资产相关
+PYPL
+HOOD
+MSTR
+MARA
+RIOT
+IREN
+HUT
+SOFI
+
+# 消费、互联网与汽车
+SHOP
+RIVN
+WMT
+COST
+NKE
+RDDT
+
+# 医疗与制药
+LLY
+NVO
+UNH
+ISRG
+HIMS
+TEM
+AMGN
+MRK
+ABBV
+
+# 银行、支付与量子计算
+JPM
+BAC
+GS
+V
+IONQ
