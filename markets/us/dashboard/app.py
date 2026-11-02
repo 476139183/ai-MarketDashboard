@@ -11,8 +11,9 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-from engine import analyze_many
+from engine import analyze_many, analyze_symbol
 from engine import BJ
+from dsa_client import DSAClient, DSAError
 
 ROOT = Path(__file__).resolve().parent
 STATIC = ROOT / "static"
@@ -20,6 +21,21 @@ WATCHLIST = ROOT / "watchlist.txt"
 ALERTS = ROOT / "cache" / "alerts.json"
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("BOARD_PORT", "8765"))
+MONITOR_PATH = ROOT.parent / ".cache" / "sndk-monitor" / "latest.json"
+
+
+def load_monitor_report(path: Path, now: datetime) -> dict:
+    try:
+        report = json.loads(path.read_text(encoding="utf-8"))
+        generated = datetime.fromisoformat(report["generated_bj"])
+        age = (now.astimezone(timezone.utc) - generated.astimezone(timezone.utc)).total_seconds()
+        fresh = -60 <= age <= 1200
+        report.update(available=True, report_fresh=fresh)
+        if not fresh:
+            report.update(quote_fresh=False, current_price=None, signal="观望", reason="定时分析已超过 20 分钟未更新，请检查采集脚本。")
+        return report
+    except (OSError, ValueError, KeyError, TypeError):
+        return {"available": False, "report_fresh": False, "signal": "观望", "reason": "等待定时脚本生成分析。"}
 
 
 def _load_watchlist() -> list:
@@ -48,6 +64,9 @@ def load_alerts(now: datetime) -> dict:
     active = []
     for row in data.get("active", []):
         try:
+            expiry=row.get('valid_until_bj')
+            if expiry and datetime.fromisoformat(expiry)<=now:
+                continue
             fired = datetime.strptime(row["fired_bj"], "%Y-%m-%d %H:%M:%S").replace(tzinfo=BJ)
             if -60 <= (now - fired).total_seconds() <= 1200:
                 active.append(row)
@@ -68,13 +87,92 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _json(self, status: int, payload: dict) -> None:
+        self._send(status, json.dumps(payload, ensure_ascii=False).encode('utf-8'),
+                   'application/json; charset=utf-8')
+
+    def do_POST(self) -> None:
+        path=urlparse(self.path).path
+        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings'):
+            self._json(404, {'error': 'not found'})
+            return
+        origin = self.headers.get('Origin')
+        if origin and urlparse(origin).netloc != self.headers.get('Host'):
+            self._json(403, {'error': '不允许跨站发起分析'})
+            return
+        try:
+            length = int(self.headers.get('Content-Length', '0'))
+            if not 0 < length <= 4096:
+                raise ValueError('无效的请求长度')
+            body = json.loads(self.rfile.read(length))
+            if not isinstance(body, dict):
+                raise ValueError('请求必须是 JSON 对象')
+            client=DSAClient.from_env()
+            if path=='/api/dsa/ai-settings':
+                self._json(200,client.save_ai_settings(body))
+            else:
+                self._json(202,client.start_analysis(body.get('symbol', '')))
+        except DSAError as exc:
+            self._json(503 if exc.status == 503 else 502, {'error': str(exc)})
+        except (ValueError, UnicodeError) as exc:
+            self._json(400, {'error': str(exc)})
+
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if path == '/api/market-state':
+            qs = parse_qs(parsed.query)
+            try:
+                code = (qs.get('symbol') or [''])[0].strip().upper()
+                overnight = (qs.get('accept_overnight') or ['0'])[0] == '1'
+                self._json(200, analyze_symbol(code, accept_overnight=overnight))
+            except (ValueError, OSError) as exc:
+                self._json(400, {'error': str(exc)})
+            return
+
+        if path in ('/research', '/research/'):
+            self._send(200, (STATIC / 'research.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
+        if path.startswith('/api/dsa/'):
+            try:
+                if path == '/api/dsa/config':
+                    if not os.environ.get('DSA_BASE_URL', '').strip():
+                        result = {'configured': False, 'connected': False, 'model_ready': False}
+                    else:
+                        result = DSAClient.from_env().service_status()
+                    self._json(200, result)
+                    return
+                client = DSAClient.from_env()
+                qs = parse_qs(parsed.query)
+                if path == '/api/dsa/search':
+                    result = client.search((qs.get('q') or [''])[0])
+                elif path == '/api/dsa/history':
+                    client.timeout = 60
+                    result = client.daily((qs.get('symbol') or [''])[0],
+                                          days=int((qs.get('days') or ['90'])[0]))
+                elif path == '/api/dsa/status':
+                    result = client.task_status((qs.get('task_id') or [''])[0])
+                elif path == '/api/dsa/ai-settings':
+                    result = client.ai_settings()
+                else:
+                    self._json(404, {'error': 'not found'})
+                    return
+                self._json(200, result)
+            except DSAError as exc:
+                self._json(503 if exc.status == 503 else 502, {'error': str(exc)})
+            except ValueError as exc:
+                self._json(400, {'error': str(exc)})
+            return
+
         if path in ("/", "/index.html"):
             data = (STATIC / "index.html").read_bytes()
             self._send(200, data, "text/html; charset=utf-8")
+            return
+
+        if path in ("/premarket", "/premarket/"):
+            self._send(200, (STATIC / "premarket.html").read_bytes(), "text/html; charset=utf-8")
             return
 
         if path in ("/backtest", "/backtest/"):
@@ -91,6 +189,11 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, report.read_bytes(), "text/html; charset=utf-8")
             else:
                 self._send(404, "尚未生成逐笔诊断报告".encode("utf-8"), "text/plain; charset=utf-8")
+            return
+
+        if path == "/api/premarket":
+            result = load_monitor_report(MONITOR_PATH, datetime.now(timezone.utc))
+            self._send(200, json.dumps(result, ensure_ascii=False).encode("utf-8"), "application/json; charset=utf-8")
             return
 
         if path.startswith("/static/"):
@@ -147,7 +250,7 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/health":
-            self._send(200, b'{"ok":true}', "application/json; charset=utf-8")
+            self._send(200, b'{"ok":true,"app":"market_studio"}', "application/json; charset=utf-8")
             return
 
         self._send(404, b"not found", "text/plain; charset=utf-8")

@@ -4,12 +4,16 @@
 from __future__ import annotations
 
 import json
+import os
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+from dsa_client import DSAClient, DSAError, stock_code
+from market_states import build_market_context, entry_signal, market_session
 
 try:
     from zoneinfo import ZoneInfo
@@ -63,6 +67,7 @@ def _parse_chart(d: dict) -> Tuple[List[dict], dict]:
                 "l": float(l),
                 "c": float(c),
                 "v": float(v or 0),
+                "feed": "yahoo",
                 "dt_ny": datetime.fromtimestamp(t, NY),
                 "dt_bj": datetime.fromtimestamp(t, BJ),
             }
@@ -124,7 +129,23 @@ def _save_cache(symbol: str, interval: str, raw: dict) -> None:
 
 
 def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = False) -> Tuple[List[dict], dict, str]:
-    """Returns rows, meta, provenance ('live'|'cache')."""
+    """Returns rows, meta, provenance ('dsa'|'live'|'cache')."""
+    daily_error = None
+    dsa_days = {"1mo": 30, "3mo": 90, "6mo": 180, "1y": 365}.get(range_)
+    if (interval == "1d" and dsa_days and os.environ.get("DSA_BASE_URL", "").strip()
+            and os.environ.get("SIGNAL_CACHE", "").strip().lower() not in ("1", "true", "yes")):
+        try:
+            result = DSAClient.from_env().daily(symbol, days=dsa_days)
+            rows = []
+            for bar in result["data"]:
+                dt = datetime.fromisoformat(bar["date"]).replace(hour=9, minute=30, tzinfo=NY)
+                rows.append(dict(t=int(dt.timestamp()), dt_ny=dt, dt_bj=dt.astimezone(BJ),
+                                 o=bar["open"], h=bar["high"], l=bar["low"], c=bar["close"],
+                                 v=bar["volume"] or 0))
+            return rows, {"shortName": result.get("stock_name") or symbol,
+                          "daily_as_of": result["data"][-1]["date"]}, "dsa"
+        except (DSAError, ValueError) as exc:
+            daily_error = str(exc)
     if prefer_cache:
         cached = _load_cache(symbol, interval)
         if cached:
@@ -137,7 +158,7 @@ def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = Fa
             if interval in INTERVALS and session_status(now).get("is_rth"):
                 recent = recent and int(last["t"]) + 900 >= now.timestamp() - 1200
             if recent:
-                return cached[0], cached[1], "cache"
+                return cached[0], {**cached[1], **({"daily_error": daily_error} if daily_error else {})}, "cache"
 
     url = (
         f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
@@ -150,14 +171,14 @@ def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = Fa
             rows, meta = _parse_chart(d)
             if rows:
                 _save_cache(symbol, interval, d)
-                return rows, meta, "live"
+                return rows, {**meta, **({"daily_error": daily_error} if daily_error else {})}, "live"
         except Exception as e:
             last_err = e
             continue
     cached = _load_cache(symbol, interval)
     if cached:
         rows, meta = cached
-        return rows, meta, "cache"
+        return rows, {**meta, **({"daily_error": daily_error} if daily_error else {})}, "cache"
     raise RuntimeError(f"Yahoo 失败且无本地缓存: {last_err}")
 
 
@@ -315,6 +336,7 @@ def aggregate_points_to_bars(points: List[dict], minutes: int = 15) -> List[dict
                 "l": l,
                 "c": c,
                 "v": 0.0,
+                "feed": "nasdaq_sampled",
                 "dt_ny": dt_ny,
                 "dt_bj": dt_ny.astimezone(BJ),
             }
@@ -1199,112 +1221,34 @@ def compute_intraday_signal(
     }
 
 
-def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, Any]:
-    import os
-
-    iv = normalize_interval(interval)
-    orb_n = orb_bar_count(iv)
-    min_bars = orb_n + 1
-    now_bj = datetime.now(BJ)
-    sess_info = session_status(now_bj)
-    force_cache = os.environ.get("SIGNAL_CACHE", "").strip() in ("1", "true", "yes")
-    prefer_daily_cache = force_cache or os.environ.get("SIGNAL_LIVE", "").strip() not in (
-        "1",
-        "true",
-        "yes",
-    )
-    daily: List[dict] = []
-    dmeta: dict = {}
-    src_d = "none"
+def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL, *, accept_overnight: bool = False) -> Dict[str, Any]:
+    symbol = stock_code(symbol)
+    if symbol.isdigit():
+        from a_share_feed import analyze_symbol as analyze_a
+        return analyze_a(symbol, accept_overnight=accept_overnight)
+    now = datetime.now(BJ)
+    session = market_session(now, "us")
+    force_cache = os.environ.get("SIGNAL_CACHE", "").strip().lower() in ("1", "true", "yes")
+    prefer_cache = force_cache or os.environ.get("SIGNAL_LIVE", "").strip().lower() not in ("1", "true", "yes")
+    daily, dmeta, src_d = [], {}, "unavailable"
+    data_errors = []
     try:
-        daily, dmeta, src_d = fetch_chart(
-            symbol, "3mo", "1d", prefer_cache=prefer_daily_cache
-        )
-    except Exception:
-        daily, dmeta, src_d = [], {}, "yahoo_fail"
-
-    bars_iv, meta_iv, src_m = fetch_bars_intraday(
-        symbol, iv, prefer_cache=force_cache or prefer_daily_cache
-    )
-    # 已结束的日线定大方向；已收盘 15m 才能进入小时趋势与入场结构。
-    daily = [b for b in daily if b["dt_ny"].date() < now_bj.astimezone(NY).date()]
-    bars_iv = sorted((b for b in bars_iv if int(b["t"]) + 900 <= now_bj.timestamp()), key=lambda b: b["t"])
-    trend_context = confirm_trend(daily, bars_iv, now_bj)
-    if src_m == "nasdaq" and meta_iv.get("previousClose") and not dmeta.get("previousClose"):
-        dmeta = {**dmeta, "previousClose": meta_iv["previousClose"]}
-    if meta_iv.get("regularMarketPrice") and not dmeta.get("regularMarketPrice"):
-        dmeta = {**dmeta, "regularMarketPrice": meta_iv["regularMarketPrice"]}
-
-    atr = atr14(daily) if daily else None
-    closes = [x["c"] for x in daily] if daily else []
-    ma20 = sma(closes, 20) if closes else None
-    last = daily[-1] if daily else None
-    # Yahoo 日线不可用时：用分时振幅粗估 ATR，保证票池仍可扫
-    if atr is None and bars_iv:
-        sess_tmp = regular_session(bars_iv)
-        sample = sess_tmp[-24:] if len(sess_tmp) >= 5 else sess_tmp
-        if sample:
-            hs = [float(b["h"]) for b in sample]
-            ls = [float(b["l"]) for b in sample]
-            px0 = float(sample[-1]["c"])
-            atr = max(max(hs) - min(ls), px0 * 0.02)
-
+        daily, dmeta, src_d = fetch_chart(symbol, "6mo", "1d", prefer_cache=prefer_cache)
+    except Exception as exc:
+        data_errors.append("日线不可用：" + str(exc))
     try:
-        price, prev, chg_pct, price_tag, price_src, quote_ts = resolve_display_price(
-            symbol, dmeta, sess_info
-        )
+        bars, metadata, src_m = fetch_bars_intraday(symbol, "15m", prefer_cache=prefer_cache)
+    except Exception as exc:
+        bars, metadata, src_m = [], {}, "unavailable"
+        data_errors.append("分钟行情不可用：" + str(exc))
+    context = build_market_context(daily, bars, now, market="us")
+    day, state = context["daily_context"], context["intraday_state"]
+    try:
+        price, previous, change, tag, price_source, quote_ts = resolve_display_price(symbol, dmeta, session)
     except Exception:
-        nq = fetch_nasdaq_quote(symbol) or {}
-        price = float(
-            nq.get("price")
-            or dmeta.get("regularMarketPrice")
-            or meta_iv.get("regularMarketPrice")
-            or (last["c"] if last else (bars_iv[-1]["c"] if bars_iv else 0))
-        )
-        prev = nq.get("prev_close") or dmeta.get("previousClose") or dmeta.get("chartPreviousClose")
-        if prev is None and len(daily) > 1:
-            prev = daily[-2]["c"]
-        prev = float(prev) if prev is not None else None
-        chg_pct = ((price / prev - 1) * 100) if prev and abs(prev - price) > 1e-9 else None
-        price_tag, price_src, quote_ts = "回退", "nasdaq/cache", None
-
-    if prev is None:
-        prev = dmeta.get("previousClose") or dmeta.get("chartPreviousClose")
-        if prev is None and len(daily) > 1:
-            prev = daily[-2]["c"]
-        prev = float(prev) if prev is not None else None
-    if prev is not None and abs(float(prev) - float(price)) < 1e-9:
-        if len(daily) > 1 and abs(daily[-2]["c"] - float(price)) > 1e-9:
-            prev = float(daily[-2]["c"])
-        else:
-            prev = None
-    if chg_pct is None and prev:
-        chg_pct = (float(price) / float(prev) - 1) * 100
-
-    high_vol = bool(atr and price and atr / price > 0.06)
-    sess = regular_session(bars_iv)
-    by_day: Dict[Any, List[dict]] = {}
-    for b in sess:
-        by_day.setdefault(b["dt_ny"].date(), []).append(b)
-
-    # 只用今日 RTH 算入场点；未满 ORB+1 根绝不借用旧日结构
-    ny_date = now_bj.astimezone(NY).date()
-    today_n = len(by_day.get(ny_date, []))
-    today_bars = by_day.get(ny_date, [])
-    struct_scope = f"今日RTH·{iv}"
-    forming = today_n < min_bars
-    if forming:
-        if sess_info.get("is_rth"):
-            struct_scope = f"趋势形成中·今日仅{today_n}根<{min_bars}"
-        elif sess_info.get("phase") and "盘前" in str(sess_info.get("phase")):
-            struct_scope = f"盘前·等待今日ORB（已有{today_n}根）"
-        else:
-            struct_scope = f"非完整今日RTH·{today_n}根"
-
-    live_quote = "Nasdaq" in price_src or "fullday" in price_src or "1m" in price_src
-    provenance = "live" if live_quote else ("live" if src_d == "live" else "cache")
-    src_label = f"{price_src} · {price_tag} · {iv}/{src_m}"
-    quote_time_bj = now_bj.strftime("%Y-%m-%d %H:%M:%S")
+        price = daily[-1]["c"] if daily else None
+        previous = None
+        change, tag, price_source, quote_ts = None, "旧快照", "cache", None
     quote_at = None
     if quote_ts:
         stamp = str(quote_ts).removesuffix(" ET").removesuffix(" EDT").removesuffix(" EST")
@@ -1313,141 +1257,24 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL) -> Dict[str, A
                 quote_at = datetime.strptime(stamp, fmt).replace(tzinfo=NY)
                 break
             except ValueError:
-                continue
-    quote_fresh = quote_at is not None and -60 <= (now_bj - quote_at).total_seconds() <= 300
-
-    base = {
-        "symbol": symbol,
-        "name": dmeta.get("longName") or dmeta.get("shortName") or symbol,
-        "price": round(price, 4),
-        "prev_close": round(prev, 4) if prev else None,
-        "change_pct": round(chg_pct, 2) if chg_pct is not None else None,
-        "price_tag": price_tag,
-        "interval": iv,
-        "orb_bars": orb_n,
-        "atr14": round(atr, 4) if atr else None,
-        "ma20": round(ma20, 4) if ma20 else None,
-        "high_vol": high_vol,
-        "source": src_label,
-        "data_mode": provenance,
-        "quote_time_bj": quote_at.astimezone(BJ).strftime("%Y-%m-%d %H:%M:%S") if quote_at else None,
-        "checked_at_bj": quote_time_bj,
-        "quote_fresh": quote_fresh,
-        "quote_ts": quote_ts,
-        "struct_scope": struct_scope,
-        "session": sess_info,
-        "trend_context": trend_context,
-    }
-
-    block_reason = None
-    if not sess_info.get("is_rth"):
-        block_reason = "当前非美股常规交易时段，仅展示方向，不生成入场计划"
-    elif not today_bars or forming:
-        block_reason = f"趋势形成中：今日已收盘 {iv} 需至少 {min_bars} 根才给定入场/止损"
-    elif now_bj.timestamp() - int(today_bars[-1]["t"]) - 900 > 1200:
-        block_reason = "15m 结构数据过期，暂停入场计划"
-    elif today_bars[0]["dt_ny"].hour != 9 or today_bars[0]["dt_ny"].minute != 30 or any(
-        int(b["t"]) - int(a["t"]) != 900 for a, b in zip(today_bars, today_bars[1:])
-    ):
-        block_reason = "今日15m数据缺失，无法确认开盘区间与趋势"
-    elif any(float(b.get("v") or 0) <= 0 for b in today_bars):
-        block_reason = "缺少可信成交量，无法计算VWAP，暂停入场计划"
-    elif not quote_fresh:
-        block_reason = "报价过期或无法验证报价时间，暂停入场计划"
-    elif not atr:
-        block_reason = "日线ATR不足，暂停入场计划"
-
-    if block_reason:
-        mem = remember_advice(symbol, "观望", quote_time_bj)
-        return {
-            **base,
-            **mem,
-            "trend": {"up": "上涨", "down": "下跌"}.get(trend_context["bias"], "震荡"),
-            "advice": "观望",
-            "signal": "观望",
-            "reason": block_reason,
-            "action_label": "等待确认",
-            "actionable": False,
-            "strength": None,
-            "strength_label": None,
-            "risk_pct": None,
-            "risk_label": None,
-            "ref_price": round(price, 4) if price else None,
-            "stop": None,
-            "stop_note": None,
-            "target": None,
-            "target_note": None,
-            "at_entry": False,
-            "S": None,
-            "S_key": None,
-            "E_band": None,
-            "T1": None,
-            "R1": None,
-            "structure": "未定",
-            "orb": None,
-            "vwap": None,
-            "watch_only": True,
-        }
-
-    orb_bars = today_bars[:orb_n]
-    orb_h = max(x["h"] for x in orb_bars)
-    orb_l = min(x["l"] for x in orb_bars)
-    day_o = today_bars[0]["o"]
-    num = den = 0.0
-    for b in today_bars:
-        tp = (b["h"] + b["l"] + b["c"]) / 3
-        if b["v"] > 0:
-            num += tp * b["v"]
-            den += b["v"]
-    vwap = num / den if den else today_bars[-1]["c"]
-    last_b = today_bars[-1]
-    px = float(price)
-    sess_l = min(x["l"] for x in today_bars)
-    sess_h = max(x["h"] for x in today_bars)
-    # 分时聚合常漏尖峰；用 Nasdaq 日高/日低校正路径极值
-    nq_ext = fetch_nasdaq_quote(symbol) or {}
-    day_hi = nq_ext.get("day_high")
-    day_lo = nq_ext.get("day_low")
-    path_l = min(sess_l, px, day_lo if day_lo is not None else px)
-    path_h = max(sess_h, px, day_hi if day_hi is not None else px)
-
-    daily_bias = "—"
-    if ma20:
-        daily_bias = "日线偏空" if price < ma20 else "日线偏多"
-
-    sig = compute_intraday_signal(
-        px=px,
-        atr=float(atr),
-        orb_l=float(orb_l),
-        orb_h=float(orb_h),
-        vwap=float(vwap),
-        day_o=float(day_o),
-        path_l=float(path_l),
-        path_h=float(path_h),
-        bars=today_bars,
-        daily_bias=daily_bias,
-        trend_context=trend_context,
-    )
-
-    reason = sig["reason"]
-    if reason:
-        reason = f"[{iv}] {reason}"
-
-    advice = sig.get("advice") or sig.get("signal") or "观望"
-    mem = remember_advice(symbol, advice, quote_time_bj)
-
-    return {
-        **base,
-        **sig,
-        **mem,
-        "reason": reason,
-        "daily_bias": daily_bias,
-        "bar_time_bj": last_b["dt_bj"].strftime("%Y-%m-%d %H:%M"),
-        "day_high": round(path_h, 4),
-        "day_low": round(path_l, 4),
-        "broke_up": path_h > orb_h + 1e-9,
-        "broke_down": path_l < orb_l - 1e-9,
-    }
+                pass
+    quote_fresh = quote_at is not None and -30 <= (now - quote_at).total_seconds() <= 120
+    signal = entry_signal(context, px=float(price or 0), quote_fresh=quote_fresh,
+                          session_open=session["is_rth"], now=now)
+    memory = remember_advice(symbol, signal["advice"], now.strftime("%Y-%m-%d %H:%M:%S"))
+    return {**context, **signal, **memory, "symbol": symbol, "market": "us",
+            "name": dmeta.get("longName") or dmeta.get("shortName") or symbol,
+            "price": round(price,4) if price else None,
+            "prev_close": round(previous,4) if previous else None, "change_pct": change,
+            "price_tag": tag, "interval": "15m", "source": f"{price_source} · 15m/{src_m} · 日线/{src_d}",
+            "data_mode": "live" if quote_fresh else "cache", "daily_source": src_d,
+            "daily_error": dmeta.get("daily_error") or "；".join(data_errors) or None,
+            "daily_as_of": day["as_of"], "atr14": day["atr"], "ma20": day["ma20"],
+            "quote_time_bj": quote_at.astimezone(BJ).isoformat() if quote_at else None,
+            "quote_fresh": quote_fresh, "quote_ts": quote_ts, "session": session,
+            "checked_at_bj": now.isoformat(), "struct_scope": "常规盘完整15m",
+            "watch_only": not signal["actionable"],
+            "bar_time_bj": datetime.fromtimestamp(state["last_bar_end"], BJ).isoformat() if state["last_bar_end"] else None}
 
 
 def _signal_bias(item: Dict[str, Any]) -> str:
@@ -1496,6 +1323,7 @@ def analyze_many(
     symbols: Optional[List[str]] = None,
     interval: str = DEFAULT_INTERVAL,
     multi: bool = False,
+    accept_overnight: bool = False,
 ) -> Dict[str, Any]:
     """仅 15m 策略；multi 参数保留兼容，一律不跑 1m/5m。"""
     symbols = symbols or DEFAULT_SYMBOLS
@@ -1504,7 +1332,7 @@ def analyze_many(
     items = []
     errors = []
     with ThreadPoolExecutor(max_workers=4) as pool:
-        futures = [(s, pool.submit(analyze_symbol, s.strip().upper(), interval=iv)) for s in symbols]
+        futures = [(s, pool.submit(analyze_symbol, s.strip().upper(), interval=iv, accept_overnight=accept_overnight)) for s in symbols]
         for s, future in futures:
             try:
                 items.append(future.result())
@@ -1518,8 +1346,8 @@ def analyze_many(
         "interval": iv,
         "multi": False,
         "session": session_status(now_bj),
-        "source_note": "【美股】日线+1小时确认方向→15m同向回踩/反抽→入场计划。",
-        "rules_note": "日线MA20及斜率与1小时趋势同向；仅用已收盘K线；缺量/缺数据观望；≥1.5R；禁追价",
+        "source_note": "日线量价定方向 → 15m 加速/反弹/反转识别 → 条件式进场；A股、美股规则分别处理。",
+        "rules_note": "日线MA5/20/60与量能；盘中同时段相对量；完整K线；≥1.5R；A股T+1/涨跌停/不可默认做空",
         "items": items,
         "errors": errors,
     }

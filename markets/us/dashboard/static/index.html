@@ -4,30 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="Cache-Control" content="no-store" />
-  <title>美股信号看板</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>观市 · 盘中信号</title>
   <link rel="stylesheet" href="/static/styles.css?v=21" />
+  <link rel="stylesheet" href="/static/research.css?v=2" />
+  <link rel="stylesheet" href="/static/signal-board.css?v=1" />
 </head>
-<body>
-  <div class="page">
-    <header class="top">
-      <div class="brand">
-        <p class="brand-name">美股信号看板</p>
-        <p id="bj-clock" class="brand-sub clock-live">北京 —</p>
-      </div>
-      <div class="actions">
-        <input id="symbols" type="text" value="SNDK,SKHY,MU,NVDA" spellcheck="false" aria-label="标的" />
-        <span class="field-label" title="日线与1小时定方向，15分钟找同向入场">日线 + 1h → 15m 入场</span>
-        <button id="btn-only" type="button" class="btn-timer" aria-pressed="false" title="只显示到价/平仓信号">全部</button>
-        <button id="btn-timer" type="button" class="btn-timer" aria-pressed="false" title="定时只刷新最新价与判断">不定时</button>
+<body class="signal-workspace">
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav"><a href="/research"><span>◫</span>行情研究<span class="nav-arrow">↗</span></a><a class="nav-active" href="/"><span>⌁</span>盘中信号<span class="nav-dot"></span></a></nav>
+    <div class="sidebar-bottom"><span class="status-dot connected"></span><div><strong>规则研究工作台</strong><small>不自动下单</small></div><span class="local-tag">LOCAL</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>盘中信号</strong></div><time id="bj-clock" class="signal-clock">北京 —</time></header>
+    <div class="main-content">
+      <div class="page-heading"><div><p class="eyebrow">PRICE · VOLUME · STRUCTURE</p><h1>先看趋势，再等机会。</h1><p class="heading-note">日线量价定方向，15 分钟收盘确认形态；到价与进场分开判断。</p></div><span class="snapshot-tag"><span></span>A 股 / 美股</span></div>
+      <input id="symbols" type="hidden" value="SNDK,SKHY,MU,NVDA" />
+      <div class="board-search-row search-bar"><span class="search-icon" aria-hidden="true">⌕</span><label class="sr-only" for="board-search-input">搜索股票</label><input id="board-search-input" placeholder="搜索名称或代码，如 闪迪、SNDK" autocomplete="off" spellcheck="false" aria-describedby="symbols-status" /><button id="btn-confirm" class="primary-button" type="button" disabled>确认</button></div>
+      <p id="symbols-status" class="search-status" role="status" hidden></p>
+      <div id="board-search-results" class="search-results" aria-label="选择股票市场" hidden></div>
+      <div class="actions signal-controls">
+        <div class="signal-filter" role="group" aria-label="显示范围"><button id="btn-all" type="button" aria-pressed="true">全部标的</button><button id="btn-only" type="button" aria-pressed="false">仅有效信号</button></div>
+        <div class="signal-refresh-controls">
+        <button id="btn-timer" type="button" class="timer-switch" role="switch" aria-checked="false" aria-label="定时刷新"><span>定时刷新</span><span class="switch-track" aria-hidden="true"><i></i></span><span id="timer-label">关闭</span></button>
         <button id="btn-refresh" type="button">刷新</button>
-        <a href="/backtest">历史回放</a>
-        <a href="/diagnostics">逐笔诊断</a>
+        </div>
       </div>
-    </header>
-
+      <p id="filter-status" class="filter-status" role="status">显示票池中的全部标的，包含观望状态。</p>
+      <div class="signal-links"><span>日线趋势 → 盘中状态 → 量能确认 → 进场检查</span><a href="/backtest">历史回放 ↗</a><a href="/diagnostics">逐笔诊断 ↗</a><a href="/research">行情与 AI 研究 ↗</a></div>
     <p id="alert-banner" class="alert-banner" hidden></p>
     <p id="timer-status" class="timer-status"></p>
     <p id="watch-status" class="timer-status" aria-live="polite">正在读取巡检状态…</p>
@@ -36,8 +42,11 @@
       <span id="page-status" class="field-label" aria-live="polite">正在加载票池…</span>
       <button id="btn-next" type="button" class="btn-timer" disabled>下一页</button>
     </nav>
+    <p id="page-loading" class="page-loading" role="status" hidden><span class="loading-spinner" aria-hidden="true"></span><span id="page-loading-text">正在加载…</span></p>
     <main id="cards" class="cards" aria-live="polite"></main>
+    </div>
   </div>
-  <script src="/static/app.js?v=21"></script>
+</div>
+  <script src="/static/workspace-tabs.js?v=1"></script><script src="/static/app.js?v=25"></script>
 </body>
 </html>

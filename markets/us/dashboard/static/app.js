@@ -1,5 +1,11 @@
 const $ = (id) => document.getElementById(id);
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  })[c]);
+}
+
 const LS_TIMER = "signal_board_timer_on";
 const LS_ONLY = "signal_board_only_signal";
 /** 美东常规开盘 09:30，定时刷新按 15m K 线对齐 */
@@ -237,6 +243,11 @@ function chgText(item) {
 }
 
 function renderCard(item) {
+  if(item.valid_until_bj && new Date(item.valid_until_bj).getTime()<=Date.now()) {
+    item={...item,advice:"观望",signal:"观望",actionable:false,at_entry:false,E_band:null,
+      entry_low:null,entry_high:null,stop:null,target:null,S:null,T1:null,R1:null,
+      action_label:"计划已过期",reason:"进场计划已过期，请刷新判断。"};
+  }
   const trend = item.trend || item.structure || "震荡";
   const advice = item.advice || item.signal || "观望";
   const isExit = advice === "平空" || advice === "平多";
@@ -299,7 +310,7 @@ function renderCard(item) {
       ? `${fmt(item.orb.low)} – ${fmt(item.orb.high)}`
       : "—";
   return `
-    <article class="card">
+    <article class="card" ${item.valid_until_bj ? `data-valid-until="${escapeHtml(item.valid_until_bj)}"` : ""}>
       <div class="row">
         <p class="sym">${item.symbol || "—"} <span class="iv">15m</span></p>
         <p class="px">${fmt(item.price)}${chgText(item)}${tag}</p>
@@ -311,11 +322,14 @@ function renderCard(item) {
         <div class="badge ${signalClass(advice)}">建议·${advice}</div>
       </div>
       ${direction}
+      ${item.daily_context ? `<div class="state-facts"><span>日线 · ${escapeHtml(item.daily_context.label)}</span><span>盘中 · ${escapeHtml(item.intraday_state?.label || "待确认")}</span><span>${escapeHtml(item.daily_context.volume_label)}</span><span>同时段量比 ${item.intraday_state?.bar_rvol != null ? fmt(item.intraday_state.bar_rvol) + "×" : "待核"}</span></div>` : ""}
+      ${item.daily_source ? `<p class="scope">日线：${escapeHtml(({dsa: "DSA", live: "Yahoo", cache: "本地缓存"})[item.daily_source] || item.daily_source)} · 截至 ${escapeHtml(item.daily_as_of || "未知")}${item.daily_error ? " · " + escapeHtml(item.daily_error) + "，已回退" : ""}</p>` : ""}
       ${positionRule}
       ${exitHints}
       <ul class="levels">${levels}</ul>
       ${scope}
       ${hint ? `<p class="hint">${hint}</p>` : ""}
+      ${item.valid_until_bj || item.execution_note ? `<p class="signal-rule-note">${item.valid_until_bj ? "计划有效至 " + escapeHtml(item.valid_until_bj) + " · " : ""}${escapeHtml(item.execution_note || "")}</p>` : ""}
     </article>
   `;
 }
@@ -327,29 +341,80 @@ function updateOnlyUi() {
   if (!btn) return;
   btn.classList.toggle("on", onlySignals);
   btn.setAttribute("aria-pressed", onlySignals ? "true" : "false");
-  btn.textContent = onlySignals ? "仅信号" : "全部";
+  $("btn-all").setAttribute("aria-pressed", onlySignals ? "false" : "true");
+  $("filter-status").textContent = onlySignals ? "只显示尚未过期的进场或平仓信号；没有信号时显示空状态。" : "显示票池中的全部标的，包含观望状态。";
 }
 
 function setOnly(on) {
+  if (loading || on === onlySignals) return;
   onlySignals = on;
   localStorage.setItem(LS_ONLY, on ? "1" : "0");
   updateOnlyUi();
-  load();
+  return load();
+}
+
+let boardSearchVersion = 0, boardSearchTimer = null, pendingStock = null;
+
+async function searchBoardStocks() {
+  clearTimeout(boardSearchTimer);
+  const version = ++boardSearchVersion, query = $("board-search-input").value.trim();
+  pendingStock = null; $("btn-confirm").disabled = true;
+  $("board-search-results").hidden = true;
+  $("symbols-status").hidden = !query;
+  if (!query) return;
+  $("symbols-status").textContent = '正在搜索…';
+  try {
+    const data = await fetchJson('/api/dsa/search?' + new URLSearchParams({q: query}), 20000);
+    if (version !== boardSearchVersion || $("board-search-input").value.trim() !== query) return;
+    const items = data.items || [];
+    $("symbols-status").hidden = !!items.length;
+    $("symbols-status").textContent = items.length ? '' : '未找到匹配股票，请检查名称或代码。';
+    $("board-search-results").replaceChildren(...items.map(item => {
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'search-result'; button.disabled = !item.supported;
+      const name = document.createElement('strong'); name.textContent = item.name;
+      const detail = document.createElement('span');
+      detail.textContent = `${item.symbol} · ${item.market_label}${item.note ? ' · ' + item.note : ''}`;
+      button.appendChild(name); button.appendChild(detail);
+      button.addEventListener('click', () => {
+        if (!item.supported) return;
+        ++boardSearchVersion; pendingStock = item;
+        $("board-search-input").value = `${item.name} · ${item.symbol}`;
+        $("board-search-results").hidden = true; $("symbols-status").hidden = true;
+        $("btn-confirm").disabled = loading;
+      });
+      return button;
+    }));
+    $("board-search-results").hidden = !items.length;
+  } catch (error) {
+    if (version !== boardSearchVersion) return;
+    $("symbols-status").hidden = false;
+    $("symbols-status").textContent = `搜索暂不可用：${error.message}`;
+  }
+}
+
+async function confirmStock() {
+  if (!pendingStock || loading) return;
+  $("symbols").value = pendingStock.symbol;
+  if (onlySignals) {
+    onlySignals = false; localStorage.setItem(LS_ONLY, '0'); updateOnlyUi();
+  }
+  return load();
 }
 
 function updateTimerUi() {
   const btn = $("btn-timer");
   const status = $("timer-status");
   btn.classList.toggle("on", timerOn);
-  btn.setAttribute("aria-pressed", timerOn ? "true" : "false");
-  btn.textContent = timerOn ? "停定时" : "不定时";
+  btn.setAttribute("aria-checked", timerOn ? "true" : "false");
+  $("timer-label").textContent = timerOn ? "开启" : "关闭";
   btn.title = timerOn
     ? "关闭自动刷新（仅展示）"
     : "开启自动刷新（仅展示，不影响策略）";
   const meta = lastRefreshMeta ? ` · ${lastRefreshMeta}` : "";
   const mode = onlySignals ? "仅信号" : "全部标的";
   if (!timerOn) {
-    status.textContent = `不定时 · ${mode} · 日线+1h定方向 → 15m找入场${meta}`;
+    status.textContent = `不定时 · ${mode} · 日线量价 → 盘中形态 → 进场确认${meta}`;
     return;
   }
   const left = Math.max(0, Math.ceil((nextAt - Date.now()) / 1000));
@@ -444,6 +509,8 @@ async function refreshAlertBanner() {
 async function loadWatchlistIntoInput() {
   const input = $("symbols");
   if (!input) return;
+  const requested=new URLSearchParams(location.search).get('symbols');
+  if(requested){input.value=requested;return;}
   try {
     const res = await fetch("/api/watchlist", { cache: "no-store" });
     if (!res.ok) return;
@@ -485,6 +552,11 @@ async function load() {
   const btn = $("btn-refresh");
   btn.disabled = true;
   $("btn-only").disabled = true;
+  $("btn-all").disabled = true;
+  $("btn-confirm").disabled = true;
+  $("cards").setAttribute("aria-busy", "true");
+  $("page-loading").hidden = false;
+  $("page-loading-text").textContent = onlySignals ? "正在读取有效信号…" : `正在加载第 ${pageIndex + 1} 页…`;
   updatePagination();
   try {
     if (onlySignals) {
@@ -493,13 +565,15 @@ async function load() {
     }
     // 每次只分析当前页；完整票池通过翻页访问，避免同时请求所有标的。
     const raw = $("symbols").value.trim() || "SNDK,SKHY,MU,NVDA";
-    const all = [...new Set(raw.split(",").map((s) => s.trim().toUpperCase()).filter(Boolean))];
+    const all = [...new Set(raw.split(',').map(value=>value.trim().toUpperCase()).filter(Boolean))];
+    $("symbols").value = all.join(',');
     const normalized = all.join(",");
     if (normalized !== previousSymbols) pageIndex = 0;
     previousSymbols = normalized;
     symbolCount = all.length;
     pageIndex = Math.min(pageIndex, Math.max(0, Math.ceil(symbolCount / PAGE_SIZE) - 1));
     updatePagination();
+    $("page-loading-text").textContent = `正在加载第 ${pageIndex + 1} 页 · ${pageIndex * PAGE_SIZE + 1}–${Math.min((pageIndex + 1) * PAGE_SIZE, symbolCount)} 只…`;
     const list = all.slice(pageIndex * PAGE_SIZE, (pageIndex + 1) * PAGE_SIZE);
     const symbols = list.join(",");
     const data = await fetchJson(
@@ -522,8 +596,12 @@ async function load() {
     }
   } finally {
     loading = false;
+    $("cards").setAttribute("aria-busy", "false");
+    $("page-loading").hidden = true;
     btn.disabled = false;
     $("btn-only").disabled = false;
+    $("btn-all").disabled = false;
+    $("btn-confirm").disabled = !pendingStock;
     updatePagination();
     updateTimerUi();
   }
@@ -531,7 +609,8 @@ async function load() {
 
 $("btn-refresh").addEventListener("click", load);
 $("btn-timer").addEventListener("click", () => setTimer(!timerOn));
-$("btn-only").addEventListener("click", () => setOnly(!onlySignals));
+$("btn-only").addEventListener("click", () => setOnly(true));
+$("btn-all").addEventListener("click", () => setOnly(false));
 $("btn-prev").addEventListener("click", () => {
   if (loading || pageIndex === 0) return;
   pageIndex -= 1;
@@ -542,12 +621,32 @@ $("btn-next").addEventListener("click", () => {
   pageIndex += 1;
   return load();
 });
-$("symbols").addEventListener("keydown", (e) => {
-  if (e.key === "Enter") load();
+$("board-search-input").addEventListener("input", () => {
+  ++boardSearchVersion; pendingStock = null; clearTimeout(boardSearchTimer);
+  $("btn-confirm").disabled = true; $("board-search-results").hidden = true; $("symbols-status").hidden = true;
+  boardSearchTimer = setTimeout(searchBoardStocks, 300);
 });
+$("board-search-input").addEventListener("keydown", event => {
+  if (event.key === 'Enter') {event.preventDefault(); return pendingStock ? confirmStock() : searchBoardStocks();}
+});
+$("btn-confirm").addEventListener("click", confirmStock);
 
 tickBeijingClock();
 setInterval(tickBeijingClock, 1000);
+setInterval(()=>{
+  if(!document.querySelectorAll)return;
+  for(const card of document.querySelectorAll('.card[data-valid-until]')){
+    if(new Date(card.dataset.validUntil).getTime()>Date.now())continue;
+    const action=card.querySelector('.badges > span');
+    if(action){action.textContent='观望 · 计划已过期';action.className='wait-entry';}
+    for(const badge of card.querySelectorAll('.badge')){
+      if(badge.textContent.startsWith('建议')){badge.textContent='建议·观望';badge.className='badge wait';}
+    }
+    const levels=card.querySelector('.levels');
+    if(levels)levels.innerHTML='<li>本次进场计划已过期，请刷新后重新判断。</li>';
+    card.removeAttribute('data-valid-until');
+  }
+},1000);
 updateOnlyUi();
 updateTimerUi();
 (async () => {

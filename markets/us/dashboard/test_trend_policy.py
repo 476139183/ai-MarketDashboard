@@ -127,7 +127,7 @@ class TrendPolicyTests(unittest.TestCase):
 class LiveTrendTests(unittest.TestCase):
     def analyze(self, *, volume=1000, minutes_old=0, is_rth=True, quote_time="Oct 30, 2026 12:05 PM ET"):
         now = datetime(2026, 10, 30, 12, 5, tzinfo=engine.NY)
-        daily = candles([100 + i for i in range(35)], now - timedelta(days=35), 86400)
+        daily = candles([100 + i for i in range(70)], now - timedelta(days=70), 86400)
         bars = candles([100 + i * .2 for i in range(11)])
         bars[-1].update(c=1, h=1000, l=1)  # 12:00 未收盘，不得进入趋势/ORB/VWAP。
         for bar in bars:
@@ -152,9 +152,10 @@ class LiveTrendTests(unittest.TestCase):
             return result, compute, confirm
 
     def test_unfinished_15m_bar_is_excluded(self):
-        _, compute, _ = self.analyze()
-        self.assertLess(max(b["h"] for b in compute.call_args.kwargs["bars"]), 1000)
-        self.assertTrue(compute.call_args.kwargs["trend_context"]["confirmed"])
+        result, _, _ = self.analyze()
+        self.assertEqual(result['intraday_state']['last_close'], 101.8)
+        self.assertEqual(result['intraday_state']['bar_count'], 10)
+        self.assertEqual(result['daily_context']['bias'], 'up')
 
     def test_missing_volume_blocks_entry_instead_of_faking_vwap(self):
         result, compute, _ = self.analyze(volume=0)
