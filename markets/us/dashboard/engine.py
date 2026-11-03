@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 import os
+import sys
+import time
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -38,6 +40,14 @@ DEFAULT_INTERVAL = "15m"
 
 # 进程内信号时间记忆：symbol → {advice, since_bj}
 _SIGNAL_MEM: Dict[str, Dict[str, str]] = {}
+# Yahoo 限流：最短间隔 + 429 冷却；过期缓存不得冒充今日 15m。
+_YAHOO_MIN_GAP_SEC = 0.85
+_YAHOO_COOLDOWN_SEC = 45.0
+_yahoo_last_request = 0.0
+_yahoo_cooldown_until = 0.0
+_YF_MEM: Dict[Tuple[str, str, str], Tuple[float, List[dict], dict]] = {}
+_YF_TTL_SEC = 120.0
+_REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def normalize_interval(interval: Optional[str]) -> str:
@@ -86,6 +96,122 @@ def _http_json(url: str, timeout: int = 4, extra_headers: Optional[dict] = None)
     req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode("utf-8"))
+
+
+def _yahoo_http_json(url: str, timeout: int = 6) -> dict:
+    """带间隔与 429 冷却的 Yahoo 请求，避免把限流打成静默旧缓存。"""
+    global _yahoo_last_request, _yahoo_cooldown_until
+    now = time.time()
+    if now < _yahoo_cooldown_until:
+        raise urllib.error.HTTPError(url, 429, "Yahoo cooldown", hdrs=None, fp=None)
+    wait = _YAHOO_MIN_GAP_SEC - (now - _yahoo_last_request)
+    if wait > 0:
+        time.sleep(wait)
+    try:
+        _yahoo_last_request = time.time()
+        return _http_json(url, timeout=timeout)
+    except urllib.error.HTTPError as exc:
+        if getattr(exc, "code", None) == 429:
+            _yahoo_cooldown_until = time.time() + _YAHOO_COOLDOWN_SEC
+        raise
+
+
+def _expected_us_session_date(now: Optional[datetime] = None):
+    """期望已落地的最近一个美股常规交易日（开盘前仍期望上一交易日）。"""
+    now = now or datetime.now(NY)
+    day = now.date()
+    if now.hour * 60 + now.minute < 9 * 60 + 30:
+        day -= timedelta(days=1)
+    while day.weekday() >= 5:
+        day -= timedelta(days=1)
+    return day
+
+
+def _rows_cover_session(rows: Optional[List[dict]], *, now: Optional[datetime] = None) -> bool:
+    if not rows:
+        return False
+    last = rows[-1].get("dt_ny")
+    if last is None:
+        return False
+    return last.date() >= _expected_us_session_date(now)
+
+
+def _session_volume_bars(rows: List[dict], *, now: Optional[datetime] = None) -> int:
+    """最近期望交易日常规盘中，成交量>0 的 15m 根数。"""
+    if not rows:
+        return 0
+    now = now or datetime.now(NY)
+    day = _expected_us_session_date(now)
+    n = 0
+    for bar in rows:
+        dt = bar.get("dt_ny")
+        if dt is None or dt.date() != day:
+            continue
+        mins = dt.hour * 60 + dt.minute
+        if 9 * 60 + 30 <= mins < 16 * 60 and float(bar.get("v") or 0) > 0:
+            n += 1
+    return n
+
+
+def _yfinance_mod():
+    try:
+        import yfinance as yf  # type: ignore
+        return yf
+    except ImportError:
+        pass
+    venv = _REPO_ROOT / ".cache" / "daily-stock-analysis" / ".venv"
+    for site in venv.glob("lib/python*/site-packages"):
+        path = str(site)
+        if path not in sys.path:
+            sys.path.insert(0, path)
+        try:
+            import yfinance as yf  # type: ignore
+            return yf
+        except ImportError:
+            continue
+    return None
+
+
+def _fetch_yfinance_chart(symbol: str, range_: str, interval: str) -> Optional[Tuple[List[dict], dict]]:
+    """免费回退：复用本机 DSA venv 中的 yfinance，拿带量分钟线。"""
+    yf = _yfinance_mod()
+    if yf is None:
+        return None
+    period = {"1d": "1d", "5d": "5d", "1mo": "1mo", "3mo": "3mo", "6mo": "6mo", "1y": "1y"}.get(range_, range_)
+    key = (symbol, period, interval)
+    hit = _YF_MEM.get(key)
+    now = time.time()
+    if hit and now - hit[0] < _YF_TTL_SEC:
+        return hit[1], hit[2]
+    try:
+        frame = yf.Ticker(symbol).history(period=period, interval=interval, auto_adjust=False, prepost=True)
+    except Exception:
+        return None
+    if frame is None or getattr(frame, "empty", True):
+        return None
+    rows = []
+    for idx, row in frame.iterrows():
+        try:
+            ts = idx.to_pydatetime() if hasattr(idx, "to_pydatetime") else idx
+            if getattr(ts, "tzinfo", None) is None:
+                dt_ny = ts.replace(tzinfo=NY)
+            else:
+                dt_ny = ts.astimezone(NY)
+            o, h, l, c = float(row["Open"]), float(row["High"]), float(row["Low"]), float(row["Close"])
+            if not all(x == x and x > 0 for x in (o, h, l, c)):  # NaN check
+                continue
+            vol = float(row["Volume"] or 0)
+            if vol != vol or vol < 0:
+                vol = 0.0
+            rows.append(dict(t=int(dt_ny.timestamp()), o=o, h=h, l=l, c=c, v=vol,
+                             feed="yfinance", dt_ny=dt_ny, dt_bj=dt_ny.astimezone(BJ)))
+        except Exception:
+            continue
+    if not rows:
+        return None
+    meta = {"shortName": symbol, "source": "yfinance", "volume_bars": _session_volume_bars(rows)}
+    _YF_MEM[key] = (now, rows, meta)
+    return rows, meta
 
 
 def _cache_path(symbol: str, interval: str) -> Path:
@@ -146,6 +272,7 @@ def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = Fa
                           "daily_as_of": result["data"][-1]["date"]}, "dsa"
         except (DSAError, ValueError) as exc:
             daily_error = str(exc)
+    intraday = interval in INTERVALS or interval in ("1m", "5m", "15m", "30m", "60m", "1h")
     if prefer_cache:
         cached = _load_cache(symbol, interval)
         if cached:
@@ -155,8 +282,10 @@ def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = Fa
                 expected -= timedelta(days=1)
             last = cached[0][-1] if cached[0] else None
             recent = last is not None and last["dt_ny"].date() >= expected
-            if interval in INTERVALS and session_status(now).get("is_rth"):
-                recent = recent and int(last["t"]) + 900 >= now.timestamp() - 1200
+            if intraday:
+                recent = _rows_cover_session(cached[0], now=now)
+                if recent and session_status(now).get("is_rth"):
+                    recent = int(last["t"]) + 900 >= now.timestamp() - 1200
             if recent:
                 return cached[0], {**cached[1], **({"daily_error": daily_error} if daily_error else {})}, "cache"
 
@@ -165,20 +294,45 @@ def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = Fa
         f"?range={range_}&interval={interval}&includePrePost=true"
     )
     last_err = None
+    yahoo_limited = False
     for u in (url, url.replace("query1", "query2")):
         try:
-            d = _http_json(u, timeout=3)
+            d = _yahoo_http_json(u, timeout=6)
             rows, meta = _parse_chart(d)
             if rows:
                 _save_cache(symbol, interval, d)
                 return rows, {**meta, **({"daily_error": daily_error} if daily_error else {})}, "live"
         except Exception as e:
             last_err = e
+            if isinstance(e, urllib.error.HTTPError) and getattr(e, "code", None) == 429:
+                yahoo_limited = True
             continue
+
+    if intraday:
+        yf = _fetch_yfinance_chart(symbol, range_, interval)
+        if yf and _session_volume_bars(yf[0]) >= 3:
+            rows, meta = yf
+            return rows, {**meta, **({"daily_error": daily_error} if daily_error else {}),
+                          "feed_warning": "Yahoo 限流或失败，已改用 yfinance 带量分钟线" if yahoo_limited or last_err else None}, "yfinance"
+        if yf and yf[0]:
+            rows, meta = yf
+            return rows, {**meta, **({"daily_error": daily_error} if daily_error else {}),
+                          "feed_warning": "yfinance 仅有部分带量分钟线"}, "yfinance"
+
     cached = _load_cache(symbol, interval)
+    if cached and (not intraday or _rows_cover_session(cached[0])):
+        rows, meta = cached
+        note = {"daily_error": daily_error} if daily_error else {}
+        if yahoo_limited:
+            note["feed_warning"] = "Yahoo 429 限流，使用本地缓存"
+        return rows, {**meta, **note}, "cache"
+    detail = "Yahoo 429 限流" if yahoo_limited else f"Yahoo 失败: {last_err}"
+    if intraday:
+        raise RuntimeError(f"{detail}；无可用带量 15m（已拒绝过期缓存）")
     if cached:
         rows, meta = cached
-        return rows, {**meta, **({"daily_error": daily_error} if daily_error else {})}, "cache"
+        return rows, {**meta, **({"daily_error": daily_error} if daily_error else {}),
+                      "feed_warning": "缓存可能过期"}, "cache"
     raise RuntimeError(f"Yahoo 失败且无本地缓存: {last_err}")
 
 
@@ -345,12 +499,16 @@ def aggregate_points_to_bars(points: List[dict], minutes: int = 15) -> List[dict
 
 
 def _merge_bar_rows(primary: List[dict], secondary: List[dict]) -> List[dict]:
-    """按 t 合并；primary 覆盖同桶（用于 Nasdaq 今日 + Yahoo 多日）。"""
+    """按 t 合并；带量 K 线优先，无量采样不得覆盖真实成交量。"""
     by_t: Dict[int, dict] = {}
     for b in secondary:
         by_t[int(b["t"])] = b
     for b in primary:
-        by_t[int(b["t"])] = b
+        key = int(b["t"])
+        old = by_t.get(key)
+        if old is not None and float(old.get("v") or 0) > 0 and float(b.get("v") or 0) <= 0:
+            continue
+        by_t[key] = b
     return [by_t[k] for k in sorted(by_t)]
 
 
@@ -359,47 +517,67 @@ def fetch_bars_intraday(
     interval: str = DEFAULT_INTERVAL,
     prefer_cache: bool = False,
 ) -> Tuple[List[dict], dict, str]:
-    """1m/5m/15m：优先 Nasdaq 分时聚合，其次 Yahoo，最后本地缓存。
-    Nasdaq 常只有今日：若不足 ORB+1 根完整参照日，并入 Yahoo 5d 作结构回退。"""
+    """15m：优先带量源（Yahoo / yfinance），Nasdaq 无量采样只补缺口。"""
     iv = normalize_interval(interval)
     mins = INTERVAL_MINUTES[iv]
     yahoo_range = "1d" if iv == "1m" else "5d"
-    min_bars = orb_bar_count(iv) + 1
+    warnings: List[str] = []
     nq_rows: List[dict] = []
     nq_meta: dict = {}
-    # 1) Nasdaq（免 Key，盘中可用）
+    # 1) Nasdaq（免 Key；仅有价格采样，无成交量）
     try:
         pts, meta = fetch_nasdaq_intraday_points(symbol)
         nq_rows = aggregate_points_to_bars(pts, mins)
         nq_meta = meta
     except Exception:
         pass
-    # 2) Yahoo（多日结构；与 Nasdaq 合并）
+    # 2) Yahoo / yfinance 带量分钟线
     y_rows: List[dict] = []
     y_meta: dict = {}
     y_src = ""
     try:
         y_rows, y_meta, y_src = fetch_chart(symbol, yahoo_range, iv, prefer_cache=prefer_cache)
-    except Exception:
+    except Exception as exc:
+        warnings.append(str(exc))
         if iv == "1m":
             try:
                 y_rows, y_meta, y_src = fetch_chart(symbol, "5d", iv, prefer_cache=prefer_cache)
-            except Exception:
-                pass
+            except Exception as exc2:
+                warnings.append(str(exc2))
+    if y_meta.get("feed_warning"):
+        warnings.append(str(y_meta["feed_warning"]))
+    if (not y_rows) or (not _rows_cover_session(y_rows)) or _session_volume_bars(y_rows) < 3:
+        if y_rows and _session_volume_bars(y_rows) < 3:
+            warnings.append("带量源未覆盖最近交易日常规盘")
+        yf = _fetch_yfinance_chart(symbol, yahoo_range, iv)
+        if yf and _session_volume_bars(yf[0]) >= max(3, _session_volume_bars(y_rows)):
+            y_rows, y_meta, y_src = yf[0], yf[1], "yfinance"
+            warnings.append("已改用 yfinance 带量分钟线")
+    note = "；".join(dict.fromkeys(w for w in warnings if w))
     if nq_rows and y_rows:
-        # 保留真实 OHLCV，Nasdaq 无量采样仅补缺失时间桶。
         merged = _merge_bar_rows(y_rows, nq_rows)
-        return merged, {**y_meta, **nq_meta, "merged": "nasdaq+yahoo"}, "nasdaq+yahoo"
-    if nq_rows and len(nq_rows) >= max(2, orb_bar_count(iv)):
-        # 仅 Nasdaq：若跨日不足 min_bars，仍返回（上层可能观望）
-        return nq_rows, nq_meta, "nasdaq"
+        meta = {**y_meta, **nq_meta, "merged": f"nasdaq+{y_src or 'yahoo'}"}
+        if note:
+            meta["feed_warning"] = note
+        # 今日若仍无量，避免把无量采样伪装成可用盘中结构源
+        if _session_volume_bars(merged) < 3 and nq_rows:
+            meta["feed_warning"] = (meta.get("feed_warning") + "；" if meta.get("feed_warning") else "") + (
+                "最近交易日仅有 Nasdaq 无量采样"
+            )
+        return merged, meta, f"nasdaq+{y_src or 'yahoo'}"
     if y_rows:
-        return y_rows, y_meta, y_src or "yahoo"
-    # 3) cache only
+        meta = dict(y_meta)
+        if note:
+            meta["feed_warning"] = note
+        return y_rows, meta, y_src or "yahoo"
+    if nq_rows and len(nq_rows) >= max(2, orb_bar_count(iv)):
+        meta = {**nq_meta, "feed_warning": (note + "；" if note else "") + "仅有 Nasdaq 无量采样，不能做量价确认"}
+        return nq_rows, meta, "nasdaq"
     cached = _load_cache(symbol, iv)
-    if cached:
-        return cached[0], cached[1], "cache"
-    raise RuntimeError(f"{symbol} {iv}：Nasdaq/Yahoo/缓存均不可用")
+    if cached and _rows_cover_session(cached[0]):
+        rows, meta = cached
+        return rows, {**meta, **({"feed_warning": note} if note else {})}, "cache"
+    raise RuntimeError(f"{symbol} {iv}：Yahoo/yfinance/Nasdaq/新鲜缓存均不可用" + (f"；{note}" if note else ""))
 
 
 def fetch_bars_15m(symbol: str, prefer_cache: bool = False) -> Tuple[List[dict], dict, str]:
@@ -1261,6 +1439,10 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL, *, accept_over
     quote_fresh = quote_at is not None and -30 <= (now - quote_at).total_seconds() <= 120
     signal = entry_signal(context, px=float(price or 0), quote_fresh=quote_fresh,
                           session_open=session["is_rth"], now=now)
+    feed_warning = (metadata or {}).get("feed_warning") or (dmeta or {}).get("feed_warning")
+    if feed_warning:
+        base = (signal.get("reason") or "").strip()
+        signal["reason"] = f"{base}；{feed_warning}" if base and feed_warning not in base else (base or feed_warning)
     memory = remember_advice(symbol, signal["advice"], now.strftime("%Y-%m-%d %H:%M:%S"))
     return {**context, **signal, **memory, "symbol": symbol, "market": "us",
             "name": dmeta.get("longName") or dmeta.get("shortName") or symbol,
@@ -1269,6 +1451,7 @@ def analyze_symbol(symbol: str, interval: str = DEFAULT_INTERVAL, *, accept_over
             "price_tag": tag, "interval": "15m", "source": f"{price_source} · 15m/{src_m} · 日线/{src_d}",
             "data_mode": "live" if quote_fresh else "cache", "daily_source": src_d,
             "daily_error": dmeta.get("daily_error") or "；".join(data_errors) or None,
+            "feed_warning": feed_warning,
             "daily_as_of": day["as_of"], "atr14": day["atr"], "ma20": day["ma20"],
             "quote_time_bj": quote_at.astimezone(BJ).isoformat() if quote_at else None,
             "quote_fresh": quote_fresh, "quote_ts": quote_ts, "session": session,

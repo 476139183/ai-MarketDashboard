@@ -107,7 +107,8 @@ class TrendPolicyTests(unittest.TestCase):
             bar["v"] = 0
         with patch.object(engine, "fetch_nasdaq_intraday_points", return_value=([], {})), \
              patch.object(engine, "aggregate_points_to_bars", return_value=sampled), \
-             patch.object(engine, "fetch_chart", return_value=(real, {}, "live")):
+             patch.object(engine, "fetch_chart", return_value=(real, {}, "live")), \
+             patch.object(engine, "_fetch_yfinance_chart", return_value=None):
             result, _, _ = engine.fetch_bars_intraday("NVDA")
         self.assertEqual(result[0]["v"], 1000)
         self.assertEqual(result[0]["c"], 104)
@@ -116,12 +117,37 @@ class TrendPolicyTests(unittest.TestCase):
         old = candles([100] * 30, datetime(2026, 8, 1, 9, 30, tzinfo=engine.NY), 86400)
         fresh = candles([101] * 30, datetime.now(engine.NY) - timedelta(days=30), 86400)
         with patch.object(engine, "_load_cache", return_value=(old, {})), \
-             patch.object(engine, "_http_json", return_value={}) as http, \
+             patch.object(engine, "_yahoo_http_json", return_value={}) as http, \
              patch.object(engine, "_parse_chart", return_value=(fresh, {})), \
              patch.object(engine, "_save_cache"):
             rows, _, source = engine.fetch_chart("NVDA", "3mo", "1d", prefer_cache=True)
         self.assertEqual(source, "live")
-        http.assert_called_once()
+        http.assert_called()
+
+    def test_stale_intraday_cache_is_rejected_then_yfinance_used(self):
+        day = engine._expected_us_session_date()
+        stale = candles([100] * 8, datetime(2026, 10, 20, 9, 30, tzinfo=engine.NY))
+        fresh = candles([110] * 26, datetime(day.year, day.month, day.day, 9, 30, tzinfo=engine.NY))
+        for bar in fresh:
+            bar["feed"] = "yfinance"
+        with patch.object(engine, "_load_cache", return_value=(stale, {})), \
+             patch.object(engine, "_yahoo_http_json", side_effect=engine.urllib.error.HTTPError(
+                 "https://query1.finance.yahoo.com", 429, "Too Many Requests", hdrs=None, fp=None)), \
+             patch.object(engine, "_fetch_yfinance_chart", return_value=(fresh, {"source": "yfinance"})), \
+             patch.object(engine, "_save_cache"):
+            rows, meta, source = engine.fetch_chart("SNDK", "5d", "15m", prefer_cache=True)
+        self.assertEqual(source, "yfinance")
+        self.assertGreaterEqual(engine._session_volume_bars(rows), 3)
+        self.assertIn("yfinance", meta.get("feed_warning") or "")
+
+    def test_zero_volume_sample_cannot_overwrite_volume_bar_on_merge(self):
+        volume = candles([104], datetime(2026, 11, 2, 10, 0, tzinfo=engine.NY))
+        sampled = candles([200], datetime(2026, 11, 2, 10, 0, tzinfo=engine.NY))
+        sampled[0]["v"] = 0
+        sampled[0]["feed"] = "nasdaq_sampled"
+        merged = engine._merge_bar_rows(sampled, volume)
+        self.assertEqual(merged[0]["c"], 104)
+        self.assertEqual(merged[0]["v"], 1000)
 
 
 class LiveTrendTests(unittest.TestCase):

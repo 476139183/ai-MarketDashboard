@@ -223,6 +223,13 @@ class DSAIntegrationTests(unittest.TestCase):
         self.assertTrue(config['configured'])
         self.assertNotIn('test-session', json.dumps(config))
 
+    def test_public_sample_status_reads_local_audit_without_contacting_models(self):
+        with patch('app.audit_history',return_value={'available':True,'daily':[{'symbol':'AAPL','rows':4024}],'minute':[]}):
+            status,payload=self.local_api('GET','/api/history-samples')
+        self.assertEqual(status,200)
+        self.assertEqual(payload['daily'][0]['symbol'],'AAPL')
+        self.assertEqual(self.requests,[])
+
     def test_local_post_submits_async_and_local_status_reads_result(self):
         self.__class__.payload = dict(task_id='task_test', status='pending')
         status, result = self.local_api('POST', '/api/dsa/analysis', {'symbol': 'NVDA'})

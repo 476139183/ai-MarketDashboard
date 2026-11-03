@@ -30,11 +30,12 @@ function page({saved, failStatus = false, configured = true, modelReady = config
     fetch: async (url, options = {}) => {
       requests.push([url, options]);
       let data = {};
+      if (url.includes('/api/history-samples')) data={daily:[{symbol:'AAPL',first:'2010-01-04',last:'2025-12-31',rows:4024,source:'FinMind'}],minute:[]};
       if (url.includes('/search?')) data = {items:searchResults};
       if (url.includes('/config')) data = {configured, connected: configured, model_ready: modelReady,...(includeBackend?{backend:'codex_cli'}:{})};
       if (url.includes('/ai-settings')) data = {backend:'codex_cli',local_available:{codex_cli:true}};
       if (url.includes('/analysis')) data = {task_id: 'task_1', status: 'pending'};
-      if (url.includes('/history')) data = {stock_name: '英伟达', data: [
+      if (url.includes('/api/dsa/history?')) data = {stock_name: '英伟达', data: [
         {date: '2026-10-29', open: 100, high: 104, low: 99, close: 103},
         {date: '2026-10-30', open: 103, high: 106, low: 102, close: 105},
       ]};
@@ -188,4 +189,13 @@ test('刷新不会把另一只股票的历史任务套到当前个股',async()=>
  assert.equal(p.elements.get('report').hidden,true);
  await p.elements.get('research-watchlist').children.find(button=>button.dataset.symbol==='SNDK').handlers.click();
  assert.equal(p.requests.some(([url])=>url.includes('task_sndk')),true);
+});
+
+test('历史样本面板只在展开时读本地覆盖，不触发数据下载或模型',async()=>{
+ const p=page();await p.settle();
+ assert.equal(p.requests.some(([url])=>url.includes('/api/history-samples')),false);
+ p.elements.get('history-samples').open=true;
+ await p.elements.get('history-samples').handlers.toggle();
+ assert.match(p.elements.get('history-samples-list').children[0].textContent,/AAPL.*2010-01-04/);
+ assert.equal(p.requests.filter(([,o])=>o.method==='POST').length,0);
 });

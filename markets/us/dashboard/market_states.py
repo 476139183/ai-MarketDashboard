@@ -4,11 +4,14 @@ import math
 from statistics import mean
 from zoneinfo import ZoneInfo
 
-VERSION = 'daily-volume-v1'
+VERSION = 'daily-volume-v2.1'
 BJ = ZoneInfo('Asia/Shanghai')
 ZONES = {'us': ZoneInfo('America/New_York'), 'cn': BJ}
 SESSIONS = {'us': [(570, 960)], 'cn': [(570, 690), (780, 900)]}
 MIN_RR = 1.5
+# 趋势日早段可开仓形态（与延续加速/反抽确认并列）
+EARLY_SETUP_CODES = frozenset({'open_drive', 'rebound_fail'})
+ENTRY_SETUP_CODES = frozenset({'acceleration', 'pullback_confirmed', 'reversal'}) | EARLY_SETUP_CODES
 
 
 def market_session(now, market='us'):
@@ -57,6 +60,64 @@ def _ema(values, period):
     for value in values[1:]:
         current += (value-current)*2/(period+1)
     return current
+
+
+def _early_vol_ok(*, rvol, strong, cum=None, fallback_v=0.0, today=None):
+    """早段：单根/累计量比达标，或开盘砸盘已主导当日量；无历史样本时回退到有量。"""
+    if strong or (rvol is not None and rvol >= 1.0) or (cum is not None and cum >= .85):
+        return True
+    if today and len(today) >= 2 and today[0]['c'] < today[0]['o']:
+        total = sum(float(b.get('v') or 0) for b in today)
+        if total > 0 and float(today[0].get('v') or 0) / total >= .4:
+            return True
+    return rvol is None and cum is None and float(fallback_v or 0) > 0
+
+
+def _open_drive_down(today, *, vwap, daily, rvol, strong, cum=None):
+    """日线偏空 + 开盘大阴且高点仍在开盘附近 → 趋势日开盘弱势（可空）。"""
+    if daily.get('bias') != 'down' or len(today) < 2:
+        return False
+    first = today[0]
+    span = float(first['h'] - first['l'])
+    if span <= 0 or first['c'] >= first['o']:
+        return False
+    weak = (first['h'] - first['c']) / span >= .5
+    atr = daily.get('atr')
+    wide = atr is None or span >= .35 * float(atr)
+    hod = max(b['h'] for b in today)
+    held_high = hod <= first['h'] * 1.0005
+    # 允许略贴 VWAP 上方（反抽初期），但仍须明显低于开盘价
+    below = today[-1]['c'] < first['o'] and today[-1]['c'] <= vwap * 1.002
+    vol_ok = _early_vol_ok(rvol=rvol, strong=strong, cum=cum, fallback_v=first.get('v'), today=today)
+    return weak and wide and held_high and below and vol_ok
+
+
+def _rebound_fail_down(today, *, vwap, daily, rvol, strong, cum=None):
+    """日线偏空：早盘先砸后反抽，反抽高点失守 → 早盘反抽失败（可空）。"""
+    if daily.get('bias') != 'down' or len(today) < 4:
+        return False
+    first = today[0]
+    if first['c'] >= first['o']:
+        return False
+    low_i = min(range(len(today)), key=lambda i: today[i]['l'])
+    if low_i <= 0 or low_i >= len(today) - 1:
+        return False
+    bounce = today[low_i:]
+    bounce_high = max(b['h'] for b in bounce)
+    peak_i = low_i + max(range(len(bounce)), key=lambda i: bounce[i]['h'])
+    morning_low = min(b['l'] for b in today)
+    if bounce_high < morning_low * 1.004:
+        return False
+    latest = today[-1]
+    span = float(latest['h'] - latest['l'])
+    # 峰值在当根：收阴且上影占比高 → 视作反抽拒绝，无需再等下一根
+    reject_now = (peak_i == len(today) - 1 and span > 0 and latest['c'] < latest['o']
+                  and (latest['h'] - latest['c']) / span >= .5)
+    failed_after = (peak_i < len(today) - 1 and latest['c'] < bounce_high
+                    and latest['h'] <= bounce_high * 1.0005 and latest['c'] <= today[-2]['c']
+                    and (latest['c'] < vwap or peak_i <= len(today) - 3))
+    vol_ok = _early_vol_ok(rvol=rvol, strong=strong, cum=cum, fallback_v=latest.get('v'), today=today)
+    return (reject_now or failed_after) and vol_ok
 
 
 def daily_context(rows, now, market='us'):
@@ -116,14 +177,17 @@ def intraday_context(daily, rows, now, market='us'):
                bar_rvol=None, cumulative_rvol=None, volume_reference_days=0, vwap=None,
                bar_count=len(today), last_close=None, last_bar_end=None, evidence=[], trigger=None,
                structure_stop=None, intraday_atr=None, volume_label='量能待核', error=None)
-    if len(today)<3:
-        out['error']='今日至少需要 3 根已收盘 15m K 线'
+    if len(today) < 2:
+        out['error'] = '今日至少需要 2 根已收盘 15m K 线'
         return out
     actual = [_time(b,market).hour*60+_time(b,market).minute for b in today]
     expected = [slot for slot in slots if slot<=actual[-1]]
     feeds = {b.get('feed') for b in today}
     if actual != expected or len(feeds)>1 or not all(_price_ok(b) and _volume_ok(b) for b in today):
-        out['error']='今日15m数据缺失、重复或缺少可信成交量，不能确认结构与VWAP'
+        if feeds <= {'nasdaq_sampled'} and today and not any(_volume_ok(b) for b in today):
+            out['error']='仅有Nasdaq无量采样（Yahoo/带量源不可用或被限流），不能确认结构与VWAP'
+        else:
+            out['error']='今日15m数据缺失、重复或缺少可信成交量，不能确认结构与VWAP'
         return out
     latest = today[-1]
     vwap = sum((b['h']+b['l']+b['c'])/3*b['v'] for b in today)/sum(b['v'] for b in today)
@@ -142,6 +206,37 @@ def intraday_context(daily, rows, now, market='us'):
             cumulatives.append(sum(daybars[slot][0]['v'] for slot in expected))
     rvol = latest['v']/mean(references) if len(references)>=3 else None
     cum = sum(b['v'] for b in today)/mean(cumulatives) if len(cumulatives)>=3 else None
+    strong = rvol is not None and rvol >= 1.5
+    early_kw = dict(vwap=vwap, daily=daily, rvol=rvol, strong=strong, cum=cum)
+
+    def _fill_early(code, label, direction, trigger, stop, atr):
+        volume_confirmed = _early_vol_ok(rvol=rvol, strong=strong, cum=cum,
+                                         fallback_v=latest.get('v'), today=today)
+        out.update(code=code, label=label, direction=direction, data_ready=True,
+                   volume_confirmed=volume_confirmed,
+                   bar_rvol=round(rvol, 3) if rvol is not None else None,
+                   cumulative_rvol=round(cum, 3) if cum is not None else None,
+                   volume_reference_days=len(references), vwap=round(vwap, 4), last_close=latest['c'],
+                   last_bar_end=int(latest['t']) + 900, trigger=trigger, structure_stop=stop,
+                   intraday_atr=atr,
+                   volume_label=('放量' if strong else '量能正常' if (rvol is not None and rvol >= .8)
+                                 or (cum is not None and cum >= 1.0)
+                                 else '缩量' if rvol is not None or cum is not None else '历史同时段量能不足'))
+        out['evidence'] = [f'15m 已收盘 {len(today)} 根；收盘 {latest["c"]:.3f}，VWAP估算 {vwap:.3f}',
+                           (f'同时段量比 {rvol:.2f}，参考 {len(references)} 个历史交易日'
+                            if rvol is not None else '历史同时段样本不足 3 日，量能不能确认')]
+        if cum is not None:
+            out['evidence'].append(f'早盘累计量比 {cum:.2f}')
+        out['evidence'].append(f'早段形态 {label}；止损参考 {stop:.3f}，触发参考 {trigger:.3f}')
+        return out
+
+    # 两根即可识别开盘弱势；常规形态仍要满 3 根
+    if len(today) < 3:
+        if _open_drive_down(today, **early_kw):
+            return _fill_early('open_drive', '开盘弱势（趋势日）', 'down',
+                               today[0]['h'], max(b['h'] for b in today), _atr(today))
+        out['error'] = '今日至少需要 3 根已收盘 15m K 线'
+        return out
     closes = [b['c'] for b in today]
     e5,e13 = _ema(closes,5),_ema(closes,13)
     score = (1 if e5>e13 else -1 if e5<e13 else 0)+(1 if closes[-1]>closes[-2] else -1 if closes[-1]<closes[-2] else 0)+(1 if closes[-1]>vwap else -1)
@@ -149,7 +244,6 @@ def intraday_context(daily, rows, now, market='us'):
     high = max(b['h'] for b in today[-4:-1])
     low = min(b['l'] for b in today[-4:-1])
     breakout = latest['c']>high if direction=='up' else latest['c']<low if direction=='down' else False
-    strong = rvol is not None and rvol>=1.5
     opposite = direction in ('up','down') and daily['bias'] in ('up','down') and direction!=daily['bias']
     was_up = any(b['c']>vwap for b in today[:-2])
     reversed_down = direction=='down' and was_up and all(b['c']<vwap for b in today[-2:]) and breakout and strong
@@ -172,10 +266,20 @@ def intraday_context(daily, rows, now, market='us'):
         code,label = 'probe','上行试探' if direction=='up' else '下行试探'
     atr = _atr(today)
     stop = min(b['l'] for b in today[-3:]) if direction=='up' else max(b['h'] for b in today[-3:])
-    out.update(code=code,label=label,direction=direction,data_ready=True,volume_confirmed=rvol is not None and rvol>=1.2,
+    trigger = high if direction=='up' else low
+    # 趋势日早段：先识别反抽失败，再识别仍未反抽的开盘弱势
+    if _rebound_fail_down(today, **early_kw):
+        low_i = min(range(len(today)), key=lambda i: today[i]['l'])
+        bounce_high = max(b['h'] for b in today[low_i:])
+        return _fill_early('rebound_fail', '早盘反抽失败', 'down', bounce_high, bounce_high, atr)
+    if _open_drive_down(today, **early_kw):
+        return _fill_early('open_drive', '开盘弱势（趋势日）', 'down',
+                           today[0]['h'], max(b['h'] for b in today), atr)
+    volume_confirmed = rvol is not None and rvol >= 1.2
+    out.update(code=code,label=label,direction=direction,data_ready=True,volume_confirmed=volume_confirmed,
                bar_rvol=round(rvol,3) if rvol is not None else None,cumulative_rvol=round(cum,3) if cum is not None else None,
                volume_reference_days=len(references), vwap=round(vwap,4),last_close=latest['c'],
-               last_bar_end=int(latest['t'])+900,trigger=high if direction=='up' else low,
+               last_bar_end=int(latest['t'])+900,trigger=trigger,
                structure_stop=stop,intraday_atr=atr,
                volume_label='放量' if strong else '量能正常' if rvol is not None and rvol>=.8 else '缩量' if rvol is not None else '历史同时段量能不足')
     out['evidence']=[f'15m 已收盘 {len(today)} 根；收盘 {latest["c"]:.3f}，VWAP估算 {vwap:.3f}',
@@ -224,7 +328,7 @@ def entry_signal(context, *, px, quote_fresh, session_open, now, accept_overnigh
         reason='日线成交量不足或量价背离，暂缓进场'
     elif not state['volume_confirmed']:
         reason='盘中量能未确认，或历史同时段样本不足'
-    elif state['direction']!=day['bias'] or state['code'] not in ('acceleration','pullback_confirmed','reversal'):
+    elif state['direction']!=day['bias'] or state['code'] not in ENTRY_SETUP_CODES:
         reason='盘中形态与日线方向不一致，反弹/回调不直接转为新开仓'
     elif market=='cn' and sign<0:
         reason='A股普通现货不发做空信号'
@@ -244,39 +348,73 @@ def entry_signal(context, *, px, quote_fresh, session_open, now, accept_overnigh
     if not atr or not intra_atr or not math.isfinite(px) or px<=0:
         out['reason']='缺少有效波动或价格数据'
         return out
+    early_short = state['code'] in EARLY_SETUP_CODES and sign < 0
     trigger = state['trigger']
     width = max(.25*intra_atr,.0002*trigger)
     low,high = (trigger,trigger+width) if sign>0 else (trigger-width,trigger)
     stop = state['structure_stop']-sign*max(.05*atr,.1*intra_atr)
     mid = (low+high)/2
     visible_target = day['resistance'] if sign>0 else day['support']
-    if visible_target is not None and sign*(visible_target-(high if sign>0 else low))>0:
-        target,note=visible_target,'日线近20日可见结构位'
+    ref = high if early_short else mid
+    stretch = abs(atr)
+    # 非早段：即使结构很近也保留该结构（盈亏比不足则观望，禁止用 ATR 翻过近端结构）
+    if visible_target is not None and sign*(visible_target-ref)>0:
+        if early_short and abs(visible_target-ref) < .8*stretch:
+            target,note=ref+sign*stretch,'早段趋势日：日线结构过近或已失守，改用1日ATR投射'
+        else:
+            target,note=visible_target,'日线近20日可见结构位'
     else:
-        target,note=mid+sign*atr,'无已知前方结构位，以1日ATR估算目标（非保证）'
+        target,note=ref+sign*stretch,('早段趋势日：以1日ATR投射目标' if early_short
+                                       else '无已知前方结构位，以1日ATR估算目标（非保证）')
+    # 早段若现价已离开触发区，目标改为从现价再投射 1ATR，避免「止损在高点、目标贴着现价」假盈亏比
+    if early_short and sign < 0 and px < high:
+        target = min(target, px - stretch)
+        note = '早段趋势日：自现价投射1日ATR目标'
+    elif early_short and sign > 0 and px > low:
+        target = max(target, px + stretch)
+        note = '早段趋势日：自现价投射1日ATR目标'
     if market=='cn':
         target=min(target,limits[0])
         if stop<=limits[1]:
             out['reason']='结构止损受跌停价约束，无法按普通止损估算'
             return out
-    worst_entry = high if sign>0 else low
-    risk,reward = sign*(worst_entry-stop),sign*(target-worst_entry)
+    # 早段空：最差按「贴近触发上沿」估风险；非早段用真实目标结构估盈亏比
+    worst_entry = high if sign > 0 else (high if early_short else low)
+    gate_target = ((high if early_short else mid) + sign*stretch) if early_short else target
+    risk,reward = sign*(worst_entry-stop),sign*(gate_target-worst_entry)
     if low<=0 or risk<=0 or reward<=0 or reward/risk<MIN_RR:
         out['reason']='可见目标空间不足，最差入场盈亏比低于1.5，观望'
         return out
     current_risk,current_reward = sign*(px-stop),sign*(target-px)
-    at_entry = low<=px<=high and current_risk>0 and current_reward/current_risk>=MIN_RR
+    in_band = low <= px <= high
+    if early_short and state['code'] == 'rebound_fail':
+        # 反抽失败：在触发区附近（含小幅跌破）做空；更深则等回抽
+        near_trigger = px >= high * .97
+        at_entry = (in_band or (px <= high and near_trigger)) and current_risk>0 and current_reward/current_risk>=MIN_RR
+    elif early_short:
+        at_entry = px <= high and current_risk>0 and current_reward/current_risk>=MIN_RR
+    else:
+        at_entry = in_band and current_risk>0 and current_reward/current_risk>=MIN_RR
     expires = datetime.fromtimestamp(state['last_bar_end']+900,ZONES[market])
     if market=='cn':
         end = 690 if expires.hour<12 else 897
         expires=min(expires,expires.replace(hour=end//60,minute=end%60,second=0,microsecond=0))
+    if early_short and state['code'] == 'rebound_fail':
+        wait_note = '反抽失败区附近可做空' if at_entry else '等待反抽回触发区附近，不在低位追空'
+        stop_note = '反抽高点加波动缓冲'
+    elif early_short:
+        wait_note = '开盘弱势延续，可按计划做空' if at_entry else '等待反抽至开盘高点附近'
+        stop_note = '开盘高点加波动缓冲'
+    else:
+        wait_note = '已回到进场带' if at_entry else '等待回踩/反抽进场带，当前不追价'
+        stop_note = '最近三根完整15m结构极值加波动缓冲'
     out.update(advice='做多' if sign>0 else '做空',signal='做多' if sign>0 else '做空',
                actionable=at_entry,at_entry=at_entry,entry_ready=at_entry,entry_low=round(low,4),entry_high=round(high,4),
                entry_mid=round(mid,4),ref_price=round(px if at_entry else mid,4),
                stop=round(stop,4),target=round(target,4),S=round(stop,4),E_band=[round(low,4),round(high,4)],T1=round(target,4),
                R1=round(current_reward/current_risk,3) if at_entry else round(sign*(target-mid)/(sign*(mid-stop)),3),
-               worst_R1=round(reward/risk,3),target_note=note,stop_note='最近三根完整15m结构极值加波动缓冲',
-               reason=f'{state["label"]}，量能确认，'+('已回到进场带' if at_entry else '等待回踩/反抽进场带，当前不追价'),
+               worst_R1=round(reward/risk,3),target_note=note,stop_note=stop_note,
+               reason=f'{state["label"]}，量能确认，'+wait_note,
                action_label='进场条件满足' if at_entry else '等待到价',valid_until_bj=expires.astimezone(BJ).isoformat(),
                risk_pct=round(current_risk/px*100,3) if at_entry else round(abs(mid-stop)/mid*100,3),
                position_rule=f'已有{("多" if sign>0 else "空")}仓：结构止损 {stop:.3f}；{out["execution_note"]}')

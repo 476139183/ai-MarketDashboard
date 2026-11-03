@@ -170,6 +170,83 @@ class MarketStateTests(unittest.TestCase):
         moved=self.module().entry_signal(context,px=117,quote_fresh=True,session_open=True,now=now)
         self.assertEqual(result['E_band'],moved['E_band'])
 
+    def test_open_drive_allows_early_short_on_down_day(self):
+        # 开盘大阴后继续在 VWAP 下：应识别开盘弱势并可做空（不必再摸回开盘高）
+        daily, bars, now = scenario(direction='down', prices=[148.6, 147.2, 145.5, 144.8, 143.5, 142.8], last_volume=2500)
+        start = now.replace(hour=9, minute=30)
+        today = [b for b in bars if datetime.fromtimestamp(b['t'], now.tzinfo).date() == now.date()]
+        for i, px in enumerate([148.6, 147.2, 145.5, 144.8, 143.5, 142.8]):
+            today[i].update(c=px, o=px + .2, h=px + .4, l=px - .3, v=2200)
+        today[0].update(o=151, h=152, l=148.5, c=148.6, v=5000)
+        today[-1]['v'] = 2500
+        now = start + timedelta(minutes=15 * len(today))
+        context = self.module().build_market_context(daily, bars, now)
+        self.assertEqual(context['intraday_state']['code'], 'open_drive')
+        result = self.module().entry_signal(context, px=142.8, quote_fresh=True, session_open=True, now=now)
+        self.assertEqual(result['advice'], '做空')
+        self.assertTrue(result['actionable'])
+        self.assertGreater(result['stop'], result['ref_price'])
+
+    def test_rebound_fail_allows_short_after_morning_bounce(self):
+        # 先砸后抽再失守：早盘反抽失败可做空
+        path = [
+            (151, 152, 145, 146),
+            (146, 146.5, 143, 143.5),
+            (143.5, 144, 142, 142.2),
+            (142.5, 147, 142.4, 146.5),
+            (146.2, 146.8, 144.5, 145),
+            (144.8, 145, 143.5, 143.8),
+        ]
+        daily, bars, now = scenario(direction='down', prices=[p[3] for p in path], last_volume=2500)
+        start = now.replace(hour=9, minute=30)
+        today = [b for b in bars if datetime.fromtimestamp(b['t'], now.tzinfo).date() == now.date()]
+        for i, (o, h, l, c) in enumerate(path):
+            today[i].update(o=o, h=h, l=l, c=c, v=2200)
+        today[-1]['v'] = 2600
+        now = start + timedelta(minutes=15 * len(path))
+        context = self.module().build_market_context(daily, bars, now)
+        self.assertEqual(context['intraday_state']['code'], 'rebound_fail')
+        result = self.module().entry_signal(context, px=145.0, quote_fresh=True, session_open=True, now=now)
+        self.assertEqual(result['advice'], '做空')
+        self.assertTrue(result['actionable'])
+        self.assertGreaterEqual(result['stop'], 147)
+
+    def test_rebound_fail_rejects_on_peak_bar_without_waiting(self):
+        # 反抽峰值当根收阴上影 → 立刻认失败，不等下一根
+        path = [
+            (151, 152, 145, 146),
+            (146, 146.5, 143, 143.5),
+            (143.5, 144, 142, 142.2),
+            (146.8, 147.5, 142.5, 143.2),  # 冲高回落拒绝（收阴+长上影）
+        ]
+        daily, bars, now = scenario(direction='down', prices=[p[3] for p in path], last_volume=800)
+        start = now.replace(hour=9, minute=30)
+        today = [b for b in bars if datetime.fromtimestamp(b['t'], now.tzinfo).date() == now.date()]
+        for i, (o, h, l, c) in enumerate(path):
+            today[i].update(o=o, h=h, l=l, c=c, v=2200 if i < 3 else 600)
+        # 开盘放量、拒绝根缩量：靠累计量比仍应确认
+        today[0]['v'] = 5000
+        now = start + timedelta(minutes=15 * len(path))
+        context = self.module().build_market_context(daily, bars, now)
+        self.assertEqual(context['intraday_state']['code'], 'rebound_fail')
+        result = self.module().entry_signal(context, px=143.2, quote_fresh=True, session_open=True, now=now)
+        self.assertEqual(result['advice'], '做空')
+        self.assertTrue(result['actionable'])
+        self.assertGreaterEqual(result['stop'], 147.5)
+
+    def test_open_drive_after_two_bars(self):
+        daily, bars, now = scenario(direction='down', prices=[148.6, 147.2], last_volume=2500)
+        start = now.replace(hour=9, minute=30)
+        today = [b for b in bars if datetime.fromtimestamp(b['t'], now.tzinfo).date() == now.date()]
+        today[0].update(o=151, h=152, l=148.5, c=148.6, v=5000)
+        today[1].update(o=148.6, h=149.0, l=146.8, c=147.2, v=2200)
+        now = start + timedelta(minutes=30)
+        context = self.module().build_market_context(daily, bars, now)
+        self.assertEqual(context['intraday_state']['code'], 'open_drive')
+        result = self.module().entry_signal(context, px=147.2, quote_fresh=True, session_open=True, now=now)
+        self.assertEqual(result['advice'], '做空')
+        self.assertTrue(result['actionable'])
+
 
 if __name__ == '__main__':
     unittest.main()

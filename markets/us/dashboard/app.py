@@ -6,6 +6,8 @@ from __future__ import annotations
 import json
 import mimetypes
 import os
+import sqlite3
+import sys
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -16,6 +18,8 @@ from engine import BJ
 from dsa_client import DSAClient, DSAError
 
 ROOT = Path(__file__).resolve().parent
+sys.path.append(str(ROOT.parent))
+from public_history import audit_history, DEFAULT_DB as PUBLIC_HISTORY_DB
 STATIC = ROOT / "static"
 WATCHLIST = ROOT / "watchlist.txt"
 ALERTS = ROOT / "cache" / "alerts.json"
@@ -120,6 +124,14 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+
+        if path == '/api/history-samples':
+            try:
+                self._json(200, audit_history(PUBLIC_HISTORY_DB))
+            except (OSError, ValueError, sqlite3.Error):
+                # 本地历史审计失败不影响实时行情或 AI 任务。
+                self._json(503, {'error': '历史样本暂不可读，请运行样本审计检查本地数据库'})
+            return
 
         if path == '/api/market-state':
             qs = parse_qs(parsed.query)

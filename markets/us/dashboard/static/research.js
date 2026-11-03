@@ -8,6 +8,8 @@ let chart = null, requestVersion = 0, selectedDays = 90;
 let signalVersion = 0, signalExpiryTimer = null, aiSettings = null;
 let searchVersion = 0, searchTimer = null, pendingResearchStock = null;
 let activeSymbol = '', taskViewVersion = 0;
+const HISTORY_DAYS = 365;
+let dailyCache = null;
 const stockTasks = Object.create(null), stockReports = Object.create(null), submitting = new Set();
 let chosenAIBackend = '', serverModelReady = false;
 try {chosenAIBackend=localStorage.getItem('market_studio_ai_choice')||'';}catch(_){}
@@ -193,7 +195,37 @@ function drawCandles(rows) {
   });
 }
 
-async function loadDaily() {
+function paintDaily(code, payload) {
+  const rows = payload.data;
+  drawCandles(rows);
+  el('chart-empty').hidden = true;
+  const last = rows[rows.length - 1], previous = rows[rows.length - 2];
+  const visible = visibleRows(rows, selectedDays);
+  el('stock-name').textContent = payload.stock_name || NAMES[code] || code;
+  el('stock-price').textContent = number(last.close);
+  if (previous) {
+    const delta = last.close - previous.close, pct = delta / previous.close * 100;
+    el('stock-change').textContent = `${delta >= 0 ? '+' : ''}${delta.toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
+    el('stock-change').classList.toggle('negative', delta < 0);
+  } else el('stock-change').textContent = '无前一日数据';
+  el('stock-asof').textContent = `截至 ${last.date} · 日线快照`;
+  el('daily-status').textContent = `${payload.source || 'DSA'} · ${visible[0].date} 至 ${last.date} · ${visible.length} 根日线`;
+  showMetrics(last, rows);
+}
+
+function applyPeriod() {
+  if (!dailyCache?.data?.length || dailyCache.symbol !== activeSymbol) return loadDaily();
+  const version = ++requestVersion;
+  try {
+    paintDaily(activeSymbol, dailyCache);
+  } catch (error) {
+    el('daily-status').textContent = error.message;
+  } finally {
+    if (version === requestVersion) {el('btn-daily').disabled = !connected; el('chart-empty').classList.toggle('loading', false);}
+  }
+}
+
+async function loadDaily(force = false) {
   pendingResearchStock = null;
   ++searchVersion; clearTimeout(searchTimer);
   el('search-results').hidden = true; el('search-status').hidden = true;
@@ -212,31 +244,24 @@ async function loadDaily() {
     el('overnight-control').hidden = !cn;
     loadSignal(code);
     el('stock-currency').textContent = cn ? 'CNY' : 'USD';
+    if (!force && dailyCache?.symbol === code && dailyCache.data?.length) {
+      paintDaily(code, dailyCache);
+      return;
+    }
     el('stock-price').textContent = '—'; el('stock-change').textContent = '读取中'; el('stock-asof').textContent = '正在读取日线快照';
     for (const key of ['open', 'high', 'low', 'volume', 'ma5', 'ma20']) el('metric-' + key).textContent = '—';
     el('chart-empty').hidden = false; el('chart-empty').classList.toggle('loading', true);
     el('chart-empty-title').textContent = '正在读取 ' + code;
     el('chart-empty-note').textContent = '正在从行情服务获取日线，首次读取可能需要一些时间。';
     el('daily-status').textContent = `${code} · 正在读取日线…`;
-    const data = await api('/api/dsa/history?' + new URLSearchParams({symbol: code, days: String(selectedDays)}));
+    const data = await api('/api/dsa/history?' + new URLSearchParams({symbol: code, days: String(HISTORY_DAYS)}));
     if (version !== requestVersion) return;
     if (!data.data?.length) throw new Error('暂无可用日线，请稍后重试');
-    drawCandles(data.data);
-    el('chart-empty').hidden = true;
-    const last = data.data[data.data.length - 1], previous = data.data[data.data.length - 2];
-    const visible = visibleRows(data.data, selectedDays);
-    el('stock-name').textContent = data.stock_name || NAMES[code] || code;
-    el('stock-price').textContent = number(last.close);
-    if (previous) {
-      const delta = last.close - previous.close, pct = delta / previous.close * 100;
-      el('stock-change').textContent = `${delta >= 0 ? '+' : ''}${delta.toFixed(2)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`;
-      el('stock-change').classList.toggle('negative', delta < 0);
-    } else el('stock-change').textContent = '无前一日数据';
-    el('stock-asof').textContent = `截至 ${last.date} · 日线快照`;
-    el('daily-status').textContent = `${data.source || 'DSA'} · ${visible[0].date} 至 ${last.date} · ${visible.length} 根日线`;
-    showMetrics(last, data.data);
+    dailyCache = {symbol: code, source: data.source || 'DSA', stock_name: data.stock_name, data: data.data};
+    paintDaily(code, dailyCache);
   } catch (error) {
     if (version !== requestVersion) return;
+    if (force) dailyCache = null;
     el('daily-status').textContent = error.message;
     el('stock-change').textContent = '暂无数据';
     el('stock-asof').textContent = '本次行情读取失败';
@@ -350,7 +375,7 @@ el('research-symbol').addEventListener('input', () => {
   el('search-results').hidden = true; el('search-status').hidden = true;
   searchTimer = setTimeout(() => searchStocks(), 300);
 });
-el('btn-retry').addEventListener('click', loadDaily);
+el('btn-retry').addEventListener('click', () => loadDaily(true));
 el('btn-save-watch').addEventListener('click', toggleWatch);
 el('btn-chart-reset').addEventListener('click', () => chart?.timeScale().fitContent());
 el('period-controls').addEventListener('click', event => {
@@ -358,10 +383,28 @@ el('period-controls').addEventListener('click', event => {
   if (!button || !connected) return;
   selectedDays = Number(button.dataset.days);
   for (const child of el('period-controls').querySelectorAll('button')) {child.classList.toggle('selected', child === button); child.setAttribute('aria-pressed', String(child === button));}
-  return loadDaily();
+  return applyPeriod();
 });
 el('btn-analyze').addEventListener('click', analyze);
 el('btn-resume').addEventListener('click', pollTask);
+
+el('history-samples').addEventListener('toggle', async () => {
+  if (!el('history-samples').open) return;
+  el('history-samples-status').textContent = '正在读取已导入的历史样本…';
+  try {
+    const data = await api('/api/history-samples');
+    const rows = [
+      ...(data.daily || []).map(row => `${row.symbol} · 日线 · ${row.first} 至 ${row.last} · ${row.rows.toLocaleString()} 条 · ${row.source}`),
+      ...(data.minute || []).map(row => `${row.symbol} · 分钟样本 ${(row.months || []).join('、')} · ${row.rows.toLocaleString()} 条 · 观测 ${row.observed_days} 天，完整常规盘 ${row.complete_regular_days} 天 · ${row.source}`),
+    ];
+    el('history-samples-list').replaceChildren(...rows.map(text => {
+      const p = document.createElement('p'); p.textContent = text; return p;
+    }));
+    el('history-samples-status').textContent = rows.length
+      ? '仅供历史研究。分钟缺口不补造；入场回测还需足够完整交易日热身，日线统计不等于盘中策略收益。'
+      : '尚未导入历史样本。';
+  } catch (error) {el('history-samples-status').textContent = error.message;}
+});
 
 async function loadSignal(code) {
   const version=++signalVersion;

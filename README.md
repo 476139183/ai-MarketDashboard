@@ -22,6 +22,8 @@ bash start-web.sh
 
 首次运行会自动准备独立行情服务，随后打开 `http://127.0.0.1:8766/research`。搜索股票名称或代码，在候选列表中选择后确认。支持日 K、自选、MA5/MA20、成交量和桌面/手机布局。AI 方式由用户手动选择 API、Codex CLI 或 Claude Code CLI；只有点击生成报告才调用，任务与报告按个股隔离。详见 [接入与启动说明](docs/dsa-integration.md)。
 
+历史研究已接入 FinMind 日线与公开 OHLCV 月度样本，按少量股票和月份导入，默认下载预算256MiB。网页展开「历史回测样本」可查看实际覆盖和完整交易日；详见 [公开样本接入](docs/public-history.md)。
+
 ## 目录
 
 ```
