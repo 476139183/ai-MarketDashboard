@@ -112,7 +112,8 @@ docs/                # DSA 接入、公开样本等说明
 
 ## 数据与边界（请先读）
 
-- 行情来自公开源（腾讯 / 新浪 / 东财 / Yahoo·yfinance 等），可能限流、延迟或缺日线
+- 日线多源协作见 `feeds/`（暂仅 A/美）：A 股 `dsa→腾讯→AKShare→BaoStock→Tushare→新浪`，美股 `dsa→Yahoo→yfinance→AV→Finnhub`；可选 `pip install -r requirements-feeds.txt` 与 `.env` 中 Token / `*_DAILY_SOURCES`
+- 行情仍可能限流、延迟或缺日线；分钟/报价链路与日线级联独立
 - A 股信号日：一般 **15:05 后**可用当日收盘；源未落地时自动回退上一交易日
 - 未完整还原除权、停牌、真实涨跌停队列与盘口；回测与候选有前视/幸存者偏差
 - AI 与盘中信号、盘后盯盘是不同链路：AI 是辅助解读，执行以规则面板为准
@@ -120,6 +121,7 @@ docs/                # DSA 接入、公开样本等说明
 ## 测试
 
 ```bash
+python3 -m unittest discover -s feeds -p 'test_*.py'
 python3 -m unittest discover -s markets/a -p 'test_*.py'
 cd markets/us/dashboard && python3 -m unittest test_market_states test_trend_policy
 ```

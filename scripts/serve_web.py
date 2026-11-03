@@ -57,7 +57,13 @@ def main():
     if config.is_file():
         for line in config.read_text().splitlines():
             key, separator, value = line.removeprefix('export ').partition('=')
-            if separator and key.strip() in ('DSA_BASE_URL', 'DSA_SESSION_COOKIE'):
+            feed_keys = (
+                'DSA_BASE_URL', 'DSA_SESSION_COOKIE',
+                'CN_DAILY_SOURCES', 'US_DAILY_SOURCES',
+                'FEEDS_CROSSCHECK', 'TUSHARE_TOKEN',
+                'ALPHAVANTAGE_API_KEY', 'FINNHUB_API_KEY',
+            )
+            if separator and key.strip() in feed_keys:
                 parts = shlex.split(value, comments=True)
                 env.setdefault(key.strip(), parts[0] if parts else '')
     env.setdefault('DSA_BASE_URL', 'http://127.0.0.1:8000')

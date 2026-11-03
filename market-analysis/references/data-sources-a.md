@@ -2,7 +2,12 @@
 
 仅用于 **A股**。不要用本节源去支撑美股信号；也不要用 Nasdaq/Alpaca 当 A股主源。规则见 [market-a-share.md](market-a-share.md)。
 
-整理日期：2026-10-27。**尚未绑定唯一生产主源**；选定后在本节顶部标注「当前生产主源」与延迟声明。
+整理日期：2026-11-03。
+
+**当前生产日线协作（轻量级联）**：`feeds/` → 默认  
+`dsa → tencent → akshare → baostock → tushare → sina`  
+（环境变量 `CN_DAILY_SOURCES` 可改序；缺包/缺 Token 自动跳过）。  
+盘中 15m / 报价仍走新浪分钟 + 腾讯报价。可选 `FEEDS_CROSSCHECK=1` 用下一成功源核对收盘。
 
 ## 选型维度
 
@@ -20,7 +25,7 @@
 |---|---|---|
 | 交易所 / 券商行情 | 官方或牌照源；实时性取决于权限 | 生产优先考虑合规授权 |
 | 东方财富 / 新浪财经等公开页或接口 | 常用于个人研究；稳定性与条款需自核 | 可作交叉核对；注意限流与字段变更 |
-| AkShare / Tushare 等社区库 | 聚合多源；日线与部分分钟 | 核对许可证与数据延迟；不默认「实时」 |
+| AkShare / Tushare / BaoStock | 日线级联备源（见 `feeds/cn.py`） | `pip install -r requirements-feeds.txt`；Tushare 需 `TUSHARE_TOKEN` |
 | Yahoo `=.SS` / `=.SZ` | 有时可用但不稳定 | **不宜单独作盘中主源** |
 
 盘中 ORB/VWAP：至少需要**当日分钟级 OHLCV**（连续竞价）与时间戳。集合竞价阶段单独标注，不与连续竞价混算 VWAP。

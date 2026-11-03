@@ -1,0 +1,5 @@
+# 可选多源行情依赖；缺省时对应源自动跳过，公开 HTTP（腾讯/新浪/Yahoo Chart）仍可用。
+akshare>=1.14.0
+baostock>=0.8.8
+tushare>=1.4.0
+yfinance>=0.2.40

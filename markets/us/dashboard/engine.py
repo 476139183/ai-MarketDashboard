@@ -255,22 +255,32 @@ def _save_cache(symbol: str, interval: str, raw: dict) -> None:
 
 
 def fetch_chart(symbol: str, range_: str, interval: str, prefer_cache: bool = False) -> Tuple[List[dict], dict, str]:
-    """Returns rows, meta, provenance ('dsa'|'live'|'cache')."""
+    """Returns rows, meta, provenance ('dsa'|'live'|'cache'|...)."""
     daily_error = None
     dsa_days = {"1mo": 30, "3mo": 90, "6mo": 180, "1y": 365}.get(range_)
-    if (interval == "1d" and dsa_days and os.environ.get("DSA_BASE_URL", "").strip()
+    if (interval == "1d" and dsa_days
             and os.environ.get("SIGNAL_CACHE", "").strip().lower() not in ("1", "true", "yes")):
         try:
-            result = DSAClient.from_env().daily(symbol, days=dsa_days)
+            if str(_REPO_ROOT) not in sys.path:
+                sys.path.insert(0, str(_REPO_ROOT))
+            from feeds.daily import fetch_daily as multi_fetch_daily
+            result = multi_fetch_daily(symbol, market="us", days=dsa_days, min_bars=5)
             rows = []
-            for bar in result["data"]:
+            for bar in result["bars"]:
                 dt = datetime.fromisoformat(bar["date"]).replace(hour=9, minute=30, tzinfo=NY)
                 rows.append(dict(t=int(dt.timestamp()), dt_ny=dt, dt_bj=dt.astimezone(BJ),
                                  o=bar["open"], h=bar["high"], l=bar["low"], c=bar["close"],
                                  v=bar["volume"] or 0))
-            return rows, {"shortName": result.get("stock_name") or symbol,
-                          "daily_as_of": result["data"][-1]["date"]}, "dsa"
-        except (DSAError, ValueError) as exc:
+            meta = {
+                "shortName": symbol,
+                "daily_as_of": result["as_of"],
+                "daily_source": result.get("source_label") or result["source"],
+                "feed_attempts": result.get("attempts"),
+            }
+            if result.get("warnings"):
+                meta["feed_warning"] = "；".join(result["warnings"])
+            return rows, meta, result["source"]
+        except Exception as exc:
             daily_error = str(exc)
     intraday = interval in INTERVALS or interval in ("1m", "5m", "15m", "30m", "60m", "1h")
     if prefer_cache:

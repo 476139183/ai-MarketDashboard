@@ -2,7 +2,11 @@
 
 仅用于 **美股现货 / ETF / 美股相关永续**。A股见 [data-sources-a.md](data-sources-a.md)。规则见 [market-us.md](market-us.md)。
 
-整理日期：2026-10-26。**尚未绑定唯一生产主源**。现货价 ≠ 永续标记价。
+整理日期：2026-11-03。
+
+**当前生产日线协作（轻量级联）**：`feeds/` → 默认  
+`dsa → yahoo → yfinance → alphavantage → finnhub`  
+（`US_DAILY_SOURCES` 可改序）。分钟线仍走 Nasdaq 分时聚合 + Yahoo/yfinance 回退。现货价 ≠ 永续标记价。
 
 ## 选型维度
 

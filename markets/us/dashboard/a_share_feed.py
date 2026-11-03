@@ -1,13 +1,18 @@
 """沪深 A 股真实日线/15m/报价适配；不调用美股行情源。"""
 import json
-import os
 import re
+import sys
 from datetime import datetime, timedelta
+from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
-from dsa_client import DSAClient
 from market_states import BJ, build_market_context, entry_signal, market_session
+
+_REPO = Path(__file__).resolve().parents[3]
+if str(_REPO) not in sys.path:
+    sys.path.insert(0, str(_REPO))
+from feeds.daily import fetch_daily as multi_fetch_daily  # noqa: E402
 
 
 def exchange_symbol(code):
@@ -56,22 +61,17 @@ def fetch_minutes(code):
 
 
 def fetch_daily(code):
-    if os.environ.get('DSA_BASE_URL','').strip():
-        result=DSAClient.from_env().daily(code,days=180)
-        data=result['data']
-        source='DSA'
-    else:
-        symbol=exchange_symbol(code)
-        query=urlencode({'param':f'{symbol},day,,,320,qfq'})
-        payload=json.loads(_read('https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?'+query))
-        raw=payload.get('data',{}).get(symbol,{}).get('qfqday',[])
-        data=[dict(date=b[0],open=float(b[1]),close=float(b[2]),high=float(b[3]),low=float(b[4]),volume=float(b[5])) for b in raw]
-        source='Tencent qfq'
-    rows=[]
-    for b in data:
-        dt=datetime.fromisoformat(b['date']).replace(hour=9,minute=30,tzinfo=BJ)
-        rows.append(dict(t=int(dt.timestamp()),o=b['open'],h=b['high'],l=b['low'],c=b['close'],v=b['volume'] or 0))
-    return rows,source
+    """多源级联日线：DSA → 腾讯 → AKShare → BaoStock → Tushare → 新浪。"""
+    result = multi_fetch_daily(code, market='cn', days=180, min_bars=5)
+    rows = []
+    for b in result['bars']:
+        dt = datetime.fromisoformat(b['date']).replace(hour=9, minute=30, tzinfo=BJ)
+        rows.append(dict(t=int(dt.timestamp()), o=b['open'], h=b['high'], l=b['low'],
+                         c=b['close'], v=b['volume'] or 0))
+    label = result.get('source_label') or result['source']
+    if result.get('warnings'):
+        label = label + '；' + '；'.join(result['warnings'])
+    return rows, label
 
 
 def analyze_symbol(code, *, accept_overnight=False):
