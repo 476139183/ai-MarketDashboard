@@ -14,6 +14,7 @@ from hot_backtest import as_of_date, load, prepare_symbols
 from hot_source import fetch_names, fetch_rank, now as hot_now
 from large_evaluate import market_above_ma20
 from large_universe import exclusion_reason, quotes
+from trade_plan import build_trade_plan
 
 OUT = Path(__file__).resolve().parent / 'radar-latest.json'
 HOT = Path(__file__).resolve().parent / 'hot-universe.json'
@@ -72,7 +73,8 @@ def _hs300(end):
         query = urlencode({'param': f'sh000300,day,{start},{stop},1200,qfq'})
         url = 'https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?' + query
         with urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=20) as response:
-            day = json.load(response)['data']['sh000300']['day']
+            payload = json.load(response)['data']['sh000300']
+            day = payload.get('day') or payload.get('qfqday') or []
         rows.extend({'date': x[0], 'close': float(x[2])} for x in day)
     rows = sorted({x['date']: x for x in rows}.values(), key=lambda x: x['date'])
     if len(rows) < 30 or any(a['date'] >= b['date'] for a, b in zip(rows, rows[1:])):
@@ -165,6 +167,14 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
         if len(bars) >= 2 and float(bars[-2]['close']) > 0:
             row['change_pct'] = round((close / float(bars[-2]['close']) - 1) * 100, 2)
         row['note'] = _watch_note(row['category'], signals, market_pass)
+        plan = build_trade_plan(bars)
+        if plan:
+            row['trade_plan'] = plan
+            row['sniper'] = plan['sniper']
+            row['checklist'] = plan['checklist']
+            row['plan_ready'] = plan['plan_ready']
+            row['summary'] = plan['summary']
+            row['note'] = row['note'] + '；' + plan['summary']
         (strategy if row['category'] == '策略候选' else watch).append(row)
 
     strategy.sort(key=lambda x: (-('trend' in x['rules']), x['code']))
@@ -185,7 +195,8 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
         'excluded_count': len(excluded) + len(rejected),
         'limitations': [
             '热榜股票池有幸存者/人气偏差，不是全市场扫描',
-            '收盘后判断、次日观察；不等于自动下单或保证开盘可买',
+            '收盘后判断、次日观察；点位为回踩预案，不等于自动下单或保证开盘可买',
+            '作战计划参考乖离<5%、MA多头与MA5/MA10/MA20结构，属研究规则',
             '普通A股现货默认只研究做多方向',
             '未完整处理除权、停牌与真实涨跌停队列',
         ],

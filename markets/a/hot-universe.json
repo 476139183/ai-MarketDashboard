@@ -1,6 +1,9 @@
 {
-  "generated_at": "2026-11-03T15:19:41+08:00",
+  "generated_at": "2026-11-03T17:06:13+08:00",
   "source": "东方财富股吧当前人气榜及人气飙升榜",
+  "source_timestamp": null,
+  "time_note": "源榜单未提供榜单生成时间；received_at 为本次请求接收时间，不能作为历史日期的榜单。",
+  "coverage_note": "两个接口各请求前100条；并集保留北交所证券，不代表全市场全部热门股票。简称由腾讯行情补充。",
   "stocks": [
     {
       "code": "001381",
@@ -120,11 +123,11 @@
       }
     },
     {
-      "code": "603533",
-      "name": "掌阅科技",
+      "code": "300502",
+      "name": "新易盛",
       "rank": 10,
-      "source_symbol": "SH603533",
-      "exchange": "SH",
+      "source_symbol": "SZ300502",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 10,
@@ -133,11 +136,11 @@
       }
     },
     {
-      "code": "000530",
-      "name": "冰山冷热",
+      "code": "688825",
+      "name": "长鑫科技",
       "rank": 11,
-      "source_symbol": "SZ000530",
-      "exchange": "SZ",
+      "source_symbol": "SH688825",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 11,
@@ -146,10 +149,10 @@
       }
     },
     {
-      "code": "300750",
-      "name": "宁德时代",
+      "code": "000530",
+      "name": "冰山冷热",
       "rank": 12,
-      "source_symbol": "SZ300750",
+      "source_symbol": "SZ000530",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -159,11 +162,11 @@
       }
     },
     {
-      "code": "300502",
-      "name": "新易盛",
+      "code": "603533",
+      "name": "掌阅科技",
       "rank": 13,
-      "source_symbol": "SZ300502",
-      "exchange": "SZ",
+      "source_symbol": "SH603533",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 13,
@@ -172,10 +175,10 @@
       }
     },
     {
-      "code": "000995",
-      "name": "皇台酒业",
+      "code": "300750",
+      "name": "宁德时代",
       "rank": 14,
-      "source_symbol": "SZ000995",
+      "source_symbol": "SZ300750",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -185,11 +188,11 @@
       }
     },
     {
-      "code": "688825",
-      "name": "长鑫科技",
+      "code": "000995",
+      "name": "皇台酒业",
       "rank": 15,
-      "source_symbol": "SH688825",
-      "exchange": "SH",
+      "source_symbol": "SZ000995",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 15,
@@ -198,10 +201,10 @@
       }
     },
     {
-      "code": "300059",
-      "name": "东方财富",
+      "code": "002249",
+      "name": "大洋电机",
       "rank": 16,
-      "source_symbol": "SZ300059",
+      "source_symbol": "SZ002249",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -211,11 +214,11 @@
       }
     },
     {
-      "code": "002724",
-      "name": "海洋王",
+      "code": "600519",
+      "name": "贵州茅台",
       "rank": 17,
-      "source_symbol": "SZ002724",
-      "exchange": "SZ",
+      "source_symbol": "SH600519",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 17,
@@ -224,11 +227,11 @@
       }
     },
     {
-      "code": "600892",
-      "name": "大晟文化",
+      "code": "002029",
+      "name": "七 匹 狼",
       "rank": 18,
-      "source_symbol": "SH600892",
-      "exchange": "SH",
+      "source_symbol": "SZ002029",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 18,
@@ -237,10 +240,10 @@
       }
     },
     {
-      "code": "301487",
-      "name": "盟固利",
+      "code": "300059",
+      "name": "东方财富",
       "rank": 19,
-      "source_symbol": "SZ301487",
+      "source_symbol": "SZ300059",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -250,10 +253,10 @@
       }
     },
     {
-      "code": "600519",
-      "name": "贵州茅台",
+      "code": "600892",
+      "name": "大晟文化",
       "rank": 20,
-      "source_symbol": "SH600519",
+      "source_symbol": "SH600892",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -263,10 +266,10 @@
       }
     },
     {
-      "code": "002029",
-      "name": "七 匹 狼",
+      "code": "002724",
+      "name": "海洋王",
       "rank": 21,
-      "source_symbol": "SZ002029",
+      "source_symbol": "SZ002724",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -289,10 +292,10 @@
       }
     },
     {
-      "code": "002249",
-      "name": "大洋电机",
+      "code": "002696",
+      "name": "百洋股份",
       "rank": 23,
-      "source_symbol": "SZ002249",
+      "source_symbol": "SZ002696",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -302,10 +305,10 @@
       }
     },
     {
-      "code": "300274",
-      "name": "阳光电源",
+      "code": "001318",
+      "name": "阳光乳业",
       "rank": 24,
-      "source_symbol": "SZ300274",
+      "source_symbol": "SZ001318",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -315,10 +318,10 @@
       }
     },
     {
-      "code": "002696",
-      "name": "百洋股份",
+      "code": "301487",
+      "name": "盟固利",
       "rank": 25,
-      "source_symbol": "SZ002696",
+      "source_symbol": "SZ301487",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -328,11 +331,11 @@
       }
     },
     {
-      "code": "603278",
-      "name": "大业股份",
+      "code": "000591",
+      "name": "太阳能",
       "rank": 26,
-      "source_symbol": "SH603278",
-      "exchange": "SH",
+      "source_symbol": "SZ000591",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 26,
@@ -341,10 +344,10 @@
       }
     },
     {
-      "code": "688836",
-      "name": "宇树科技-W",
+      "code": "600293",
+      "name": "三峡新材",
       "rank": 27,
-      "source_symbol": "SH688836",
+      "source_symbol": "SH600293",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -354,10 +357,10 @@
       }
     },
     {
-      "code": "001318",
-      "name": "阳光乳业",
+      "code": "300274",
+      "name": "阳光电源",
       "rank": 28,
-      "source_symbol": "SZ001318",
+      "source_symbol": "SZ300274",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -367,11 +370,11 @@
       }
     },
     {
-      "code": "002343",
-      "name": "慈文传媒",
+      "code": "600558",
+      "name": "大西洋",
       "rank": 29,
-      "source_symbol": "SZ002343",
-      "exchange": "SZ",
+      "source_symbol": "SH600558",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 29,
@@ -380,10 +383,10 @@
       }
     },
     {
-      "code": "600293",
-      "name": "三峡新材",
+      "code": "688836",
+      "name": "宇树科技-W",
       "rank": 30,
-      "source_symbol": "SH600293",
+      "source_symbol": "SH688836",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -393,11 +396,11 @@
       }
     },
     {
-      "code": "002384",
-      "name": "东山精密",
+      "code": "603278",
+      "name": "大业股份",
       "rank": 31,
-      "source_symbol": "SZ002384",
-      "exchange": "SZ",
+      "source_symbol": "SH603278",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 31,
@@ -406,10 +409,10 @@
       }
     },
     {
-      "code": "300085",
-      "name": "银之杰",
+      "code": "002292",
+      "name": "奥飞娱乐",
       "rank": 32,
-      "source_symbol": "SZ300085",
+      "source_symbol": "SZ002292",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -419,10 +422,10 @@
       }
     },
     {
-      "code": "001219",
-      "name": "青岛食品",
+      "code": "002384",
+      "name": "东山精密",
       "rank": 33,
-      "source_symbol": "SZ001219",
+      "source_symbol": "SZ002384",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -432,10 +435,10 @@
       }
     },
     {
-      "code": "300426",
-      "name": "华智数媒",
+      "code": "300739",
+      "name": "明阳电路",
       "rank": 34,
-      "source_symbol": "SZ300426",
+      "source_symbol": "SZ300739",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -445,10 +448,10 @@
       }
     },
     {
-      "code": "002292",
-      "name": "奥飞娱乐",
+      "code": "002343",
+      "name": "慈文传媒",
       "rank": 35,
-      "source_symbol": "SZ002292",
+      "source_symbol": "SZ002343",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -458,11 +461,11 @@
       }
     },
     {
-      "code": "605577",
-      "name": "龙版传媒",
+      "code": "002300",
+      "name": "太阳电缆",
       "rank": 36,
-      "source_symbol": "SH605577",
-      "exchange": "SH",
+      "source_symbol": "SZ002300",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 36,
@@ -471,10 +474,10 @@
       }
     },
     {
-      "code": "603258",
-      "name": "电魂网络",
+      "code": "601566",
+      "name": "九牧王",
       "rank": 37,
-      "source_symbol": "SH603258",
+      "source_symbol": "SH601566",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -484,10 +487,10 @@
       }
     },
     {
-      "code": "600838",
-      "name": "上海九百",
+      "code": "605577",
+      "name": "龙版传媒",
       "rank": 38,
-      "source_symbol": "SH600838",
+      "source_symbol": "SH605577",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -497,11 +500,11 @@
       }
     },
     {
-      "code": "600506",
-      "name": "统一股份",
+      "code": "300085",
+      "name": "银之杰",
       "rank": 39,
-      "source_symbol": "SH600506",
-      "exchange": "SH",
+      "source_symbol": "SZ300085",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 39,
@@ -510,10 +513,10 @@
       }
     },
     {
-      "code": "688256",
-      "name": "寒武纪",
+      "code": "603258",
+      "name": "电魂网络",
       "rank": 40,
-      "source_symbol": "SH688256",
+      "source_symbol": "SH603258",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -523,10 +526,10 @@
       }
     },
     {
-      "code": "300739",
-      "name": "明阳电路",
+      "code": "001219",
+      "name": "青岛食品",
       "rank": 41,
-      "source_symbol": "SZ300739",
+      "source_symbol": "SZ001219",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -536,11 +539,11 @@
       }
     },
     {
-      "code": "000591",
-      "name": "太阳能",
+      "code": "688256",
+      "name": "寒武纪",
       "rank": 42,
-      "source_symbol": "SZ000591",
-      "exchange": "SZ",
+      "source_symbol": "SH688256",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 42,
@@ -549,11 +552,11 @@
       }
     },
     {
-      "code": "000410",
-      "name": "沈阳机床",
+      "code": "601188",
+      "name": "龙江交通",
       "rank": 43,
-      "source_symbol": "SZ000410",
-      "exchange": "SZ",
+      "source_symbol": "SH601188",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 43,
@@ -562,10 +565,10 @@
       }
     },
     {
-      "code": "601398",
-      "name": "工商银行",
+      "code": "600838",
+      "name": "上海九百",
       "rank": 44,
-      "source_symbol": "SH601398",
+      "source_symbol": "SH600838",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -575,11 +578,11 @@
       }
     },
     {
-      "code": "600558",
-      "name": "大西洋",
+      "code": "001309",
+      "name": "德明利",
       "rank": 45,
-      "source_symbol": "SH600558",
-      "exchange": "SH",
+      "source_symbol": "SZ001309",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 45,
@@ -588,10 +591,10 @@
       }
     },
     {
-      "code": "000525",
-      "name": "红太阳",
+      "code": "300426",
+      "name": "华智数媒",
       "rank": 46,
-      "source_symbol": "SZ000525",
+      "source_symbol": "SZ300426",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -601,10 +604,10 @@
       }
     },
     {
-      "code": "600825",
-      "name": "新华传媒",
+      "code": "601599",
+      "name": "浙文影业",
       "rank": 47,
-      "source_symbol": "SH600825",
+      "source_symbol": "SH601599",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -614,11 +617,11 @@
       }
     },
     {
-      "code": "002242",
-      "name": "九阳股份",
+      "code": "601086",
+      "name": "国芳集团",
       "rank": 48,
-      "source_symbol": "SZ002242",
-      "exchange": "SZ",
+      "source_symbol": "SH601086",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 48,
@@ -627,10 +630,10 @@
       }
     },
     {
-      "code": "002300",
-      "name": "太阳电缆",
+      "code": "002242",
+      "name": "九阳股份",
       "rank": 49,
-      "source_symbol": "SZ002300",
+      "source_symbol": "SZ002242",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -640,10 +643,10 @@
       }
     },
     {
-      "code": "600189",
-      "name": "泉阳泉",
+      "code": "601398",
+      "name": "工商银行",
       "rank": 50,
-      "source_symbol": "SH600189",
+      "source_symbol": "SH601398",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -653,10 +656,10 @@
       }
     },
     {
-      "code": "601566",
-      "name": "九牧王",
+      "code": "603986",
+      "name": "兆易创新",
       "rank": 51,
-      "source_symbol": "SH601566",
+      "source_symbol": "SH603986",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -666,11 +669,11 @@
       }
     },
     {
-      "code": "603986",
-      "name": "兆易创新",
+      "code": "000525",
+      "name": "红太阳",
       "rank": 52,
-      "source_symbol": "SH603986",
-      "exchange": "SH",
+      "source_symbol": "SZ000525",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 52,
@@ -679,10 +682,10 @@
       }
     },
     {
-      "code": "601086",
-      "name": "国芳集团",
+      "code": "600506",
+      "name": "统一股份",
       "rank": 53,
-      "source_symbol": "SH601086",
+      "source_symbol": "SH600506",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -692,10 +695,10 @@
       }
     },
     {
-      "code": "601599",
-      "name": "浙文影业",
+      "code": "600487",
+      "name": "亨通光电",
       "rank": 54,
-      "source_symbol": "SH601599",
+      "source_symbol": "SH600487",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -705,10 +708,10 @@
       }
     },
     {
-      "code": "002639",
-      "name": "雪人集团",
+      "code": "000410",
+      "name": "沈阳机床",
       "rank": 55,
-      "source_symbol": "SZ002639",
+      "source_symbol": "SZ000410",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -718,11 +721,11 @@
       }
     },
     {
-      "code": "002354",
-      "name": "天娱数科",
+      "code": "603906",
+      "name": "龙蟠科技",
       "rank": 56,
-      "source_symbol": "SZ002354",
-      "exchange": "SZ",
+      "source_symbol": "SH603906",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 56,
@@ -731,10 +734,10 @@
       }
     },
     {
-      "code": "600487",
-      "name": "亨通光电",
+      "code": "600189",
+      "name": "泉阳泉",
       "rank": 57,
-      "source_symbol": "SH600487",
+      "source_symbol": "SH600189",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -744,11 +747,11 @@
       }
     },
     {
-      "code": "002558",
-      "name": "巨人网络",
+      "code": "600825",
+      "name": "新华传媒",
       "rank": 58,
-      "source_symbol": "SZ002558",
-      "exchange": "SZ",
+      "source_symbol": "SH600825",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 58,
@@ -770,10 +773,10 @@
       }
     },
     {
-      "code": "601188",
-      "name": "龙江交通",
+      "code": "603330",
+      "name": "天洋新材",
       "rank": 60,
-      "source_symbol": "SH601188",
+      "source_symbol": "SH603330",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -783,11 +786,11 @@
       }
     },
     {
-      "code": "000725",
-      "name": "京东方Ａ",
+      "code": "600183",
+      "name": "生益科技",
       "rank": 61,
-      "source_symbol": "SZ000725",
-      "exchange": "SZ",
+      "source_symbol": "SH600183",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 61,
@@ -796,10 +799,10 @@
       }
     },
     {
-      "code": "001309",
-      "name": "德明利",
+      "code": "300010",
+      "name": "ST豆神",
       "rank": 62,
-      "source_symbol": "SZ001309",
+      "source_symbol": "SZ300010",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -809,10 +812,10 @@
       }
     },
     {
-      "code": "300182",
-      "name": "捷成股份",
+      "code": "000725",
+      "name": "京东方Ａ",
       "rank": 63,
-      "source_symbol": "SZ300182",
+      "source_symbol": "SZ000725",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -822,11 +825,11 @@
       }
     },
     {
-      "code": "600259",
-      "name": "中稀有色",
+      "code": "002058",
+      "name": "紫竹高科",
       "rank": 64,
-      "source_symbol": "SH600259",
-      "exchange": "SH",
+      "source_symbol": "SZ002058",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 64,
@@ -835,10 +838,10 @@
       }
     },
     {
-      "code": "600183",
-      "name": "生益科技",
+      "code": "600327",
+      "name": "大东方",
       "rank": 65,
-      "source_symbol": "SH600183",
+      "source_symbol": "SH600327",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -848,11 +851,11 @@
       }
     },
     {
-      "code": "000417",
-      "name": "合百集团",
+      "code": "600241",
+      "name": "时代万恒",
       "rank": 66,
-      "source_symbol": "SZ000417",
-      "exchange": "SZ",
+      "source_symbol": "SH600241",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 66,
@@ -861,10 +864,10 @@
       }
     },
     {
-      "code": "601099",
-      "name": "太平洋",
+      "code": "605058",
+      "name": "澳弘电子",
       "rank": 67,
-      "source_symbol": "SH601099",
+      "source_symbol": "SH605058",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -874,10 +877,10 @@
       }
     },
     {
-      "code": "002636",
-      "name": "金安国纪",
+      "code": "002639",
+      "name": "雪人集团",
       "rank": 68,
-      "source_symbol": "SZ002636",
+      "source_symbol": "SZ002639",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -887,10 +890,10 @@
       }
     },
     {
-      "code": "600127",
-      "name": "金健米业",
+      "code": "600802",
+      "name": "福建水泥",
       "rank": 69,
-      "source_symbol": "SH600127",
+      "source_symbol": "SH600802",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -900,11 +903,11 @@
       }
     },
     {
-      "code": "603906",
-      "name": "龙蟠科技",
+      "code": "002558",
+      "name": "巨人网络",
       "rank": 70,
-      "source_symbol": "SH603906",
-      "exchange": "SH",
+      "source_symbol": "SZ002558",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 70,
@@ -913,10 +916,10 @@
       }
     },
     {
-      "code": "002949",
-      "name": "华阳国际",
+      "code": "002354",
+      "name": "天娱数科",
       "rank": 71,
-      "source_symbol": "SZ002949",
+      "source_symbol": "SZ002354",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -926,10 +929,10 @@
       }
     },
     {
-      "code": "300010",
-      "name": "ST豆神",
+      "code": "002827",
+      "name": "高争民爆",
       "rank": 72,
-      "source_symbol": "SZ300010",
+      "source_symbol": "SZ002827",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -939,11 +942,11 @@
       }
     },
     {
-      "code": "603131",
-      "name": "上海沪工",
+      "code": "002949",
+      "name": "华阳国际",
       "rank": 73,
-      "source_symbol": "SH603131",
-      "exchange": "SH",
+      "source_symbol": "SZ002949",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 73,
@@ -952,23 +955,27 @@
       }
     },
     {
-      "code": "002181",
-      "name": "粤 传 媒",
+      "code": "301513",
+      "name": "尚水智能",
       "rank": 74,
-      "source_symbol": "SZ002181",
+      "source_symbol": "SZ301513",
       "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 74,
           "popularity_rank": 74
+        },
+        "rising": {
+          "list_rank": 56,
+          "popularity_rank": 74
         }
       }
     },
     {
-      "code": "603200",
-      "name": "上海洗霸",
+      "code": "600259",
+      "name": "中稀有色",
       "rank": 75,
-      "source_symbol": "SH603200",
+      "source_symbol": "SH600259",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -978,11 +985,11 @@
       }
     },
     {
-      "code": "002058",
-      "name": "紫竹高科",
+      "code": "603131",
+      "name": "上海沪工",
       "rank": 76,
-      "source_symbol": "SZ002058",
-      "exchange": "SZ",
+      "source_symbol": "SH603131",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 76,
@@ -991,11 +998,11 @@
       }
     },
     {
-      "code": "600576",
-      "name": "祥源文旅",
+      "code": "002636",
+      "name": "金安国纪",
       "rank": 77,
-      "source_symbol": "SH600576",
-      "exchange": "SH",
+      "source_symbol": "SZ002636",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 77,
@@ -1004,10 +1011,10 @@
       }
     },
     {
-      "code": "601091",
-      "name": "沈鼓集团",
+      "code": "605388",
+      "name": "均瑶健康",
       "rank": 78,
-      "source_symbol": "SH601091",
+      "source_symbol": "SH605388",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -1017,28 +1024,24 @@
       }
     },
     {
-      "code": "301513",
-      "name": "尚水智能",
+      "code": "600127",
+      "name": "金健米业",
       "rank": 79,
-      "source_symbol": "SZ301513",
-      "exchange": "SZ",
+      "source_symbol": "SH600127",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 79,
-          "popularity_rank": 79
-        },
-        "rising": {
-          "list_rank": 52,
           "popularity_rank": 79
         }
       }
     },
     {
-      "code": "605058",
-      "name": "澳弘电子",
+      "code": "000417",
+      "name": "合百集团",
       "rank": 80,
-      "source_symbol": "SH605058",
-      "exchange": "SH",
+      "source_symbol": "SZ000417",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 80,
@@ -1047,11 +1050,11 @@
       }
     },
     {
-      "code": "002708",
-      "name": "光洋股份",
+      "code": "601099",
+      "name": "太平洋",
       "rank": 81,
-      "source_symbol": "SZ002708",
-      "exchange": "SZ",
+      "source_symbol": "SH601099",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 81,
@@ -1060,11 +1063,11 @@
       }
     },
     {
-      "code": "603330",
-      "name": "天洋新材",
+      "code": "002805",
+      "name": "丰元股份",
       "rank": 82,
-      "source_symbol": "SH603330",
-      "exchange": "SH",
+      "source_symbol": "SZ002805",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 82,
@@ -1073,10 +1076,10 @@
       }
     },
     {
-      "code": "000592",
-      "name": "平潭发展",
+      "code": "300182",
+      "name": "捷成股份",
       "rank": 83,
-      "source_symbol": "SZ000592",
+      "source_symbol": "SZ300182",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -1086,11 +1089,11 @@
       }
     },
     {
-      "code": "601899",
-      "name": "紫金矿业",
+      "code": "000599",
+      "name": "青岛双星",
       "rank": 84,
-      "source_symbol": "SH601899",
-      "exchange": "SH",
+      "source_symbol": "SZ000599",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 84,
@@ -1099,11 +1102,11 @@
       }
     },
     {
-      "code": "002827",
-      "name": "高争民爆",
+      "code": "603200",
+      "name": "上海洗霸",
       "rank": 85,
-      "source_symbol": "SZ002827",
-      "exchange": "SZ",
+      "source_symbol": "SH603200",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 85,
@@ -1112,11 +1115,11 @@
       }
     },
     {
-      "code": "600241",
-      "name": "时代万恒",
+      "code": "002181",
+      "name": "粤 传 媒",
       "rank": 86,
-      "source_symbol": "SH600241",
-      "exchange": "SH",
+      "source_symbol": "SZ002181",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 86,
@@ -1125,10 +1128,10 @@
       }
     },
     {
-      "code": "600802",
-      "name": "福建水泥",
+      "code": "601318",
+      "name": "中国平安",
       "rank": 87,
-      "source_symbol": "SH600802",
+      "source_symbol": "SH601318",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -1138,11 +1141,11 @@
       }
     },
     {
-      "code": "601138",
-      "name": "工业富联",
+      "code": "002708",
+      "name": "光洋股份",
       "rank": 88,
-      "source_symbol": "SH601138",
-      "exchange": "SH",
+      "source_symbol": "SZ002708",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 88,
@@ -1151,10 +1154,10 @@
       }
     },
     {
-      "code": "603703",
-      "name": "盛洋科技",
+      "code": "601899",
+      "name": "紫金矿业",
       "rank": 89,
-      "source_symbol": "SH603703",
+      "source_symbol": "SH601899",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -1164,11 +1167,11 @@
       }
     },
     {
-      "code": "002275",
-      "name": "桂林三金",
+      "code": "601091",
+      "name": "沈鼓集团",
       "rank": 90,
-      "source_symbol": "SZ002275",
-      "exchange": "SZ",
+      "source_symbol": "SH601091",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 90,
@@ -1177,10 +1180,10 @@
       }
     },
     {
-      "code": "605388",
-      "name": "均瑶健康",
+      "code": "601138",
+      "name": "工业富联",
       "rank": 91,
-      "source_symbol": "SH605388",
+      "source_symbol": "SH601138",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -1190,11 +1193,11 @@
       }
     },
     {
-      "code": "301262",
-      "name": "海看股份",
+      "code": "600745",
+      "name": "*ST闻泰",
       "rank": 92,
-      "source_symbol": "SZ301262",
-      "exchange": "SZ",
+      "source_symbol": "SH600745",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 92,
@@ -1203,36 +1206,44 @@
       }
     },
     {
-      "code": "302132",
-      "name": "中航成飞",
+      "code": "603381",
+      "name": "永臻股份",
       "rank": 93,
-      "source_symbol": "SZ302132",
-      "exchange": "SZ",
+      "source_symbol": "SH603381",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 93,
+          "popularity_rank": 93
+        },
+        "rising": {
+          "list_rank": 17,
           "popularity_rank": 93
         }
       }
     },
     {
-      "code": "600745",
-      "name": "*ST闻泰",
+      "code": "605378",
+      "name": "野马电池",
       "rank": 94,
-      "source_symbol": "SH600745",
+      "source_symbol": "SH605378",
       "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 94,
           "popularity_rank": 94
+        },
+        "rising": {
+          "list_rank": 37,
+          "popularity_rank": 94
         }
       }
     },
     {
-      "code": "002281",
-      "name": "光迅科技",
+      "code": "000592",
+      "name": "平潭发展",
       "rank": 95,
-      "source_symbol": "SZ002281",
+      "source_symbol": "SZ000592",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -1242,11 +1253,11 @@
       }
     },
     {
-      "code": "600327",
-      "name": "大东方",
+      "code": "002281",
+      "name": "光迅科技",
       "rank": 96,
-      "source_symbol": "SH600327",
-      "exchange": "SH",
+      "source_symbol": "SZ002281",
+      "exchange": "SZ",
       "lists": {
         "popularity": {
           "list_rank": 96,
@@ -1255,10 +1266,10 @@
       }
     },
     {
-      "code": "600584",
-      "name": "长电科技",
+      "code": "600576",
+      "name": "祥源文旅",
       "rank": 97,
-      "source_symbol": "SH600584",
+      "source_symbol": "SH600576",
       "exchange": "SH",
       "lists": {
         "popularity": {
@@ -1268,10 +1279,10 @@
       }
     },
     {
-      "code": "300223",
-      "name": "君正股份",
+      "code": "002088",
+      "name": "鲁阳节能",
       "rank": 98,
-      "source_symbol": "SZ300223",
+      "source_symbol": "SZ002088",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -1281,10 +1292,10 @@
       }
     },
     {
-      "code": "002463",
-      "name": "沪电股份",
+      "code": "002275",
+      "name": "桂林三金",
       "rank": 99,
-      "source_symbol": "SZ002463",
+      "source_symbol": "SZ002275",
       "exchange": "SZ",
       "lists": {
         "popularity": {
@@ -1294,11 +1305,11 @@
       }
     },
     {
-      "code": "002805",
-      "name": "丰元股份",
+      "code": "603703",
+      "name": "盛洋科技",
       "rank": 100,
-      "source_symbol": "SZ002805",
-      "exchange": "SZ",
+      "source_symbol": "SH603703",
+      "exchange": "SH",
       "lists": {
         "popularity": {
           "list_rank": 100,
@@ -1307,1292 +1318,2482 @@
       }
     },
     {
-      "code": "605378",
-      "name": "野马电池",
-      "rank": 123,
-      "source_symbol": "SH605378",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 34,
-          "popularity_rank": 123
-        }
-      }
-    },
-    {
-      "code": "002190",
-      "name": "成飞集成",
-      "rank": 124,
-      "source_symbol": "SZ002190",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 20,
-          "popularity_rank": 124
-        }
-      }
-    },
-    {
-      "code": "603381",
-      "name": "永臻股份",
-      "rank": 138,
-      "source_symbol": "SH603381",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 22,
-          "popularity_rank": 138
-        }
-      }
-    },
-    {
-      "code": "301311",
-      "name": "昆船智能",
-      "rank": 146,
-      "source_symbol": "SZ301311",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 59,
-          "popularity_rank": 146
-        }
-      }
-    },
-    {
       "code": "000151",
       "name": "中成股份",
-      "rank": 189,
+      "rank": 108,
       "source_symbol": "SZ000151",
       "exchange": "SZ",
       "lists": {
         "rising": {
           "list_rank": 6,
-          "popularity_rank": 189
-        }
-      }
-    },
-    {
-      "code": "920627",
-      "name": "力王股份",
-      "rank": 213,
-      "source_symbol": "SZ920627",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 21,
-          "popularity_rank": 213
-        }
-      }
-    },
-    {
-      "code": "603402",
-      "name": "陕西旅游",
-      "rank": 220,
-      "source_symbol": "SH603402",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 47,
-          "popularity_rank": 220
-        }
-      }
-    },
-    {
-      "code": "300118",
-      "name": "东方日升",
-      "rank": 241,
-      "source_symbol": "SZ300118",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 70,
-          "popularity_rank": 241
+          "popularity_rank": 108
         }
       }
     },
     {
       "code": "601366",
       "name": "利群股份",
-      "rank": 276,
+      "rank": 112,
       "source_symbol": "SH601366",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 65,
-          "popularity_rank": 276
-        }
-      }
-    },
-    {
-      "code": "002651",
-      "name": "利君股份",
-      "rank": 294,
-      "source_symbol": "SZ002651",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 23,
-          "popularity_rank": 294
-        }
-      }
-    },
-    {
-      "code": "002105",
-      "name": "信隆健康",
-      "rank": 312,
-      "source_symbol": "SZ002105",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 8,
-          "popularity_rank": 312
-        }
-      }
-    },
-    {
-      "code": "600778",
-      "name": "友好集团",
-      "rank": 347,
-      "source_symbol": "SH600778",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 11,
-          "popularity_rank": 347
+          "list_rank": 55,
+          "popularity_rank": 112
         }
       }
     },
     {
       "code": "002522",
       "name": "浙江众成",
-      "rank": 357,
+      "rank": 115,
       "source_symbol": "SZ002522",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 56,
-          "popularity_rank": 357
+          "list_rank": 46,
+          "popularity_rank": 115
         }
       }
     },
     {
-      "code": "603477",
-      "name": "巨星农牧",
-      "rank": 374,
-      "source_symbol": "SH603477",
+      "code": "603402",
+      "name": "陕西旅游",
+      "rank": 134,
+      "source_symbol": "SH603402",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 39,
-          "popularity_rank": 374
+          "list_rank": 48,
+          "popularity_rank": 134
+        }
+      }
+    },
+    {
+      "code": "301311",
+      "name": "昆船智能",
+      "rank": 145,
+      "source_symbol": "SZ301311",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 61,
+          "popularity_rank": 145
+        }
+      }
+    },
+    {
+      "code": "601123",
+      "name": "马矿股份",
+      "rank": 150,
+      "source_symbol": "SH601123",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 74,
+          "popularity_rank": 150
+        }
+      }
+    },
+    {
+      "code": "002190",
+      "name": "成飞集成",
+      "rank": 151,
+      "source_symbol": "SZ002190",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 24,
+          "popularity_rank": 151
+        }
+      }
+    },
+    {
+      "code": "600778",
+      "name": "友好集团",
+      "rank": 159,
+      "source_symbol": "SH600778",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 10,
+          "popularity_rank": 159
+        }
+      }
+    },
+    {
+      "code": "002105",
+      "name": "信隆健康",
+      "rank": 169,
+      "source_symbol": "SZ002105",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 8,
+          "popularity_rank": 169
         }
       }
     },
     {
       "code": "002992",
       "name": "宝明科技",
-      "rank": 464,
+      "rank": 177,
       "source_symbol": "SZ002992",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 5,
-          "popularity_rank": 464
+          "list_rank": 4,
+          "popularity_rank": 177
         }
       }
     },
     {
-      "code": "002043",
-      "name": "兔 宝 宝",
-      "rank": 465,
-      "source_symbol": "SZ002043",
+      "code": "920627",
+      "name": "力王股份",
+      "rank": 235,
+      "source_symbol": "SZ920627",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 23,
+          "popularity_rank": 235
+        }
+      }
+    },
+    {
+      "code": "300118",
+      "name": "东方日升",
+      "rank": 268,
+      "source_symbol": "SZ300118",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 51,
-          "popularity_rank": 465
+          "list_rank": 72,
+          "popularity_rank": 268
+        }
+      }
+    },
+    {
+      "code": "002651",
+      "name": "利君股份",
+      "rank": 300,
+      "source_symbol": "SZ002651",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 27,
+          "popularity_rank": 300
+        }
+      }
+    },
+    {
+      "code": "603477",
+      "name": "巨星农牧",
+      "rank": 329,
+      "source_symbol": "SH603477",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 41,
+          "popularity_rank": 329
         }
       }
     },
     {
       "code": "603567",
       "name": "珍宝岛",
-      "rank": 476,
+      "rank": 420,
       "source_symbol": "SH603567",
       "exchange": "SH",
       "lists": {
         "rising": {
           "list_rank": 30,
-          "popularity_rank": 476
-        }
-      }
-    },
-    {
-      "code": "688299",
-      "name": "长阳科技",
-      "rank": 493,
-      "source_symbol": "SH688299",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 68,
-          "popularity_rank": 493
-        }
-      }
-    },
-    {
-      "code": "301662",
-      "name": "宏工科技",
-      "rank": 514,
-      "source_symbol": "SZ301662",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 19,
-          "popularity_rank": 514
-        }
-      }
-    },
-    {
-      "code": "920779",
-      "name": "武汉蓝电",
-      "rank": 532,
-      "source_symbol": "SZ920779",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 1,
-          "popularity_rank": 532
-        }
-      }
-    },
-    {
-      "code": "001396",
-      "name": "誉帆科技",
-      "rank": 548,
-      "source_symbol": "SZ001396",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 3,
-          "popularity_rank": 548
-        }
-      }
-    },
-    {
-      "code": "600278",
-      "name": "东方创业",
-      "rank": 581,
-      "source_symbol": "SH600278",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 26,
-          "popularity_rank": 581
+          "popularity_rank": 420
         }
       }
     },
     {
       "code": "000838",
       "name": "*ST发展",
-      "rank": 597,
+      "rank": 422,
       "source_symbol": "SZ000838",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 75,
-          "popularity_rank": 597
+          "list_rank": 63,
+          "popularity_rank": 422
+        }
+      }
+    },
+    {
+      "code": "002043",
+      "name": "兔 宝 宝",
+      "rank": 430,
+      "source_symbol": "SZ002043",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 54,
+          "popularity_rank": 430
+        }
+      }
+    },
+    {
+      "code": "600278",
+      "name": "东方创业",
+      "rank": 461,
+      "source_symbol": "SH600278",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 20,
+          "popularity_rank": 461
+        }
+      }
+    },
+    {
+      "code": "688299",
+      "name": "长阳科技",
+      "rank": 496,
+      "source_symbol": "SH688299",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 68,
+          "popularity_rank": 496
+        }
+      }
+    },
+    {
+      "code": "001396",
+      "name": "誉帆科技",
+      "rank": 507,
+      "source_symbol": "SZ001396",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 3,
+          "popularity_rank": 507
+        }
+      }
+    },
+    {
+      "code": "301662",
+      "name": "宏工科技",
+      "rank": 529,
+      "source_symbol": "SZ301662",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 21,
+          "popularity_rank": 529
         }
       }
     },
     {
       "code": "300338",
       "name": "*ST开元",
-      "rank": 612,
+      "rank": 534,
       "source_symbol": "SZ300338",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 76,
-          "popularity_rank": 612
+          "list_rank": 70,
+          "popularity_rank": 534
+        }
+      }
+    },
+    {
+      "code": "920779",
+      "name": "武汉蓝电",
+      "rank": 579,
+      "source_symbol": "SZ920779",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 2,
+          "popularity_rank": 579
         }
       }
     },
     {
       "code": "300247",
       "name": "融捷健康",
-      "rank": 674,
+      "rank": 594,
       "source_symbol": "SZ300247",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 2,
-          "popularity_rank": 674
-        }
-      }
-    },
-    {
-      "code": "301408",
-      "name": "华人健康",
-      "rank": 696,
-      "source_symbol": "SZ301408",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 69,
-          "popularity_rank": 696
-        }
-      }
-    },
-    {
-      "code": "301565",
-      "name": "中仑新材",
-      "rank": 706,
-      "source_symbol": "SZ301565",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 31,
-          "popularity_rank": 706
-        }
-      }
-    },
-    {
-      "code": "300890",
-      "name": "翔丰华",
-      "rank": 719,
-      "source_symbol": "SZ300890",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 67,
-          "popularity_rank": 719
+          "list_rank": 1,
+          "popularity_rank": 594
         }
       }
     },
     {
       "code": "603202",
       "name": "天有为",
-      "rank": 731,
+      "rank": 658,
       "source_symbol": "SH603202",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 61,
-          "popularity_rank": 731
-        }
-      }
-    },
-    {
-      "code": "300106",
-      "name": "西部牧业",
-      "rank": 776,
-      "source_symbol": "SZ300106",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 49,
-          "popularity_rank": 776
-        }
-      }
-    },
-    {
-      "code": "301292",
-      "name": "海科新源",
-      "rank": 788,
-      "source_symbol": "SZ301292",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 87,
-          "popularity_rank": 788
-        }
-      }
-    },
-    {
-      "code": "603389",
-      "name": "亚振家居",
-      "rank": 843,
-      "source_symbol": "SH603389",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 93,
-          "popularity_rank": 843
+          "list_rank": 57,
+          "popularity_rank": 658
         }
       }
     },
     {
       "code": "301061",
       "name": "匠心家居",
-      "rank": 869,
+      "rank": 698,
       "source_symbol": "SZ301061",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 72,
-          "popularity_rank": 869
+          "list_rank": 59,
+          "popularity_rank": 698
         }
       }
     },
     {
-      "code": "002047",
-      "name": "宝鹰股份",
-      "rank": 871,
-      "source_symbol": "SZ002047",
+      "code": "301565",
+      "name": "中仑新材",
+      "rank": 707,
+      "source_symbol": "SZ301565",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 24,
-          "popularity_rank": 871
+          "list_rank": 33,
+          "popularity_rank": 707
         }
       }
     },
     {
       "code": "600266",
       "name": "城建发展",
-      "rank": 889,
+      "rank": 736,
       "source_symbol": "SH600266",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 58,
-          "popularity_rank": 889
+          "list_rank": 50,
+          "popularity_rank": 736
+        }
+      }
+    },
+    {
+      "code": "603389",
+      "name": "亚振家居",
+      "rank": 742,
+      "source_symbol": "SH603389",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 91,
+          "popularity_rank": 742
         }
       }
     },
     {
       "code": "605318",
       "name": "法狮龙",
-      "rank": 897,
+      "rank": 743,
       "source_symbol": "SH605318",
       "exchange": "SH",
       "lists": {
         "rising": {
           "list_rank": 9,
-          "popularity_rank": 897
+          "popularity_rank": 743
+        }
+      }
+    },
+    {
+      "code": "002047",
+      "name": "宝鹰股份",
+      "rank": 771,
+      "source_symbol": "SZ002047",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 19,
+          "popularity_rank": 771
+        }
+      }
+    },
+    {
+      "code": "301408",
+      "name": "华人健康",
+      "rank": 781,
+      "source_symbol": "SZ301408",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 82,
+          "popularity_rank": 781
+        }
+      }
+    },
+    {
+      "code": "300890",
+      "name": "翔丰华",
+      "rank": 789,
+      "source_symbol": "SZ300890",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 78,
+          "popularity_rank": 789
+        }
+      }
+    },
+    {
+      "code": "002746",
+      "name": "仙坛股份",
+      "rank": 838,
+      "source_symbol": "SZ002746",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 88,
+          "popularity_rank": 838
+        }
+      }
+    },
+    {
+      "code": "600039",
+      "name": "四川路桥",
+      "rank": 849,
+      "source_symbol": "SH600039",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 81,
+          "popularity_rank": 849
+        }
+      }
+    },
+    {
+      "code": "300106",
+      "name": "西部牧业",
+      "rank": 851,
+      "source_symbol": "SZ300106",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 60,
+          "popularity_rank": 851
         }
       }
     },
     {
       "code": "301012",
       "name": "扬电科技",
-      "rank": 899,
+      "rank": 886,
       "source_symbol": "SZ301012",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 36,
-          "popularity_rank": 899
+          "list_rank": 39,
+          "popularity_rank": 886
         }
       }
     },
     {
       "code": "002116",
       "name": "中国海诚",
-      "rank": 910,
+      "rank": 921,
       "source_symbol": "SZ002116",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 10,
-          "popularity_rank": 910
-        }
-      }
-    },
-    {
-      "code": "300340",
-      "name": "科恒股份",
-      "rank": 954,
-      "source_symbol": "SZ300340",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 32,
-          "popularity_rank": 954
-        }
-      }
-    },
-    {
-      "code": "688702",
-      "name": "盛科通信-U",
-      "rank": 1013,
-      "source_symbol": "SH688702",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 96,
-          "popularity_rank": 1013
+          "list_rank": 12,
+          "popularity_rank": 921
         }
       }
     },
     {
       "code": "301209",
       "name": "联合化学",
-      "rank": 1021,
+      "rank": 974,
       "source_symbol": "SZ301209",
       "exchange": "SZ",
       "lists": {
         "rising": {
           "list_rank": 7,
-          "popularity_rank": 1021
-        }
-      }
-    },
-    {
-      "code": "301507",
-      "name": "民生健康",
-      "rank": 1070,
-      "source_symbol": "SZ301507",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 12,
-          "popularity_rank": 1070
+          "popularity_rank": 974
         }
       }
     },
     {
       "code": "300875",
       "name": "捷强装备",
-      "rank": 1079,
+      "rank": 1049,
       "source_symbol": "SZ300875",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 29,
-          "popularity_rank": 1079
+          "list_rank": 31,
+          "popularity_rank": 1049
         }
       }
     },
     {
-      "code": "688345",
-      "name": "博力威",
-      "rank": 1104,
-      "source_symbol": "SH688345",
-      "exchange": "SH",
+      "code": "301507",
+      "name": "民生健康",
+      "rank": 1051,
+      "source_symbol": "SZ301507",
+      "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 4,
-          "popularity_rank": 1104
+          "list_rank": 13,
+          "popularity_rank": 1051
+        }
+      }
+    },
+    {
+      "code": "300340",
+      "name": "科恒股份",
+      "rank": 1059,
+      "source_symbol": "SZ300340",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 40,
+          "popularity_rank": 1059
+        }
+      }
+    },
+    {
+      "code": "002372",
+      "name": "伟星新材",
+      "rank": 1087,
+      "source_symbol": "SZ002372",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 98,
+          "popularity_rank": 1087
         }
       }
     },
     {
       "code": "600467",
       "name": "好当家",
-      "rank": 1150,
+      "rank": 1116,
       "source_symbol": "SH600467",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 84,
-          "popularity_rank": 1150
+          "list_rank": 85,
+          "popularity_rank": 1116
         }
       }
     },
     {
-      "code": "300374",
-      "name": "中铁装配",
-      "rank": 1212,
-      "source_symbol": "SZ300374",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 13,
-          "popularity_rank": 1212
-        }
-      }
-    },
-    {
-      "code": "688798",
-      "name": "艾为电子",
-      "rank": 1247,
-      "source_symbol": "SH688798",
+      "code": "688345",
+      "name": "博力威",
+      "rank": 1120,
+      "source_symbol": "SH688345",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 33,
-          "popularity_rank": 1247
+          "list_rank": 5,
+          "popularity_rank": 1120
         }
       }
     },
     {
-      "code": "688627",
-      "name": "精智达",
-      "rank": 1249,
-      "source_symbol": "SH688627",
+      "code": "601952",
+      "name": "苏垦农发",
+      "rank": 1183,
+      "source_symbol": "SH601952",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 90,
-          "popularity_rank": 1249
-        }
-      }
-    },
-    {
-      "code": "920786",
-      "name": "骑士乳业",
-      "rank": 1254,
-      "source_symbol": "SZ920786",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 40,
-          "popularity_rank": 1254
-        }
-      }
-    },
-    {
-      "code": "300619",
-      "name": "金银河",
-      "rank": 1264,
-      "source_symbol": "SZ300619",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 55,
-          "popularity_rank": 1264
-        }
-      }
-    },
-    {
-      "code": "300967",
-      "name": "晓鸣股份",
-      "rank": 1385,
-      "source_symbol": "SZ300967",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 45,
-          "popularity_rank": 1385
-        }
-      }
-    },
-    {
-      "code": "001380",
-      "name": "华纬科技",
-      "rank": 1448,
-      "source_symbol": "SZ001380",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 74,
-          "popularity_rank": 1448
+          "list_rank": 100,
+          "popularity_rank": 1183
         }
       }
     },
     {
       "code": "688009",
       "name": "中国通号",
-      "rank": 1480,
+      "rank": 1190,
       "source_symbol": "SH688009",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 73,
-          "popularity_rank": 1480
+          "list_rank": 51,
+          "popularity_rank": 1190
         }
       }
     },
     {
-      "code": "920522",
-      "name": "纳科诺尔",
-      "rank": 1510,
-      "source_symbol": "SZ920522",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 42,
-          "popularity_rank": 1510
-        }
-      }
-    },
-    {
-      "code": "920748",
-      "name": "路桥信息",
-      "rank": 1548,
-      "source_symbol": "SZ920748",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 25,
-          "popularity_rank": 1548
-        }
-      }
-    },
-    {
-      "code": "600575",
-      "name": "淮河能源",
-      "rank": 1564,
-      "source_symbol": "SH600575",
+      "code": "688627",
+      "name": "精智达",
+      "rank": 1217,
+      "source_symbol": "SH688627",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 79,
-          "popularity_rank": 1564
+          "list_rank": 97,
+          "popularity_rank": 1217
+        }
+      }
+    },
+    {
+      "code": "688798",
+      "name": "艾为电子",
+      "rank": 1246,
+      "source_symbol": "SH688798",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 36,
+          "popularity_rank": 1246
+        }
+      }
+    },
+    {
+      "code": "300374",
+      "name": "中铁装配",
+      "rank": 1282,
+      "source_symbol": "SZ300374",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 14,
+          "popularity_rank": 1282
+        }
+      }
+    },
+    {
+      "code": "920786",
+      "name": "骑士乳业",
+      "rank": 1307,
+      "source_symbol": "SZ920786",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 44,
+          "popularity_rank": 1307
+        }
+      }
+    },
+    {
+      "code": "300967",
+      "name": "晓鸣股份",
+      "rank": 1324,
+      "source_symbol": "SZ300967",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 42,
+          "popularity_rank": 1324
         }
       }
     },
     {
       "code": "001312",
       "name": "福恩股份",
-      "rank": 1596,
+      "rank": 1366,
       "source_symbol": "SZ001312",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 86,
-          "popularity_rank": 1596
+          "list_rank": 67,
+          "popularity_rank": 1366
         }
       }
     },
     {
-      "code": "300784",
-      "name": "利安科技",
-      "rank": 1634,
-      "source_symbol": "SZ300784",
-      "exchange": "SZ",
+      "code": "600575",
+      "name": "淮河能源",
+      "rank": 1388,
+      "source_symbol": "SH600575",
+      "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 16,
-          "popularity_rank": 1634
-        }
-      }
-    },
-    {
-      "code": "002567",
-      "name": "唐人神",
-      "rank": 1646,
-      "source_symbol": "SZ002567",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 100,
-          "popularity_rank": 1646
+          "list_rank": 65,
+          "popularity_rank": 1388
         }
       }
     },
     {
       "code": "688186",
       "name": "广大特材",
-      "rank": 1655,
+      "rank": 1418,
       "source_symbol": "SH688186",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 15,
-          "popularity_rank": 1655
+          "list_rank": 11,
+          "popularity_rank": 1418
         }
       }
     },
     {
-      "code": "002872",
-      "name": "ST天圣",
-      "rank": 1699,
-      "source_symbol": "SZ002872",
+      "code": "001380",
+      "name": "华纬科技",
+      "rank": 1433,
+      "source_symbol": "SZ001380",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 80,
-          "popularity_rank": 1699
-        }
-      }
-    },
-    {
-      "code": "002302",
-      "name": "西部建设",
-      "rank": 1767,
-      "source_symbol": "SZ002302",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 48,
-          "popularity_rank": 1767
-        }
-      }
-    },
-    {
-      "code": "300293",
-      "name": "蓝英装备",
-      "rank": 1804,
-      "source_symbol": "SZ300293",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 50,
-          "popularity_rank": 1804
-        }
-      }
-    },
-    {
-      "code": "300791",
-      "name": "仙乐健康",
-      "rank": 1809,
-      "source_symbol": "SZ300791",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 43,
-          "popularity_rank": 1809
-        }
-      }
-    },
-    {
-      "code": "000669",
-      "name": "ST金鸿",
-      "rank": 1830,
-      "source_symbol": "SZ000669",
-      "exchange": "SZ",
-      "lists": {
-        "rising": {
-          "list_rank": 18,
-          "popularity_rank": 1830
+          "list_rank": 71,
+          "popularity_rank": 1433
         }
       }
     },
     {
       "code": "688669",
       "name": "聚石化学",
-      "rank": 1860,
+      "rank": 1435,
       "source_symbol": "SH688669",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 54,
-          "popularity_rank": 1860
+          "list_rank": 38,
+          "popularity_rank": 1435
         }
       }
     },
     {
-      "code": "688772",
-      "name": "珠海冠宇",
-      "rank": 1869,
-      "source_symbol": "SH688772",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 92,
-          "popularity_rank": 1869
-        }
-      }
-    },
-    {
-      "code": "605008",
-      "name": "长鸿高科",
-      "rank": 1919,
-      "source_symbol": "SH605008",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 37,
-          "popularity_rank": 1919
-        }
-      }
-    },
-    {
-      "code": "688778",
-      "name": "厦钨新能",
-      "rank": 1920,
-      "source_symbol": "SH688778",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 85,
-          "popularity_rank": 1920
-        }
-      }
-    },
-    {
-      "code": "920122",
-      "name": "中纺标",
-      "rank": 1949,
-      "source_symbol": "SZ920122",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 14,
-          "popularity_rank": 1949
-        }
-      }
-    },
-    {
-      "code": "300847",
-      "name": "中船汉光",
-      "rank": 1958,
-      "source_symbol": "SZ300847",
+      "code": "300619",
+      "name": "金银河",
+      "rank": 1470,
+      "source_symbol": "SZ300619",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 41,
-          "popularity_rank": 1958
+          "list_rank": 79,
+          "popularity_rank": 1470
         }
       }
     },
     {
-      "code": "920690",
-      "name": "捷众科技",
-      "rank": 1962,
-      "source_symbol": "SZ920690",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 78,
-          "popularity_rank": 1962
-        }
-      }
-    },
-    {
-      "code": "920252",
-      "name": "天宏锂电",
-      "rank": 1983,
-      "source_symbol": "SZ920252",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 17,
-          "popularity_rank": 1983
-        }
-      }
-    },
-    {
-      "code": "920088",
-      "name": "科力股份",
-      "rank": 2018,
-      "source_symbol": "SZ920088",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 62,
-          "popularity_rank": 2018
-        }
-      }
-    },
-    {
-      "code": "300343",
-      "name": "联创股份",
-      "rank": 2039,
-      "source_symbol": "SZ300343",
+      "code": "301688",
+      "name": "格林生物",
+      "rank": 1545,
+      "source_symbol": "SZ301688",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 99,
-          "popularity_rank": 2039
+          "list_rank": 94,
+          "popularity_rank": 1545
         }
       }
     },
     {
-      "code": "920087",
-      "name": "秋乐种业",
-      "rank": 2065,
-      "source_symbol": "SZ920087",
-      "exchange": "BJ",
+      "code": "002567",
+      "name": "唐人神",
+      "rank": 1557,
+      "source_symbol": "SZ002567",
+      "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 27,
-          "popularity_rank": 2065
-        }
-      }
-    },
-    {
-      "code": "920006",
-      "name": "晟楠科技",
-      "rank": 2158,
-      "source_symbol": "SZ920006",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 83,
-          "popularity_rank": 2158
+          "list_rank": 96,
+          "popularity_rank": 1557
         }
       }
     },
     {
       "code": "301035",
       "name": "润丰股份",
-      "rank": 2172,
+      "rank": 1573,
       "source_symbol": "SZ301035",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 38,
-          "popularity_rank": 2172
+          "list_rank": 16,
+          "popularity_rank": 1573
         }
       }
     },
     {
-      "code": "603959",
-      "name": "ST百利",
-      "rank": 2236,
-      "source_symbol": "SH603959",
+      "code": "300784",
+      "name": "利安科技",
+      "rank": 1595,
+      "source_symbol": "SZ300784",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 15,
+          "popularity_rank": 1595
+        }
+      }
+    },
+    {
+      "code": "920522",
+      "name": "纳科诺尔",
+      "rank": 1703,
+      "source_symbol": "SZ920522",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 52,
+          "popularity_rank": 1703
+        }
+      }
+    },
+    {
+      "code": "002872",
+      "name": "ST天圣",
+      "rank": 1725,
+      "source_symbol": "SZ002872",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 86,
+          "popularity_rank": 1725
+        }
+      }
+    },
+    {
+      "code": "920748",
+      "name": "路桥信息",
+      "rank": 1741,
+      "source_symbol": "SZ920748",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 32,
+          "popularity_rank": 1741
+        }
+      }
+    },
+    {
+      "code": "605008",
+      "name": "长鸿高科",
+      "rank": 1778,
+      "source_symbol": "SH605008",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 63,
-          "popularity_rank": 2236
+          "list_rank": 34,
+          "popularity_rank": 1778
         }
       }
     },
     {
-      "code": "688408",
-      "name": "中信博",
-      "rank": 2259,
-      "source_symbol": "SH688408",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 44,
-          "popularity_rank": 2259
-        }
-      }
-    },
-    {
-      "code": "600818",
-      "name": "ST中路",
-      "rank": 2295,
-      "source_symbol": "SH600818",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 35,
-          "popularity_rank": 2295
-        }
-      }
-    },
-    {
-      "code": "603609",
-      "name": "禾丰股份",
-      "rank": 2368,
-      "source_symbol": "SH603609",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 97,
-          "popularity_rank": 2368
-        }
-      }
-    },
-    {
-      "code": "300882",
-      "name": "万胜智能",
-      "rank": 2375,
-      "source_symbol": "SZ300882",
+      "code": "300293",
+      "name": "蓝英装备",
+      "rank": 1781,
+      "source_symbol": "SZ300293",
       "exchange": "SZ",
       "lists": {
         "rising": {
           "list_rank": 53,
-          "popularity_rank": 2375
+          "popularity_rank": 1781
         }
       }
     },
     {
-      "code": "002069",
-      "name": "獐子岛",
-      "rank": 2382,
-      "source_symbol": "SZ002069",
+      "code": "002302",
+      "name": "西部建设",
+      "rank": 1812,
+      "source_symbol": "SZ002302",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 88,
-          "popularity_rank": 2382
+          "list_rank": 58,
+          "popularity_rank": 1812
         }
       }
     },
     {
-      "code": "920125",
-      "name": "鸿仕达",
-      "rank": 2389,
-      "source_symbol": "SZ920125",
+      "code": "000669",
+      "name": "ST金鸿",
+      "rank": 1826,
+      "source_symbol": "SZ000669",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 18,
+          "popularity_rank": 1826
+        }
+      }
+    },
+    {
+      "code": "300791",
+      "name": "仙乐健康",
+      "rank": 1900,
+      "source_symbol": "SZ300791",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 49,
+          "popularity_rank": 1900
+        }
+      }
+    },
+    {
+      "code": "603468",
+      "name": "津富士达",
+      "rank": 1901,
+      "source_symbol": "SH603468",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 80,
+          "popularity_rank": 1901
+        }
+      }
+    },
+    {
+      "code": "920087",
+      "name": "秋乐种业",
+      "rank": 1941,
+      "source_symbol": "SZ920087",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 26,
+          "popularity_rank": 1941
+        }
+      }
+    },
+    {
+      "code": "920162",
+      "name": "莫森泰克",
+      "rank": 1964,
+      "source_symbol": "SZ920162",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 35,
+          "popularity_rank": 1964
+        }
+      }
+    },
+    {
+      "code": "920088",
+      "name": "科力股份",
+      "rank": 2025,
+      "source_symbol": "SZ920088",
       "exchange": "BJ",
       "lists": {
         "rising": {
           "list_rank": 64,
-          "popularity_rank": 2389
+          "popularity_rank": 2025
         }
       }
     },
     {
-      "code": "920180",
-      "name": "爱得科技",
-      "rank": 2406,
-      "source_symbol": "SZ920180",
+      "code": "300847",
+      "name": "中船汉光",
+      "rank": 2041,
+      "source_symbol": "SZ300847",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 47,
+          "popularity_rank": 2041
+        }
+      }
+    },
+    {
+      "code": "920690",
+      "name": "捷众科技",
+      "rank": 2046,
+      "source_symbol": "SZ920690",
       "exchange": "BJ",
       "lists": {
         "rising": {
-          "list_rank": 28,
-          "popularity_rank": 2406
-        }
-      }
-    },
-    {
-      "code": "600819",
-      "name": "耀皮玻璃",
-      "rank": 2420,
-      "source_symbol": "SH600819",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 71,
-          "popularity_rank": 2420
+          "list_rank": 93,
+          "popularity_rank": 2046
         }
       }
     },
     {
       "code": "603299",
       "name": "苏盐井神",
-      "rank": 2486,
+      "rank": 2060,
       "source_symbol": "SH603299",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 98,
-          "popularity_rank": 2486
+          "list_rank": 62,
+          "popularity_rank": 2060
+        }
+      }
+    },
+    {
+      "code": "600818",
+      "name": "ST中路",
+      "rank": 2066,
+      "source_symbol": "SH600818",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 28,
+          "popularity_rank": 2066
+        }
+      }
+    },
+    {
+      "code": "920125",
+      "name": "鸿仕达",
+      "rank": 2083,
+      "source_symbol": "SZ920125",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 45,
+          "popularity_rank": 2083
+        }
+      }
+    },
+    {
+      "code": "920252",
+      "name": "天宏锂电",
+      "rank": 2102,
+      "source_symbol": "SZ920252",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 22,
+          "popularity_rank": 2102
+        }
+      }
+    },
+    {
+      "code": "920122",
+      "name": "中纺标",
+      "rank": 2128,
+      "source_symbol": "SZ920122",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 25,
+          "popularity_rank": 2128
+        }
+      }
+    },
+    {
+      "code": "920006",
+      "name": "晟楠科技",
+      "rank": 2185,
+      "source_symbol": "SZ920006",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 90,
+          "popularity_rank": 2185
+        }
+      }
+    },
+    {
+      "code": "603609",
+      "name": "禾丰股份",
+      "rank": 2205,
+      "source_symbol": "SH603609",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 87,
+          "popularity_rank": 2205
+        }
+      }
+    },
+    {
+      "code": "688408",
+      "name": "中信博",
+      "rank": 2211,
+      "source_symbol": "SH688408",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 43,
+          "popularity_rank": 2211
         }
       }
     },
     {
       "code": "301279",
       "name": "金道科技",
-      "rank": 2549,
+      "rank": 2308,
       "source_symbol": "SZ301279",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 94,
-          "popularity_rank": 2549
+          "list_rank": 75,
+          "popularity_rank": 2308
         }
       }
     },
     {
-      "code": "300020",
-      "name": "ST银江",
-      "rank": 2560,
-      "source_symbol": "SZ300020",
+      "code": "002110",
+      "name": "三钢闽光",
+      "rank": 2418,
+      "source_symbol": "SZ002110",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 81,
-          "popularity_rank": 2560
+          "list_rank": 76,
+          "popularity_rank": 2418
+        }
+      }
+    },
+    {
+      "code": "920180",
+      "name": "爱得科技",
+      "rank": 2419,
+      "source_symbol": "SZ920180",
+      "exchange": "BJ",
+      "lists": {
+        "rising": {
+          "list_rank": 29,
+          "popularity_rank": 2419
+        }
+      }
+    },
+    {
+      "code": "603959",
+      "name": "ST百利",
+      "rank": 2474,
+      "source_symbol": "SH603959",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 89,
+          "popularity_rank": 2474
         }
       }
     },
     {
       "code": "688379",
       "name": "华光新材",
-      "rank": 2662,
+      "rank": 2482,
       "source_symbol": "SH688379",
       "exchange": "SH",
       "lists": {
         "rising": {
-          "list_rank": 95,
-          "popularity_rank": 2662
+          "list_rank": 83,
+          "popularity_rank": 2482
         }
       }
     },
     {
-      "code": "920237",
-      "name": "力佳科技",
-      "rank": 2753,
-      "source_symbol": "SZ920237",
-      "exchange": "BJ",
+      "code": "300882",
+      "name": "万胜智能",
+      "rank": 2518,
+      "source_symbol": "SZ300882",
+      "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 46,
-          "popularity_rank": 2753
+          "list_rank": 66,
+          "popularity_rank": 2518
+        }
+      }
+    },
+    {
+      "code": "600819",
+      "name": "耀皮玻璃",
+      "rank": 2590,
+      "source_symbol": "SH600819",
+      "exchange": "SH",
+      "lists": {
+        "rising": {
+          "list_rank": 92,
+          "popularity_rank": 2590
+        }
+      }
+    },
+    {
+      "code": "300020",
+      "name": "ST银江",
+      "rank": 2665,
+      "source_symbol": "SZ300020",
+      "exchange": "SZ",
+      "lists": {
+        "rising": {
+          "list_rank": 95,
+          "popularity_rank": 2665
         }
       }
     },
     {
       "code": "002168",
       "name": "ST惠程",
-      "rank": 2756,
+      "rank": 2928,
       "source_symbol": "SZ002168",
       "exchange": "SZ",
       "lists": {
         "rising": {
-          "list_rank": 57,
-          "popularity_rank": 2756
+          "list_rank": 73,
+          "popularity_rank": 2928
         }
       }
     },
     {
-      "code": "920706",
-      "name": "铁拓机械",
-      "rank": 2872,
-      "source_symbol": "SZ920706",
+      "code": "920237",
+      "name": "力佳科技",
+      "rank": 3080,
+      "source_symbol": "SZ920237",
       "exchange": "BJ",
       "lists": {
         "rising": {
-          "list_rank": 89,
-          "popularity_rank": 2872
-        }
-      }
-    },
-    {
-      "code": "920284",
-      "name": "灵鸽科技",
-      "rank": 2911,
-      "source_symbol": "SZ920284",
-      "exchange": "BJ",
-      "lists": {
-        "rising": {
-          "list_rank": 60,
-          "popularity_rank": 2911
+          "list_rank": 69,
+          "popularity_rank": 3080
         }
       }
     },
     {
       "code": "920895",
       "name": "花溪科技",
-      "rank": 2983,
+      "rank": 3136,
       "source_symbol": "SZ920895",
       "exchange": "BJ",
       "lists": {
         "rising": {
-          "list_rank": 77,
-          "popularity_rank": 2983
+          "list_rank": 99,
+          "popularity_rank": 3136
         }
       }
     },
     {
-      "code": "920187",
-      "name": "通领科技",
-      "rank": 3095,
-      "source_symbol": "SZ920187",
+      "code": "920284",
+      "name": "灵鸽科技",
+      "rank": 3149,
+      "source_symbol": "SZ920284",
       "exchange": "BJ",
       "lists": {
         "rising": {
-          "list_rank": 82,
-          "popularity_rank": 3095
-        }
-      }
-    },
-    {
-      "code": "688707",
-      "name": "振华新材",
-      "rank": 3139,
-      "source_symbol": "SH688707",
-      "exchange": "SH",
-      "lists": {
-        "rising": {
-          "list_rank": 91,
-          "popularity_rank": 3139
+          "list_rank": 84,
+          "popularity_rank": 3149
         }
       }
     },
     {
       "code": "920753",
       "name": "天纺标",
-      "rank": 3181,
+      "rank": 3280,
       "source_symbol": "SZ920753",
       "exchange": "BJ",
       "lists": {
         "rising": {
-          "list_rank": 66,
-          "popularity_rank": 3181
+          "list_rank": 77,
+          "popularity_rank": 3280
         }
       }
     }
   ],
+  "boards": {
+    "popularity": {
+      "requested_page_size": 100,
+      "received_at": "2026-11-03T17:06:12+08:00",
+      "source_timestamp": null,
+      "raw": [
+        {
+          "sc": "SZ001381",
+          "rk": 1,
+          "rc": 0,
+          "hisRc": 0
+        },
+        {
+          "sc": "SZ300308",
+          "rk": 2,
+          "rc": 0,
+          "hisRc": 41
+        },
+        {
+          "sc": "SZ002086",
+          "rk": 3,
+          "rc": 0,
+          "hisRc": 1
+        },
+        {
+          "sc": "SH600715",
+          "rk": 4,
+          "rc": 0,
+          "hisRc": 1
+        },
+        {
+          "sc": "SZ000678",
+          "rk": 5,
+          "rc": 0,
+          "hisRc": -4
+        },
+        {
+          "sc": "SZ002172",
+          "rk": 6,
+          "rc": 0,
+          "hisRc": 1
+        },
+        {
+          "sc": "SZ002580",
+          "rk": 7,
+          "rc": 0,
+          "hisRc": 263
+        },
+        {
+          "sc": "SH600261",
+          "rk": 8,
+          "rc": 0,
+          "hisRc": 1
+        },
+        {
+          "sc": "SZ300413",
+          "rk": 9,
+          "rc": 0,
+          "hisRc": -7
+        },
+        {
+          "sc": "SZ300502",
+          "rk": 10,
+          "rc": 0,
+          "hisRc": 45
+        },
+        {
+          "sc": "SH688825",
+          "rk": 11,
+          "rc": 0,
+          "hisRc": 89
+        },
+        {
+          "sc": "SZ000530",
+          "rk": 12,
+          "rc": 0,
+          "hisRc": -6
+        },
+        {
+          "sc": "SH603533",
+          "rk": 13,
+          "rc": 0,
+          "hisRc": 5
+        },
+        {
+          "sc": "SZ300750",
+          "rk": 14,
+          "rc": 0,
+          "hisRc": 68
+        },
+        {
+          "sc": "SZ000995",
+          "rk": 15,
+          "rc": 0,
+          "hisRc": 4
+        },
+        {
+          "sc": "SZ002249",
+          "rk": 16,
+          "rc": 0,
+          "hisRc": 142
+        },
+        {
+          "sc": "SH600519",
+          "rk": 17,
+          "rc": 0,
+          "hisRc": 5
+        },
+        {
+          "sc": "SZ002029",
+          "rk": 18,
+          "rc": 0,
+          "hisRc": 11
+        },
+        {
+          "sc": "SZ300059",
+          "rk": 19,
+          "rc": 0,
+          "hisRc": -16
+        },
+        {
+          "sc": "SH600892",
+          "rk": 20,
+          "rc": 0,
+          "hisRc": 3
+        },
+        {
+          "sc": "SZ002724",
+          "rk": 21,
+          "rc": 0,
+          "hisRc": 24
+        },
+        {
+          "sc": "SZ300394",
+          "rk": 22,
+          "rc": 0,
+          "hisRc": 118
+        },
+        {
+          "sc": "SZ002696",
+          "rk": 23,
+          "rc": 0,
+          "hisRc": 150
+        },
+        {
+          "sc": "SZ001318",
+          "rk": 24,
+          "rc": 1,
+          "hisRc": 195
+        },
+        {
+          "sc": "SZ301487",
+          "rk": 25,
+          "rc": -1,
+          "hisRc": 702
+        },
+        {
+          "sc": "SZ000591",
+          "rk": 26,
+          "rc": 0,
+          "hisRc": 773
+        },
+        {
+          "sc": "SH600293",
+          "rk": 27,
+          "rc": 0,
+          "hisRc": 33
+        },
+        {
+          "sc": "SZ300274",
+          "rk": 28,
+          "rc": 0,
+          "hisRc": 64
+        },
+        {
+          "sc": "SH600558",
+          "rk": 29,
+          "rc": 1,
+          "hisRc": 271
+        },
+        {
+          "sc": "SH688836",
+          "rk": 30,
+          "rc": -1,
+          "hisRc": -17
+        },
+        {
+          "sc": "SH603278",
+          "rk": 31,
+          "rc": 0,
+          "hisRc": 23
+        },
+        {
+          "sc": "SZ002292",
+          "rk": 32,
+          "rc": 0,
+          "hisRc": 26
+        },
+        {
+          "sc": "SZ002384",
+          "rk": 33,
+          "rc": 0,
+          "hisRc": -25
+        },
+        {
+          "sc": "SZ300739",
+          "rk": 34,
+          "rc": 0,
+          "hisRc": 451
+        },
+        {
+          "sc": "SZ002343",
+          "rk": 35,
+          "rc": 0,
+          "hisRc": 87
+        },
+        {
+          "sc": "SZ002300",
+          "rk": 36,
+          "rc": 0,
+          "hisRc": 322
+        },
+        {
+          "sc": "SH601566",
+          "rk": 37,
+          "rc": 0,
+          "hisRc": 224
+        },
+        {
+          "sc": "SH605577",
+          "rk": 38,
+          "rc": 0,
+          "hisRc": -7
+        },
+        {
+          "sc": "SZ300085",
+          "rk": 39,
+          "rc": 0,
+          "hisRc": -27
+        },
+        {
+          "sc": "SH603258",
+          "rk": 40,
+          "rc": 0,
+          "hisRc": 17
+        },
+        {
+          "sc": "SZ001219",
+          "rk": 41,
+          "rc": 0,
+          "hisRc": -26
+        },
+        {
+          "sc": "SH688256",
+          "rk": 42,
+          "rc": 0,
+          "hisRc": 227
+        },
+        {
+          "sc": "SH601188",
+          "rk": 43,
+          "rc": 0,
+          "hisRc": 270
+        },
+        {
+          "sc": "SH600838",
+          "rk": 44,
+          "rc": 0,
+          "hisRc": 99
+        },
+        {
+          "sc": "SZ001309",
+          "rk": 45,
+          "rc": 0,
+          "hisRc": 160
+        },
+        {
+          "sc": "SZ300426",
+          "rk": 46,
+          "rc": 0,
+          "hisRc": 10
+        },
+        {
+          "sc": "SH601599",
+          "rk": 47,
+          "rc": 0,
+          "hisRc": -3
+        },
+        {
+          "sc": "SH601086",
+          "rk": 48,
+          "rc": 0,
+          "hisRc": -16
+        },
+        {
+          "sc": "SZ002242",
+          "rk": 49,
+          "rc": 0,
+          "hisRc": -1
+        },
+        {
+          "sc": "SH601398",
+          "rk": 50,
+          "rc": 0,
+          "hisRc": 124
+        },
+        {
+          "sc": "SH603986",
+          "rk": 51,
+          "rc": 0,
+          "hisRc": 37
+        },
+        {
+          "sc": "SZ000525",
+          "rk": 52,
+          "rc": 0,
+          "hisRc": -32
+        },
+        {
+          "sc": "SH600506",
+          "rk": 53,
+          "rc": 0,
+          "hisRc": -12
+        },
+        {
+          "sc": "SH600487",
+          "rk": 54,
+          "rc": 0,
+          "hisRc": 88
+        },
+        {
+          "sc": "SZ000410",
+          "rk": 55,
+          "rc": 0,
+          "hisRc": -41
+        },
+        {
+          "sc": "SH603906",
+          "rk": 56,
+          "rc": 0,
+          "hisRc": 1126
+        },
+        {
+          "sc": "SH600189",
+          "rk": 57,
+          "rc": 0,
+          "hisRc": -36
+        },
+        {
+          "sc": "SH600825",
+          "rk": 58,
+          "rc": 0,
+          "hisRc": -19
+        },
+        {
+          "sc": "SZ002185",
+          "rk": 59,
+          "rc": 0,
+          "hisRc": 57
+        },
+        {
+          "sc": "SH603330",
+          "rk": 60,
+          "rc": 0,
+          "hisRc": 152
+        },
+        {
+          "sc": "SH600183",
+          "rk": 61,
+          "rc": 0,
+          "hisRc": 94
+        },
+        {
+          "sc": "SZ300010",
+          "rk": 62,
+          "rc": 0,
+          "hisRc": 65
+        },
+        {
+          "sc": "SZ000725",
+          "rk": 63,
+          "rc": 0,
+          "hisRc": 50
+        },
+        {
+          "sc": "SZ002058",
+          "rk": 64,
+          "rc": 0,
+          "hisRc": 35
+        },
+        {
+          "sc": "SH600327",
+          "rk": 65,
+          "rc": 0,
+          "hisRc": 1346
+        },
+        {
+          "sc": "SH600241",
+          "rk": 66,
+          "rc": 1,
+          "hisRc": 442
+        },
+        {
+          "sc": "SH605058",
+          "rk": 67,
+          "rc": -1,
+          "hisRc": 114
+        },
+        {
+          "sc": "SZ002639",
+          "rk": 68,
+          "rc": 0,
+          "hisRc": 125
+        },
+        {
+          "sc": "SH600802",
+          "rk": 69,
+          "rc": 1,
+          "hisRc": 535
+        },
+        {
+          "sc": "SZ002558",
+          "rk": 70,
+          "rc": -1,
+          "hisRc": -54
+        },
+        {
+          "sc": "SZ002354",
+          "rk": 71,
+          "rc": 0,
+          "hisRc": -33
+        },
+        {
+          "sc": "SZ002827",
+          "rk": 72,
+          "rc": 0,
+          "hisRc": 13
+        },
+        {
+          "sc": "SZ002949",
+          "rk": 73,
+          "rc": 0,
+          "hisRc": -38
+        },
+        {
+          "sc": "SZ301513",
+          "rk": 74,
+          "rc": 0,
+          "hisRc": 2530
+        },
+        {
+          "sc": "SH600259",
+          "rk": 75,
+          "rc": 0,
+          "hisRc": 3
+        },
+        {
+          "sc": "SH603131",
+          "rk": 76,
+          "rc": 0,
+          "hisRc": -26
+        },
+        {
+          "sc": "SZ002636",
+          "rk": 77,
+          "rc": 0,
+          "hisRc": 51
+        },
+        {
+          "sc": "SH605388",
+          "rk": 78,
+          "rc": 0,
+          "hisRc": 1096
+        },
+        {
+          "sc": "SH600127",
+          "rk": 79,
+          "rc": 0,
+          "hisRc": 169
+        },
+        {
+          "sc": "SZ000417",
+          "rk": 80,
+          "rc": 0,
+          "hisRc": -53
+        },
+        {
+          "sc": "SH601099",
+          "rk": 81,
+          "rc": 0,
+          "hisRc": -70
+        },
+        {
+          "sc": "SZ002805",
+          "rk": 82,
+          "rc": 0,
+          "hisRc": 1904
+        },
+        {
+          "sc": "SZ300182",
+          "rk": 83,
+          "rc": 0,
+          "hisRc": -73
+        },
+        {
+          "sc": "SZ000599",
+          "rk": 84,
+          "rc": 0,
+          "hisRc": 47
+        },
+        {
+          "sc": "SH603200",
+          "rk": 85,
+          "rc": 0,
+          "hisRc": 152
+        },
+        {
+          "sc": "SZ002181",
+          "rk": 86,
+          "rc": 0,
+          "hisRc": -69
+        },
+        {
+          "sc": "SH601318",
+          "rk": 87,
+          "rc": 0,
+          "hisRc": 200
+        },
+        {
+          "sc": "SZ002708",
+          "rk": 88,
+          "rc": 0,
+          "hisRc": -26
+        },
+        {
+          "sc": "SH601899",
+          "rk": 89,
+          "rc": 0,
+          "hisRc": 71
+        },
+        {
+          "sc": "SH601091",
+          "rk": 90,
+          "rc": 0,
+          "hisRc": 214
+        },
+        {
+          "sc": "SH601138",
+          "rk": 91,
+          "rc": 0,
+          "hisRc": 89
+        },
+        {
+          "sc": "SH600745",
+          "rk": 92,
+          "rc": 0,
+          "hisRc": 114
+        },
+        {
+          "sc": "SH603381",
+          "rk": 93,
+          "rc": 0,
+          "hisRc": 3381
+        },
+        {
+          "sc": "SH605378",
+          "rk": 94,
+          "rc": 0,
+          "hisRc": 2945
+        },
+        {
+          "sc": "SZ000592",
+          "rk": 95,
+          "rc": 0,
+          "hisRc": 185
+        },
+        {
+          "sc": "SZ002281",
+          "rk": 96,
+          "rc": 1,
+          "hisRc": 272
+        },
+        {
+          "sc": "SH600576",
+          "rk": 97,
+          "rc": -1,
+          "hisRc": -1
+        },
+        {
+          "sc": "SZ002088",
+          "rk": 98,
+          "rc": 1,
+          "hisRc": 489
+        },
+        {
+          "sc": "SZ002275",
+          "rk": 99,
+          "rc": -1,
+          "hisRc": -52
+        },
+        {
+          "sc": "SH603703",
+          "rk": 100,
+          "rc": 0,
+          "hisRc": 33
+        }
+      ]
+    },
+    "rising": {
+      "requested_page_size": 100,
+      "received_at": "2026-11-03T17:06:12+08:00",
+      "source_timestamp": null,
+      "raw": [
+        {
+          "sc": "SZ300247",
+          "rk": 594,
+          "hrc": 4461,
+          "hrcrk": 1
+        },
+        {
+          "sc": "SZ920779",
+          "rk": 579,
+          "hrc": 4448,
+          "hrcrk": 2
+        },
+        {
+          "sc": "SZ001396",
+          "rk": 507,
+          "hrc": 4368,
+          "hrcrk": 3
+        },
+        {
+          "sc": "SZ002992",
+          "rk": 177,
+          "hrc": 4312,
+          "hrcrk": 4
+        },
+        {
+          "sc": "SH688345",
+          "rk": 1120,
+          "hrc": 4096,
+          "hrcrk": 5
+        },
+        {
+          "sc": "SZ000151",
+          "rk": 108,
+          "hrc": 4007,
+          "hrcrk": 6
+        },
+        {
+          "sc": "SZ301209",
+          "rk": 974,
+          "hrc": 3945,
+          "hrcrk": 7
+        },
+        {
+          "sc": "SZ002105",
+          "rk": 169,
+          "hrc": 3938,
+          "hrcrk": 8
+        },
+        {
+          "sc": "SH605318",
+          "rk": 743,
+          "hrc": 3830,
+          "hrcrk": 9
+        },
+        {
+          "sc": "SH600778",
+          "rk": 159,
+          "hrc": 3825,
+          "hrcrk": 10
+        },
+        {
+          "sc": "SH688186",
+          "rk": 1418,
+          "hrc": 3698,
+          "hrcrk": 11
+        },
+        {
+          "sc": "SZ002116",
+          "rk": 921,
+          "hrc": 3656,
+          "hrcrk": 12
+        },
+        {
+          "sc": "SZ301507",
+          "rk": 1051,
+          "hrc": 3643,
+          "hrcrk": 13
+        },
+        {
+          "sc": "SZ300374",
+          "rk": 1282,
+          "hrc": 3531,
+          "hrcrk": 14
+        },
+        {
+          "sc": "SZ300784",
+          "rk": 1595,
+          "hrc": 3497,
+          "hrcrk": 15
+        },
+        {
+          "sc": "SZ301035",
+          "rk": 1573,
+          "hrc": 3440,
+          "hrcrk": 16
+        },
+        {
+          "sc": "SH603381",
+          "rk": 93,
+          "hrc": 3381,
+          "hrcrk": 17
+        },
+        {
+          "sc": "SZ000669",
+          "rk": 1826,
+          "hrc": 3379,
+          "hrcrk": 18
+        },
+        {
+          "sc": "SZ002047",
+          "rk": 771,
+          "hrc": 3346,
+          "hrcrk": 19
+        },
+        {
+          "sc": "SH600278",
+          "rk": 461,
+          "hrc": 3342,
+          "hrcrk": 20
+        },
+        {
+          "sc": "SZ301662",
+          "rk": 529,
+          "hrc": 3335,
+          "hrcrk": 21
+        },
+        {
+          "sc": "SZ920252",
+          "rk": 2102,
+          "hrc": 3323,
+          "hrcrk": 22
+        },
+        {
+          "sc": "SZ920627",
+          "rk": 235,
+          "hrc": 3322,
+          "hrcrk": 23
+        },
+        {
+          "sc": "SZ002190",
+          "rk": 151,
+          "hrc": 3321,
+          "hrcrk": 24
+        },
+        {
+          "sc": "SZ920122",
+          "rk": 2128,
+          "hrc": 3309,
+          "hrcrk": 25
+        },
+        {
+          "sc": "SZ920087",
+          "rk": 1941,
+          "hrc": 3289,
+          "hrcrk": 26
+        },
+        {
+          "sc": "SZ002651",
+          "rk": 300,
+          "hrc": 3278,
+          "hrcrk": 27
+        },
+        {
+          "sc": "SH600818",
+          "rk": 2066,
+          "hrc": 3129,
+          "hrcrk": 28
+        },
+        {
+          "sc": "SZ920180",
+          "rk": 2419,
+          "hrc": 3118,
+          "hrcrk": 29
+        },
+        {
+          "sc": "SH603567",
+          "rk": 420,
+          "hrc": 3101,
+          "hrcrk": 30
+        },
+        {
+          "sc": "SZ300875",
+          "rk": 1049,
+          "hrc": 3093,
+          "hrcrk": 31
+        },
+        {
+          "sc": "SZ920748",
+          "rk": 1741,
+          "hrc": 3052,
+          "hrcrk": 32
+        },
+        {
+          "sc": "SZ301565",
+          "rk": 707,
+          "hrc": 3039,
+          "hrcrk": 33
+        },
+        {
+          "sc": "SH605008",
+          "rk": 1778,
+          "hrc": 3012,
+          "hrcrk": 34
+        },
+        {
+          "sc": "SZ920162",
+          "rk": 1964,
+          "hrc": 2996,
+          "hrcrk": 35
+        },
+        {
+          "sc": "SH688798",
+          "rk": 1246,
+          "hrc": 2968,
+          "hrcrk": 36
+        },
+        {
+          "sc": "SH605378",
+          "rk": 94,
+          "hrc": 2945,
+          "hrcrk": 37
+        },
+        {
+          "sc": "SH688669",
+          "rk": 1435,
+          "hrc": 2940,
+          "hrcrk": 38
+        },
+        {
+          "sc": "SZ301012",
+          "rk": 886,
+          "hrc": 2896,
+          "hrcrk": 39
+        },
+        {
+          "sc": "SZ300340",
+          "rk": 1059,
+          "hrc": 2864,
+          "hrcrk": 40
+        },
+        {
+          "sc": "SH603477",
+          "rk": 329,
+          "hrc": 2845,
+          "hrcrk": 41
+        },
+        {
+          "sc": "SZ300967",
+          "rk": 1324,
+          "hrc": 2787,
+          "hrcrk": 42
+        },
+        {
+          "sc": "SH688408",
+          "rk": 2211,
+          "hrc": 2778,
+          "hrcrk": 43
+        },
+        {
+          "sc": "SZ920786",
+          "rk": 1307,
+          "hrc": 2738,
+          "hrcrk": 44
+        },
+        {
+          "sc": "SZ920125",
+          "rk": 2083,
+          "hrc": 2728,
+          "hrcrk": 45
+        },
+        {
+          "sc": "SZ002522",
+          "rk": 115,
+          "hrc": 2726,
+          "hrcrk": 46
+        },
+        {
+          "sc": "SZ300847",
+          "rk": 2041,
+          "hrc": 2701,
+          "hrcrk": 47
+        },
+        {
+          "sc": "SH603402",
+          "rk": 134,
+          "hrc": 2679,
+          "hrcrk": 48
+        },
+        {
+          "sc": "SZ300791",
+          "rk": 1900,
+          "hrc": 2667,
+          "hrcrk": 49
+        },
+        {
+          "sc": "SH600266",
+          "rk": 736,
+          "hrc": 2631,
+          "hrcrk": 50
+        },
+        {
+          "sc": "SH688009",
+          "rk": 1190,
+          "hrc": 2600,
+          "hrcrk": 51
+        },
+        {
+          "sc": "SZ920522",
+          "rk": 1703,
+          "hrc": 2586,
+          "hrcrk": 52
+        },
+        {
+          "sc": "SZ300293",
+          "rk": 1781,
+          "hrc": 2578,
+          "hrcrk": 53
+        },
+        {
+          "sc": "SZ002043",
+          "rk": 430,
+          "hrc": 2577,
+          "hrcrk": 54
+        },
+        {
+          "sc": "SH601366",
+          "rk": 112,
+          "hrc": 2558,
+          "hrcrk": 55
+        },
+        {
+          "sc": "SZ301513",
+          "rk": 74,
+          "hrc": 2530,
+          "hrcrk": 56
+        },
+        {
+          "sc": "SH603202",
+          "rk": 658,
+          "hrc": 2517,
+          "hrcrk": 57
+        },
+        {
+          "sc": "SZ002302",
+          "rk": 1812,
+          "hrc": 2517,
+          "hrcrk": 58
+        },
+        {
+          "sc": "SZ301061",
+          "rk": 698,
+          "hrc": 2487,
+          "hrcrk": 59
+        },
+        {
+          "sc": "SZ300106",
+          "rk": 851,
+          "hrc": 2482,
+          "hrcrk": 60
+        },
+        {
+          "sc": "SZ301311",
+          "rk": 145,
+          "hrc": 2474,
+          "hrcrk": 61
+        },
+        {
+          "sc": "SH603299",
+          "rk": 2060,
+          "hrc": 2472,
+          "hrcrk": 62
+        },
+        {
+          "sc": "SZ000838",
+          "rk": 422,
+          "hrc": 2463,
+          "hrcrk": 63
+        },
+        {
+          "sc": "SZ920088",
+          "rk": 2025,
+          "hrc": 2435,
+          "hrcrk": 64
+        },
+        {
+          "sc": "SH600575",
+          "rk": 1388,
+          "hrc": 2421,
+          "hrcrk": 65
+        },
+        {
+          "sc": "SZ300882",
+          "rk": 2518,
+          "hrc": 2377,
+          "hrcrk": 66
+        },
+        {
+          "sc": "SZ001312",
+          "rk": 1366,
+          "hrc": 2365,
+          "hrcrk": 67
+        },
+        {
+          "sc": "SH688299",
+          "rk": 496,
+          "hrc": 2346,
+          "hrcrk": 68
+        },
+        {
+          "sc": "SZ920237",
+          "rk": 3080,
+          "hrc": 2341,
+          "hrcrk": 69
+        },
+        {
+          "sc": "SZ300338",
+          "rk": 534,
+          "hrc": 2334,
+          "hrcrk": 70
+        },
+        {
+          "sc": "SZ001380",
+          "rk": 1433,
+          "hrc": 2311,
+          "hrcrk": 71
+        },
+        {
+          "sc": "SZ300118",
+          "rk": 268,
+          "hrc": 2309,
+          "hrcrk": 72
+        },
+        {
+          "sc": "SZ002168",
+          "rk": 2928,
+          "hrc": 2308,
+          "hrcrk": 73
+        },
+        {
+          "sc": "SH601123",
+          "rk": 150,
+          "hrc": 2305,
+          "hrcrk": 74
+        },
+        {
+          "sc": "SZ301279",
+          "rk": 2308,
+          "hrc": 2304,
+          "hrcrk": 75
+        },
+        {
+          "sc": "SZ002110",
+          "rk": 2418,
+          "hrc": 2301,
+          "hrcrk": 76
+        },
+        {
+          "sc": "SZ920753",
+          "rk": 3280,
+          "hrc": 2292,
+          "hrcrk": 77
+        },
+        {
+          "sc": "SZ300890",
+          "rk": 789,
+          "hrc": 2286,
+          "hrcrk": 78
+        },
+        {
+          "sc": "SZ300619",
+          "rk": 1470,
+          "hrc": 2285,
+          "hrcrk": 79
+        },
+        {
+          "sc": "SH603468",
+          "rk": 1901,
+          "hrc": 2269,
+          "hrcrk": 80
+        },
+        {
+          "sc": "SH600039",
+          "rk": 849,
+          "hrc": 2261,
+          "hrcrk": 81
+        },
+        {
+          "sc": "SZ301408",
+          "rk": 781,
+          "hrc": 2251,
+          "hrcrk": 82
+        },
+        {
+          "sc": "SH688379",
+          "rk": 2482,
+          "hrc": 2240,
+          "hrcrk": 83
+        },
+        {
+          "sc": "SZ920284",
+          "rk": 3149,
+          "hrc": 2229,
+          "hrcrk": 84
+        },
+        {
+          "sc": "SH600467",
+          "rk": 1116,
+          "hrc": 2224,
+          "hrcrk": 85
+        },
+        {
+          "sc": "SZ002872",
+          "rk": 1725,
+          "hrc": 2212,
+          "hrcrk": 86
+        },
+        {
+          "sc": "SH603609",
+          "rk": 2205,
+          "hrc": 2211,
+          "hrcrk": 87
+        },
+        {
+          "sc": "SZ002746",
+          "rk": 838,
+          "hrc": 2204,
+          "hrcrk": 88
+        },
+        {
+          "sc": "SH603959",
+          "rk": 2474,
+          "hrc": 2202,
+          "hrcrk": 89
+        },
+        {
+          "sc": "SZ920006",
+          "rk": 2185,
+          "hrc": 2183,
+          "hrcrk": 90
+        },
+        {
+          "sc": "SH603389",
+          "rk": 742,
+          "hrc": 2168,
+          "hrcrk": 91
+        },
+        {
+          "sc": "SH600819",
+          "rk": 2590,
+          "hrc": 2164,
+          "hrcrk": 92
+        },
+        {
+          "sc": "SZ920690",
+          "rk": 2046,
+          "hrc": 2161,
+          "hrcrk": 93
+        },
+        {
+          "sc": "SZ301688",
+          "rk": 1545,
+          "hrc": 2154,
+          "hrcrk": 94
+        },
+        {
+          "sc": "SZ300020",
+          "rk": 2665,
+          "hrc": 2132,
+          "hrcrk": 95
+        },
+        {
+          "sc": "SZ002567",
+          "rk": 1557,
+          "hrc": 2121,
+          "hrcrk": 96
+        },
+        {
+          "sc": "SH688627",
+          "rk": 1217,
+          "hrc": 2119,
+          "hrcrk": 97
+        },
+        {
+          "sc": "SZ002372",
+          "rk": 1087,
+          "hrc": 2106,
+          "hrcrk": 98
+        },
+        {
+          "sc": "SZ920895",
+          "rk": 3136,
+          "hrc": 2102,
+          "hrcrk": 99
+        },
+        {
+          "sc": "SH601952",
+          "rk": 1183,
+          "hrc": 2084,
+          "hrcrk": 100
+        }
+      ]
+    }
+  },
   "missing_names": []
 }

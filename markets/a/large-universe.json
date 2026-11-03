@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T11:50:39.111082+08:00",
+  "generated_at": "2026-11-03T17:06:29.382976+08:00",
   "method": "剔除当前名称含ST或退、流通市值低于100亿元、近20日估算日均成交额低于1亿元或数据缺失；成交额近似为每日收盘价乘成交量",
   "limitations": [
     "市值与名称为本次时点，不是历史时点",
@@ -10,307 +10,35 @@
   "quote_source": "腾讯公开行情，流通市值单位为亿元",
   "included": [
     {
-      "code": "002249",
-      "name": "大洋电机",
-      "board": "SZ",
-      "quote": {
-        "name": "大洋电机",
-        "price": 8.21,
-        "previous_close": 7.7,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 153.73,
-        "total_cap_yi": 203.25
-      },
-      "avg20_turnover_proxy_yuan": 406553256.9335,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002636",
-      "name": "金安国纪",
-      "board": "SZ",
-      "quote": {
-        "name": "金安国纪",
-        "price": 58.59,
-        "previous_close": 53.26,
-        "quote_time": "20261028115003",
-        "float_cap_yi": 424.92,
-        "total_cap_yi": 426.54
-      },
-      "avg20_turnover_proxy_yuan": 3193473395.1625,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "688836",
-      "name": "宇树科技-W",
-      "board": "SH",
-      "quote": {
-        "name": "宇树科技-W",
-        "price": 719.89,
-        "previous_close": 639.96,
-        "quote_time": "20261028115010",
-        "float_cap_yi": 216.6,
-        "total_cap_yi": 2911.7
-      },
-      "avg20_turnover_proxy_yuan": 2109931996.4380002,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "000559",
-      "name": "万向钱潮",
-      "board": "SZ",
-      "quote": {
-        "name": "万向钱潮",
-        "price": 13.18,
-        "previous_close": 11.98,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 438.51,
-        "total_cap_yi": 438.76
-      },
-      "avg20_turnover_proxy_yuan": 795762222.1185,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "603667",
-      "name": "五洲新春",
-      "board": "SH",
-      "quote": {
-        "name": "五洲新春",
-        "price": 49.98,
-        "previous_close": 45.44,
-        "quote_time": "20261028115036",
-        "float_cap_yi": 191.5,
-        "total_cap_yi": 191.5
-      },
-      "avg20_turnover_proxy_yuan": 680656692.1465,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300223",
-      "name": "君正股份",
-      "board": "SZ",
-      "quote": {
-        "name": "君正股份",
-        "price": 109.52,
-        "previous_close": 94.6,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 463.13,
-        "total_cap_yi": 563.98
-      },
-      "avg20_turnover_proxy_yuan": 2371069681.018,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "600601",
-      "name": "方正科技",
-      "board": "SH",
-      "quote": {
-        "name": "方正科技",
-        "price": 10.32,
-        "previous_close": 9.38,
-        "quote_time": "20261028115028",
-        "float_cap_yi": 430.37,
-        "total_cap_yi": 457.94
-      },
-      "avg20_turnover_proxy_yuan": 2196720375.3955,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "688825",
-      "name": "长鑫科技",
-      "board": "SH",
-      "quote": {
-        "name": "长鑫科技",
-        "price": 43.76,
-        "previous_close": 43.0,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 1970.53,
-        "total_cap_yi": 29706.08
-      },
-      "avg20_turnover_proxy_yuan": 12809005279.6285,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002185",
-      "name": "华天科技",
-      "board": "SZ",
-      "quote": {
-        "name": "华天科技",
-        "price": 15.8,
-        "previous_close": 15.39,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 525.51,
-        "total_cap_yi": 525.63
-      },
-      "avg20_turnover_proxy_yuan": 3236241814.692,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "605488",
-      "name": "福莱新材",
-      "board": "SH",
-      "quote": {
-        "name": "福莱新材",
-        "price": 48.61,
-        "previous_close": 44.19,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 145.09,
-        "total_cap_yi": 145.83
-      },
-      "avg20_turnover_proxy_yuan": 541755890.9655,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002354",
-      "name": "天娱数科",
-      "board": "SZ",
-      "quote": {
-        "name": "天娱数科",
-        "price": 8.37,
-        "previous_close": 8.24,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 136.18,
-        "total_cap_yi": 138.49
-      },
-      "avg20_turnover_proxy_yuan": 1973800856.433,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002747",
-      "name": "埃斯顿",
-      "board": "SZ",
-      "quote": {
-        "name": "埃斯顿",
-        "price": 30.53,
-        "previous_close": 28.45,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 239.46,
-        "total_cap_yi": 295.73
-      },
-      "avg20_turnover_proxy_yuan": 1152006881.3530002,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300613",
-      "name": "富瀚微",
-      "board": "SZ",
-      "quote": {
-        "name": "富瀚微",
-        "price": 72.48,
-        "previous_close": 60.4,
-        "quote_time": "20261028114948",
-        "float_cap_yi": 159.29,
-        "total_cap_yi": 168.86
-      },
-      "avg20_turnover_proxy_yuan": 1074056277.3014998,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
       "code": "300308",
       "name": "中际旭创",
       "board": "SZ",
       "quote": {
         "name": "中际旭创",
-        "price": 614.35,
-        "previous_close": 577.0,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 6818.9,
-        "total_cap_yi": 7236.49
+        "price": 480.2,
+        "previous_close": 550.0,
+        "quote_time": "20261103161421",
+        "float_cap_yi": 5329.92,
+        "total_cap_yi": 5656.32
       },
-      "avg20_turnover_proxy_yuan": 18173403503.5335,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 19208975877.010002,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "601208",
-      "name": "东材科技",
-      "board": "SH",
-      "quote": {
-        "name": "东材科技",
-        "price": 37.83,
-        "previous_close": 34.71,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 382.15,
-        "total_cap_yi": 382.15
-      },
-      "avg20_turnover_proxy_yuan": 2771909413.9224997,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "603986",
-      "name": "兆易创新",
-      "board": "SH",
-      "quote": {
-        "name": "兆易创新",
-        "price": 282.92,
-        "previous_close": 268.98,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 1897.6,
-        "total_cap_yi": 1991.68
-      },
-      "avg20_turnover_proxy_yuan": 9638200374.442,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "600276",
-      "name": "恒瑞医药",
-      "board": "SH",
-      "quote": {
-        "name": "恒瑞医药",
-        "price": 48.55,
-        "previous_close": 45.55,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 3097.01,
-        "total_cap_yi": 3222.36
-      },
-      "avg20_turnover_proxy_yuan": 2693479353.8285,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "000858",
-      "name": "五 粮 液",
+      "code": "300413",
+      "name": "芒果超媒",
       "board": "SZ",
       "quote": {
-        "name": "五 粮 液",
-        "price": 71.09,
-        "previous_close": 75.38,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 2759.37,
-        "total_cap_yi": 2759.44
+        "name": "芒果超媒",
+        "price": 27.8,
+        "previous_close": 26.76,
+        "quote_time": "20261103161451",
+        "float_cap_yi": 284.03,
+        "total_cap_yi": 520.06
       },
-      "avg20_turnover_proxy_yuan": 1624123857.6244998,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "600825",
-      "name": "新华传媒",
-      "board": "SH",
-      "quote": {
-        "name": "新华传媒",
-        "price": 14.6,
-        "previous_close": 14.58,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 152.55,
-        "total_cap_yi": 152.55
-      },
-      "avg20_turnover_proxy_yuan": 1099385640.0335,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 2499793610.6514997,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -319,30 +47,30 @@
       "board": "SZ",
       "quote": {
         "name": "新易盛",
-        "price": 250.65,
-        "previous_close": 237.59,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 3144.97,
-        "total_cap_yi": 3495.91
+        "price": 173.36,
+        "previous_close": 191.48,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 2175.19,
+        "total_cap_yi": 2417.92
       },
-      "avg20_turnover_proxy_yuan": 13306758828.5245,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 14310966129.3,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "002472",
-      "name": "双环传动",
-      "board": "SZ",
+      "code": "688825",
+      "name": "长鑫科技",
+      "board": "SH",
       "quote": {
-        "name": "双环传动",
-        "price": 45.55,
-        "previous_close": 41.41,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 344.8,
-        "total_cap_yi": 387.17
+        "name": "长鑫科技",
+        "price": 38.8,
+        "previous_close": 41.72,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 1747.18,
+        "total_cap_yi": 26339.03
       },
-      "avg20_turnover_proxy_yuan": 905658951.3030001,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 13249546867.8205,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -351,110 +79,14 @@
       "board": "SH",
       "quote": {
         "name": "掌阅科技",
-        "price": 28.03,
-        "previous_close": 25.48,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 123.02,
-        "total_cap_yi": 123.02
+        "price": 28.72,
+        "previous_close": 26.72,
+        "quote_time": "20261103161450",
+        "float_cap_yi": 126.05,
+        "total_cap_yi": 126.05
       },
-      "avg20_turnover_proxy_yuan": 1436524414.3125,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002929",
-      "name": "润建股份",
-      "board": "SZ",
-      "quote": {
-        "name": "润建股份",
-        "price": 56.14,
-        "previous_close": 54.04,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 121.61,
-        "total_cap_yi": 160.76
-      },
-      "avg20_turnover_proxy_yuan": 765380780.04,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "600487",
-      "name": "亨通光电",
-      "board": "SH",
-      "quote": {
-        "name": "亨通光电",
-        "price": 47.63,
-        "previous_close": 46.53,
-        "quote_time": "20261028115022",
-        "float_cap_yi": 1168.67,
-        "total_cap_yi": 1174.74
-      },
-      "avg20_turnover_proxy_yuan": 7804587228.808001,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002242",
-      "name": "九阳股份",
-      "board": "SZ",
-      "quote": {
-        "name": "九阳股份",
-        "price": 21.34,
-        "previous_close": 21.34,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 162.56,
-        "total_cap_yi": 162.83
-      },
-      "avg20_turnover_proxy_yuan": 1622716294.9775,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "603626",
-      "name": "科森科技",
-      "board": "SH",
-      "quote": {
-        "name": "科森科技",
-        "price": 27.83,
-        "previous_close": 25.3,
-        "quote_time": "20261028115022",
-        "float_cap_yi": 154.42,
-        "total_cap_yi": 154.42
-      },
-      "avg20_turnover_proxy_yuan": 1159621102.2795,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "001309",
-      "name": "德明利",
-      "board": "SZ",
-      "quote": {
-        "name": "德明利",
-        "price": 231.09,
-        "previous_close": 224.0,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 537.09,
-        "total_cap_yi": 733.9
-      },
-      "avg20_turnover_proxy_yuan": 4063969426.1055,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300059",
-      "name": "东方财富",
-      "board": "SZ",
-      "quote": {
-        "name": "东方财富",
-        "price": 18.1,
-        "previous_close": 18.11,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 2424.02,
-        "total_cap_yi": 2863.82
-      },
-      "avg20_turnover_proxy_yuan": 3151686509.2799997,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 1726960629.3270001,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -463,94 +95,30 @@
       "board": "SZ",
       "quote": {
         "name": "宁德时代",
-        "price": 231.72,
-        "previous_close": 233.0,
-        "quote_time": "20261028114951",
-        "float_cap_yi": 9872.7,
-        "total_cap_yi": 10722.26
+        "price": 249.32,
+        "previous_close": 240.19,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 10622.57,
+        "total_cap_yi": 11536.66
       },
-      "avg20_turnover_proxy_yuan": 13137657547.045,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 13566162183.397,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "301526",
-      "name": "国际复材",
+      "code": "002249",
+      "name": "大洋电机",
       "board": "SZ",
       "quote": {
-        "name": "国际复材",
-        "price": 20.49,
-        "previous_close": 19.04,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 287.76,
-        "total_cap_yi": 772.65
+        "name": "大洋电机",
+        "price": 7.87,
+        "previous_close": 7.36,
+        "quote_time": "20261103161418",
+        "float_cap_yi": 147.36,
+        "total_cap_yi": 194.83
       },
-      "avg20_turnover_proxy_yuan": 1927598220.9264998,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "603728",
-      "name": "鸣志电器",
-      "board": "SH",
-      "quote": {
-        "name": "鸣志电器",
-        "price": 60.54,
-        "previous_close": 55.04,
-        "quote_time": "20261028115021",
-        "float_cap_yi": 253.59,
-        "total_cap_yi": 253.59
-      },
-      "avg20_turnover_proxy_yuan": 459114118.54399997,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300006",
-      "name": "莱美药业",
-      "board": "SZ",
-      "quote": {
-        "name": "莱美药业",
-        "price": 9.79,
-        "previous_close": 8.27,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 103.36,
-        "total_cap_yi": 103.37
-      },
-      "avg20_turnover_proxy_yuan": 1273867525.625,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002384",
-      "name": "东山精密",
-      "board": "SZ",
-      "quote": {
-        "name": "东山精密",
-        "price": 104.52,
-        "previous_close": 101.09,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 1448.98,
-        "total_cap_yi": 1914.4
-      },
-      "avg20_turnover_proxy_yuan": 8216806063.071001,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002463",
-      "name": "沪电股份",
-      "board": "SZ",
-      "quote": {
-        "name": "沪电股份",
-        "price": 104.45,
-        "previous_close": 99.2,
-        "quote_time": "20261028114954",
-        "float_cap_yi": 2012.8,
-        "total_cap_yi": 2014.38
-      },
-      "avg20_turnover_proxy_yuan": 5492320123.1355,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 946641276.7004999,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -559,270 +127,30 @@
       "board": "SH",
       "quote": {
         "name": "贵州茅台",
-        "price": 1331.45,
-        "previous_close": 1355.9,
-        "quote_time": "20261028115008",
-        "float_cap_yi": 16644.21,
-        "total_cap_yi": 16644.21
+        "price": 1480.0,
+        "previous_close": 1439.1,
+        "quote_time": "20261103161453",
+        "float_cap_yi": 18501.21,
+        "total_cap_yi": 18501.21
       },
-      "avg20_turnover_proxy_yuan": 4578509464.196,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 5808894334.651999,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "002050",
-      "name": "三花智控",
+      "code": "300059",
+      "name": "东方财富",
       "board": "SZ",
       "quote": {
-        "name": "三花智控",
-        "price": 35.77,
-        "previous_close": 34.06,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 1320.29,
-        "total_cap_yi": 1505.21
+        "name": "东方财富",
+        "price": 18.86,
+        "previous_close": 18.71,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 2525.8,
+        "total_cap_yi": 2984.07
       },
-      "avg20_turnover_proxy_yuan": 1618279507.2779999,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "000700",
-      "name": "模塑科技",
-      "board": "SZ",
-      "quote": {
-        "name": "模塑科技",
-        "price": 14.71,
-        "previous_close": 13.58,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 135.04,
-        "total_cap_yi": 135.04
-      },
-      "avg20_turnover_proxy_yuan": 719502221.391,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "600584",
-      "name": "长电科技",
-      "board": "SH",
-      "quote": {
-        "name": "长电科技",
-        "price": 54.67,
-        "previous_close": 53.29,
-        "quote_time": "20261028115025",
-        "float_cap_yi": 978.27,
-        "total_cap_yi": 978.27
-      },
-      "avg20_turnover_proxy_yuan": 3699942323.408,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002611",
-      "name": "东方精工",
-      "board": "SZ",
-      "quote": {
-        "name": "东方精工",
-        "price": 14.73,
-        "previous_close": 13.39,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 147.88,
-        "total_cap_yi": 179.31
-      },
-      "avg20_turnover_proxy_yuan": 269934165.73,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300115",
-      "name": "长盈精密",
-      "board": "SZ",
-      "quote": {
-        "name": "长盈精密",
-        "price": 30.6,
-        "previous_close": 28.35,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 415.36,
-        "total_cap_yi": 416.57
-      },
-      "avg20_turnover_proxy_yuan": 1335532068.388,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300364",
-      "name": "中文在线",
-      "board": "SZ",
-      "quote": {
-        "name": "中文在线",
-        "price": 25.15,
-        "previous_close": 23.45,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 166.26,
-        "total_cap_yi": 183.22
-      },
-      "avg20_turnover_proxy_yuan": 2188396064.6029997,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002181",
-      "name": "粤 传 媒",
-      "board": "SZ",
-      "quote": {
-        "name": "粤 传 媒",
-        "price": 10.68,
-        "previous_close": 10.4,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 121.17,
-        "total_cap_yi": 124.0
-      },
-      "avg20_turnover_proxy_yuan": 1024151537.7055,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "600580",
-      "name": "卧龙电驱",
-      "board": "SH",
-      "quote": {
-        "name": "卧龙电驱",
-        "price": 26.71,
-        "previous_close": 25.25,
-        "quote_time": "20261028115022",
-        "float_cap_yi": 416.04,
-        "total_cap_yi": 417.24
-      },
-      "avg20_turnover_proxy_yuan": 721068075.139,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "000823",
-      "name": "超声电子",
-      "board": "SZ",
-      "quote": {
-        "name": "超声电子",
-        "price": 18.35,
-        "previous_close": 17.8,
-        "quote_time": "20261028115003",
-        "float_cap_yi": 109.17,
-        "total_cap_yi": 109.17
-      },
-      "avg20_turnover_proxy_yuan": 3022326177.033,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "601899",
-      "name": "紫金矿业",
-      "board": "SH",
-      "quote": {
-        "name": "紫金矿业",
-        "price": 28.05,
-        "previous_close": 27.85,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 5778.8,
-        "total_cap_yi": 7458.72
-      },
-      "avg20_turnover_proxy_yuan": 5047479710.2125,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "603119",
-      "name": "浙江荣泰",
-      "board": "SH",
-      "quote": {
-        "name": "浙江荣泰",
-        "price": 62.07,
-        "previous_close": 56.43,
-        "quote_time": "20261028115034",
-        "float_cap_yi": 293.5,
-        "total_cap_yi": 293.5
-      },
-      "avg20_turnover_proxy_yuan": 708270422.0385001,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002436",
-      "name": "兴森科技",
-      "board": "SZ",
-      "quote": {
-        "name": "兴森科技",
-        "price": 33.72,
-        "previous_close": 31.01,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 511.85,
-        "total_cap_yi": 573.13
-      },
-      "avg20_turnover_proxy_yuan": 4234418691.7144995,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "603186",
-      "name": "华正新材",
-      "board": "SH",
-      "quote": {
-        "name": "华正新材",
-        "price": 167.0,
-        "previous_close": 163.34,
-        "quote_time": "20261028115022",
-        "float_cap_yi": 261.84,
-        "total_cap_yi": 261.84
-      },
-      "avg20_turnover_proxy_yuan": 3507784819.7415,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "003021",
-      "name": "兆威机电",
-      "board": "SZ",
-      "quote": {
-        "name": "兆威机电",
-        "price": 101.75,
-        "previous_close": 92.5,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 211.86,
-        "total_cap_yi": 272.63
-      },
-      "avg20_turnover_proxy_yuan": 576400658.7375,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "300296",
-      "name": "利亚德",
-      "board": "SZ",
-      "quote": {
-        "name": "利亚德",
-        "price": 6.56,
-        "previous_close": 6.31,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 152.26,
-        "total_cap_yi": 177.91
-      },
-      "avg20_turnover_proxy_yuan": 967746842.4075,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "002265",
-      "name": "建设工业",
-      "board": "SZ",
-      "quote": {
-        "name": "建设工业",
-        "price": 20.92,
-        "previous_close": 19.02,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 216.11,
-        "total_cap_yi": 216.11
-      },
-      "avg20_turnover_proxy_yuan": 288907533.01199996,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 3747205196.0085,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -831,30 +159,238 @@
       "board": "SZ",
       "quote": {
         "name": "天孚通信",
-        "price": 197.5,
-        "previous_close": 188.62,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 2149.57,
-        "total_cap_yi": 2154.38
+        "price": 123.61,
+        "previous_close": 141.75,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 1345.36,
+        "total_cap_yi": 1348.37
       },
-      "avg20_turnover_proxy_yuan": 7176074916.4965,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 7450610527.369499,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "002428",
-      "name": "云南锗业",
+      "code": "000591",
+      "name": "太阳能",
       "board": "SZ",
       "quote": {
-        "name": "云南锗业",
-        "price": 74.92,
-        "previous_close": 73.89,
-        "quote_time": "20261028114954",
-        "float_cap_yi": 489.23,
-        "total_cap_yi": 489.32
+        "name": "太阳能",
+        "price": 4.59,
+        "previous_close": 4.17,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 179.16,
+        "total_cap_yi": 179.23
       },
-      "avg20_turnover_proxy_yuan": 3665946380.3480005,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 178153865.49949998,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "300274",
+      "name": "阳光电源",
+      "board": "SZ",
+      "quote": {
+        "name": "阳光电源",
+        "price": 75.72,
+        "previous_close": 71.54,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 1202.02,
+        "total_cap_yi": 1569.84
+      },
+      "avg20_turnover_proxy_yuan": 3440716173.082,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "688836",
+      "name": "宇树科技-W",
+      "board": "SH",
+      "quote": {
+        "name": "宇树科技-W",
+        "price": 624.58,
+        "previous_close": 662.17,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 187.92,
+        "total_cap_yi": 2526.2
+      },
+      "avg20_turnover_proxy_yuan": 2955171554.2125,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002384",
+      "name": "东山精密",
+      "board": "SZ",
+      "quote": {
+        "name": "东山精密",
+        "price": 88.13,
+        "previous_close": 92.2,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 1221.77,
+        "total_cap_yi": 1714.47
+      },
+      "avg20_turnover_proxy_yuan": 7940891916.233,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "300085",
+      "name": "银之杰",
+      "board": "SZ",
+      "quote": {
+        "name": "银之杰",
+        "price": 28.86,
+        "previous_close": 26.68,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 172.21,
+        "total_cap_yi": 203.94
+      },
+      "avg20_turnover_proxy_yuan": 1059254169.8375,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "688256",
+      "name": "寒武纪",
+      "board": "SH",
+      "quote": {
+        "name": "寒武纪",
+        "price": 767.93,
+        "previous_close": 861.0,
+        "quote_time": "20261103161459",
+        "float_cap_yi": 4829.16,
+        "total_cap_yi": 4829.16
+      },
+      "avg20_turnover_proxy_yuan": 9159320004.5545,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "001309",
+      "name": "德明利",
+      "board": "SZ",
+      "quote": {
+        "name": "德明利",
+        "price": 187.0,
+        "previous_close": 207.78,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 434.62,
+        "total_cap_yi": 593.87
+      },
+      "avg20_turnover_proxy_yuan": 4240952994.078,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "board": "SZ",
+      "quote": {
+        "name": "九阳股份",
+        "price": 22.88,
+        "previous_close": 23.33,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 174.29,
+        "total_cap_yi": 174.58
+      },
+      "avg20_turnover_proxy_yuan": 2180678762.658,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "board": "SH",
+      "quote": {
+        "name": "工商银行",
+        "price": 8.59,
+        "previous_close": 8.69,
+        "quote_time": "20261103161453",
+        "float_cap_yi": 23159.69,
+        "total_cap_yi": 30615.3
+      },
+      "avg20_turnover_proxy_yuan": 3403738351.479,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "603986",
+      "name": "兆易创新",
+      "board": "SH",
+      "quote": {
+        "name": "兆易创新",
+        "price": 250.16,
+        "previous_close": 265.67,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 1677.87,
+        "total_cap_yi": 1761.05
+      },
+      "avg20_turnover_proxy_yuan": 9277884282.013,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "600487",
+      "name": "亨通光电",
+      "board": "SH",
+      "quote": {
+        "name": "亨通光电",
+        "price": 40.45,
+        "previous_close": 43.52,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 992.5,
+        "total_cap_yi": 997.66
+      },
+      "avg20_turnover_proxy_yuan": 6629148691.558001,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "000410",
+      "name": "沈阳机床",
+      "board": "SZ",
+      "quote": {
+        "name": "沈阳机床",
+        "price": 5.83,
+        "previous_close": 5.91,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 114.91,
+        "total_cap_yi": 154.44
+      },
+      "avg20_turnover_proxy_yuan": 233205303.2775,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "600825",
+      "name": "新华传媒",
+      "board": "SH",
+      "quote": {
+        "name": "新华传媒",
+        "price": 12.31,
+        "previous_close": 12.47,
+        "quote_time": "20261103161441",
+        "float_cap_yi": 128.63,
+        "total_cap_yi": 128.63
+      },
+      "avg20_turnover_proxy_yuan": 1494661977.1375,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "board": "SZ",
+      "quote": {
+        "name": "华天科技",
+        "price": 13.88,
+        "previous_close": 14.9,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 462.31,
+        "total_cap_yi": 497.59
+      },
+      "avg20_turnover_proxy_yuan": 2986781167.149,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -863,14 +399,14 @@
       "board": "SH",
       "quote": {
         "name": "生益科技",
-        "price": 102.07,
-        "previous_close": 97.61,
-        "quote_time": "20261028115010",
-        "float_cap_yi": 2461.67,
-        "total_cap_yi": 2479.28
+        "price": 73.87,
+        "previous_close": 82.08,
+        "quote_time": "20261103161455",
+        "float_cap_yi": 1781.56,
+        "total_cap_yi": 1794.31
       },
-      "avg20_turnover_proxy_yuan": 6463086903.7975,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 6497419191.7725,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
@@ -879,624 +415,368 @@
       "board": "SZ",
       "quote": {
         "name": "京东方Ａ",
-        "price": 4.82,
-        "previous_close": 4.73,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 1704.7,
-        "total_cap_yi": 1785.54
+        "price": 4.4,
+        "previous_close": 4.34,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 1556.15,
+        "total_cap_yi": 1629.95
       },
-      "avg20_turnover_proxy_yuan": 4930286635.289,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 3997766227.6800003,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "688279",
-      "name": "峰岹科技",
-      "board": "SH",
-      "quote": {
-        "name": "峰岹科技",
-        "price": 214.05,
-        "previous_close": 183.06,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 200.26,
-        "total_cap_yi": 246.4
-      },
-      "avg20_turnover_proxy_yuan": 419749045.219,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "301275",
-      "name": "汉朔科技",
+      "code": "002558",
+      "name": "巨人网络",
       "board": "SZ",
       "quote": {
-        "name": "汉朔科技",
-        "price": 41.3,
-        "previous_close": 37.6,
-        "quote_time": "20261028114948",
-        "float_cap_yi": 124.25,
-        "total_cap_yi": 174.45
+        "name": "巨人网络",
+        "price": 21.49,
+        "previous_close": 20.68,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 408.43,
+        "total_cap_yi": 408.43
       },
-      "avg20_turnover_proxy_yuan": 138974032.171,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 1065936431.225,
+      "history_as_of": "2026-11-03",
       "reason": null
     },
     {
-      "code": "688485",
-      "name": "九州一轨",
-      "board": "SH",
-      "quote": {
-        "name": "九州一轨",
-        "price": 85.05,
-        "previous_close": 78.0,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 127.82,
-        "total_cap_yi": 127.82
-      },
-      "avg20_turnover_proxy_yuan": 621768115.508,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "688392",
-      "name": "骄成超声",
-      "board": "SH",
-      "quote": {
-        "name": "骄成超声",
-        "price": 114.37,
-        "previous_close": 106.8,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 132.36,
-        "total_cap_yi": 132.36
-      },
-      "avg20_turnover_proxy_yuan": 431271230.99399996,
-      "history_as_of": "2026-10-27",
-      "reason": null
-    },
-    {
-      "code": "301093",
-      "name": "华兰股份",
+      "code": "002354",
+      "name": "天娱数科",
       "board": "SZ",
       "quote": {
-        "name": "华兰股份",
-        "price": 51.06,
-        "previous_close": 47.68,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 103.9,
-        "total_cap_yi": 108.82
+        "name": "天娱数科",
+        "price": 7.68,
+        "previous_close": 7.9,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 124.95,
+        "total_cap_yi": 127.07
       },
-      "avg20_turnover_proxy_yuan": 299596953.815,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 2399417412.4185,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002827",
+      "name": "高争民爆",
+      "board": "SZ",
+      "quote": {
+        "name": "高争民爆",
+        "price": 62.68,
+        "previous_close": 56.98,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 173.0,
+        "total_cap_yi": 173.65
+      },
+      "avg20_turnover_proxy_yuan": 867397605.7835,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "600259",
+      "name": "中稀有色",
+      "board": "SH",
+      "quote": {
+        "name": "中稀有色",
+        "price": 62.15,
+        "previous_close": 57.97,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 209.09,
+        "total_cap_yi": 209.09
+      },
+      "avg20_turnover_proxy_yuan": 494748980.23249996,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002636",
+      "name": "金安国纪",
+      "board": "SZ",
+      "quote": {
+        "name": "金安国纪",
+        "price": 58.55,
+        "previous_close": 63.7,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 424.63,
+        "total_cap_yi": 426.24
+      },
+      "avg20_turnover_proxy_yuan": 2917266278.084,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "601099",
+      "name": "太平洋",
+      "board": "SH",
+      "quote": {
+        "name": "太平洋",
+        "price": 3.58,
+        "previous_close": 3.54,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 244.02,
+        "total_cap_yi": 244.02
+      },
+      "avg20_turnover_proxy_yuan": 505642897.84300005,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "300182",
+      "name": "捷成股份",
+      "board": "SZ",
+      "quote": {
+        "name": "捷成股份",
+        "price": 5.57,
+        "previous_close": 5.64,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 134.49,
+        "total_cap_yi": 148.38
+      },
+      "avg20_turnover_proxy_yuan": 1521813615.892,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002181",
+      "name": "粤 传 媒",
+      "board": "SZ",
+      "quote": {
+        "name": "粤 传 媒",
+        "price": 10.42,
+        "previous_close": 10.27,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 118.22,
+        "total_cap_yi": 120.98
+      },
+      "avg20_turnover_proxy_yuan": 1121203271.194,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "board": "SH",
+      "quote": {
+        "name": "中国平安",
+        "price": 54.59,
+        "previous_close": 53.12,
+        "quote_time": "20261103161449",
+        "float_cap_yi": 5819.33,
+        "total_cap_yi": 9884.96
+      },
+      "avg20_turnover_proxy_yuan": 4006942459.7955003,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "601899",
+      "name": "紫金矿业",
+      "board": "SH",
+      "quote": {
+        "name": "紫金矿业",
+        "price": 27.45,
+        "previous_close": 26.84,
+        "quote_time": "20261103161455",
+        "float_cap_yi": 5655.19,
+        "total_cap_yi": 7299.17
+      },
+      "avg20_turnover_proxy_yuan": 5267662112.992,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "601138",
+      "name": "工业富联",
+      "board": "SH",
+      "quote": {
+        "name": "工业富联",
+        "price": 41.95,
+        "previous_close": 44.39,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 8324.6,
+        "total_cap_yi": 8324.6
+      },
+      "avg20_turnover_proxy_yuan": 4506634154.9845,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "000592",
+      "name": "平潭发展",
+      "board": "SZ",
+      "quote": {
+        "name": "平潭发展",
+        "price": 6.61,
+        "previous_close": 6.53,
+        "quote_time": "20261103161427",
+        "float_cap_yi": 126.59,
+        "total_cap_yi": 127.69
+      },
+      "avg20_turnover_proxy_yuan": 1739854943.9615002,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002281",
+      "name": "光迅科技",
+      "board": "SZ",
+      "quote": {
+        "name": "光迅科技",
+        "price": 92.2,
+        "previous_close": 102.44,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 724.72,
+        "total_cap_yi": 763.15
+      },
+      "avg20_turnover_proxy_yuan": 3538829839.9535,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002043",
+      "name": "兔 宝 宝",
+      "board": "SZ",
+      "quote": {
+        "name": "兔 宝 宝",
+        "price": 13.43,
+        "previous_close": 12.55,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 108.26,
+        "total_cap_yi": 111.44
+      },
+      "avg20_turnover_proxy_yuan": 191308265.5185,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "600039",
+      "name": "四川路桥",
+      "board": "SH",
+      "quote": {
+        "name": "四川路桥",
+        "price": 8.82,
+        "previous_close": 8.32,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 766.95,
+        "total_cap_yi": 766.95
+      },
+      "avg20_turnover_proxy_yuan": 180718476.5405,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "002372",
+      "name": "伟星新材",
+      "board": "SZ",
+      "quote": {
+        "name": "伟星新材",
+        "price": 8.82,
+        "previous_close": 8.43,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 129.66,
+        "total_cap_yi": 140.42
+      },
+      "avg20_turnover_proxy_yuan": 103639979.634,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "601952",
+      "name": "苏垦农发",
+      "board": "SH",
+      "quote": {
+        "name": "苏垦农发",
+        "price": 8.31,
+        "previous_close": 8.0,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 114.51,
+        "total_cap_yi": 114.51
+      },
+      "avg20_turnover_proxy_yuan": 131445604.5095,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "688009",
+      "name": "中国通号",
+      "board": "SH",
+      "quote": {
+        "name": "中国通号",
+        "price": 5.12,
+        "previous_close": 4.91,
+        "quote_time": "20261103161447",
+        "float_cap_yi": 441.4,
+        "total_cap_yi": 542.2
+      },
+      "avg20_turnover_proxy_yuan": 155450576.8745,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "688627",
+      "name": "精智达",
+      "board": "SH",
+      "quote": {
+        "name": "精智达",
+        "price": 194.84,
+        "previous_close": 222.61,
+        "quote_time": "20261103161440",
+        "float_cap_yi": 183.4,
+        "total_cap_yi": 198.24
+      },
+      "avg20_turnover_proxy_yuan": 1226319575.8799999,
+      "history_as_of": "2026-11-03",
+      "reason": null
+    },
+    {
+      "code": "600575",
+      "name": "淮河能源",
+      "board": "SH",
+      "quote": {
+        "name": "淮河能源",
+        "price": 3.18,
+        "previous_close": 3.09,
+        "quote_time": "20261103161455",
+        "float_cap_yi": 123.58,
+        "total_cap_yi": 227.9
+      },
+      "avg20_turnover_proxy_yuan": 103786521.6465,
+      "history_as_of": "2026-11-03",
       "reason": null
     }
   ],
   "excluded": [
     {
-      "code": "000678",
-      "name": "襄阳轴承",
+      "code": "001381",
+      "name": "N皇冠新材",
       "board": "SZ",
       "quote": {
-        "name": "襄阳轴承",
-        "price": 17.61,
-        "previous_close": 16.01,
-        "quote_time": "20261028115006",
-        "float_cap_yi": 80.94,
-        "total_cap_yi": 80.94
+        "name": "N皇冠新材",
+        "price": 84.55,
+        "previous_close": 16.98,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 37.28,
+        "total_cap_yi": 396.52
       },
-      "avg20_turnover_proxy_yuan": 827049715.1800001,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
+      "avg20_turnover_proxy_yuan": null,
+      "history_as_of": null,
+      "reason": "缺少市值或成交额"
     },
     {
-      "code": "600838",
-      "name": "上海九百",
-      "board": "SH",
-      "quote": {
-        "name": "上海九百",
-        "price": 14.07,
-        "previous_close": 13.31,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 56.4,
-        "total_cap_yi": 56.4
-      },
-      "avg20_turnover_proxy_yuan": 188223706.155,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002708",
-      "name": "光洋股份",
+      "code": "002086",
+      "name": "东方海洋",
       "board": "SZ",
       "quote": {
-        "name": "光洋股份",
-        "price": 18.94,
-        "previous_close": 17.22,
-        "quote_time": "20261028114948",
-        "float_cap_yi": 96.52,
-        "total_cap_yi": 106.46
+        "name": "东方海洋",
+        "price": 3.42,
+        "previous_close": 3.11,
+        "quote_time": "20261103161451",
+        "float_cap_yi": 54.07,
+        "total_cap_yi": 67.0
       },
-      "avg20_turnover_proxy_yuan": 507505915.19049996,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002724",
-      "name": "海洋王",
-      "board": "SZ",
-      "quote": {
-        "name": "海洋王",
-        "price": 12.92,
-        "previous_close": 13.09,
-        "quote_time": "20261028115000",
-        "float_cap_yi": 73.19,
-        "total_cap_yi": 99.68
-      },
-      "avg20_turnover_proxy_yuan": 575241185.762,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "601086",
-      "name": "国芳集团",
-      "board": "SH",
-      "quote": {
-        "name": "国芳集团",
-        "price": 13.01,
-        "previous_close": 12.62,
-        "quote_time": "20261028115037",
-        "float_cap_yi": 86.65,
-        "total_cap_yi": 86.65
-      },
-      "avg20_turnover_proxy_yuan": 920401360.082,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603528",
-      "name": "多伦科技",
-      "board": "SH",
-      "quote": {
-        "name": "多伦科技",
-        "price": 9.34,
-        "previous_close": 9.85,
-        "quote_time": "20261028115008",
-        "float_cap_yi": 65.93,
-        "total_cap_yi": 65.93
-      },
-      "avg20_turnover_proxy_yuan": 234059356.8935,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002164",
-      "name": "宁波东力",
-      "board": "SZ",
-      "quote": {
-        "name": "宁波东力",
-        "price": 16.9,
-        "previous_close": 15.36,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 81.08,
-        "total_cap_yi": 89.94
-      },
-      "avg20_turnover_proxy_yuan": 814791108.779,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600828",
-      "name": "茂业商业",
-      "board": "SH",
-      "quote": {
-        "name": "茂业商业",
-        "price": 4.73,
-        "previous_close": 4.47,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 81.89,
-        "total_cap_yi": 81.92
-      },
-      "avg20_turnover_proxy_yuan": 92932255.34349999,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "001219",
-      "name": "青岛食品",
-      "board": "SZ",
-      "quote": {
-        "name": "青岛食品",
-        "price": 16.48,
-        "previous_close": 14.98,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 31.34,
-        "total_cap_yi": 32.13
-      },
-      "avg20_turnover_proxy_yuan": 37814535.2415,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "601956",
-      "name": "东贝集团",
-      "board": "SH",
-      "quote": {
-        "name": "东贝集团",
-        "price": 6.09,
-        "previous_close": 5.54,
-        "quote_time": "20261028115011",
-        "float_cap_yi": 37.86,
-        "total_cap_yi": 37.86
-      },
-      "avg20_turnover_proxy_yuan": 80458454.396,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603028",
-      "name": "赛福天",
-      "board": "SH",
-      "quote": {
-        "name": "赛福天",
-        "price": 10.74,
-        "previous_close": 10.33,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 30.45,
-        "total_cap_yi": 30.62
-      },
-      "avg20_turnover_proxy_yuan": 53069607.9565,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002187",
-      "name": "广百股份",
-      "board": "SZ",
-      "quote": {
-        "name": "广百股份",
-        "price": 5.98,
-        "previous_close": 5.92,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 41.91,
-        "total_cap_yi": 41.91
-      },
-      "avg20_turnover_proxy_yuan": 60529492.511,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600785",
-      "name": "新华百货",
-      "board": "SH",
-      "quote": {
-        "name": "新华百货",
-        "price": 13.49,
-        "previous_close": 13.9,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 42.61,
-        "total_cap_yi": 42.61
-      },
-      "avg20_turnover_proxy_yuan": 342249294.29050004,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603278",
-      "name": "大业股份",
-      "board": "SH",
-      "quote": {
-        "name": "大业股份",
-        "price": 17.81,
-        "previous_close": 17.4,
-        "quote_time": "20261028115019",
-        "float_cap_yi": 60.87,
-        "total_cap_yi": 60.87
-      },
-      "avg20_turnover_proxy_yuan": 579192075.47,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "000530",
-      "name": "冰山冷热",
-      "board": "SZ",
-      "quote": {
-        "name": "冰山冷热",
-        "price": 7.77,
-        "previous_close": 8.2,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 46.63,
-        "total_cap_yi": 65.52
-      },
-      "avg20_turnover_proxy_yuan": 947606657.3809999,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301488",
-      "name": "豪恩汽电",
-      "board": "SZ",
-      "quote": {
-        "name": "豪恩汽电",
-        "price": 97.87,
-        "previous_close": 81.56,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 40.95,
-        "total_cap_yi": 99.54
-      },
-      "avg20_turnover_proxy_yuan": 130230410.75850001,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "000058",
-      "name": "深 赛 格",
-      "board": "SZ",
-      "quote": {
-        "name": "深 赛 格",
-        "price": 8.03,
-        "previous_close": 7.87,
-        "quote_time": "20261028115000",
-        "float_cap_yi": 79.07,
-        "total_cap_yi": 98.87
-      },
-      "avg20_turnover_proxy_yuan": 108512243.4135,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "000670",
-      "name": "盈方微",
-      "board": "SZ",
-      "quote": {
-        "name": "盈方微",
-        "price": 7.08,
-        "previous_close": 6.44,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 58.76,
-        "total_cap_yi": 59.54
-      },
-      "avg20_turnover_proxy_yuan": 283396102.088,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002820",
-      "name": "桂发祥",
-      "board": "SZ",
-      "quote": {
-        "name": "桂发祥",
-        "price": 10.43,
-        "previous_close": 11.21,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 20.95,
-        "total_cap_yi": 20.95
-      },
-      "avg20_turnover_proxy_yuan": 101551711.1755,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002343",
-      "name": "慈文传媒",
-      "board": "SZ",
-      "quote": {
-        "name": "慈文传媒",
-        "price": 8.61,
-        "previous_close": 8.82,
-        "quote_time": "20261028115003",
-        "float_cap_yi": 40.78,
-        "total_cap_yi": 40.78
-      },
-      "avg20_turnover_proxy_yuan": 821749500.8765,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603466",
-      "name": "风语筑",
-      "board": "SH",
-      "quote": {
-        "name": "风语筑",
-        "price": 14.6,
-        "previous_close": 13.82,
-        "quote_time": "20261028115028",
-        "float_cap_yi": 86.85,
-        "total_cap_yi": 86.85
-      },
-      "avg20_turnover_proxy_yuan": 1126356460.184,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603037",
-      "name": "凯众股份",
-      "board": "SH",
-      "quote": {
-        "name": "凯众股份",
-        "price": 13.06,
-        "previous_close": 11.87,
-        "quote_time": "20261028115006",
-        "float_cap_yi": 34.76,
-        "total_cap_yi": 34.81
-      },
-      "avg20_turnover_proxy_yuan": 88078848.7405,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "001318",
-      "name": "阳光乳业",
-      "board": "SZ",
-      "quote": {
-        "name": "阳光乳业",
-        "price": 13.49,
-        "previous_close": 13.31,
-        "quote_time": "20261028115021",
-        "float_cap_yi": 38.13,
-        "total_cap_yi": 38.13
-      },
-      "avg20_turnover_proxy_yuan": 348420237.695,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301261",
-      "name": "恒工精密",
-      "board": "SZ",
-      "quote": {
-        "name": "恒工精密",
-        "price": 62.89,
-        "previous_close": 52.41,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 65.77,
-        "total_cap_yi": 66.33
-      },
-      "avg20_turnover_proxy_yuan": 107533518.534,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002639",
-      "name": "雪人集团",
-      "board": "SZ",
-      "quote": {
-        "name": "雪人集团",
-        "price": 13.98,
-        "previous_close": 14.27,
-        "quote_time": "20261028114957",
-        "float_cap_yi": 92.29,
-        "total_cap_yi": 108.97
-      },
-      "avg20_turnover_proxy_yuan": 1563511627.174,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002093",
-      "name": "国脉科技",
-      "board": "SZ",
-      "quote": {
-        "name": "国脉科技",
-        "price": 8.16,
-        "previous_close": 7.93,
-        "quote_time": "20261028114936",
-        "float_cap_yi": 82.21,
-        "total_cap_yi": 82.21
-      },
-      "avg20_turnover_proxy_yuan": 209573302.2575,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301313",
-      "name": "凡拓数创",
-      "board": "SZ",
-      "quote": {
-        "name": "凡拓数创",
-        "price": 67.55,
-        "previous_close": 64.4,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 53.17,
-        "total_cap_yi": 69.13
-      },
-      "avg20_turnover_proxy_yuan": 744191688.1355,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301413",
-      "name": "安培龙",
-      "board": "SZ",
-      "quote": {
-        "name": "安培龙",
-        "price": 72.83,
-        "previous_close": 60.69,
-        "quote_time": "20261028115006",
-        "float_cap_yi": 55.62,
-        "total_cap_yi": 100.06
-      },
-      "avg20_turnover_proxy_yuan": 316150366.03499997,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002696",
-      "name": "百洋股份",
-      "board": "SZ",
-      "quote": {
-        "name": "百洋股份",
-        "price": 10.5,
-        "previous_close": 10.7,
-        "quote_time": "20261028114957",
-        "float_cap_yi": 35.1,
-        "total_cap_yi": 36.3
-      },
-      "avg20_turnover_proxy_yuan": 519277689.28900003,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002823",
-      "name": "凯中精密",
-      "board": "SZ",
-      "quote": {
-        "name": "凯中精密",
-        "price": 14.03,
-        "previous_close": 13.49,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 31.29,
-        "total_cap_yi": 45.95
-      },
-      "avg20_turnover_proxy_yuan": 63859856.002,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600865",
-      "name": "百大集团",
-      "board": "SH",
-      "quote": {
-        "name": "百大集团",
-        "price": 11.78,
-        "previous_close": 12.62,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 44.32,
-        "total_cap_yi": 44.32
-      },
-      "avg20_turnover_proxy_yuan": 440518841.342,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301428",
-      "name": "世纪恒通",
-      "board": "SZ",
-      "quote": {
-        "name": "世纪恒通",
-        "price": 42.58,
-        "previous_close": 37.46,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 29.65,
-        "total_cap_yi": 42.01
-      },
-      "avg20_turnover_proxy_yuan": 228003010.10149997,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "003026",
-      "name": "中晶科技",
-      "board": "SZ",
-      "quote": {
-        "name": "中晶科技",
-        "price": 28.78,
-        "previous_close": 27.83,
-        "quote_time": "20261028115006",
-        "float_cap_yi": 41.49,
-        "total_cap_yi": 54.56
-      },
-      "avg20_turnover_proxy_yuan": 494491691.83949995,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 525988779.3695,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
@@ -1505,126 +785,206 @@
       "board": "SH",
       "quote": {
         "name": "文投控股",
-        "price": 2.06,
-        "previous_close": 1.87,
-        "quote_time": "20261028115032",
-        "float_cap_yi": 58.96,
-        "total_cap_yi": 83.63
+        "price": 2.46,
+        "previous_close": 2.24,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 70.41,
+        "total_cap_yi": 99.87
       },
-      "avg20_turnover_proxy_yuan": 234074843.41300002,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 454178880.04899997,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "002526",
-      "name": "山东矿机",
+      "code": "000678",
+      "name": "襄阳轴承",
       "board": "SZ",
       "quote": {
-        "name": "山东矿机",
-        "price": 2.98,
-        "previous_close": 2.71,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 52.78,
-        "total_cap_yi": 53.13
+        "name": "襄阳轴承",
+        "price": 20.26,
+        "previous_close": 19.89,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 93.12,
+        "total_cap_yi": 93.12
       },
-      "avg20_turnover_proxy_yuan": 87552935.3215,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 1471453804.2845,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "605333",
-      "name": "沪光股份",
-      "board": "SH",
-      "quote": {
-        "name": "沪光股份",
-        "price": 21.9,
-        "previous_close": 19.91,
-        "quote_time": "20261028115017",
-        "float_cap_yi": 101.62,
-        "total_cap_yi": 101.62
-      },
-      "avg20_turnover_proxy_yuan": 53507018.43,
-      "history_as_of": "2026-10-27",
-      "reason": "近20日估算日均成交额低于1亿元"
-    },
-    {
-      "code": "600693",
-      "name": "东百集团",
-      "board": "SH",
-      "quote": {
-        "name": "东百集团",
-        "price": 9.2,
-        "previous_close": 9.71,
-        "quote_time": "20261028115026",
-        "float_cap_yi": 79.94,
-        "total_cap_yi": 80.03
-      },
-      "avg20_turnover_proxy_yuan": 942416712.4035,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603758",
-      "name": "秦安股份",
-      "board": "SH",
-      "quote": {
-        "name": "秦安股份",
-        "price": 11.0,
-        "previous_close": 10.73,
-        "quote_time": "20261028115020",
-        "float_cap_yi": 47.64,
-        "total_cap_yi": 47.64
-      },
-      "avg20_turnover_proxy_yuan": 65399563.3235,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300539",
-      "name": "横河精密",
+      "code": "002172",
+      "name": "澳洋健康",
       "board": "SZ",
       "quote": {
-        "name": "横河精密",
-        "price": 20.68,
-        "previous_close": 19.68,
-        "quote_time": "20261028114948",
-        "float_cap_yi": 45.18,
-        "total_cap_yi": 55.56
+        "name": "澳洋健康",
+        "price": 6.8,
+        "previous_close": 6.5,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 52.03,
+        "total_cap_yi": 52.07
       },
-      "avg20_turnover_proxy_yuan": 134717215.9675,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 906650743.8174999,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "601566",
-      "name": "九牧王",
-      "board": "SH",
+      "code": "002580",
+      "name": "圣阳股份",
+      "board": "SZ",
       "quote": {
-        "name": "九牧王",
-        "price": 9.82,
-        "previous_close": 10.32,
-        "quote_time": "20261028115010",
-        "float_cap_yi": 56.43,
-        "total_cap_yi": 56.43
+        "name": "圣阳股份",
+        "price": 18.67,
+        "previous_close": 16.97,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 84.45,
+        "total_cap_yi": 84.74
       },
-      "avg20_turnover_proxy_yuan": 317052321.8995,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 1074784088.8095,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "603081",
-      "name": "大丰实业",
+      "code": "600261",
+      "name": "阳光照明",
       "board": "SH",
       "quote": {
-        "name": "大丰实业",
-        "price": 11.31,
-        "previous_close": 10.28,
-        "quote_time": "20261028115017",
-        "float_cap_yi": 47.78,
-        "total_cap_yi": 47.78
+        "name": "阳光照明",
+        "price": 4.95,
+        "previous_close": 4.5,
+        "quote_time": "20261103161450",
+        "float_cap_yi": 66.09,
+        "total_cap_yi": 66.09
       },
-      "avg20_turnover_proxy_yuan": 74178093.86050001,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 210254770.2125,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "000530",
+      "name": "冰山冷热",
+      "board": "SZ",
+      "quote": {
+        "name": "冰山冷热",
+        "price": 8.6,
+        "previous_close": 8.71,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 51.61,
+        "total_cap_yi": 72.52
+      },
+      "avg20_turnover_proxy_yuan": 1426943712.9194999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "000995",
+      "name": "皇台酒业",
+      "board": "SZ",
+      "quote": {
+        "name": "皇台酒业",
+        "price": 17.16,
+        "previous_close": 15.6,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 30.44,
+        "total_cap_yi": 30.44
+      },
+      "avg20_turnover_proxy_yuan": 434027359.83549994,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002029",
+      "name": "七 匹 狼",
+      "board": "SZ",
+      "quote": {
+        "name": "七 匹 狼",
+        "price": 10.33,
+        "previous_close": 9.39,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 68.74,
+        "total_cap_yi": 72.83
+      },
+      "avg20_turnover_proxy_yuan": 456764334.413,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600892",
+      "name": "大晟文化",
+      "board": "SH",
+      "quote": {
+        "name": "大晟文化",
+        "price": 4.81,
+        "previous_close": 4.37,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 26.9,
+        "total_cap_yi": 26.91
+      },
+      "avg20_turnover_proxy_yuan": 296660045.092,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002724",
+      "name": "海洋王",
+      "board": "SZ",
+      "quote": {
+        "name": "海洋王",
+        "price": 12.76,
+        "previous_close": 13.25,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 72.28,
+        "total_cap_yi": 98.44
+      },
+      "avg20_turnover_proxy_yuan": 855933842.9350001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002696",
+      "name": "百洋股份",
+      "board": "SZ",
+      "quote": {
+        "name": "百洋股份",
+        "price": 12.36,
+        "previous_close": 11.24,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 41.31,
+        "total_cap_yi": 42.74
+      },
+      "avg20_turnover_proxy_yuan": 778744583.3955,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "001318",
+      "name": "阳光乳业",
+      "board": "SZ",
+      "quote": {
+        "name": "阳光乳业",
+        "price": 15.84,
+        "previous_close": 14.4,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 44.77,
+        "total_cap_yi": 44.77
+      },
+      "avg20_turnover_proxy_yuan": 526057313.6345,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301487",
+      "name": "盟固利",
+      "board": "SZ",
+      "quote": {
+        "name": "盟固利",
+        "price": 20.5,
+        "previous_close": 18.06,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 94.22,
+        "total_cap_yi": 94.22
+      },
+      "avg20_turnover_proxy_yuan": 846206060.2435,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
@@ -1633,46 +993,510 @@
       "board": "SH",
       "quote": {
         "name": "三峡新材",
-        "price": 3.92,
-        "previous_close": 4.27,
-        "quote_time": "20261028115036",
-        "float_cap_yi": 45.48,
-        "total_cap_yi": 45.48
+        "price": 4.0,
+        "previous_close": 3.64,
+        "quote_time": "20261103161451",
+        "float_cap_yi": 46.41,
+        "total_cap_yi": 46.41
       },
-      "avg20_turnover_proxy_yuan": 408128221.4155,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 538437906.5115,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "002284",
-      "name": "亚太股份",
-      "board": "SZ",
+      "code": "600558",
+      "name": "大西洋",
+      "board": "SH",
       "quote": {
-        "name": "亚太股份",
-        "price": 9.99,
-        "previous_close": 9.67,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 73.15,
-        "total_cap_yi": 73.84
+        "name": "大西洋",
+        "price": 6.24,
+        "previous_close": 5.67,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 56.01,
+        "total_cap_yi": 56.01
       },
-      "avg20_turnover_proxy_yuan": 132309547.4955,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 289878458.35749996,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "301052",
-      "name": "果麦文化",
+      "code": "603278",
+      "name": "大业股份",
+      "board": "SH",
+      "quote": {
+        "name": "大业股份",
+        "price": 15.81,
+        "previous_close": 17.57,
+        "quote_time": "20261103161446",
+        "float_cap_yi": 54.03,
+        "total_cap_yi": 54.03
+      },
+      "avg20_turnover_proxy_yuan": 879750434.4075,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002292",
+      "name": "奥飞娱乐",
       "board": "SZ",
       "quote": {
-        "name": "果麦文化",
-        "price": 38.94,
-        "previous_close": 32.45,
-        "quote_time": "20261028114936",
-        "float_cap_yi": 31.25,
-        "total_cap_yi": 38.53
+        "name": "奥飞娱乐",
+        "price": 9.58,
+        "previous_close": 8.71,
+        "quote_time": "20261103161436",
+        "float_cap_yi": 97.51,
+        "total_cap_yi": 141.66
       },
-      "avg20_turnover_proxy_yuan": 649623189.1524999,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 722243251.797,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300739",
+      "name": "明阳电路",
+      "board": "SZ",
+      "quote": {
+        "name": "明阳电路",
+        "price": 26.0,
+        "previous_close": 23.12,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 78.93,
+        "total_cap_yi": 97.08
+      },
+      "avg20_turnover_proxy_yuan": 502988956.3405,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002343",
+      "name": "慈文传媒",
+      "board": "SZ",
+      "quote": {
+        "name": "慈文传媒",
+        "price": 8.3,
+        "previous_close": 7.86,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 39.32,
+        "total_cap_yi": 39.32
+      },
+      "avg20_turnover_proxy_yuan": 1169562125.9965,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002300",
+      "name": "太阳电缆",
+      "board": "SZ",
+      "quote": {
+        "name": "太阳电缆",
+        "price": 8.72,
+        "previous_close": 7.93,
+        "quote_time": "20261103161439",
+        "float_cap_yi": 62.98,
+        "total_cap_yi": 62.99
+      },
+      "avg20_turnover_proxy_yuan": 406125772.9085,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "601566",
+      "name": "九牧王",
+      "board": "SH",
+      "quote": {
+        "name": "九牧王",
+        "price": 11.55,
+        "previous_close": 10.5,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 66.37,
+        "total_cap_yi": 66.37
+      },
+      "avg20_turnover_proxy_yuan": 401697788.8725,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "605577",
+      "name": "龙版传媒",
+      "board": "SH",
+      "quote": {
+        "name": "龙版传媒",
+        "price": 14.3,
+        "previous_close": 13.0,
+        "quote_time": "20261103161441",
+        "float_cap_yi": 63.56,
+        "total_cap_yi": 63.56
+      },
+      "avg20_turnover_proxy_yuan": 546847718.5335,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603258",
+      "name": "电魂网络",
+      "board": "SH",
+      "quote": {
+        "name": "电魂网络",
+        "price": 16.69,
+        "previous_close": 15.17,
+        "quote_time": "20261103161459",
+        "float_cap_yi": 40.28,
+        "total_cap_yi": 40.52
+      },
+      "avg20_turnover_proxy_yuan": 230606262.33249998,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "001219",
+      "name": "青岛食品",
+      "board": "SZ",
+      "quote": {
+        "name": "青岛食品",
+        "price": 21.96,
+        "previous_close": 21.93,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 41.77,
+        "total_cap_yi": 42.82
+      },
+      "avg20_turnover_proxy_yuan": 183573918.95900002,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "601188",
+      "name": "龙江交通",
+      "board": "SH",
+      "quote": {
+        "name": "龙江交通",
+        "price": 3.7,
+        "previous_close": 3.36,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 48.3,
+        "total_cap_yi": 48.3
+      },
+      "avg20_turnover_proxy_yuan": 382831581.475,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600838",
+      "name": "上海九百",
+      "board": "SH",
+      "quote": {
+        "name": "上海九百",
+        "price": 12.55,
+        "previous_close": 11.75,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 50.31,
+        "total_cap_yi": 50.31
+      },
+      "avg20_turnover_proxy_yuan": 591431280.276,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300426",
+      "name": "华智数媒",
+      "board": "SZ",
+      "quote": {
+        "name": "华智数媒",
+        "price": 9.0,
+        "previous_close": 7.74,
+        "quote_time": "20261103161436",
+        "float_cap_yi": 36.0,
+        "total_cap_yi": 40.53
+      },
+      "avg20_turnover_proxy_yuan": 316409684.2645,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "601599",
+      "name": "浙文影业",
+      "board": "SH",
+      "quote": {
+        "name": "浙文影业",
+        "price": 3.82,
+        "previous_close": 3.47,
+        "quote_time": "20261103161459",
+        "float_cap_yi": 44.33,
+        "total_cap_yi": 44.33
+      },
+      "avg20_turnover_proxy_yuan": 95560228.9975,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "601086",
+      "name": "国芳集团",
+      "board": "SH",
+      "quote": {
+        "name": "国芳集团",
+        "price": 14.0,
+        "previous_close": 13.46,
+        "quote_time": "20261103161454",
+        "float_cap_yi": 93.24,
+        "total_cap_yi": 93.24
+      },
+      "avg20_turnover_proxy_yuan": 920357688.499,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "000525",
+      "name": "红太阳",
+      "board": "SZ",
+      "quote": {
+        "name": "红太阳",
+        "price": 5.02,
+        "previous_close": 4.94,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 55.81,
+        "total_cap_yi": 65.41
+      },
+      "avg20_turnover_proxy_yuan": 147909560.3885,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600506",
+      "name": "统一股份",
+      "board": "SH",
+      "quote": {
+        "name": "统一股份",
+        "price": 19.52,
+        "previous_close": 19.0,
+        "quote_time": "20261103161443",
+        "float_cap_yi": 48.73,
+        "total_cap_yi": 48.73
+      },
+      "avg20_turnover_proxy_yuan": 378419843.029,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603906",
+      "name": "龙蟠科技",
+      "board": "SH",
+      "quote": {
+        "name": "龙蟠科技",
+        "price": 15.64,
+        "previous_close": 14.22,
+        "quote_time": "20261103161440",
+        "float_cap_yi": 88.05,
+        "total_cap_yi": 123.73
+      },
+      "avg20_turnover_proxy_yuan": 668590216.7135,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600189",
+      "name": "泉阳泉",
+      "board": "SH",
+      "quote": {
+        "name": "泉阳泉",
+        "price": 9.4,
+        "previous_close": 9.72,
+        "quote_time": "20261103161459",
+        "float_cap_yi": 67.23,
+        "total_cap_yi": 67.23
+      },
+      "avg20_turnover_proxy_yuan": 330048862.81350005,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603330",
+      "name": "天洋新材",
+      "board": "SH",
+      "quote": {
+        "name": "天洋新材",
+        "price": 10.9,
+        "previous_close": 10.37,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 47.16,
+        "total_cap_yi": 47.16
+      },
+      "avg20_turnover_proxy_yuan": 669971371.6984999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300010",
+      "name": "ST豆神",
+      "board": "SZ",
+      "quote": {
+        "name": "ST豆神",
+        "price": 3.79,
+        "previous_close": 3.16,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 62.03,
+        "total_cap_yi": 78.32
+      },
+      "avg20_turnover_proxy_yuan": 303413474.013,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "002058",
+      "name": "紫竹高科",
+      "board": "SZ",
+      "quote": {
+        "name": "紫竹高科",
+        "price": 21.13,
+        "previous_close": 19.21,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 30.29,
+        "total_cap_yi": 30.31
+      },
+      "avg20_turnover_proxy_yuan": 318589202.3175,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600327",
+      "name": "大东方",
+      "board": "SH",
+      "quote": {
+        "name": "大东方",
+        "price": 4.35,
+        "previous_close": 3.95,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 38.49,
+        "total_cap_yi": 38.49
+      },
+      "avg20_turnover_proxy_yuan": 59696469.386,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600241",
+      "name": "时代万恒",
+      "board": "SH",
+      "quote": {
+        "name": "时代万恒",
+        "price": 9.12,
+        "previous_close": 8.29,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 26.84,
+        "total_cap_yi": 26.84
+      },
+      "avg20_turnover_proxy_yuan": 771123887.174,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "605058",
+      "name": "澳弘电子",
+      "board": "SH",
+      "quote": {
+        "name": "澳弘电子",
+        "price": 56.42,
+        "previous_close": 53.05,
+        "quote_time": "20261103161436",
+        "float_cap_yi": 80.64,
+        "total_cap_yi": 80.64
+      },
+      "avg20_turnover_proxy_yuan": 1164494117.836,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002639",
+      "name": "雪人集团",
+      "board": "SZ",
+      "quote": {
+        "name": "雪人集团",
+        "price": 14.18,
+        "previous_close": 13.83,
+        "quote_time": "20261103161424",
+        "float_cap_yi": 93.61,
+        "total_cap_yi": 110.53
+      },
+      "avg20_turnover_proxy_yuan": 1654064359.408,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600802",
+      "name": "福建水泥",
+      "board": "SH",
+      "quote": {
+        "name": "福建水泥",
+        "price": 7.51,
+        "previous_close": 6.83,
+        "quote_time": "20261103161452",
+        "float_cap_yi": 34.41,
+        "total_cap_yi": 34.41
+      },
+      "avg20_turnover_proxy_yuan": 565711473.496,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002949",
+      "name": "华阳国际",
+      "board": "SZ",
+      "quote": {
+        "name": "华阳国际",
+        "price": 15.34,
+        "previous_close": 14.08,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 23.31,
+        "total_cap_yi": 30.08
+      },
+      "avg20_turnover_proxy_yuan": 174292275.667,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301513",
+      "name": "尚水智能",
+      "board": "SZ",
+      "quote": {
+        "name": "尚水智能",
+        "price": 54.78,
+        "previous_close": 45.65,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 11.64,
+        "total_cap_yi": 54.78
+      },
+      "avg20_turnover_proxy_yuan": 383468879.59749997,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603131",
+      "name": "上海沪工",
+      "board": "SH",
+      "quote": {
+        "name": "上海沪工",
+        "price": 15.57,
+        "previous_close": 17.3,
+        "quote_time": "20261103161452",
+        "float_cap_yi": 52.46,
+        "total_cap_yi": 52.46
+      },
+      "avg20_turnover_proxy_yuan": 272113616.3045,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "605388",
+      "name": "均瑶健康",
+      "board": "SH",
+      "quote": {
+        "name": "均瑶健康",
+        "price": 6.58,
+        "previous_close": 5.98,
+        "quote_time": "20261103161434",
+        "float_cap_yi": 39.51,
+        "total_cap_yi": 39.51
+      },
+      "avg20_turnover_proxy_yuan": 198051716.829,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
@@ -1681,1102 +1505,46 @@
       "board": "SH",
       "quote": {
         "name": "金健米业",
-        "price": 10.3,
-        "previous_close": 10.38,
-        "quote_time": "20261028115020",
-        "float_cap_yi": 66.1,
-        "total_cap_yi": 66.1
-      },
-      "avg20_turnover_proxy_yuan": 2974238337.8315,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301359",
-      "name": "东南电子",
-      "board": "SZ",
-      "quote": {
-        "name": "东南电子",
-        "price": 19.08,
-        "previous_close": 15.9,
-        "quote_time": "20261028114936",
-        "float_cap_yi": 13.45,
-        "total_cap_yi": 22.93
-      },
-      "avg20_turnover_proxy_yuan": 38464026.744,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603633",
-      "name": "徕木股份",
-      "board": "SH",
-      "quote": {
-        "name": "徕木股份",
-        "price": 6.36,
-        "previous_close": 5.78,
-        "quote_time": "20261028115025",
-        "float_cap_yi": 27.15,
-        "total_cap_yi": 27.15
-      },
-      "avg20_turnover_proxy_yuan": 51026545.7165,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300488",
-      "name": "恒锋工具",
-      "board": "SZ",
-      "quote": {
-        "name": "恒锋工具",
-        "price": 39.28,
-        "previous_close": 32.73,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 63.73,
-        "total_cap_yi": 75.11
-      },
-      "avg20_turnover_proxy_yuan": 168566491.939,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300258",
-      "name": "精锻科技",
-      "board": "SZ",
-      "quote": {
-        "name": "精锻科技",
         "price": 10.1,
-        "previous_close": 8.91,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 57.56,
-        "total_cap_yi": 59.09
+        "previous_close": 9.78,
+        "quote_time": "20261103161436",
+        "float_cap_yi": 64.82,
+        "total_cap_yi": 64.82
       },
-      "avg20_turnover_proxy_yuan": 96000361.75649999,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 2588516371.834,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "603897",
-      "name": "长城科技",
-      "board": "SH",
-      "quote": {
-        "name": "长城科技",
-        "price": 26.43,
-        "previous_close": 24.03,
-        "quote_time": "20261028115020",
-        "float_cap_yi": 54.56,
-        "total_cap_yi": 54.56
-      },
-      "avg20_turnover_proxy_yuan": 143899498.825,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603006",
-      "name": "联明股份",
-      "board": "SH",
-      "quote": {
-        "name": "联明股份",
-        "price": 10.74,
-        "previous_close": 9.76,
-        "quote_time": "20261028115016",
-        "float_cap_yi": 27.31,
-        "total_cap_yi": 27.31
-      },
-      "avg20_turnover_proxy_yuan": 28506923.757,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600173",
-      "name": "卧龙新能",
-      "board": "SH",
-      "quote": {
-        "name": "卧龙新能",
-        "price": 5.45,
-        "previous_close": 4.95,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 38.17,
-        "total_cap_yi": 38.18
-      },
-      "avg20_turnover_proxy_yuan": 27539092.033,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300403",
-      "name": "汉宇集团",
+      "code": "000417",
+      "name": "合百集团",
       "board": "SZ",
       "quote": {
-        "name": "汉宇集团",
-        "price": 9.49,
-        "previous_close": 8.58,
-        "quote_time": "20261028114936",
-        "float_cap_yi": 41.58,
-        "total_cap_yi": 57.22
+        "name": "合百集团",
+        "price": 5.96,
+        "previous_close": 6.27,
+        "quote_time": "20261103161433",
+        "float_cap_yi": 46.43,
+        "total_cap_yi": 46.48
       },
-      "avg20_turnover_proxy_yuan": 68722740.2485,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 168750215.431,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "603109",
-      "name": "神驰机电",
-      "board": "SH",
-      "quote": {
-        "name": "神驰机电",
-        "price": 17.93,
-        "previous_close": 16.3,
-        "quote_time": "20261028115031",
-        "float_cap_yi": 37.45,
-        "total_cap_yi": 37.45
-      },
-      "avg20_turnover_proxy_yuan": 28225684.159499995,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603868",
-      "name": "飞科电器",
-      "board": "SH",
-      "quote": {
-        "name": "飞科电器",
-        "price": 34.22,
-        "previous_close": 31.11,
-        "quote_time": "20261028115016",
-        "float_cap_yi": 149.06,
-        "total_cap_yi": 149.06
-      },
-      "avg20_turnover_proxy_yuan": 40602428.506,
-      "history_as_of": "2026-10-27",
-      "reason": "近20日估算日均成交额低于1亿元"
-    },
-    {
-      "code": "301076",
-      "name": "新瀚新材",
+      "code": "002805",
+      "name": "丰元股份",
       "board": "SZ",
       "quote": {
-        "name": "新瀚新材",
-        "price": 23.71,
-        "previous_close": 19.76,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 36.12,
-        "total_cap_yi": 54.1
-      },
-      "avg20_turnover_proxy_yuan": 74236893.79349999,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920896",
-      "name": "旺成科技",
-      "board": "BJ",
-      "quote": {
-        "name": "旺成科技",
-        "price": 16.23,
-        "previous_close": 12.49,
-        "quote_time": "20261028115029",
-        "float_cap_yi": 7.21,
-        "total_cap_yi": 16.43
-      },
-      "avg20_turnover_proxy_yuan": 11635252.1085,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300984",
-      "name": "金沃股份",
-      "board": "SZ",
-      "quote": {
-        "name": "金沃股份",
-        "price": 40.33,
-        "previous_close": 33.61,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 50.02,
-        "total_cap_yi": 77.62
-      },
-      "avg20_turnover_proxy_yuan": 215564701.75949997,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688698",
-      "name": "伟创电气",
-      "board": "SH",
-      "quote": {
-        "name": "伟创电气",
-        "price": 45.48,
-        "previous_close": 37.9,
-        "quote_time": "20261028115013",
-        "float_cap_yi": 97.8,
-        "total_cap_yi": 97.8
-      },
-      "avg20_turnover_proxy_yuan": 177861178.9235,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603040",
-      "name": "新坐标",
-      "board": "SH",
-      "quote": {
-        "name": "新坐标",
-        "price": 42.59,
-        "previous_close": 38.72,
-        "quote_time": "20261028115028",
-        "float_cap_yi": 84.05,
-        "total_cap_yi": 84.05
-      },
-      "avg20_turnover_proxy_yuan": 116736473.67300001,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600229",
-      "name": "城市传媒",
-      "board": "SH",
-      "quote": {
-        "name": "城市传媒",
-        "price": 6.06,
-        "previous_close": 5.81,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 40.04,
-        "total_cap_yi": 40.04
-      },
-      "avg20_turnover_proxy_yuan": 124578808.875,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002488",
-      "name": "金固股份",
-      "board": "SZ",
-      "quote": {
-        "name": "金固股份",
-        "price": 6.36,
-        "previous_close": 6.86,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 58.52,
-        "total_cap_yi": 63.31
-      },
-      "avg20_turnover_proxy_yuan": 91408993.9525,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "000554",
-      "name": "泰山石油",
-      "board": "SZ",
-      "quote": {
-        "name": "泰山石油",
-        "price": 6.63,
-        "previous_close": 6.03,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 23.82,
-        "total_cap_yi": 31.65
-      },
-      "avg20_turnover_proxy_yuan": 69839115.58250001,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300817",
-      "name": "双飞集团",
-      "board": "SZ",
-      "quote": {
-        "name": "双飞集团",
-        "price": 18.01,
-        "previous_close": 16.32,
-        "quote_time": "20261028115003",
-        "float_cap_yi": 22.72,
-        "total_cap_yi": 39.32
-      },
-      "avg20_turnover_proxy_yuan": 72737754.2885,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "605288",
-      "name": "凯迪股份",
-      "board": "SH",
-      "quote": {
-        "name": "凯迪股份",
-        "price": 65.4,
-        "previous_close": 59.45,
-        "quote_time": "20261028115014",
-        "float_cap_yi": 64.27,
-        "total_cap_yi": 64.66
-      },
-      "avg20_turnover_proxy_yuan": 136015501.333,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603608",
-      "name": "天创股份",
-      "board": "SH",
-      "quote": {
-        "name": "天创股份",
-        "price": 18.8,
-        "previous_close": 17.5,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 79.91,
-        "total_cap_yi": 79.91
-      },
-      "avg20_turnover_proxy_yuan": 212130421.821,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300969",
-      "name": "恒帅股份",
-      "board": "SZ",
-      "quote": {
-        "name": "恒帅股份",
-        "price": 78.9,
-        "previous_close": 67.58,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 61.76,
-        "total_cap_yi": 129.49
-      },
-      "avg20_turnover_proxy_yuan": 156178499.63,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301252",
-      "name": "同星科技",
-      "board": "SZ",
-      "quote": {
-        "name": "同星科技",
-        "price": 31.46,
-        "previous_close": 27.8,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 42.69,
-        "total_cap_yi": 53.24
-      },
-      "avg20_turnover_proxy_yuan": 82688908.6575,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301207",
-      "name": "华兰疫苗",
-      "board": "SZ",
-      "quote": {
-        "name": "华兰疫苗",
-        "price": 15.24,
-        "previous_close": 17.55,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 91.54,
-        "total_cap_yi": 91.6
-      },
-      "avg20_turnover_proxy_yuan": 178685749.77,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688689",
-      "name": "银河微电",
-      "board": "SH",
-      "quote": {
-        "name": "银河微电",
-        "price": 37.62,
-        "previous_close": 33.69,
-        "quote_time": "20261028115010",
-        "float_cap_yi": 54.51,
-        "total_cap_yi": 54.51
-      },
-      "avg20_turnover_proxy_yuan": 282226965.9405,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688045",
-      "name": "必易微",
-      "board": "SH",
-      "quote": {
-        "name": "必易微",
-        "price": 55.87,
-        "previous_close": 46.56,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 39.43,
-        "total_cap_yi": 39.43
-      },
-      "avg20_turnover_proxy_yuan": 96229011.944,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301333",
-      "name": "诺思格",
-      "board": "SZ",
-      "quote": {
-        "name": "诺思格",
-        "price": 57.87,
-        "previous_close": 51.85,
-        "quote_time": "20261028114942",
-        "float_cap_yi": 55.82,
-        "total_cap_yi": 55.89
-      },
-      "avg20_turnover_proxy_yuan": 132941925.9335,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301086",
-      "name": "鸿富瀚",
-      "board": "SZ",
-      "quote": {
-        "name": "鸿富瀚",
-        "price": 132.75,
-        "previous_close": 115.32,
-        "quote_time": "20261028114948",
-        "float_cap_yi": 92.61,
-        "total_cap_yi": 167.08
-      },
-      "avg20_turnover_proxy_yuan": 527996008.083,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "001296",
-      "name": "长江材料",
-      "board": "SZ",
-      "quote": {
-        "name": "长江材料",
-        "price": 20.23,
-        "previous_close": 18.39,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 16.38,
-        "total_cap_yi": 30.26
-      },
-      "avg20_turnover_proxy_yuan": 38493060.891,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301255",
-      "name": "通力科技",
-      "board": "SZ",
-      "quote": {
-        "name": "通力科技",
-        "price": 20.45,
-        "previous_close": 19.2,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 27.34,
-        "total_cap_yi": 31.15
-      },
-      "avg20_turnover_proxy_yuan": 47344404.008,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920378",
-      "name": "泰德股份",
-      "board": "BJ",
-      "quote": {
-        "name": "泰德股份",
-        "price": 7.99,
-        "previous_close": 7.02,
-        "quote_time": "20261028115011",
-        "float_cap_yi": 8.77,
-        "total_cap_yi": 12.42
-      },
-      "avg20_turnover_proxy_yuan": 5835756.057,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600523",
-      "name": "贵航股份",
-      "board": "SH",
-      "quote": {
-        "name": "贵航股份",
-        "price": 12.09,
-        "previous_close": 11.27,
-        "quote_time": "20261028115034",
-        "float_cap_yi": 48.85,
-        "total_cap_yi": 48.88
-      },
-      "avg20_turnover_proxy_yuan": 37356064.891,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920526",
-      "name": "凯华材料",
-      "board": "BJ",
-      "quote": {
-        "name": "凯华材料",
-        "price": 20.62,
-        "previous_close": 19.08,
-        "quote_time": "20261028115026",
-        "float_cap_yi": 10.8,
-        "total_cap_yi": 17.05
-      },
-      "avg20_turnover_proxy_yuan": 88631074.1305,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "000755",
-      "name": "山西高速",
-      "board": "SZ",
-      "quote": {
-        "name": "山西高速",
-        "price": 4.78,
-        "previous_close": 4.48,
-        "quote_time": "20261028114954",
-        "float_cap_yi": 70.14,
-        "total_cap_yi": 70.14
-      },
-      "avg20_turnover_proxy_yuan": 18649404.1525,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603319",
-      "name": "美湖股份",
-      "board": "SH",
-      "quote": {
-        "name": "美湖股份",
-        "price": 25.48,
-        "previous_close": 23.44,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 86.42,
-        "total_cap_yi": 86.42
-      },
-      "avg20_turnover_proxy_yuan": 343249687.99,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002150",
-      "name": "正泰电源",
-      "board": "SZ",
-      "quote": {
-        "name": "正泰电源",
-        "price": 18.55,
-        "previous_close": 17.11,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 66.62,
-        "total_cap_yi": 66.94
-      },
-      "avg20_turnover_proxy_yuan": 117599024.46300001,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002616",
-      "name": "长青集团",
-      "board": "SZ",
-      "quote": {
-        "name": "长青集团",
-        "price": 4.84,
-        "previous_close": 4.53,
-        "quote_time": "20261028114954",
-        "float_cap_yi": 28.43,
-        "total_cap_yi": 41.59
-      },
-      "avg20_turnover_proxy_yuan": 29416349.2865,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603926",
-      "name": "铁流股份",
-      "board": "SH",
-      "quote": {
-        "name": "铁流股份",
-        "price": 17.06,
-        "previous_close": 15.51,
-        "quote_time": "20261028115020",
-        "float_cap_yi": 39.38,
-        "total_cap_yi": 39.75
-      },
-      "avg20_turnover_proxy_yuan": 57554473.2675,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002875",
-      "name": "安奈儿",
-      "board": "SZ",
-      "quote": {
-        "name": "安奈儿",
-        "price": 12.45,
-        "previous_close": 11.75,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 26.25,
-        "total_cap_yi": 26.25
-      },
-      "avg20_turnover_proxy_yuan": 48549520.6165,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920510",
-      "name": "丰光精密",
-      "board": "BJ",
-      "quote": {
-        "name": "丰光精密",
-        "price": 21.73,
-        "previous_close": 19.4,
-        "quote_time": "20261028115029",
-        "float_cap_yi": 20.42,
-        "total_cap_yi": 39.98
-      },
-      "avg20_turnover_proxy_yuan": 124712009.3125,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603190",
-      "name": "亚通精工",
-      "board": "SH",
-      "quote": {
-        "name": "亚通精工",
-        "price": 15.79,
-        "previous_close": 14.96,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 26.53,
-        "total_cap_yi": 27.53
-      },
-      "avg20_turnover_proxy_yuan": 26495521.635500003,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002862",
-      "name": "实丰文化",
-      "board": "SZ",
-      "quote": {
-        "name": "实丰文化",
-        "price": 15.38,
-        "previous_close": 13.98,
-        "quote_time": "20261028115006",
-        "float_cap_yi": 19.78,
-        "total_cap_yi": 26.07
-      },
-      "avg20_turnover_proxy_yuan": 99196537.985,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603266",
-      "name": "天龙股份",
-      "board": "SH",
-      "quote": {
-        "name": "天龙股份",
-        "price": 17.02,
-        "previous_close": 15.91,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 33.85,
-        "total_cap_yi": 33.85
-      },
-      "avg20_turnover_proxy_yuan": 161588975.4985,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920438",
-      "name": "戈碧迦",
-      "board": "BJ",
-      "quote": {
-        "name": "戈碧迦",
-        "price": 55.76,
-        "previous_close": 61.2,
-        "quote_time": "20261028115029",
-        "float_cap_yi": 77.73,
-        "total_cap_yi": 80.54
-      },
-      "avg20_turnover_proxy_yuan": 423806874.089,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920002",
-      "name": "万达轴承",
-      "board": "BJ",
-      "quote": {
-        "name": "万达轴承",
-        "price": 56.9,
-        "previous_close": 51.0,
-        "quote_time": "20261028115035",
-        "float_cap_yi": 25.38,
-        "total_cap_yi": 36.25
-      },
-      "avg20_turnover_proxy_yuan": 74309936.89750001,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603022",
-      "name": "新通联",
-      "board": "SH",
-      "quote": {
-        "name": "新通联",
-        "price": 8.36,
-        "previous_close": 7.99,
-        "quote_time": "20261028115022",
-        "float_cap_yi": 16.72,
-        "total_cap_yi": 16.72
-      },
-      "avg20_turnover_proxy_yuan": 29243430.9115,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688691",
-      "name": "灿芯股份",
-      "board": "SH",
-      "quote": {
-        "name": "灿芯股份",
-        "price": 57.57,
-        "previous_close": 48.74,
-        "quote_time": "20261028115018",
-        "float_cap_yi": 42.01,
-        "total_cap_yi": 69.08
-      },
-      "avg20_turnover_proxy_yuan": 200096193.964,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300439",
-      "name": "美康生物",
-      "board": "SZ",
-      "quote": {
-        "name": "美康生物",
-        "price": 10.09,
-        "previous_close": 9.1,
-        "quote_time": "20261028115000",
-        "float_cap_yi": 29.5,
-        "total_cap_yi": 38.73
-      },
-      "avg20_turnover_proxy_yuan": 39736648.9995,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300197",
-      "name": "节能铁汉",
-      "board": "SZ",
-      "quote": {
-        "name": "节能铁汉",
-        "price": 1.9,
-        "previous_close": 1.79,
-        "quote_time": "20261028115030",
-        "float_cap_yi": 56.34,
-        "total_cap_yi": 56.34
-      },
-      "avg20_turnover_proxy_yuan": 84423320.3625,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301678",
-      "name": "新恒汇",
-      "board": "SZ",
-      "quote": {
-        "name": "新恒汇",
-        "price": 47.71,
-        "previous_close": 44.66,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 66.3,
-        "total_cap_yi": 114.29
-      },
-      "avg20_turnover_proxy_yuan": 330349276.199,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "600996",
-      "name": "贵广网络",
-      "board": "SH",
-      "quote": {
-        "name": "贵广网络",
-        "price": 6.4,
-        "previous_close": 6.11,
-        "quote_time": "20261028115029",
-        "float_cap_yi": 79.8,
-        "total_cap_yi": 79.8
-      },
-      "avg20_turnover_proxy_yuan": 131208192.595,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920821",
-      "name": "则成电子",
-      "board": "BJ",
-      "quote": {
-        "name": "则成电子",
-        "price": 20.34,
-        "previous_close": 19.62,
-        "quote_time": "20261028115029",
-        "float_cap_yi": 14.82,
-        "total_cap_yi": 28.14
-      },
-      "avg20_turnover_proxy_yuan": 124978563.8005,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300310",
-      "name": "宜通世纪",
-      "board": "SZ",
-      "quote": {
-        "name": "宜通世纪",
-        "price": 4.3,
-        "previous_close": 4.07,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 34.68,
-        "total_cap_yi": 37.91
-      },
-      "avg20_turnover_proxy_yuan": 69991013.4595,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002062",
-      "name": "宏润建设",
-      "board": "SZ",
-      "quote": {
-        "name": "宏润建设",
-        "price": 8.22,
-        "previous_close": 7.68,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 92.45,
-        "total_cap_yi": 101.7
-      },
-      "avg20_turnover_proxy_yuan": 179848166.167,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603360",
-      "name": "百傲化学",
-      "board": "SH",
-      "quote": {
-        "name": "百傲化学",
-        "price": 10.49,
-        "previous_close": 9.92,
-        "quote_time": "20261028115033",
-        "float_cap_yi": 74.08,
-        "total_cap_yi": 74.08
-      },
-      "avg20_turnover_proxy_yuan": 126500408.39649999,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603836",
-      "name": "海程邦达",
-      "board": "SH",
-      "quote": {
-        "name": "海程邦达",
-        "price": 8.96,
-        "previous_close": 8.42,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 24.09,
-        "total_cap_yi": 24.79
-      },
-      "avg20_turnover_proxy_yuan": 25794575.663,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688785",
-      "name": "恒运昌",
-      "board": "SH",
-      "quote": {
-        "name": "恒运昌",
-        "price": 275.6,
-        "previous_close": 250.17,
-        "quote_time": "20261028115036",
-        "float_cap_yi": 37.33,
-        "total_cap_yi": 186.59
-      },
-      "avg20_turnover_proxy_yuan": 184533649.968,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603090",
-      "name": "宏盛股份",
-      "board": "SH",
-      "quote": {
-        "name": "宏盛股份",
-        "price": 32.53,
-        "previous_close": 30.14,
-        "quote_time": "20261028115020",
-        "float_cap_yi": 32.53,
-        "total_cap_yi": 32.53
-      },
-      "avg20_turnover_proxy_yuan": 113416311.835,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920799",
-      "name": "艾融软件",
-      "board": "BJ",
-      "quote": {
-        "name": "艾融软件",
-        "price": 27.66,
-        "previous_close": 30.45,
-        "quote_time": "20261028115008",
-        "float_cap_yi": 33.21,
-        "total_cap_yi": 57.85
-      },
-      "avg20_turnover_proxy_yuan": 117359270.5795,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300733",
-      "name": "西菱动力",
-      "board": "SZ",
-      "quote": {
-        "name": "西菱动力",
-        "price": 14.15,
+        "name": "丰元股份",
+        "price": 14.36,
         "previous_close": 13.05,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 41.38,
-        "total_cap_yi": 56.12
+        "quote_time": "20261103161445",
+        "float_cap_yi": 40.04,
+        "total_cap_yi": 40.22
       },
-      "avg20_turnover_proxy_yuan": 91148521.1735,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300588",
-      "name": "熙菱信息",
-      "board": "SZ",
-      "quote": {
-        "name": "熙菱信息",
-        "price": 19.16,
-        "previous_close": 17.91,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 33.88,
-        "total_cap_yi": 36.69
-      },
-      "avg20_turnover_proxy_yuan": 50973189.927499995,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301503",
-      "name": "智迪科技",
-      "board": "SZ",
-      "quote": {
-        "name": "智迪科技",
-        "price": 21.58,
-        "previous_close": 20.13,
-        "quote_time": "20261028115021",
-        "float_cap_yi": 12.44,
-        "total_cap_yi": 22.44
-      },
-      "avg20_turnover_proxy_yuan": 19120987.498499997,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300626",
-      "name": "华瑞股份",
-      "board": "SZ",
-      "quote": {
-        "name": "华瑞股份",
-        "price": 27.28,
-        "previous_close": 24.23,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 49.08,
-        "total_cap_yi": 49.1
-      },
-      "avg20_turnover_proxy_yuan": 100752790.621,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688293",
-      "name": "奥浦迈",
-      "board": "SH",
-      "quote": {
-        "name": "奥浦迈",
-        "price": 59.4,
-        "previous_close": 54.08,
-        "quote_time": "20261028115022",
-        "float_cap_yi": 69.76,
-        "total_cap_yi": 84.63
-      },
-      "avg20_turnover_proxy_yuan": 397414188.4785,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300992",
-      "name": "泰福泵业",
-      "board": "SZ",
-      "quote": {
-        "name": "泰福泵业",
-        "price": 23.68,
-        "previous_close": 21.82,
-        "quote_time": "20261028115027",
-        "float_cap_yi": 18.46,
-        "total_cap_yi": 22.57
-      },
-      "avg20_turnover_proxy_yuan": 80108284.7,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300440",
-      "name": "运达科技",
-      "board": "SZ",
-      "quote": {
-        "name": "运达科技",
-        "price": 17.75,
-        "previous_close": 16.39,
-        "quote_time": "20261028114951",
-        "float_cap_yi": 78.09,
-        "total_cap_yi": 78.44
-      },
-      "avg20_turnover_proxy_yuan": 127735224.806,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920533",
-      "name": "骏创科技",
-      "board": "BJ",
-      "quote": {
-        "name": "骏创科技",
-        "price": 18.8,
-        "previous_close": 16.68,
-        "quote_time": "20261028115008",
-        "float_cap_yi": 13.75,
-        "total_cap_yi": 24.58
-      },
-      "avg20_turnover_proxy_yuan": 41589087.695999995,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "603112",
-      "name": "华翔股份",
-      "board": "SH",
-      "quote": {
-        "name": "华翔股份",
-        "price": 14.82,
-        "previous_close": 13.62,
-        "quote_time": "20261028115026",
-        "float_cap_yi": 79.23,
-        "total_cap_yi": 80.02
-      },
-      "avg20_turnover_proxy_yuan": 108448744.45049998,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 428180859.82199997,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
@@ -2785,430 +1553,1614 @@
       "board": "SZ",
       "quote": {
         "name": "青岛双星",
-        "price": 4.25,
-        "previous_close": 4.07,
-        "quote_time": "20261028115009",
-        "float_cap_yi": 34.71,
-        "total_cap_yi": 103.83
+        "price": 4.5,
+        "previous_close": 4.09,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 36.75,
+        "total_cap_yi": 109.94
       },
-      "avg20_turnover_proxy_yuan": 42002617.964,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 60524700.7005,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "920211",
-      "name": "新睿电子",
-      "board": "BJ",
-      "quote": {
-        "name": "新睿电子",
-        "price": 87.49,
-        "previous_close": 82.05,
-        "quote_time": "20261028115008",
-        "float_cap_yi": 10.15,
-        "total_cap_yi": 30.1
-      },
-      "avg20_turnover_proxy_yuan": 47854339.623500004,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301160",
-      "name": "翔楼新材",
-      "board": "SZ",
-      "quote": {
-        "name": "翔楼新材",
-        "price": 38.93,
-        "previous_close": 33.78,
-        "quote_time": "20261028114951",
-        "float_cap_yi": 43.13,
-        "total_cap_yi": 64.9
-      },
-      "avg20_turnover_proxy_yuan": 136239289.27249998,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "003038",
-      "name": "鑫铂股份",
-      "board": "SZ",
-      "quote": {
-        "name": "鑫铂股份",
-        "price": 10.18,
-        "previous_close": 9.79,
-        "quote_time": "20261028115036",
-        "float_cap_yi": 16.49,
-        "total_cap_yi": 24.77
-      },
-      "avg20_turnover_proxy_yuan": 32031396.472500004,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688210",
-      "name": "统联精密",
+      "code": "603200",
+      "name": "上海洗霸",
       "board": "SH",
       "quote": {
-        "name": "统联精密",
-        "price": 26.78,
-        "previous_close": 23.6,
-        "quote_time": "20261028115006",
-        "float_cap_yi": 43.56,
-        "total_cap_yi": 43.56
+        "name": "上海洗霸",
+        "price": 53.6,
+        "previous_close": 52.05,
+        "quote_time": "20261103161455",
+        "float_cap_yi": 94.06,
+        "total_cap_yi": 94.06
       },
-      "avg20_turnover_proxy_yuan": 82766813.3015,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 1238628672.3790002,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "920593",
-      "name": "鼎智科技",
-      "board": "BJ",
-      "quote": {
-        "name": "鼎智科技",
-        "price": 25.66,
-        "previous_close": 24.25,
-        "quote_time": "20261028115014",
-        "float_cap_yi": 41.61,
-        "total_cap_yi": 48.82
-      },
-      "avg20_turnover_proxy_yuan": 55521602.35,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300320",
-      "name": "海达股份",
+      "code": "002708",
+      "name": "光洋股份",
       "board": "SZ",
       "quote": {
-        "name": "海达股份",
-        "price": 7.79,
-        "previous_close": 7.71,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 37.9,
-        "total_cap_yi": 46.84
+        "name": "光洋股份",
+        "price": 18.88,
+        "previous_close": 20.54,
+        "quote_time": "20261103161421",
+        "float_cap_yi": 96.22,
+        "total_cap_yi": 106.12
       },
-      "avg20_turnover_proxy_yuan": 37906799.974,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 952571060.9465001,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "688061",
-      "name": "灿瑞科技",
+      "code": "601091",
+      "name": "沈鼓集团",
       "board": "SH",
       "quote": {
-        "name": "灿瑞科技",
-        "price": 43.02,
-        "previous_close": 38.73,
-        "quote_time": "20261028115013",
-        "float_cap_yi": 49.43,
-        "total_cap_yi": 49.43
+        "name": "沈鼓集团",
+        "price": 18.01,
+        "previous_close": 17.31,
+        "quote_time": "20261103161455",
+        "float_cap_yi": 38.03,
+        "total_cap_yi": 560.11
       },
-      "avg20_turnover_proxy_yuan": 95010548.7675,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 1130772246.6445,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "300644",
-      "name": "南京聚隆",
-      "board": "SZ",
-      "quote": {
-        "name": "南京聚隆",
-        "price": 19.93,
-        "previous_close": 18.49,
-        "quote_time": "20261028114957",
-        "float_cap_yi": 17.61,
-        "total_cap_yi": 22.11
-      },
-      "avg20_turnover_proxy_yuan": 52656441.182,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300809",
-      "name": "华辰装备",
-      "board": "SZ",
-      "quote": {
-        "name": "华辰装备",
-        "price": 22.94,
-        "previous_close": 21.5,
-        "quote_time": "20261028114948",
-        "float_cap_yi": 34.54,
-        "total_cap_yi": 58.16
-      },
-      "avg20_turnover_proxy_yuan": 73573297.0395,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300050",
-      "name": "世纪鼎利",
-      "board": "SZ",
-      "quote": {
-        "name": "世纪鼎利",
-        "price": 6.7,
-        "previous_close": 6.3,
-        "quote_time": "20261028115000",
-        "float_cap_yi": 36.48,
-        "total_cap_yi": 36.5
-      },
-      "avg20_turnover_proxy_yuan": 140255873.13599998,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920247",
-      "name": "华密新材",
-      "board": "BJ",
-      "quote": {
-        "name": "华密新材",
-        "price": 15.8,
-        "previous_close": 14.63,
-        "quote_time": "20261028115008",
-        "float_cap_yi": 21.67,
-        "total_cap_yi": 29.87
-      },
-      "avg20_turnover_proxy_yuan": 49955487.503,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300264",
-      "name": "佳创视讯",
-      "board": "SZ",
-      "quote": {
-        "name": "佳创视讯",
-        "price": 5.87,
-        "previous_close": 5.51,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 21.74,
-        "total_cap_yi": 25.29
-      },
-      "avg20_turnover_proxy_yuan": 95248129.00299999,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301512",
-      "name": "智信精密",
-      "board": "SZ",
-      "quote": {
-        "name": "智信精密",
-        "price": 29.95,
-        "previous_close": 27.8,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 14.59,
-        "total_cap_yi": 22.36
-      },
-      "avg20_turnover_proxy_yuan": 31272732.1105,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301131",
-      "name": "聚赛龙",
-      "board": "SZ",
-      "quote": {
-        "name": "聚赛龙",
-        "price": 31.52,
-        "previous_close": 30.29,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 12.34,
-        "total_cap_yi": 17.23
-      },
-      "avg20_turnover_proxy_yuan": 27056288.634499997,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688716",
-      "name": "中研股份",
+      "code": "600745",
+      "name": "*ST闻泰",
       "board": "SH",
       "quote": {
-        "name": "中研股份",
-        "price": 26.32,
-        "previous_close": 23.89,
-        "quote_time": "20261028115023",
-        "float_cap_yi": 18.4,
-        "total_cap_yi": 32.03
+        "name": "*ST闻泰",
+        "price": 12.51,
+        "previous_close": 11.77,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 165.21,
+        "total_cap_yi": 165.21
       },
-      "avg20_turnover_proxy_yuan": 37382631.3705,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688759",
-      "name": "必贝特-U",
-      "board": "SH",
-      "quote": {
-        "name": "必贝特-U",
-        "price": 14.76,
-        "previous_close": 16.0,
-        "quote_time": "20261028115025",
-        "float_cap_yi": 35.35,
-        "total_cap_yi": 66.43
-      },
-      "avg20_turnover_proxy_yuan": 89759557.8765,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301020",
-      "name": "密封科技",
-      "board": "SZ",
-      "quote": {
-        "name": "密封科技",
-        "price": 20.67,
-        "previous_close": 19.06,
-        "quote_time": "20261028114945",
-        "float_cap_yi": 30.26,
-        "total_cap_yi": 30.26
-      },
-      "avg20_turnover_proxy_yuan": 67701981.975,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "920076",
-      "name": "国亮新材",
-      "board": "BJ",
-      "quote": {
-        "name": "国亮新材",
-        "price": 12.09,
-        "previous_close": 11.72,
-        "quote_time": "20261028115023",
-        "float_cap_yi": 4.45,
-        "total_cap_yi": 14.16
-      },
-      "avg20_turnover_proxy_yuan": 4497743.3094999995,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "300946",
-      "name": "恒而达",
-      "board": "SZ",
-      "quote": {
-        "name": "恒而达",
-        "price": 34.68,
-        "previous_close": 32.4,
-        "quote_time": "20261028115015",
-        "float_cap_yi": 26.29,
-        "total_cap_yi": 54.1
-      },
-      "avg20_turnover_proxy_yuan": 34609668.225999996,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301588",
-      "name": "美新科技",
-      "board": "SZ",
-      "quote": {
-        "name": "美新科技",
-        "price": 21.87,
-        "previous_close": 21.33,
-        "quote_time": "20261028115012",
-        "float_cap_yi": 16.04,
-        "total_cap_yi": 26.5
-      },
-      "avg20_turnover_proxy_yuan": 58986135.475999996,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "301259",
-      "name": "艾布鲁",
-      "board": "SZ",
-      "quote": {
-        "name": "艾布鲁",
-        "price": 15.66,
-        "previous_close": 15.02,
-        "quote_time": "20261028114936",
-        "float_cap_yi": 22.72,
-        "total_cap_yi": 35.42
-      },
-      "avg20_turnover_proxy_yuan": 77099558.633,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "002816",
-      "name": "*ST和科",
-      "board": "SZ",
-      "quote": {
-        "name": "*ST和科",
-        "price": 17.94,
-        "previous_close": 16.31,
-        "quote_time": "20261028115036",
-        "float_cap_yi": 17.94,
-        "total_cap_yi": 17.94
-      },
-      "avg20_turnover_proxy_yuan": 30768151.752499998,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 472326198.283,
+      "history_as_of": "2026-11-03",
       "reason": "当前名称显示风险警示或退市"
     },
     {
-      "code": "301387",
-      "name": "光大同创",
-      "board": "SZ",
-      "quote": {
-        "name": "光大同创",
-        "price": 41.65,
-        "previous_close": 39.31,
-        "quote_time": "20261028114939",
-        "float_cap_yi": 44.43,
-        "total_cap_yi": 44.69
-      },
-      "avg20_turnover_proxy_yuan": 84114500.24149999,
-      "history_as_of": "2026-10-27",
-      "reason": "当前流通市值低于100亿元"
-    },
-    {
-      "code": "688667",
-      "name": "菱电电控",
+      "code": "603381",
+      "name": "永臻股份",
       "board": "SH",
       "quote": {
-        "name": "菱电电控",
-        "price": 106.75,
-        "previous_close": 97.5,
-        "quote_time": "20261028115034",
-        "float_cap_yi": 56.25,
-        "total_cap_yi": 56.25
+        "name": "永臻股份",
+        "price": 15.58,
+        "previous_close": 14.16,
+        "quote_time": "20261103161453",
+        "float_cap_yi": 22.15,
+        "total_cap_yi": 36.96
       },
-      "avg20_turnover_proxy_yuan": 80630580.5255,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 48167316.956,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "688619",
-      "name": "罗普特",
+      "code": "605378",
+      "name": "野马电池",
       "board": "SH",
       "quote": {
-        "name": "罗普特",
-        "price": 11.61,
-        "previous_close": 11.2,
-        "quote_time": "20261028115024",
-        "float_cap_yi": 21.53,
-        "total_cap_yi": 21.53
+        "name": "野马电池",
+        "price": 14.36,
+        "previous_close": 13.05,
+        "quote_time": "20261103161431",
+        "float_cap_yi": 37.53,
+        "total_cap_yi": 37.53
       },
-      "avg20_turnover_proxy_yuan": 34877147.934,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 163746473.829,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     },
     {
-      "code": "300329",
-      "name": "海伦钢琴",
+      "code": "600576",
+      "name": "祥源文旅",
+      "board": "SH",
+      "quote": {
+        "name": "祥源文旅",
+        "price": 5.47,
+        "previous_close": 5.62,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 36.12,
+        "total_cap_yi": 57.68
+      },
+      "avg20_turnover_proxy_yuan": 65160242.85699999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002088",
+      "name": "鲁阳节能",
       "board": "SZ",
       "quote": {
-        "name": "海伦钢琴",
-        "price": 11.28,
-        "previous_close": 10.84,
-        "quote_time": "20261028115036",
-        "float_cap_yi": 28.42,
-        "total_cap_yi": 28.53
+        "name": "鲁阳节能",
+        "price": 8.33,
+        "previous_close": 7.57,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 42.15,
+        "total_cap_yi": 42.44
       },
-      "avg20_turnover_proxy_yuan": 24164843.685,
-      "history_as_of": "2026-10-27",
+      "avg20_turnover_proxy_yuan": 71474592.522,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002275",
+      "name": "桂林三金",
+      "board": "SZ",
+      "quote": {
+        "name": "桂林三金",
+        "price": 15.8,
+        "previous_close": 16.48,
+        "quote_time": "20261103161421",
+        "float_cap_yi": 89.23,
+        "total_cap_yi": 92.84
+      },
+      "avg20_turnover_proxy_yuan": 110098995.92450002,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603703",
+      "name": "盛洋科技",
+      "board": "SH",
+      "quote": {
+        "name": "盛洋科技",
+        "price": 11.19,
+        "previous_close": 11.74,
+        "quote_time": "20261103161451",
+        "float_cap_yi": 46.44,
+        "total_cap_yi": 46.44
+      },
+      "avg20_turnover_proxy_yuan": 273419831.126,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "000151",
+      "name": "中成股份",
+      "board": "SZ",
+      "quote": {
+        "name": "中成股份",
+        "price": 9.56,
+        "previous_close": 8.69,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 29.44,
+        "total_cap_yi": 33.55
+      },
+      "avg20_turnover_proxy_yuan": 63337960.276,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "601366",
+      "name": "利群股份",
+      "board": "SH",
+      "quote": {
+        "name": "利群股份",
+        "price": 3.96,
+        "previous_close": 3.6,
+        "quote_time": "20261103161446",
+        "float_cap_yi": 38.01,
+        "total_cap_yi": 38.01
+      },
+      "avg20_turnover_proxy_yuan": 44090073.642000005,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002522",
+      "name": "浙江众成",
+      "board": "SZ",
+      "quote": {
+        "name": "浙江众成",
+        "price": 5.06,
+        "previous_close": 4.6,
+        "quote_time": "20261103161439",
+        "float_cap_yi": 45.8,
+        "total_cap_yi": 45.83
+      },
+      "avg20_turnover_proxy_yuan": 126447275.61199999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603402",
+      "name": "陕西旅游",
+      "board": "SH",
+      "quote": {
+        "name": "陕西旅游",
+        "price": 56.35,
+        "previous_close": 51.23,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 14.16,
+        "total_cap_yi": 56.65
+      },
+      "avg20_turnover_proxy_yuan": 58739338.109500006,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301311",
+      "name": "昆船智能",
+      "board": "SZ",
+      "quote": {
+        "name": "昆船智能",
+        "price": 18.68,
+        "previous_close": 15.82,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 44.83,
+        "total_cap_yi": 44.83
+      },
+      "avg20_turnover_proxy_yuan": 472056097.00450003,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "601123",
+      "name": "马矿股份",
+      "board": "SH",
+      "quote": {
+        "name": "马矿股份",
+        "price": 15.07,
+        "previous_close": 13.7,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 14.44,
+        "total_cap_yi": 186.06
+      },
+      "avg20_turnover_proxy_yuan": 157108583.771,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002190",
+      "name": "成飞集成",
+      "board": "SZ",
+      "quote": {
+        "name": "成飞集成",
+        "price": 22.33,
+        "previous_close": 21.1,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 80.1,
+        "total_cap_yi": 80.1
+      },
+      "avg20_turnover_proxy_yuan": 120626246.6535,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600778",
+      "name": "友好集团",
+      "board": "SH",
+      "quote": {
+        "name": "友好集团",
+        "price": 5.49,
+        "previous_close": 4.99,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 17.09,
+        "total_cap_yi": 17.1
+      },
+      "avg20_turnover_proxy_yuan": 48747342.847500004,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002105",
+      "name": "信隆健康",
+      "board": "SZ",
+      "quote": {
+        "name": "信隆健康",
+        "price": 5.56,
+        "previous_close": 5.05,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 20.26,
+        "total_cap_yi": 20.36
+      },
+      "avg20_turnover_proxy_yuan": 76833555.814,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002992",
+      "name": "宝明科技",
+      "board": "SZ",
+      "quote": {
+        "name": "宝明科技",
+        "price": 30.36,
+        "previous_close": 27.6,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 48.04,
+        "total_cap_yi": 54.91
+      },
+      "avg20_turnover_proxy_yuan": 49004587.323,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920627",
+      "name": "力王股份",
+      "board": "BJ",
+      "quote": {
+        "name": "力王股份",
+        "price": 18.93,
+        "previous_close": 16.11,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 9.29,
+        "total_cap_yi": 17.88
+      },
+      "avg20_turnover_proxy_yuan": 163161609.02749997,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300118",
+      "name": "东方日升",
+      "board": "SZ",
+      "quote": {
+        "name": "东方日升",
+        "price": 8.07,
+        "previous_close": 7.74,
+        "quote_time": "20261103161439",
+        "float_cap_yi": 74.77,
+        "total_cap_yi": 92.0
+      },
+      "avg20_turnover_proxy_yuan": 233445584.54749998,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002651",
+      "name": "利君股份",
+      "board": "SZ",
+      "quote": {
+        "name": "利君股份",
+        "price": 7.72,
+        "previous_close": 7.4,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 43.65,
+        "total_cap_yi": 79.78
+      },
+      "avg20_turnover_proxy_yuan": 100078280.24249999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603477",
+      "name": "巨星农牧",
+      "board": "SH",
+      "quote": {
+        "name": "巨星农牧",
+        "price": 14.57,
+        "previous_close": 13.63,
+        "quote_time": "20261103161440",
+        "float_cap_yi": 76.1,
+        "total_cap_yi": 76.2
+      },
+      "avg20_turnover_proxy_yuan": 151794626.6645,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603567",
+      "name": "珍宝岛",
+      "board": "SH",
+      "quote": {
+        "name": "珍宝岛",
+        "price": 4.9,
+        "previous_close": 4.64,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 46.03,
+        "total_cap_yi": 46.07
+      },
+      "avg20_turnover_proxy_yuan": 109492937.56500001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "000838",
+      "name": "*ST发展",
+      "board": "SZ",
+      "quote": {
+        "name": "*ST发展",
+        "price": 1.55,
+        "previous_close": 1.41,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 17.06,
+        "total_cap_yi": 17.06
+      },
+      "avg20_turnover_proxy_yuan": 57450381.872,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "600278",
+      "name": "东方创业",
+      "board": "SH",
+      "quote": {
+        "name": "东方创业",
+        "price": 6.58,
+        "previous_close": 6.24,
+        "quote_time": "20261103161449",
+        "float_cap_yi": 56.62,
+        "total_cap_yi": 56.62
+      },
+      "avg20_turnover_proxy_yuan": 38326296.6125,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "688299",
+      "name": "长阳科技",
+      "board": "SH",
+      "quote": {
+        "name": "长阳科技",
+        "price": 12.23,
+        "previous_close": 11.48,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 35.15,
+        "total_cap_yi": 35.15
+      },
+      "avg20_turnover_proxy_yuan": 80865750.208,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "001396",
+      "name": "誉帆科技",
+      "board": "SZ",
+      "quote": {
+        "name": "誉帆科技",
+        "price": 27.1,
+        "previous_close": 25.83,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 6.16,
+        "total_cap_yi": 28.97
+      },
+      "avg20_turnover_proxy_yuan": 27987644.4195,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301662",
+      "name": "宏工科技",
+      "board": "SZ",
+      "quote": {
+        "name": "宏工科技",
+        "price": 58.12,
+        "previous_close": 54.51,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 25.92,
+        "total_cap_yi": 67.42
+      },
+      "avg20_turnover_proxy_yuan": 291452906.311,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300338",
+      "name": "*ST开元",
+      "board": "SZ",
+      "quote": {
+        "name": "*ST开元",
+        "price": 1.98,
+        "previous_close": 1.76,
+        "quote_time": "20261103161439",
+        "float_cap_yi": 6.93,
+        "total_cap_yi": 7.97
+      },
+      "avg20_turnover_proxy_yuan": 41357989.515999995,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "920779",
+      "name": "武汉蓝电",
+      "board": "BJ",
+      "quote": {
+        "name": "武汉蓝电",
+        "price": 26.96,
+        "previous_close": 24.75,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 5.4,
+        "total_cap_yi": 21.58
+      },
+      "avg20_turnover_proxy_yuan": 127914775.8935,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300247",
+      "name": "融捷健康",
+      "board": "SZ",
+      "quote": {
+        "name": "融捷健康",
+        "price": 3.54,
+        "previous_close": 3.29,
+        "quote_time": "20261103161433",
+        "float_cap_yi": 28.46,
+        "total_cap_yi": 28.46
+      },
+      "avg20_turnover_proxy_yuan": 46638866.937,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603202",
+      "name": "天有为",
+      "board": "SH",
+      "quote": {
+        "name": "天有为",
+        "price": 51.67,
+        "previous_close": 49.54,
+        "quote_time": "20261103161443",
+        "float_cap_yi": 25.95,
+        "total_cap_yi": 82.67
+      },
+      "avg20_turnover_proxy_yuan": 57393959.58049999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301061",
+      "name": "匠心家居",
+      "board": "SZ",
+      "quote": {
+        "name": "匠心家居",
+        "price": 39.22,
+        "previous_close": 36.19,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 74.77,
+        "total_cap_yi": 112.09
+      },
+      "avg20_turnover_proxy_yuan": 77933779.15699999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301565",
+      "name": "中仑新材",
+      "board": "SZ",
+      "quote": {
+        "name": "中仑新材",
+        "price": 15.54,
+        "previous_close": 14.54,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 19.89,
+        "total_cap_yi": 62.16
+      },
+      "avg20_turnover_proxy_yuan": 83636657.98550001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600266",
+      "name": "城建发展",
+      "board": "SH",
+      "quote": {
+        "name": "城建发展",
+        "price": 4.09,
+        "previous_close": 3.85,
+        "quote_time": "20261103161446",
+        "float_cap_yi": 84.9,
+        "total_cap_yi": 84.9
+      },
+      "avg20_turnover_proxy_yuan": 142420230.06849998,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603389",
+      "name": "亚振家居",
+      "board": "SH",
+      "quote": {
+        "name": "亚振家居",
+        "price": 46.33,
+        "previous_close": 43.15,
+        "quote_time": "20261103161441",
+        "float_cap_yi": 121.73,
+        "total_cap_yi": 121.73
+      },
+      "avg20_turnover_proxy_yuan": 79706966.0475,
+      "history_as_of": "2026-11-03",
+      "reason": "近20日估算日均成交额低于1亿元"
+    },
+    {
+      "code": "605318",
+      "name": "法狮龙",
+      "board": "SH",
+      "quote": {
+        "name": "法狮龙",
+        "price": 69.49,
+        "previous_close": 65.54,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 87.37,
+        "total_cap_yi": 87.37
+      },
+      "avg20_turnover_proxy_yuan": 121060053.3175,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002047",
+      "name": "宝鹰股份",
+      "board": "SZ",
+      "quote": {
+        "name": "宝鹰股份",
+        "price": 2.66,
+        "previous_close": 2.59,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 40.33,
+        "total_cap_yi": 40.33
+      },
+      "avg20_turnover_proxy_yuan": 61042734.583000004,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301408",
+      "name": "华人健康",
+      "board": "SZ",
+      "quote": {
+        "name": "华人健康",
+        "price": 13.91,
+        "previous_close": 13.8,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 31.85,
+        "total_cap_yi": 55.64
+      },
+      "avg20_turnover_proxy_yuan": 186689762.181,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300890",
+      "name": "翔丰华",
+      "board": "SZ",
+      "quote": {
+        "name": "翔丰华",
+        "price": 26.06,
+        "previous_close": 25.45,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 28.48,
+        "total_cap_yi": 31.16
+      },
+      "avg20_turnover_proxy_yuan": 252629616.4255,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002746",
+      "name": "仙坛股份",
+      "board": "SZ",
+      "quote": {
+        "name": "仙坛股份",
+        "price": 6.39,
+        "previous_close": 6.11,
+        "quote_time": "20261103161439",
+        "float_cap_yi": 45.35,
+        "total_cap_yi": 54.99
+      },
+      "avg20_turnover_proxy_yuan": 85414928.18149999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300106",
+      "name": "西部牧业",
+      "board": "SZ",
+      "quote": {
+        "name": "西部牧业",
+        "price": 9.24,
+        "previous_close": 9.02,
+        "quote_time": "20261103161433",
+        "float_cap_yi": 19.53,
+        "total_cap_yi": 19.53
+      },
+      "avg20_turnover_proxy_yuan": 94460444.0265,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301012",
+      "name": "扬电科技",
+      "board": "SZ",
+      "quote": {
+        "name": "扬电科技",
+        "price": 19.72,
+        "previous_close": 18.95,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 38.84,
+        "total_cap_yi": 38.84
+      },
+      "avg20_turnover_proxy_yuan": 77183909.50850001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002116",
+      "name": "中国海诚",
+      "board": "SZ",
+      "quote": {
+        "name": "中国海诚",
+        "price": 6.92,
+        "previous_close": 6.66,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 38.24,
+        "total_cap_yi": 38.68
+      },
+      "avg20_turnover_proxy_yuan": 37289030.712,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301209",
+      "name": "联合化学",
+      "board": "SZ",
+      "quote": {
+        "name": "联合化学",
+        "price": 37.01,
+        "previous_close": 44.46,
+        "quote_time": "20261103161436",
+        "float_cap_yi": 49.58,
+        "total_cap_yi": 58.03
+      },
+      "avg20_turnover_proxy_yuan": 98921417.0095,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300875",
+      "name": "捷强装备",
+      "board": "SZ",
+      "quote": {
+        "name": "捷强装备",
+        "price": 29.36,
+        "previous_close": 28.02,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 25.78,
+        "total_cap_yi": 29.31
+      },
+      "avg20_turnover_proxy_yuan": 136018106.6555,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301507",
+      "name": "民生健康",
+      "board": "SZ",
+      "quote": {
+        "name": "民生健康",
+        "price": 11.91,
+        "previous_close": 11.43,
+        "quote_time": "20261103161451",
+        "float_cap_yi": 13.0,
+        "total_cap_yi": 42.47
+      },
+      "avg20_turnover_proxy_yuan": 62387173.359500006,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300340",
+      "name": "科恒股份",
+      "board": "SZ",
+      "quote": {
+        "name": "科恒股份",
+        "price": 7.55,
+        "previous_close": 7.37,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 20.65,
+        "total_cap_yi": 20.8
+      },
+      "avg20_turnover_proxy_yuan": 174056195.441,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600467",
+      "name": "好当家",
+      "board": "SH",
+      "quote": {
+        "name": "好当家",
+        "price": 2.26,
+        "previous_close": 2.19,
+        "quote_time": "20261103161436",
+        "float_cap_yi": 33.02,
+        "total_cap_yi": 33.02
+      },
+      "avg20_turnover_proxy_yuan": 87771271.004,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "688345",
+      "name": "博力威",
+      "board": "SH",
+      "quote": {
+        "name": "博力威",
+        "price": 41.64,
+        "previous_close": 38.88,
+        "quote_time": "20261103161447",
+        "float_cap_yi": 42.22,
+        "total_cap_yi": 42.42
+      },
+      "avg20_turnover_proxy_yuan": 138375737.894,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "688798",
+      "name": "艾为电子",
+      "board": "SH",
+      "quote": {
+        "name": "艾为电子",
+        "price": 54.35,
+        "previous_close": 51.7,
+        "quote_time": "20261103161453",
+        "float_cap_yi": 73.78,
+        "total_cap_yi": 126.71
+      },
+      "avg20_turnover_proxy_yuan": 166421628.632,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300374",
+      "name": "中铁装配",
+      "board": "SZ",
+      "quote": {
+        "name": "中铁装配",
+        "price": 9.67,
+        "previous_close": 9.41,
+        "quote_time": "20261103161454",
+        "float_cap_yi": 23.78,
+        "total_cap_yi": 23.78
+      },
+      "avg20_turnover_proxy_yuan": 36468792.416,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920786",
+      "name": "骑士乳业",
+      "board": "BJ",
+      "quote": {
+        "name": "骑士乳业",
+        "price": 7.12,
+        "previous_close": 6.86,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 9.63,
+        "total_cap_yi": 14.88
+      },
+      "avg20_turnover_proxy_yuan": 80805799.6375,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300967",
+      "name": "晓鸣股份",
+      "board": "SZ",
+      "quote": {
+        "name": "晓鸣股份",
+        "price": 15.47,
+        "previous_close": 14.83,
+        "quote_time": "20261103161415",
+        "float_cap_yi": 19.31,
+        "total_cap_yi": 29.02
+      },
+      "avg20_turnover_proxy_yuan": 71028531.68450001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "001312",
+      "name": "福恩股份",
+      "board": "SZ",
+      "quote": {
+        "name": "福恩股份",
+        "price": 16.49,
+        "previous_close": 15.95,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 9.62,
+        "total_cap_yi": 38.48
+      },
+      "avg20_turnover_proxy_yuan": 28390413.879,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "688186",
+      "name": "广大特材",
+      "board": "SH",
+      "quote": {
+        "name": "广大特材",
+        "price": 12.81,
+        "previous_close": 11.89,
+        "quote_time": "20261103161442",
+        "float_cap_yi": 35.93,
+        "total_cap_yi": 35.93
+      },
+      "avg20_turnover_proxy_yuan": 51156155.224,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "001380",
+      "name": "华纬科技",
+      "board": "SZ",
+      "quote": {
+        "name": "华纬科技",
+        "price": 14.14,
+        "previous_close": 14.17,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 32.91,
+        "total_cap_yi": 38.3
+      },
+      "avg20_turnover_proxy_yuan": 47969114.929000005,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "688669",
+      "name": "聚石化学",
+      "board": "SH",
+      "quote": {
+        "name": "聚石化学",
+        "price": 41.17,
+        "previous_close": 51.46,
+        "quote_time": "20261103161455",
+        "float_cap_yi": 49.95,
+        "total_cap_yi": 49.95
+      },
+      "avg20_turnover_proxy_yuan": 141659332.9195,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300619",
+      "name": "金银河",
+      "board": "SZ",
+      "quote": {
+        "name": "金银河",
+        "price": 19.77,
+        "previous_close": 19.61,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 38.04,
+        "total_cap_yi": 45.11
+      },
+      "avg20_turnover_proxy_yuan": 261945953.87199998,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301688",
+      "name": "格林生物",
+      "board": "SZ",
+      "quote": {
+        "name": "格林生物",
+        "price": 31.66,
+        "previous_close": 30.42,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 8.23,
+        "total_cap_yi": 42.21
+      },
+      "avg20_turnover_proxy_yuan": 134930551.933,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002567",
+      "name": "唐人神",
+      "board": "SZ",
+      "quote": {
+        "name": "唐人神",
+        "price": 3.58,
+        "previous_close": 3.49,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 51.25,
+        "total_cap_yi": 51.3
+      },
+      "avg20_turnover_proxy_yuan": 62139943.866,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301035",
+      "name": "润丰股份",
+      "board": "SZ",
+      "quote": {
+        "name": "润丰股份",
+        "price": 42.96,
+        "previous_close": 40.49,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 156.27,
+        "total_cap_yi": 156.59
+      },
+      "avg20_turnover_proxy_yuan": 85159091.666,
+      "history_as_of": "2026-11-03",
+      "reason": "近20日估算日均成交额低于1亿元"
+    },
+    {
+      "code": "300784",
+      "name": "利安科技",
+      "board": "SZ",
+      "quote": {
+        "name": "利安科技",
+        "price": 38.41,
+        "previous_close": 36.95,
+        "quote_time": "20261103161433",
+        "float_cap_yi": 6.5,
+        "total_cap_yi": 21.6
+      },
+      "avg20_turnover_proxy_yuan": 22681469.676,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920522",
+      "name": "纳科诺尔",
+      "board": "BJ",
+      "quote": {
+        "name": "纳科诺尔",
+        "price": 17.41,
+        "previous_close": 17.0,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 31.65,
+        "total_cap_yi": 38.21
+      },
+      "avg20_turnover_proxy_yuan": 213536723.0155,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002872",
+      "name": "ST天圣",
+      "board": "SZ",
+      "quote": {
+        "name": "ST天圣",
+        "price": 5.8,
+        "previous_close": 5.54,
+        "quote_time": "20261103161451",
+        "float_cap_yi": 12.47,
+        "total_cap_yi": 18.44
+      },
+      "avg20_turnover_proxy_yuan": 20295818.3725,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "920748",
+      "name": "路桥信息",
+      "board": "BJ",
+      "quote": {
+        "name": "路桥信息",
+        "price": 29.44,
+        "previous_close": 28.69,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 20.72,
+        "total_cap_yi": 22.59
+      },
+      "avg20_turnover_proxy_yuan": 130518765.03099999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "605008",
+      "name": "长鸿高科",
+      "board": "SH",
+      "quote": {
+        "name": "长鸿高科",
+        "price": 10.57,
+        "previous_close": 10.12,
+        "quote_time": "20261103161454",
+        "float_cap_yi": 68.28,
+        "total_cap_yi": 68.28
+      },
+      "avg20_turnover_proxy_yuan": 46417854.1405,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300293",
+      "name": "蓝英装备",
+      "board": "SZ",
+      "quote": {
+        "name": "蓝英装备",
+        "price": 12.81,
+        "previous_close": 12.49,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 43.35,
+        "total_cap_yi": 43.35
+      },
+      "avg20_turnover_proxy_yuan": 63739309.721,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002302",
+      "name": "西部建设",
+      "board": "SZ",
+      "quote": {
+        "name": "西部建设",
+        "price": 4.46,
+        "previous_close": 4.36,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 56.3,
+        "total_cap_yi": 56.3
+      },
+      "avg20_turnover_proxy_yuan": 30870870.6095,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "000669",
+      "name": "ST金鸿",
+      "board": "SZ",
+      "quote": {
+        "name": "ST金鸿",
+        "price": 3.43,
+        "previous_close": 3.26,
+        "quote_time": "20261103161457",
+        "float_cap_yi": 23.34,
+        "total_cap_yi": 23.34
+      },
+      "avg20_turnover_proxy_yuan": 15009125.8055,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "300791",
+      "name": "仙乐健康",
+      "board": "SZ",
+      "quote": {
+        "name": "仙乐健康",
+        "price": 17.2,
+        "previous_close": 16.74,
+        "quote_time": "20261103161427",
+        "float_cap_yi": 44.24,
+        "total_cap_yi": 53.01
+      },
+      "avg20_turnover_proxy_yuan": 32906698.635500003,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603468",
+      "name": "津富士达",
+      "board": "SH",
+      "quote": {
+        "name": "津富士达",
+        "price": 19.2,
+        "previous_close": 18.55,
+        "quote_time": "20261103161441",
+        "float_cap_yi": 7.68,
+        "total_cap_yi": 79.15
+      },
+      "avg20_turnover_proxy_yuan": 39295485.991,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920087",
+      "name": "秋乐种业",
+      "board": "BJ",
+      "quote": {
+        "name": "秋乐种业",
+        "price": 11.79,
+        "previous_close": 11.31,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 19.34,
+        "total_cap_yi": 19.48
+      },
+      "avg20_turnover_proxy_yuan": 146892964.463,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920162",
+      "name": "莫森泰克",
+      "board": "BJ",
+      "quote": {
+        "name": "莫森泰克",
+        "price": 18.15,
+        "previous_close": 17.04,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 2.78,
+        "total_cap_yi": 22.33
+      },
+      "avg20_turnover_proxy_yuan": null,
+      "history_as_of": null,
+      "reason": "缺少市值或成交额"
+    },
+    {
+      "code": "920088",
+      "name": "科力股份",
+      "board": "BJ",
+      "quote": {
+        "name": "科力股份",
+        "price": 37.66,
+        "previous_close": 36.48,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 12.18,
+        "total_cap_yi": 33.17
+      },
+      "avg20_turnover_proxy_yuan": 144917985.957,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300847",
+      "name": "中船汉光",
+      "board": "SZ",
+      "quote": {
+        "name": "中船汉光",
+        "price": 13.46,
+        "previous_close": 13.19,
+        "quote_time": "20261103161445",
+        "float_cap_yi": 39.84,
+        "total_cap_yi": 39.84
+      },
+      "avg20_turnover_proxy_yuan": 80669685.99350001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920690",
+      "name": "捷众科技",
+      "board": "BJ",
+      "quote": {
+        "name": "捷众科技",
+        "price": 16.59,
+        "previous_close": 16.02,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 9.3,
+        "total_cap_yi": 14.3
+      },
+      "avg20_turnover_proxy_yuan": 95977167.4365,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603299",
+      "name": "苏盐井神",
+      "board": "SH",
+      "quote": {
+        "name": "苏盐井神",
+        "price": 8.81,
+        "previous_close": 8.54,
+        "quote_time": "20261103161441",
+        "float_cap_yi": 83.2,
+        "total_cap_yi": 84.11
+      },
+      "avg20_turnover_proxy_yuan": 30035383.853499997,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600818",
+      "name": "ST中路",
+      "board": "SH",
+      "quote": {
+        "name": "ST中路",
+        "price": 7.6,
+        "previous_close": 7.15,
+        "quote_time": "20261103161453",
+        "float_cap_yi": 18.08,
+        "total_cap_yi": 24.43
+      },
+      "avg20_turnover_proxy_yuan": 29162237.438,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "920125",
+      "name": "鸿仕达",
+      "board": "BJ",
+      "quote": {
+        "name": "鸿仕达",
+        "price": 90.4,
+        "previous_close": 105.1,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 20.7,
+        "total_cap_yi": 50.77
+      },
+      "avg20_turnover_proxy_yuan": 132982795.21400002,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920252",
+      "name": "天宏锂电",
+      "board": "BJ",
+      "quote": {
+        "name": "天宏锂电",
+        "price": 14.65,
+        "previous_close": 14.13,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 10.0,
+        "total_cap_yi": 15.04
+      },
+      "avg20_turnover_proxy_yuan": 55172447.66599999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920122",
+      "name": "中纺标",
+      "board": "BJ",
+      "quote": {
+        "name": "中纺标",
+        "price": 21.58,
+        "previous_close": 20.89,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 8.07,
+        "total_cap_yi": 19.91
+      },
+      "avg20_turnover_proxy_yuan": 21393655.1225,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920006",
+      "name": "晟楠科技",
+      "board": "BJ",
+      "quote": {
+        "name": "晟楠科技",
+        "price": 18.59,
+        "previous_close": 17.84,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 8.89,
+        "total_cap_yi": 16.78
+      },
+      "avg20_turnover_proxy_yuan": 112506174.57049999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603609",
+      "name": "禾丰股份",
+      "board": "SH",
+      "quote": {
+        "name": "禾丰股份",
+        "price": 6.33,
+        "previous_close": 6.16,
+        "quote_time": "20261103161439",
+        "float_cap_yi": 57.22,
+        "total_cap_yi": 57.22
+      },
+      "avg20_turnover_proxy_yuan": 23889491.788,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "688408",
+      "name": "中信博",
+      "board": "SH",
+      "quote": {
+        "name": "中信博",
+        "price": 23.0,
+        "previous_close": 22.07,
+        "quote_time": "20261103161452",
+        "float_cap_yi": 50.39,
+        "total_cap_yi": 50.39
+      },
+      "avg20_turnover_proxy_yuan": 88032382.6515,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "301279",
+      "name": "金道科技",
+      "board": "SZ",
+      "quote": {
+        "name": "金道科技",
+        "price": 19.24,
+        "previous_close": 21.67,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 25.11,
+        "total_cap_yi": 32.42
+      },
+      "avg20_turnover_proxy_yuan": 97611707.3035,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "002110",
+      "name": "三钢闽光",
+      "board": "SZ",
+      "quote": {
+        "name": "三钢闽光",
+        "price": 2.77,
+        "previous_close": 2.67,
+        "quote_time": "20261103161500",
+        "float_cap_yi": 67.29,
+        "total_cap_yi": 67.29
+      },
+      "avg20_turnover_proxy_yuan": 61674944.1995,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920180",
+      "name": "爱得科技",
+      "board": "BJ",
+      "quote": {
+        "name": "爱得科技",
+        "price": 10.38,
+        "previous_close": 10.0,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 3.73,
+        "total_cap_yi": 12.26
+      },
+      "avg20_turnover_proxy_yuan": 4976103.0235,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "603959",
+      "name": "ST百利",
+      "board": "SH",
+      "quote": {
+        "name": "ST百利",
+        "price": 3.57,
+        "previous_close": 3.47,
+        "quote_time": "20261103161458",
+        "float_cap_yi": 17.5,
+        "total_cap_yi": 17.5
+      },
+      "avg20_turnover_proxy_yuan": 17288906.427500002,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "688379",
+      "name": "华光新材",
+      "board": "SH",
+      "quote": {
+        "name": "华光新材",
+        "price": 38.41,
+        "previous_close": 43.85,
+        "quote_time": "20261103161448",
+        "float_cap_yi": 36.48,
+        "total_cap_yi": 36.48
+      },
+      "avg20_turnover_proxy_yuan": 134867591.947,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300882",
+      "name": "万胜智能",
+      "board": "SZ",
+      "quote": {
+        "name": "万胜智能",
+        "price": 11.62,
+        "previous_close": 11.36,
+        "quote_time": "20261103161430",
+        "float_cap_yi": 30.95,
+        "total_cap_yi": 33.26
+      },
+      "avg20_turnover_proxy_yuan": 41185994.877,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "600819",
+      "name": "耀皮玻璃",
+      "board": "SH",
+      "quote": {
+        "name": "耀皮玻璃",
+        "price": 5.15,
+        "previous_close": 5.05,
+        "quote_time": "20261103161456",
+        "float_cap_yi": 40.65,
+        "total_cap_yi": 50.3
+      },
+      "avg20_turnover_proxy_yuan": 34188810.9935,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "300020",
+      "name": "ST银江",
+      "board": "SZ",
+      "quote": {
+        "name": "ST银江",
+        "price": 3.12,
+        "previous_close": 3.03,
+        "quote_time": "20261103161433",
+        "float_cap_yi": 23.92,
+        "total_cap_yi": 24.79
+      },
+      "avg20_turnover_proxy_yuan": 32251833.793,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "002168",
+      "name": "ST惠程",
+      "board": "SZ",
+      "quote": {
+        "name": "ST惠程",
+        "price": 3.2,
+        "previous_close": 3.11,
+        "quote_time": "20261103161454",
+        "float_cap_yi": 25.09,
+        "total_cap_yi": 25.09
+      },
+      "avg20_turnover_proxy_yuan": 12819618.9205,
+      "history_as_of": "2026-11-03",
+      "reason": "当前名称显示风险警示或退市"
+    },
+    {
+      "code": "920237",
+      "name": "力佳科技",
+      "board": "BJ",
+      "quote": {
+        "name": "力佳科技",
+        "price": 11.36,
+        "previous_close": 11.13,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 10.59,
+        "total_cap_yi": 10.8
+      },
+      "avg20_turnover_proxy_yuan": 42375649.0695,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920895",
+      "name": "花溪科技",
+      "board": "BJ",
+      "quote": {
+        "name": "花溪科技",
+        "price": 16.99,
+        "previous_close": 16.53,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 4.88,
+        "total_cap_yi": 9.6
+      },
+      "avg20_turnover_proxy_yuan": 81055069.66800001,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920284",
+      "name": "灵鸽科技",
+      "board": "BJ",
+      "quote": {
+        "name": "灵鸽科技",
+        "price": 15.63,
+        "previous_close": 15.25,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 10.48,
+        "total_cap_yi": 16.38
+      },
+      "avg20_turnover_proxy_yuan": 81219729.26449999,
+      "history_as_of": "2026-11-03",
+      "reason": "当前流通市值低于100亿元"
+    },
+    {
+      "code": "920753",
+      "name": "天纺标",
+      "board": "BJ",
+      "quote": {
+        "name": "天纺标",
+        "price": 14.55,
+        "previous_close": 14.19,
+        "quote_time": "20261103153135",
+        "float_cap_yi": 4.76,
+        "total_cap_yi": 11.84
+      },
+      "avg20_turnover_proxy_yuan": 7215479.784,
+      "history_as_of": "2026-11-03",
       "reason": "当前流通市值低于100亿元"
     }
   ]

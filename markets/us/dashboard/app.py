@@ -24,6 +24,7 @@ sys.path.append(str(ROOT.parent))
 sys.path.append(str(REPO / 'markets' / 'a'))
 from public_history import audit_history, DEFAULT_DB as PUBLIC_HISTORY_DB
 import radar as a_radar
+import market_review as a_review
 STATIC = ROOT / "static"
 WATCHLIST = ROOT / "watchlist.txt"
 ALERTS = ROOT / "cache" / "alerts.json"
@@ -32,6 +33,8 @@ PORT = int(os.environ.get("BOARD_PORT", "8765"))
 MONITOR_PATH = ROOT.parent / ".cache" / "sndk-monitor" / "latest.json"
 _RADAR_LOCK = threading.Lock()
 _RADAR_STATE = {'status': 'idle', 'error': None, 'started_at': None}
+_REVIEW_LOCK = threading.Lock()
+_REVIEW_STATE = {'status': 'idle', 'error': None}
 
 
 def load_monitor_report(path: Path, now: datetime) -> dict:
@@ -87,11 +90,45 @@ def _start_radar_refresh():
     def job():
         try:
             a_radar.scan(force_hot=True)
+            try:
+                a_review.build_review()
+            except Exception:  # noqa: BLE001 - 复盘失败不阻断雷达
+                pass
             with _RADAR_LOCK:
                 _RADAR_STATE.update(status='idle', error=None)
         except Exception as exc:  # noqa: BLE001
             with _RADAR_LOCK:
                 _RADAR_STATE.update(status='idle', error=str(exc))
+
+    threading.Thread(target=job, daemon=True).start()
+    return True
+
+
+def _review_payload():
+    cached = a_review.load_cached(max_age_hours=18)
+    if cached is None:
+        cached = {'as_of': None, 'market_tone': '尚未复盘', 'summary_bullets': [],
+                  'indices': [], 'top_sectors': [], 'bottom_sectors': [], 'stale': True,
+                  'next_day_hint': '点击刷新生成盘后复盘', 'limitations': []}
+    with _REVIEW_LOCK:
+        state = dict(_REVIEW_STATE)
+    return {**cached, 'status': state['status'], 'error': state['error']}
+
+
+def _start_review_refresh():
+    with _REVIEW_LOCK:
+        if _REVIEW_STATE['status'] == 'running':
+            return False
+        _REVIEW_STATE.update(status='running', error=None)
+
+    def job():
+        try:
+            a_review.build_review()
+            with _REVIEW_LOCK:
+                _REVIEW_STATE.update(status='idle', error=None)
+        except Exception as exc:  # noqa: BLE001
+            with _REVIEW_LOCK:
+                _REVIEW_STATE.update(status='idle', error=str(exc))
 
     threading.Thread(target=job, daemon=True).start()
     return True
@@ -188,6 +225,10 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, (STATIC / 'a-radar.html').read_bytes(), 'text/html; charset=utf-8')
             return
 
+        if path in ('/a-review', '/a-review/'):
+            self._send(200, (STATIC / 'a-review.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
         if path == '/api/a-radar':
             qs = parse_qs(parsed.query)
             refresh = (qs.get('refresh') or ['0'])[0] in ('1', 'true', 'yes')
@@ -198,6 +239,14 @@ class Handler(BaseHTTPRequestHandler):
                 payload = {**payload, 'generated_at': None, 'observe_session': '下一交易日',
                            'strategy_candidates': [], 'watch_pool': []}
             self._json(200, payload)
+            return
+
+        if path == '/api/a-review':
+            qs = parse_qs(parsed.query)
+            refresh = (qs.get('refresh') or ['0'])[0] in ('1', 'true', 'yes')
+            if refresh:
+                _start_review_refresh()
+            self._json(200, _review_payload())
             return
 
         if path.startswith('/api/dsa/'):

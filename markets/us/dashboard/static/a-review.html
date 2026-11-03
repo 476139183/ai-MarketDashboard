@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>观市 · 盘后复盘</title>
+  <link rel="stylesheet" href="/static/research.css?v=3" />
+  <link rel="stylesheet" href="/static/a-radar.css?v=3" />
+</head>
+<body>
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a href="/a-radar"><span>◎</span>明日盯盘</a>
+      <a class="nav-active" href="/a-review"><span>▣</span>盘后复盘<span class="nav-dot"></span></a>
+      <a href="/"><span>⌁</span>盘中信号</a>
+    </nav>
+    <p class="sidebar-hint">收盘后看指数、涨跌家数与板块冷热，再决定明天防守还是回踩。</p>
+    <div class="sidebar-bottom"><span class="status-dot" id="service-dot"></span><div><strong id="service-label">本地复盘</strong><small>A股盘后</small></div></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>盘后复盘</strong></div><div class="topbar-right"><time id="workspace-date"></time></div></header>
+    <main class="main-content radar-page">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">AFTER-CLOSE REVIEW</p>
+          <h1>今天市场怎样，明天怎么看。</h1>
+          <p class="heading-note">结构化行情复盘（指数 / 涨跌家数 / 板块），不含 AI 叙事。</p>
+        </div>
+        <button id="btn-refresh" class="primary-button" type="button">刷新复盘 <span>↻</span></button>
+      </div>
+      <section class="panel radar-hero">
+        <div class="radar-hero-main">
+          <p class="radar-kicker">复盘日 <strong id="as-of">—</strong></p>
+          <h2 id="tone">—</h2>
+          <p id="hint" class="radar-market">—</p>
+        </div>
+      </section>
+      <p id="status" class="connection-status" role="status">正在读取复盘…</p>
+      <section class="panel radar-section"><div class="section-title"><h2>要点</h2></div><ul id="bullets" class="review-bullets"></ul></section>
+      <section class="panel radar-section"><div class="section-title"><h2>主要指数</h2></div><div id="indices" class="review-grid"></div></section>
+      <section class="panel radar-section"><div class="section-title"><h2>领涨板块</h2></div><div id="top" class="review-grid"></div></section>
+      <section class="panel radar-section"><div class="section-title"><h2>领跌板块</h2></div><div id="bottom" class="review-grid"></div></section>
+      <div class="data-note"><span>ⓘ</span><p id="limits">数据来自公开行情接口；失败字段可能为空。</p></div>
+    </main>
+  </div>
+</div>
+<script src="/static/a-review.js?v=1"></script>
+</body>
+</html>

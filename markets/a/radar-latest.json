@@ -26,7 +26,77 @@
       "close": 5.91,
       "change_pct": 10.06,
       "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 5.188,
+        "ma10": 5.042,
+        "ma20": 5.027,
+        "bias_ma5": 13.92,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 5.188,
+          "secondary_buy": 5.042,
+          "stop_loss": 4.9265,
+          "take_profit": 6.2055,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +13.92%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 4.9265 → 目标 6.2055",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 5.188,
+        "secondary_buy": 5.042,
+        "stop_loss": 4.9265,
+        "take_profit": 6.2055,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +13.92%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 4.9265 → 目标 6.2055",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
     },
     {
       "code": "002181",
@@ -45,7 +115,77 @@
       "close": 10.27,
       "change_pct": 9.96,
       "note": "次日仅观察：趋势延续、收复均线；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 10.232,
+        "ma10": 10.206,
+        "ma20": 9.8165,
+        "bias_ma5": 0.37,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": false,
+        "plan_ready": true,
+        "sniper": {
+          "ideal_buy": 10.232,
+          "secondary_buy": 10.206,
+          "stop_loss": 9.6202,
+          "take_profit": 11.69,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +0.37%（阈值5.0%）",
+            "status": "满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 9.6202 → 目标 11.69",
+            "status": "满足"
+          }
+        ],
+        "summary": "次日可按回踩计划观察"
+      },
+      "sniper": {
+        "ideal_buy": 10.232,
+        "secondary_buy": 10.206,
+        "stop_loss": 9.6202,
+        "take_profit": 11.69,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +0.37%（阈值5.0%）",
+          "status": "满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 9.6202 → 目标 11.69",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": true,
+      "summary": "次日可按回踩计划观察"
     },
     {
       "code": "002354",
@@ -62,7 +202,77 @@
       "close": 7.9,
       "change_pct": 5.05,
       "note": "次日仅观察：趋势延续；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 8.04,
+        "ma10": 7.927,
+        "ma20": 7.6465,
+        "bias_ma5": -1.74,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": false,
+        "plan_ready": true,
+        "sniper": {
+          "ideal_buy": 8.04,
+          "secondary_buy": 7.927,
+          "stop_loss": 7.4936,
+          "take_profit": 8.83,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 -1.74%（阈值5.0%）",
+            "status": "满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 7.4936 → 目标 8.83",
+            "status": "满足"
+          }
+        ],
+        "summary": "次日可按回踩计划观察"
+      },
+      "sniper": {
+        "ideal_buy": 8.04,
+        "secondary_buy": 7.927,
+        "stop_loss": 7.4936,
+        "take_profit": 8.83,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 -1.74%（阈值5.0%）",
+          "status": "满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 7.4936 → 目标 8.83",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": true,
+      "summary": "次日可按回踩计划观察"
     },
     {
       "code": "300059",
@@ -83,7 +293,77 @@
       "close": 18.71,
       "change_pct": 6.31,
       "note": "次日仅观察：趋势延续、收复均线、突破前高；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 18.078,
+        "ma10": 18.113,
+        "ma20": 18.0155,
+        "bias_ma5": 3.5,
+        "alignment": "均线纠缠",
+        "chase_risk": false,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 18.078,
+          "secondary_buy": 18.113,
+          "stop_loss": 17.6552,
+          "take_profit": 19.6455,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "均线纠缠",
+            "status": "注意"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +3.50%（阈值5.0%）",
+            "status": "注意"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 17.6552 → 目标 19.6455",
+            "status": "满足"
+          }
+        ],
+        "summary": "趋势未齐，仅观察不优先"
+      },
+      "sniper": {
+        "ideal_buy": 18.078,
+        "secondary_buy": 18.113,
+        "stop_loss": 17.6552,
+        "take_profit": 19.6455,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "均线纠缠",
+          "status": "注意"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +3.50%（阈值5.0%）",
+          "status": "注意"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 17.6552 → 目标 19.6455",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "趋势未齐，仅观察不优先"
     },
     {
       "code": "300413",
@@ -102,7 +382,77 @@
       "close": 26.76,
       "change_pct": 20.0,
       "note": "次日仅观察：趋势延续、收复均线；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 24.112,
+        "ma10": 23.582,
+        "ma20": 23.2005,
+        "bias_ma5": 10.98,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 24.112,
+          "secondary_buy": 23.582,
+          "stop_loss": 22.7365,
+          "take_profit": 28.098,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +10.98%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 22.7365 → 目标 28.098",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 24.112,
+        "secondary_buy": 23.582,
+        "stop_loss": 22.7365,
+        "take_profit": 28.098,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +10.98%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 22.7365 → 目标 28.098",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
     },
     {
       "code": "600519",
@@ -119,7 +469,77 @@
       "close": 1439.1,
       "change_pct": 3.38,
       "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 1374.36,
+        "ma10": 1351.684,
+        "ma20": 1317.283,
+        "bias_ma5": 4.71,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": false,
+        "plan_ready": true,
+        "sniper": {
+          "ideal_buy": 1374.36,
+          "secondary_buy": 1351.684,
+          "stop_loss": 1290.9373,
+          "take_profit": 1511.055,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +4.71%（阈值5.0%）",
+            "status": "注意"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 1290.9373 → 目标 1511.055",
+            "status": "满足"
+          }
+        ],
+        "summary": "次日可按回踩计划观察"
+      },
+      "sniper": {
+        "ideal_buy": 1374.36,
+        "secondary_buy": 1351.684,
+        "stop_loss": 1290.9373,
+        "take_profit": 1511.055,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +4.71%（阈值5.0%）",
+          "status": "注意"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 1290.9373 → 目标 1511.055",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": true,
+      "summary": "次日可按回踩计划观察"
     },
     {
       "code": "688836",
@@ -136,7 +556,77 @@
       "close": 662.17,
       "change_pct": 2.34,
       "note": "次日仅观察：收复均线；沪深300未站上MA20，偏防守",
-      "observe_for": "下一交易日"
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 661.494,
+        "ma10": 616.45,
+        "ma20": 526.576,
+        "bias_ma5": 0.1,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": false,
+        "plan_ready": true,
+        "sniper": {
+          "ideal_buy": 661.494,
+          "secondary_buy": 616.45,
+          "stop_loss": 516.0445,
+          "take_profit": 739.03,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +0.10%（阈值5.0%）",
+            "status": "满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 516.0445 → 目标 739.03",
+            "status": "满足"
+          }
+        ],
+        "summary": "次日可按回踩计划观察"
+      },
+      "sniper": {
+        "ideal_buy": 661.494,
+        "secondary_buy": 616.45,
+        "stop_loss": 516.0445,
+        "take_profit": 739.03,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +0.10%（阈值5.0%）",
+          "status": "满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 516.0445 → 目标 739.03",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": true,
+      "summary": "次日可按回踩计划观察"
     }
   ],
   "excluded_count": 61,

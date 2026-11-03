@@ -14,7 +14,18 @@
       "board": "沪市主板",
       "source_universe_time": "2026-10-28T11:50:39.111082+08:00",
       "follow_up": {
-        "status": "等待下一交易日行情"
+        "status": "假设入场，观察价不保证成交",
+        "entry_date": "2026-10-28",
+        "entry_price": 45.12,
+        "day3": {
+          "status": "观察值",
+          "date": "2026-11-02",
+          "close": 45.24,
+          "return_pct": -0.034
+        },
+        "day5": {
+          "status": "数据尚不足"
+        }
       },
       "record_timing": "事后记录",
       "data_quality": "数据对齐"
@@ -33,7 +44,18 @@
       "board": "沪市主板",
       "source_universe_time": "2026-10-28T11:50:39.111082+08:00",
       "follow_up": {
-        "status": "等待下一交易日行情"
+        "status": "假设入场，观察价不保证成交",
+        "entry_date": "2026-10-28",
+        "entry_price": 1354.98,
+        "day3": {
+          "status": "观察值",
+          "date": "2026-11-02",
+          "close": 1439.1,
+          "return_pct": 5.89
+        },
+        "day5": {
+          "status": "数据尚不足"
+        }
       },
       "record_timing": "事后记录",
       "data_quality": "数据对齐"
@@ -52,7 +74,18 @@
       "board": "深市主板",
       "source_universe_time": "2026-10-28T11:50:39.111082+08:00",
       "follow_up": {
-        "status": "等待下一交易日行情"
+        "status": "假设入场，观察价不保证成交",
+        "entry_date": "2026-10-28",
+        "entry_price": 13.45,
+        "day3": {
+          "status": "观察值",
+          "date": "2026-11-02",
+          "close": 13.82,
+          "return_pct": 2.443
+        },
+        "day5": {
+          "status": "数据尚不足"
+        }
       },
       "record_timing": "事后记录",
       "data_quality": "数据对齐"
@@ -71,16 +104,162 @@
       "board": "深市主板",
       "source_universe_time": "2026-10-28T11:50:39.111082+08:00",
       "follow_up": {
-        "status": "等待下一交易日行情"
+        "status": "假设入场，观察价不保证成交",
+        "entry_date": "2026-10-28",
+        "entry_price": 10.23,
+        "day3": {
+          "status": "观察值",
+          "date": "2026-11-02",
+          "close": 10.27,
+          "return_pct": 0.09
+        },
+        "day5": {
+          "status": "数据尚不足"
+        }
       },
       "record_timing": "事后记录",
       "data_quality": "数据对齐"
+    },
+    {
+      "code": "300413",
+      "name": "芒果超媒",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "breakout"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 27.8,
+      "record_timing": "信号日记录",
+      "board": "创业板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
+    },
+    {
+      "code": "002249",
+      "name": "大洋电机",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "reclaim"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 7.87,
+      "record_timing": "信号日记录",
+      "board": "深市主板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "breakout"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 1480.0,
+      "record_timing": "信号日记录",
+      "board": "沪市主板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
+    },
+    {
+      "code": "000591",
+      "name": "太阳能",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "breakout"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 4.59,
+      "record_timing": "信号日记录",
+      "board": "深市主板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
+    },
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "breakout"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 54.59,
+      "record_timing": "信号日记录",
+      "board": "沪市主板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
+    },
+    {
+      "code": "002043",
+      "name": "兔 宝 宝",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "reclaim",
+        "breakout"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 13.43,
+      "record_timing": "信号日记录",
+      "board": "深市主板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
+    },
+    {
+      "code": "688009",
+      "name": "中国通号",
+      "signal_date": "2026-11-03",
+      "recorded_at": "2026-11-03T17:06:29.668574+08:00",
+      "rules": [
+        "reclaim",
+        "breakout"
+      ],
+      "market_pass": false,
+      "category": "观察池",
+      "close": 5.12,
+      "record_timing": "信号日记录",
+      "board": "科创板",
+      "source_universe_time": "2026-11-03T17:06:29.382976+08:00",
+      "data_quality": "数据对齐",
+      "follow_up": {
+        "status": "等待下一交易日行情"
+      }
     }
   ],
-  "last_signal_date": "2026-10-27",
-  "last_run_at": "2026-10-28T14:06:37.978989+08:00",
+  "last_signal_date": "2026-11-03",
+  "last_run_at": "2026-11-03T17:06:29.668574+08:00",
   "market_pass": false,
-  "universe_snapshot_time": "2026-10-28T11:50:39.111082+08:00",
+  "universe_snapshot_time": "2026-11-03T17:06:29.382976+08:00",
   "stale_symbols": [],
   "limitations": [
     "本次股票池按当前名称、市值和热榜筛选，历史回看有前视偏差",
@@ -89,6 +268,7 @@
     "需要手动刷新行情和运行脚本，本程序不会自动定时"
   ],
   "quality_excluded": {
-    "600825": "最近21个市场交易日日线不完整"
+    "600825": "最近21个市场交易日日线不完整",
+    "002827": "最近21个市场交易日日线不完整"
   }
 }

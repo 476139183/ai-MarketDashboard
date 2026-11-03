@@ -19,8 +19,9 @@ RULES = [('breakout', 10), ('breakout', 20), ('reclaim', 10), ('reclaim', 20), (
 
 
 def as_of_date(snapshot_time):
-    # 17:00 后才允许采集当日收盘日线；盘中始终只用此前日期。
-    return (snapshot_time.date() if snapshot_time.hour >= 17 else snapshot_time.date() - timedelta(days=1)).isoformat()
+    # A股 15:05 后允许使用当日收盘；盘中仍用上一自然日（再由交易日历回退）。
+    closed = snapshot_time.hour > 15 or (snapshot_time.hour == 15 and snapshot_time.minute >= 5)
+    return (snapshot_time.date() if closed else snapshot_time.date() - timedelta(days=1)).isoformat()
 
 
 def prepare_symbols(stocks):

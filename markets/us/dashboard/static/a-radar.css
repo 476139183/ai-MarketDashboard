@@ -13,11 +13,12 @@
 .radar-filter{display:flex;gap:4px}
 .radar-filter button{border:0;background:transparent;color:#9aa69e;font-size:10px;padding:6px 10px;border-radius:4px}
 .radar-filter button.selected{background:var(--green-soft);color:var(--green);font-weight:600}
-.radar-table-head,.radar-row{display:grid;grid-template-columns:36px minmax(0,1.4fr) minmax(0,1.1fr) 88px 148px;gap:10px;align-items:center}
+.radar-table-head,.radar-row-top{display:grid;grid-template-columns:36px minmax(0,1.4fr) minmax(0,1.1fr) 88px 148px;gap:10px;align-items:center}
 .radar-table-head{padding:0 12px 10px;font-size:9px;color:#9aa89d;border-bottom:1px solid var(--line)}
 .radar-board-list{display:grid;gap:0}
 .radar-row{padding:12px;border-bottom:1px solid #f0f3f1}
 .radar-row:hover{background:#f7faf8}
+.radar-row-rich{display:block}
 .radar-row .rank{font-size:12px;color:#9aa89d;font-variant-numeric:tabular-nums}
 .radar-stock{display:grid;gap:4px;min-width:0;text-align:left;border:0;background:transparent;padding:0;color:inherit}
 .radar-stock:hover strong{color:var(--green)}
@@ -41,15 +42,31 @@
 .tomorrow-pins .pin-item strong{display:block;font-size:12px}
 .tomorrow-pins .pin-item small{display:block;margin-top:3px;font-size:10px;color:#99a3a1}
 .tomorrow-pins .pin-code{width:46px;flex-shrink:0;font-size:10px;font-weight:650;color:var(--green);font-variant-numeric:tabular-nums}
+.radar-plan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.radar-plan>div{background:#f5f8f5;border-radius:6px;padding:8px 9px}
+.radar-plan span{display:block;font-size:9px;color:#9aa89d;margin-bottom:5px}
+.radar-plan strong{font-size:12px;font-weight:550;color:#425e4d;font-variant-numeric:tabular-nums}
+.radar-check{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.radar-check i{font-style:normal;font-size:9px;padding:3px 7px;border-radius:999px;background:#eef4f0;color:#5f7d68}
+.radar-check i.warn{background:#faf4e8;color:#9a7a3a}
+.radar-check i.bad{background:#fdeeee;color:#b45a5a}
+.radar-plan-note{margin-top:8px;font-size:10px;line-height:1.7;color:#7d9083}
+.review-bullets{margin:12px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:#4e6556}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:14px}
+.review-card{border:1px solid var(--line);border-radius:8px;padding:12px;background:#fbfdfb;display:grid;gap:6px}
+.review-card strong{font-size:13px;color:#2f4638}
+.review-card span{font-size:12px;font-variant-numeric:tabular-nums}
+.review-card .up{color:var(--red)}.review-card .down{color:var(--green)}.review-card .flat{color:#9aa89d}
 @media(max-width:960px){
   .radar-hero{flex-direction:column}
   .radar-hero-stats{grid-template-columns:repeat(3,1fr)}
   .radar-table-head{display:none}
-  .radar-row{grid-template-columns:28px minmax(0,1fr);grid-template-areas:"rank stock" "rank signals" "rank price" "rank ops"}
-  .radar-row .rank{grid-area:rank;align-self:start;padding-top:4px}
-  .radar-stock{grid-area:stock}
-  .radar-signals{grid-area:signals}
-  .radar-px{grid-area:price;text-align:left}
-  .radar-ops{grid-area:ops;justify-content:flex-start}
+  .radar-row-top{grid-template-columns:28px minmax(0,1fr);grid-template-areas:"rank stock" "rank signals" "rank price" "rank ops"}
+  .radar-row-top .rank{grid-area:rank;align-self:start;padding-top:4px}
+  .radar-row-top .radar-stock{grid-area:stock}
+  .radar-row-top .radar-signals{grid-area:signals}
+  .radar-row-top .radar-px{grid-area:price;text-align:left}
+  .radar-row-top .radar-ops{grid-area:ops;justify-content:flex-start}
+  .radar-plan{grid-template-columns:repeat(2,minmax(0,1fr))}
   .page-heading{flex-direction:column;align-items:flex-start;gap:14px}
 }

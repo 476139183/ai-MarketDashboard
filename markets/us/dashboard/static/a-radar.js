@@ -100,6 +100,24 @@
     return `<span class="${cls}">${text}</span>`;
   }
 
+  function planBlock(row) {
+    const s = row.sniper || row.trade_plan?.sniper;
+    if (!s) return '<p class="radar-plan-note">暂无次日点位（日线不足）</p>';
+    const checks = (row.checklist || row.trade_plan?.checklist || []).map((c) => {
+      const cls = c.status === '满足' ? '' : c.status === '注意' ? 'warn' : 'bad';
+      return `<i class="${cls}">${c.status} ${c.item}</i>`;
+    }).join('');
+    return `
+      <div class="radar-plan">
+        <div><span>理想买≈MA5</span><strong>${s.ideal_buy}</strong></div>
+        <div><span>次优买≈MA10</span><strong>${s.secondary_buy}</strong></div>
+        <div><span>止损参考</span><strong>${s.stop_loss}</strong></div>
+        <div><span>目标参考</span><strong>${s.take_profit}</strong></div>
+      </div>
+      <div class="radar-check">${checks}</div>
+      <p class="radar-plan-note">${row.summary || row.trade_plan?.summary || ''}</p>`;
+  }
+
   function renderBoard() {
     const list = el('board-list');
     const rows = filteredRows();
@@ -110,23 +128,27 @@
     list.replaceChildren(...rows.map((row, idx) => {
       const pinned = isPinned(row.code);
       const item = document.createElement('article');
-      item.className = 'radar-row';
+      item.className = 'radar-row radar-row-rich';
       const badge = row.category === '策略候选'
         ? '<span class="radar-badge priority">优先</span>'
         : '<span class="radar-badge watch">观察</span>';
+      const ready = row.plan_ready ? '<span class="radar-badge priority">计划可观察</span>' : '';
       const tags = (row.rule_labels || []).map((x) => `<i>${x}</i>`).join('');
       item.innerHTML = `
-        <span class="rank">${idx + 1}</span>
-        <button type="button" class="radar-stock" data-act="open">
-          <strong>${badge}${row.name || row.code}</strong>
-          <small>${row.code}${row.board ? ' · ' + row.board : ''}</small>
-        </button>
-        <div class="radar-signals">${tags || '<i>信号</i>'}</div>
-        <div class="radar-px"><strong>${row.close ?? '—'}</strong>${changeHtml(row.change_pct)}</div>
-        <div class="radar-ops">
-          <button type="button" class="outline-button ${pinned ? 'pinned' : ''}" data-act="pin">${pinned ? '已盯' : '盯住'}</button>
-          <button type="button" class="outline-button" data-act="open">看盘</button>
-        </div>`;
+        <div class="radar-row-top">
+          <span class="rank">${idx + 1}</span>
+          <button type="button" class="radar-stock" data-act="open">
+            <strong>${badge}${ready}${row.name || row.code}</strong>
+            <small>${row.code}${row.board ? ' · ' + row.board : ''}</small>
+          </button>
+          <div class="radar-signals">${tags || '<i>信号</i>'}</div>
+          <div class="radar-px"><strong>${row.close ?? '—'}</strong>${changeHtml(row.change_pct)}</div>
+          <div class="radar-ops">
+            <button type="button" class="outline-button ${pinned ? 'pinned' : ''}" data-act="pin">${pinned ? '已盯' : '盯住'}</button>
+            <button type="button" class="outline-button" data-act="open">看盘</button>
+          </div>
+        </div>
+        ${planBlock(row)}`;
       item.querySelectorAll('[data-act="open"]').forEach((node) => node.addEventListener('click', () => openResearch(row.code)));
       item.querySelector('[data-act="pin"]').addEventListener('click', () => togglePin(row));
       return item;
