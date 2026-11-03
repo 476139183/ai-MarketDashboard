@@ -1,0 +1,55 @@
+.radar-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.radar-hero{display:flex;justify-content:space-between;gap:24px;align-items:stretch;padding:22px 24px;margin-bottom:8px;background:linear-gradient(135deg,#f7fbf8,#fff)}
+.radar-hero-main{min-width:0}
+.radar-kicker{margin:0;font-size:11px;color:#8fa094}
+.radar-kicker strong{color:#4e6556;font-weight:600}
+.radar-hero h2{margin:10px 0 8px;font-size:22px;font-weight:600;letter-spacing:.2px;color:#24362c}
+.radar-market{margin:0;font-size:12px;line-height:1.7;color:#6f8b76}
+.radar-hero-stats{display:grid;grid-template-columns:repeat(3,minmax(72px,1fr));gap:10px;align-content:center}
+.radar-hero-stats>div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:72px}
+.radar-hero-stats span{display:block;font-size:9px;color:#9ba99f;margin-bottom:8px}
+.radar-hero-stats strong{font-size:22px;font-weight:600;color:#3f5c48;font-variant-numeric:tabular-nums}
+.radar-board{margin-top:16px;padding:18px 20px 12px}
+.radar-filter{display:flex;gap:4px}
+.radar-filter button{border:0;background:transparent;color:#9aa69e;font-size:10px;padding:6px 10px;border-radius:4px}
+.radar-filter button.selected{background:var(--green-soft);color:var(--green);font-weight:600}
+.radar-table-head,.radar-row{display:grid;grid-template-columns:36px minmax(0,1.4fr) minmax(0,1.1fr) 88px 148px;gap:10px;align-items:center}
+.radar-table-head{padding:0 12px 10px;font-size:9px;color:#9aa89d;border-bottom:1px solid var(--line)}
+.radar-board-list{display:grid;gap:0}
+.radar-row{padding:12px;border-bottom:1px solid #f0f3f1}
+.radar-row:hover{background:#f7faf8}
+.radar-row .rank{font-size:12px;color:#9aa89d;font-variant-numeric:tabular-nums}
+.radar-stock{display:grid;gap:4px;min-width:0;text-align:left;border:0;background:transparent;padding:0;color:inherit}
+.radar-stock:hover strong{color:var(--green)}
+.radar-stock strong{font-size:14px;font-weight:600;color:#2f4638}
+.radar-stock small{font-size:11px;color:#8fa094;font-variant-numeric:tabular-nums}
+.radar-badge{display:inline-flex;align-items:center;padding:2px 6px;border-radius:3px;font-size:9px;font-weight:600;margin-right:6px}
+.radar-badge.priority{background:#eaf5ef;color:var(--green)}
+.radar-badge.watch{background:#f4f6f5;color:#7d9083}
+.radar-signals{display:flex;flex-wrap:wrap;gap:5px}
+.radar-signals i{font-style:normal;font-size:9px;padding:3px 7px;border-radius:999px;background:#eef4f0;color:#5f7d68}
+.radar-px{text-align:right;font-variant-numeric:tabular-nums}
+.radar-px strong{display:block;font-size:14px;font-weight:550;color:#425e4d}
+.radar-px span{display:block;margin-top:4px;font-size:11px}
+.radar-px .up{color:var(--red)}.radar-px .down{color:var(--green)}.radar-px .flat{color:#9aa89d}
+.radar-ops{display:flex;justify-content:flex-end;gap:6px}
+.radar-ops .outline-button{padding:7px 9px;font-size:10px}
+.radar-ops .outline-button.pinned{border-color:#cfe4d7;background:var(--green-soft);color:var(--green)}
+.radar-empty{font-size:12px;color:#91a08f;padding:28px 8px;text-align:center}
+.tomorrow-pins .pin-item{display:flex;align-items:center;gap:8px;width:100%;border:0;background:transparent;padding:10px 12px;border-radius:8px;text-align:left;color:var(--ink)}
+.tomorrow-pins .pin-item:hover{background:#f6f8f7}
+.tomorrow-pins .pin-item strong{display:block;font-size:12px}
+.tomorrow-pins .pin-item small{display:block;margin-top:3px;font-size:10px;color:#99a3a1}
+.tomorrow-pins .pin-code{width:46px;flex-shrink:0;font-size:10px;font-weight:650;color:var(--green);font-variant-numeric:tabular-nums}
+@media(max-width:960px){
+  .radar-hero{flex-direction:column}
+  .radar-hero-stats{grid-template-columns:repeat(3,1fr)}
+  .radar-table-head{display:none}
+  .radar-row{grid-template-columns:28px minmax(0,1fr);grid-template-areas:"rank stock" "rank signals" "rank price" "rank ops"}
+  .radar-row .rank{grid-area:rank;align-self:start;padding-top:4px}
+  .radar-stock{grid-area:stock}
+  .radar-signals{grid-area:signals}
+  .radar-px{grid-area:price;text-align:left}
+  .radar-ops{grid-area:ops;justify-content:flex-start}
+  .page-heading{flex-direction:column;align-items:flex-start;gap:14px}
+}

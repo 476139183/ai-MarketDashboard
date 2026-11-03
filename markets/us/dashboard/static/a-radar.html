@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" /><title>观市 · 明日盯盘</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23167960'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E观%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/static/research.css?v=3" />
+  <link rel="stylesheet" href="/static/a-radar.css?v=2" />
+</head>
+<body>
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research" aria-label="观市首页"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav" aria-label="工作空间">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a class="nav-active" href="/a-radar"><span>◎</span>明日盯盘<span class="nav-dot"></span></a>
+      <a href="/"><span>⌁</span>盘中信号<span class="nav-arrow">↗</span></a>
+    </nav>
+    <div class="watch-heading"><span class="sidebar-label">明日观察</span><span id="pin-count" class="count">0</span></div>
+    <div id="pin-list" class="watchlist tomorrow-pins" aria-label="明日观察列表"></div>
+    <p class="sidebar-hint">盘后选出信号股，盯住后第二天开盘直接点开看盘。<br>不会自动下单。</p>
+    <div class="sidebar-bottom"><span class="status-dot" id="service-dot"></span><div><strong id="service-label">本地雷达</strong><small>A 股次日观察</small></div><span class="local-tag">LOCAL</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar">
+      <div class="breadcrumb">工作空间 <span>/</span> <strong>明日盯盘</strong></div>
+      <div class="topbar-right"><time id="workspace-date"></time></div>
+    </header>
+    <main class="main-content radar-page">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">TOMORROW WATCH</p>
+          <h1>明天先看这些票。</h1>
+          <p class="heading-note">按最近收盘信号排序；点「盯住」加入侧栏，点名称进研究页看盘。</p>
+        </div>
+        <div class="radar-actions">
+          <button id="btn-pin-all" class="outline-button" type="button">全部盯住</button>
+          <button id="btn-clear-pins" class="outline-button" type="button">清空明日观察</button>
+          <button id="btn-refresh" class="primary-button" type="button">刷新名单 <span>↻</span></button>
+        </div>
+      </div>
+
+      <section class="panel radar-hero" aria-label="明日观察摘要">
+        <div class="radar-hero-main">
+          <p class="radar-kicker">信号日 <strong id="signal-date">—</strong></p>
+          <h2 id="observe-headline">下一交易日观察</h2>
+          <p id="market-label" class="radar-market">—</p>
+        </div>
+        <div class="radar-hero-stats">
+          <div><span>优先</span><strong id="strategy-count">0</strong></div>
+          <div><span>观察</span><strong id="watch-count">0</strong></div>
+          <div><span>已盯</span><strong id="pinned-stat">0</strong></div>
+        </div>
+      </section>
+
+      <p id="radar-status" class="connection-status" role="status">正在读取名单…</p>
+
+      <section class="panel radar-board" aria-labelledby="board-title">
+        <div class="section-title">
+          <h2 id="board-title">明日观察板</h2>
+          <div class="radar-filter" role="tablist" aria-label="名单筛选">
+            <button type="button" class="selected" data-filter="all" aria-pressed="true">全部</button>
+            <button type="button" data-filter="strategy" aria-pressed="false">优先</button>
+            <button type="button" data-filter="watch" aria-pressed="false">观察</button>
+            <button type="button" data-filter="pinned" aria-pressed="false">已盯</button>
+          </div>
+        </div>
+        <div class="radar-table-head" aria-hidden="true">
+          <span>#</span><span>股票</span><span>信号</span><span>收盘</span><span>操作</span>
+        </div>
+        <div id="board-list" class="radar-board-list"></div>
+      </section>
+
+      <div class="data-note"><span>ⓘ</span><p id="radar-limits">热榜过滤池 · 收盘判断、次日观察 · 现货默认只研究做多 · 不保证开盘可买</p></div>
+    </main>
+  </div>
+</div>
+<script src="/static/a-radar.js?v=2"></script>
+</body>
+</html>

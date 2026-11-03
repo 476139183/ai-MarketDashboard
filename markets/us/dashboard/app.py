@@ -8,6 +8,7 @@ import mimetypes
 import os
 import sqlite3
 import sys
+import threading
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -18,14 +19,19 @@ from engine import BJ
 from dsa_client import DSAClient, DSAError
 
 ROOT = Path(__file__).resolve().parent
+REPO = ROOT.parents[2]
 sys.path.append(str(ROOT.parent))
+sys.path.append(str(REPO / 'markets' / 'a'))
 from public_history import audit_history, DEFAULT_DB as PUBLIC_HISTORY_DB
+import radar as a_radar
 STATIC = ROOT / "static"
 WATCHLIST = ROOT / "watchlist.txt"
 ALERTS = ROOT / "cache" / "alerts.json"
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("BOARD_PORT", "8765"))
 MONITOR_PATH = ROOT.parent / ".cache" / "sndk-monitor" / "latest.json"
+_RADAR_LOCK = threading.Lock()
+_RADAR_STATE = {'status': 'idle', 'error': None, 'started_at': None}
 
 
 def load_monitor_report(path: Path, now: datetime) -> dict:
@@ -58,6 +64,37 @@ def _load_watchlist() -> list:
             seen.add(s)
             uniq.append(s)
     return uniq or ["SNDK", "SKHY", "MU", "NVDA"]
+
+
+def _radar_payload():
+    cached = a_radar.load_cached(max_age_hours=18)
+    if cached is None:
+        cached = {'signal_date': None, 'strategy_candidates': [], 'watch_pool': [],
+                  'strategy_count': 0, 'watch_count': 0, 'stale': True,
+                  'market_label': '尚未扫描', 'observe_session': '下一交易日',
+                  'limitations': ['点击「刷新扫描」生成最近交易日雷达']}
+    with _RADAR_LOCK:
+        state = dict(_RADAR_STATE)
+    return {**cached, 'status': state['status'], 'error': state['error']}
+
+
+def _start_radar_refresh():
+    with _RADAR_LOCK:
+        if _RADAR_STATE['status'] == 'running':
+            return False
+        _RADAR_STATE.update(status='running', error=None, started_at=datetime.now(timezone.utc).isoformat())
+
+    def job():
+        try:
+            a_radar.scan(force_hot=True)
+            with _RADAR_LOCK:
+                _RADAR_STATE.update(status='idle', error=None)
+        except Exception as exc:  # noqa: BLE001
+            with _RADAR_LOCK:
+                _RADAR_STATE.update(status='idle', error=str(exc))
+
+    threading.Thread(target=job, daemon=True).start()
+    return True
 
 
 def load_alerts(now: datetime) -> dict:
@@ -145,6 +182,22 @@ class Handler(BaseHTTPRequestHandler):
 
         if path in ('/research', '/research/'):
             self._send(200, (STATIC / 'research.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
+        if path in ('/a-radar', '/a-radar/'):
+            self._send(200, (STATIC / 'a-radar.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
+        if path == '/api/a-radar':
+            qs = parse_qs(parsed.query)
+            refresh = (qs.get('refresh') or ['0'])[0] in ('1', 'true', 'yes')
+            if refresh:
+                _start_radar_refresh()
+            payload = _radar_payload()
+            if refresh and payload.get('status') == 'running' and not payload.get('signal_date'):
+                payload = {**payload, 'generated_at': None, 'observe_session': '下一交易日',
+                           'strategy_candidates': [], 'watch_pool': []}
+            self._json(200, payload)
             return
 
         if path.startswith('/api/dsa/'):

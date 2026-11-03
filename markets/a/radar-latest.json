@@ -1,0 +1,149 @@
+{
+  "title": "A股盘后雷达",
+  "signal_date": "2026-11-02",
+  "observe_session": "下一交易日",
+  "generated_at": "2026-11-03T15:19:41+08:00",
+  "market_pass": false,
+  "market_label": "沪深300未站上MA20（偏防守）",
+  "universe_size": 99,
+  "scanned": 98,
+  "strategy_count": 0,
+  "watch_count": 7,
+  "strategy_candidates": [],
+  "watch_pool": [
+    {
+      "code": "000410",
+      "name": "沈阳机床",
+      "board": "深市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 5.91,
+      "change_pct": 10.06,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    },
+    {
+      "code": "002181",
+      "name": "粤 传 媒",
+      "board": "深市主板",
+      "rules": [
+        "trend",
+        "reclaim"
+      ],
+      "rule_labels": [
+        "趋势延续",
+        "收复均线"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 10.27,
+      "change_pct": 9.96,
+      "note": "次日仅观察：趋势延续、收复均线；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    },
+    {
+      "code": "002354",
+      "name": "天娱数科",
+      "board": "深市主板",
+      "rules": [
+        "trend"
+      ],
+      "rule_labels": [
+        "趋势延续"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 7.9,
+      "change_pct": 5.05,
+      "note": "次日仅观察：趋势延续；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    },
+    {
+      "code": "300059",
+      "name": "东方财富",
+      "board": "创业板",
+      "rules": [
+        "trend",
+        "reclaim",
+        "breakout"
+      ],
+      "rule_labels": [
+        "趋势延续",
+        "收复均线",
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 18.71,
+      "change_pct": 6.31,
+      "note": "次日仅观察：趋势延续、收复均线、突破前高；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    },
+    {
+      "code": "300413",
+      "name": "芒果超媒",
+      "board": "创业板",
+      "rules": [
+        "trend",
+        "reclaim"
+      ],
+      "rule_labels": [
+        "趋势延续",
+        "收复均线"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 26.76,
+      "change_pct": 20.0,
+      "note": "次日仅观察：趋势延续、收复均线；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "board": "沪市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 1439.1,
+      "change_pct": 3.38,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    },
+    {
+      "code": "688836",
+      "name": "宇树科技-W",
+      "board": "科创板",
+      "rules": [
+        "reclaim"
+      ],
+      "rule_labels": [
+        "收复均线"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 662.17,
+      "change_pct": 2.34,
+      "note": "次日仅观察：收复均线；沪深300未站上MA20，偏防守",
+      "observe_for": "下一交易日"
+    }
+  ],
+  "excluded_count": 61,
+  "limitations": [
+    "热榜股票池有幸存者/人气偏差，不是全市场扫描",
+    "收盘后判断、次日观察；不等于自动下单或保证开盘可买",
+    "普通A股现货默认只研究做多方向",
+    "未完整处理除权、停牌与真实涨跌停队列"
+  ]
+}
