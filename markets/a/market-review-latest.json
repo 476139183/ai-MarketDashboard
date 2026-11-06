@@ -1,120 +1,120 @@
 {
   "title": "A股盘后复盘",
   "as_of": "2026-11-03",
-  "generated_at": "2026-11-03T17:06:37+08:00",
+  "generated_at": "2026-11-04T09:12:29+08:00",
   "market_tone": "平淡",
   "summary_bullets": [
-    "沪深300 -0.20%（4008.87）",
-    "涨 989 / 跌 1304 / 平 63",
-    "领涨板块：教育运营及其他(9.84%)、涂料(5.07%)、氨纶(4.17%)",
-    "领跌板块：半导体设备(-6.76%)、通信网络设备及器件(-6.62%)、半导体材料(-6.2%)"
+    "沪深300 -0.00%（4008.81）",
+    "涨 0 / 跌 0 / 平 0",
+    "领涨板块：其他饰品(0.0%)、钢铁管材(0.0%)、粮食种植(0.0%)",
+    "领跌板块：航空机场(0.0%)、铁路公路(0.0%)、水泥(0.0%)"
   ],
   "indices": [
     {
       "code": "000001",
       "name": "上证指数",
       "price": 3608.1,
-      "prev_close": 3638.03,
-      "open": 3624.58,
-      "change_pct": -0.82,
-      "asof": "20261103161500"
+      "prev_close": 3608.1,
+      "open": 0.0,
+      "change_pct": 0.0,
+      "asof": "20261104091200"
     },
     {
       "code": "399001",
       "name": "深证成指",
       "price": 10876.99,
-      "prev_close": 11010.68,
-      "open": 10934.3,
-      "change_pct": -1.21,
-      "asof": "20261103161400"
+      "prev_close": 10876.99,
+      "open": 0.0,
+      "change_pct": 0.0,
+      "asof": "20261104091145"
     },
     {
       "code": "000300",
       "name": "沪深300",
-      "price": 4008.87,
-      "prev_close": 4016.92,
-      "open": 4005.25,
-      "change_pct": -0.2,
-      "asof": "20261103161412"
+      "price": 4008.81,
+      "prev_close": 4008.87,
+      "open": 0.0,
+      "change_pct": -0.0,
+      "asof": "20261104091200"
     },
     {
       "code": "000688",
       "name": "科创50",
       "price": 1151.28,
-      "prev_close": 1196.94,
-      "open": 1184.53,
-      "change_pct": -3.81,
-      "asof": "20261103161412"
+      "prev_close": 1151.28,
+      "open": 0.0,
+      "change_pct": 0.0,
+      "asof": "20261104091200"
     }
   ],
   "breadth": {
-    "up": 989,
-    "down": 1304,
-    "flat": 63
+    "up": 0,
+    "down": 0,
+    "flat": 0
   },
   "limit_stats": null,
   "top_sectors": [
     {
-      "code": "BK1556",
-      "name": "教育运营及其他",
-      "price": 1008.92,
-      "change_pct": 9.84
+      "code": "BK1356",
+      "name": "其他饰品",
+      "price": 460.78,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1469",
-      "name": "涂料",
-      "price": 745.78,
-      "change_pct": 5.07
+      "code": "BK1368",
+      "name": "钢铁管材",
+      "price": 524.61,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1412",
-      "name": "氨纶",
-      "price": 2303.95,
-      "change_pct": 4.17
+      "code": "BK1515",
+      "name": "粮食种植",
+      "price": 965.12,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1296",
-      "name": "视频媒体",
-      "price": 1343.92,
-      "change_pct": 3.89
+      "code": "BK1416",
+      "name": "粘胶",
+      "price": 1316.73,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1306",
-      "name": "蓄电池及其他电池",
-      "price": 1968.51,
-      "change_pct": 3.76
+      "code": "BK1523",
+      "name": "汽车经销商",
+      "price": 1318.85,
+      "change_pct": 0.0
     }
   ],
   "bottom_sectors": [
     {
-      "code": "BK1326",
-      "name": "半导体设备",
-      "price": 30662.46,
-      "change_pct": -6.76
+      "code": "BK0420",
+      "name": "航空机场",
+      "price": 3994.02,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1591",
-      "name": "通信网络设备及器件",
-      "price": 9782.41,
-      "change_pct": -6.62
+      "code": "BK0421",
+      "name": "铁路公路",
+      "price": 8580.31,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1325",
-      "name": "半导体材料",
-      "price": 8668.05,
-      "change_pct": -6.2
+      "code": "BK0424",
+      "name": "水泥",
+      "price": 24555.14,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1340",
-      "name": "印制电路板",
-      "price": 9528.73,
-      "change_pct": -5.65
+      "code": "BK0427",
+      "name": "公用事业",
+      "price": 8610.58,
+      "change_pct": 0.0
     },
     {
-      "code": "BK1409",
-      "name": "激光设备",
-      "price": 13548.79,
-      "change_pct": -5.5
+      "code": "BK0428",
+      "name": "电力",
+      "price": 17553.13,
+      "change_pct": 0.0
     }
   ],
   "next_day_hint": "震荡市以计划内回踩为主，清单未齐的不升格为优先。",
