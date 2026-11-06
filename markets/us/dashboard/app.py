@@ -17,6 +17,7 @@ from urllib.parse import parse_qs, urlparse
 from engine import analyze_many, analyze_symbol
 from engine import BJ
 from dsa_client import DSAClient, DSAError
+from contract_radar import SERVICE as contract_radar
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
@@ -198,6 +199,14 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+
+        if path in ('/contracts', '/contracts/'):
+            self._send(200, (STATIC / 'contracts.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
+        if path == '/api/contracts':
+            self._json(200, contract_radar.payload())
+            return
 
         if path == '/api/history-samples':
             try:

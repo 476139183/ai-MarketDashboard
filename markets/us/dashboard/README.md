@@ -54,6 +54,18 @@ SIGNAL_LIVE=1 python3 app.py
 
 API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 
+## 合约雷达
+
+侧栏「合约雷达」进入 `/contracts`；A 股「明日盯盘」仍为 `/a-radar`。合约 API 为 `/api/contracts`，由本机看板直接读取 Bitget USDT 永续公开行情，无需账户密钥或 DSA 服务。
+
+默认 12 个标的：BTC、ETH、SOL、XRP、DOGE、BNB，以及 MU、NVDA、TSLA、SNDK、AMD、AAPL 同名 USDT 合约。股票合约使用实际合约价格，不使用原股行情替代。列表来自代码中的 `contract_radar.WATCHLIST`；未返回行情的合约明确显示不可用。
+
+方向基于已收盘 4h 收盘价、EMA20/50 排列与 EMA20 最近 6 根斜率，同向才显示看涨/看跌。支撑与阻力分别参考最近 20 根完整 K 线低点和高点，穿越后不作为当前对应价位。报价超过 30 秒、K 线不足 60 根、不连续或未覆盖最新收盘周期均暂停方向。单票失败保留其余标的；页面请求失败保留上次价格并撤销方向。暂停刷新后仍会检查报价过期。
+
+当前资金费率按接口值转为百分比，非年化、不假定统一结算周期。名义持仓估算为基础币持仓量 × 标记价，非用户仓位。报价默认每 10 秒刷新（可选 30/60 秒），服务端以 10 秒为最短间隔；K 线缓存 60 秒，跨 4h 边界重取。仅在页面请求时触发后台采集；首屏显示正在更新后自动查询进度。
+
+数据字段与单位依据 [Bitget 官方合约行情文档](https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market)。本模块为规则研究，尚无独立收益回测；不接账户、不下单。测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_contract*.py'`、`node --test markets/us/dashboard/test_contracts_page.cjs`。
+
 ## 日 K 与 AI 报告
 
 配置 `DSA_BASE_URL` 后，日线优先使用 Daily Stock Analysis，失败回退原来源；分钟线沿用原链路。首页「日 K 与 AI 报告」进入 `/research`，支持 A 股/美股日 K 展示及手动异步 AI 报告。AI 报告独立于看板策略，不自动推送。安装、模型配置与验证边界见 [接入说明](../../../docs/dsa-integration.md)。
