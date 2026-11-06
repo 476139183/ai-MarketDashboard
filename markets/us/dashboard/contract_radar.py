@@ -86,6 +86,11 @@ def analyze_contract(symbol, name, group, ticker, raw_candles, now):
     funding, change = number(ticker.get('fundingRate')), number(ticker.get('change24h'))
     holding, mark = number(ticker.get('holdingAmount')), number(ticker.get('markPrice'), positive=True)
     item = dict(symbol=symbol, name=name, group=group, source='Bitget', price=price,
+                instrument_id=ticker.get('instId', symbol),
+                bid=number(ticker.get('bidPr'), positive=True), ask=number(ticker.get('askPr'), positive=True),
+                contract_value=number(ticker.get('ctVal'), positive=True),
+                lot_size=number(ticker.get('lotSz'), positive=True), min_size=number(ticker.get('minSz'), positive=True),
+                volume_estimated=bool(ticker.get('volume_estimated', False)),
                 quote_at=timestamp, quote_fresh=fresh, structure_fresh=False,
                 change_pct=None if change is None else change * 100,
                 funding_pct=None if funding is None else funding * 100,
@@ -134,8 +139,9 @@ def analyze_contract(symbol, name, group, ticker, raw_candles, now):
 
 
 class ContractRadar:
-    def __init__(self, fetch=None, watchlist=None):
+    def __init__(self, fetch=None, watchlist=None, source='Bitget'):
         self.fetch = fetch or fetch_json
+        self.source = source
         self.watchlist = WATCHLIST if watchlist is None else watchlist
         self.lock = threading.Lock()
         self.running = False
@@ -164,11 +170,12 @@ class ContractRadar:
                 quote = quotes.get(symbol, {})
                 try:
                     rows = self._candles(symbol, now) if quote else []
-                    return analyze_contract(symbol, name, group, quote, rows, now)
+                    item = analyze_contract(symbol, name, group, quote, rows, now)
                 except Exception as exc:  # Isolate upstream failure to this contract.
                     item = analyze_contract(symbol, name, group, quote, [], now)
                     item.update(error=str(exc), reasons=['K 线读取失败：' + str(exc)])
-                    return item
+                item['source'] = self.source
+                return item
 
             with ThreadPoolExecutor(max_workers=4) as pool:
                 items = list(pool.map(one, self.watchlist))
@@ -198,7 +205,7 @@ class ContractRadar:
                     row['reasons'] = ['报价已过期或缺失，方向暂停'] + row['reasons']
                 if not structure and row['candle_close_at'] is not None:
                     row['reasons'] = ['等待最近 4 小时收盘结构'] + row['reasons']
-        return dict(status='running' if running else 'idle', source='Bitget', product='USDT-FUTURES',
+        return dict(status='running' if running else 'idle', source=self.source, product='USDT-FUTURES',
                     generated_at=updated, server_time=now, error=error, items=items,
                     total=len(self.watchlist), refresh_seconds=10,
                     counts={key: sum(row['direction'] == key for row in items)

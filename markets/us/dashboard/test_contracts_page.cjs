@@ -14,9 +14,9 @@ function page() {
   for(const [,id] of html.matchAll(/id="([^"]+)"/g)) nodes.set(id,element());
   nodes.get('refresh-interval').value='10'; nodes.get('direction-filter').value='all';
   const groups=['all','crypto','stock'].map(group=>Object.assign(element(),{dataset:{group}}));
-  let fail=false, requests=0, clock=now;
+  let fail=false, requests=0, clock=now; const urls=[];
   const item=(symbol,group,direction)=>({symbol,name:symbol,group,direction,label:direction==='bullish'?'看涨':'看跌',
-    price:100,quote_at:now,quote_fresh:true,structure_fresh:true,candle_close_at:Math.floor(now/14400000)*14400000,
+    source:'OKX',price:100,quote_at:now,quote_fresh:true,structure_fresh:true,candle_close_at:Math.floor(now/14400000)*14400000,
     change_pct:5,funding_pct:.01,open_interest_usdt:1000000,volume_usdt:2000000,reasons:['结构依据'],
     invalidation:'4小时收盘确认',ema20:90,ema50:80,support:75,resistance:110,candles:[]});
   const items=[item('BTCUSDT','crypto','bullish'),item('MUUSDT','stock','bearish')];
@@ -25,9 +25,9 @@ function page() {
     querySelectorAll:()=>groups},window:{},Date:Clock,Intl,AbortController,
     setTimeout:fn=>{const id=timers.size+1;timers.set(id,fn);return id;},clearTimeout:id=>timers.delete(id),
     setInterval:fn=>{context.expire=fn;},
-    fetch:async()=>{requests++;if(fail)throw Error('offline');return {ok:true,json:async()=>({items,status:'idle',total:2,generated_at:now,error:null})};}});
+    fetch:async(url)=>{urls.push(url);requests++;if(fail)throw Error('offline');const source=url.includes('bitget')?'Bitget':'OKX';return {ok:true,json:async()=>({source,items:items.map(row=>({...row,source})),status:'idle',total:2,generated_at:now,error:null})};}});
   vm.runInContext(readFileSync(join(__dirname,'static/contracts.js'),'utf8'),context);
-  return {nodes,groups,timers,items,settle:()=>new Promise(resolve=>setImmediate(resolve)),
+  return {nodes,groups,timers,items,urls,settle:()=>new Promise(resolve=>setImmediate(resolve)),
     fail(){fail=true;},get requests(){return requests;},advance(ms){clock+=ms;context.expire();}};
 }
 
@@ -60,4 +60,14 @@ test('暂停取消轮询，恢复只安排一个刷新任务',async()=>{
   assert.equal(p.timers.size,1);
   p.nodes.get('pause-refresh').handlers.click();assert.equal(p.timers.size,0);
   p.nodes.get('pause-refresh').handlers.click();assert.equal(p.timers.size,1);
+});
+
+test('默认欧易，切换 Bitget 后来源和价格口径一起切换',async()=>{
+  const p=page();await p.settle();
+  assert.match(p.urls[0],/exchange=okx/);
+  assert.match(p.nodes.get('detail-source').textContent,/OKX/);
+  p.nodes.get('exchange-source').value='bitget';
+  await p.nodes.get('exchange-source').handlers.change();await p.settle();
+  assert.match(p.urls.at(-1),/exchange=bitget/);
+  assert.match(p.nodes.get('detail-source').textContent,/Bitget/);
 });

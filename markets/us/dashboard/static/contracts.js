@@ -3,6 +3,7 @@
   const el = id => document.getElementById(id);
   const groups = [...document.querySelectorAll('[data-group]')];
   let items = [], selected = '', group = 'all', busy = false, paused = false;
+  let exchange = 'okx', source = 'OKX', requestId = 0, activeController = null;
   let timer = null, failed = false, serverError = '', generated = null, status = 'idle', total = 0;
   let chart = null, series = null, chartKey = '', freshnessKey = '';
   const number = (value, digits = 2) => value == null || !Number.isFinite(value) ? '—'
@@ -53,7 +54,8 @@
     if (!row) return;
     selected = row.symbol;
     el('detail-symbol').textContent = row.symbol;
-    el('detail-name').textContent = `${row.name} · ${row.group === 'stock' ? '股票合约' : '加密货币'} · Bitget USDT 永续`;
+    el('detail-name').textContent = `${row.name} · ${row.group === 'stock' ? '股票合约' : '加密货币'} · ${row.source} USDT 永续`;
+    el('detail-source').textContent = `${row.source} USDT 永续`;
     el('detail-direction').textContent = row.label;
     el('detail-direction').className = `direction-badge ${row.direction}`;
     el('detail-price').textContent = price(row.price);
@@ -86,13 +88,13 @@
       const changeClass = row.change_pct > 0 ? 'bullish' : row.change_pct < 0 ? 'bearish' : '';
       tr.innerHTML = `<td><button type="button">${escape(row.symbol)}</button><small>${escape(row.name)}</small></td>
         <td><span class="direction-badge ${row.direction}">${escape(row.label)}</span><small>4 小时结构</small></td>
-        <td><strong>${price(row.price)}</strong><small>Bitget · ${escape(time(row.quote_at))}</small></td>
+        <td><strong>${price(row.price)}</strong><small>${escape(row.source)} · ${escape(time(row.quote_at))}</small></td>
         <td class="${changeClass}">${percent(row.change_pct)}</td>
         <td class="level support">${price(row.support)}<small>近 20 根最低价</small></td>
         <td class="level resistance">${price(row.resistance)}<small>近 20 根最高价</small></td>
         <td>${money(row.open_interest_usdt)}<small>USDT · 持仓量 × 标记价</small></td>
         <td>${percent(row.funding_pct)}<small>当前周期 / 非年化</small></td>
-        <td>${money(row.volume_usdt)}<small>USDT</small></td>
+        <td>${money(row.volume_usdt)}<small>USDT${row.volume_estimated ? ' · 基础币量 × 现价估算' : ''}</small></td>
         <td class="${row.valid ? '' : 'stale'}">${row.error ? '数据不足' : row.valid ? '已更新' : '待确认'}<small>${escape(row.error || (!row.fresh ? '报价过期 / 缺失' : !row.structure_fresh ? '结构待确认' : failed || serverError ? '连接异常' : '结构已确认'))}</small></td>`;
       tr.addEventListener('click', () => {selected = row.symbol; render();});
       return tr;
@@ -105,6 +107,8 @@
       button.setAttribute('aria-pressed', String(button.dataset.group === group));
     });
     renderDetail(rows);
+    el('source-name').textContent = `${source} · USDT 永续`;
+    el('source-docs').href = exchange === 'okx' ? 'https://www.okx.com/docs-v5/en/' : 'https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market';
     el('workspace-date').textContent = `北京 ${time(Date.now())}`;
     const fresh = rows.filter(row => row.fresh).length;
     if (!failed) {
@@ -120,28 +124,35 @@
     if (!paused) timer = setTimeout(load, status === 'running' ? 1000 : Number(el('refresh-interval').value) * 1000);
   }
 
-  async function load() {
-    if (busy) return;
+  async function load(force = false) {
+    if (busy && force !== true) return;
+    const current = ++requestId;
+    if (activeController) activeController.abort();
     busy = true; el('refresh-now').disabled = true;
     if (timer !== null) clearTimeout(timer);
     timer = null;
     const controller = new AbortController();
+    activeController = controller;
     const timeout = setTimeout(() => controller.abort(), 12000);
     try {
-      const response = await fetch('/api/contracts', {signal:controller.signal,cache:'no-store'});
+      const response = await fetch(`/api/contracts?exchange=${exchange}`, {signal:controller.signal,cache:'no-store'});
       if (!response.ok) throw Error(`HTTP ${response.status}`);
       const payload = await response.json();
+      if (current !== requestId) return;
       if (!Array.isArray(payload.items)) throw Error('无效的行情响应');
       items = payload.items; generated = payload.generated_at; status = payload.status; total = payload.total ?? items.length;
       serverError = payload.error || ''; failed = false;
+      source = payload.source || (exchange === 'okx' ? 'OKX' : 'Bitget');
       if (!selected && items.length) selected = items[0].symbol;
       render();
     } catch (error) {
+      if (current !== requestId) return;
       failed = true; status = 'idle';
       el('connection-status').textContent = `读取失败：${error.message} · 保留上次快照，方向暂停`;
       el('connection-status').className = 'error'; render();
     } finally {
-      clearTimeout(timeout); busy = false; el('refresh-now').disabled = false; schedule();
+      clearTimeout(timeout);
+      if (current === requestId) {busy = false; el('refresh-now').disabled = false; schedule();}
     }
   }
 
@@ -150,6 +161,19 @@
   el('direction-filter').addEventListener('change', render);
   el('refresh-interval').addEventListener('change', schedule);
   el('refresh-now').addEventListener('click', load);
+  el('exchange-source').value = exchange;
+  el('exchange-source').addEventListener('change', () => {
+    exchange = el('exchange-source').value; source = exchange === 'okx' ? 'OKX' : 'Bitget';
+    items = []; selected = ''; chartKey = ''; generated = null; total = 0; failed = false; serverError = '';
+    if (series) series.setData([]);
+    for (const id of ['detail-price','detail-ema20','detail-ema50','detail-time','detail-closed-at']) el(id).textContent = '—';
+    el('detail-symbol').textContent = '等待行情'; el('detail-direction').textContent = '待确认';
+    el('detail-direction').className = 'direction-badge';
+    el('detail-source').textContent = `${source} USDT 永续`;
+    el('detail-name').textContent = '正在切换行情来源';
+    el('detail-reasons').replaceChildren(); el('detail-invalidation').textContent = '等待新来源的完整结构';
+    render(); return load(true);
+  });
   el('pause-refresh').addEventListener('click', () => {
     paused = !paused; el('pause-refresh').textContent = paused ? '继续' : '暂停';
     el('pause-refresh').setAttribute('aria-pressed', String(paused)); schedule(); render();

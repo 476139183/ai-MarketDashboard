@@ -56,15 +56,25 @@ API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 
 ## 合约雷达
 
-侧栏「合约雷达」进入 `/contracts`；A 股「明日盯盘」仍为 `/a-radar`。合约 API 为 `/api/contracts`，由本机看板直接读取 Bitget USDT 永续公开行情，无需账户密钥或 DSA 服务。
+侧栏「合约雷达」进入 `/contracts`；A 股「明日盯盘」仍为 `/a-radar`。合约 API 为 `/api/contracts?exchange=okx`（默认欧易），可切 `exchange=bitget`；本机直接读取各所 USDT 永续公开行情，无需账户密钥或 DSA 服务。两源独立采集，不跨交易所回退。
 
 默认 12 个标的：BTC、ETH、SOL、XRP、DOGE、BNB，以及 MU、NVDA、TSLA、SNDK、AMD、AAPL 同名 USDT 合约。股票合约使用实际合约价格，不使用原股行情替代。列表来自代码中的 `contract_radar.WATCHLIST`；未返回行情的合约明确显示不可用。
 
 方向基于已收盘 4h 收盘价、EMA20/50 排列与 EMA20 最近 6 根斜率，同向才显示看涨/看跌。支撑与阻力分别参考最近 20 根完整 K 线低点和高点，穿越后不作为当前对应价位。报价超过 30 秒、K 线不足 60 根、不连续或未覆盖最新收盘周期均暂停方向。单票失败保留其余标的；页面请求失败保留上次价格并撤销方向。暂停刷新后仍会检查报价过期。
 
-当前资金费率按接口值转为百分比，非年化、不假定统一结算周期。名义持仓估算为基础币持仓量 × 标记价，非用户仓位。报价默认每 10 秒刷新（可选 30/60 秒），服务端以 10 秒为最短间隔；K 线缓存 60 秒，跨 4h 边界重取。仅在页面请求时触发后台采集；首屏显示正在更新后自动查询进度。
+当前资金费率按接口值转为百分比，非年化、不假定统一结算周期。名义持仓估算为基础币持仓量 × 标记价，非用户仓位。OKX 24h 成交额由基础币成交量 × 当前价估算，页面明确标注；Bitget 使用接口 USDT 成交额。OKX K 线仅保留 confirm=1，基础币量读取 volCcy 而不是合约张数。报价默认每 10 秒刷新（可选 30/60 秒），服务端以 10 秒为最短间隔；K 线缓存 60 秒，跨 4h 边界重取。页面请求或模拟交易后台触发采集；首屏显示正在更新后自动查询进度。
 
-数据字段与单位依据 [Bitget 官方合约行情文档](https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market)。本模块为规则研究，尚无独立收益回测；不接账户、不下单。测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_contract*.py'`、`node --test markets/us/dashboard/test_contracts_page.cjs`。
+数据字段与单位依据 [OKX 官方文档](https://www.okx.com/docs-v5/en/)与 [Bitget 官方合约行情文档](https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market)。本模块为规则研究，尚无独立收益回测；不接账户、不下单。测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_contract*.py'`、`python3 -m unittest discover -s markets/us/dashboard -p test_okx_contracts.py`、`node --test markets/us/dashboard/test_contracts_page.cjs`。
+
+## 自动模拟交易
+
+入口 `/paper`，账户读取 `/api/paper`，本地控制 `POST /api/paper/control`（JSON `{"enabled":true}` 或 `false`）。初始暂停，点击「启用自动模拟」后按 OKX 合约雷达自动做多/做空。关闭浏览器后继续，服务重启后恢复启用状态与仓位；没有真实交易接口或 API Key。
+
+默认 10,000 USDT 虚拟本金，单笔预算约 1,000，最多 3 仓，1 倍名义敞口。按观察列表顺序占用额度，不做信号间收益择优。张数依据交易所 ctVal / lotSz / minSz 向下取整。只在发现信号之后的新盘口报价模拟成交，每个标的/4h收盘/方向最多开一次。做多卖一进、买一出，做空反之，各边再加 5bp 不利滑点、6bp 手续费（均为假设）。止损 2%、止盈 4%，或完整 4h 方向失效时退出；跳空按当前盘口价，非历史止损价。暂停仅停新开仓，已有仓位仍执行退出规则。
+
+账户、待处理信号和完整交易历史落在被 Git 忽略的 `cache/paper-trading.sqlite3`，事务内统一更新。权益 = 现金 + 冻结名义本金 + 浮盈亏；已实现盈亏已扣两边费用。过期或缺盘口时不撮合，估值标注为历史报价。页面列最近 100 笔平仓，汇总使用全部历史。尚未计入资金费、市场深度/冲击、强平与跨时段拆股处理；按约 10 秒报价采样，可能漏掉采样间触价，服务停机期间不补单。首次试用不要将此记录当作完整交易所撮合或实盘收益。
+
+测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'`、`node --test markets/us/dashboard/test_paper_page.cjs`。设计与验收范围见 [说明](../../../docs/plans/2026-11-06-auto-paper-trading-design.md)。
 
 ## 日 K 与 AI 报告
 

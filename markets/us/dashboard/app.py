@@ -17,7 +17,9 @@ from urllib.parse import parse_qs, urlparse
 from engine import analyze_many, analyze_symbol
 from engine import BJ
 from dsa_client import DSAClient, DSAError
-from contract_radar import SERVICE as contract_radar
+from contract_radar import SERVICE as bitget_radar
+from okx_contracts import SERVICE as contract_radar
+from paper_trading import RUNNER as paper_runner
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
@@ -172,7 +174,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         path=urlparse(self.path).path
-        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings'):
+        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control'):
             self._json(404, {'error': 'not found'})
             return
         origin = self.headers.get('Origin')
@@ -186,6 +188,11 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length))
             if not isinstance(body, dict):
                 raise ValueError('请求必须是 JSON 对象')
+            if path == '/api/paper/control':
+                paper_runner.account.set_enabled(body.get('enabled'))
+                paper_runner.start()
+                self._json(200, paper_runner.snapshot())
+                return
             client=DSAClient.from_env()
             if path=='/api/dsa/ai-settings':
                 self._json(200,client.save_ai_settings(body))
@@ -195,17 +202,35 @@ class Handler(BaseHTTPRequestHandler):
             self._json(503 if exc.status == 503 else 502, {'error': str(exc)})
         except (ValueError, UnicodeError) as exc:
             self._json(400, {'error': str(exc)})
+        except (OSError, sqlite3.Error) as exc:
+            self._json(503, {'error': str(exc)})
 
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+
+        if path in ('/paper', '/paper/'):
+            self._send(200, (STATIC / 'paper.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
+        if path == '/api/paper':
+            try:
+                self._json(200, paper_runner.snapshot())
+            except (OSError, sqlite3.Error) as exc:
+                self._json(503, {'error': str(exc)})
+            return
 
         if path in ('/contracts', '/contracts/'):
             self._send(200, (STATIC / 'contracts.html').read_bytes(), 'text/html; charset=utf-8')
             return
 
         if path == '/api/contracts':
-            self._json(200, contract_radar.payload())
+            exchange = (parse_qs(parsed.query).get('exchange') or ['okx'])[0]
+            sources = {'okx': contract_radar, 'bitget': bitget_radar}
+            if exchange not in sources:
+                self._json(400, {'error': '行情来源仅支持 okx / bitget'})
+                return
+            self._json(200, sources[exchange].payload())
             return
 
         if path == '/api/history-samples':
@@ -381,6 +406,7 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> None:
     server = ThreadingHTTPServer((HOST, PORT), Handler)
+    paper_runner.start()
     print(f"信号看板: http://{HOST}:{PORT}")
     print("Ctrl+C 退出")
     try:
@@ -388,6 +414,8 @@ def main() -> None:
     except KeyboardInterrupt:
         print("\n已停止")
         server.server_close()
+    finally:
+        paper_runner.stop_event.set()
 
 
 if __name__ == "__main__":
