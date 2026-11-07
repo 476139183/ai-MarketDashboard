@@ -1,5 +1,7 @@
 # Market Studio — Stock Market Dashboard, Candlestick Charts & Paper Trading
 
+> **Private and proprietary; not an open-source release.** Owner-controlled strategies and research methods are confidential. See [confidentiality policy](CONFIDENTIALITY.md).
+
 **A local research workspace for China A-shares, US equities and cryptocurrency perpetual futures.**
 
 [简体中文](README.md) · **English** · [Quick start](#quick-start) · [Screenshots](#screenshots) · [Issues](https://github.com/476139183/ai-MarketDashboard/issues)
@@ -223,6 +225,6 @@ Please file [issues](https://github.com/476139183/ai-MarketDashboard/issues) wit
 
 Market Studio integrates a separate [Daily Stock Analysis](https://github.com/ZhuLinsen/daily_stock_analysis) service and bundles [TradingView Lightweight Charts](https://github.com/tradingview/lightweight-charts) 5.2.1. See [third-party notices](markets/us/dashboard/static/vendor/README.md).
 
-The repository currently has **no project-level LICENSE**. Do not assume MIT or another open-source license; confirm usage and redistribution rights with the maintainer. Third-party components retain their own licenses, and market-data access/reuse remains subject to provider terms.
+This is a **private, proprietary personal project, not an open-source release**. Owner-controlled strategy implementations, parameters, training or tuning methods (where applicable), selection and evaluation procedures, and experiment records are confidential. Use or disclosure of owner-controlled materials requires express written authorization. See the [proprietary rights notice](LICENSE) and [confidentiality policy](CONFIDENTIALITY.md). Third-party components and data retain their respective licenses and terms.
 
 This is a local research and paper-trading tool, not a brokerage, guaranteed real-time terminal or proof of investment returns. Historical samples, current watchlists, corporate actions, trading calendars and execution assumptions all have documented limitations.

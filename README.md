@@ -1,5 +1,7 @@
 # 观市 Market Studio｜A 股、美股行情看板 · K 线成交量 · 合约雷达 · 模拟交易
 
+> **私有专有项目，不提供开源授权。** 自有策略与研究方法为保密内容，见 [保密约定](CONFIDENTIALITY.md)。
+
 **在一个本地工作台中，研究股票量价、观察加密货币合约，并用独立虚拟账户验证交易规则。**
 
 Local market research dashboard for China A-shares, US stocks and crypto perpetual futures — candlestick charts, volume analysis, market scanners and paper trading.
@@ -692,6 +694,6 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 - [TradingView Lightweight Charts](https://github.com/tradingview/lightweight-charts)：浏览器价格与成交量图；本地打包版本为 5.2.1，第三方许可与署名见 [依赖说明](markets/us/dashboard/static/vendor/README.md)。
 - 感谢提供公开行情接口及可选数据服务的各来源；具体访问权限、覆盖、延迟和再分发条件以提供方规则为准。
 
-当前仓库尚未声明项目级 `LICENSE`，请勿默认按 MIT 或其他开源许可授权；第三方依赖保持各自许可。使用、修改或再分发本项目代码前，请与维护者确认授权范围。
+本项目为**个人私有知识产权项目，不提供开源授权**。项目自有策略实现、参数、训练或调参方法（如有）、筛选与评估流程及实验记录按保密内容处理。未经拥有者明确书面授权，不得使用、复制、修改、再分发或披露自有内容。详见 [专有权利声明](LICENSE)与[保密约定](CONFIDENTIALITY.md)；第三方依赖与数据仍保持各自许可和条款。
 
 本项目用于学习、研究和模拟验证，不构成投资建议，也不保证策略表现。历史图表、示例信号和模拟盈亏均不能视为真实可成交收益。
