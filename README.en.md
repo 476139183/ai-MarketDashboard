@@ -60,16 +60,16 @@ Screenshots were captured on November 7, 2026. They illustrate the interface, no
 
 Other operating systems have not received the same compatibility validation. Windows users can try WSL; this is not a claim of verified native Windows support.
 
-### 1. Clone the feature branch
+### 1. Clone the main branch
 
-The functionality described here is on `feature/us-live-market-data`; the repository's default branch is `main`. Use the feature branch until these changes are merged and published there:
+The features described here are available on the default `main` branch:
 
 ```bash
-git clone --branch feature/us-live-market-data https://github.com/476139183/ai-MarketDashboard.git
+git clone --branch main https://github.com/476139183/ai-MarketDashboard.git
 cd ai-MarketDashboard
 ```
 
-The remote feature branch must contain the relevant commits. Local changes do not become available to other users until the maintainer publishes them.
+For an existing checkout, save local changes before switching to and updating `main`.
 
 ### 2. Run the lightweight workspace
 

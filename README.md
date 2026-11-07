@@ -132,14 +132,14 @@ Local market research dashboard for China A-shares, US stocks and crypto perpetu
 
 ### 1. 下载代码
 
-本文对应 `feature/us-live-market-data` 分支；GitHub 默认分支是 `main`。新功能尚未合并时，请明确检出该功能分支：
+本文对应默认分支 `main`，包含美股雷达、合约雷达、实时量价图与独立模拟账户：
 
 ```bash
-git clone --branch feature/us-live-market-data https://github.com/476139183/ai-MarketDashboard.git
+git clone --branch main https://github.com/476139183/ai-MarketDashboard.git
 cd ai-MarketDashboard
 ```
 
-仓库中的功能分支需要包含本文对应提交；若远端尚未更新，应由维护者先推送。已有本地仓库时，先保存自己的修改，再切换相应分支。
+已有本地仓库时，先保存自己的修改，再切换并更新 `main`，避免本地旧版本与本文功能不一致。
 
 ### 2. 先体验轻量模式
 
