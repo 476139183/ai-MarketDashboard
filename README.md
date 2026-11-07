@@ -1,10 +1,61 @@
-# 观市 · Market Studio
+# 观市 Market Studio｜A 股、美股行情看板 · K 线成交量 · 合约雷达 · 模拟交易
 
-面向 **A 股、美股与 USDT 永续合约** 的本地市场研究工作台，整合行情图表、量价信号、A 股盘后筛选、合约方向雷达、自动模拟交易与手动 AI 分析。
+**在一个本地工作台中，研究股票量价、观察加密货币合约，并用独立虚拟账户验证交易规则。**
 
-股票与合约使用独立的数据和规则链路。合约默认优先 **欧易 OKX**，支持切换币安 Binance 与 Bitget；欧易和币安分别维护本地模拟账户，欧易加密币与美股合约也按独立账本保存。
+Local market research dashboard for China A-shares, US stocks and crypto perpetual futures — candlestick charts, volume analysis, market scanners and paper trading.
 
-> 本项目用于研究、观察与模拟验证，不构成投资建议。自动开平仓仅作用于本地虚拟账户，不向券商或交易所发送真实委托。
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Frontend: Vanilla JavaScript](https://img.shields.io/badge/Frontend-Vanilla%20JavaScript-F7DF1E?logo=javascript&logoColor=black)](markets/us/dashboard/static/)
+[![Storage: SQLite](https://img.shields.io/badge/Storage-SQLite-003B57?logo=sqlite&logoColor=white)](markets/us/dashboard/paper_trading.py)
+[![Trading: Paper only](https://img.shields.io/badge/Trading-Paper%20only-267B65)](#自动模拟交易)
+
+[简体中文](README.md) · [English](README.en.md) · [快速开始](#快速开始) · [界面预览](#界面预览) · [HTTP API](#本地-http-api) · [问题反馈](https://github.com/476139183/ai-MarketDashboard/issues)
+
+观市（仓库名 **ai-MarketDashboard**）是一个可在本机运行的多市场行情研究项目：支持 **A 股选股与盘后复盘、美股盘前盘中盘后观察、实时更新的 K 线与成交量、OKX / Binance / Bitget USDT 永续合约雷达、自动模拟交易（Paper Trading）**，也可连接独立服务进行手动 AI 股票分析。
+
+行情、规则信号、AI 报告与模拟账本各自保留来源和状态。公开合约与美股分钟图可通过轻量模式运行，无需前端构建、交易所账户密钥或模型 Key；AI 分析和部分可选数据源另行配置。
+
+> **当前状态**：本地研究与模拟验证工具。价格采用 HTTP 轮询更新，实时性取决于数据来源和权限；股票原股行情与交易所股票永续合约分别处理。系统不会向真实券商或交易所发送委托。
+
+## 适合哪些使用场景
+
+| 你想做什么 | 从哪里开始 | 能得到什么 |
+|---|---|---|
+| 用 A 股量价和趋势条件筛选次日观察标的 | A 股明日盯盘 | 策略候选、观察池、均线与次日点位计划 |
+| 快速复盘指数、涨跌家数和板块强弱 | A 股盘后复盘 | 市场宽度、板块冷热与下一交易日提示 |
+| 查看 SNDK、NVDA、MU 等美股分钟 K 线与成交量 | 美股雷达 | 1–60 分钟图表、逐根成交量及扩展时段分时 |
+| 观察 BTC、ETH、SOL 等永续合约方向 | 合约雷达 | 多周期 EMA 趋势、结构参考、资金费率与名义持仓估算 |
+| 在投入真实资金前观察规则如何开平仓 | 模拟交易 | 按交易所 / 产品隔离的虚拟本金、持仓、费用与交易记录 |
+| 对选定股票生成 AI 研究报告 | 行情研究 | 日 K、条件信号与手动生成的 AI 解读 |
+| 检查历史样本与规则行为 | 历史研究 | 本地回放、来源核对、覆盖审计及偏差说明 |
+
+## 项目特点
+
+- **多市场独立处理**：A 股、美股和永续合约分别使用对应的数据与交易约束，原股 USD 报价不会直接替代 USDT 合约成交价。
+- **价格与成交量联动**：K 线图支持缩放、拖动和悬停 OHLCV；形成中的 K 线单独标记，缺少成交量时明确显示缺失。
+- **信号可追溯**：展示方向成立的条件、失效条件、报价时间与结构收盘时间；过期报价或不完整结构撤销有效方向。
+- **模拟有独立账本**：欧易加密币、欧易美股合约、币安加密币分账户保存；费用、滑点、去重和重启恢复均有明确规则。
+- **AI 按需运行**：读取行情不会自动提交新的 AI 分析，报告按股票隔离；规则引擎不依赖模型给出交易指令。
+- **本地部署易检查**：Python HTTP 服务、原生 JavaScript 前端与 SQLite；核心雷达无需 npm 构建，可直接查看数据适配和策略实现。
+
+## 界面预览
+
+### 美股 K 线与成交量
+
+下图为实际运行的 SNDK 5 分钟页面：上方价格 K 线、下方逐根成交量，并分别标注分钟数据来源、Nasdaq 源日累计量与采集时间。
+
+![观市美股行情看板：SNDK 五分钟 K 线、真实成交量柱图及美股雷达桌面界面](docs/images/us-stock-candlestick-volume-desktop.png)
+
+<details>
+<summary>查看手机界面：美股量价图与永续合约雷达</summary>
+
+| 美股分钟图 | 合约 K 线与成交量 |
+|---|---|
+| <img src="docs/images/us-stock-candlestick-volume-mobile.png" alt="手机端美股 SNDK 分钟 K 线与成交量图" width="320"> | <img src="docs/images/perpetual-radar-volume-mobile.png" alt="手机端欧易永续合约雷达：形成中的 K 线与基础币成交量" width="320"> |
+
+</details>
+
+截图采集于 2026-11-07，仅展示界面和数据口径，不代表当前行情、策略收益或未来成交结果。
 
 ## 目录
 
@@ -20,7 +71,10 @@
 - [运行维护与数据保存](#运行维护与数据保存)
 - [验证与测试](#验证与测试)
 - [常见问题](#常见问题)
+- [参与贡献与问题反馈](#参与贡献与问题反馈)
+- [项目定位与相关工具](#项目定位与相关工具)
 - [研究边界与扩展说明](#研究边界与扩展说明)
+- [致谢与许可](#致谢与许可)
 
 ## 功能与支持范围
 
@@ -60,49 +114,74 @@
 
 ## 快速开始
 
-### 环境要求
+### 环境要求与运行模式
 
-- Python 3.10 或以上、Git，以及可运行 Bash 的环境；本地功能验收使用过 Python 3.13 与 macOS。
-- 浏览器能够访问本机服务；行情采集需要连接所选数据提供方。
-- 前端为静态 HTML / CSS / JavaScript，无需前端构建或 `npm install`。运行前端测试时需要 Node.js。
-- 完整股票研究与 AI 功能通过独立的 [Daily Stock Analysis（DSA）](https://github.com/ZhuLinsen/daily_stock_analysis) 服务提供，其依赖安装在独立虚拟环境中。
+| 项目 | 要求 / 说明 |
+|---|---|
+| Python | 3.10+；本地验收使用 Python 3.13 |
+| 操作系统 | 已在 macOS 验证；其他系统的完整兼容性尚未验收，Windows 可通过 WSL 尝试 |
+| 浏览器 | 支持现代 JavaScript 的桌面或手机浏览器；手机布局已按 390px 视口验证 |
+| Git / Bash | 用于下载代码与完整工作台脚本；直接运行 Python 服务无需 Bash 启动器 |
+| Node.js | 运行前端自动化测试时需要；运行网页无需 Node.js 或 npm install |
+| 网络 | 后端需能访问所选股票、合约数据接口及可选 AI 服务 |
 
-### 方式一：完整工作台
+| 模式 | 适合用途 | 是否安装 DSA | 是否需要 Key |
+|---|---|---|---|
+| **轻量模式** | 美股分钟图、合约雷达、模拟交易 | 否 | 公开来源无需；Massive 可选 |
+| **完整工作台** | 追加股票搜索、日 K 研究与手动 AI 分析 | 首次自动准备独立环境 | 模型和部分数据服务按需配置 |
 
-以下示例检出当前功能分支 `feature/us-live-market-data`：
+### 1. 下载代码
+
+本文对应 `feature/us-live-market-data` 分支；GitHub 默认分支是 `main`。新功能尚未合并时，请明确检出该功能分支：
 
 ```bash
 git clone --branch feature/us-live-market-data https://github.com/476139183/ai-MarketDashboard.git
 cd ai-MarketDashboard
-bash start-web.sh
 ```
 
-首次运行会准备独立 DSA 环境，再启动工作台。安装脚本锁定已核验的 DSA 提交 `db0570edd008a319d7eff14eda3bc0ef9da620eb`，默认保存在 `.cache/daily-stock-analysis/`，不会将上游依赖安装进看板环境。
+仓库中的功能分支需要包含本文对应提交；若远端尚未更新，应由维护者先推送。已有本地仓库时，先保存自己的修改，再切换相应分支。
 
-默认打开 `http://127.0.0.1:8766/research`。可选参数：
+### 2. 先体验轻量模式
 
-```bash
-bash start-web.sh --no-open             # 运行服务，不自动打开浏览器
-bash start-web.sh --port 8767           # 使用其他本地端口
-bash start-web.sh --port 8767 --no-open
-```
-
-如已有 DSA 服务，先配置 `DSA_BASE_URL`，再运行启动入口。自建 DSA 的安装、认证和模型配置见 [DSA 接入说明](docs/dsa-integration.md)。
-
-### 方式二：仅运行合约雷达与模拟交易
-
-合约模块不依赖 DSA、模型服务或交易所 API Key，可直接启动本地服务：
+在仓库根目录启动服务：
 
 ```bash
 BOARD_PORT=8766 python3 markets/us/dashboard/app.py
 ```
 
-随后打开：
+打开 [美股雷达](http://127.0.0.1:8766/us-radar)、[合约雷达](http://127.0.0.1:8766/contracts) 或 [模拟交易](http://127.0.0.1:8766/paper)。按 `Ctrl+C` 停止服务。
 
-- 合约雷达：`http://127.0.0.1:8766/contracts`
-- 模拟交易：`http://127.0.0.1:8766/paper`
+看板 HTTP 服务、公开合约适配、新浪美股分钟适配均使用 Python 标准库。此方式不安装 DSA，不自动读取根目录 `.env`；需要可选配置时，使用后文的环境变量导入方式。完整股票搜索与 AI 页面依赖 DSA，轻量模式下不应据此判断其他雷达不可用。
 
-看板服务及公开合约适配使用 Python 标准库。此启动方式不会自动加载根目录 `.env`；需要股票服务配置时，应先导出环境变量。
+### 3. 按需启动完整工作台
+
+先停止占用同一端口的轻量服务，再运行：
+
+```bash
+bash start-web.sh
+```
+
+启动器首次准备独立 [Daily Stock Analysis（DSA）](https://github.com/ZhuLinsen/daily_stock_analysis) 环境，然后启动看板并打开 `http://127.0.0.1:8766/research`。首次安装需要下载上游代码及 Python 依赖，耗时取决于网络和环境。
+
+安装脚本锁定已核验的 DSA 提交 `db0570edd008a319d7eff14eda3bc0ef9da620eb`，默认目录 `.cache/daily-stock-analysis/`；上游依赖安装在其独立虚拟环境，完整模式还需满足该锁定版本的依赖要求。模型与新闻服务凭证在 DSA 环境中单独配置，参见 [DSA 接入说明](docs/dsa-integration.md)。
+
+```bash
+bash start-web.sh --no-open             # 启动但不自动打开浏览器
+bash start-web.sh --port 8767           # 指定其他端口
+bash start-web.sh --port 8767 --no-open
+```
+
+若同一端口已有工作台，启动器会复用现有服务；要从轻量模式启用完整功能，应先正常停止原服务。已有独立 DSA 服务时，设置 `DSA_BASE_URL` 后再启动。
+
+### 4. 验证运行状态
+
+```bash
+curl 'http://127.0.0.1:8766/api/health'
+curl 'http://127.0.0.1:8766/api/us-chart?symbols=SNDK&period=5&provider=auto'
+curl 'http://127.0.0.1:8766/api/contracts?exchange=okx&period=15'
+```
+
+首次行情请求可能返回 `status=running` 与空 `items`，随后再次请求同一地址获取快照。页面刷新秒数、后端采集节流和数据提供方延迟分别生效，不能用浏览器每秒刷新推断数据每秒更新。
 
 ### 页面导航
 
@@ -143,6 +222,14 @@ python3 markets/a/market_review.py
 ```
 
 「盯住」用于维护观察列表，不自动创建开盘提醒或模拟委托。
+
+### 美股分钟图与扩展时段
+
+1. 打开「美股雷达」，输入 `SNDK`、`NVDA` 或 `MU` 等美股代码；也可分页浏览默认观察池。
+2. 选择 1 / 5 / 10 / 15 / 30 / 60 分钟周期，在图表下方查看逐根成交量，悬停读取 OHLCV。
+3. 自动来源在未配置 Massive 时优先使用新浪常规盘真实分钟线。选择「盘前 / 盘后」时自动使用 Nasdaq 分时备用；采样来源没有逐根成交量，图上会清空量柱并说明缺失。
+4. 查看数据来源、源时间与更新状态。单股图约 15 秒采集，列表约 60 秒；盘外或报价过期时价格仅供参考。
+5. 如需观察对应股票的交易所永续合约，进入「合约雷达」或「美股合约模拟」。原股研究与合约模拟使用不同数据，不能直接套用成交价。
 
 ### 合约观察与模拟验证
 
@@ -313,7 +400,7 @@ python3 markets/a/market_review.py
 
 - 合约报价有效窗口为 **30 秒**；缺失、超期或时间异常时撤销方向。
 - 币安使用 ticker 与盘口时间的较早值，不用请求接收时间替代源时间。
-- 合约 K 线缓存 60 秒，跨所选周期边界重新获取；长冷扫描结束后重新取报价。
+- 合约原始 K 线缓存约 10 秒，跨所选周期边界重新获取；长冷扫描结束后重新取报价。
 - 页面默认每 10 秒刷新，可选 1 / 5 / 10 / 15 / 30 / 60 秒并暂停；服务端最短采集间隔为 10 秒。
 - UI 区分报价时间、结构收盘时间和采集时间；页面主要使用北京时间展示。
 - 三所独立缓存与报错，不跨所填补报价、资金费率或 K 线。
@@ -330,12 +417,14 @@ flowchart LR
     Web --> DSA["独立 DSA · 搜索 / 日线 / 手动 AI"]
     Web --> Stocks["股票规则引擎与盘后扫描"]
     Stocks --> Feeds["股票行情与多源日线"]
+    Web --> USRadar["美股原股雷达与单股量价图"]
+    USRadar --> USFeeds["Sina / Nasdaq / 可选 Massive"]
     Web --> Radar["合约雷达 · 独立交易所适配"]
     Radar --> Exchanges["OKX / Binance / Bitget 公开行情"]
     Web --> Paper["本地模拟账户"]
     Worker["后台模拟检查"] --> Radar
     Worker --> Paper
-    Paper --> DB["按交易所隔离的 SQLite 账本"]
+    Paper --> DB["按交易所与市场隔离的 SQLite 账本"]
 ```
 
 浏览器只访问本地 HTTP API；行情与 AI 服务调用由后端处理。AI 报告、股票条件信号、合约方向和模拟成交各自保留规则与状态。
@@ -376,7 +465,7 @@ Bitget 公开行情适配位于 `contract_radar.py`。图表使用本地打包�
 
 ### 环境变量
 
-首次配置可将 `.env.example` 复制为 `.env`；已有配置时编辑原文件。`start-web.sh` 自动读取模板中列出的 DSA 与日线源配置，已导出的环境变量优先。
+首次配置可将 `.env.example` 复制为 `.env`；已有配置时编辑原文件。`start-web.sh` 自动读取白名单内的 DSA、日线源和 Massive 配置，已导出的环境变量优先。
 
 | 配置项 | 用途 / 默认值 |
 |---|---|
@@ -391,7 +480,7 @@ Bitget 公开行情适配位于 `contract_radar.py`。图表使用本地打包�
 | `TUSHARE_TOKEN` | 可选 Tushare 凭证 |
 | `ALPHAVANTAGE_API_KEY` | 可选 Alpha Vantage 凭证 |
 | `FINNHUB_API_KEY` | 可选 Finnhub 凭证 |
-| `MASSIVE_API_KEY` | 可选美股雷达分钟 OHLCV 凭证；未配置时使用 Nasdaq 分时采样 |
+| `MASSIVE_API_KEY` | 可选美股分钟 OHLCV 凭证；未配置时常规盘优先新浪，扩展时段用 Nasdaq 分时 |
 | `SIGNAL_LIVE` | 股票看板强制刷新行情；不改变合约雷达的独立刷新逻辑 |
 
 直接执行 `app.py` 或股票巡检时，可显式导入配置：
@@ -544,6 +633,31 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | 切换交易所后余额不同 | 欧易和币安各自拥有独立账本与本金，页面展示所选账户 |
 | 页面展示旧功能 | 刷新浏览器；修改 Python 服务代码后需要重启相应本地服务 |
 
+## 参与贡献与问题反馈
+
+欢迎通过 [GitHub Issues](https://github.com/476139183/ai-MarketDashboard/issues) 提交问题与需求，通过 [Pull Requests](https://github.com/476139183/ai-MarketDashboard/pulls) 参与改进。行情异常反馈请尽量包含以下信息：
+
+- 使用的 Git 分支 / 提交、Python 版本、操作系统和启动命令。
+- 页面模块、股票或合约代码、交易所、周期、观察时段及复现时间（注明时区）。
+- 页面显示的数据源、源报价时间、结构收盘时间，以及可复现的 API 参数。
+- 脱敏后的错误、相关日志或截图；不要上传 API Key、Cookie、`.env` 或本地模拟账本。
+
+提交新数据适配时，请验证市场与产品身份、时间戳、价格 / 成交量单位、未收盘标记、缺失与重复数据、限流及回退行为。更改模拟规则时，应同时验证账户隔离、延后成交、费用、数量限制、去重及恢复行为，并更新相应文档。
+
+开发者可从 [数据接入说明](docs/market-data-sources.md)、[看板模块说明](markets/us/dashboard/README.md) 和 [本地 HTTP API](#本地-http-api) 入手。优先提交小范围、可复现、带相关验证结果的改动。
+
+## 项目定位与相关工具
+
+| 能力 | 观市的当前实现 | 边界 |
+|---|---|---|
+| 股票行情终端 | 量价图表、自选、原股雷达及独立合约观察 | 不承诺终端级全市场覆盖、逐笔行情或统一实时权限 |
+| 规则研究 | A 股盘后筛选、固定股票状态规则、多周期合约趋势 | 不是任意脚本策略平台，未提供在线策略编辑器 |
+| 交易模拟 | 本地前向 Paper Trading、独立 SQLite 账本 | 不连接真实资金，不覆盖完整保证金与强平机制 |
+| 历史研究 | 公开样本导入、审计和规则回放 | 不是对全市场、全部时段和公司行为的完整还原 |
+| AI 股票分析 | 通过独立 DSA 服务手动生成报告 | 不自动调用模型替用户下单，模型输出不覆盖规则条件 |
+
+如你在寻找“Python 股票行情看板”“A 股选股雷达”“美股 K 线成交量”“加密货币合约监控”或“本地模拟交易工具”，可按上面的模块选择入口；各模块可用性取决于对应数据源和配置。
+
 ## 研究边界与扩展说明
 
 - A 股与美股按各自交易时段和动作约束处理，不能直接套用彼此的成交假设。北交所、ETF、ST、新股及其他特殊产品的识别与策略覆盖并不统一。
@@ -554,10 +668,12 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 
 扩展标的时，先维护 `contract_radar.py` 的观察池与分类，再核验提供方是否存在对应产品、价格单位、数量过滤器及足够的历史 K 线。新增交易所需保留原始合约 ID、源时间和数量口径，并补充适配、源隔离与账户测试。
 
-进一步阅读：
+### 文档索引
 
 | 文档 | 内容 |
 |---|---|
+| [英文说明](README.en.md) | English overview, setup, market coverage and paper trading |
+| [GitHub 发布与发现](docs/github-discovery.md) | About、Topics 与默认分支发布建议 |
 | [看板说明](markets/us/dashboard/README.md) | 页面、巡检、合约与模拟交易细节 |
 | [DSA 接入](docs/dsa-integration.md) | 上游安装、AI 配置和任务隔离 |
 | [数据源说明](docs/market-data-sources.md) | 行情接入与来源比较 |
@@ -568,3 +684,14 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | [合约雷达设计](docs/plans/2026-11-06-contract-radar-design.md) | 4 小时方向、缓存与数据质量边界 |
 | [自动模拟设计](docs/plans/2026-11-06-auto-paper-trading-design.md) | 前向模拟、成交与持久化模型 |
 | [币安扩展设计](docs/plans/2026-11-07-binance-crypto-contracts-design.md) | 欧易优先、币种分类与跨所账户隔离 |
+
+
+## 致谢与许可
+
+- [Daily Stock Analysis](https://github.com/ZhuLinsen/daily_stock_analysis)：独立股票研究与 AI 分析服务；本项目通过服务接口接入，启动脚本使用锁定版本。
+- [TradingView Lightweight Charts](https://github.com/tradingview/lightweight-charts)：浏览器价格与成交量图；本地打包版本为 5.2.1，第三方许可与署名见 [依赖说明](markets/us/dashboard/static/vendor/README.md)。
+- 感谢提供公开行情接口及可选数据服务的各来源；具体访问权限、覆盖、延迟和再分发条件以提供方规则为准。
+
+当前仓库尚未声明项目级 `LICENSE`，请勿默认按 MIT 或其他开源许可授权；第三方依赖保持各自许可。使用、修改或再分发本项目代码前，请与维护者确认授权范围。
+
+本项目用于学习、研究和模拟验证，不构成投资建议，也不保证策略表现。历史图表、示例信号和模拟盈亏均不能视为真实可成交收益。
