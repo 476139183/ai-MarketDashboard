@@ -1,4 +1,4 @@
-"""Local forward paper account. Public OKX quotes only; no order API or credentials."""
+"""Local forward paper accounts using isolated OKX/Binance public quotes; no order API."""
 from contextlib import contextmanager
 from decimal import Decimal, ROUND_FLOOR
 import json
@@ -15,8 +15,11 @@ RULES = dict(initial_balance=10000.0, order_budget=1000.0, max_positions=3,
 
 
 class PaperAccount:
-    def __init__(self, path):
+    def __init__(self, path, exchange='OKX'):
         self.path = Path(path)
+        if exchange not in ('OKX', 'Binance'):
+            raise ValueError('模拟账户仅支持 OKX / Binance')
+        self.exchange = exchange
 
     @contextmanager
     def transaction(self):
@@ -27,7 +30,10 @@ class PaperAccount:
             db.execute('BEGIN IMMEDIATE')
             saved = db.execute('SELECT body FROM paper_state WHERE id=1').fetchone()
             state = json.loads(saved[0]) if saved else dict(enabled=False, cash=RULES['initial_balance'],
-                positions=[], trades=[], signals={}, updated_at=None, error=None)
+                positions=[], trades=[], signals={}, updated_at=None, error=None, exchange=self.exchange)
+            if state.get('exchange', 'OKX') != self.exchange:
+                raise ValueError('模拟账户的交易所与账本不一致')
+            state['exchange'] = self.exchange
             yield state
             encoded = json.dumps(state, ensure_ascii=False, allow_nan=False)
             if saved is None or saved[0] != encoded:
@@ -44,11 +50,10 @@ class PaperAccount:
             if not enabled:
                 state['signals'] = {key: value for key, value in state['signals'].items() if value['used']}
 
-    @staticmethod
-    def quote_valid(row, now):
+    def quote_valid(self, row, now):
         ts = number(row.get('quote_at'))
         bid, ask = number(row.get('bid'), positive=True), number(row.get('ask'), positive=True)
-        return (row.get('source') == 'OKX' and row.get('quote_fresh') and ts is not None
+        return (row.get('source') == self.exchange and row.get('quote_fresh') and ts is not None
                 and -5000 <= now - ts <= 30000 and bid is not None and ask is not None and ask >= bid)
 
     @staticmethod
@@ -60,8 +65,8 @@ class PaperAccount:
         now = int(time.time() * 1000) if now is None else now
         with self.transaction() as state:
             state['updated_at'] = now
-            if market.get('source') != 'OKX' or market.get('error'):
-                state['error'] = market.get('error') or '模拟交易只接受 OKX 合约行情'
+            if market.get('source') != self.exchange or market.get('error'):
+                state['error'] = market.get('error') or f'模拟交易只接受 {self.exchange} 合约行情'
                 return
             state['error'] = None
             rows = {row['symbol']: row for row in market.get('items', [])}
@@ -126,12 +131,17 @@ class PaperAccount:
                     continue
                 quantity = float(contracts * Decimal(str(ct)))
                 notional = quantity * entry
+                maximum = number(row.get('max_size'), positive=True)
+                min_notional = number(row.get('min_notional'), positive=True)
+                if (maximum is not None and contracts > Decimal(str(maximum))) or (min_notional and notional < min_notional):
+                    continue
                 fee = notional * RULES['fee_rate']
                 if state['cash'] < notional + fee:
                     continue
                 state['positions'].append(dict(symbol=symbol, instrument_id=row['instrument_id'],
                     name=row.get('name', symbol), side='long' if side == 1 else 'short',
                     quantity=quantity, contracts=float(contracts), entry_price=entry,
+                    quantity_unit=row.get('quantity_unit', '张'),
                     notional=notional, entry_fee=fee, entry_time=now, entry_quote_at=row['quote_at'],
                     stop_price=entry * (1 - side * RULES['stop_pct']),
                     target_price=entry * (1 + side * RULES['target_pct']),
@@ -152,7 +162,7 @@ class PaperAccount:
             unrealized += position['unrealized_pnl']
             collateral += position['notional']
         all_trades = result['trades']
-        result.update(rules=RULES, unrealized_pnl=unrealized,
+        result.update(rules={**RULES, 'exchange': self.exchange}, unrealized_pnl=unrealized,
                       realized_pnl=sum(trade['net_pnl'] for trade in all_trades),
                       equity=result['cash'] + collateral + unrealized,
                       valuation_fresh=all(position['quote_fresh'] for position in result['positions']),
@@ -198,3 +208,6 @@ class PaperRunner:
 from okx_contracts import SERVICE as OKX_RADAR
 ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading.sqlite3')
 RUNNER = PaperRunner(ACCOUNT, OKX_RADAR)
+from binance_contracts import SERVICE as BINANCE_RADAR
+BINANCE_ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading-binance.sqlite3', exchange='Binance')
+BINANCE_RUNNER = PaperRunner(BINANCE_ACCOUNT, BINANCE_RADAR)

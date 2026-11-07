@@ -56,9 +56,9 @@ API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 
 ## 合约雷达
 
-侧栏「合约雷达」进入 `/contracts`；A 股「明日盯盘」仍为 `/a-radar`。合约 API 为 `/api/contracts?exchange=okx`（默认欧易），可切 `exchange=bitget`；本机直接读取各所 USDT 永续公开行情，无需账户密钥或 DSA 服务。两源独立采集，不跨交易所回退。
+侧栏「合约雷达」进入 `/contracts`；A 股「明日盯盘」仍为 `/a-radar`。合约 API 为 `/api/contracts?exchange=okx`（默认欧易、优先来源），可切 `exchange=binance` 或 `exchange=bitget`；本机直接读取各所 USDT 永续公开行情，无需账户密钥或 DSA 服务。三源独立采集，不跨交易所回退。
 
-默认 12 个标的：BTC、ETH、SOL、XRP、DOGE、BNB，以及 MU、NVDA、TSLA、SNDK、AMD、AAPL 同名 USDT 合约。股票合约使用实际合约价格，不使用原股行情替代。列表来自代码中的 `contract_radar.WATCHLIST`；未返回行情的合约明确显示不可用。
+加密币从 6 个扩到 24 个：BTC、ETH、SOL、XRP、DOGE、BNB、ADA、AVAX、LINK、DOT、LTC、BCH、UNI、ATOM、NEAR、APT、ARB、OP、SUI、FIL、AAVE、TRX、ETC、WIF。支持主流、公链、Layer 2、DeFi、Meme、基础设施分类筛选，均研究 USDT 永续。欧易/Bitget 另保留 MU、NVDA、TSLA、SNDK、AMD、AAPL 六个股票合约，合计 30 项；币安雷达只观察 24 个加密币。股票合约使用实际合约价格，不使用原股行情替代。列表来自 `contract_radar.WATCHLIST`；各所未返回行情的合约明确显示不可用。
 
 方向基于已收盘 4h 收盘价、EMA20/50 排列与 EMA20 最近 6 根斜率，同向才显示看涨/看跌。支撑与阻力分别参考最近 20 根完整 K 线低点和高点，穿越后不作为当前对应价位。报价超过 30 秒、K 线不足 60 根、不连续或未覆盖最新收盘周期均暂停方向。单票失败保留其余标的；页面请求失败保留上次价格并撤销方向。暂停刷新后仍会检查报价过期。
 
@@ -66,13 +66,15 @@ API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 
 数据字段与单位依据 [OKX 官方文档](https://www.okx.com/docs-v5/en/)与 [Bitget 官方合约行情文档](https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market)。本模块为规则研究，尚无独立收益回测；不接账户、不下单。测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_contract*.py'`、`python3 -m unittest discover -s markets/us/dashboard -p test_okx_contracts.py`、`node --test markets/us/dashboard/test_contracts_page.cjs`。
 
+币安使用 [USD-M 官方行情接口](https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data)：只纳入在交易的 USDT 加密永续；行情时间取 ticker 的 closeTime 与盘口 time 较早者，缺少盘口时间时不标新鲜。4h K 线检查收盘时间；24h 成交额直接取 quoteVolume，持仓量后台缓存，缺值不伪造。冷扫描超过 15 秒时，完成 K 线后重新取行情再发布；首屏可能需等待数十秒。元数据缓存 1 小时；币安最多 8 路 K 线、4 路持仓量请求。测试：`python3 -m unittest discover -s markets/us/dashboard -p test_binance_contracts.py`。
+
 ## 自动模拟交易
 
-入口 `/paper`，账户读取 `/api/paper`，本地控制 `POST /api/paper/control`（JSON `{"enabled":true}` 或 `false`）。初始暂停，点击「启用自动模拟」后按 OKX 合约雷达自动做多/做空。关闭浏览器后继续，服务重启后恢复启用状态与仓位；没有真实交易接口或 API Key。
+入口 `/paper`，默认欧易账户；可在页面选择币安，或使用 `/paper?exchange=binance`。读取 `/api/paper?exchange=okx|binance`，本地控制 `POST /api/paper/control`（如 `{"enabled":true,"exchange":"binance"}`，省略 exchange 时为欧易）。账户初始暂停，启用后按对应交易所雷达自动做多/做空。关闭浏览器后继续，服务重启后恢复启用状态与仓位；没有真实交易接口或 API Key。升级保留原欧易账户，新增币安账户独立初始化为暂停状态，不复制或迁移欧易资金、仓位和历史。
 
-默认 10,000 USDT 虚拟本金，单笔预算约 1,000，最多 3 仓，1 倍名义敞口。按观察列表顺序占用额度，不做信号间收益择优。张数依据交易所 ctVal / lotSz / minSz 向下取整。只在发现信号之后的新盘口报价模拟成交，每个标的/4h收盘/方向最多开一次。做多卖一进、买一出，做空反之，各边再加 5bp 不利滑点、6bp 手续费（均为假设）。止损 2%、止盈 4%，或完整 4h 方向失效时退出；跳空按当前盘口价，非历史止损价。暂停仅停新开仓，已有仓位仍执行退出规则。
+每个账户默认 10,000 USDT 虚拟本金，单笔预算约 1,000，最多 3 仓，1 倍名义敞口。按观察列表顺序占用额度，不做信号间收益择优。欧易张数依据 ctVal / lotSz / minSz 向下取整；币安以基础币为交易数量单位，检查数量步长、最小/最大数量与最小名义金额，不将币数量称作欧易合约张数。只在发现信号之后的新盘口报价模拟成交，每个标的/4h收盘/方向最多开一次。做多卖一进、买一出，做空反之，各边再加 5bp 不利滑点、6bp 手续费（均为假设）。止损 2%、止盈 4%，或完整 4h 方向失效时退出；跳空按当前盘口价，非历史止损价。暂停仅停新开仓，已有仓位仍执行退出规则。
 
-账户、待处理信号和完整交易历史落在被 Git 忽略的 `cache/paper-trading.sqlite3`，事务内统一更新。权益 = 现金 + 冻结名义本金 + 浮盈亏；已实现盈亏已扣两边费用。过期或缺盘口时不撮合，估值标注为历史报价。页面列最近 100 笔平仓，汇总使用全部历史。尚未计入资金费、市场深度/冲击、强平与跨时段拆股处理；按约 10 秒报价采样，可能漏掉采样间触价，服务停机期间不补单。首次试用不要将此记录当作完整交易所撮合或实盘收益。
+账户、待处理信号和完整交易历史落在被 Git 忽略的 SQLite 中：欧易 `cache/paper-trading.sqlite3`、币安 `cache/paper-trading-binance.sqlite3`。各自事务内统一更新并校验交易所指纹，拒绝跨所行情和账本混用。权益 = 现金 + 冻结名义本金 + 浮盈亏；已实现盈亏已扣两边费用。过期或缺盘口时不撮合，估值标注为历史报价。页面列最近 100 笔平仓，汇总使用全部历史。尚未计入资金费、市场深度/冲击、强平与跨时段拆股处理；按约 10 秒报价采样，可能漏掉采样间触价，服务停机期间不补单。首次试用不要将此记录当作完整交易所撮合或实盘收益。
 
 测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'`、`node --test markets/us/dashboard/test_paper_page.cjs`。设计与验收范围见 [说明](../../../docs/plans/2026-11-06-auto-paper-trading-design.md)。
 

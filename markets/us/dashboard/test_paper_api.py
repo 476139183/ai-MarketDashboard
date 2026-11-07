@@ -15,9 +15,16 @@ class PaperAPITests(unittest.TestCase):
         self.addCleanup(directory.cleanup)
         account = PaperAccount(Path(directory.name) / 'paper.db')
         self.runner = PaperRunner(account, None)
+        self.binance_runner = PaperRunner(PaperAccount(Path(directory.name) / 'binance.db', exchange='Binance'), None)
         substitute = patch('app.paper_runner', self.runner)
         substitute.start()
         self.addCleanup(substitute.stop)
+        other = patch('app.binance_paper_runner', self.binance_runner)
+        other.start()
+        self.addCleanup(other.stop)
+        other_start = patch.object(self.binance_runner, 'start')
+        other_start.start()
+        self.addCleanup(other_start.stop)
         start = patch.object(self.runner, 'start')
         start.start()
         self.addCleanup(start.stop)
@@ -68,6 +75,23 @@ class PaperAPITests(unittest.TestCase):
         status, html = self.call('GET', '/paper')
         self.assertEqual(status, 200)
         self.assertIn(b'paper.js', html)
+
+    def test_binance_control_and_reads_do_not_change_okx_account(self):
+        status, data = self.call('POST', '/api/paper/control', {'enabled': True, 'exchange': 'binance'})
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(data)['rules']['exchange'], 'Binance')
+        self.assertFalse(self.runner.snapshot()['enabled'])
+        status, data = self.call('GET', '/api/paper?exchange=binance')
+        self.assertEqual(status, 200)
+        self.assertTrue(json.loads(data)['enabled'])
+        self.assertEqual(self.call('GET', '/api/paper?exchange=spot')[0], 400)
+        self.assertEqual(self.call('POST', '/api/paper/control', {'enabled': True, 'exchange': 'spot'})[0], 400)
+
+    def test_binance_radar_route(self):
+        with patch('app.binance_radar.payload', return_value={'source': 'Binance'}):
+            status, data = self.call('GET', '/api/contracts?exchange=binance')
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(data)['source'], 'Binance')
 
 
 if __name__ == '__main__':

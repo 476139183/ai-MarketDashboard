@@ -2,6 +2,9 @@
   'use strict';
   const el = id => document.getElementById(id);
   let state = null, timer = null, busy = false;
+  let exchange = typeof location !== 'undefined' && /(?:\?|&)exchange=binance(?:&|$)/.test(location.search) ? 'binance' : 'okx';
+  let requestId = 0, activeController = null;
+  const sources = {okx:'OKX',binance:'Binance'};
   const num = (value, digits = 2) => value == null || !Number.isFinite(value) ? '—'
     : value.toLocaleString('en-US', {maximumFractionDigits:digits});
   const time = value => value == null ? '—' : new Date(value).toLocaleString('zh-CN', {timeZone:'Asia/Shanghai',hour12:false});
@@ -12,7 +15,12 @@
   function render() {
     el('paper-toggle').textContent = state.enabled ? '暂停新开仓' : '启用自动模拟';
     el('paper-toggle').setAttribute('aria-pressed', String(state.enabled));
-    el('paper-running').textContent = state.enabled ? '自动模拟运行中 · OKX 合约'
+    const source = sources[exchange];
+    el('paper-source').textContent = `${source} · USDT 永续`;
+    el('paper-exchange-label').textContent = `PAPER ACCOUNT / ${source}`;
+    el('paper-position-exchange').textContent = `${source} · PAPER`;
+    el('paper-signals-link').href = el('paper-radar-link').href = `/contracts?exchange=${exchange}`;
+    el('paper-running').textContent = state.enabled ? `自动模拟运行中 · ${source} 合约`
       : state.positions.length ? '新开仓已暂停 · 现有持仓继续管理' : '自动模拟尚未启用';
     el('paper-running').className = state.enabled ? 'paper-running' : 'paper-paused';
     el('paper-status').textContent = state.runner_error || state.error
@@ -37,7 +45,7 @@
     el('paper-positions').replaceChildren(...state.positions.map(position => {
       const tr=document.createElement('tr');
       tr.innerHTML=`<td><strong>${escape(position.instrument_id)}</strong><small>${escape(position.name)}</small></td>
-        <td>${side(position)}</td><td>${num(position.contracts,6)} 张<small>${num(position.quantity,8)} 基础币</small></td>
+        <td>${side(position)}</td><td>${num(position.contracts,6)} ${escape(position.quantity_unit || '张')}<small>${num(position.quantity,8)} 基础币</small></td>
         <td>${num(position.entry_price,6)}</td><td>${num(position.last_price,6)}</td>
         <td class="${color(position.unrealized_pnl)}">${num(position.unrealized_pnl)}</td>
         <td>${num(position.stop_price,6)}<small>${num(position.target_price,6)}</small></td>
@@ -60,30 +68,52 @@
     el('paper-fees').textContent = `累计费用 ${num(state.fees,4)} USDT`;
   }
 
-  async function request(enabled) {
-    if(busy)return;
+  async function request(enabled, force = false) {
+    if(busy && !force)return;
+    const current = ++requestId, selectedExchange = exchange;
+    if (activeController) activeController.abort();
     busy=true; el('paper-toggle').disabled=true;el('paper-refresh').disabled=true;
     if(timer!==null)clearTimeout(timer);
     const controller=new AbortController();
+    activeController = controller;
     const timeout=setTimeout(()=>controller.abort(),12000);
     let succeeded=false;
     try{
       const control=typeof enabled==='boolean';
-      const options=control?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({enabled})}:{};
-      const response=await fetch(control?'/api/paper/control':'/api/paper',{...options,signal:controller.signal,cache:'no-store'});
+      const options=control?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({enabled,exchange:selectedExchange})}:{};
+      const response=await fetch(control?'/api/paper/control':`/api/paper?exchange=${selectedExchange}`,{...options,signal:controller.signal,cache:'no-store'});
       const data=await response.json();
+      if(current !== requestId)return;
       if(!response.ok)throw Error(data.error||`HTTP ${response.status}`);
       if(!Array.isArray(data.positions)||!Array.isArray(data.trades))throw Error('无效的账户响应');
+      if(data.rules.exchange !== sources[selectedExchange])throw Error('账户交易所不匹配');
       state=data;render();succeeded=true;
     }catch(error){
+      if(current !== requestId)return;
       el('paper-status').textContent=`读取 / 控制失败：${error.message} · 画面保留上次快照，运行状态待核实`;
       el('paper-status').className='error';
     }finally{
-      clearTimeout(timeout);busy=false;el('paper-refresh').disabled=false;el('paper-toggle').disabled=!succeeded;
-      timer=setTimeout(()=>request(),3000);
+      clearTimeout(timeout);
+      if(current === requestId){busy=false;el('paper-refresh').disabled=false;el('paper-toggle').disabled=!succeeded;
+        timer=setTimeout(()=>request(),3000);}
     }
   }
   el('paper-refresh').addEventListener('click',()=>request());
   el('paper-toggle').addEventListener('click',()=>request(!state.enabled));
+  el('paper-exchange').value = exchange;
+  el('paper-exchange').addEventListener('change', () => {
+    exchange = el('paper-exchange').value;state=null;
+    for (const id of ['paper-equity','paper-cash','paper-realized','paper-unrealized']) el(id).textContent='—';
+    el('paper-positions').replaceChildren();el('paper-trades').replaceChildren();
+    el('paper-running').textContent = `正在读取 ${sources[exchange]} 独立账户`;
+    el('paper-source').textContent = `${sources[exchange]} · USDT 永续`;
+    el('paper-exchange-label').textContent = `PAPER ACCOUNT / ${sources[exchange]}`;
+    el('paper-position-exchange').textContent = `${sources[exchange]} · PAPER`;
+    el('paper-signals-link').href = el('paper-radar-link').href = `/contracts?exchange=${exchange}`;
+    for (const id of ['paper-position-count','paper-pending','paper-trade-summary','paper-fees']) el(id).textContent='—';
+    el('paper-position-note').textContent='等待所选交易所的持仓数据';
+    el('paper-status').textContent = '正在切换账户…';el('paper-toggle').textContent='读取账户中…';
+    return request(undefined,true);
+  });
   request();
 })();

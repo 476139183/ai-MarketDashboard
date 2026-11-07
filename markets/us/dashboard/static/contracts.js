@@ -4,6 +4,12 @@
   const groups = [...document.querySelectorAll('[data-group]')];
   let items = [], selected = '', group = 'all', busy = false, paused = false;
   let exchange = 'okx', source = 'OKX', requestId = 0, activeController = null;
+  const sources = {okx:'OKX',binance:'Binance',bitget:'Bitget'};
+  if (typeof location !== 'undefined') {
+    const requested = /(?:\?|&)exchange=(okx|binance|bitget)(?:&|$)/.exec(location.search);
+    if (requested) {exchange=requested[1];source=sources[exchange];}
+  }
+  const docs = {okx:'https://www.okx.com/docs-v5/en/',binance:'https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data',bitget:'https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market'};
   let timer = null, failed = false, serverError = '', generated = null, status = 'idle', total = 0;
   let chart = null, series = null, chartKey = '', freshnessKey = '';
   const number = (value, digits = 2) => value == null || !Number.isFinite(value) ? '—'
@@ -54,7 +60,7 @@
     if (!row) return;
     selected = row.symbol;
     el('detail-symbol').textContent = row.symbol;
-    el('detail-name').textContent = `${row.name} · ${row.group === 'stock' ? '股票合约' : '加密货币'} · ${row.source} USDT 永续`;
+    el('detail-name').textContent = `${row.name} · ${row.category_label || (row.group === 'stock' ? '股票合约' : '加密货币')} · ${row.source} USDT 永续`;
     el('detail-source').textContent = `${row.source} USDT 永续`;
     el('detail-direction').textContent = row.label;
     el('detail-direction').className = `direction-badge ${row.direction}`;
@@ -79,14 +85,16 @@
     for (const key of Object.keys(counts)) el(`${key}-count`).textContent = rows.length ? counts[key] : '—';
     const query = el('contract-search').value.trim().toLowerCase();
     const direction = el('direction-filter').value;
+    const category = el('category-filter').value;
     const filtered = rows.filter(row => (group === 'all' || row.group === group)
+      && (category === 'all' || row.category === category)
       && (direction === 'all' || row.direction === direction)
       && `${row.symbol} ${row.name}`.toLowerCase().includes(query));
     el('contract-rows').replaceChildren(...filtered.map(row => {
       const tr = document.createElement('tr');
       tr.className = row.symbol === selected ? 'selected' : '';
       const changeClass = row.change_pct > 0 ? 'bullish' : row.change_pct < 0 ? 'bearish' : '';
-      tr.innerHTML = `<td><button type="button">${escape(row.symbol)}</button><small>${escape(row.name)}</small></td>
+      tr.innerHTML = `<td><button type="button">${escape(row.symbol)}</button><small>${escape(row.name)} · ${escape(row.category_label || '')}</small></td>
         <td><span class="direction-badge ${row.direction}">${escape(row.label)}</span><small>4 小时结构</small></td>
         <td><strong>${price(row.price)}</strong><small>${escape(row.source)} · ${escape(time(row.quote_at))}</small></td>
         <td class="${changeClass}">${percent(row.change_pct)}</td>
@@ -108,7 +116,9 @@
     });
     renderDetail(rows);
     el('source-name').textContent = `${source} · USDT 永续`;
-    el('source-docs').href = exchange === 'okx' ? 'https://www.okx.com/docs-v5/en/' : 'https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market';
+    el('source-docs').href = docs[exchange];
+    el('paper-link').href = `/paper?exchange=${exchange === 'binance' ? 'binance' : 'okx'}`;
+    el('paper-link').textContent = exchange === 'binance' ? '币安自动模拟 ↗' : '欧易自动模拟 ↗';
     el('workspace-date').textContent = `北京 ${time(Date.now())}`;
     const fresh = rows.filter(row => row.fresh).length;
     if (!failed) {
@@ -142,7 +152,7 @@
       if (!Array.isArray(payload.items)) throw Error('无效的行情响应');
       items = payload.items; generated = payload.generated_at; status = payload.status; total = payload.total ?? items.length;
       serverError = payload.error || ''; failed = false;
-      source = payload.source || (exchange === 'okx' ? 'OKX' : 'Bitget');
+      source = payload.source || sources[exchange];
       if (!selected && items.length) selected = items[0].symbol;
       render();
     } catch (error) {
@@ -159,11 +169,14 @@
   groups.forEach(button => button.addEventListener('click', () => {group = button.dataset.group; render();}));
   el('contract-search').addEventListener('input', render);
   el('direction-filter').addEventListener('change', render);
+  el('category-filter').value = 'all';
+  el('category-filter').addEventListener('change', () => {if (el('category-filter').value !== 'all') group = 'crypto';render();});
   el('refresh-interval').addEventListener('change', schedule);
   el('refresh-now').addEventListener('click', load);
   el('exchange-source').value = exchange;
   el('exchange-source').addEventListener('change', () => {
-    exchange = el('exchange-source').value; source = exchange === 'okx' ? 'OKX' : 'Bitget';
+    exchange = el('exchange-source').value; source = sources[exchange];
+    if (exchange === 'binance' && group === 'stock') group = 'crypto';
     items = []; selected = ''; chartKey = ''; generated = null; total = 0; failed = false; serverError = '';
     if (series) series.setData([]);
     for (const id of ['detail-price','detail-ema20','detail-ema50','detail-time','detail-closed-at']) el(id).textContent = '—';

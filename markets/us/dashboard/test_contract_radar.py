@@ -1,5 +1,6 @@
 import copy
 import unittest
+from unittest.mock import patch
 
 import contract_radar as radar
 
@@ -101,6 +102,26 @@ class ContractAnalysisTests(unittest.TestCase):
 
 
 class RadarServiceTests(unittest.TestCase):
+    def test_slow_cold_scan_refreshes_quotes_after_candles(self):
+        calls = []
+        def fetch(path, params):
+            if path == 'tickers':
+                calls.append(path)
+                return [dict(ticker(), lastPr=str(200 + len(calls)))]
+            return candles()
+        service = radar.ContractRadar(fetch, [('BTCUSDT', '比特币', 'crypto')])
+        with patch('contract_radar.time.time', return_value=NOW / 1000), \
+             patch('contract_radar.time.monotonic', side_effect=[0, 16]):
+            service._refresh()
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(service.snapshot(NOW)['items'][0]['price'], 202)
+
+    def test_expanded_crypto_registry_has_categories_and_no_duplicate_symbols(self):
+        symbols = [spec[0] for spec in radar.CRYPTO_WATCHLIST]
+        self.assertEqual(len(symbols), 24)
+        self.assertEqual(len(set(symbols)), 24)
+        self.assertTrue(all(symbol in radar.CATEGORY_BY_SYMBOL for symbol in symbols))
+
     def test_partial_failure_keeps_other_symbols_and_cached_view_expires(self):
         def fetch(path, params):
             if path.endswith('tickers'):

@@ -15,10 +15,28 @@ WATCHLIST = [
     ('BTCUSDT', '比特币', 'crypto'), ('ETHUSDT', '以太坊', 'crypto'),
     ('SOLUSDT', 'Solana', 'crypto'), ('XRPUSDT', '瑞波币', 'crypto'),
     ('DOGEUSDT', '狗狗币', 'crypto'), ('BNBUSDT', 'BNB', 'crypto'),
+    ('ADAUSDT', 'Cardano', 'crypto'), ('AVAXUSDT', 'Avalanche', 'crypto'),
+    ('LINKUSDT', 'Chainlink', 'crypto'), ('DOTUSDT', 'Polkadot', 'crypto'),
+    ('LTCUSDT', '莱特币', 'crypto'), ('BCHUSDT', '比特币现金', 'crypto'),
+    ('UNIUSDT', 'Uniswap', 'crypto'), ('ATOMUSDT', 'Cosmos', 'crypto'),
+    ('NEARUSDT', 'NEAR', 'crypto'), ('APTUSDT', 'Aptos', 'crypto'),
+    ('ARBUSDT', 'Arbitrum', 'crypto'), ('OPUSDT', 'Optimism', 'crypto'),
+    ('SUIUSDT', 'Sui', 'crypto'), ('FILUSDT', 'Filecoin', 'crypto'),
+    ('AAVEUSDT', 'Aave', 'crypto'), ('TRXUSDT', 'TRON', 'crypto'),
+    ('ETCUSDT', 'Ethereum Classic', 'crypto'), ('WIFUSDT', 'dogwifhat', 'crypto'),
     ('MUUSDT', '美光科技', 'stock'), ('NVDAUSDT', '英伟达', 'stock'),
     ('TSLAUSDT', '特斯拉', 'stock'), ('SNDKUSDT', '闪迪', 'stock'),
     ('AMDUSDT', 'AMD', 'stock'), ('AAPLUSDT', '苹果', 'stock'),
 ]
+CRYPTO_WATCHLIST = [spec for spec in WATCHLIST if spec[2] == 'crypto']
+CATEGORIES = {
+    'main': ('主流', 'BTC ETH BNB XRP LTC BCH'),
+    'layer1': ('公链', 'SOL ADA AVAX DOT ATOM NEAR APT SUI TRX ETC'),
+    'layer2': ('Layer 2', 'ARB OP'), 'defi': ('DeFi', 'LINK UNI AAVE'),
+    'meme': ('Meme', 'DOGE WIF'), 'infrastructure': ('基础设施', 'FIL'),
+}
+CATEGORY_BY_SYMBOL = {coin + 'USDT': (key, label)
+                      for key, (label, coins) in CATEGORIES.items() for coin in coins.split()}
 
 
 def number(value, *, positive=False):
@@ -86,10 +104,15 @@ def analyze_contract(symbol, name, group, ticker, raw_candles, now):
     funding, change = number(ticker.get('fundingRate')), number(ticker.get('change24h'))
     holding, mark = number(ticker.get('holdingAmount')), number(ticker.get('markPrice'), positive=True)
     item = dict(symbol=symbol, name=name, group=group, source='Bitget', price=price,
+                category=CATEGORY_BY_SYMBOL.get(symbol, ('other', '其他') if group == 'crypto' else ('stock', '股票合约'))[0],
+                category_label=CATEGORY_BY_SYMBOL.get(symbol, ('other', '其他') if group == 'crypto' else ('stock', '股票合约'))[1],
                 instrument_id=ticker.get('instId', symbol),
                 bid=number(ticker.get('bidPr'), positive=True), ask=number(ticker.get('askPr'), positive=True),
                 contract_value=number(ticker.get('ctVal'), positive=True),
                 lot_size=number(ticker.get('lotSz'), positive=True), min_size=number(ticker.get('minSz'), positive=True),
+                max_size=number(ticker.get('maxSz'), positive=True),
+                min_notional=number(ticker.get('minNotional'), positive=True),
+                quantity_unit=ticker.get('quantity_unit', '张'),
                 volume_estimated=bool(ticker.get('volume_estimated', False)),
                 quote_at=timestamp, quote_fresh=fresh, structure_fresh=False,
                 change_pct=None if change is None else change * 100,
@@ -139,9 +162,10 @@ def analyze_contract(symbol, name, group, ticker, raw_candles, now):
 
 
 class ContractRadar:
-    def __init__(self, fetch=None, watchlist=None, source='Bitget'):
+    def __init__(self, fetch=None, watchlist=None, source='Bitget', candle_workers=4):
         self.fetch = fetch or fetch_json
         self.source = source
+        self.candle_workers = candle_workers
         self.watchlist = WATCHLIST if watchlist is None else watchlist
         self.lock = threading.Lock()
         self.running = False
@@ -161,6 +185,8 @@ class ContractRadar:
         return rows
 
     def _refresh(self, now=None):
+        started = time.monotonic()
+        explicit_now = now is not None
         now = int(time.time() * 1000) if now is None else now
         try:
             quotes = {row['symbol']: row for row in self.fetch('tickers', {'productType': 'USDT-FUTURES'})}
@@ -177,8 +203,17 @@ class ContractRadar:
                 item['source'] = self.source
                 return item
 
-            with ThreadPoolExecutor(max_workers=4) as pool:
+            with ThreadPoolExecutor(max_workers=self.candle_workers) as pool:
                 items = list(pool.map(one, self.watchlist))
+            # A large cold scan must not publish quotes obtained before slow candle requests.
+            if not explicit_now and time.monotonic() - started >= 15:
+                quotes = {row['symbol']: row for row in self.fetch('tickers', {'productType': 'USDT-FUTURES'})}
+                now = int(time.time() * 1000)
+                for index, (symbol, name, group) in enumerate(self.watchlist):
+                    rows = self.candle_cache.get(symbol, (None, []))[1]
+                    item = analyze_contract(symbol, name, group, quotes.get(symbol, {}), rows, now)
+                    item['source'] = self.source
+                    items[index] = item
             with self.lock:
                 self.items, self.updated_at, self.error = items, now, None
         except Exception as exc:  # Preserve last snapshot with an explicit error.
