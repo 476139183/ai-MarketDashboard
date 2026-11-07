@@ -60,9 +60,9 @@ API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 
 加密币从 6 个扩到 24 个：BTC、ETH、SOL、XRP、DOGE、BNB、ADA、AVAX、LINK、DOT、LTC、BCH、UNI、ATOM、NEAR、APT、ARB、OP、SUI、FIL、AAVE、TRX、ETC、WIF。支持主流、公链、Layer 2、DeFi、Meme、基础设施分类筛选，均研究 USDT 永续。欧易/Bitget 另保留 MU、NVDA、TSLA、SNDK、AMD、AAPL 六个股票合约，合计 30 项；币安雷达只观察 24 个加密币。股票合约使用实际合约价格，不使用原股行情替代。列表来自 `contract_radar.WATCHLIST`；各所未返回行情的合约明确显示不可用。
 
-方向基于已收盘 4h 收盘价、EMA20/50 排列与 EMA20 最近 6 根斜率，同向才显示看涨/看跌。支撑与阻力分别参考最近 20 根完整 K 线低点和高点，穿越后不作为当前对应价位。报价超过 30 秒、K 线不足 60 根、不连续或未覆盖最新收盘周期均暂停方向。单票失败保留其余标的；页面请求失败保留上次价格并撤销方向。暂停刷新后仍会检查报价过期。
+方向支持 1/5/10/15/30/60 分钟与原默认 4h，基于所选周期已收盘收盘价、EMA20/50 排列与 EMA20 最近 6 根斜率，同向才显示看涨/看跌。支撑与阻力分别参考最近 20 根完整 K 线低点和高点，穿越后不作为当前对应价位。报价超过 30 秒、K 线不足 60 根、不连续或未覆盖最新收盘周期均暂停方向。单票失败保留其余标的；页面请求失败保留上次价格并撤销方向。暂停刷新后仍会检查报价过期。
 
-当前资金费率按接口值转为百分比，非年化、不假定统一结算周期。名义持仓估算为基础币持仓量 × 标记价，非用户仓位。OKX 24h 成交额由基础币成交量 × 当前价估算，页面明确标注；Bitget 使用接口 USDT 成交额。OKX K 线仅保留 confirm=1，基础币量读取 volCcy 而不是合约张数。报价默认每 10 秒刷新（可选 30/60 秒），服务端以 10 秒为最短间隔；K 线缓存 60 秒，跨 4h 边界重取。页面请求或模拟交易后台触发采集；首屏显示正在更新后自动查询进度。
+当前资金费率按接口值转为百分比，非年化、不假定统一结算周期。名义持仓估算为基础币持仓量 × 标记价，非用户仓位。OKX 24h 成交额由基础币成交量 × 当前价估算，页面明确标注；Bitget 使用接口 USDT 成交额。OKX K 线仅保留 confirm=1，基础币量读取 volCcy 而不是合约张数。报价默认每 10 秒刷新（可选 1/5/10/15/30/60 秒），服务端以 10 秒为最短间隔；K 线缓存 60 秒，跨所选周期边界重取。页面请求或模拟交易后台触发采集；首屏显示正在更新后自动查询进度。
 
 数据字段与单位依据 [OKX 官方文档](https://www.okx.com/docs-v5/en/)与 [Bitget 官方合约行情文档](https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market)。本模块为规则研究，尚无独立收益回测；不接账户、不下单。测试：`python3 -m unittest discover -s markets/us/dashboard -p 'test_contract*.py'`、`python3 -m unittest discover -s markets/us/dashboard -p test_okx_contracts.py`、`node --test markets/us/dashboard/test_contracts_page.cjs`。
 
@@ -87,3 +87,23 @@ API：`/api/signals` · `/api/alerts` · `/api/watchlist`
 - 现价 + 日高/日低：Nasdaq quote（keyStats）；15m：Nasdaq 分时聚合 → Yahoo/缓存
 - 正式主源未选：见 `../docs/market-data-sources.md`
 - 休市多为观望属正常
+
+
+## 美股原股雷达与市场账户
+
+`/us-radar` 专门观察美股原股（USD），使用观察列表每页 8 票，也可输入单股代码。六档分钟周期和秒级页面刷新分别配置；时段按纽约盘前 04:00–09:30、盘中 09:30–16:00、盘后 16:00–20:00 切分，自动适配夏令时。节假日与提前收市以源数据为准。
+
+自动模式在配置 `MASSIVE_API_KEY` 时优先使用 Massive 真实分钟 OHLCV，否则常规盘优先新浪分钟 OHLCV，盘前 / 盘后筛选使用 Nasdaq 分时采样。可显式选择 Yahoo/yfinance；分钟源失败回退 Nasdaq，并显示来源和缺失情况。Nasdaq 采样仅画价格线，不伪造成交量或 K 线；趋势保持待确认。Massive 权限和延迟取决于订阅，浏览器不持有 Key。报价与分时图分别标源时间，日期级报价不冒充实时。后端每组查询至少间隔 60 秒。
+
+`/api/us-radar?symbols=NVDA,MU&period=15&session=all&provider=auto`；period 支持 1/5/10/15/30/60，session 支持 all/pre/regular/post，provider 支持 auto/sina/nasdaq/massive/yahoo。10 分钟由完整 5 分钟聚合，60 分钟由完整 30 分钟聚合，按各时段开始时间对齐。
+
+模拟交易 `/paper?market=stock` 是欧易美股合约独立账户，初始暂停、虚拟本金 10,000 USDT。默认 `market=crypto` 保留原账本，历史仓位继续管理；币安只支持 crypto。GET /api/paper 和 POST /api/paper/control 都携带 exchange 与 market，后端拒绝不支持的组合。模拟规则固定 4h，雷达切换周期不改变模拟策略。
+
+
+## 持续更新的价格与成交量图
+
+合约图与美股图都显示价格及逐根成交量、悬停 OHLCV，形成中的 K 线明确标记。信号及模拟仍只使用收盘线；OKX 的 confirm=0 仅用于形成中图表，不可用于方向判断。合约采集及 K 线缓存约 10 秒更新，所选美股 `/api/us-chart?symbols=SNDK&period=5&provider=auto` 独立每 15 秒采集，仅允许单股。列表仍按 60 秒节流。上述为 REST 轮询，源延迟和订阅权限单独显示。
+
+新浪接口以 K 线结束时间标记，转换为美东周期起点；常规盘量柱单位为股。Nasdaq 源日累计成交量另标日期，与逐根量柱区分。合约量柱为基础币数量。Nasdaq 价格采样无逐根成交量时清空量柱并显示缺失；不填零，不用全日累计量造分钟量。单股 / 来源 / 周期切换清除旧图，持续刷新保留用户缩放范围。
+
+实测 SNDK 5 分钟末根真实成交量为 454,154 股（2026-11-06 15:55 ET 起点），Nasdaq 源日累计量 17,763,666 股；仅为验收快照，不保证后续数据不修订。百度财经公开接口返回 403，未接为可用源。扩展时段真实分钟量仍依赖具备权限的 OHLCV 源。

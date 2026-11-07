@@ -1,123 +1,123 @@
 {
   "title": "A股盘后复盘",
-  "as_of": "2026-11-03",
-  "generated_at": "2026-11-04T09:12:29+08:00",
-  "market_tone": "平淡",
+  "as_of": "2026-11-06",
+  "generated_at": "2026-11-07T13:13:15+08:00",
+  "market_tone": "偏弱",
   "summary_bullets": [
-    "沪深300 -0.00%（4008.81）",
-    "涨 0 / 跌 0 / 平 0",
-    "领涨板块：其他饰品(0.0%)、钢铁管材(0.0%)、粮食种植(0.0%)",
-    "领跌板块：航空机场(0.0%)、铁路公路(0.0%)、水泥(0.0%)"
+    "沪深300 -1.44%（4054.28）",
+    "涨 381 / 跌 1936 / 平 40",
+    "领涨板块：视频媒体(6.25%)、种子(4.64%)、卫浴电器(3.46%)",
+    "领跌板块：印制电路板(-5.86%)、元件(-5.13%)、通信线缆及配套(-4.78%)"
   ],
   "indices": [
     {
       "code": "000001",
       "name": "上证指数",
-      "price": 3608.1,
-      "prev_close": 3608.1,
-      "open": 0.0,
-      "change_pct": 0.0,
-      "asof": "20261104091200"
+      "price": 3649.18,
+      "prev_close": 3689.91,
+      "open": 3612.15,
+      "change_pct": -1.1,
+      "asof": "20261106161401"
     },
     {
       "code": "399001",
       "name": "深证成指",
-      "price": 10876.99,
-      "prev_close": 10876.99,
-      "open": 0.0,
-      "change_pct": 0.0,
-      "asof": "20261104091145"
+      "price": 11175.78,
+      "prev_close": 11471.09,
+      "open": 11044.56,
+      "change_pct": -2.57,
+      "asof": "20261106161442"
     },
     {
       "code": "000300",
       "name": "沪深300",
-      "price": 4008.81,
-      "prev_close": 4008.87,
-      "open": 0.0,
-      "change_pct": -0.0,
-      "asof": "20261104091200"
+      "price": 4054.28,
+      "prev_close": 4113.41,
+      "open": 4017.94,
+      "change_pct": -1.44,
+      "asof": "20261106161413"
     },
     {
       "code": "000688",
       "name": "科创50",
-      "price": 1151.28,
-      "prev_close": 1151.28,
-      "open": 0.0,
-      "change_pct": 0.0,
-      "asof": "20261104091200"
+      "price": 1253.2,
+      "prev_close": 1286.68,
+      "open": 1221.67,
+      "change_pct": -2.6,
+      "asof": "20261106161413"
     }
   ],
   "breadth": {
-    "up": 0,
-    "down": 0,
-    "flat": 0
+    "up": 381,
+    "down": 1936,
+    "flat": 40
   },
   "limit_stats": null,
   "top_sectors": [
     {
-      "code": "BK1356",
-      "name": "其他饰品",
-      "price": 460.78,
-      "change_pct": 0.0
+      "code": "BK1296",
+      "name": "视频媒体",
+      "price": 1683.77,
+      "change_pct": 6.25
     },
     {
-      "code": "BK1368",
-      "name": "钢铁管材",
-      "price": 524.61,
-      "change_pct": 0.0
+      "code": "BK1518",
+      "name": "种子",
+      "price": 4212.17,
+      "change_pct": 4.64
     },
     {
-      "code": "BK1515",
-      "name": "粮食种植",
-      "price": 965.12,
-      "change_pct": 0.0
+      "code": "BK1452",
+      "name": "卫浴电器",
+      "price": 1422.18,
+      "change_pct": 3.46
     },
     {
-      "code": "BK1416",
-      "name": "粘胶",
-      "price": 1316.73,
-      "change_pct": 0.0
+      "code": "BK1510",
+      "name": "其他养殖",
+      "price": 806.16,
+      "change_pct": 3.18
     },
     {
-      "code": "BK1523",
-      "name": "汽车经销商",
-      "price": 1318.85,
-      "change_pct": 0.0
+      "code": "BK1587",
+      "name": "电信运营商",
+      "price": 1106.62,
+      "change_pct": 2.87
     }
   ],
   "bottom_sectors": [
     {
-      "code": "BK0420",
-      "name": "航空机场",
-      "price": 3994.02,
-      "change_pct": 0.0
+      "code": "BK1340",
+      "name": "印制电路板",
+      "price": 9555.91,
+      "change_pct": -5.86
     },
     {
-      "code": "BK0421",
-      "name": "铁路公路",
-      "price": 8580.31,
-      "change_pct": 0.0
+      "code": "BK0459",
+      "name": "元件",
+      "price": 44823.98,
+      "change_pct": -5.13
     },
     {
-      "code": "BK0424",
-      "name": "水泥",
-      "price": 24555.14,
-      "change_pct": 0.0
+      "code": "BK1592",
+      "name": "通信线缆及配套",
+      "price": 17502.78,
+      "change_pct": -4.78
     },
     {
-      "code": "BK0427",
-      "name": "公用事业",
-      "price": 8610.58,
-      "change_pct": 0.0
+      "code": "BK1600",
+      "name": "医疗研发外包",
+      "price": 7958.64,
+      "change_pct": -4.67
     },
     {
-      "code": "BK0428",
-      "name": "电力",
-      "price": 17553.13,
-      "change_pct": 0.0
+      "code": "BK1462",
+      "name": "玻纤制造",
+      "price": 11720.68,
+      "change_pct": -4.65
     }
   ],
-  "next_day_hint": "震荡市以计划内回踩为主，清单未齐的不升格为优先。",
+  "next_day_hint": "大盘偏弱时，明日盯盘以观察池防守为主，优先等待回踩点位，不追高。",
   "limitations": [
     "结构化行情复盘，不含AI叙事与北向资金",
     "板块与涨跌统计依赖东财公开接口，失败时字段为空",

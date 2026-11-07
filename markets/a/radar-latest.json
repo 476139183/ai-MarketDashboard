@@ -1,19 +1,19 @@
 {
   "title": "A股盘后雷达",
-  "signal_date": "2026-11-03",
+  "signal_date": "2026-11-06",
   "observe_session": "下一交易日",
-  "generated_at": "2026-11-04T09:12:25+08:00",
+  "generated_at": "2026-11-07T13:13:08+08:00",
   "market_pass": false,
   "market_label": "沪深300未站上MA20（偏防守）",
   "universe_size": 100,
   "scanned": 99,
   "strategy_count": 0,
-  "watch_count": 6,
+  "watch_count": 11,
   "strategy_candidates": [],
   "watch_pool": [
     {
-      "code": "000591",
-      "name": "太阳能",
+      "code": "002149",
+      "name": "西部材料",
       "board": "深市主板",
       "rules": [
         "breakout"
@@ -23,110 +23,23 @@
       ],
       "category": "观察池",
       "market_pass": false,
-      "close": 4.59,
-      "change_pct": 10.07,
+      "close": 37.74,
+      "change_pct": 3.54,
       "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
       "observe_for": "下一交易日",
       "trade_plan": {
-        "ma5": 4.174,
-        "ma10": 4.077,
-        "ma20": 4.108,
-        "bias_ma5": 9.97,
-        "alignment": "弱势多头（MA10未上MA20）",
+        "ma5": 35.536,
+        "ma10": 32.819,
+        "ma20": 31.3915,
+        "bias_ma5": 6.2,
+        "alignment": "多头排列 MA5>MA10>MA20",
         "chase_risk": true,
         "plan_ready": false,
         "sniper": {
-          "ideal_buy": 4.174,
-          "secondary_buy": 4.077,
-          "stop_loss": 4.0258,
-          "take_profit": 4.8195,
-          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
-        },
-        "checklist": [
-          {
-            "item": "均线多头",
-            "detail": "弱势多头（MA10未上MA20）",
-            "status": "注意"
-          },
-          {
-            "item": "不追高",
-            "detail": "乖离MA5 +9.97%（阈值5.0%）",
-            "status": "不满足"
-          },
-          {
-            "item": "量能",
-            "detail": "不低于5日均量八成",
-            "status": "满足"
-          },
-          {
-            "item": "结构空间",
-            "detail": "止损 4.0258 → 目标 4.8195",
-            "status": "满足"
-          }
-        ],
-        "summary": "乖离偏高，不追高，等回踩"
-      },
-      "sniper": {
-        "ideal_buy": 4.174,
-        "secondary_buy": 4.077,
-        "stop_loss": 4.0258,
-        "take_profit": 4.8195,
-        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
-      },
-      "checklist": [
-        {
-          "item": "均线多头",
-          "detail": "弱势多头（MA10未上MA20）",
-          "status": "注意"
-        },
-        {
-          "item": "不追高",
-          "detail": "乖离MA5 +9.97%（阈值5.0%）",
-          "status": "不满足"
-        },
-        {
-          "item": "量能",
-          "detail": "不低于5日均量八成",
-          "status": "满足"
-        },
-        {
-          "item": "结构空间",
-          "detail": "止损 4.0258 → 目标 4.8195",
-          "status": "满足"
-        }
-      ],
-      "plan_ready": false,
-      "summary": "乖离偏高，不追高，等回踩"
-    },
-    {
-      "code": "002249",
-      "name": "大洋电机",
-      "board": "深市主板",
-      "rules": [
-        "reclaim"
-      ],
-      "rule_labels": [
-        "收复均线"
-      ],
-      "category": "观察池",
-      "market_pass": false,
-      "close": 7.87,
-      "change_pct": 6.93,
-      "note": "次日仅观察：收复均线；沪深300未站上MA20，偏防守；次日可按回踩计划观察",
-      "observe_for": "下一交易日",
-      "trade_plan": {
-        "ma5": 7.78,
-        "ma10": 7.466,
-        "ma20": 6.879,
-        "bias_ma5": 1.16,
-        "alignment": "多头排列 MA5>MA10>MA20",
-        "chase_risk": false,
-        "plan_ready": true,
-        "sniper": {
-          "ideal_buy": 7.78,
-          "secondary_buy": 7.466,
-          "stop_loss": 6.7414,
-          "take_profit": 8.58,
+          "ideal_buy": 35.536,
+          "secondary_buy": 32.819,
+          "stop_loss": 30.7637,
+          "take_profit": 39.627,
           "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
         },
         "checklist": [
@@ -137,8 +50,8 @@
           },
           {
             "item": "不追高",
-            "detail": "乖离MA5 +1.16%（阈值5.0%）",
-            "status": "满足"
+            "detail": "乖离MA5 +6.20%（阈值5.0%）",
+            "status": "不满足"
           },
           {
             "item": "量能",
@@ -147,17 +60,17 @@
           },
           {
             "item": "结构空间",
-            "detail": "止损 6.7414 → 目标 8.58",
+            "detail": "止损 30.7637 → 目标 39.627",
             "status": "满足"
           }
         ],
-        "summary": "次日可按回踩计划观察"
+        "summary": "乖离偏高，不追高，等回踩"
       },
       "sniper": {
-        "ideal_buy": 7.78,
-        "secondary_buy": 7.466,
-        "stop_loss": 6.7414,
-        "take_profit": 8.58,
+        "ideal_buy": 35.536,
+        "secondary_buy": 32.819,
+        "stop_loss": 30.7637,
+        "take_profit": 39.627,
         "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
       },
       "checklist": [
@@ -168,8 +81,8 @@
         },
         {
           "item": "不追高",
-          "detail": "乖离MA5 +1.16%（阈值5.0%）",
-          "status": "满足"
+          "detail": "乖离MA5 +6.20%（阈值5.0%）",
+          "status": "不满足"
         },
         {
           "item": "量能",
@@ -178,12 +91,447 @@
         },
         {
           "item": "结构空间",
-          "detail": "止损 6.7414 → 目标 8.58",
+          "detail": "止损 30.7637 → 目标 39.627",
           "status": "满足"
         }
       ],
-      "plan_ready": true,
-      "summary": "次日可按回踩计划观察"
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
+    },
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "board": "深市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 25.1,
+      "change_pct": 3.0,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 23.872,
+        "ma10": 22.974,
+        "ma20": 21.0975,
+        "bias_ma5": 5.14,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 23.872,
+          "secondary_buy": 22.974,
+          "stop_loss": 20.6756,
+          "take_profit": 26.355,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +5.14%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 20.6756 → 目标 26.355",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 23.872,
+        "secondary_buy": 22.974,
+        "stop_loss": 20.6756,
+        "take_profit": 26.355,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +5.14%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 20.6756 → 目标 26.355",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
+    },
+    {
+      "code": "002310",
+      "name": "东方新能",
+      "board": "深市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 2.32,
+      "change_pct": 9.95,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 2.114,
+        "ma10": 2.071,
+        "ma20": 2.1025,
+        "bias_ma5": 9.74,
+        "alignment": "弱势多头（MA10未上MA20）",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 2.114,
+          "secondary_buy": 2.071,
+          "stop_loss": 2.0604,
+          "take_profit": 2.436,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "弱势多头（MA10未上MA20）",
+            "status": "注意"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +9.74%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 2.0604 → 目标 2.436",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 2.114,
+        "secondary_buy": 2.071,
+        "stop_loss": 2.0604,
+        "take_profit": 2.436,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "弱势多头（MA10未上MA20）",
+          "status": "注意"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +9.74%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 2.0604 → 目标 2.436",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
+    },
+    {
+      "code": "002506",
+      "name": "协鑫集成",
+      "board": "深市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 2.58,
+      "change_pct": 1.57,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 2.372,
+        "ma10": 2.295,
+        "ma20": 2.302,
+        "bias_ma5": 8.77,
+        "alignment": "弱势多头（MA10未上MA20）",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 2.372,
+          "secondary_buy": 2.295,
+          "stop_loss": 2.256,
+          "take_profit": 2.709,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "弱势多头（MA10未上MA20）",
+            "status": "注意"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +8.77%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 2.256 → 目标 2.709",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 2.372,
+        "secondary_buy": 2.295,
+        "stop_loss": 2.256,
+        "take_profit": 2.709,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "弱势多头（MA10未上MA20）",
+          "status": "注意"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +8.77%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 2.256 → 目标 2.709",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
+    },
+    {
+      "code": "002865",
+      "name": "钧达股份",
+      "board": "深市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 44.59,
+      "change_pct": 2.11,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 41.264,
+        "ma10": 38.752,
+        "ma20": 36.497,
+        "bias_ma5": 8.06,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 41.264,
+          "secondary_buy": 38.752,
+          "stop_loss": 35.7671,
+          "take_profit": 46.8195,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +8.06%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 35.7671 → 目标 46.8195",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 41.264,
+        "secondary_buy": 38.752,
+        "stop_loss": 35.7671,
+        "take_profit": 46.8195,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +8.06%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 35.7671 → 目标 46.8195",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
+    },
+    {
+      "code": "002929",
+      "name": "润建股份",
+      "board": "深市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 63.11,
+      "change_pct": 10.01,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 55.73,
+        "ma10": 54.534,
+        "ma20": 51.0555,
+        "bias_ma5": 13.24,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 55.73,
+          "secondary_buy": 54.534,
+          "stop_loss": 50.0344,
+          "take_profit": 66.2655,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "多头排列 MA5>MA10>MA20",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +13.24%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 50.0344 → 目标 66.2655",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 55.73,
+        "secondary_buy": 54.534,
+        "stop_loss": 50.0344,
+        "take_profit": 66.2655,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "多头排列 MA5>MA10>MA20",
+          "status": "满足"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +13.24%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 50.0344 → 目标 66.2655",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
     },
     {
       "code": "300413",
@@ -197,23 +545,23 @@
       ],
       "category": "观察池",
       "market_pass": false,
-      "close": 27.8,
-      "change_pct": 3.89,
+      "close": 34.83,
+      "change_pct": 6.25,
       "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
       "observe_for": "下一交易日",
       "trade_plan": {
-        "ma5": 24.976,
-        "ma10": 24.022,
-        "ma20": 23.6005,
-        "bias_ma5": 11.31,
+        "ma5": 30.434,
+        "ma10": 27.013,
+        "ma20": 25.3225,
+        "bias_ma5": 14.44,
         "alignment": "多头排列 MA5>MA10>MA20",
         "chase_risk": true,
         "plan_ready": false,
         "sniper": {
-          "ideal_buy": 24.976,
-          "secondary_buy": 24.022,
-          "stop_loss": 23.1285,
-          "take_profit": 29.19,
+          "ideal_buy": 30.434,
+          "secondary_buy": 27.013,
+          "stop_loss": 24.816,
+          "take_profit": 36.5715,
           "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
         },
         "checklist": [
@@ -224,7 +572,7 @@
           },
           {
             "item": "不追高",
-            "detail": "乖离MA5 +11.31%（阈值5.0%）",
+            "detail": "乖离MA5 +14.44%（阈值5.0%）",
             "status": "不满足"
           },
           {
@@ -234,17 +582,17 @@
           },
           {
             "item": "结构空间",
-            "detail": "止损 23.1285 → 目标 29.19",
+            "detail": "止损 24.816 → 目标 36.5715",
             "status": "满足"
           }
         ],
         "summary": "乖离偏高，不追高，等回踩"
       },
       "sniper": {
-        "ideal_buy": 24.976,
-        "secondary_buy": 24.022,
-        "stop_loss": 23.1285,
-        "take_profit": 29.19,
+        "ideal_buy": 30.434,
+        "secondary_buy": 27.013,
+        "stop_loss": 24.816,
+        "take_profit": 36.5715,
         "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
       },
       "checklist": [
@@ -255,7 +603,7 @@
         },
         {
           "item": "不追高",
-          "detail": "乖离MA5 +11.31%（阈值5.0%）",
+          "detail": "乖离MA5 +14.44%（阈值5.0%）",
           "status": "不满足"
         },
         {
@@ -265,7 +613,7 @@
         },
         {
           "item": "结构空间",
-          "detail": "止损 23.1285 → 目标 29.19",
+          "detail": "止损 24.816 → 目标 36.5715",
           "status": "满足"
         }
       ],
@@ -273,8 +621,8 @@
       "summary": "乖离偏高，不追高，等回踩"
     },
     {
-      "code": "600519",
-      "name": "贵州茅台",
+      "code": "600089",
+      "name": "特变电工",
       "board": "沪市主板",
       "rules": [
         "breakout"
@@ -284,110 +632,23 @@
       ],
       "category": "观察池",
       "market_pass": false,
-      "close": 1480.0,
-      "change_pct": 2.84,
-      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
-      "observe_for": "下一交易日",
-      "trade_plan": {
-        "ma5": 1399.18,
-        "ma10": 1366.496,
-        "ma20": 1329.504,
-        "bias_ma5": 5.78,
-        "alignment": "多头排列 MA5>MA10>MA20",
-        "chase_risk": true,
-        "plan_ready": false,
-        "sniper": {
-          "ideal_buy": 1399.18,
-          "secondary_buy": 1366.496,
-          "stop_loss": 1302.9139,
-          "take_profit": 1554.0,
-          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
-        },
-        "checklist": [
-          {
-            "item": "均线多头",
-            "detail": "多头排列 MA5>MA10>MA20",
-            "status": "满足"
-          },
-          {
-            "item": "不追高",
-            "detail": "乖离MA5 +5.78%（阈值5.0%）",
-            "status": "不满足"
-          },
-          {
-            "item": "量能",
-            "detail": "不低于5日均量八成",
-            "status": "满足"
-          },
-          {
-            "item": "结构空间",
-            "detail": "止损 1302.9139 → 目标 1554.0",
-            "status": "满足"
-          }
-        ],
-        "summary": "乖离偏高，不追高，等回踩"
-      },
-      "sniper": {
-        "ideal_buy": 1399.18,
-        "secondary_buy": 1366.496,
-        "stop_loss": 1302.9139,
-        "take_profit": 1554.0,
-        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
-      },
-      "checklist": [
-        {
-          "item": "均线多头",
-          "detail": "多头排列 MA5>MA10>MA20",
-          "status": "满足"
-        },
-        {
-          "item": "不追高",
-          "detail": "乖离MA5 +5.78%（阈值5.0%）",
-          "status": "不满足"
-        },
-        {
-          "item": "量能",
-          "detail": "不低于5日均量八成",
-          "status": "满足"
-        },
-        {
-          "item": "结构空间",
-          "detail": "止损 1302.9139 → 目标 1554.0",
-          "status": "满足"
-        }
-      ],
-      "plan_ready": false,
-      "summary": "乖离偏高，不追高，等回踩"
-    },
-    {
-      "code": "600887",
-      "name": "伊利股份",
-      "board": "沪市主板",
-      "rules": [
-        "breakout"
-      ],
-      "rule_labels": [
-        "突破前高"
-      ],
-      "category": "观察池",
-      "market_pass": false,
-      "close": 31.47,
-      "change_pct": 2.78,
+      "close": 18.92,
+      "change_pct": 2.22,
       "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；次日可按回踩计划观察",
       "observe_for": "下一交易日",
       "trade_plan": {
-        "ma5": 30.076,
-        "ma10": 29.146,
-        "ma20": 28.4865,
-        "bias_ma5": 4.63,
+        "ma5": 18.216,
+        "ma10": 17.981,
+        "ma20": 17.7085,
+        "bias_ma5": 3.86,
         "alignment": "多头排列 MA5>MA10>MA20",
         "chase_risk": false,
         "plan_ready": true,
         "sniper": {
-          "ideal_buy": 30.076,
-          "secondary_buy": 29.146,
-          "stop_loss": 27.9168,
-          "take_profit": 33.0435,
+          "ideal_buy": 18.216,
+          "secondary_buy": 17.981,
+          "stop_loss": 17.3543,
+          "take_profit": 19.866,
           "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
         },
         "checklist": [
@@ -398,7 +659,7 @@
           },
           {
             "item": "不追高",
-            "detail": "乖离MA5 +4.63%（阈值5.0%）",
+            "detail": "乖离MA5 +3.86%（阈值5.0%）",
             "status": "注意"
           },
           {
@@ -408,17 +669,17 @@
           },
           {
             "item": "结构空间",
-            "detail": "止损 27.9168 → 目标 33.0435",
+            "detail": "止损 17.3543 → 目标 19.866",
             "status": "满足"
           }
         ],
         "summary": "次日可按回踩计划观察"
       },
       "sniper": {
-        "ideal_buy": 30.076,
-        "secondary_buy": 29.146,
-        "stop_loss": 27.9168,
-        "take_profit": 33.0435,
+        "ideal_buy": 18.216,
+        "secondary_buy": 17.981,
+        "stop_loss": 17.3543,
+        "take_profit": 19.866,
         "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
       },
       "checklist": [
@@ -429,7 +690,7 @@
         },
         {
           "item": "不追高",
-          "detail": "乖离MA5 +4.63%（阈值5.0%）",
+          "detail": "乖离MA5 +3.86%（阈值5.0%）",
           "status": "注意"
         },
         {
@@ -439,7 +700,7 @@
         },
         {
           "item": "结构空间",
-          "detail": "止损 27.9168 → 目标 33.0435",
+          "detail": "止损 17.3543 → 目标 19.866",
           "status": "满足"
         }
       ],
@@ -447,8 +708,97 @@
       "summary": "次日可按回踩计划观察"
     },
     {
-      "code": "601318",
-      "name": "中国平安",
+      "code": "600900",
+      "name": "长江电力",
+      "board": "沪市主板",
+      "rules": [
+        "trend",
+        "reclaim"
+      ],
+      "rule_labels": [
+        "趋势延续",
+        "收复均线"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 29.91,
+      "change_pct": 2.15,
+      "note": "次日仅观察：趋势延续、收复均线；沪深300未站上MA20，偏防守；趋势未齐，仅观察不优先",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 29.644,
+        "ma10": 29.704,
+        "ma20": 29.6035,
+        "bias_ma5": 0.9,
+        "alignment": "均线纠缠",
+        "chase_risk": false,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 29.644,
+          "secondary_buy": 29.704,
+          "stop_loss": 29.0114,
+          "take_profit": 31.4055,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "均线纠缠",
+            "status": "注意"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +0.90%（阈值5.0%）",
+            "status": "满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 29.0114 → 目标 31.4055",
+            "status": "满足"
+          }
+        ],
+        "summary": "趋势未齐，仅观察不优先"
+      },
+      "sniper": {
+        "ideal_buy": 29.644,
+        "secondary_buy": 29.704,
+        "stop_loss": 29.0114,
+        "take_profit": 31.4055,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "均线纠缠",
+          "status": "注意"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +0.90%（阈值5.0%）",
+          "status": "满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 29.0114 → 目标 31.4055",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "趋势未齐，仅观察不优先"
+    },
+    {
+      "code": "600986",
+      "name": "浙文互联",
       "board": "沪市主板",
       "rules": [
         "breakout"
@@ -458,23 +808,110 @@
       ],
       "category": "观察池",
       "market_pass": false,
-      "close": 54.59,
-      "change_pct": 2.77,
-      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；次日可按回踩计划观察",
+      "close": 7.76,
+      "change_pct": 1.44,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
       "observe_for": "下一交易日",
       "trade_plan": {
-        "ma5": 53.204,
-        "ma10": 52.515,
-        "ma20": 52.3315,
-        "bias_ma5": 2.61,
-        "alignment": "多头排列 MA5>MA10>MA20",
-        "chase_risk": false,
-        "plan_ready": true,
+        "ma5": 7.222,
+        "ma10": 6.986,
+        "ma20": 6.995,
+        "bias_ma5": 7.45,
+        "alignment": "弱势多头（MA10未上MA20）",
+        "chase_risk": true,
+        "plan_ready": false,
         "sniper": {
-          "ideal_buy": 53.204,
-          "secondary_buy": 52.515,
-          "stop_loss": 51.2849,
-          "take_profit": 57.3195,
+          "ideal_buy": 7.222,
+          "secondary_buy": 6.986,
+          "stop_loss": 6.8551,
+          "take_profit": 8.148,
+          "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+        },
+        "checklist": [
+          {
+            "item": "均线多头",
+            "detail": "弱势多头（MA10未上MA20）",
+            "status": "注意"
+          },
+          {
+            "item": "不追高",
+            "detail": "乖离MA5 +7.45%（阈值5.0%）",
+            "status": "不满足"
+          },
+          {
+            "item": "量能",
+            "detail": "不低于5日均量八成",
+            "status": "满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损 6.8551 → 目标 8.148",
+            "status": "满足"
+          }
+        ],
+        "summary": "乖离偏高，不追高，等回踩"
+      },
+      "sniper": {
+        "ideal_buy": 7.222,
+        "secondary_buy": 6.986,
+        "stop_loss": 6.8551,
+        "take_profit": 8.148,
+        "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
+      },
+      "checklist": [
+        {
+          "item": "均线多头",
+          "detail": "弱势多头（MA10未上MA20）",
+          "status": "注意"
+        },
+        {
+          "item": "不追高",
+          "detail": "乖离MA5 +7.45%（阈值5.0%）",
+          "status": "不满足"
+        },
+        {
+          "item": "量能",
+          "detail": "不低于5日均量八成",
+          "status": "满足"
+        },
+        {
+          "item": "结构空间",
+          "detail": "止损 6.8551 → 目标 8.148",
+          "status": "满足"
+        }
+      ],
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
+    },
+    {
+      "code": "601595",
+      "name": "上海电影",
+      "board": "沪市主板",
+      "rules": [
+        "breakout"
+      ],
+      "rule_labels": [
+        "突破前高"
+      ],
+      "category": "观察池",
+      "market_pass": false,
+      "close": 35.76,
+      "change_pct": 10.0,
+      "note": "次日仅观察：突破前高；沪深300未站上MA20，偏防守；乖离偏高，不追高，等回踩",
+      "observe_for": "下一交易日",
+      "trade_plan": {
+        "ma5": 32.044,
+        "ma10": 30.391,
+        "ma20": 29.151,
+        "bias_ma5": 11.6,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 32.044,
+          "secondary_buy": 30.391,
+          "stop_loss": 28.568,
+          "take_profit": 37.548,
           "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
         },
         "checklist": [
@@ -485,8 +922,8 @@
           },
           {
             "item": "不追高",
-            "detail": "乖离MA5 +2.61%（阈值5.0%）",
-            "status": "满足"
+            "detail": "乖离MA5 +11.60%（阈值5.0%）",
+            "status": "不满足"
           },
           {
             "item": "量能",
@@ -495,17 +932,17 @@
           },
           {
             "item": "结构空间",
-            "detail": "止损 51.2849 → 目标 57.3195",
+            "detail": "止损 28.568 → 目标 37.548",
             "status": "满足"
           }
         ],
-        "summary": "次日可按回踩计划观察"
+        "summary": "乖离偏高，不追高，等回踩"
       },
       "sniper": {
-        "ideal_buy": 53.204,
-        "secondary_buy": 52.515,
-        "stop_loss": 51.2849,
-        "take_profit": 57.3195,
+        "ideal_buy": 32.044,
+        "secondary_buy": 30.391,
+        "stop_loss": 28.568,
+        "take_profit": 37.548,
         "note": "理想买≈MA5，次优≈MA10，止损参考MA20下；目标取近20日高点与5%弹性较大者"
       },
       "checklist": [
@@ -516,8 +953,8 @@
         },
         {
           "item": "不追高",
-          "detail": "乖离MA5 +2.61%（阈值5.0%）",
-          "status": "满足"
+          "detail": "乖离MA5 +11.60%（阈值5.0%）",
+          "status": "不满足"
         },
         {
           "item": "量能",
@@ -526,15 +963,15 @@
         },
         {
           "item": "结构空间",
-          "detail": "止损 51.2849 → 目标 57.3195",
+          "detail": "止损 28.568 → 目标 37.548",
           "status": "满足"
         }
       ],
-      "plan_ready": true,
-      "summary": "次日可按回踩计划观察"
+      "plan_ready": false,
+      "summary": "乖离偏高，不追高，等回踩"
     }
   ],
-  "excluded_count": 70,
+  "excluded_count": 53,
   "limitations": [
     "热榜股票池有幸存者/人气偏差，不是全市场扫描",
     "收盘后判断、次日观察；点位为回踩预案，不等于自动下单或保证开盘可买",

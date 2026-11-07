@@ -3,6 +3,9 @@
   const el = id => document.getElementById(id);
   let state = null, timer = null, busy = false;
   let exchange = typeof location !== 'undefined' && /(?:\?|&)exchange=binance(?:&|$)/.test(location.search) ? 'binance' : 'okx';
+  let market = typeof location !== 'undefined' && /(?:\?|&)market=stock(?:&|$)/.test(location.search) ? 'stock' : 'crypto';
+  if(market==='stock')exchange='okx';
+  const marketLabel=()=>market==='stock'?'美股合约':'加密货币';
   let requestId = 0, activeController = null;
   const sources = {okx:'OKX',binance:'Binance'};
   const num = (value, digits = 2) => value == null || !Number.isFinite(value) ? '—'
@@ -16,9 +19,9 @@
     el('paper-toggle').textContent = state.enabled ? '暂停新开仓' : '启用自动模拟';
     el('paper-toggle').setAttribute('aria-pressed', String(state.enabled));
     const source = sources[exchange];
-    el('paper-source').textContent = `${source} · USDT 永续`;
-    el('paper-exchange-label').textContent = `PAPER ACCOUNT / ${source}`;
-    el('paper-position-exchange').textContent = `${source} · PAPER`;
+    el('paper-source').textContent = `${source} · ${marketLabel()}`;
+    el('paper-exchange-label').textContent = `PAPER ACCOUNT / ${source} / ${marketLabel()}`;
+    el('paper-position-exchange').textContent = `${source} · ${marketLabel()} · PAPER`;
     el('paper-signals-link').href = el('paper-radar-link').href = `/contracts?exchange=${exchange}`;
     el('paper-running').textContent = state.enabled ? `自动模拟运行中 · ${source} 合约`
       : state.positions.length ? '新开仓已暂停 · 现有持仓继续管理' : '自动模拟尚未启用';
@@ -37,6 +40,7 @@
     el('paper-position-note').textContent = state.valuation_fresh ? '按最新可成交侧报价估值，交易所原始合约代码。' : '部分报价过期；保留上次估值，暂停相应合约撮合。';
     const r = state.rules;
     el('paper-rule-tags').replaceChildren(...[
+      `${marketLabel()} · 固定 4 小时策略`, ...(state.legacy_position_count ? [`保留管理 ${state.legacy_position_count} 个历史跨类持仓`] : []),
       `初始本金 ${num(r.initial_balance)} USDT`, `单笔预算 ${num(r.order_budget)} USDT`,
       `${r.leverage} 倍名义敞口 / 最多 ${r.max_positions} 仓`,
       `止损 ${num(r.stop_pct * 100)}% / 止盈 ${num(r.target_pct * 100)}%`,
@@ -70,7 +74,7 @@
 
   async function request(enabled, force = false) {
     if(busy && !force)return;
-    const current = ++requestId, selectedExchange = exchange;
+    const current = ++requestId, selectedExchange = exchange, selectedMarket = market;
     if (activeController) activeController.abort();
     busy=true; el('paper-toggle').disabled=true;el('paper-refresh').disabled=true;
     if(timer!==null)clearTimeout(timer);
@@ -80,13 +84,14 @@
     let succeeded=false;
     try{
       const control=typeof enabled==='boolean';
-      const options=control?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({enabled,exchange:selectedExchange})}:{};
-      const response=await fetch(control?'/api/paper/control':`/api/paper?exchange=${selectedExchange}`,{...options,signal:controller.signal,cache:'no-store'});
+      const options=control?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({enabled,exchange:selectedExchange,market:selectedMarket})}:{};
+      const response=await fetch(control?'/api/paper/control':`/api/paper?exchange=${selectedExchange}&market=${selectedMarket}`,{...options,signal:controller.signal,cache:'no-store'});
       const data=await response.json();
       if(current !== requestId)return;
       if(!response.ok)throw Error(data.error||`HTTP ${response.status}`);
       if(!Array.isArray(data.positions)||!Array.isArray(data.trades))throw Error('无效的账户响应');
       if(data.rules.exchange !== sources[selectedExchange])throw Error('账户交易所不匹配');
+      if(data.rules.market && data.rules.market !== selectedMarket)throw Error('账户类型不匹配');
       state=data;render();succeeded=true;
     }catch(error){
       if(current !== requestId)return;
@@ -100,8 +105,13 @@
   }
   el('paper-refresh').addEventListener('click',()=>request());
   el('paper-toggle').addEventListener('click',()=>request(!state.enabled));
+  el('paper-market').value=market;
+  el('paper-binance-option').disabled=market==='stock';
   el('paper-exchange').value = exchange;
-  el('paper-exchange').addEventListener('change', () => {
+  function switchAccount() {
+    market=el('paper-market').value;
+    el('paper-binance-option').disabled=market==='stock';
+    if(market==='stock')el('paper-exchange').value='okx';
     exchange = el('paper-exchange').value;state=null;
     for (const id of ['paper-equity','paper-cash','paper-realized','paper-unrealized']) el(id).textContent='—';
     el('paper-positions').replaceChildren();el('paper-trades').replaceChildren();
@@ -114,6 +124,8 @@
     el('paper-position-note').textContent='等待所选交易所的持仓数据';
     el('paper-status').textContent = '正在切换账户…';el('paper-toggle').textContent='读取账户中…';
     return request(undefined,true);
-  });
+  }
+  el('paper-exchange').addEventListener('change',switchAccount);
+  el('paper-market').addEventListener('change',switchAccount);
   request();
 })();

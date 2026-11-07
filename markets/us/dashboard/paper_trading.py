@@ -7,7 +7,8 @@ import sqlite3
 import threading
 import time
 
-from contract_radar import STEP, number
+from contract_radar import STEP, WATCHLIST, number
+STOCK_SYMBOLS = {symbol for symbol, _, group in WATCHLIST if group == 'stock'}
 
 RULES = dict(initial_balance=10000.0, order_budget=1000.0, max_positions=3,
              fee_rate=.0006, slippage_rate=.0005, stop_pct=.02, target_pct=.04,
@@ -15,11 +16,18 @@ RULES = dict(initial_balance=10000.0, order_budget=1000.0, max_positions=3,
 
 
 class PaperAccount:
-    def __init__(self, path, exchange='OKX'):
+    def __init__(self, path, exchange='OKX', market='all'):
         self.path = Path(path)
         if exchange not in ('OKX', 'Binance'):
             raise ValueError('模拟账户仅支持 OKX / Binance')
         self.exchange = exchange
+        if market not in ('all','crypto','stock') or (exchange == 'Binance' and market == 'stock'):
+            raise ValueError('美股合约模拟目前由欧易提供；市场仅支持 crypto / stock')
+        self.market = market
+
+    def eligible(self, row):
+        group = row.get('group') or ('stock' if row.get('symbol') in STOCK_SYMBOLS else 'crypto')
+        return self.market == 'all' or group == self.market
 
     @contextmanager
     def transaction(self):
@@ -34,6 +42,10 @@ class PaperAccount:
             if state.get('exchange', 'OKX') != self.exchange:
                 raise ValueError('模拟账户的交易所与账本不一致')
             state['exchange'] = self.exchange
+            previous_market = state.get('market','all')
+            if previous_market not in ('all',self.market):
+                raise ValueError('模拟账户的市场类型与账本不一致')
+            state['market'] = self.market
             yield state
             encoded = json.dumps(state, ensure_ascii=False, allow_nan=False)
             if saved is None or saved[0] != encoded:
@@ -100,12 +112,14 @@ class PaperAccount:
             for key, signal in list(state['signals'].items()):
                 row = rows.get(signal['symbol'], {})
                 if not signal['used'] and (not self.quote_valid(row, now) or not self.structure_valid(row, now)
+                    or not self.eligible(row)
                     or row.get('direction') != signal['direction'] or row.get('candle_close_at') != signal['candle_close_at']):
                     del state['signals'][key]
             if not state['enabled']:
                 return
             for symbol, row in rows.items():
                 if (not self.quote_valid(row, now) or not self.structure_valid(row, now)
+                        or not self.eligible(row)
                         or row.get('direction') not in ('bullish', 'bearish') or symbol in closed):
                     continue
                 key = f"{symbol}:{row['candle_close_at']}:{row['direction']}"
@@ -142,6 +156,7 @@ class PaperAccount:
                     name=row.get('name', symbol), side='long' if side == 1 else 'short',
                     quantity=quantity, contracts=float(contracts), entry_price=entry,
                     quantity_unit=row.get('quantity_unit', '张'),
+                    market='stock' if symbol in STOCK_SYMBOLS else 'crypto', strategy_period_minutes=240,
                     notional=notional, entry_fee=fee, entry_time=now, entry_quote_at=row['quote_at'],
                     stop_price=entry * (1 - side * RULES['stop_pct']),
                     target_price=entry * (1 + side * RULES['target_pct']),
@@ -162,7 +177,8 @@ class PaperAccount:
             unrealized += position['unrealized_pnl']
             collateral += position['notional']
         all_trades = result['trades']
-        result.update(rules={**RULES, 'exchange': self.exchange}, unrealized_pnl=unrealized,
+        result.update(rules={**RULES, 'exchange': self.exchange, 'market': self.market}, unrealized_pnl=unrealized,
+                      legacy_position_count=sum(not self.eligible(p) for p in result['positions']),
                       realized_pnl=sum(trade['net_pnl'] for trade in all_trades),
                       equity=result['cash'] + collateral + unrealized,
                       valuation_fresh=all(position['quote_fresh'] for position in result['positions']),
@@ -206,8 +222,10 @@ class PaperRunner:
 
 
 from okx_contracts import SERVICE as OKX_RADAR
-ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading.sqlite3')
+ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading.sqlite3', market='crypto')
 RUNNER = PaperRunner(ACCOUNT, OKX_RADAR)
 from binance_contracts import SERVICE as BINANCE_RADAR
-BINANCE_ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading-binance.sqlite3', exchange='Binance')
+BINANCE_ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading-binance.sqlite3', exchange='Binance', market='crypto')
 BINANCE_RUNNER = PaperRunner(BINANCE_ACCOUNT, BINANCE_RADAR)
+STOCK_ACCOUNT = PaperAccount(Path(__file__).parent / 'cache' / 'paper-trading-okx-stock.sqlite3', market='stock')
+STOCK_RUNNER = PaperRunner(STOCK_ACCOUNT, OKX_RADAR)

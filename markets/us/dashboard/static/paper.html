@@ -17,14 +17,14 @@
       <a href="/a-review"><span>▣</span>盘后复盘</a><a href="/"><span>⌁</span>盘中信号</a>
       <a href="/contracts"><span>◉</span>合约雷达</a>
       <a class="nav-active" href="/paper" aria-current="page"><span>◈</span>模拟交易<span class="nav-dot"></span></a>
-    </nav>
+    <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a></nav>
     <div class="source-card"><span class="source-dot"></span> 本地模拟账户<strong id="paper-source">OKX · USDT 永续</strong><p>规则自动开平仓<br>不同交易所账户独立保存</p></div>
     <div class="sidebar-bottom"><div><strong>前向模拟 · 非历史回测</strong><small>账户和记录保存在本机</small></div><span class="local-tag">PAPER</span></div>
   </aside>
   <div class="main-shell">
     <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>模拟交易</strong></div><span id="paper-exchange-label" class="paper-mode">PAPER ACCOUNT / OKX</span></header>
     <main class="main-content contracts-page">
-      <div class="page-heading"><div><p class="eyebrow">FORWARD PAPER TRADING</p><h1>让规则，留下交易记录。</h1><p class="heading-note">欧易优先；币安使用独立模拟账户，资金、仓位与记录分别保存。</p></div><div class="refresh-controls"><label class="sr-only" for="paper-exchange">模拟交易所</label><select id="paper-exchange"><option value="okx">欧易 OKX（优先）</option><option value="binance">币安 Binance</option></select><button id="paper-refresh" type="button">刷新账户 ↻</button><button id="paper-toggle" type="button" disabled>读取账户中…</button></div></div>
+      <div class="page-heading"><div><p class="eyebrow">FORWARD PAPER TRADING</p><h1>让规则，留下交易记录。</h1><p class="heading-note">欧易优先 · 加密货币与美股合约分别模拟 · 各账户资金、仓位与记录独立保存。</p></div><div class="refresh-controls"><label class="sr-only" for="paper-exchange">模拟交易所</label><label for="paper-market">合约类型</label><select id="paper-market"><option value="crypto">加密货币</option><option value="stock">美股合约（OKX）</option></select><select id="paper-exchange"><option value="okx">欧易 OKX（优先）</option><option id="paper-binance-option" value="binance">币安 Binance</option></select><button id="paper-refresh" type="button">刷新账户 ↻</button><button id="paper-toggle" type="button" disabled>读取账户中…</button></div></div>
       <div class="paper-run-state"><span id="paper-running">正在读取运行状态</span><p id="paper-status" role="status">连接本地模拟账户…</p></div>
       <section class="contract-stats" aria-label="模拟账户摘要">
         <article class="contract-panel"><span id="equity-label">估算权益 / USDT</span><strong id="paper-equity">—</strong><small>现金 + 仓位本金 + 浮动盈亏</small></article>
@@ -35,7 +35,7 @@
       <section class="contract-panel paper-rules" aria-label="自动模拟规则">
         <div class="section-title"><h2>当前模拟规则</h2><a id="paper-signals-link" href="/contracts">查看合约信号 ↗</a></div>
         <div id="paper-rule-tags" class="paper-rule-tags"></div>
-        <p>4 小时看涨做多、看跌做空；首次发现信号后等待下一次新报价。同一标的、收盘周期与方向只开一次，不重复追单。结构转为观望或反向时退出。</p>
+        <p>雷达切换周期不改变本页策略。固定 4 小时看涨做多、看跌做空；首次发现信号后等待下一次新报价。同一标的、收盘周期与方向只开一次，不重复追单。结构转为观望或反向时退出。</p>
         <p>暂停仅停止新开仓，已有仓位继续执行退出规则。启用后由本地服务后台运行，关闭网页仍继续；服务停止期间不补造成交。</p>
         <div class="paper-cost-note">费用与滑点为模拟假设。首版未计资金费、深度冲击和强平；按采样报价触发止损止盈，可能错过两次报价之间的触价。跳空按当前买卖价模拟成交。</div>
       </section>
@@ -53,6 +53,6 @@
     </main>
   </div>
 </div>
-<script src="/static/paper.js?v=1"></script>
+<script src="/static/paper.js?v=2"></script>
 </body>
 </html>

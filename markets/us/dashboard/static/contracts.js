@@ -3,6 +3,8 @@
   const el = id => document.getElementById(id);
   const groups = [...document.querySelectorAll('[data-group]')];
   let items = [], selected = '', group = 'all', busy = false, paused = false;
+  let minutes = 240;
+  const periodLabel = () => minutes === 240 ? '4 小时' : `${minutes} 分钟`;
   let exchange = 'okx', source = 'OKX', requestId = 0, activeController = null;
   const sources = {okx:'OKX',binance:'Binance',bitget:'Bitget'};
   if (typeof location !== 'undefined') {
@@ -11,7 +13,7 @@
   }
   const docs = {okx:'https://www.okx.com/docs-v5/en/',binance:'https://developers.binance.com/en/docs/catalog/core-trading-derivatives-trading-usd-s-m-futures/api/rest-api/market-data',bitget:'https://www.bitget.com/docs/catalog/classic-contract-market/classic-contract-market'};
   let timer = null, failed = false, serverError = '', generated = null, status = 'idle', total = 0;
-  let chart = null, series = null, chartKey = '', freshnessKey = '';
+  let chartKey = '', freshnessKey = '';
   const number = (value, digits = 2) => value == null || !Number.isFinite(value) ? '—'
     : value.toLocaleString('en-US', {maximumFractionDigits: digits, minimumFractionDigits: 0});
   const price = value => number(value, value != null && Math.abs(value) < 1 ? 6 : 2);
@@ -26,33 +28,17 @@
   function view(row) {
     const age = Date.now() - row.quote_at;
     const fresh = row.quote_at != null && row.quote_fresh && age >= -5000 && age <= 30000;
-    const structure = row.structure_fresh && row.candle_close_at === Math.floor(Date.now() / 14400000) * 14400000;
+    const structure = row.structure_fresh && row.candle_close_at === Math.floor(Date.now() / (minutes * 60000)) * (minutes * 60000);
     const valid = fresh && structure && !failed && !serverError;
     return {...row, fresh, valid, direction: valid ? row.direction : 'observe', label: valid ? row.label : '待确认'};
   }
 
+  const chartView=window.MarketChart?new window.MarketChart(el('contract-chart'),el('chart-legend')):null;
   function renderChart(row) {
-    const rows = row?.candles || [];
-    el('chart-status').textContent = rows.length ? `${rows.length} 根已收盘 K 线 · 时间显示北京时间` : '暂无完整的合约 K 线';
-    if (!el('chart-details').open || !window.LightweightCharts) return;
-    const key = `${row.symbol}:${row.candle_close_at}`;
-    if (key === chartKey) return;
-    const L = window.LightweightCharts;
-    if (!chart) {
-      chart = L.createChart(el('contract-chart'), {autoSize:true,
-        layout:{background:{color:'#182126'},textColor:'#8fa5b2'},
-        grid:{vertLines:{color:'#26333b'},horzLines:{color:'#26333b'}},
-        timeScale:{timeVisible:true,secondsVisible:false,
-          tickMarkFormatter:seconds => new Date(seconds * 1000).toLocaleString('zh-CN', {
-            timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false})},
-        localization:{timeFormatter: seconds => time(seconds * 1000)},
-      });
-      series = chart.addSeries(L.CandlestickSeries, {upColor:'#65c4aa',downColor:'#ef8b87',
-        borderVisible:false,wickUpColor:'#65c4aa',wickDownColor:'#ef8b87'});
-    }
-    series.applyOptions({priceFormat:{type:'price',precision:row.price < 1 ? 6 : 2,minMove:row.price < 1 ? .000001 : .01}});
-    series.setData(rows.map(candle => ({...candle,time:candle.time / 1000})));
-    chart.timeScale().fitContent(); chartKey = key;
+    const rows=row?.chart_candles||row?.candles||[];
+    const forming=rows.at(-1)?.complete===false;
+    el('chart-status').textContent=rows.length?`${rows.length} 根 K 线 · ${forming?'末根形成中，未参与信号':'当前无形成中 K 线'} · 下方量柱：基础币 · 采集约 10 秒更新，非逐笔推送 · 北京时间`:'暂无完整合约 K 线与成交量';
+    if(el('chart-details').open&&chartView)chartView.render(row);
   }
 
   function renderDetail(rows) {
@@ -70,7 +56,7 @@
     el('detail-reasons').replaceChildren(...reasons.map(text => {
       const li = document.createElement('li'); li.textContent = text; return li;
     }));
-    el('detail-invalidation').textContent = row.valid ? row.invalidation : '等待新鲜报价与完整 4 小时结构后重新判断。';
+    el('detail-invalidation').textContent = row.valid ? row.invalidation : `等待新鲜报价与完整 ${periodLabel()}结构后重新判断。`;
     el('detail-ema20').textContent = price(row.ema20);
     el('detail-ema50').textContent = price(row.ema50);
     el('detail-closed-at').textContent = `结构收盘时间：${time(row.candle_close_at)}`;
@@ -78,6 +64,8 @@
   }
 
   function render() {
+    el('chart-summary').textContent = `查看该合约 ${periodLabel()} K 线与成交量`;
+    el('contract-chart').setAttribute('aria-label', `${periodLabel()} K 线`);
     const rows = items.map(view);
     freshnessKey = rows.map(row => `${row.symbol}:${row.valid}`).join(',');
     const counts = {bullish:0,bearish:0,observe:0};
@@ -95,7 +83,7 @@
       tr.className = row.symbol === selected ? 'selected' : '';
       const changeClass = row.change_pct > 0 ? 'bullish' : row.change_pct < 0 ? 'bearish' : '';
       tr.innerHTML = `<td><button type="button">${escape(row.symbol)}</button><small>${escape(row.name)} · ${escape(row.category_label || '')}</small></td>
-        <td><span class="direction-badge ${row.direction}">${escape(row.label)}</span><small>4 小时结构</small></td>
+        <td><span class="direction-badge ${row.direction}">${escape(row.label)}</span><small>${periodLabel()}结构</small></td>
         <td><strong>${price(row.price)}</strong><small>${escape(row.source)} · ${escape(time(row.quote_at))}</small></td>
         <td class="${changeClass}">${percent(row.change_pct)}</td>
         <td class="level support">${price(row.support)}<small>近 20 根最低价</small></td>
@@ -109,7 +97,7 @@
     }));
     el('empty-results').hidden = filtered.length > 0 || items.length === 0;
     el('board-loading').hidden = items.length > 0;
-    el('board-loading').textContent = failed || serverError ? '合约行情暂不可用，请稍后重试。' : '首次读取合约与 4 小时 K 线，稍候…';
+    el('board-loading').textContent = failed || serverError ? '合约行情暂不可用，请稍后重试。' : `首次读取合约与 ${periodLabel()} K 线，稍候…`;
     groups.forEach(button => {
       button.classList.toggle('selected', button.dataset.group === group);
       button.setAttribute('aria-pressed', String(button.dataset.group === group));
@@ -145,7 +133,7 @@
     activeController = controller;
     const timeout = setTimeout(() => controller.abort(), 12000);
     try {
-      const response = await fetch(`/api/contracts?exchange=${exchange}`, {signal:controller.signal,cache:'no-store'});
+      const response = await fetch(`/api/contracts?exchange=${exchange}&period=${minutes}`, {signal:controller.signal,cache:'no-store'});
       if (!response.ok) throw Error(`HTTP ${response.status}`);
       const payload = await response.json();
       if (current !== requestId) return;
@@ -173,12 +161,23 @@
   el('category-filter').addEventListener('change', () => {if (el('category-filter').value !== 'all') group = 'crypto';render();});
   el('refresh-interval').addEventListener('change', schedule);
   el('refresh-now').addEventListener('click', load);
+  el('signal-period').value = '240';
+  el('signal-period').addEventListener('change', () => {
+    minutes = Number(el('signal-period').value);
+    items=[]; selected=''; chartKey=''; generated=null; total=0; failed=false; serverError='';
+    if(chartView)chartView.clear();
+    for(const id of ['detail-price','detail-ema20','detail-ema50','detail-time','detail-closed-at'])el(id).textContent='—';
+    el('detail-symbol').textContent='等待行情';el('detail-direction').textContent='待确认';
+    el('detail-direction').className='direction-badge';el('detail-reasons').replaceChildren();
+    el('detail-invalidation').textContent='等待所选周期的完整结构';
+    render();return load(true);
+  });
   el('exchange-source').value = exchange;
   el('exchange-source').addEventListener('change', () => {
     exchange = el('exchange-source').value; source = sources[exchange];
     if (exchange === 'binance' && group === 'stock') group = 'crypto';
     items = []; selected = ''; chartKey = ''; generated = null; total = 0; failed = false; serverError = '';
-    if (series) series.setData([]);
+    if(chartView)chartView.clear();
     for (const id of ['detail-price','detail-ema20','detail-ema50','detail-time','detail-closed-at']) el(id).textContent = '—';
     el('detail-symbol').textContent = '等待行情'; el('detail-direction').textContent = '待确认';
     el('detail-direction').className = 'direction-badge';

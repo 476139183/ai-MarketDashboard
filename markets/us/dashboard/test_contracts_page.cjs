@@ -90,3 +90,12 @@ test('从币安模拟账户进入信号页时保留显式来源，普通入口�
  assert.match(p.urls[0],/exchange=binance/);
  assert.match(p.nodes.get('detail-source').textContent,/Binance/);
 });
+
+
+test('分钟周期切换同时更改 API 参数、详情与表格口径',async()=>{
+ const p=page();await p.settle();
+ p.nodes.get('signal-period').value='10';await p.nodes.get('signal-period').handlers.change();await p.settle();
+ assert.match(p.urls.at(-1),/period=10/);
+ assert.match(p.nodes.get('chart-summary').textContent,/10 分钟/);
+ assert.match(p.nodes.get('contract-rows').children[0].innerHTML,/10 分钟结构/);
+});

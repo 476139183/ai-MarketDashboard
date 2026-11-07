@@ -61,7 +61,7 @@ def main():
                 'DSA_BASE_URL', 'DSA_SESSION_COOKIE',
                 'CN_DAILY_SOURCES', 'US_DAILY_SOURCES',
                 'FEEDS_CROSSCHECK', 'TUSHARE_TOKEN',
-                'ALPHAVANTAGE_API_KEY', 'FINNHUB_API_KEY',
+                'ALPHAVANTAGE_API_KEY', 'FINNHUB_API_KEY', 'MASSIVE_API_KEY',
             )
             if separator and key.strip() in feed_keys:
                 parts = shlex.split(value, comments=True)

@@ -19,6 +19,9 @@ class PaperAPITests(unittest.TestCase):
         substitute = patch('app.paper_runner', self.runner)
         substitute.start()
         self.addCleanup(substitute.stop)
+        self.stock_runner=PaperRunner(PaperAccount(Path(directory.name)/'stocks.db',market='stock'),None)
+        stock=patch('app.stock_paper_runner',self.stock_runner);stock.start();self.addCleanup(stock.stop)
+        stock_start=patch.object(self.stock_runner,'start');stock_start.start();self.addCleanup(stock_start.stop)
         other = patch('app.binance_paper_runner', self.binance_runner)
         other.start()
         self.addCleanup(other.stop)
@@ -92,6 +95,28 @@ class PaperAPITests(unittest.TestCase):
             status, data = self.call('GET', '/api/contracts?exchange=binance')
         self.assertEqual(status, 200)
         self.assertEqual(json.loads(data)['source'], 'Binance')
+
+    def test_stock_account_control_is_independent_and_binance_stock_rejected(self):
+        status,data=self.call('POST','/api/paper/control',{'enabled':True,'exchange':'okx','market':'stock'})
+        self.assertEqual(status,200)
+        self.assertEqual(json.loads(data)['rules']['market'],'stock')
+        self.assertFalse(self.runner.snapshot()['enabled'])
+        self.assertEqual(self.call('GET','/api/paper?exchange=binance&market=stock')[0],400)
+        self.assertEqual(self.call('GET','/api/paper?market=invalid')[0],400)
+
+    def test_period_rejected_and_us_page_and_api_available(self):
+        self.assertEqual(self.call('GET','/api/contracts?period=2')[0],400)
+        self.assertEqual(self.call('GET','/api/us-radar?period=240')[0],400)
+        self.assertEqual(self.call('GET','/api/us-radar?symbols=../NVDA')[0],400)
+        self.assertIn(b'us-radar.js',self.call('GET','/us-radar')[1])
+        with patch('app.us_radar.payload',return_value={'items':[]}) as radar:
+            self.assertEqual(self.call('GET','/api/us-radar?symbols=NVDA,MU&period=10&provider=nasdaq&session=post')[0],200)
+            radar.assert_called_once_with(['NVDA','MU'],'10','post','nasdaq')
+    def test_live_chart_selects_independent_service_and_rejects_batch_symbols(self):
+        with patch('app.us_chart.payload',return_value={'items':[]}) as chart:
+            self.assertEqual(self.call('GET','/api/us-chart?symbols=SNDK&period=5&provider=sina')[0],200)
+            chart.assert_called_once_with(['SNDK'],'5','all','sina')
+        self.assertEqual(self.call('GET','/api/us-chart?symbols=SNDK,NVDA')[0],400)
 
 
 if __name__ == '__main__':

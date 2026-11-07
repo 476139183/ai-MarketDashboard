@@ -415,6 +415,8 @@ def fetch_nasdaq_quote(symbol: str, *, force: bool = False) -> Optional[Dict[str
         "market_status": status,
         "ts": primary.get("lastTradeTimestamp") or (secondary or {}).get("lastTradeTimestamp"),
         "change_pct": chg,
+        "day_volume": _parse_money(primary.get("volume")),
+        "day_volume_date": primary.get("lastTradeTimestamp"),
         "day_high": day_hi,
         "day_low": day_lo,
     }
@@ -466,6 +468,8 @@ def fetch_nasdaq_intraday_points(symbol: str) -> Tuple[List[dict], dict]:
         "regularMarketPrice": _parse_money(data.get("lastSalePrice")),
         "previousClose": _parse_money(data.get("previousClose")),
         "timeAsOf": data.get("timeAsOf"),
+        "day_volume": _parse_money(data.get("volume")),
+        "day_volume_date": data.get("timeAsOf"),
         "source": "Nasdaq chart",
     }
     return points, meta

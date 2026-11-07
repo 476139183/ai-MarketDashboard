@@ -70,8 +70,10 @@ class BinanceFeed:
     def __call__(self, path, params):
         if path == 'candles':
             now = time.time() * 1000
-            rows = self.fetch('klines', {'symbol': params['symbol'], 'interval': '4h', 'limit': '120'})
-            return [row[:6] + [row[7]] for row in rows if len(row) >= 8 and row[6] < now]
+            rows = self.fetch('klines', {'symbol': params['symbol'],
+                                        'interval': params.get('granularity','4H').lower(),
+                                        'limit': params.get('limit','120')})
+            return [row[:6] + [row[7]] for row in rows if len(row) >= 8 and (row[6] < now or params.get('include_open'))]
         if path != 'tickers':
             raise ValueError('不支持的公开行情接口')
         with ThreadPoolExecutor(max_workers=4) as pool:

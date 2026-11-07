@@ -41,9 +41,10 @@ class OKXFeed:
     def __call__(self, path, params):
         if path == 'candles':
             instrument = params['symbol'][:-4] + '-USDT-SWAP'
-            rows = self.fetch('market/candles', {'instId': instrument, 'bar': '4H', 'limit': '120'})
+            rows = self.fetch('market/candles', {'instId': instrument, 'bar': params.get('granularity','4H'),
+                                                'limit': params.get('limit','120')})
             # OKX volume[5] is contracts, volume[6] is base currency; confirm[8] is authoritative.
-            return [row[:5] + row[6:8] for row in rows if len(row) >= 9 and row[8] == '1']
+            return [row[:5] + row[6:8] + ([row[8]=='1'] if params.get('include_open') else []) for row in rows if len(row) >= 9 and (row[8] == '1' or (params.get('include_open') and row[8] == '0'))]
         if path != 'tickers':
             raise ValueError('不支持的公开行情接口')
         quotes = self.fetch('market/tickers', {'instType': 'SWAP'})

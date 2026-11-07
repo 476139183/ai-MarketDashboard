@@ -20,7 +20,10 @@ from dsa_client import DSAClient, DSAError
 from contract_radar import SERVICE as bitget_radar
 from okx_contracts import SERVICE as contract_radar
 from binance_contracts import SERVICE as binance_radar
-from paper_trading import RUNNER as paper_runner, BINANCE_RUNNER as binance_paper_runner
+from contract_radar import ContractRadar
+from radar_periods import period_minutes
+from us_radar import SERVICE as us_radar, LIVE_SERVICE as us_chart
+from paper_trading import RUNNER as paper_runner, BINANCE_RUNNER as binance_paper_runner, STOCK_RUNNER as stock_paper_runner
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
@@ -39,6 +42,34 @@ _RADAR_LOCK = threading.Lock()
 _RADAR_STATE = {'status': 'idle', 'error': None, 'started_at': None}
 _REVIEW_LOCK = threading.Lock()
 _REVIEW_STATE = {'status': 'idle', 'error': None}
+_CONTRACT_PERIODS = {}
+_CONTRACT_PERIOD_LOCK = threading.Lock()
+
+
+def select_paper_runner(exchange='okx', market='crypto'):
+    if exchange not in ('okx','binance') or market not in ('crypto','stock'):
+        raise ValueError('模拟交易仅支持 okx / binance 与 crypto / stock')
+    if market == 'stock':
+        if exchange != 'okx':
+            raise ValueError('美股合约模拟目前仅支持欧易 OKX')
+        return stock_paper_runner
+    return paper_runner if exchange == 'okx' else binance_paper_runner
+
+
+def select_contract_radar(exchange='okx', minutes=240):
+    sources = {'okx':contract_radar, 'binance':binance_radar, 'bitget':bitget_radar}
+    if exchange not in sources:
+        raise ValueError('行情来源仅支持 okx / bitget / binance')
+    minutes = period_minutes(minutes)
+    base = sources[exchange]
+    if minutes == 240:
+        return base
+    key=(exchange,minutes)
+    with _CONTRACT_PERIOD_LOCK:
+        if key not in _CONTRACT_PERIODS:
+            _CONTRACT_PERIODS[key]=ContractRadar(base.fetch,base.watchlist,source=base.source,
+                                                candle_workers=base.candle_workers,minutes=minutes)
+        return _CONTRACT_PERIODS[key]
 
 
 def load_monitor_report(path: Path, now: datetime) -> dict:
@@ -190,10 +221,7 @@ class Handler(BaseHTTPRequestHandler):
             if not isinstance(body, dict):
                 raise ValueError('请求必须是 JSON 对象')
             if path == '/api/paper/control':
-                exchange = body.get('exchange', 'okx')
-                if exchange not in ('okx', 'binance'):
-                    raise ValueError('模拟交易仅支持 okx / binance')
-                runner = paper_runner if exchange == 'okx' else binance_paper_runner
+                runner = select_paper_runner(body.get('exchange','okx'),body.get('market','crypto'))
                 runner.account.set_enabled(body.get('enabled'))
                 runner.start()
                 self._json(200, runner.snapshot())
@@ -214,16 +242,30 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if path in ('/us-radar', '/us-radar/'):
+            self._send(200, (STATIC / 'us-radar.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+
+        if path in ('/api/us-radar','/api/us-chart'):
+            qs=parse_qs(parsed.query)
+            try:
+                symbols=(qs.get('symbols') or [','.join(_load_watchlist()[:8])])[0].split(',')
+                if path=='/api/us-chart' and len(symbols)!=1:raise ValueError('实时图表每次仅支持一只美股')
+                service=us_chart if path=='/api/us-chart' else us_radar
+                self._json(200,service.payload(symbols,(qs.get('period') or ['15'])[0],
+                                              (qs.get('session') or ['all'])[0],(qs.get('provider') or ['auto'])[0]))
+            except ValueError as exc:
+                self._json(400,{'error':str(exc)})
+            return
+
         if path in ('/paper', '/paper/'):
             self._send(200, (STATIC / 'paper.html').read_bytes(), 'text/html; charset=utf-8')
             return
 
         if path == '/api/paper':
             try:
-                exchange = (parse_qs(parsed.query).get('exchange') or ['okx'])[0]
-                if exchange not in ('okx', 'binance'):
-                    raise ValueError('模拟交易仅支持 okx / binance')
-                runner = paper_runner if exchange == 'okx' else binance_paper_runner
+                qs=parse_qs(parsed.query)
+                runner = select_paper_runner((qs.get('exchange') or ['okx'])[0],(qs.get('market') or ['crypto'])[0])
                 self._json(200, runner.snapshot())
             except ValueError as exc:
                 self._json(400, {'error': str(exc)})
@@ -236,12 +278,12 @@ class Handler(BaseHTTPRequestHandler):
             return
 
         if path == '/api/contracts':
-            exchange = (parse_qs(parsed.query).get('exchange') or ['okx'])[0]
-            sources = {'okx': contract_radar, 'bitget': bitget_radar, 'binance': binance_radar}
-            if exchange not in sources:
-                self._json(400, {'error': '行情来源仅支持 okx / bitget / binance'})
-                return
-            self._json(200, sources[exchange].payload())
+            qs=parse_qs(parsed.query)
+            try:
+                service=select_contract_radar((qs.get('exchange') or ['okx'])[0],(qs.get('period') or ['240'])[0])
+                self._json(200,service.payload())
+            except ValueError as exc:
+                self._json(400,{'error':str(exc)})
             return
 
         if path == '/api/history-samples':
@@ -419,6 +461,7 @@ def main() -> None:
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     paper_runner.start()
     binance_paper_runner.start()
+    stock_paper_runner.start()
     print(f"信号看板: http://{HOST}:{PORT}")
     print("Ctrl+C 退出")
     try:
@@ -429,6 +472,7 @@ def main() -> None:
     finally:
         paper_runner.stop_event.set()
         binance_paper_runner.stop_event.set()
+        stock_paper_runner.stop_event.set()
 
 
 if __name__ == "__main__":
