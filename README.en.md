@@ -25,6 +25,7 @@ Daily China/US equity charts, US intraday charts and perpetual charts share conf
 | A-share scanner | Filtered popularity universe | End-of-day trend candidates, observation lists and next-session plans |
 | A-share market review | Indices, breadth and sectors | Market tone, advancing/declining stocks and sector performance |
 | US stock radar | Original US equities, priced in USD | Intraday OHLCV, 1–60 minute charts and pre-market/regular/after-hours filters |
+| China commodity futures | 12 commodity products, quoted in CNY | Continuous and dated contracts, daily/5/15/30/60-minute OHLCV, open interest and historical technical statistics |
 | Perpetual futures radar | USDT perpetuals | OKX, Binance and Bitget market data, EMA trends, funding and estimated open-interest notional |
 | Paper trading | OKX and Binance contracts | Rule-based simulated entries/exits, fees, slippage, position valuation and persistent history |
 | Historical research | Available public samples | Imports, coverage audits, rule comparisons and replay tools |
@@ -88,6 +89,7 @@ Open:
 | Page | Local URL |
 |---|---|
 | US stock radar | http://127.0.0.1:8766/us-radar |
+| China commodity futures | http://127.0.0.1:8766/futures |
 | Perpetual futures radar | http://127.0.0.1:8766/contracts |
 | Paper trading | http://127.0.0.1:8766/paper |
 | OKX stock-perpetual paper account | http://127.0.0.1:8766/paper?market=stock |
@@ -153,6 +155,12 @@ The charts support zooming, panning and OHLCV hover readouts. Stock volume bars 
 | Bitget | 24 crypto symbols and six stock perpetuals | Market data only |
 
 The predefined stock-perpetual list is MU, NVDA, TSLA, SNDK, AMD and AAPL. Crypto categories cover majors, Layer 1, Layer 2, DeFi, meme assets and infrastructure. Availability always depends on the exchange response; a watchlist entry is not a guarantee that a product remains listed.
+
+## China commodity futures analysis
+
+The futures workspace covers rebar, gold, silver, copper, aluminium, crude oil, fuel oil, soybean meal, soybean oil, palm oil, corn and iron ore. Select a continuous symbol such as `RB0` or a dated contract such as `RB2701`. Public Sina quotes and K-lines do not require DSA or an AI key.
+
+Changes use the previous settlement as their baseline. Prices retain each product's quotation unit; volume and open interest use lots. SMA20/60, ATR14, recent high/low references and volume/open-interest changes describe completed bars only. Minute timestamps retain source period ends; current/future-date daily bars are conservatively excluded. Continuous contracts can contain roll gaps and are not directly tradable. This workspace does not use the crypto paper-trading accounts or strategies. See [data semantics and limitations](docs/features/domestic-futures.md).
 
 ## Paper trading rules
 

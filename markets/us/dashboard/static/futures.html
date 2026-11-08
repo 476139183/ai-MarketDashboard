@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>观市 · 国内商品期货分析</title>
+  <link rel="stylesheet" href="/static/research.css?v=3">
+  <link rel="stylesheet" href="/static/contracts.css?v=3">
+  <link rel="stylesheet" href="/static/futures.css?v=1">
+</head>
+<body class="contracts-workspace">
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav" aria-label="工作空间">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a href="/a-radar"><span>◎</span>A 股明日盯盘</a>
+      <a href="/a-review"><span>▣</span>盘后复盘</a>
+      <a href="/"><span>⌁</span>盘中信号</a>
+      <a href="/contracts"><span>◉</span>合约雷达</a>
+      <a href="/paper"><span>◈</span>模拟交易</a>
+      <a href="/us-radar"><span>◌</span>美股雷达</a>
+      <a class="nav-active" href="/futures" aria-current="page"><span>▥</span>期货分析</a>
+      <a href="/news"><span>▤</span>资讯与事件</a>
+    </nav>
+    <div class="source-card"><span class="source-dot"></span> 国内商品期货<strong>新浪财经 · 公开行情</strong><p>主力连续 / 月份合约<br>价格单位按品种标注</p></div>
+    <div class="sidebar-bottom"><div><strong>量价与持仓观察</strong><small>历史结构 · 北京时间</small></div><span class="local-tag">LOCAL</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>期货分析</strong></div><span>国内商品 · CNY</span></header>
+    <main class="main-content contracts-page">
+      <div class="page-heading"><div><p class="eyebrow">CHINA COMMODITIES · PRICE & OPEN INTEREST</p><h1>从量价与持仓，观察商品期货。</h1><p class="heading-note">黑色 / 贵金属 / 有色 / 能源 / 农产品 · 主力连续与月份合约分别标识</p></div></div>
+      <section class="contract-panel futures-controls" aria-label="期货查询">
+        <label>品种分类<select id="futures-group"><option value="all">全部商品</option><option>黑色</option><option>贵金属</option><option>有色</option><option>能源</option><option>农产品</option></select></label>
+        <label>K 线周期<select id="futures-period"><option value="day">日线</option><option value="5">5 分钟</option><option value="15">15 分钟</option><option value="30">30 分钟</option><option value="60">60 分钟</option></select></label>
+        <form id="futures-search"><label for="futures-symbol">商品代码 / 月份合约<input id="futures-symbol" value="RB0" placeholder="如 RB0、AU0、RB2701" maxlength="6" autocomplete="off" spellcheck="false"></label><button type="submit">分析合约 ↗</button></form>
+        <button id="futures-refresh" type="button">刷新快照</button>
+      </section>
+      <p id="futures-status" class="refresh-bar" role="status">正在读取商品行情…</p>
+      <section class="contract-panel contract-board" aria-labelledby="futures-board-title">
+        <div class="board-heading"><div><h2 id="futures-board-title">商品观察池</h2><p>点击品种查看图表与分析；涨跌按昨结算计算。成交量、持仓量单位为手，报价不折算为每手价值。</p></div><span>12 个品种</span></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th scope="col">品种 / 合约类型</th><th scope="col">最新报价</th><th scope="col">较昨结算</th><th scope="col">源累计成交量</th><th scope="col">持仓量</th><th scope="col">源报价时间 / 北京</th><th scope="col">数据状态</th></tr></thead><tbody id="futures-rows"></tbody></table></div>
+      </section>
+      <section class="contract-panel futures-detail" aria-labelledby="futures-selected">
+        <div class="futures-detail-heading"><div><p class="eyebrow">CONTRACT DETAIL</p><h2 id="futures-selected">螺纹钢 RB0 · 主力连续</h2><p id="futures-identity">SHFE · 元/吨</p></div><span id="futures-quote">等待所选合约报价</span></div>
+        <p id="futures-contract-note" class="futures-note">主力连续用于走势观察，换月可能产生跳空；并非可直接成交的到期合约。</p>
+        <p id="futures-chart-legend" class="chart-readout" role="status">等待 K 线及成交量</p>
+        <div id="futures-chart" aria-label="期货K线与成交量图"></div>
+        <p id="futures-chart-status" role="status">正在读取K线…</p>
+        <p class="futures-time-note">分钟K线横轴保留来源的结束时间；日线显示源交易日。分钟线结束60秒后纳入统计；当日及未来日期日线保守排除，夜盘与节假日归属以源数据为准。</p>
+        <a class="chart-attribution" href="https://www.tradingview.com/" target="_blank" rel="noreferrer">TradingView Lightweight Charts™ ↗</a>
+      </section>
+      <section class="contract-panel futures-detail" aria-labelledby="futures-analysis-title">
+        <div class="futures-analysis-heading"><h2 id="futures-analysis-title">历史结构分析</h2><span id="futures-analysis">等待完整K线</span></div>
+        <p id="futures-analysis-asof">指标只使用完整 K 线</p>
+        <dl class="futures-metrics"><div><dt>SMA20 / SMA60</dt><dd id="futures-ma">—</dd></div><div><dt>ATR14 · 价格波动</dt><dd id="futures-atr">—</dd></div><div><dt>最近20根支撑 / 压力</dt><dd id="futures-levels">—</dd></div><div><dt>末根量 / 前20根均量</dt><dd id="futures-volume-ratio">—</dd></div><div><dt>较前根持仓变化 · 手</dt><dd id="futures-oi-change">—</dd></div></dl>
+        <ul id="futures-evidence"></ul>
+        <p class="futures-time-note">技术结构仅描述所选周期的历史表现；持仓变化无法单独推断多空资金方向。连续合约换月会影响均线和波动指标，分析未纳入交割、库存、期限结构与保证金规则。</p>
+      </section>
+      <footer class="contract-footer"><span>HTTP 轮询 · 后端至少间隔30秒采集 · 休市与源延迟均显示原时间 · 本模块只读分析</span><a href="https://finance.sina.com.cn/futures/" target="_blank" rel="noreferrer">新浪期货来源 ↗</a></footer>
+    </main>
+  </div>
+</div>
+<script src="/static/vendor/lightweight-charts.js"></script>
+<script src="/static/market-chart.js?v=2"></script>
+<script src="/static/futures.js?v=1"></script>
+</body>
+</html>

@@ -26,6 +26,7 @@ Local market research dashboard for China A-shares, US stocks and crypto perpetu
 | 用 A 股量价和趋势条件筛选次日观察标的 | A 股明日盯盘 | 策略候选、观察池、均线与次日点位计划 |
 | 快速复盘指数、涨跌家数和板块强弱 | A 股盘后复盘 | 市场宽度、板块冷热与下一交易日提示 |
 | 查看 SNDK、NVDA、MU 等美股分钟 K 线与成交量 | 美股雷达 | 1–60 分钟图表、逐根成交量及扩展时段分时 |
+| 分析螺纹钢、黄金、原油、豆粕等国内商品 | 期货分析 | 日/分钟 K 线、量仓变化、均线与波动统计 |
 | 观察 BTC、ETH、SOL 等永续合约方向 | 合约雷达 | 多周期 EMA 趋势、结构参考、资金费率与名义持仓估算 |
 | 在投入真实资金前观察规则如何开平仓 | 模拟交易 | 按交易所 / 产品隔离的虚拟本金、持仓、费用与交易记录 |
 | 对选定股票生成 AI 研究报告 | 行情研究 | 日 K、条件信号与手动生成的 AI 解读 |
@@ -92,6 +93,7 @@ A股与美股日K、美股分钟线和合约K线支持高低点（HH/HL/LH/LL）
 | A 股盘后复盘 | 7个指数、广度、量能、涨跌分布、板块 | 标明全A／样本范围、涨跌停、事实摘要和下次开盘观察 |
 | 资讯与事件 | A股、美股、数字资产、全球财经 | 本地资讯池、来源状态、关键词筛选、分页与显式采集；依赖DSA |
 | 美股雷达 | 美股原股 / USD | 独立观察池、盘前 / 盘中 / 盘后、新浪分钟 OHLCV、Nasdaq 分时与可选 Massive |
+| 期货分析 | 国内12个商品品种 / CNY | 主力连续与月份合约、日线和5/15/30/60分钟图、SMA20/60、ATR14、量仓变化；不依赖DSA |
 | 合约雷达 | USDT 永续 | 三所独立行情、六个分钟周期及 4 小时方向、结构点位、资金费率与持仓估算 |
 | 自动模拟交易 | OKX、Binance 合约 | 自动模拟开平仓、费用与滑点、持仓估值、账户恢复、交易记录与盈亏汇总 |
 | 历史研究 | A 股、美股样本 | 日线与分钟回放、规则比较、公开样本导入和覆盖审计 |
@@ -202,6 +204,7 @@ curl 'http://127.0.0.1:8766/api/contracts?exchange=okx&period=15'
 | A 股盘后复盘 | http://127.0.0.1:8766/a-review | 指数、广度、量能与板块复盘 |
 | 资讯与事件 | http://127.0.0.1:8766/news | 多市场资讯与来源状态 |
 | 美股雷达 | http://127.0.0.1:8766/us-radar | 原股美元行情，按美东时段观察 |
+| 国内商品期货 | http://127.0.0.1:8766/futures | 主力连续 / 月份合约，K线与量仓分析 |
 | 合约雷达 | http://127.0.0.1:8766/contracts | 默认欧易，可切币安 / Bitget |
 | 自动模拟交易 | http://127.0.0.1:8766/paper | 默认欧易模拟账户 |
 | 美股合约模拟 | http://127.0.0.1:8766/paper?market=stock | 欧易股票合约；独立账户，默认暂停 |
@@ -244,6 +247,12 @@ python3 markets/a/market_review.py
 3. 自动来源在未配置 Massive 时优先使用新浪常规盘真实分钟线。选择「盘前 / 盘后」时自动使用 Nasdaq 分时备用；采样来源没有逐根成交量，图上会清空量柱并说明缺失。
 4. 查看数据来源、源时间与更新状态。单股图约 15 秒采集，列表约 60 秒；盘外或报价过期时价格仅供参考。
 5. 如需观察对应股票的交易所永续合约，进入「合约雷达」或「美股合约模拟」。原股研究与合约模拟使用不同数据，不能直接套用成交价。
+
+### 国内商品期货分析
+
+侧栏「期货分析」覆盖螺纹钢、黄金、白银、沪铜、沪铝、原油、燃料油、豆粕、豆油、棕榈油、玉米和铁矿石。点击观察池品种，或输入对应月份合约（如 `RB2701`），可查看日线与5/15/30/60分钟K线、逐根成交量和持仓变化。
+
+报价涨跌以昨结算为基准，价格单位按品种标注。分析只使用完整K线，展示SMA20/60、ATR14、最近20根高低参考和相对量能；均线结果描述历史结构。主力连续存在换月不连续，不能直接作为可成交合约；不接入本项目的自动模拟账户。[数据口径与边界](docs/features/domestic-futures.md)。
 
 ### 合约观察与模拟验证
 
@@ -541,6 +550,8 @@ DSA 的模型与可选新闻服务配置位于其独立目录的 `.env`，默认
 | GET / POST | `/api/news/refresh` | 查询采集状态／显式启动后台采集 |
 | GET | `/api/us-radar?symbols=NVDA,MU&period=15&session=all&provider=auto` | 美股原股；最多 8 代码，时段 `all/pre/regular/post`，来源 `auto/sina/nasdaq/massive/yahoo` |
 | GET | `/api/us-chart?symbols=SNDK&period=5&provider=auto` | 单股价格 / 成交量图，独立 15 秒采集，含形成中 K 线；参数同美股雷达 |
+| GET | `/api/futures` | 国内12个商品主力连续报价、昨结算涨跌、成交量、持仓量；后台缓存状态 |
+| GET | `/api/futures/chart?symbol=RB0&period=day` | 商品连续或月份合约图与历史指标；周期 `day/5/15/30/60` |
 | GET | `/api/contracts?exchange=okx&period=240` | 合约雷达；三交易所，周期 `1/5/10/15/30/60/240` |
 | GET | `/api/paper?exchange=okx&market=crypto` | 模拟账户；类型 `crypto/stock`，`stock` 只支持 `okx` |
 | POST | `/api/paper/control` | JSON `enabled`、`exchange`、`market`；启用或暂停所选账户新开仓 |
@@ -711,6 +722,7 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | [GitHub 发布与发现](docs/github-discovery.md) | About、Topics 与默认分支发布建议 |
 | [看板说明](markets/us/dashboard/README.md) | 页面、巡检、合约与模拟交易细节 |
 | [资讯与A股复盘](docs/features/news-and-a-review.md) | 新闻来源、时间口径、全A覆盖与网络限制 |
+| [国内商品期货](docs/features/domestic-futures.md) | 品种、主力连续与月份合约、完整K线及量仓分析口径 |
 | [DSA 接入](docs/dsa-integration.md) | 上游安装、AI 配置和任务隔离 |
 | [数据源说明](docs/market-data-sources.md) | 行情接入与来源比较 |
 | [公开历史样本](docs/public-history.md) | 样本导入、覆盖与审计 |

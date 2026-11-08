@@ -18,6 +18,7 @@ from engine import analyze_many, analyze_symbol
 from engine import BJ
 from dsa_client import DSAClient, DSAError
 from news_service import REFRESH as news_refresh
+from futures_cn import SERVICE as futures_service
 from contract_radar import SERVICE as bitget_radar
 from okx_contracts import SERVICE as contract_radar
 from binance_contracts import SERVICE as binance_radar
@@ -249,6 +250,19 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+
+        if path in ('/futures', '/futures/'):
+            self._send(200, (STATIC / 'futures.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+        if path in ('/api/futures', '/api/futures/chart'):
+            try:
+                qs = parse_qs(parsed.query)
+                payload = futures_service.snapshot() if path == '/api/futures' else futures_service.chart(
+                    (qs.get('symbol') or ['RB0'])[0], (qs.get('period') or ['day'])[0])
+                self._json(200, payload)
+            except ValueError as exc:
+                self._json(400, {'error': str(exc)})
+            return
 
         if path in ('/news','/news/'):
             self._send(200,(STATIC/'news.html').read_bytes(),'text/html; charset=utf-8')
