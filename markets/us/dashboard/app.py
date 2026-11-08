@@ -19,6 +19,7 @@ from engine import BJ
 from dsa_client import DSAClient, DSAError
 from news_service import REFRESH as news_refresh
 from futures_cn import SERVICE as futures_service
+from futures_backtest import JOBS as futures_backtest_jobs, SPECS as futures_specs, DEFAULTS as futures_backtest_defaults, STRATEGIES as futures_strategies
 from contract_radar import SERVICE as bitget_radar
 from okx_contracts import SERVICE as contract_radar
 from binance_contracts import SERVICE as binance_radar
@@ -208,7 +209,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         path=urlparse(self.path).path
-        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources'):
+        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources','/api/futures/backtest'):
             self._json(404, {'error': 'not found'})
             return
         origin = self.headers.get('Origin')
@@ -222,6 +223,9 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length))
             if not isinstance(body, dict):
                 raise ValueError('请求必须是 JSON 对象')
+            if path == '/api/futures/backtest':
+                self._json(202, futures_backtest_jobs.start(body))
+                return
             if path == '/api/paper/control':
                 runner = select_paper_runner(body.get('exchange','okx'),body.get('market','crypto'))
                 runner.account.set_enabled(body.get('enabled'))
@@ -253,6 +257,17 @@ class Handler(BaseHTTPRequestHandler):
 
         if path in ('/futures', '/futures/'):
             self._send(200, (STATIC / 'futures.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+        if path == '/api/futures/backtest':
+            qs = parse_qs(parsed.query)
+            job_id = (qs.get('id') or [''])[0]
+            try:
+                payload = futures_backtest_jobs.snapshot(job_id) if job_id else dict(
+                    specs={k:dict(multiplier=v[0],tick_size=v[1]) for k,v in futures_specs.items()},
+                    defaults=futures_backtest_defaults, strategies=futures_strategies)
+                self._json(200, payload)
+            except KeyError as exc:
+                self._json(404, {'error': str(exc.args[0])})
             return
         if path in ('/api/futures', '/api/futures/chart'):
             try:

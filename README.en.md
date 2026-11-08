@@ -162,6 +162,8 @@ The futures workspace covers rebar, gold, silver, copper, aluminium, crude oil, 
 
 Changes use the previous settlement as their baseline. Prices retain each product's quotation unit; volume and open interest use lots. SMA20/60, ATR14, recent high/low references and volume/open-interest changes describe completed bars only. Minute timestamps retain source period ends; current/future-date daily bars are conservatively excluded. Continuous contracts can contain roll gaps and are not directly tradable. This workspace does not use the crypto paper-trading accounts or strategies. See [data semantics and limitations](docs/features/domestic-futures.md).
 
+The explicit **Strategy Backtest** form compares two fixed daily baselines: SMA20/60 direction and Donchian20/10 close breakout, both with 2×ATR14 protection. It accepts dated contracts only, executes prior-close signals at the next open, and models integer lots, contract multipliers, margin limits, configurable commissions, close-today fees and tick slippage. Results include closing-equity curves, trades, doubled-cost stress and a fresh-account tail rerun. Exported JSON includes the input sample for offline reproduction. See [implementation references and rules](docs/features/futures-backtest.md) and the [recorded sample report](docs/reports/futures-backtest-2026-11-08/report.md). No strategy is automatically promoted to a trading account.
+
 ## Paper trading rules
 
 Each newly created account starts **paused** with **10,000 virtual USDT**. Existing account state is restored from local storage.

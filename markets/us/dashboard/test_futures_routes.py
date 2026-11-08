@@ -2,10 +2,30 @@ import json
 import unittest
 from unittest.mock import patch
 import test_contract_routes as routes
+from app import Handler
+import io
 
 
 class FuturesRouteTests(unittest.TestCase):
     get = routes.ContractRouteTests.get
+
+    def post(self,body,origin=None):
+        handler=object.__new__(Handler);handler.path='/api/futures/backtest'
+        raw=json.dumps(body).encode();handler.rfile=io.BytesIO(raw)
+        handler.headers={'Host':'127.0.0.1:8766','Content-Length':str(len(raw))}
+        if origin:handler.headers['Origin']=origin
+        out=[];handler._json=lambda status,data:out.append((status,data));handler.do_POST()
+        return out[0]
+
+    def test_backtest_requires_explicit_post_and_valid_same_origin(self):
+        with patch('app.futures_backtest_jobs.start',return_value={'id':'abc','status':'running'}) as start,patch('app.paper_runner.start') as paper:
+            status,body,_=self.get('/api/futures/backtest')
+            self.assertEqual(status,200);self.assertIn('specs',json.loads(body));start.assert_not_called()
+            self.assertEqual(self.post({'symbol':'RB2701'})[0],202);start.assert_called_once()
+            self.assertEqual(self.post({'symbol':'RB2701'},'https://other.test')[0],403)
+            paper.assert_not_called()
+        self.assertEqual(self.post({'symbol':'RB0'})[0],400)
+        status,_,_=self.get('/api/futures/backtest?id=missing');self.assertEqual(status,404)
 
     def test_page_and_assets(self):
         for path, content in [('/futures', b'futures.js'),('/futures/', b'futures.js'),

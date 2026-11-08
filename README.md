@@ -254,6 +254,8 @@ python3 markets/a/market_review.py
 
 报价涨跌以昨结算为基准，价格单位按品种标注。分析只使用完整K线，展示SMA20/60、ATR14、最近20根高低参考和相对量能；均线结果描述历史结构。主力连续存在换月不连续，不能直接作为可成交合约；不接入本项目的自动模拟账户。[数据口径与边界](docs/features/domestic-futures.md)。
 
+页面「策略回测」可显式运行双均线20/60方向基准与唐奇安20/10收盘突破：仅用四位月份合约日线，前收盘信号、后开盘成交，计入整数手、乘数、保证金占用、双边费用、平今倍数与tick滑点。输出两策略对照、收盘权益曲线、逐笔交易、成本翻倍和尾段独立重跑，并可导出包含样本的JSON。[回测规则与GitHub参考](docs/features/futures-backtest.md) · [真实样本报告](docs/reports/futures-backtest-2026-11-08/report.md)。
+
 ### 合约观察与模拟验证
 
 1. 打开「合约雷达」，默认读取欧易 USDT 永续。
@@ -552,6 +554,7 @@ DSA 的模型与可选新闻服务配置位于其独立目录的 `.env`，默认
 | GET | `/api/us-chart?symbols=SNDK&period=5&provider=auto` | 单股价格 / 成交量图，独立 15 秒采集，含形成中 K 线；参数同美股雷达 |
 | GET | `/api/futures` | 国内12个商品主力连续报价、昨结算涨跌、成交量、持仓量；后台缓存状态 |
 | GET | `/api/futures/chart?symbol=RB0&period=day` | 商品连续或月份合约图与历史指标；周期 `day/5/15/30/60` |
+| GET / POST | `/api/futures/backtest` | GET读取规格预设；POST显式提交日线回测参数；GET携带`id`查询任务 |
 | GET | `/api/contracts?exchange=okx&period=240` | 合约雷达；三交易所，周期 `1/5/10/15/30/60/240` |
 | GET | `/api/paper?exchange=okx&market=crypto` | 模拟账户；类型 `crypto/stock`，`stock` 只支持 `okx` |
 | POST | `/api/paper/control` | JSON `enabled`、`exchange`、`market`；启用或暂停所选账户新开仓 |
@@ -723,6 +726,7 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | [看板说明](markets/us/dashboard/README.md) | 页面、巡检、合约与模拟交易细节 |
 | [资讯与A股复盘](docs/features/news-and-a-review.md) | 新闻来源、时间口径、全A覆盖与网络限制 |
 | [国内商品期货](docs/features/domestic-futures.md) | 品种、主力连续与月份合约、完整K线及量仓分析口径 |
+| [期货策略回测](docs/features/futures-backtest.md) | GitHub参考、两个固定基准、撮合成本、研究边界与离线复跑 |
 | [DSA 接入](docs/dsa-integration.md) | 上游安装、AI 配置和任务隔离 |
 | [数据源说明](docs/market-data-sources.md) | 行情接入与来源比较 |
 | [公开历史样本](docs/public-history.md) | 样本导入、覆盖与审计 |

@@ -1,0 +1,490 @@
+[
+  {
+    "symbol": "RB2701",
+    "file": "RB2701.json",
+    "bars": 194,
+    "results": [
+      {
+        "strategy": "sma",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 98638.0,
+          "return_pct": -1.3619999999999965,
+          "max_drawdown_pct": 2.5912955485669498,
+          "trade_count": 7,
+          "win_rate_pct": 42.857142857142854,
+          "profit_factor": 0.37921604375569734,
+          "fees": 42.0,
+          "slippage_cost": 142.8571428571422,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776700800000,
+          "end_at": 1793894400000,
+          "bars": 134,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 98476.0,
+          "return_pct": -1.5240000000000031,
+          "max_drawdown_pct": 2.6350801247046207,
+          "trade_count": 7,
+          "win_rate_pct": 42.857142857142854,
+          "profit_factor": 0.33099209833187004,
+          "fees": 84.0,
+          "slippage_cost": 282.8571428571422,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776700800000,
+          "end_at": 1793894400000,
+          "bars": 134,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 99066.0,
+          "return_pct": -0.9340000000000015,
+          "max_drawdown_pct": 1.385,
+          "trade_count": 4,
+          "win_rate_pct": 25.0,
+          "profit_factor": 0.2634069400630915,
+          "fees": 24.0,
+          "slippage_cost": 80.0,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1788364800000,
+          "end_at": 1793894400000,
+          "bars": 41,
+          "warmup_bars": 153
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。"
+        ]
+      },
+      {
+        "strategy": "donchian",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 98980.0,
+          "return_pct": -1.0199999999999987,
+          "max_drawdown_pct": 2.1891792564339423,
+          "trade_count": 5,
+          "win_rate_pct": 40.0,
+          "profit_factor": 0.3695920889987639,
+          "fees": 30.0,
+          "slippage_cost": 112.85714285714221,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776700800000,
+          "end_at": 1793894400000,
+          "bars": 134,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 98870.0,
+          "return_pct": -1.1299999999999977,
+          "max_drawdown_pct": 2.2729078915997776,
+          "trade_count": 5,
+          "win_rate_pct": 40.0,
+          "profit_factor": 0.32577565632458233,
+          "fees": 60.0,
+          "slippage_cost": 212.8571428571422,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776700800000,
+          "end_at": 1793894400000,
+          "bars": 134,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 100284.0,
+          "return_pct": 0.28399999999999537,
+          "max_drawdown_pct": 0.5061180743695852,
+          "trade_count": 1,
+          "win_rate_pct": 100.0,
+          "profit_factor": null,
+          "fees": 6.0,
+          "slippage_cost": 20.0,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1788364800000,
+          "end_at": 1793894400000,
+          "bars": 41,
+          "warmup_bars": 153
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。"
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "M2701",
+    "file": "M2701.json",
+    "bars": 193,
+    "results": [
+      {
+        "strategy": "sma",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 99714.0,
+          "return_pct": -0.28599999999999737,
+          "max_drawdown_pct": 3.1415568203041295,
+          "trade_count": 6,
+          "win_rate_pct": 33.333333333333336,
+          "profit_factor": 0.8505747126436781,
+          "fees": 36.0,
+          "slippage_cost": 137.1428571428578,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776787200000,
+          "end_at": 1793894400000,
+          "bars": 133,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 99588.0,
+          "return_pct": -0.41200000000000125,
+          "max_drawdown_pct": 3.169824685673809,
+          "trade_count": 6,
+          "win_rate_pct": 33.333333333333336,
+          "profit_factor": 0.7927565392354124,
+          "fees": 72.0,
+          "slippage_cost": 257.1428571428578,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776787200000,
+          "end_at": 1793894400000,
+          "bars": 133,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 99312.0,
+          "return_pct": -0.6879999999999997,
+          "max_drawdown_pct": 2.997024721500094,
+          "trade_count": 3,
+          "win_rate_pct": 33.333333333333336,
+          "profit_factor": 0.5885167464114832,
+          "fees": 18.0,
+          "slippage_cost": 61.42857142857338,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1788451200000,
+          "end_at": 1793894400000,
+          "bars": 40,
+          "warmup_bars": 153
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。"
+        ]
+      },
+      {
+        "strategy": "donchian",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 103396.0,
+          "return_pct": 3.395999999999999,
+          "max_drawdown_pct": 1.5890811601267367,
+          "trade_count": 4,
+          "win_rate_pct": 50.0,
+          "profit_factor": 3.628482972136223,
+          "fees": 24.0,
+          "slippage_cost": 88.57142857143117,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776787200000,
+          "end_at": 1793894400000,
+          "bars": 133,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 103312.0,
+          "return_pct": 3.312000000000004,
+          "max_drawdown_pct": 1.5897786013849606,
+          "trade_count": 4,
+          "win_rate_pct": 50.0,
+          "profit_factor": 3.501510574018127,
+          "fees": 48.0,
+          "slippage_cost": 168.57142857143117,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1776787200000,
+          "end_at": 1793894400000,
+          "bars": 133,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 101428.0,
+          "return_pct": 1.428000000000007,
+          "max_drawdown_pct": 1.6201655948393252,
+          "trade_count": 2,
+          "win_rate_pct": 50.0,
+          "profit_factor": 2.4631147540983607,
+          "fees": 12.0,
+          "slippage_cost": 40.0,
+          "rejected_entries": 0,
+          "margin_halted": false,
+          "start_at": 1788451200000,
+          "end_at": 1793894400000,
+          "bars": 40,
+          "warmup_bars": 153
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。"
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "AU2612",
+    "file": "AU2612.json",
+    "bars": 235,
+    "results": [
+      {
+        "strategy": "sma",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 174,
+          "margin_halted": false,
+          "start_at": 1770825600000,
+          "end_at": 1793894400000,
+          "bars": 175,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 174,
+          "margin_halted": false,
+          "start_at": 1770825600000,
+          "end_at": 1793894400000,
+          "bars": 175,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 52,
+          "margin_halted": false,
+          "start_at": 1786982400000,
+          "end_at": 1793894400000,
+          "bars": 53,
+          "warmup_bars": 182
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。",
+          "174次开仓因保证金或占用上限被拒绝。"
+        ]
+      },
+      {
+        "strategy": "donchian",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 21,
+          "margin_halted": false,
+          "start_at": 1770825600000,
+          "end_at": 1793894400000,
+          "bars": 175,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 21,
+          "margin_halted": false,
+          "start_at": 1770825600000,
+          "end_at": 1793894400000,
+          "bars": 175,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 10,
+          "margin_halted": false,
+          "start_at": 1786982400000,
+          "end_at": 1793894400000,
+          "bars": 53,
+          "warmup_bars": 182
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。",
+          "21次开仓因保证金或占用上限被拒绝。"
+        ]
+      }
+    ]
+  },
+  {
+    "symbol": "SC2701",
+    "file": "SC2701.json",
+    "bars": 201,
+    "results": [
+      {
+        "strategy": "sma",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 140,
+          "margin_halted": false,
+          "start_at": 1775750400000,
+          "end_at": 1793894400000,
+          "bars": 141,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 140,
+          "margin_halted": false,
+          "start_at": 1775750400000,
+          "end_at": 1793894400000,
+          "bars": 141,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 42,
+          "margin_halted": false,
+          "start_at": 1788192000000,
+          "end_at": 1793894400000,
+          "bars": 43,
+          "warmup_bars": 158
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。",
+          "140次开仓因保证金或占用上限被拒绝。"
+        ]
+      },
+      {
+        "strategy": "donchian",
+        "summary": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 21,
+          "margin_halted": false,
+          "start_at": 1775750400000,
+          "end_at": 1793894400000,
+          "bars": 141,
+          "warmup_bars": 60
+        },
+        "stress": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 21,
+          "margin_halted": false,
+          "start_at": 1775750400000,
+          "end_at": 1793894400000,
+          "bars": 141,
+          "warmup_bars": 60
+        },
+        "tail": {
+          "initial_capital": 100000.0,
+          "end_equity": 100000.0,
+          "return_pct": 0.0,
+          "max_drawdown_pct": 0,
+          "trade_count": 0,
+          "win_rate_pct": null,
+          "profit_factor": null,
+          "fees": 0.0,
+          "slippage_cost": 0.0,
+          "rejected_entries": 6,
+          "margin_halted": false,
+          "start_at": 1788192000000,
+          "end_at": 1793894400000,
+          "bars": 43,
+          "warmup_bars": 158
+        },
+        "warnings": [
+          "完整交易不足10笔，结果仅供小样本研究。",
+          "21次开仓因保证金或占用上限被拒绝。"
+        ]
+      }
+    ]
+  }
+]
