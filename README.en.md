@@ -1,4 +1,4 @@
-# Market Studio — Stock Market Dashboard, Candlestick Charts & Paper Trading
+# Market Studio — Python Stock Market Dashboard, Stock Screener & Paper Trading
 
 > **Complete source and research materials are now public.** Strategy experiments and trade replays are included. Usage rights are governed by [LICENSE](LICENSE); see the [publication policy](CONFIDENTIALITY.md).
 
@@ -214,6 +214,24 @@ The November 7, 2026 dashboard run reported **163/165 Python tests passing** and
 Live-source and browser checks covered SNDK OHLCV, sampled extended-session data, contract forming bars, account isolation and a 390px mobile viewport. Massive account access has not been verified with a real API key.
 
 Please file [issues](https://github.com/476139183/ai-MarketDashboard/issues) with the branch/commit, platform, startup command, symbol, exchange, timeframe, timezone, source timestamps and redacted error details. Do not upload credentials, cookies or account databases. Contributions should preserve source identity, time/volume units, closed-bar semantics and account isolation.
+
+## Frequently asked questions
+
+### What is Market Studio?
+
+Market Studio (`ai-MarketDashboard`, 观市) is a local Python stock market dashboard for China A-shares, US equities and cryptocurrency perpetual futures. It combines stock screening, candlestick and volume charts, market monitoring and paper trading. Each market keeps its own data and trading rules; see [market coverage](#what-you-can-do).
+
+### Can I use it without an AI API key or an exchange account?
+
+Public US intraday charts, perpetual futures monitoring and the corresponding paper trading accounts support the [lightweight setup](#2-run-the-lightweight-workspace). AI reports and full stock research require a separate DSA service. Optional data providers may require their own credentials.
+
+### Does it place real trades or offer a hosted dashboard?
+
+The application runs on your machine and does not place brokerage or exchange orders. Paper trading uses local virtual accounts. There is currently no public hosted market dashboard; download the project and follow the [quick start](#quick-start).
+
+### Are stock quotes real time, and is historical research a full backtest?
+
+Quotes update through HTTP polling, with freshness depending on the provider, trading session and data entitlements. Historical research uses available samples and does not reproduce every market event or execution condition. See [data coverage](#candlesticks-volume-and-data-coverage) and [paper trading rules](#paper-trading-rules).
 
 ## Documentation
 

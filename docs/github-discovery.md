@@ -1,26 +1,26 @@
 # GitHub 项目介绍与搜索发现配置
 
-这份文档供仓库维护者发布时使用。README 的项目说明、截图和中英文术语已准备；下面的仓库设置建议尚未写入 GitHub。
+这份文档记录仓库的搜索发现设置，并说明 README 发布和后续公开网站收录的区别。
 
 ## 当前状态
 
-2026-11-07 只读核对 `476139183/ai-MarketDashboard`：仓库公开，默认分支为 `main`，About 仍为早期股票研究介绍，未设置 Topics，也未声明项目级许可证。新雷达、模拟功能与中英文 README 已从 `feature/us-live-market-data` 快进合并至 `main`；发布以 GitHub 远端 `main` 为准。
+2026-11-08 通过 GitHub API 核对 `476139183/ai-MarketDashboard`：仓库公开，默认分支为 `main`，网站地址为空。本次已更新下方 About 描述和 20 个 Topics，并在本次文档改动中补充中英文 README 的标题与常见问题；公开展示以远端默认分支为准。项目自有材料的使用权限仍以根目录 LICENSE 为准，不因搜索优化变更。
 
 README 文件必须发布到访问者查看的分支后才可见；若希望默认仓库首页呈现新文档，需要维护者将对应提交发布到默认分支。Topics 和 About 属于 GitHub 仓库设置，不能仅靠提交 README 自动更新。
 
-## 建议的 About 描述
+## 已配置的 About 描述
 
-可直接复制以下描述：
+当前配置：
 
 ```text
-观市 Market Studio：本地 A股/美股行情看板、K线与成交量、选股雷达、OKX/Binance/Bitget 永续合约监控、独立模拟交易与手动 AI 分析。Local market dashboard for stocks, crypto futures and paper trading.
+观市 Market Studio：Python A股/美股行情看板、选股雷达、K线成交量、合约监控、模拟交易与手动AI分析。Local stock market dashboard, stock screener, crypto futures monitor and paper trading.
 ```
 
 描述围绕当前已实现的用途，不写“零延迟实时”“稳赚量化”“自动实盘”等未实现或不可保证的能力。
 
-## 建议的 Topics
+## 已配置的 Topics
 
-下面为 20 个候选主题，使用小写与连字符；发布时可根据主要受众删减：
+下面为本次配置的 20 个主题，使用小写与连字符：
 
 ```text
 stock-market
@@ -69,4 +69,12 @@ GitHub 对 README 的说明强调项目用途、价值、上手方式、帮助�
 4. 更新截图或数据适配时，标注日期与来源；验证记录保留日期，不将历史通过状态当作当前 CI 结果。
 5. 需要正式开放修改、分发和复用权限时，由维护者确认合适的项目许可证；当前文档没有代替维护者选择许可证。
 
-这些改进旨在提高项目的可发现性和可理解性，不能保证搜索排名、收录时间或访问量。合并与推送代码到 `main` 不会自动修改 About、Topics 等仓库设置；此文档中的设置建议尚未执行。
+## 搜索引擎与后续网站
+
+GitHub 仓库搜索与 Google 等公共搜索引擎是不同入口。README 提供可读、可链接的功能与上手说明；About 和 Topics 用于仓库发现。不要在 README 中添加 HTML meta 标签、隐藏关键词或无关热门主题：仓库页面的 HTML head 由 GitHub 管理。
+
+当前看板在本机 `127.0.0.1` 运行，公共搜索引擎无法访问。若后续需要独立网站，可先发布只展示功能、真实截图、安装说明和仓库链接的静态介绍页，再基于最终公开网址配置独立标题、描述、canonical、站点地图及搜索站长验证。没有公开网址时，不编造 canonical 或 sitemap 地址，也不把本地行情和模拟账户服务直接作为介绍站部署。
+
+内容应围绕实际用途回答用户问题，并通过描述性链接连接安装、数据覆盖和模拟规则。参见 [Google 搜索基础](https://developers.google.com/search/docs/essentials)和 [SEO 入门指南](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)。
+
+这些改进旨在提高项目的可发现性和可理解性，不能保证搜索排名、收录时间或访问量。合并与推送代码到 `main` 不会自动修改 About、Topics 等仓库设置；本次仓库设置已单独通过 GitHub API 更新。
