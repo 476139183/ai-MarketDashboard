@@ -2,6 +2,8 @@
 
 > **Private and proprietary; not an open-source release.** Owner-controlled strategies and research methods are confidential. See [confidentiality policy](CONFIDENTIALITY.md).
 
+> This branch is the complete private Gitee edition. Export an explicitly allowlisted edition separately for GitHub.
+
 **A local research workspace for China A-shares, US equities and cryptocurrency perpetual futures.**
 
 [简体中文](README.md) · **English** · [Quick start](#quick-start) · [Screenshots](#screenshots) · [Issues](https://github.com/476139183/ai-MarketDashboard/issues)

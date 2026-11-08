@@ -2,6 +2,8 @@
 
 > **私有专有项目，不提供开源授权。** 自有策略与研究方法为保密内容，见 [保密约定](CONFIDENTIALITY.md)。
 
+> 本分支为码云私有完整版：包含完整策略与研究记录；GitHub开源版需另行白名单导出。
+
 **在一个本地工作台中，研究股票量价、观察加密货币合约，并用独立虚拟账户验证交易规则。**
 
 Local market research dashboard for China A-shares, US stocks and crypto perpetual futures — candlestick charts, volume analysis, market scanners and paper trading.

@@ -14,17 +14,11 @@ markets/us/dashboard/cache/
 _upstream_MarketDashboard/
 _merge_backup/
 
-# Private research: keep local unless the owner explicitly authorizes a scope change.
-/docs/research_notes/
-/docs/reports/crypto-*/
-/docs/reports/加密 合约 策略 回放 研究.md
-/docs/plans/2026-11-07-crypto-experiments.md
-/docs/plans/2026-11-07-crypto-trade-review.md
-/markets/us/backtest/crypto_*
-/markets/us/backtest/test_crypto_*
-# Only strategy06 and its required engine/tests are approved for private backup.
-!/markets/us/backtest/crypto_bollinger_cost.py
-!/markets/us/backtest/crypto_replay_engine.py
-!/markets/us/backtest/test_crypto_bollinger_cost.py
-!/markets/us/backtest/test_crypto_replay_engine.py
+# This private branch includes authorized strategy research and reports.
+# Runtime caches, account databases and credentials remain local.
 /private_research/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm

@@ -1,0 +1,173 @@
+{
+  "engine": "isolated-funding-hard-opening-cap-v2",
+  "models": {
+    "ema_original": {
+      "entry_family": "ema_original",
+      "factor": null
+    },
+    "ema_reversed": {
+      "entry_family": "ema_reversed",
+      "factor": null
+    },
+    "ema_daily_filter": {
+      "entry_family": "ema_daily_filter",
+      "factor": null
+    },
+    "momentum_12_fixed": {
+      "entry_family": "momentum_12_fixed",
+      "factor": null
+    },
+    "momentum_12_atr": {
+      "entry_family": "momentum_12_atr",
+      "factor": null
+    },
+    "momentum_42_fixed": {
+      "entry_family": "momentum_42_fixed",
+      "factor": null
+    },
+    "momentum_42_atr": {
+      "entry_family": "momentum_42_atr",
+      "factor": null
+    },
+    "donchian_20_10_fixed": {
+      "entry_family": "donchian_20_10_fixed",
+      "factor": null
+    },
+    "donchian_20_10_atr": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": null
+    },
+    "donchian_55_20_fixed": {
+      "entry_family": "donchian_55_20_fixed",
+      "factor": null
+    },
+    "donchian_55_20_atr": {
+      "entry_family": "donchian_55_20_atr",
+      "factor": null
+    },
+    "pullback_adx20_fixed": {
+      "entry_family": "pullback_adx20_fixed",
+      "factor": null
+    },
+    "pullback_adx20_atr": {
+      "entry_family": "pullback_adx20_atr",
+      "factor": null
+    },
+    "pullback_adx25_fixed": {
+      "entry_family": "pullback_adx25_fixed",
+      "factor": null
+    },
+    "pullback_adx25_atr": {
+      "entry_family": "pullback_adx25_atr",
+      "factor": null
+    },
+    "bollinger_20_fixed": {
+      "entry_family": "bollinger_20_fixed",
+      "factor": null
+    },
+    "bollinger_20_atr": {
+      "entry_family": "bollinger_20_atr",
+      "factor": null
+    },
+    "bollinger_30_fixed": {
+      "entry_family": "bollinger_30_fixed",
+      "factor": null
+    },
+    "bollinger_30_atr": {
+      "entry_family": "bollinger_30_atr",
+      "factor": null
+    },
+    "daily_sma10_40_fixed": {
+      "entry_family": "daily_sma10_40_fixed",
+      "factor": null
+    },
+    "daily_sma10_40_atr": {
+      "entry_family": "daily_sma10_40_atr",
+      "factor": null
+    },
+    "ema_daily_filter+flow": {
+      "entry_family": "ema_daily_filter",
+      "factor": "flow"
+    },
+    "ema_daily_filter+oi": {
+      "entry_family": "ema_daily_filter",
+      "factor": "oi"
+    },
+    "ema_daily_filter+volume": {
+      "entry_family": "ema_daily_filter",
+      "factor": "volume"
+    },
+    "ema_daily_filter+turnover": {
+      "entry_family": "ema_daily_filter",
+      "factor": "turnover"
+    },
+    "ema_daily_filter+poc": {
+      "entry_family": "ema_daily_filter",
+      "factor": "poc"
+    },
+    "ema_daily_filter+crowding": {
+      "entry_family": "ema_daily_filter",
+      "factor": "crowding"
+    },
+    "ema_daily_filter+combined": {
+      "entry_family": "ema_daily_filter",
+      "factor": "combined"
+    },
+    "donchian_20_10_atr+flow": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "flow"
+    },
+    "donchian_20_10_atr+oi": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "oi"
+    },
+    "donchian_20_10_atr+volume": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "volume"
+    },
+    "donchian_20_10_atr+turnover": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "turnover"
+    },
+    "donchian_20_10_atr+poc": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "poc"
+    },
+    "donchian_20_10_atr+crowding": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "crowding"
+    },
+    "donchian_20_10_atr+combined": {
+      "entry_family": "donchian_20_10_atr",
+      "factor": "combined"
+    },
+    "momentum_42_atr+flow": {
+      "entry_family": "momentum_42_atr",
+      "factor": "flow"
+    },
+    "momentum_42_atr+oi": {
+      "entry_family": "momentum_42_atr",
+      "factor": "oi"
+    },
+    "momentum_42_atr+volume": {
+      "entry_family": "momentum_42_atr",
+      "factor": "volume"
+    },
+    "momentum_42_atr+turnover": {
+      "entry_family": "momentum_42_atr",
+      "factor": "turnover"
+    },
+    "momentum_42_atr+poc": {
+      "entry_family": "momentum_42_atr",
+      "factor": "poc"
+    },
+    "momentum_42_atr+crowding": {
+      "entry_family": "momentum_42_atr",
+      "factor": "crowding"
+    },
+    "momentum_42_atr+combined": {
+      "entry_family": "momentum_42_atr",
+      "factor": "combined"
+    }
+  }
+}
