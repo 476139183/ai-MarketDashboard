@@ -1,14 +1,7 @@
 {
-  "title": "A股盘后复盘",
+  "title": "A股市场复盘",
   "as_of": "2026-11-06",
-  "generated_at": "2026-11-07T13:13:15+08:00",
-  "market_tone": "偏弱",
-  "summary_bullets": [
-    "沪深300 -1.44%（4054.28）",
-    "涨 381 / 跌 1936 / 平 40",
-    "领涨板块：视频媒体(6.25%)、种子(4.64%)、卫浴电器(3.46%)",
-    "领跌板块：印制电路板(-5.86%)、元件(-5.13%)、通信线缆及配套(-4.78%)"
-  ],
+  "generated_at": "2026-11-08T12:12:45+08:00",
   "indices": [
     {
       "code": "000001",
@@ -17,7 +10,9 @@
       "prev_close": 3689.91,
       "open": 3612.15,
       "change_pct": -1.1,
-      "asof": "20261106161401"
+      "asof": "20261106161401",
+      "amount": 772634570000.0,
+      "source": "腾讯指数行情"
     },
     {
       "code": "399001",
@@ -26,7 +21,20 @@
       "prev_close": 11471.09,
       "open": 11044.56,
       "change_pct": -2.57,
-      "asof": "20261106161442"
+      "asof": "20261106161442",
+      "amount": 885159900000.0,
+      "source": "腾讯指数行情"
+    },
+    {
+      "code": "399006",
+      "name": "创业板指",
+      "price": 2465.23,
+      "prev_close": 2566.8,
+      "open": 2438.72,
+      "change_pct": -3.96,
+      "asof": "20261106161457",
+      "amount": 441068350000.0,
+      "source": "腾讯指数行情"
     },
     {
       "code": "000300",
@@ -35,7 +43,9 @@
       "prev_close": 4113.41,
       "open": 4017.94,
       "change_pct": -1.44,
-      "asof": "20261106161413"
+      "asof": "20261106161413",
+      "amount": 478840400000.0,
+      "source": "腾讯指数行情"
     },
     {
       "code": "000688",
@@ -44,15 +54,99 @@
       "prev_close": 1286.68,
       "open": 1221.67,
       "change_pct": -2.6,
-      "asof": "20261106161413"
+      "asof": "20261106161413",
+      "amount": 89626590000.0,
+      "source": "腾讯指数行情"
+    },
+    {
+      "code": "000852",
+      "name": "中证1000",
+      "price": 6505.35,
+      "prev_close": 6650.14,
+      "open": 6413.94,
+      "change_pct": -2.18,
+      "asof": "20261106161401",
+      "amount": 335690830000.0,
+      "source": "腾讯指数行情"
+    },
+    {
+      "code": "899050",
+      "name": "北证50",
+      "price": 888.48,
+      "prev_close": 910.07,
+      "open": 871.47,
+      "change_pct": -2.37,
+      "asof": "20261106153232",
+      "amount": 14000444100.0,
+      "source": "腾讯指数行情"
     }
   ],
   "breadth": {
-    "up": 381,
-    "down": 1936,
-    "flat": 40
+    "up": 758,
+    "down": 4741,
+    "flat": 76,
+    "scope": "全A股有效报价样本",
+    "source": "东方财富全A快照"
   },
-  "limit_stats": null,
+  "stock_snapshot": {
+    "complete": true,
+    "expected": 5927,
+    "received": 5927,
+    "breadth": {
+      "up": 758,
+      "down": 4741,
+      "flat": 76,
+      "scope": "全A股有效报价样本",
+      "source": "东方财富全A快照"
+    },
+    "amount": null,
+    "distribution": [
+      {
+        "label": "≤-5%",
+        "count": 395,
+        "direction": "down"
+      },
+      {
+        "label": "-5%至-2%",
+        "count": 2232,
+        "direction": "down"
+      },
+      {
+        "label": "-2%至0",
+        "count": 2114,
+        "direction": "down"
+      },
+      {
+        "label": "平盘",
+        "count": 76,
+        "direction": "flat"
+      },
+      {
+        "label": "0至2%",
+        "count": 534,
+        "direction": "up"
+      },
+      {
+        "label": "2%至5%",
+        "count": 145,
+        "direction": "up"
+      },
+      {
+        "label": "≥5%",
+        "count": 79,
+        "direction": "up"
+      }
+    ],
+    "missing_quotes": 352,
+    "source": "东方财富全A快照"
+  },
+  "limit_stats": {
+    "limit_up": 32,
+    "limit_down": 15,
+    "as_of": "2026-11-06",
+    "source": "东方财富涨跌停池",
+    "scope": "东方财富涨跌停池覆盖，非自行按涨幅阈值估算"
+  },
   "top_sectors": [
     {
       "code": "BK1296",
@@ -117,10 +211,60 @@
       "change_pct": -4.65
     }
   ],
-  "next_day_hint": "大盘偏弱时，明日盯盘以观察池防守为主，优先等待回踩点位，不追高。",
   "limitations": [
-    "结构化行情复盘，不含AI叙事与北向资金",
-    "板块与涨跌统计依赖东财公开接口，失败时字段为空",
-    "不构成投资建议"
+    "指数来自腾讯；个股、板块和涨跌停来自东方财富公开接口",
+    "全A快照仅完整覆盖时汇总；失败时保留明确样本口径；分页采集不是同一瞬间成交快照",
+    "资讯不自动解释当日涨跌，不构成交易依据",
+    "法定节假日尚未接入交易所日历；日期以实际行情为准"
+  ],
+  "collection_old": false,
+  "stale": false,
+  "session": {
+    "phase": "closed",
+    "label": "周末休市",
+    "date_note": "周末休市，行情日期与最近周五一致"
+  },
+  "report_kind": "after_close",
+  "market_tone": "偏弱",
+  "tone_key": "weak",
+  "metrics": {
+    "advance_ratio": 13.6,
+    "breadth_total": 5575,
+    "turnover": 1657794470000.0,
+    "turnover_scope": "沪深成交额（不含北交所）",
+    "index_count": 7,
+    "positive_indices": 0,
+    "limit_up": 32,
+    "limit_down": 15
+  },
+  "insights": [
+    {
+      "title": "指数结构",
+      "text": "沪深300 -1.44%，指数表现与个股广度分别观察。"
+    },
+    {
+      "title": "市场广度",
+      "text": "上涨占比 13.6%，涨 758 / 跌 4741 / 平 76；口径：全A股有效报价样本。"
+    },
+    {
+      "title": "成交量能",
+      "text": "沪深成交额（不含北交所） 16,577.94 亿元；不是资金净流入。"
+    },
+    {
+      "title": "领涨方向",
+      "text": "视频媒体 / 种子 / 卫浴电器；涨幅排名不代表已验证的主线。"
+    }
+  ],
+  "quality": {
+    "missing": [],
+    "coverage_label": "全A有效报价",
+    "snapshot_complete": true
+  },
+  "next_day_hint": "指数承压，优先观察广度与量能是否修复，避免仅凭板块涨幅追涨。",
+  "summary_bullets": [
+    "沪深300 -1.44%，指数表现与个股广度分别观察。",
+    "上涨占比 13.6%，涨 758 / 跌 4741 / 平 76；口径：全A股有效报价样本。",
+    "沪深成交额（不含北交所） 16,577.94 亿元；不是资金净流入。",
+    "视频媒体 / 种子 / 卫浴电器；涨幅排名不代表已验证的主线。"
   ]
 }

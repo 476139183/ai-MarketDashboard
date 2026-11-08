@@ -89,7 +89,8 @@ A股与美股日K、美股分钟线和合约K线支持高低点（HH/HL/LH/LL）
 | 行情研究 | A 股、美股 | 名称 / 代码搜索、日 K、成交量、MA5 / MA20、浏览器自选、手动 AI 报告 |
 | 股票盘中信号 | 沪深普通 A 股、美股 | 日线量价方向、已收盘 15 分钟状态、条件式进场带、止损与目标参考 |
 | A 股明日盯盘 | 热榜过滤股票池 | 盘后筛选、策略候选 / 观察池、次日点位计划、明日观察列表 |
-| A 股盘后复盘 | 指数、市场宽度、板块 | 指数表现、涨跌家数、板块冷热与次日观察提示 |
+| A 股盘后复盘 | 7个指数、广度、量能、涨跌分布、板块 | 标明全A／样本范围、涨跌停、事实摘要和下次开盘观察 |
+| 资讯与事件 | A股、美股、数字资产、全球财经 | 本地资讯池、来源状态、关键词筛选、分页与显式采集；依赖DSA |
 | 美股雷达 | 美股原股 / USD | 独立观察池、盘前 / 盘中 / 盘后、新浪分钟 OHLCV、Nasdaq 分时与可选 Massive |
 | 合约雷达 | USDT 永续 | 三所独立行情、六个分钟周期及 4 小时方向、结构点位、资金费率与持仓估算 |
 | 自动模拟交易 | OKX、Binance 合约 | 自动模拟开平仓、费用与滑点、持仓估值、账户恢复、交易记录与盈亏汇总 |
@@ -198,7 +199,8 @@ curl 'http://127.0.0.1:8766/api/contracts?exchange=okx&period=15'
 | 行情研究 | http://127.0.0.1:8766/research | 搜索股票、日 K 与 AI 报告 |
 | 股票盘中信号 | http://127.0.0.1:8766/ | 15 分钟规则状态与条件进场观察 |
 | A 股明日盯盘 | http://127.0.0.1:8766/a-radar | 盘后生成次日观察名单 |
-| A 股盘后复盘 | http://127.0.0.1:8766/a-review | 市场与板块复盘 |
+| A 股盘后复盘 | http://127.0.0.1:8766/a-review | 指数、广度、量能与板块复盘 |
+| 资讯与事件 | http://127.0.0.1:8766/news | 多市场资讯与来源状态 |
 | 美股雷达 | http://127.0.0.1:8766/us-radar | 原股美元行情，按美东时段观察 |
 | 合约雷达 | http://127.0.0.1:8766/contracts | 默认欧易，可切币安 / Bitget |
 | 自动模拟交易 | http://127.0.0.1:8766/paper | 默认欧易模拟账户 |
@@ -220,7 +222,7 @@ curl 'http://127.0.0.1:8766/api/contracts?exchange=okx&period=15'
 
 在「明日盯盘」刷新名单，检查信号日、市场过滤、均线和量能条件，再将关注标的加入明日观察。盘中刷新通常使用前一个完整交易日；北京时间 **15:05 后**才允许纳入当日收盘数据，仍需通过源数据与日历检查。
 
-「盘后复盘」展示指数、涨跌家数和板块冷热，不自动调用大模型。命令行入口：
+「盘后复盘」按市场概览、7个主要指数、广度与量能、涨跌幅分布、行业板块、事实摘要和下次开盘观察组织。完整全A快照与上证样本分别标明口径；全A成交额缺失时可展示明确标注的沪深成交额，未知数据不补零。行情日期、采集时间、周末状态和数据来源独立显示，不自动调用大模型。详细口径见[资讯与A股复盘](docs/features/news-and-a-review.md)。命令行入口：
 
 ```bash
 python3 markets/a/radar.py
@@ -228,6 +230,12 @@ python3 markets/a/market_review.py
 ```
 
 「盯住」用于维护观察列表，不自动创建开盘提醒或模拟委托。
+
+### 资讯与事件
+
+通过独立DSA服务读取本地资讯池，支持A股、美股、数字资产和全球财经，包含市场筛选、关键词、最近采集范围、分页、来源状态与原文链接。进入「资讯与事件」添加内置来源，然后显式点击采集；打开页面不会自动调用模型或推送通知。
+
+发布时间与最近采集时间分开，旧闻重新采集不会被标成今日发布。预设包括财联社热门、金十财经、SEC官方新闻、MarketWatch和CoinDesk，实际可用性取决于网络与来源。SEC新闻不等于完整公司财报日历。若代理Fake-IP导致域名解析到保留地址，DSA会拒绝连接，需调整本机DNS后重试；本机2026-11-08验收仍受此限制，未宣称真实新闻已采集成功。见[接入与数据口径](docs/features/news-and-a-review.md)。
 
 ### 美股分钟图与扩展时段
 
@@ -528,6 +536,9 @@ DSA 的模型与可选新闻服务配置位于其独立目录的 `.env`，默认
 | GET | `/api/alerts` | 股票巡检告警快照 |
 | GET | `/api/a-radar` | A 股次日名单；`refresh=1` 请求后台更新 |
 | GET | `/api/a-review` | 盘后复盘；`refresh=1` 请求后台更新 |
+| GET | `/api/news?market=cn&days=7&page=1` | 查询资讯池；关键词`q`、每页`page_size` |
+| GET / POST | `/api/news/sources` | 来源状态；POST以`preset`添加内置来源 |
+| GET / POST | `/api/news/refresh` | 查询采集状态／显式启动后台采集 |
 | GET | `/api/us-radar?symbols=NVDA,MU&period=15&session=all&provider=auto` | 美股原股；最多 8 代码，时段 `all/pre/regular/post`，来源 `auto/sina/nasdaq/massive/yahoo` |
 | GET | `/api/us-chart?symbols=SNDK&period=5&provider=auto` | 单股价格 / 成交量图，独立 15 秒采集，含形成中 K 线；参数同美股雷达 |
 | GET | `/api/contracts?exchange=okx&period=240` | 合约雷达；三交易所，周期 `1/5/10/15/30/60/240` |
@@ -681,6 +692,7 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | [英文说明](README.en.md) | English overview, setup, market coverage and paper trading |
 | [GitHub 发布与发现](docs/github-discovery.md) | About、Topics 与默认分支发布建议 |
 | [看板说明](markets/us/dashboard/README.md) | 页面、巡检、合约与模拟交易细节 |
+| [资讯与A股复盘](docs/features/news-and-a-review.md) | 新闻来源、时间口径、全A覆盖与网络限制 |
 | [DSA 接入](docs/dsa-integration.md) | 上游安装、AI 配置和任务隔离 |
 | [数据源说明](docs/market-data-sources.md) | 行情接入与来源比较 |
 | [公开历史样本](docs/public-history.md) | 样本导入、覆盖与审计 |

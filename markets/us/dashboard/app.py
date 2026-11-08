@@ -17,6 +17,7 @@ from urllib.parse import parse_qs, urlparse
 from engine import analyze_many, analyze_symbol
 from engine import BJ
 from dsa_client import DSAClient, DSAError
+from news_service import REFRESH as news_refresh
 from contract_radar import SERVICE as bitget_radar
 from okx_contracts import SERVICE as contract_radar
 from binance_contracts import SERVICE as binance_radar
@@ -206,7 +207,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         path=urlparse(self.path).path
-        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control'):
+        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources'):
             self._json(404, {'error': 'not found'})
             return
         origin = self.headers.get('Origin')
@@ -226,7 +227,14 @@ class Handler(BaseHTTPRequestHandler):
                 runner.start()
                 self._json(200, runner.snapshot())
                 return
+            if path=='/api/news/refresh':
+                news_refresh.start()
+                self._json(202,news_refresh.snapshot())
+                return
             client=DSAClient.from_env()
+            if path=='/api/news/sources':
+                self._json(200,client.news_add_source(body.get('preset')))
+                return
             if path=='/api/dsa/ai-settings':
                 self._json(200,client.save_ai_settings(body))
             else:
@@ -241,6 +249,20 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+
+        if path in ('/news','/news/'):
+            self._send(200,(STATIC/'news.html').read_bytes(),'text/html; charset=utf-8')
+            return
+        if path in ('/api/news','/api/news/sources','/api/news/refresh'):
+            try:
+                if path=='/api/news/refresh':self._json(200,news_refresh.snapshot());return
+                client=DSAClient.from_env()
+                if path=='/api/news/sources':self._json(200,client.news_sources());return
+                qs=parse_qs(parsed.query)
+                self._json(200,client.news_items(market=(qs.get('market')or['all'])[0],query=(qs.get('q')or[''])[0],symbol=(qs.get('symbol')or[''])[0],days=int((qs.get('days')or['7'])[0]),page=int((qs.get('page')or['1'])[0]),page_size=int((qs.get('page_size')or['20'])[0])))
+            except DSAError as exc:self._json(503 if exc.status==503 else 502,{'error':str(exc)})
+            except (ValueError,TypeError) as exc:self._json(400,{'error':str(exc)})
+            return
 
         if path in ('/us-radar', '/us-radar/'):
             self._send(200, (STATIC / 'us-radar.html').read_bytes(), 'text/html; charset=utf-8')

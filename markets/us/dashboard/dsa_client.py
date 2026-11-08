@@ -9,7 +9,7 @@ import urllib.error
 import urllib.request
 from datetime import date
 from functools import lru_cache
-from urllib.parse import quote, urlencode, urlsplit
+from urllib.parse import quote, urlencode, urlsplit, urlunsplit, parse_qsl
 
 
 class DSAError(ValueError):
@@ -220,6 +220,84 @@ class DSAClient:
         self.request('/api/v1/system/config',{'config_version':config['config_version'],
                      'mask_token':config.get('mask_token','******'),'reload_now':True,'items':items},method='PUT')
         return self.ai_settings()
+
+    @staticmethod
+    def news_link(value):
+        if not isinstance(value,str) or len(value)>2000:return None
+        try:
+            parsed=urlsplit(value)
+            if parsed.scheme not in ('http','https') or not parsed.hostname or parsed.username or parsed.password:return None
+            if parsed.hostname.lower() in ('localhost','localhost.localdomain'):return None
+            import ipaddress
+            try:
+                if not ipaddress.ip_address(parsed.hostname).is_global:return None
+            except ValueError:pass
+            hidden={'access_token','api_key','apikey','token','key','secret','password','signature','authorization'}
+            query=urlencode([(k,v) for k,v in parse_qsl(parsed.query) if k.casefold() not in hidden])
+            return urlunsplit((parsed.scheme,parsed.netloc,parsed.path,query,parsed.fragment))
+        except ValueError:return None
+
+    @staticmethod
+    def news_source_item(row):
+        keys=('id','name','source_type','enabled','market','scope_type','scope_value','last_status','last_fetched_at')
+        item={k:row.get(k) for k in keys}
+        if item.get('scope_value')=='crypto':item['market']='crypto'
+        item['last_error']='采集失败，请检查来源可用性' if row.get('last_error') else None
+        return item
+
+    def news_sources(self):
+        payload=self.request('/api/v1/intelligence/sources?page=1&page_size=100')
+        if not isinstance(payload.get('items'),list):raise DSAError('DSA资讯源响应无效')
+        return {'items':[self.news_source_item(r) for r in payload['items'] if isinstance(r,dict)],'total':payload.get('total',0)}
+
+    def news_items(self,market='all',query='',symbol='',days=7,page=1,page_size=20):
+        if market not in ('all','cn','us','crypto','global','hk'):raise ValueError('资讯市场参数无效')
+        if not isinstance(query,str) or len(query.strip())>100:raise ValueError('资讯关键词最多100字')
+        if not 1<=days<=30 or not 1<=page<=1000 or not 1<=page_size<=100:raise ValueError('资讯时间范围或页码无效')
+        query=query.strip();symbol=stock_code(symbol) if symbol else ''
+        params={'days':days,'page':page,'page_size':page_size}
+        if market!='all':params['market']='global' if market=='crypto' else market
+        if market=='crypto':params.update(scope_type='market',scope_value='crypto')
+        if symbol:
+            if market=='crypto':params['query']=' '.join([symbol,query]).strip()
+            else:params.update(scope_type='symbol',scope_value=symbol)
+        if query and 'query' not in params:params['query']=query
+        payload=self.request('/api/v1/intelligence/items?'+urlencode(params))
+        if not isinstance(payload.get('items'),list):raise DSAError('DSA资讯响应无效')
+        keys=('id','source_id','source_name','source_type','title','summary','source','published_at','fetched_at','scope_type','scope_value','market')
+        items=[]
+        for row in payload['items']:
+            if not isinstance(row,dict):continue
+            item={k:row.get(k) for k in keys};item['url']=self.news_link(row.get('url'))
+            if item.get('scope_value')=='crypto':item['market']='crypto'
+            items.append(item)
+        return {'items':items,'total':payload.get('total',0),'page':page,'page_size':page_size,'market':market,'days':days}
+
+    def news_add_source(self,preset):
+        presets={
+            'cn':{'name':'财联社热门 · NewsNow','template':'newsnow-cls-hot'},
+            'us':{'name':'SEC官方新闻','template':'sec-company-news'},
+            'global':{'name':'MarketWatch全球财经','template':'global-marketwatch'},
+            'macro':{'name':'金十财经 · NewsNow','template':'newsnow-jin10'},
+            'crypto':{'name':'CoinDesk数字资产新闻','url':'https://www.coindesk.com/arc/outboundfeeds/rss/'},
+        }
+        if preset not in presets:raise ValueError('请选择内置资讯源')
+        spec=presets[preset]
+        for item in self.news_sources()['items']:
+            if item['name']==spec['name']:return {'created':False,'source':item}
+        try:
+            if 'template' in spec:
+                row=self.request('/api/v1/intelligence/sources/templates/'+spec['template'],{'name':spec['name'],'enabled':True})
+            else:
+                row=self.request('/api/v1/intelligence/sources',{'name':spec['name'],'url':spec['url'],'source_type':'rss','enabled':True,'market':'global','scope_type':'market','scope_value':'crypto'})
+        except DSAError as exc:
+            message = str(exc.payload.get('message', ''))
+            if 'private or local network addresses' in message:
+                raise DSAError('来源域名解析到保留或内网地址，DSA已拒绝连接；请检查本机代理的Fake-IP/DNS设置', 502) from None
+            if 'DNS resolution failed' in message:
+                raise DSAError('资讯源域名解析失败，请检查本机DNS和代理设置', 502) from None
+            raise
+        return {'created':True,'source':self.news_source_item(row)}
 
     def start_analysis(self, symbol):
         code = stock_code(symbol)

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>观市 · 盘后复盘</title>
   <link rel="stylesheet" href="/static/research.css?v=3" />
-  <link rel="stylesheet" href="/static/a-radar.css?v=3" />
+  <link rel="stylesheet" href="/static/insights.css?v=1" />
 </head>
 <body>
 <div class="workspace">
@@ -18,37 +18,26 @@
       <a href="/"><span>⌁</span>盘中信号</a>
       <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
       <a href="/paper" target="_top"><span>◈</span>模拟交易</a>
-    <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a></nav>
+    <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a><a href="/news" target="_top"><span>▤</span>资讯与事件</a></nav>
     <p class="sidebar-hint">收盘后看指数、涨跌家数与板块冷热，再决定明天防守还是回踩。</p>
     <div class="sidebar-bottom"><span class="status-dot" id="service-dot"></span><div><strong id="service-label">本地复盘</strong><small>A股盘后</small></div></div>
   </aside>
   <div class="main-shell">
     <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>盘后复盘</strong></div><div class="topbar-right"><time id="workspace-date"></time></div></header>
-    <main class="main-content radar-page">
-      <div class="page-heading">
-        <div>
-          <p class="eyebrow">AFTER-CLOSE REVIEW</p>
-          <h1>今天市场怎样，明天怎么看。</h1>
-          <p class="heading-note">结构化行情复盘（指数 / 涨跌家数 / 板块），不含 AI 叙事。</p>
-        </div>
-        <button id="btn-refresh" class="primary-button" type="button">刷新复盘 <span>↻</span></button>
-      </div>
-      <section class="panel radar-hero">
-        <div class="radar-hero-main">
-          <p class="radar-kicker">复盘日 <strong id="as-of">—</strong></p>
-          <h2 id="tone">—</h2>
-          <p id="hint" class="radar-market">—</p>
-        </div>
-      </section>
-      <p id="status" class="connection-status" role="status">正在读取复盘…</p>
-      <section class="panel radar-section"><div class="section-title"><h2>要点</h2></div><ul id="bullets" class="review-bullets"></ul></section>
-      <section class="panel radar-section"><div class="section-title"><h2>主要指数</h2></div><div id="indices" class="review-grid"></div></section>
-      <section class="panel radar-section"><div class="section-title"><h2>领涨板块</h2></div><div id="top" class="review-grid"></div></section>
-      <section class="panel radar-section"><div class="section-title"><h2>领跌板块</h2></div><div id="bottom" class="review-grid"></div></section>
-      <div class="data-note"><span>ⓘ</span><p id="limits">数据来自公开行情接口；失败字段可能为空。</p></div>
+    <main class="main-content insight-page review-page">
+      <div class="page-heading"><div><p class="eyebrow">A-SHARE · MARKET REVIEW</p><h1>读懂今天，准备下一次开盘。</h1><p class="heading-note">指数、广度、量能与板块放在一起看，让每一个判断都有数据出处。</p></div><button id="btn-refresh" class="primary-button" type="button">刷新复盘 ↻</button></div>
+      <section class="review-hero insight-card"><div><div class="hero-meta"><span>行情日 <strong id="as-of">—</strong></span><span id="review-phase" class="market-pill">—</span><span id="review-coverage" class="market-pill">—</span></div><p class="section-kicker">市场温度</p><h2 id="tone">等待数据</h2><p id="hint">正在核对行情与市场广度…</p></div><div class="hero-aside"><span class="section-kicker">下一交易日观察</span><p>指数能否企稳？<br>上涨是否扩散？<br>量能是否跟上？</p><a class="insight-link" href="/a-radar">打开明日盯盘 ↗</a></div></section>
+      <p id="status" class="insight-status" role="status">正在读取复盘…</p>
+      <div class="review-metrics"><article class="insight-card"><span>沪深300</span><strong id="metric-index">—</strong><small id="metric-index-note">指数参考</small></article><article class="insight-card"><span>上涨家数占比</span><strong id="metric-breadth">—</strong><small id="metric-breadth-note">样本口径见下方</small></article><article class="insight-card"><span id="metric-amount-label">市场成交额</span><strong id="metric-amount">—</strong><small>成交额，非资金净流入</small></article><article class="insight-card"><span>涨停 / 跌停</span><strong id="metric-limits">— / —</strong><small>公开接口统计 · 缺失项不补零</small></article></div>
+      <section class="insight-card"><div class="section-title"><h2>主要指数</h2><span>逐项行情日期可核验</span></div><div id="indices" class="index-grid"></div></section>
+      <div class="review-two-column"><section class="insight-card"><div class="section-title"><h2>市场广度</h2><span>涨 · 平 · 跌</span></div><p id="breadth-scope" class="small-note">等待样本口径</p><div id="breadth-bar" class="breadth-bar"></div><div id="breadth-counts" class="breadth-counts"></div><p class="small-note">上涨占比 = 上涨家数 ÷ 有效样本总数；停牌与缺失报价不应混入涨跌判断。</p></section><section class="insight-card"><div class="section-title"><h2>涨跌幅分布</h2><span>仅展示完整快照</span></div><div id="review-distribution" class="distribution"></div><p class="small-note">宽度和极端涨跌一起观察，避免仅用一条指数概括整个市场。</p></section></div>
+      <section class="insight-card"><div class="section-title"><h2>行业板块温度</h2><span>涨跌幅排名 · 非资金流向</span></div><div class="review-two-column sector-columns"><div><h3>领涨方向</h3><div id="top"></div></div><div><h3>领跌方向</h3><div id="bottom"></div></div></div><p class="small-note">当日排名不等于持续主线，结合后续量能与价格结构验证。</p></section>
+      <div class="review-two-column"><section class="insight-card"><div class="section-title"><h2>今天有哪些可验证的事实</h2><span>依据行情生成</span></div><div id="review-insights" class="review-insights"></div></section><section class="insight-card"><div class="section-title"><h2>下次开盘，重点核对</h2><a class="insight-link" href="/a-radar">去盯盘 ↗</a></div><ol class="review-checklist"><li><strong>指数与广度是否同步</strong><p>指数修复时，核对上涨家数是否同步扩散；分化时保留观察。</p></li><li><strong>量能能否支持行情</strong><p>先核对全A成交额覆盖，缺少历史对比时不下“放量”结论。</p></li><li><strong>板块强势是否延续</strong><p>结合价格结构、回踩位置和消息发布时间，逐个验证标的。</p></li></ol></section></div>
+      <section class="insight-card"><div class="section-title"><h2>近期A股资讯</h2><a class="insight-link" href="/news?market=cn">全部资讯 ↗</a></div><p class="small-note">资讯与复盘日期可能不同，按发布时间核对，不自动归因为当日涨跌原因。</p><div id="review-news" class="review-news">正在读取资讯…</div></section>
+      <details class="insight-card review-provenance" open><summary>数据覆盖与来源</summary><p id="review-missing" class="small-note"></p><p id="review-date-note" class="small-note"></p><p id="limits" class="small-note">公开行情接口可能暂时不可用，缺失项保留为空。</p></details>
     </main>
   </div>
 </div>
-<script src="/static/a-review.js?v=1"></script>
+<script src="/static/a-review.js?v=2"></script>
 </body>
 </html>
