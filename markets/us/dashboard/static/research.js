@@ -9,7 +9,8 @@ let signalVersion = 0, signalExpiryTimer = null, aiSettings = null;
 let searchVersion = 0, searchTimer = null, pendingResearchStock = null;
 let activeSymbol = '', taskViewVersion = 0;
 const HISTORY_DAYS = 365;
-let dailyCache = null;
+let dailyCache = null, dailyStructure = null;
+const dailyStructureControls=globalThis.MarketStructure?new MarketStructure.Controls(el('daily-structure')):null;
 const stockTasks = Object.create(null), stockReports = Object.create(null), submitting = new Set();
 let chosenAIBackend = '', serverModelReady = false;
 try {chosenAIBackend=localStorage.getItem('market_studio_ai_choice')||'';}catch(_){}
@@ -165,6 +166,7 @@ function showMetrics(bar, rows) {
 
 function drawCandles(rows) {
   if (!globalThis.LightweightCharts) throw new Error('图表组件加载失败，请刷新页面');
+  dailyStructure?.destroy(); dailyStructure=null; dailyStructureControls?.clear();
   chart?.remove();
   const L = LightweightCharts;
   const visible = visibleRows(rows, selectedDays);
@@ -185,6 +187,10 @@ function drawCandles(rows) {
   volume.setData(visible.filter(b => b.volume != null).map(b => ({time: b.date, value: b.volume, color: b.close >= b.open ? '#c7e4d6' : '#edcfca'})));
   const panes = chart.panes();
   if (panes[1]) panes[1].setHeight(65);
+  if(globalThis.MarketStructure){
+    dailyStructure=new MarketStructure.Overlay(chart,candles,L,{dark:false});
+    dailyStructureControls.bind(dailyStructure,MarketStructure.dailyRows(rows,activeSymbol),{visibleFrom:first,daily:true});
+  }
   chart.timeScale().fitContent();
   chart.subscribeCrosshairMove(event => {
     const current = event.seriesData?.get(candles);

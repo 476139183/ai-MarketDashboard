@@ -12,6 +12,10 @@ Public US intraday charts and crypto futures modules can run without DSA, exchan
 
 > **Research and simulation only.** Prices update through HTTP polling and remain subject to provider delays and entitlements. The application does not submit orders to a brokerage or an exchange.
 
+## Market structure overlays
+
+Daily China/US equity charts, US intraday charts and perpetual charts share confirmed swing labels, BOS/CHoCH events, premium/discount zones and three-candle price gaps. Layers are independently switchable; swing confirmation waits for 3/5/10 right-hand closed bars. See the [timing and data limitations](docs/features/market-structure.md).
+
 ## What you can do
 
 | Module | Market | Capabilities |

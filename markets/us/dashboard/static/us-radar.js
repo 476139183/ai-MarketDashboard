@@ -7,7 +7,7 @@
   let timer=null,requestId=0,controller=null,busy=false;
   const symbols=()=>search?[search]:watchlist.slice(page*8,page*8+8);
   let detail=null, detailKey='', detailTimer=null, detailController=null, detailRequest=0;
-  const chartView=window.MarketChart?new window.MarketChart(el('us-chart'),el('us-chart-legend')):null;
+  const chartView=window.MarketChart?new window.MarketChart(el('us-chart'),el('us-chart-legend'),el('us-structure')):null;
   const detailIdentity=row=>`${row.symbol}:${el('us-period').value}:${el('us-session').value}:${el('us-provider').value}`;
   function showChart(row){
     el('us-selected').textContent=`${row.symbol} · ${row.source}`;

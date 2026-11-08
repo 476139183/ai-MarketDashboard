@@ -5,7 +5,7 @@
   <meta name="color-scheme" content="dark" /><title>观市 · 合约雷达</title>
   <link rel="stylesheet" href="/static/research.css?v=3" />
   <link rel="stylesheet" href="/static/contracts.css?v=1" />
-</head>
+<link rel="stylesheet" href="/static/market-structure.css?v=1"></head>
 <body class="contracts-workspace">
 <div class="workspace">
   <aside class="sidebar">
@@ -36,7 +36,7 @@
       <section class="contract-panel contract-detail" aria-label="当前合约方向解释">
         <div class="detail-heading"><div><p class="eyebrow">当前选择 · <span id="detail-source">OKX USDT 永续</span></p><h2><span id="detail-symbol">等待行情</span><span id="detail-direction" class="direction-badge">待确认</span></h2><p id="detail-name" class="detail-caption">连接后显示已核验的同名合约</p></div><div class="detail-quote"><strong id="detail-price">—</strong><span>USDT</span><small id="detail-time">—</small></div></div>
         <div class="detail-columns"><div><h3>为什么这样判断</h3><ul id="detail-reasons"><li>等待完整合约行情</li></ul></div><div><h3>判断何时失效</h3><p id="detail-invalidation">等待 4 小时结构</p><div class="ema-reference"><span>EMA20</span><strong id="detail-ema20">—</strong><span>EMA50</span><strong id="detail-ema50">—</strong></div></div><div><h3>需要留意</h3><p>方向是条件式趋势倾向。资金费率为当前周期值；持仓名义价值按基础币持仓量 × 标记价估算。</p><p id="detail-closed-at">结构收盘时间：—</p></div></div>
-        <details id="chart-details"><summary id="chart-summary">查看该合约 K 线与成交量</summary><p id="chart-legend" class="chart-readout" role="status">等待 K 线及成交量</p><div id="contract-chart" aria-label="合约4小时K线"></div><p id="chart-status">等待 K 线</p><a class="chart-attribution" href="https://www.tradingview.com/" target="_blank" rel="noreferrer">TradingView Lightweight Charts™ ↗</a></details>
+        <details id="chart-details"><summary id="chart-summary">查看该合约 K 线与成交量</summary><div id="contract-structure"></div><p id="chart-legend" class="chart-readout" role="status">等待 K 线及成交量</p><div id="contract-chart" aria-label="合约4小时K线"></div><p id="chart-status">等待 K 线</p><a class="chart-attribution" href="https://www.tradingview.com/" target="_blank" rel="noreferrer">TradingView Lightweight Charts™ ↗</a></details>
       </section>
       <section class="contract-panel contract-board" aria-labelledby="contract-board-title">
         <div class="board-heading"><div><h2 id="contract-board-title">涨跌方向雷达 <span class="live-badge">LIVE · REST</span></h2><p>点击标的查看判断依据与失效条件；报价超过 30 秒时暂停方向。</p></div><label class="sr-only" for="contract-search">搜索合约</label><input id="contract-search" placeholder="搜索代码 / 名称" autocomplete="off" /></div>
@@ -49,6 +49,6 @@
     </main>
   </div>
 </div>
-<script src="/static/vendor/lightweight-charts.js"></script><script src="/static/market-chart.js?v=1"></script><script src="/static/contracts.js?v=2"></script>
+<script src="/static/vendor/lightweight-charts.js"></script><script src="/static/market-structure.js?v=1"></script><script src="/static/market-chart.js?v=2"></script><script src="/static/contracts.js?v=2"></script>
 </body>
 </html>

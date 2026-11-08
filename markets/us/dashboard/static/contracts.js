@@ -33,7 +33,7 @@
     return {...row, fresh, valid, direction: valid ? row.direction : 'observe', label: valid ? row.label : '待确认'};
   }
 
-  const chartView=window.MarketChart?new window.MarketChart(el('contract-chart'),el('chart-legend')):null;
+  const chartView=window.MarketChart?new window.MarketChart(el('contract-chart'),el('chart-legend'),el('contract-structure')):null;
   function renderChart(row) {
     const rows=row?.chart_candles||row?.candles||[];
     const forming=rows.at(-1)?.complete===false;

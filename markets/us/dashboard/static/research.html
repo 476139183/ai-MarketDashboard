@@ -5,7 +5,7 @@
   <meta name="color-scheme" content="light" /><title>观市 · 股票研究工作台</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23167960'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E观%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="/static/research.css?v=2" />
-</head>
+<link rel="stylesheet" href="/static/market-structure.css?v=1"></head>
 <body>
 <div class="workspace">
   <aside class="sidebar">
@@ -32,7 +32,7 @@
             <div class="quote-row"><div><span id="stock-price" class="stock-price">—</span><span id="stock-currency" class="currency">USD</span><span id="stock-change" class="change-badge">等待行情</span></div><span id="stock-asof" class="data-asof">数据读取后显示日期</span></div>
             <div class="chart-toolbar"><div id="period-controls" class="segmented" aria-label="日线范围"><button type="button" data-days="30" aria-pressed="false">1 个月</button><button type="button" class="selected" data-days="90" aria-pressed="true">3 个月</button><button type="button" data-days="180" aria-pressed="false">6 个月</button><button type="button" data-days="365" aria-pressed="false">1 年</button></div><button id="btn-chart-reset" type="button" class="text-button" title="重置图表缩放">↔ 适应窗口</button></div>
             <div class="chart-legend"><span><i class="legend-candle"></i>日 K</span><span><i class="legend-ma5"></i>MA5</span><span><i class="legend-ma20"></i>MA20</span><span id="chart-cursor" class="chart-cursor">滚轮缩放 · 拖动平移</span></div>
-            <div class="chart-wrap"><div id="daily-chart" aria-label="可缩放的日 K 线和成交量图"></div><div id="chart-empty" class="chart-empty"><span class="empty-chart-icon">⌁</span><strong id="chart-empty-title">正在准备行情</strong><p id="chart-empty-note">连接后将自动读取所选股票的日线。</p><button id="btn-retry" class="outline-button" type="button" hidden>重新读取</button></div></div>
+            <div id="daily-structure"></div><div class="chart-wrap"><div id="daily-chart" aria-label="可缩放的日 K 线和成交量图"></div><div id="chart-empty" class="chart-empty"><span class="empty-chart-icon">⌁</span><strong id="chart-empty-title">正在准备行情</strong><p id="chart-empty-note">连接后将自动读取所选股票的日线。</p><button id="btn-retry" class="outline-button" type="button" hidden>重新读取</button></div></div>
             <div class="chart-footer"><span id="daily-status" role="status">等待行情数据</span><a href="https://www.tradingview.com/" target="_blank" rel="noreferrer">图表由 TradingView Lightweight Charts™ 提供 ↗</a></div>
           </article>
           <section class="panel live-signal-panel" aria-labelledby="live-signal-title">
@@ -65,6 +65,6 @@
     </main>
   </div>
 </div>
-<script src="/static/workspace-tabs.js?v=1"></script><script src="/static/vendor/lightweight-charts.js"></script><script src="/static/research.js?v=8"></script>
+<script src="/static/workspace-tabs.js?v=1"></script><script src="/static/vendor/lightweight-charts.js"></script><script src="/static/market-structure.js?v=1"></script><script src="/static/research.js?v=9"></script>
 </body>
 </html>

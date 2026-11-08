@@ -19,3 +19,17 @@ test('采样只有价格线，成交量缺失不填零；切换标的清除旧�
  assert.equal(p.series[1].data.length,0);assert.match(p.legend.textContent,/成交量未提供/);
  assert.equal(p.series.at(-1).type,'line');
 });
+test('共享图表将已收盘OHLCV传入标注层，清空或切换图型时清理旧标注',()=>{
+ const calls=[];let removed=0;
+ class Overlay{constructor(){calls.push('new');}clear(){calls.push('clear');}destroy(){calls.push('destroy');}}
+ class Controls{bind(overlay,rows,options){calls.push({rows,options});}clear(){calls.push('control-clear');}}
+ const L={CandlestickSeries:'candle',LineSeries:'line',HistogramSeries:'volume',createChart(){return{addSeries(){return{setData(){},priceScale(){return{applyOptions(){}};}};},removeSeries(){removed++;},subscribeCrosshairMove(){},timeScale(){return{fitContent(){}};}};}};
+ const context=vm.createContext({window:{LightweightCharts:L,MarketStructure:{Overlay,Controls}},Date,Number,Map});
+ vm.runInContext(fs.readFileSync(path.join(__dirname,'static/market-chart.js'),'utf8'),context);
+ const view=new context.window.MarketChart({}, {textContent:''},{}),rows=[{time:60000,open:10,high:11,low:9,close:10,complete:true}];
+ view.render({symbol:'BTC',source:'OKX',chart_candles:rows});
+ assert.equal(calls.find(c=>c&&c.rows)?.rows,rows);
+ view.clear();assert.ok(calls.includes('control-clear'));
+ view.render({symbol:'NVDA',source:'Nasdaq',sampled:true,line:[{time:60000,value:10}]});
+ assert.ok(calls.includes('destroy'));assert.equal(removed,1);
+});

@@ -31,6 +31,10 @@ Local market research dashboard for China A-shares, US stocks and crypto perpetu
 | 对选定股票生成 AI 研究报告 | 行情研究 | 日 K、条件信号与手动生成的 AI 解读 |
 | 检查历史样本与规则行为 | 历史研究 | 本地回放、来源核对、覆盖审计及偏差说明 |
 
+## 多市场结构标注
+
+A股与美股日K、美股分钟线和合约K线支持高低点（HH/HL/LH/LL）、BOS结构突破、CHoCH转向候选、溢价/折价/均衡区和FVG价格缺口。图层可独立开关，拐点确认可选3/5/10根；明确显示确认延迟，仅使用已收盘K线。[使用说明与时序边界](docs/features/market-structure.md)。
+
 ## 项目特点
 
 - **多市场独立处理**：A 股、美股和永续合约分别使用对应的数据与交易约束，原股 USD 报价不会直接替代 USDT 合约成交价。
