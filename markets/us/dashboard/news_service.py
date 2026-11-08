@@ -15,7 +15,10 @@ class NewsRefresh:
         def job():
             try:
                 client=DSAClient.from_env();client.timeout=45
-                sources=client.news_sources()['items']
+                sources=[s for s in client.news_sources()['items'] if s.get('enabled')]
+                if not sources:
+                    with self.lock:self.state['error']='没有已启用的资讯来源，请先添加来源再采集'
+                    return
                 for source in sources:
                     if not source.get('enabled'):continue
                     try:

@@ -44,4 +44,4 @@ if [[ ! -x "$CHECKOUT/.venv/bin/python" ]]; then
   exit 1
 fi
 cd "$CHECKOUT"
-exec .venv/bin/python -m uvicorn server:app --host 127.0.0.1 --port "$SERVICE_PORT"
+exec .venv/bin/python "$ROOT/scripts/serve_dsa.py" --port "$SERVICE_PORT"

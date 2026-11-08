@@ -62,6 +62,20 @@ class NewsTests(unittest.TestCase):
         with patch('news_service.threading.Thread',side_effect=immediate),patch('news_service.DSAClient.from_env',return_value=client),patch.object(client,'news_sources',return_value={'items':[{'id':1,'name':'bad','enabled':True},{'id':2,'name':'good','enabled':True},{'id':3,'name':'off','enabled':False}]}),patch.object(client,'request',side_effect=[DSAError('failed'),{'ok':True,'saved_count':3}]):
             service.start()
         result=service.snapshot();self.assertEqual(result['status'],'idle');self.assertEqual([r['ok'] for r in result['results']],[False,True]);self.assertEqual(result['results'][1]['saved_count'],3)
+    def test_empty_sources_are_explained_instead_of_silent_success(self):
+        from news_service import NewsRefresh
+        service=NewsRefresh()
+        def immediate(**kwargs):
+            class Worker:
+                def start(self):kwargs['target']()
+            return Worker()
+        with patch('news_service.threading.Thread',side_effect=immediate),patch('news_service.DSAClient.from_env',return_value=self.client()),patch.object(DSAClient,'news_sources',return_value={'items':[]}):
+            service.start()
+        self.assertIn('来源',service.snapshot()['error'])
+    def test_cn_rss_preset_preserves_market_instead_of_crypto_scope(self):
+        with patch.object(DSAClient,'news_sources',return_value={'items':[]}),patch.object(DSAClient,'request',return_value={'id':1,'name':'中新网财经','market':'cn'}) as transport:
+            self.client().news_add_source('cn-rss')
+            body=transport.call_args.args[1];self.assertEqual(body['market'],'cn');self.assertNotEqual(body.get('scope_value'),'crypto')
     def test_foreign_origin_cannot_start_news_refresh(self):
         handler=object.__new__(Handler);handler.path='/api/news/refresh';handler.headers={'Origin':'https://other.test','Host':'127.0.0.1:8766'};out=[];handler._json=lambda status,data:out.append(status)
         handler.do_POST();self.assertEqual(out,[403])

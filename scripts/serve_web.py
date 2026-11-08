@@ -58,7 +58,7 @@ def main():
         for line in config.read_text().splitlines():
             key, separator, value = line.removeprefix('export ').partition('=')
             feed_keys = (
-                'DSA_BASE_URL', 'DSA_SESSION_COOKIE',
+                'DSA_BASE_URL', 'DSA_SESSION_COOKIE', 'DSA_NEWS_DNS_MODE',
                 'CN_DAILY_SOURCES', 'US_DAILY_SOURCES',
                 'FEEDS_CROSSCHECK', 'TUSHARE_TOKEN',
                 'ALPHAVANTAGE_API_KEY', 'FINNHUB_API_KEY', 'MASSIVE_API_KEY',
