@@ -14,7 +14,7 @@ markets/us/dashboard/cache/
 _upstream_MarketDashboard/
 _merge_backup/
 
-# This private branch includes authorized strategy research and reports.
+# Current strategy research and reports are authorized for publication.
 # Runtime caches, account databases and credentials remain local.
 /private_research/
 *.sqlite

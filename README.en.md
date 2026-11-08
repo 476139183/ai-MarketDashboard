@@ -1,8 +1,6 @@
 # Market Studio — Stock Market Dashboard, Candlestick Charts & Paper Trading
 
-> **Private and proprietary; not an open-source release.** Owner-controlled strategies and research methods are confidential. See [confidentiality policy](CONFIDENTIALITY.md).
-
-> This branch is the complete private Gitee edition. Export an explicitly allowlisted edition separately for GitHub.
+> **Complete source and research materials are now public.** Strategy experiments and trade replays are included. Usage rights are governed by [LICENSE](LICENSE); see the [publication policy](CONFIDENTIALITY.md).
 
 **A local research workspace for China A-shares, US equities and cryptocurrency perpetual futures.**
 
@@ -227,6 +225,6 @@ Please file [issues](https://github.com/476139183/ai-MarketDashboard/issues) wit
 
 Market Studio integrates a separate [Daily Stock Analysis](https://github.com/ZhuLinsen/daily_stock_analysis) service and bundles [TradingView Lightweight Charts](https://github.com/tradingview/lightweight-charts) 5.2.1. See [third-party notices](markets/us/dashboard/static/vendor/README.md).
 
-This is a **private, proprietary personal project, not an open-source release**. Owner-controlled strategy implementations, parameters, training or tuning methods (where applicable), selection and evaluation procedures, and experiment records are confidential. Use or disclosure of owner-controlled materials requires express written authorization. See the [proprietary rights notice](LICENSE) and [confidentiality policy](CONFIDENTIALITY.md). Third-party components and data retain their respective licenses and terms.
+The owner has authorized public viewing of the current complete source and research materials. Copyright remains with the respective owners. Usage, modification and redistribution rights are governed by [LICENSE](LICENSE); no additional MIT or other open-source license has been granted. Third-party components and data retain their own terms. See the [publication policy](CONFIDENTIALITY.md).
 
 This is a local research and paper-trading tool, not a brokerage, guaranteed real-time terminal or proof of investment returns. Historical samples, current watchlists, corporate actions, trading calendars and execution assumptions all have documented limitations.
