@@ -4,6 +4,7 @@ import time
 import unittest
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+from unittest.mock import patch
 
 import futures_cn as F
 
@@ -70,6 +71,32 @@ class FuturesTests(unittest.TestCase):
         self.assertEqual(base['volume_ratio'],1)
         self.assertNotIn('资金流入',' '.join(base['evidence']))
         self.assertEqual(F.analyze([])['trend'],'insufficient')
+
+    def test_radar_isolates_failed_contracts_and_preserves_analysis_dates(self):
+        def chart(symbol, period, *, include_quote):
+            self.assertFalse(include_quote)
+            if symbol == 'AU0':
+                raise OSError('source offline')
+            return dict(F.identity(symbol), analysis=dict(trend='strong', label='历史结构偏强',
+                        asof=123, count=60, volume_ratio=1.2, oi_change=10), candles=[])
+        quotes = [dict(F.identity(s), price=3000, quote_at=NOW, error=None) for s in F.SYMBOLS]
+        with patch.object(F, 'fetch_quotes', return_value=quotes), patch.object(F, 'fetch_chart', side_effect=chart):
+            result = F.fetch_radar('day')
+        self.assertEqual(len(result['items']), len(F.SYMBOLS))
+        rows = {r['symbol']: r for r in result['items']}
+        self.assertEqual(rows['RB0']['analysis']['asof'], 123)
+        self.assertEqual(rows['RB0']['price'], 3000)
+        self.assertIn('source offline', rows['AU0']['analysis_error'])
+        self.assertNotEqual((rows['AU0'].get('analysis') or {}).get('trend'), 'strong')
+        self.assertNotIn('candles', rows['RB0'])
+
+    def test_radar_quote_failure_does_not_hide_historical_structure(self):
+        with patch.object(F, 'fetch_quotes', side_effect=OSError('quotes offline')), patch.object(F, 'fetch_chart', return_value={'analysis': {'trend': 'mixed', 'asof': 123}}):
+            result = F.fetch_radar('15')
+        self.assertEqual(len(result['items']), len(F.SYMBOLS))
+        self.assertIsNone(result['items'][0]['price'])
+        self.assertIn('quotes offline', result['items'][0]['error'])
+        self.assertEqual(result['items'][0]['analysis']['trend'], 'mixed')
 
     def test_symbol_and_period_validation(self):
         self.assertEqual(F.validate_symbol('rb2701'),'RB2701')

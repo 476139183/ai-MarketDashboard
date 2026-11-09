@@ -27,6 +27,17 @@ class FuturesRouteTests(unittest.TestCase):
         self.assertEqual(self.post({'symbol':'RB0'})[0],400)
         status,_,_=self.get('/api/futures/backtest?id=missing');self.assertEqual(status,404)
 
+    def test_radar_page_and_period_validation(self):
+        status, body, _ = self.get('/futures-radar')
+        self.assertEqual(status, 200)
+        self.assertIn(b'futures-radar.js', body)
+        with patch('app.futures_service.radar', return_value={'items': [], 'status': 'loading'}) as radar:
+            status, body, _ = self.get('/api/futures/radar?period=15')
+            self.assertEqual(status, 200)
+            radar.assert_called_once_with('15')
+        status, _, _ = self.get('/api/futures/radar?period=10')
+        self.assertEqual(status, 400)
+
     def test_page_and_assets(self):
         for path, content in [('/futures', b'futures.js'),('/futures/', b'futures.js'),
                               ('/static/futures.js', b'/api/futures'),('/static/futures.css', b'futures-chart')]:

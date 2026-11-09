@@ -29,8 +29,8 @@
     const points=row.curve||[];el('bt-curve-readout').textContent=points.length?`${date(points.at(-1).time)} · 权益 ${num(points.at(-1).equity)} 元`:'暂无曲线';
     const L=window.LightweightCharts;if(!L)return;
     if(!equityChart){
-      equityChart=L.createChart(el('bt-equity'),{autoSize:true,layout:{background:{color:'#182126'},textColor:'#a1b4bf'},grid:{vertLines:{color:'#26333b'},horzLines:{color:'#26333b'}},localization:{timeFormatter:t=>date(t*1000)}});
-      series=equityChart.addSeries(L.LineSeries,{color:'#dfbc7c',lineWidth:2,priceFormat:{type:'price',precision:2,minMove:.01}});
+      equityChart=L.createChart(el('bt-equity'),{autoSize:true,layout:{background:{color:'#ffffff'},textColor:'#829092'},grid:{vertLines:{color:'#e9eef0'},horzLines:{color:'#e9eef0'}},localization:{timeFormatter:t=>date(t*1000)}});
+      series=equityChart.addSeries(L.LineSeries,{color:'#167960',lineWidth:2,priceFormat:{type:'price',precision:2,minMove:.01}});
     }
     series.setData(points.map(p=>({time:p.time/1000,value:p.equity})));equityChart.timeScale().fitContent();
   }

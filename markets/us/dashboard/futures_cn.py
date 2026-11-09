@@ -174,7 +174,7 @@ def fetch_quotes(symbols):
     return parse_quotes(read_source(url, 'gb18030'), symbols, time.time()*1000)
 
 
-def fetch_chart(symbol, period):
+def fetch_chart(symbol, period, *, include_quote=True):
     method = 'getDailyKLine' if period == 'day' else 'getFewMinLine'
     params = dict(symbol=symbol)
     if period != 'day':
@@ -184,11 +184,37 @@ def fetch_chart(symbol, period):
     result = dict(identity(symbol), candles=bars, analysis=analyze(bars),
                   period=period, period_minutes=0 if period == 'day' else int(period),
                   time_convention='trading_date' if period == 'day' else 'period_end', quote=None, quote_error=None)
-    try:
-        result['quote'] = fetch_quotes([symbol])[0]
-    except (OSError, ValueError) as exc:
-        result['quote_error'] = str(exc)[:180]
+    if include_quote:
+        try:
+            result['quote'] = fetch_quotes([symbol])[0]
+        except (OSError, ValueError) as exc:
+            result['quote_error'] = str(exc)[:180]
     return result
+
+
+def fetch_radar(period='day'):
+    """Batch historical observations; each failed product remains explicitly unknown."""
+    period = validate_period(period)
+    try:
+        quotes = {row['symbol']: row for row in fetch_quotes(SYMBOLS)}
+        quote_error = None
+    except (OSError, ValueError) as exc:
+        quotes, quote_error = {}, str(exc)[:180]
+
+    def observe(symbol):
+        row = dict(identity(symbol), price=None, change_pct=None, quote_at=None,
+                   volume=None, open_interest=None, error=quote_error,
+                   analysis=None, analysis_error=None)
+        row.update(quotes.get(symbol, {}))
+        try:
+            row['analysis'] = fetch_chart(symbol, period, include_quote=False)['analysis']
+        except Exception as exc:
+            row['analysis_error'] = str(exc)[:180]
+        return row
+
+    with ThreadPoolExecutor(max_workers=4, thread_name_prefix='futures-radar') as pool:
+        items = list(pool.map(observe, SYMBOLS))
+    return dict(items=items, period=period)
 
 
 class FuturesService:
@@ -239,6 +265,10 @@ class FuturesService:
     def chart(self, symbol='RB0', period='day'):
         symbol, period = validate_symbol(symbol), validate_period(period)
         return self.cached(symbol+':'+period, lambda: fetch_chart(symbol, period))
+
+    def radar(self, period='day'):
+        period = validate_period(period)
+        return self.cached('radar:'+period, lambda: fetch_radar(period))
 
 
 SERVICE = FuturesService()

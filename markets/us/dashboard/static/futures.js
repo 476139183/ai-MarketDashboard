@@ -6,7 +6,11 @@
   const stamp=value=>Number.isFinite(value)?new Date(value).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}):'未提供';
   const fresh=row=>Number.isFinite(row.quote_at)&&Date.now()-row.quote_at<=120000&&Date.now()-row.quote_at>=-5000;
   const chart=new window.MarketChart(el('futures-chart'),el('futures-chart-legend'));
-  let symbol='RB0',version=0,items=[],chartTimer,boardTimer,chartController,boardBusy=false;
+  const params=new URLSearchParams(typeof location==='undefined'?'':location.search);
+  const initialPeriod=params.get('period');
+  if(['day','5','15','30','60'].includes(initialPeriod))el('futures-period').value=initialPeriod;
+  let symbol=(params.get('symbol')||'RB0').trim().toUpperCase(),version=0,items=[],chartTimer,boardTimer,chartController,boardBusy=false;
+  el('futures-symbol').value=symbol;
 
   async function api(url,signal){
     const response=await fetch(url,{cache:'no-store',signal});
@@ -86,5 +90,5 @@
   el('futures-period').addEventListener('change',()=>{resetDetail();loadChart();});
   el('futures-group').addEventListener('change',paintBoard);
   el('futures-refresh').addEventListener('click',()=>{loadBoard();loadChart();});
-  loadBoard();loadChart();
+  resetDetail();loadBoard();loadChart();
 })();

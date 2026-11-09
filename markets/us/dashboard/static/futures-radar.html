@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>观市 · 国内商品期货雷达</title>
+  <link rel="stylesheet" href="/static/research.css?v=4">
+  <link rel="stylesheet" href="/static/contracts.css?v=4">
+  <link rel="stylesheet" href="/static/futures.css?v=4">
+</head>
+<body class="contracts-workspace">
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav" aria-label="工作空间">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a href="/a-radar" target="_top"><span>◎</span>明日盯盘</a>
+      <a href="/a-review" target="_top"><span>▣</span>盘后复盘</a>
+      <a href="/"><span>⌁</span>盘中信号</a>
+      <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
+      <a href="/paper" target="_top"><span>◈</span>模拟交易</a>
+      <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a>
+      <a class="nav-active" aria-current="page" href="/futures-radar" target="_top"><span>◍</span>期货雷达<span class="nav-dot"></span></a>
+      <a href="/futures" target="_top"><span>▥</span>期货分析</a>
+      <a href="/news" target="_top"><span>▤</span>资讯与事件</a>
+    </nav>
+    <div class="source-card"><span class="source-dot"></span> 国内商品期货<strong>新浪财经 · 公开行情</strong><p>主力连续 / 月份合约<br>价格单位按品种标注</p></div>
+    <div class="sidebar-bottom"><div><strong>量价与持仓观察</strong><small>历史结构 · 北京时间</small></div><span class="local-tag">LOCAL</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>期货雷达</strong></div><span>国内商品 · CNY</span></header>
+    <main class="main-content contracts-page">
+      <div class="page-heading"><div><p class="eyebrow">CHINA COMMODITIES · MARKET RADAR</p><h1>一览商品，发现值得观察的走势。</h1><p class="heading-note">国内 12 个商品品种 · 主力连续 · 历史结构与源报价分别标记时间</p></div><a class="paper-link" href="/futures">进入期货分析 ↗</a></div>
+      <section class="contract-stats" aria-label="期货雷达概览">
+        <article class="contract-panel"><span>观察品种</span><strong id="fr-total">—</strong><small>黑色 / 贵金属 / 有色 / 能源 / 农产品</small></article>
+        <article class="contract-panel"><span>历史结构偏强</span><strong id="fr-strong" class="bullish">—</strong><small>完整K线收盘价 ＞ SMA20 ＞ SMA60</small></article>
+        <article class="contract-panel"><span>历史结构偏弱</span><strong id="fr-weak" class="bearish">—</strong><small>完整K线收盘价 ＜ SMA20 ＜ SMA60</small></article>
+        <article class="contract-panel"><span>120 秒内源报价</span><strong id="fr-fresh">—</strong><small>其余标记为休市、延迟或缺失</small></article>
+      </section>
+      <section class="contract-panel futures-controls" aria-label="期货雷达筛选">
+        <label>品种分类<select id="fr-group"><option value="all">全部商品</option><option>黑色</option><option>贵金属</option><option>有色</option><option>能源</option><option>农产品</option></select></label>
+        <label>观察周期<select id="fr-period"><option value="day">日线</option><option value="5">5 分钟</option><option value="15">15 分钟</option><option value="30">30 分钟</option><option value="60">60 分钟</option></select></label>
+        <label>历史结构<select id="fr-trend"><option value="all">全部结构</option><option value="strong">偏强</option><option value="weak">偏弱</option><option value="mixed">交错</option><option value="insufficient">数据不足 / 不可用</option></select></label>
+        <label>排序<select id="fr-sort"><option value="change">涨跌幅从高到低</option><option value="volume">量比从高到低</option><option value="oi">持仓变化从高到低</option></select></label>
+        <button id="fr-refresh" type="button">刷新快照</button>
+      </section>
+      <p id="fr-status" class="refresh-bar" role="status">正在读取期货雷达，首次采集需要一些时间…</p>
+      <section class="contract-panel contract-board" aria-labelledby="fr-board-title">
+        <div class="board-heading"><div><h2 id="fr-board-title">商品期货观察池</h2><p>点击品种进入对应周期分析。涨跌幅按昨结算计算；量比为最后完整K线成交量 / 前20根均量，持仓变化为相邻完整K线差值。</p></div><span id="fr-visible">等待数据</span></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th scope="col">品种 / 主力连续</th><th scope="col">最新报价 / 较昨结算</th><th scope="col">历史结构</th><th scope="col">量比 / 持仓变化</th><th scope="col">源报价时间 / 北京</th><th scope="col">最后完整K线 / 北京</th><th scope="col">数据状态</th></tr></thead><tbody id="fr-rows"><tr><td colspan="7">正在准备商品行情…</td></tr></tbody></table></div>
+      </section>
+      <div class="contract-footer"><span>新浪财经 · 国内商品期货 · 报价为 CNY，成交量与持仓量单位为手</span><span>历史结构用于观察，不构成开仓信号</span></div>
+      <p class="heading-note">主力连续可能因换月跳空，并非可直接成交的月份合约。指标只使用完整K线，日线保守排除当日；持仓增减不代表资金流入或多空主动性。</p>
+    </main>
+  </div>
+</div>
+<script src="/static/futures-radar.js?v=1"></script>
+</body>
+</html>

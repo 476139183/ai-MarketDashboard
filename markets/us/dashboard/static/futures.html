@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>观市 · 国内商品期货分析</title>
-  <link rel="stylesheet" href="/static/research.css?v=3">
-  <link rel="stylesheet" href="/static/contracts.css?v=3">
-  <link rel="stylesheet" href="/static/futures.css?v=1">
+  <link rel="stylesheet" href="/static/research.css?v=4">
+  <link rel="stylesheet" href="/static/contracts.css?v=4">
+  <link rel="stylesheet" href="/static/futures.css?v=4">
 </head>
 <body class="contracts-workspace">
 <div class="workspace">
@@ -14,14 +14,15 @@
     <div class="sidebar-label">工作空间</div>
     <nav class="workspace-nav" aria-label="工作空间">
       <a href="/research"><span>◫</span>行情研究</a>
-      <a href="/a-radar"><span>◎</span>A 股明日盯盘</a>
-      <a href="/a-review"><span>▣</span>盘后复盘</a>
+      <a href="/a-radar" target="_top"><span>◎</span>明日盯盘</a>
+      <a href="/a-review" target="_top"><span>▣</span>盘后复盘</a>
       <a href="/"><span>⌁</span>盘中信号</a>
-      <a href="/contracts"><span>◉</span>合约雷达</a>
-      <a href="/paper"><span>◈</span>模拟交易</a>
-      <a href="/us-radar"><span>◌</span>美股雷达</a>
-      <a class="nav-active" href="/futures" aria-current="page"><span>▥</span>期货分析</a>
-      <a href="/news"><span>▤</span>资讯与事件</a>
+      <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
+      <a href="/paper" target="_top"><span>◈</span>模拟交易</a>
+      <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a>
+      <a href="/futures-radar" target="_top"><span>◍</span>期货雷达</a>
+      <a class="nav-active" aria-current="page" href="/futures" target="_top"><span>▥</span>期货分析<span class="nav-dot"></span></a>
+      <a href="/news" target="_top"><span>▤</span>资讯与事件</a>
     </nav>
     <div class="source-card"><span class="source-dot"></span> 国内商品期货<strong>新浪财经 · 公开行情</strong><p>主力连续 / 月份合约<br>价格单位按品种标注</p></div>
     <div class="sidebar-bottom"><div><strong>量价与持仓观察</strong><small>历史结构 · 北京时间</small></div><span class="local-tag">LOCAL</span></div>
@@ -95,8 +96,8 @@
   </div>
 </div>
 <script src="/static/vendor/lightweight-charts.js"></script>
-<script src="/static/market-chart.js?v=2"></script>
-<script src="/static/futures.js?v=1"></script>
-<script src="/static/futures-backtest.js?v=1"></script>
+<script src="/static/market-chart.js?v=3"></script>
+<script src="/static/futures.js?v=2"></script>
+<script src="/static/futures-backtest.js?v=3"></script>
 </body>
 </html>

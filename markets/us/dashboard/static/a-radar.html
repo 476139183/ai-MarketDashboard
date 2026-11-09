@@ -4,7 +4,7 @@
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" /><title>观市 · 明日盯盘</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23167960'/%3E%3Ctext x='20' y='28' text-anchor='middle' font-size='25' fill='white'%3E观%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="/static/research.css?v=3" />
+  <link rel="stylesheet" href="/static/research.css?v=4" />
   <link rel="stylesheet" href="/static/a-radar.css?v=3" />
 </head>
 <body>
@@ -14,12 +14,16 @@
     <div class="sidebar-label">工作空间</div>
     <nav class="workspace-nav" aria-label="工作空间">
       <a href="/research"><span>◫</span>行情研究</a>
-      <a class="nav-active" href="/a-radar"><span>◎</span>明日盯盘<span class="nav-dot"></span></a>
-      <a href="/a-review"><span>▣</span>盘后复盘</a>
-      <a href="/"><span>⌁</span>盘中信号<span class="nav-arrow">↗</span></a>
+      <a class="nav-active" aria-current="page" href="/a-radar" target="_top"><span>◎</span>明日盯盘<span class="nav-dot"></span></a>
+      <a href="/a-review" target="_top"><span>▣</span>盘后复盘</a>
+      <a href="/"><span>⌁</span>盘中信号</a>
       <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
       <a href="/paper" target="_top"><span>◈</span>模拟交易</a>
-    <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a><a href="/news" target="_top"><span>▤</span>资讯与事件</a><a href="/futures" target="_top"><span>▥</span>期货分析</a></nav>
+      <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a>
+      <a href="/futures-radar" target="_top"><span>◍</span>期货雷达</a>
+      <a href="/futures" target="_top"><span>▥</span>期货分析</a>
+      <a href="/news" target="_top"><span>▤</span>资讯与事件</a>
+    </nav>
     <div class="watch-heading"><span class="sidebar-label">明日观察</span><span id="pin-count" class="count">0</span></div>
     <div id="pin-list" class="watchlist tomorrow-pins" aria-label="明日观察列表"></div>
     <p class="sidebar-hint">盘后选出信号股，盯住后第二天开盘直接点开看盘。<br>不会自动下单。</p>

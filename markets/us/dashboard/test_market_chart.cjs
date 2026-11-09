@@ -1,8 +1,8 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const vm=require('node:vm');const fs=require('node:fs');const path=require('node:path');
 function setup(){
  const series=[],charts=[],container={},legend={textContent:''};
- const L={CandlestickSeries:'candle',LineSeries:'line',HistogramSeries:'volume',createChart(){const chart={addSeries(type,options){const s={type,options,data:[],setData(data){this.data=data;},priceScale(){return{applyOptions(){}};}};series.push(s);return s;},removeSeries(){},subscribeCrosshairMove(fn){chart.hover=fn;},timeScale(){return{fitContent(){chart.fits=(chart.fits||0)+1;}};}};charts.push(chart);return chart;}};
- const context=vm.createContext({window:{LightweightCharts:L},Date,Number,Map});
+ const L={CandlestickSeries:'candle',LineSeries:'line',HistogramSeries:'volume',createChart(container,options){const chart={options,addSeries(type,options){const s={type,options,data:[],setData(data){this.data=data;},priceScale(){return{applyOptions(){}};}};series.push(s);return s;},removeSeries(){},subscribeCrosshairMove(fn){chart.hover=fn;},timeScale(){return{fitContent(){chart.fits=(chart.fits||0)+1;}};}};charts.push(chart);return chart;}};
+ const context=vm.createContext({window:{LightweightCharts:L},getComputedStyle:()=>({getPropertyValue:name=>({'--paper':'#ffffff','--green':'#167960','--red':'#cf5a59','--line':'#e9eef0','--muted':'#829092'}[name])}),Date,Number,Map});
  vm.runInContext(fs.readFileSync(path.join(__dirname,'static/market-chart.js'),'utf8'),context);
  return{chart:new context.window.MarketChart(container,legend),legend,series,charts};
 }
@@ -24,7 +24,7 @@ test('共享图表将已收盘OHLCV传入标注层，清空或切换图型时清
  class Overlay{constructor(){calls.push('new');}clear(){calls.push('clear');}destroy(){calls.push('destroy');}}
  class Controls{bind(overlay,rows,options){calls.push({rows,options});}clear(){calls.push('control-clear');}}
  const L={CandlestickSeries:'candle',LineSeries:'line',HistogramSeries:'volume',createChart(){return{addSeries(){return{setData(){},priceScale(){return{applyOptions(){}};}};},removeSeries(){removed++;},subscribeCrosshairMove(){},timeScale(){return{fitContent(){}};}};}};
- const context=vm.createContext({window:{LightweightCharts:L,MarketStructure:{Overlay,Controls}},Date,Number,Map});
+ const context=vm.createContext({window:{LightweightCharts:L,MarketStructure:{Overlay,Controls}},getComputedStyle:()=>({getPropertyValue:name=>({'--paper':'#ffffff','--green':'#167960','--red':'#cf5a59','--line':'#e9eef0','--muted':'#829092'}[name])}),Date,Number,Map});
  vm.runInContext(fs.readFileSync(path.join(__dirname,'static/market-chart.js'),'utf8'),context);
  const view=new context.window.MarketChart({}, {textContent:''},{}),rows=[{time:60000,open:10,high:11,low:9,close:10,complete:true}];
  view.render({symbol:'BTC',source:'OKX',chart_candles:rows});
@@ -33,3 +33,5 @@ test('共享图表将已收盘OHLCV传入标注层，清空或切换图型时清
  view.render({symbol:'NVDA',source:'Nasdaq',sampled:true,line:[{time:60000,value:10}]});
  assert.ok(calls.includes('destroy'));assert.equal(removed,1);
 });
+
+test('图表背景、网格与涨跌色继承工作台主题',()=>{const p=setup();p.chart.render({symbol:'RB0',source:'test',candles:[{time:60000,open:10,high:12,low:9,close:11}]});assert.equal(p.charts[0].options.layout.background.color,'#ffffff');assert.equal(p.charts[0].options.grid.vertLines.color,'#e9eef0');assert.equal(p.series[0].options.upColor,'#167960');});

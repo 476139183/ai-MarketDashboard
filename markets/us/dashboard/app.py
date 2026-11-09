@@ -255,6 +255,17 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if path in ('/futures-radar', '/futures-radar/'):
+            self._send(200, (STATIC / 'futures-radar.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+        if path == '/api/futures/radar':
+            try:
+                period = parse_qs(parsed.query).get('period', ['day'])[0]
+                from futures_cn import validate_period
+                self._json(200, futures_service.radar(validate_period(period)))
+            except ValueError as exc:
+                self._json(400, {'error': str(exc)})
+            return
         if path in ('/futures', '/futures/'):
             self._send(200, (STATIC / 'futures.html').read_bytes(), 'text/html; charset=utf-8')
             return

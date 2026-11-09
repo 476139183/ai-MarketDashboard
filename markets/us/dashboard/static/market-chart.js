@@ -19,15 +19,17 @@
       this.rows=new Map(data.map(bar=>[bar.time/1000,bar]));
       this.legend.textContent=data.length?this.describe(data.at(-1)):'暂无图表数据 · 成交量未提供';
       const L=window.LightweightCharts;if(!L)return;
+      const css=getComputedStyle(this.container),token=(name,fallback)=>css.getPropertyValue(name).trim()||fallback;
+      const paper=token('--paper','#fff'),muted=token('--muted','#829092'),line=token('--line','#e9eef0'),green=token('--green','#167960'),red=token('--red','#cf5a59');
       if(!this.chart){
-        this.chart=L.createChart(this.container,{autoSize:true,layout:{background:{color:'#182126'},textColor:'#8fa5b2'},grid:{vertLines:{color:'#26333b'},horzLines:{color:'#26333b'}},timeScale:{timeVisible:true,secondsVisible:false,tickMarkFormatter:t=>new Date(t*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false})},localization:{timeFormatter:t=>time(t*1000)}});
+        this.chart=L.createChart(this.container,{autoSize:true,layout:{background:{color:paper},textColor:muted},grid:{vertLines:{color:line},horzLines:{color:line}},timeScale:{timeVisible:true,secondsVisible:false,tickMarkFormatter:t=>new Date(t*1000).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false})},localization:{timeFormatter:t=>time(t*1000)}});
         this.chart.subscribeCrosshairMove(event=>{const bar=this.rows.get(event.time)||[...this.rows.values()].at(-1);this.legend.textContent=this.describe(bar);});
       }
       const kind=row.sampled?'line':'candle';
       if(kind!==this.kind){
         this.structure?.destroy();this.structure=null;
         if(this.series)this.chart.removeSeries(this.series);
-        this.series=this.chart.addSeries(row.sampled?L.LineSeries:L.CandlestickSeries,row.sampled?{color:'#65c4aa'}:{upColor:'#65c4aa',downColor:'#ef8b87',wickUpColor:'#65c4aa',wickDownColor:'#ef8b87',borderVisible:false});
+        this.series=this.chart.addSeries(row.sampled?L.LineSeries:L.CandlestickSeries,row.sampled?{color:green}:{upColor:green,downColor:red,wickUpColor:green,wickDownColor:red,borderVisible:false});
         this.series.priceScale().applyOptions({scaleMargins:{top:.06,bottom:.28}});this.kind=kind;
         if(window.MarketStructure)this.structure=new window.MarketStructure.Overlay(this.chart,this.series,L,{reservedBottom:.2});
       }
@@ -39,7 +41,7 @@
       const precision=lastPrice!=null&&Math.abs(lastPrice)<1?6:2;
       this.series.applyOptions?.({priceFormat:{type:'price',precision,minMove:10**(-precision)}});
       this.series.setData(data.map(bar=>row.sampled?{time:bar.time/1000,value:bar.value}:{time:bar.time/1000,open:bar.open,high:bar.high,low:bar.low,close:bar.close}));
-      this.volume.setData(row.sampled?[]:data.filter(bar=>Number.isFinite(bar.volume)&&bar.volume>=0).map(bar=>({time:bar.time/1000,value:bar.volume,color:bar.close>=bar.open?'#65c4aa88':'#ef8b8788'})));
+      this.volume.setData(row.sampled?[]:data.filter(bar=>Number.isFinite(bar.volume)&&bar.volume>=0).map(bar=>({time:bar.time/1000,value:bar.volume,color:bar.close>=bar.open?green+'88':red+'88'})));
       if(this.structure)this.structureControls.bind(this.structure,data,{sampled:!!row.sampled});
       if(identity!==this.identity)this.chart.timeScale().fitContent();
       this.identity=identity;this.dataKey=dataKey;

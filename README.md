@@ -93,6 +93,7 @@ A股与美股日K、美股分钟线和合约K线支持高低点（HH/HL/LH/LL）
 | A 股盘后复盘 | 7个指数、广度、量能、涨跌分布、板块 | 标明全A／样本范围、涨跌停、事实摘要和下次开盘观察 |
 | 资讯与事件 | A股、美股、数字资产、全球财经 | 本地资讯池、来源状态、关键词筛选、分页与显式采集；依赖DSA |
 | 美股雷达 | 美股原股 / USD | 独立观察池、盘前 / 盘中 / 盘后、新浪分钟 OHLCV、Nasdaq 分时与可选 Massive |
+| 期货雷达 | 国内12个商品主力连续 / CNY | 分类与历史结构筛选、涨跌幅/量比/持仓变化排序，点击进入期货分析 |
 | 期货分析 | 国内12个商品品种 / CNY | 主力连续与月份合约、日线和5/15/30/60分钟图、SMA20/60、ATR14、量仓变化；不依赖DSA |
 | 合约雷达 | USDT 永续 | 三所独立行情、六个分钟周期及 4 小时方向、结构点位、资金费率与持仓估算 |
 | 自动模拟交易 | OKX、Binance 合约 | 自动模拟开平仓、费用与滑点、持仓估值、账户恢复、交易记录与盈亏汇总 |
@@ -725,6 +726,7 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | [GitHub 发布与发现](docs/github-discovery.md) | About、Topics 与默认分支发布建议 |
 | [看板说明](markets/us/dashboard/README.md) | 页面、巡检、合约与模拟交易细节 |
 | [资讯与A股复盘](docs/features/news-and-a-review.md) | 新闻来源、时间口径、全A覆盖与网络限制 |
+| [期货雷达](docs/features/futures-radar.md) | 批量观察国内商品、历史结构筛选与数据时效 |
 | [国内商品期货](docs/features/domestic-futures.md) | 品种、主力连续与月份合约、完整K线及量仓分析口径 |
 | [期货策略回测](docs/features/futures-backtest.md) | GitHub参考、两个固定基准、撮合成本、研究边界与离线复跑 |
 | [DSA 接入](docs/dsa-integration.md) | 上游安装、AI 配置和任务隔离 |
