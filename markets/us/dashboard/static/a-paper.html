@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" /><title>观市 · A股策略模拟</title>
+  <link rel="stylesheet" href="/static/research.css?v=4" />
+  <link rel="stylesheet" href="/static/contracts.css?v=4" />
+  <link rel="stylesheet" href="/static/paper.css?v=4" />
+<link rel="stylesheet" href="/static/futures.css?v=4"></head>
+<body class="contracts-workspace">
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav" aria-label="工作空间">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a href="/a-radar" target="_top"><span>◎</span>明日盯盘</a>
+      <a href="/a-review" target="_top"><span>▣</span>盘后复盘</a>
+      <a href="/"><span>⌁</span>盘中信号</a>
+      <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
+      <a class="nav-active" aria-current="page" href="/paper" target="_top"><span>◈</span>模拟交易<span class="nav-dot"></span></a>
+      <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a>
+      <a href="/futures-radar" target="_top"><span>◍</span>期货雷达</a>
+      <a href="/futures" target="_top"><span>▥</span>期货分析</a>
+      <a href="/news" target="_top"><span>▤</span>资讯与事件</a>
+    </nav>
+    <div class="source-card"><span class="source-dot"></span> 本地模拟账户<strong id="paper-source">A股普通现货 · CNY</strong><p>盘后候选 · 盘中计划到价<br>人民币资金与仓位独立保存</p></div>
+    <div class="sidebar-bottom"><div><strong>前向模拟 · 非历史回测</strong><small>账户和记录保存在本机</small></div><span class="local-tag">PAPER</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>模拟交易</strong></div><span id="paper-exchange-label" class="paper-mode">PAPER ACCOUNT / A股现货</span></header>
+    <main class="main-content contracts-page">
+      <div class="page-heading"><div><p class="eyebrow">A-SHARE · CANDIDATE PLAN PAPER TRADING</p><h1>让计划，留下可复盘的交易。</h1><p class="heading-note">盘后选股 → 下一交易日到价买入 → T+1后符合策略才卖出</p></div><div class="refresh-controls"><label for="ap-market">模拟市场</label><select id="ap-market"><option value="/a-paper" selected>A股普通现货</option><option value="/paper">加密货币</option><option value="/paper?market=stock">美股合约（OKX）</option><option value="/futures-paper">国内商品期货</option></select><button id="ap-refresh" type="button">刷新账户 ↻</button><button id="ap-toggle" type="button" disabled>读取账户中…</button></div></div>
+      <div class="paper-run-state"><span id="ap-running">正在读取运行状态</span><p id="ap-status" role="status">连接独立人民币模拟账户…</p></div>
+      <p class="heading-note"><a href="/quant-research">独立引擎回测：RQAlpha / TqSdk ↗</a></p>
+      <section class="contract-stats" aria-label="A股模拟摘要">
+        <article class="contract-panel"><span id="ap-equity-label">估算权益 / CNY</span><strong id="ap-equity">—</strong><small>现金 + 股票市值</small></article>
+        <article class="contract-panel"><span>可用现金 / CNY</span><strong id="ap-cash">—</strong><small id="ap-value">股票市值 —</small></article>
+        <article class="contract-panel"><span>已实现净盈亏 / CNY</span><strong id="ap-realized">—</strong><small id="ap-win-rate">已平仓胜率 —</small></article>
+        <article class="contract-panel"><span>持仓浮盈亏 / CNY</span><strong id="ap-unrealized">—</strong><small>含买入费用，未扣未来卖出费税</small></article>
+      </section>
+      <section class="contract-panel paper-rules">
+        <div class="section-title"><h2>候选与执行计划</h2><a href="/a-radar">查看明日盯盘 ↗</a></div>
+        <p id="ap-plan-status">读取上一交易日盘后策略候选…</p>
+        <div id="ap-plans" class="paper-rule-tags"></div>
+        <p>只执行大盘过滤和计划检查通过的「策略候选」，不买观察池。价格回到原计划的MA10至MA5区间，且新报价、资金、涨跌停和整手条件满足后才买入；首次观察后还要等更新报价。</p>
+        <p>当日买入不能卖出。T+1解锁后，只有当前报价触及原计划止损/目标，或上一完整日线收盘跌破配置的退出均线，才尝试卖出；不会到第二天就定时强卖。名单更新不改写持仓计划。</p>
+        <div class="paper-cost-note">仅连续竞价09:30–11:30、13:00–14:57采样；停牌、涨跌停或盘口缺失会等待，不保证触价成交。除权除息或前收口径不符时暂停该票撮合，保留旧估值，需另行核对。</div>
+      </section>
+      <section class="contract-panel paper-rules" aria-labelledby="ap-config-title">
+        <div class="section-title"><h2 id="ap-config-title">资金、成本与退出参数</h2><a href="#a-research">历史样本复盘 ↓</a></div>
+        <p>独立虚拟本金100,000 CNY，默认暂停。暂停且空仓时可调整参数，保存不重置资金和历史，也不自动启用。</p>
+        <form id="ap-form" class="bt-form">
+          <label>每票预算（含买入费用）/ CNY<input id="ap-per_stock_budget" type="number" min="100" max="100000" step="100" required></label>
+          <label>最大持仓票数<input id="ap-max_positions" type="number" min="1" max="10" step="1" required></label>
+          <label>退出均线<select id="ap-exit_ma"><option value="10">MA10</option><option value="20">MA20</option></select></label>
+          <label>每边不利滑点 / 分<input id="ap-slippage_ticks" type="number" min="0" max="100" step="1" required></label>
+          <label>每边佣金率 %<input id="ap-commission_rate" type="number" min="0" max="1" step="any" required></label>
+          <label>每笔最低佣金 / CNY<input id="ap-min_commission" type="number" min="0" max="1000" step="any" required></label>
+          <label>每边过户费率 %<input id="ap-transfer_rate" type="number" min="0" max="1" step="any" required></label>
+          <label>卖出印花税率 %<input id="ap-stamp_rate" type="number" min="0" max="1" step="any" required></label>
+          <div class="bt-actions"><button id="ap-save" type="submit" disabled>保存模拟参数</button><span id="ap-config-status" class="paper-small" role="status">读取参数后可编辑</span></div>
+        </form>
+        <p>普通沪深A股按100股整数倍买入，科创板至少200股；首版排除北交所、ETF、CDR、ST和退市证券。无杠杆、不做空。启用后盘后自动准备候选，关闭网页仍由本地服务维护；重启不补造离线成交。</p>
+        <div class="paper-cost-note">佣金、过户费、印花税与滑点均为可核对和调整的模拟输入，不等同于账户实际收费。该策略仍待独立验证。</div>
+      </section>
+      <section class="contract-panel contract-board">
+        <div class="board-heading"><div><h2>当前持仓 <span class="live-badge">A股 · CNY · PAPER</span></h2><p id="ap-position-note">等待持仓数据</p></div><span id="ap-pending" class="paper-small">—</span></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th>股票 / 候选日期</th><th>持仓 / 可卖股数</th><th>买入价 / 上次报价</th><th>固定止损 / 目标</th><th>浮盈亏 / CNY</th><th>买入时间 / 北京</th><th>源报价时间 / 北京</th></tr></thead><tbody id="ap-positions"></tbody></table></div>
+        <p id="ap-positions-empty" class="paper-empty">尚无持仓，等待合格候选与盘中计划到价。</p>
+      </section>
+      <section class="contract-panel contract-board paper-history">
+        <div class="board-heading"><div><h2>已平仓复盘</h2><p id="ap-trade-summary">尚无平仓记录</p></div><div><span id="ap-fees" class="paper-small">累计费税 —</span> <button id="ap-export" class="outline-button" type="button">导出完整前向记录</button></div></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th>股票 / 数量</th><th>买入 / 卖出价</th><th>买入时间 / 北京</th><th>卖出时间 / 北京</th><th>退出条件</th><th>费税 / CNY</th><th>净盈亏 / 收益率</th></tr></thead><tbody id="ap-trades"></tbody></table></div>
+        <p id="ap-trades-empty" class="paper-empty">真实前向模拟成交后，逐笔记录对应计划、价格、费用和退出原因。</p>
+      </section>
+      <section id="a-research" class="contract-panel paper-rules paper-history">
+        <div class="section-title"><h2>最近数月历史样本复盘</h2><button id="ar-run" class="outline-button" type="button">运行历史参数对照</button></div>
+        <p>逐日重建当时可见的候选与计划，用15分钟开盘采样近似成交；对照退出均线、成本翻倍与研究候选口径，不根据赢家自动改账户。当前股票池回看有选择偏差，历史盘口及实际涨跌停价不完整。</p>
+        <div class="bt-form"><label>复盘每票预算 / CNY<input id="ar-budget" type="number" value="20000" min="100" max="100000" step="100"></label><label>复盘最大持仓数<input id="ar-positions" type="number" value="3" min="1" max="10" step="1"></label><label>复盘基准退出均线<select id="ar-exit-ma"><option value="10">MA10</option><option value="20">MA20</option></select></label></div><p>这三项仅用于本次复盘，费税沿用账户已保存参数；不会改动运行配置或持仓。</p><p id="ar-status" role="status">点击后开始读取样本与复盘；不会启用模拟账户。</p>
+        <div id="ar-results"></div><button id="ar-export" class="outline-button" type="button" disabled>导出复盘JSON</button>
+      </section>
+      <footer class="contract-footer"><span>策略候选计划模拟 · 独立人民币账户 · 历史保存在账本，页面展示最近100笔平仓</span><a href="/a-radar">返回明日盯盘 ↗</a></footer>
+    </main>
+  </div>
+</div>
+<script src="/static/a-paper.js?v=1"></script><script src="/static/a-paper-research.js?v=1"></script>
+</body>
+</html>

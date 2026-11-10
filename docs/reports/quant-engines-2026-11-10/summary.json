@@ -1,0 +1,1104 @@
+{
+  "engine": "rqalpha",
+  "version": "6.5.0",
+  "results": [
+    {
+      "file": "a_share-44stocks-legacy-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "a_share",
+        "strategy": "legacy",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "symbols": 44,
+        "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0"
+      },
+      "diagnostics": {
+        "candidate_signals": 8,
+        "ready_plans": 1,
+        "market_pass_days": 8
+      },
+      "open_positions": []
+    },
+    {
+      "file": "a_share-44stocks-legacy-fixed-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "a_share",
+        "strategy": "legacy",
+        "symbol": "RB2701",
+        "cost_scale": 2,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "symbols": 44,
+        "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0"
+      },
+      "diagnostics": {
+        "candidate_signals": 8,
+        "ready_plans": 1,
+        "market_pass_days": 8
+      },
+      "open_positions": []
+    },
+    {
+      "file": "a_share-44stocks-setups_v2-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "a_share",
+        "strategy": "setups_v2",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "symbols": 44,
+        "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0"
+      },
+      "diagnostics": {
+        "candidate_signals": 8,
+        "ready_plans": 8,
+        "market_pass_days": 8
+      },
+      "open_positions": []
+    },
+    {
+      "file": "a_share-44stocks-setups_v2-fixed-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "a_share",
+        "strategy": "setups_v2",
+        "symbol": "RB2701",
+        "cost_scale": 2,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "symbols": 44,
+        "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0"
+      },
+      "diagnostics": {
+        "candidate_signals": 8,
+        "ready_plans": 8,
+        "market_pass_days": 8
+      },
+      "open_positions": []
+    },
+    {
+      "file": "a_share-44stocks-expanded-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "a_share",
+        "strategy": "expanded",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000,
+        "end_equity": 98188.84000000001,
+        "return_pct": -1.8111599999999894,
+        "max_drawdown_pct": 2.558369999999995,
+        "monthly_equivalent_pct": -0.6028766021464738,
+        "closed_trades": 5,
+        "win_rate_pct": 0.0,
+        "fees": 96.16,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "symbols": 44,
+        "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0"
+      },
+      "diagnostics": {
+        "candidate_signals": 45,
+        "ready_plans": 19,
+        "market_pass_days": 8
+      },
+      "open_positions": []
+    },
+    {
+      "file": "a_share-44stocks-expanded-fixed-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "a_share",
+        "strategy": "expanded",
+        "symbol": "RB2701",
+        "cost_scale": 2,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000,
+        "end_equity": 98008.70000000001,
+        "return_pct": -1.9912999999999847,
+        "max_drawdown_pct": 2.6937499999999854,
+        "monthly_equivalent_pct": -0.6632450164854142,
+        "closed_trades": 5,
+        "win_rate_pct": 0.0,
+        "fees": 192.3,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "symbols": 44,
+        "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0"
+      },
+      "diagnostics": {
+        "candidate_signals": 45,
+        "ready_plans": 19,
+        "market_pass_days": 8
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-RB2701-sma-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 97981.0,
+        "return_pct": -2.019000000000004,
+        "max_drawdown_pct": 2.8047357344477803,
+        "monthly_equivalent_pct": -0.30992953577559934,
+        "closed_trades": 6,
+        "win_rate_pct": 16.666666666666668,
+        "fees": 39.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-21",
+        "end": "2026-11-06",
+        "symbols": [
+          "RB2701"
+        ],
+        "sample_sha256": "d456cec18b970b08016920a19242d98b5146e6dbdbdc48b4b5551d55e111255d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 0,
+        "signals": 134
+      },
+      "open_positions": [
+        {
+          "symbol": "RB2701",
+          "direction": -1,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "file": "futures-RB2701-sma-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99424.0,
+        "return_pct": -0.5759999999999987,
+        "max_drawdown_pct": 1.4794335939435377,
+        "monthly_equivalent_pct": -0.08787480191898567,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 6.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-21",
+        "end": "2026-11-06",
+        "symbols": [
+          "RB2701"
+        ],
+        "sample_sha256": "d456cec18b970b08016920a19242d98b5146e6dbdbdc48b4b5551d55e111255d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 91,
+        "signals": 134
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-RB2701-sma-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "RB2701",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99398.0,
+        "return_pct": -0.6020000000000025,
+        "max_drawdown_pct": 1.4925077301197176,
+        "monthly_equivalent_pct": -0.09185154417948871,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 12.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-21",
+        "end": "2026-11-06",
+        "symbols": [
+          "RB2701"
+        ],
+        "sample_sha256": "d456cec18b970b08016920a19242d98b5146e6dbdbdc48b4b5551d55e111255d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 91,
+        "signals": 134
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-RB2701-donchian-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 98903.0,
+        "return_pct": -1.0970000000000035,
+        "max_drawdown_pct": 2.278574053656744,
+        "monthly_equivalent_pct": -0.167731332586607,
+        "closed_trades": 4,
+        "win_rate_pct": 25.0,
+        "fees": 27.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-21",
+        "end": "2026-11-06",
+        "symbols": [
+          "RB2701"
+        ],
+        "sample_sha256": "d456cec18b970b08016920a19242d98b5146e6dbdbdc48b4b5551d55e111255d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 0,
+        "signals": 95
+      },
+      "open_positions": [
+        {
+          "symbol": "RB2701",
+          "direction": -1,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "file": "futures-RB2701-donchian-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "RB2701",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99554.0,
+        "return_pct": -0.44600000000000195,
+        "max_drawdown_pct": 0.5822023827356522,
+        "monthly_equivalent_pct": -0.06800430578972616,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 6.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-21",
+        "end": "2026-11-06",
+        "symbols": [
+          "RB2701"
+        ],
+        "sample_sha256": "d456cec18b970b08016920a19242d98b5146e6dbdbdc48b4b5551d55e111255d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 17,
+        "signals": 27
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-RB2701-donchian-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "RB2701",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99528.0,
+        "return_pct": -0.47199999999999465,
+        "max_drawdown_pct": 0.5952618752746595,
+        "monthly_equivalent_pct": -0.07197664441033202,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 12.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-21",
+        "end": "2026-11-06",
+        "symbols": [
+          "RB2701"
+        ],
+        "sample_sha256": "d456cec18b970b08016920a19242d98b5146e6dbdbdc48b4b5551d55e111255d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 17,
+        "signals": 27
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-M2701-sma-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "M2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100533.0,
+        "return_pct": 0.5330000000000057,
+        "max_drawdown_pct": 3.1067126486190757,
+        "monthly_equivalent_pct": 0.08134012708029825,
+        "closed_trades": 4,
+        "win_rate_pct": 25.0,
+        "fees": 27.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-22",
+        "end": "2026-11-06",
+        "symbols": [
+          "M2701"
+        ],
+        "sample_sha256": "d4239ff0ad83a9d93bb0078615c19c1abb36e2c1d2aab6261e116e7841a3c5dc"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 0,
+        "signals": 133
+      },
+      "open_positions": [
+        {
+          "symbol": "M2701",
+          "direction": -1,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "file": "futures-M2701-sma-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "M2701",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99034.0,
+        "return_pct": -0.9660000000000002,
+        "max_drawdown_pct": 0.966,
+        "monthly_equivalent_pct": -0.14835999302305058,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 6.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-22",
+        "end": "2026-11-06",
+        "symbols": [
+          "M2701"
+        ],
+        "sample_sha256": "d4239ff0ad83a9d93bb0078615c19c1abb36e2c1d2aab6261e116e7841a3c5dc"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 117,
+        "signals": 133
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-M2701-sma-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "M2701",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99008.0,
+        "return_pct": -0.992000000000004,
+        "max_drawdown_pct": 0.992,
+        "monthly_equivalent_pct": -0.15237003045189823,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 12.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-22",
+        "end": "2026-11-06",
+        "symbols": [
+          "M2701"
+        ],
+        "sample_sha256": "d4239ff0ad83a9d93bb0078615c19c1abb36e2c1d2aab6261e116e7841a3c5dc"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 117,
+        "signals": 133
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-M2701-donchian-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "M2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 102429.0,
+        "return_pct": 2.4289999999999923,
+        "max_drawdown_pct": 1.7578222590864123,
+        "monthly_equivalent_pct": 0.36775524650709546,
+        "closed_trades": 3,
+        "win_rate_pct": 33.333333333333336,
+        "fees": 21.0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-22",
+        "end": "2026-11-06",
+        "symbols": [
+          "M2701"
+        ],
+        "sample_sha256": "d4239ff0ad83a9d93bb0078615c19c1abb36e2c1d2aab6261e116e7841a3c5dc"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 0,
+        "signals": 122
+      },
+      "open_positions": [
+        {
+          "symbol": "M2701",
+          "direction": -1,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "file": "futures-M2701-donchian-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "M2701",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-22",
+        "end": "2026-11-06",
+        "symbols": [
+          "M2701"
+        ],
+        "sample_sha256": "d4239ff0ad83a9d93bb0078615c19c1abb36e2c1d2aab6261e116e7841a3c5dc"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 25,
+        "signals": 25
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-M2701-donchian-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "M2701",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-22",
+        "end": "2026-11-06",
+        "symbols": [
+          "M2701"
+        ],
+        "sample_sha256": "d4239ff0ad83a9d93bb0078615c19c1abb36e2c1d2aab6261e116e7841a3c5dc"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 25,
+        "signals": 25
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-AU2612-sma-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "AU2612",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-02-12",
+        "end": "2026-11-06",
+        "symbols": [
+          "AU2612"
+        ],
+        "sample_sha256": "1c8cc1e1f9dbb11e46e73d359447619eec40ec8de9331b3547cf548406495d25"
+      },
+      "diagnostics": {
+        "margin_skips": 175,
+        "risk_skips": 0,
+        "signals": 175
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-AU2612-sma-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "AU2612",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-02-12",
+        "end": "2026-11-06",
+        "symbols": [
+          "AU2612"
+        ],
+        "sample_sha256": "1c8cc1e1f9dbb11e46e73d359447619eec40ec8de9331b3547cf548406495d25"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 175,
+        "signals": 175
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-AU2612-sma-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "AU2612",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-02-12",
+        "end": "2026-11-06",
+        "symbols": [
+          "AU2612"
+        ],
+        "sample_sha256": "1c8cc1e1f9dbb11e46e73d359447619eec40ec8de9331b3547cf548406495d25"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 175,
+        "signals": 175
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-AU2612-donchian-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "AU2612",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-02-12",
+        "end": "2026-11-06",
+        "symbols": [
+          "AU2612"
+        ],
+        "sample_sha256": "1c8cc1e1f9dbb11e46e73d359447619eec40ec8de9331b3547cf548406495d25"
+      },
+      "diagnostics": {
+        "margin_skips": 21,
+        "risk_skips": 0,
+        "signals": 21
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-AU2612-donchian-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "AU2612",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-02-12",
+        "end": "2026-11-06",
+        "symbols": [
+          "AU2612"
+        ],
+        "sample_sha256": "1c8cc1e1f9dbb11e46e73d359447619eec40ec8de9331b3547cf548406495d25"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 21,
+        "signals": 21
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-AU2612-donchian-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "AU2612",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-02-12",
+        "end": "2026-11-06",
+        "symbols": [
+          "AU2612"
+        ],
+        "sample_sha256": "1c8cc1e1f9dbb11e46e73d359447619eec40ec8de9331b3547cf548406495d25"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 21,
+        "signals": 21
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-SC2701-sma-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "SC2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-10",
+        "end": "2026-11-06",
+        "symbols": [
+          "SC2701"
+        ],
+        "sample_sha256": "ce33251298a214103672a4ab3d50325742bac09c60ad311ef0f76553d06bce7d"
+      },
+      "diagnostics": {
+        "margin_skips": 141,
+        "risk_skips": 0,
+        "signals": 141
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-SC2701-sma-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "SC2701",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-10",
+        "end": "2026-11-06",
+        "symbols": [
+          "SC2701"
+        ],
+        "sample_sha256": "ce33251298a214103672a4ab3d50325742bac09c60ad311ef0f76553d06bce7d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 141,
+        "signals": 141
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-SC2701-sma-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "sma",
+        "symbol": "SC2701",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-10",
+        "end": "2026-11-06",
+        "symbols": [
+          "SC2701"
+        ],
+        "sample_sha256": "ce33251298a214103672a4ab3d50325742bac09c60ad311ef0f76553d06bce7d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 141,
+        "signals": 141
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-SC2701-donchian-fixed-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "SC2701",
+        "cost_scale": 1,
+        "sizing": "fixed"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-10",
+        "end": "2026-11-06",
+        "symbols": [
+          "SC2701"
+        ],
+        "sample_sha256": "ce33251298a214103672a4ab3d50325742bac09c60ad311ef0f76553d06bce7d"
+      },
+      "diagnostics": {
+        "margin_skips": 22,
+        "risk_skips": 0,
+        "signals": 22
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-SC2701-donchian-risk-c1.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "SC2701",
+        "cost_scale": 1,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-10",
+        "end": "2026-11-06",
+        "symbols": [
+          "SC2701"
+        ],
+        "sample_sha256": "ce33251298a214103672a4ab3d50325742bac09c60ad311ef0f76553d06bce7d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 22,
+        "signals": 22
+      },
+      "open_positions": []
+    },
+    {
+      "file": "futures-SC2701-donchian-risk-c2.json",
+      "config": {
+        "engine": "rqalpha",
+        "market": "futures",
+        "strategy": "donchian",
+        "symbol": "SC2701",
+        "cost_scale": 2,
+        "sizing": "risk"
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "monthly_equivalent_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "rejected_orders": 0
+      },
+      "data": {
+        "start": "2026-04-10",
+        "end": "2026-11-06",
+        "symbols": [
+          "SC2701"
+        ],
+        "sample_sha256": "ce33251298a214103672a4ab3d50325742bac09c60ad311ef0f76553d06bce7d"
+      },
+      "diagnostics": {
+        "margin_skips": 0,
+        "risk_skips": 22,
+        "signals": 22
+      },
+      "open_positions": []
+    }
+  ],
+  "code_sha256": {
+    "quant_worker.py": "63cfa25cd51f2056b94b08b4ba96219579b0d187fa3899c898146aa852f2be08",
+    "rqalpha_local.py": "8e5efbe244ba009ac3cc3c04e471200624f8d6192d37ebe1742779547b678f3a",
+    "quant_research.py": "31b894057ab913effda2e053c84cbeb2b4ba3a10a021939b31069af6fe8a028c"
+  },
+  "tqsdk_status": "已安装3.10.4；用户确认暂不配置账号，尚未运行服务端回测"
+}

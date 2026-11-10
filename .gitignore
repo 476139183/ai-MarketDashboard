@@ -3,9 +3,11 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
+.venv-quant/
 venv/
 .env
 .cache/
+docs/reports/a-share-day-replay-*/input.json.gz
 markets/us/.cache/
 markets/us/dashboard/cache/
 *.log

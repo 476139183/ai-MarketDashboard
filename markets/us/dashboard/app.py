@@ -27,6 +27,10 @@ from contract_radar import ContractRadar
 from radar_periods import period_minutes
 from us_radar import SERVICE as us_radar, LIVE_SERVICE as us_chart
 from paper_trading import RUNNER as paper_runner, BINANCE_RUNNER as binance_paper_runner, STOCK_RUNNER as stock_paper_runner
+from futures_paper import RUNNER as futures_paper_runner
+from a_share_paper import RUNNER as a_paper_runner
+from a_paper_research import JOBS as a_research_jobs
+from quant_research import JOBS as quant_jobs, metadata as quant_metadata
 
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
@@ -116,7 +120,8 @@ def _radar_payload():
                   'limitations': ['点击「刷新扫描」生成最近交易日雷达']}
     with _RADAR_LOCK:
         state = dict(_RADAR_STATE)
-    return {**cached, 'status': state['status'], 'error': state['error']}
+    return {**cached, 'configured_strategy_version': a_radar.STRATEGY_VERSION,
+            'status': state['status'], 'error': state['error']}
 
 
 def _start_radar_refresh():
@@ -209,7 +214,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         path=urlparse(self.path).path
-        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources','/api/futures/backtest'):
+        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources','/api/futures/backtest','/api/futures/paper/control','/api/futures/paper/config','/api/a-paper/control','/api/a-paper/config','/api/a-paper/research','/api/quant-research'):
             self._json(404, {'error': 'not found'})
             return
         origin = self.headers.get('Origin')
@@ -223,6 +228,34 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length))
             if not isinstance(body, dict):
                 raise ValueError('请求必须是 JSON 对象')
+            if path == '/api/quant-research':
+                self._json(202,quant_jobs.start(body))
+                return
+            if path == '/api/a-paper/research':
+                self._json(202, a_research_jobs.start(body, a_paper_runner.account.snapshot()['config']))
+                return
+            if path == '/api/a-paper/control':
+                if set(body) != {'enabled'} or not isinstance(body.get('enabled'), bool):
+                    raise ValueError('A股控制只接受布尔值enabled')
+                a_paper_runner.account.set_enabled(body['enabled'])
+                a_paper_runner.start()
+                self._json(200, a_paper_runner.snapshot())
+                return
+            if path == '/api/a-paper/config':
+                a_paper_runner.account.configure(body)
+                self._json(200, a_paper_runner.snapshot())
+                return
+            if path == '/api/futures/paper/control':
+                if set(body) != {'enabled'} or not isinstance(body.get('enabled'), bool):
+                    raise ValueError('期货模拟控制只接受布尔值enabled')
+                futures_paper_runner.account.set_enabled(body['enabled'])
+                futures_paper_runner.start()
+                self._json(200, futures_paper_runner.snapshot())
+                return
+            if path == '/api/futures/paper/config':
+                futures_paper_runner.account.configure(body)
+                self._json(200, futures_paper_runner.snapshot())
+                return
             if path == '/api/futures/backtest':
                 self._json(202, futures_backtest_jobs.start(body))
                 return
@@ -255,6 +288,43 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
 
+        if path in ('/quant-research','/quant-research/'):
+            self._send(200,(STATIC/'quant-research.html').read_bytes(),'text/html; charset=utf-8')
+            return
+        if path == '/api/quant-research':
+            try:
+                key=(parse_qs(parsed.query).get('id') or [None])[0]
+                self._json(200,dict(quant_jobs.snapshot(key),metadata=quant_metadata()))
+            except ValueError as exc:self._json(400,{'error':str(exc)})
+            except (OSError,json.JSONDecodeError) as exc:self._json(503,{'error':str(exc)})
+            return
+        if path in ('/a-paper', '/a-paper/'):
+            self._send(200, (STATIC / 'a-paper.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+        if path in ('/api/a-paper','/api/a-paper/export'):
+            try:
+                self._json(200, a_paper_runner.snapshot(include_all_trades=True) if path.endswith('/export') else a_paper_runner.snapshot())
+            except (ValueError, OSError, sqlite3.Error) as exc:
+                self._json(503, {'error': str(exc)})
+            return
+        if path == '/api/a-paper/research':
+            try:
+                key = (parse_qs(parsed.query).get('id') or [None])[0]
+                self._json(200, a_research_jobs.snapshot(key))
+            except KeyError as exc:
+                self._json(404, {'error': str(exc)})
+            except (ValueError, OSError) as exc:
+                self._json(503, {'error': str(exc)})
+            return
+        if path in ('/futures-paper', '/futures-paper/'):
+            self._send(200, (STATIC / 'futures-paper.html').read_bytes(), 'text/html; charset=utf-8')
+            return
+        if path == '/api/futures/paper':
+            try:
+                self._json(200, futures_paper_runner.snapshot())
+            except (ValueError, OSError, sqlite3.Error) as exc:
+                self._json(503, {'error': str(exc)})
+            return
         if path in ('/futures-radar', '/futures-radar/'):
             self._send(200, (STATIC / 'futures-radar.html').read_bytes(), 'text/html; charset=utf-8')
             return
@@ -524,6 +594,8 @@ def main() -> None:
     paper_runner.start()
     binance_paper_runner.start()
     stock_paper_runner.start()
+    futures_paper_runner.start()
+    a_paper_runner.start()
     print(f"信号看板: http://{HOST}:{PORT}")
     print("Ctrl+C 退出")
     try:
@@ -535,6 +607,8 @@ def main() -> None:
         paper_runner.stop_event.set()
         binance_paper_runner.stop_event.set()
         stock_paper_runner.stop_event.set()
+        futures_paper_runner.stop_event.set()
+        a_paper_runner.stop_event.set()
 
 
 if __name__ == "__main__":

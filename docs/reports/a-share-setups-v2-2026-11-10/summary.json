@@ -1,0 +1,2174 @@
+{
+  "version": "a-candidate-research-v2",
+  "results": [
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 1
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "baseline",
+      "label": "旧版 / 原计划 / MA10"
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 20
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 1
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "exit_ma20",
+      "label": "旧版 / 对照：MA20退出"
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 1
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "cost_double",
+      "label": "旧版 / 压力：费税与滑点翻倍"
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 8
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "setups_v2",
+      "label": "分型v2 / MA10",
+      "strategy_version": "a-setups-v2",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 8
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "setups_v2_cost_double",
+      "label": "分型v2：费税与滑点翻倍",
+      "strategy_version": "a-setups-v2",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "expanded",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 45,
+        "ready_plans": 19
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 98188.84,
+        "return_pct": -1.8111600000000005,
+        "monthly_equivalent_pct": -0.6028766021464738,
+        "max_drawdown_pct": 2.558369999999995,
+        "closed_trades": 5,
+        "win_rate_pct": 0.0,
+        "fees": 96.16,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -1.8111600000000005,
+          "end_equity": 98188.84
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 98188.84
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 98188.84
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 98188.84
+        }
+      ],
+      "trades": [
+        {
+          "code": "002558",
+          "name": "巨人网络",
+          "shares": 600,
+          "entry_at": 1786412700000,
+          "exit_at": 1786498200000,
+          "entry_price": 29.56,
+          "exit_price": 28.94,
+          "signal_date": "2026-08-10",
+          "stop": 27.6272,
+          "target": 31.31,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.21,
+            "transfer": 0.17,
+            "stamp": 8.68,
+            "total": 14.06
+          },
+          "fees": 19.56,
+          "net_pnl": -391.56,
+          "return_pct": -2.207028717977623,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002558",
+            "name": "巨人网络",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 28.596,
+            "upper": 29.68,
+            "stop": 27.6272,
+            "target": 31.31,
+            "signal_close": 29.79,
+            "key": "2026-08-10:002558"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000592",
+          "name": "平潭发展",
+          "shares": 3000,
+          "entry_at": 1786602600000,
+          "exit_at": 1786930200000,
+          "entry_price": 6.65,
+          "exit_price": 6.46,
+          "signal_date": "2026-08-12",
+          "stop": 5.8805,
+          "target": 7.2135,
+          "entry_costs": {
+            "commission": 5.98,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.18
+          },
+          "exit_costs": {
+            "commission": 5.81,
+            "transfer": 0.19,
+            "stamp": 9.69,
+            "total": 15.69
+          },
+          "fees": 21.87,
+          "net_pnl": -591.87,
+          "return_pct": -2.965848173347805,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "000592",
+            "name": "平潭发展",
+            "signal_date": "2026-08-12",
+            "generated_at": "2026-08-12T16:00:00+08:00",
+            "lower": 6.411,
+            "upper": 6.694,
+            "stop": 5.8805,
+            "target": 7.2135,
+            "signal_close": 6.87,
+            "key": "2026-08-12:000592"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600259",
+          "name": "中稀有色",
+          "shares": 200,
+          "entry_at": 1786933800000,
+          "exit_at": 1787189400000,
+          "entry_price": 88.74,
+          "exit_price": 87.59,
+          "signal_date": "2026-08-14",
+          "stop": 77.2632,
+          "target": 96.81,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.26,
+            "transfer": 0.18,
+            "stamp": 8.76,
+            "total": 14.2
+          },
+          "fees": 19.7,
+          "net_pnl": -249.7,
+          "return_pct": -1.4064832286591376,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "600259",
+            "name": "中稀有色",
+            "signal_date": "2026-08-14",
+            "generated_at": "2026-08-14T16:00:00+08:00",
+            "lower": 86.064,
+            "upper": 89.26,
+            "stop": 77.2632,
+            "target": 96.81,
+            "signal_close": 92.2,
+            "key": "2026-08-14:600259"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300274",
+          "name": "阳光电源",
+          "shares": 100,
+          "entry_at": 1787017500000,
+          "exit_at": 1787189400000,
+          "entry_price": 117.51,
+          "exit_price": 112.95,
+          "signal_date": "2026-08-17",
+          "stop": 109.3342,
+          "target": 124.74,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 0.0,
+            "total": 5.12
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 5.65,
+            "total": 10.76
+          },
+          "fees": 15.88,
+          "net_pnl": -471.88,
+          "return_pct": -4.013909351044392,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "300274",
+            "name": "阳光电源",
+            "signal_date": "2026-08-17",
+            "generated_at": "2026-08-17T16:00:00+08:00",
+            "lower": 114.041,
+            "upper": 118.25,
+            "stop": 109.3342,
+            "target": 124.74,
+            "signal_close": 118.8,
+            "key": "2026-08-17:300274"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 300,
+          "entry_at": 1787117400000,
+          "exit_at": 1787189400000,
+          "entry_price": 57.21,
+          "exit_price": 56.92,
+          "signal_date": "2026-08-18",
+          "stop": 41.8362,
+          "target": 61.88,
+          "entry_costs": {
+            "commission": 5.15,
+            "transfer": 0.17,
+            "stamp": 0.0,
+            "total": 5.32
+          },
+          "exit_costs": {
+            "commission": 5.12,
+            "transfer": 0.17,
+            "stamp": 8.54,
+            "total": 13.83
+          },
+          "fees": 19.15,
+          "net_pnl": -106.15,
+          "return_pct": -0.618289966636223,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-18",
+            "generated_at": "2026-08-18T16:00:00+08:00",
+            "lower": 55.469,
+            "upper": 57.668,
+            "stop": 41.8362,
+            "target": 61.88,
+            "signal_close": 58.5,
+            "key": "2026-08-18:002827"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99478.5
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 99608.44
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99422.26
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 99032.26
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 99527.07
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 99350.95
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 97441.63
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 98188.84
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "candidate_expanded",
+      "label": "旧版 / 研究对照：纳入收复/突破候选"
+    }
+  ],
+  "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0",
+  "symbols": [
+    "300502",
+    "603533",
+    "300308",
+    "300413",
+    "002249",
+    "300750",
+    "600519",
+    "300394",
+    "000591",
+    "300059",
+    "300085",
+    "002384",
+    "688256",
+    "300274",
+    "601398",
+    "002242",
+    "001309",
+    "000410",
+    "603986",
+    "600487",
+    "002185",
+    "600183",
+    "002558",
+    "002354",
+    "600259",
+    "002827",
+    "000725",
+    "600825",
+    "002636",
+    "002181",
+    "300182",
+    "601318",
+    "601899",
+    "601138",
+    "000592",
+    "601099",
+    "002281",
+    "002043",
+    "002372",
+    "688009",
+    "601952",
+    "600575",
+    "600039",
+    "688627"
+  ],
+  "start": "2026-08-04",
+  "end": "2026-11-03",
+  "limitations": [
+    "当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。",
+    "逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。",
+    "只用完整16根的15分钟交易日，在每根开盘时采样；没有历史盘口，买卖价用开盘价近似，可能漏掉区间内到价。",
+    "历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。",
+    "与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。",
+    "账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。",
+    "同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。",
+    "请求最近3个月；本地日线/指数截止2026-11-03，公共分钟覆盖后实际区间2026-08-04至2026-11-03。",
+    "请求46票，可用44票；失败：无"
+  ]
+}

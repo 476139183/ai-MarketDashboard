@@ -8,18 +8,19 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
-from candidate_monitor import history_issue, signal_category
+from candidate_monitor import history_issue
 from daily_strategy import entry_signal
 from hot_backtest import as_of_date, load, prepare_symbols
 from hot_source import fetch_names, fetch_rank, now as hot_now
 from large_evaluate import market_above_ma20
 from large_universe import exclusion_reason, quotes
 from trade_plan import build_trade_plan
+from stock_setups import VERSION as STRATEGY_VERSION, LABELS as SETUP_LABELS, evaluate_setups, selected_setup
 
 OUT = Path(__file__).resolve().parent / 'radar-latest.json'
 HOT = Path(__file__).resolve().parent / 'hot-universe.json'
 BJ = ZoneInfo('Asia/Shanghai')
-RULE_LABEL = {'trend': '趋势延续', 'reclaim': '收复均线', 'breakout': '突破前高'}
+RULE_LABEL = {'trend': '重返MA20（原信号）', 'reclaim': '收复均线（原信号）', 'breakout': '突破前高（原信号）', **SETUP_LABELS}
 
 
 def _now():
@@ -87,8 +88,8 @@ def _watch_note(category, rules, market_pass):
     if category == '策略候选':
         return f'次日优先观察（做多预案）：{labels}；大盘过滤通过'
     if market_pass:
-        return f'次日仅观察：{labels}；未达趋势候选门槛'
-    return f'次日仅观察：{labels}；沪深300未站上MA20，偏防守'
+        return f'次日仅观察：{labels}；分型量价确认或买入计划未通过'
+    return f'次日仅观察：{labels}；大盘沪深300未站上MA20，偏防守'
 
 
 def scan(*, force_hot=False, workers=12, max_stocks=100):
@@ -144,10 +145,15 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
             excluded.append({'code': code, 'name': name, 'reason': reason})
             continue
         issue = history_issue(bars, calendar, signal_date)
+        if not issue and (len(bars)<25 or [b['date'] for b in bars[-25:]]!=calendar[-25:]):
+            issue = '分型需要最近25个市场交易日完整日线'
         if issue:
             excluded.append({'code': code, 'name': name, 'reason': issue})
             continue
-        signals = [rule for rule in ('trend', 'reclaim', 'breakout') if entry_signal(bars, rule)]
+        legacy_signals = [rule for rule in ('trend', 'reclaim', 'breakout') if entry_signal(bars, rule)]
+        setups = evaluate_setups(bars)
+        setup = selected_setup(setups)
+        signals = [s['rule'] for s in setups] or legacy_signals
         if not signals:
             continue
         close = float(bars[-1]['close'])
@@ -157,7 +163,10 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
             'board': stock['board'],
             'rules': signals,
             'rule_labels': [RULE_LABEL[r] for r in signals],
-            'category': signal_category(signals, market_pass),
+            'category': '策略候选' if market_pass and setup and setup['plan']['plan_ready'] else '观察池',
+            'strategy_version': STRATEGY_VERSION,
+            'confirmed_rules': [s['rule'] for s in setups],
+            'setup_plans': setups,
             'market_pass': market_pass,
             'close': round(close, 4),
             'change_pct': None,
@@ -167,7 +176,9 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
         if len(bars) >= 2 and float(bars[-2]['close']) > 0:
             row['change_pct'] = round((close / float(bars[-2]['close']) - 1) * 100, 2)
         row['note'] = _watch_note(row['category'], signals, market_pass)
-        plan = build_trade_plan(bars)
+        plan = setup['plan'] if setup else build_trade_plan(bars)
+        if not setup and plan:
+            plan = dict(plan, plan_ready=False, summary='仅原始观察信号，未满足分型量价确认')
         if plan:
             row['trade_plan'] = plan
             row['sniper'] = plan['sniper']
@@ -177,13 +188,15 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
             row['note'] = row['note'] + '；' + plan['summary']
         (strategy if row['category'] == '策略候选' else watch).append(row)
 
-    strategy.sort(key=lambda x: (-('trend' in x['rules']), x['code']))
+    strategy.sort(key=lambda x: x['code'])
     watch.sort(key=lambda x: x['code'])
     payload = {
         'title': 'A股盘后雷达',
         'signal_date': signal_date,
         'observe_session': '下一交易日',
         'generated_at': now.isoformat(timespec='seconds'),
+        'strategy_version': STRATEGY_VERSION,
+        'confirmed_count': sum(bool(r['confirmed_rules']) for r in strategy + watch),
         'market_pass': market_pass,
         'market_label': '沪深300收盘站上MA20' if market_pass else '沪深300未站上MA20（偏防守）',
         'universe_size': len(accepted),
@@ -196,7 +209,8 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
         'limitations': [
             '热榜股票池有幸存者/人气偏差，不是全市场扫描',
             '收盘后判断、次日观察；点位为回踩预案，不等于自动下单或保证开盘可买',
-            '作战计划参考乖离<5%、MA多头与MA5/MA10/MA20结构，属研究规则',
+            '分型v2：重返MA20确认、持续趋势回踩、放量突破；各自检查量价与计划，仍属待验证研究规则',
+            '个股确认与大盘允许交易分开；大盘防守时仅观察，次日须按整分回踩计划到价',
             '普通A股现货默认只研究做多方向',
             '未完整处理除权、停牌与真实涨跌停队列',
         ],

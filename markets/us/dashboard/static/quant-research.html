@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" /><title>观市 · 独立引擎回测</title>
+  <link rel="stylesheet" href="/static/research.css?v=4" />
+  <link rel="stylesheet" href="/static/contracts.css?v=4" />
+  <link rel="stylesheet" href="/static/paper.css?v=4" />
+<link rel="stylesheet" href="/static/futures.css?v=4"></head>
+<body class="contracts-workspace">
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav" aria-label="工作空间">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a href="/a-radar" target="_top"><span>◎</span>明日盯盘</a>
+      <a href="/a-review" target="_top"><span>▣</span>盘后复盘</a>
+      <a href="/"><span>⌁</span>盘中信号</a>
+      <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
+      <a class="nav-active" aria-current="page" href="/paper" target="_top"><span>◈</span>模拟交易<span class="nav-dot"></span></a>
+      <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a>
+      <a href="/futures-radar" target="_top"><span>◍</span>期货雷达</a>
+      <a href="/futures" target="_top"><span>▥</span>期货分析</a>
+      <a href="/news" target="_top"><span>▤</span>资讯与事件</a>
+    </nav>
+    <div class="source-card"><span class="source-dot"></span> 本地独立研究<strong id="paper-source">RQAlpha / TqSdk</strong><p>归档样本 · 框架独立撮合<br>运行账户与持仓保持原状</p></div>
+    <div class="sidebar-bottom"><div><strong>历史研究 · 非前向账户</strong><small>账户和记录保存在本机</small></div><span class="local-tag">PAPER</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>模拟交易</strong></div><span id="paper-exchange-label" class="paper-mode">PAPER ACCOUNT / A股现货</span></header>
+    <main class="main-content contracts-page">
+      <div class="page-heading"><div><p class="eyebrow">INDEPENDENT ENGINE RESEARCH</p><h1>用独立引擎，复核每笔交易。</h1><p class="heading-note">本地归档样本 · 独立虚拟资金 · 结果不自动切换运行策略</p></div><a href="/a-paper">A股模拟 ↗</a><a href="/futures-paper">期货模拟 ↗</a></div>
+      <section class="contract-panel"><h2>引擎与研究方案</h2><p id="qr-engines">正在读取隔离环境…</p>
+        <div class="bt-form">
+          <label>市场<select id="qr-market"><option value="a_share">A股普通现货</option><option value="futures">国内商品期货</option></select></label>
+          <label>引擎<select id="qr-engine"><option value="rqalpha">RQAlpha · 本地样本</option><option value="tqsdk">TqSdk · 需行情账号</option></select></label>
+          <label>策略<select id="qr-strategy"><option value="setups_v2">A股分型v2</option><option value="legacy">旧版重返MA20</option><option value="expanded">扩展信号对照（非运行策略）</option></select></label>
+          <label>月份合约<select id="qr-symbol"><option>RB2701</option><option>M2701</option><option>AU2612</option><option>SC2701</option></select></label>
+          <label>仓位对照<select id="qr-sizing"><option value="fixed">每票2万元，最多3只</option></select></label>
+          <label>成本压力<select id="qr-cost"><option value="1">原费税与滑点</option><option value="2">费税与滑点翻倍</option></select></label>
+        </div><p>期货首版使用日线开盘采样：此前完整日线决定、当日开盘撮合，不还原夜盘逐笔。A股使用15分钟开盘采样。每份报告保留实际区间与成交假设。</p>
+        <div class="refresh-controls"><button id="qr-run" type="button" disabled>运行独立回测</button><button id="qr-export" type="button" disabled>导出完整结果</button></div>
+      </section><p id="qr-status" role="status">正在读取研究配置…</p><section id="qr-results" class="contract-panel" aria-live="polite"></section>
+      <p class="heading-note">RQAlpha用于本机非商业研究；数据权限与框架许可需匹配实际使用范围。TqSdk无账号时不运行、不连接实盘。</p>
+    </main>
+  </div>
+</div>
+<script src="/static/quant-research.js?v=1"></script>
+</body></html>

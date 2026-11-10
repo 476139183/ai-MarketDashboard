@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" /><title>观市 · 自动模拟交易</title>
+  <meta name="color-scheme" content="light" /><title>观市 · 自动模拟交易</title>
   <link rel="stylesheet" href="/static/research.css?v=4" />
   <link rel="stylesheet" href="/static/contracts.css?v=4" />
   <link rel="stylesheet" href="/static/paper.css?v=4" />
@@ -30,7 +30,7 @@
   <div class="main-shell">
     <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>模拟交易</strong></div><span id="paper-exchange-label" class="paper-mode">PAPER ACCOUNT / OKX</span></header>
     <main class="main-content contracts-page">
-      <div class="page-heading"><div><p class="eyebrow">FORWARD PAPER TRADING</p><h1>让规则，留下交易记录。</h1><p class="heading-note">欧易优先 · 加密货币与美股合约分别模拟 · 各账户资金、仓位与记录独立保存。</p></div><div class="refresh-controls"><label class="sr-only" for="paper-exchange">模拟交易所</label><label for="paper-market">合约类型</label><select id="paper-market"><option value="crypto">加密货币</option><option value="stock">美股合约（OKX）</option></select><select id="paper-exchange"><option value="okx">欧易 OKX（优先）</option><option id="paper-binance-option" value="binance">币安 Binance</option></select><button id="paper-refresh" type="button">刷新账户 ↻</button><button id="paper-toggle" type="button" disabled>读取账户中…</button></div></div>
+      <div class="page-heading"><div><p class="eyebrow">FORWARD PAPER TRADING</p><h1>让规则，留下交易记录。</h1><p class="heading-note">加密货币、美股合约与国内商品期货分别模拟 · 各账户资金、仓位与记录独立保存。</p></div><div class="refresh-controls"><label class="sr-only" for="paper-exchange">模拟交易所</label><label for="paper-market">合约类型</label><select id="paper-market"><option value="a_share">A股普通现货</option><option value="crypto">加密货币</option><option value="stock">美股合约（OKX）</option><option value="futures">国内商品期货</option></select><select id="paper-exchange"><option value="okx">欧易 OKX（优先）</option><option id="paper-binance-option" value="binance">币安 Binance</option></select><button id="paper-refresh" type="button">刷新账户 ↻</button><button id="paper-toggle" type="button" disabled>读取账户中…</button></div></div>
       <div class="paper-run-state"><span id="paper-running">正在读取运行状态</span><p id="paper-status" role="status">连接本地模拟账户…</p></div>
       <section class="contract-stats" aria-label="模拟账户摘要">
         <article class="contract-panel"><span id="equity-label">估算权益 / USDT</span><strong id="paper-equity">—</strong><small>现金 + 仓位本金 + 浮动盈亏</small></article>
@@ -59,6 +59,6 @@
     </main>
   </div>
 </div>
-<script src="/static/paper.js?v=2"></script>
+<script src="/static/paper.js?v=4"></script>
 </body>
 </html>

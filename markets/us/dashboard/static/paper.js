@@ -1,5 +1,7 @@
 (() => {
   'use strict';
+  if(typeof location!=='undefined'&&/(?:\?|&)market=futures(?:&|$)/.test(location.search)){location.href='/futures-paper';return;}
+  if(typeof location!=='undefined'&&/(?:\?|&)market=a_share(?:&|$)/.test(location.search)){location.href='/a-paper';return;}
   const el = id => document.getElementById(id);
   let state = null, timer = null, busy = false;
   let exchange = typeof location !== 'undefined' && /(?:\?|&)exchange=binance(?:&|$)/.test(location.search) ? 'binance' : 'okx';
@@ -110,6 +112,8 @@
   el('paper-exchange').value = exchange;
   function switchAccount() {
     market=el('paper-market').value;
+    if(market==='a_share'){location.href='/a-paper';return;}
+    if(market==='futures'){location.href='/futures-paper';return;}
     el('paper-binance-option').disabled=market==='stock';
     if(market==='stock')el('paper-exchange').value='okx';
     exchange = el('paper-exchange').value;state=null;

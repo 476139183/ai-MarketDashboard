@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" /><title>观市 · 国内期货模拟</title>
+  <link rel="stylesheet" href="/static/research.css?v=4" />
+  <link rel="stylesheet" href="/static/contracts.css?v=4" />
+  <link rel="stylesheet" href="/static/paper.css?v=4" />
+<link rel="stylesheet" href="/static/futures.css?v=4"></head>
+<body class="contracts-workspace">
+<div class="workspace">
+  <aside class="sidebar">
+    <a class="brand" href="/research"><span class="brand-mark">观</span><span>观市<small>MARKET STUDIO</small></span></a>
+    <div class="sidebar-label">工作空间</div>
+    <nav class="workspace-nav" aria-label="工作空间">
+      <a href="/research"><span>◫</span>行情研究</a>
+      <a href="/a-radar" target="_top"><span>◎</span>明日盯盘</a>
+      <a href="/a-review" target="_top"><span>▣</span>盘后复盘</a>
+      <a href="/"><span>⌁</span>盘中信号</a>
+      <a href="/contracts" target="_top"><span>◉</span>合约雷达</a>
+      <a class="nav-active" aria-current="page" href="/paper" target="_top"><span>◈</span>模拟交易<span class="nav-dot"></span></a>
+      <a href="/us-radar" target="_top"><span>◌</span>美股雷达</a>
+      <a href="/futures-radar" target="_top"><span>◍</span>期货雷达</a>
+      <a href="/futures" target="_top"><span>▥</span>期货分析</a>
+      <a href="/news" target="_top"><span>▤</span>资讯与事件</a>
+    </nav>
+    <div class="source-card"><span class="source-dot"></span> 本地模拟账户<strong id="paper-source">国内商品期货 · CNY</strong><p>日线规则 · 日盘采样撮合<br>人民币资金与仓位独立保存</p></div>
+    <div class="sidebar-bottom"><div><strong>前向模拟 · 非历史回测</strong><small>账户和记录保存在本机</small></div><span class="local-tag">PAPER</span></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><div class="breadcrumb">工作空间 <span>/</span> <strong>模拟交易</strong></div><span id="paper-exchange-label" class="paper-mode">PAPER ACCOUNT / 国内商品期货</span></header>
+    <main class="main-content contracts-page">
+      <div class="page-heading"><div><p class="eyebrow">DOMESTIC FUTURES · FORWARD PAPER TRADING</p><h1>用独立账户，观察期货规则。</h1><p class="heading-note">人民币虚拟本金 · 单个月份合约 · 双均线20/60日线基准 · 默认暂停</p></div><div class="refresh-controls"><label for="fp-market">合约类型</label><select id="fp-market"><option value="/a-paper">A股普通现货</option><option value="/paper">加密货币</option><option value="/paper?market=stock">美股合约（OKX）</option><option value="/futures-paper" selected>国内商品期货</option></select><button id="fp-refresh" type="button">刷新账户 ↻</button><button id="fp-toggle" type="button" disabled>读取账户中…</button></div></div>
+      <div class="paper-run-state"><span id="fp-running">正在读取运行状态</span><p id="fp-status" role="status">连接独立人民币模拟账户…</p></div>
+      <p class="heading-note"><a href="/quant-research">独立引擎回测：RQAlpha / TqSdk ↗</a></p>
+      <section class="contract-stats" aria-label="期货模拟账户摘要">
+        <article class="contract-panel"><span id="fp-equity-label">估算权益 / CNY</span><strong id="fp-equity">—</strong><small>账户余额 + 浮动盈亏</small></article>
+        <article class="contract-panel"><span>可用资金 / CNY</span><strong id="fp-available">—</strong><small id="fp-margin">保证金占用 —</small></article>
+        <article class="contract-panel"><span>已实现净盈亏 / CNY</span><strong id="fp-realized">—</strong><small id="fp-balance">账户余额 —</small></article>
+        <article class="contract-panel"><span>浮动盈亏 / CNY</span><strong id="fp-unrealized">—</strong><small>按上次源报价估值，未扣未来平仓费用</small></article>
+      </section>
+      <section class="contract-panel paper-rules" aria-labelledby="fp-config-title">
+        <div class="section-title"><h2 id="fp-config-title">月份合约与模拟参数</h2><a id="fp-detail" href="/futures">查看期货分析 ↗</a></div>
+        <p>初始本金 100,000 CNY，独立于其他模拟账户。暂停且空仓时可修改下列参数，保存不重置资金或历史，也不会自动启用。</p>
+        <form id="fp-form" class="bt-form">
+          <label>四位月份合约<input id="fp-symbol" name="symbol" value="RB2701" placeholder="如 RB2701、AU2702" maxlength="6" required pattern="[A-Za-z]{1,2}[0-9]{4}" autocomplete="off"></label>
+          <label>每次手数（整数）<input id="fp-lots" type="number" min="1" max="10000" step="1" required></label>
+          <label>合约乘数（按品种预设）<input id="fp-multiplier" type="number" readonly></label>
+          <label>最小价位（按品种预设）<input id="fp-tick_size" type="number" readonly></label>
+          <label>保证金比例 %<input id="fp-margin_rate" type="number" min="0.01" max="100" step="any" required></label>
+          <label>开仓保证金占权益上限 %<input id="fp-max_margin_fraction" type="number" min="0.01" max="100" step="any" required></label>
+          <label>每边每手固定费用 / CNY<input id="fp-fee_fixed" type="number" min="0" max="100000" step="any" required></label>
+          <label>每边成交额费率 %<input id="fp-fee_rate" type="number" min="0" max="10" step="any" required></label>
+          <label>平今费用倍数<input id="fp-close_today_factor" type="number" min="0" max="100" step="any" required></label>
+          <label>每边不利滑点 / 跳<input id="fp-slippage_ticks" type="number" min="0" max="10000" step="1" required></label>
+          <div class="bt-actions"><button id="fp-save" type="submit" disabled>保存模拟参数</button><span id="fp-config-status" class="paper-small" role="status">读取参数后可编辑</span></div>
+        </form>
+        <div class="paper-cost-note">费用、保证金及滑点为模拟假设，不是实际交易所或券商费率。乘数与最小价位沿用本项目品种预设，使用前请核对具体合约。</div>
+      </section>
+      <section class="contract-panel paper-rules">
+        <div class="section-title"><h2>当前模拟规则与时段</h2><a href="/futures-radar">查看期货雷达 ↗</a></div>
+        <div class="paper-rule-tags"><span>双均线 SMA20/60</span><span>仅完整日线</span><span>单合约 · 最多1个持仓</span><span>固定2ATR保护价</span><span>源最新价 + 不利tick滑点</span></div>
+        <p>SMA20 高于 SMA60 目标做多，低于目标做空，相等目标空仓。首次观察信号后等待更新的源报价；同一合约、日线与方向只开一次。信号反向先退出，后续新报价再确认开仓。</p>
+        <p>首版只在日盘连续竞价时段撮合：09:00–10:15、10:30–11:30、13:30–15:00（北京时间）。夜盘、休市及停机期间不补造成交，已有仓位的退出也只在日盘新鲜报价到达后处理。</p>
+        <p>暂停只停止新开仓，已有仓位继续执行日盘采样退出。报价过期或日线不足不新开仓；完整日线读取失败时，若有有效新报价，已有保护价仍生效。进入交割月禁止新仓，不自动换月。</p>
+        <div class="paper-cost-note">采样可能错过两次报价之间的触价，不还原成交队列、每日结算、夜盘风控或完整强平；保证金不足时暂停新仓并按下一有效日盘报价退出。该期货基准仍待独立验证。</div>
+      </section>
+      <section class="contract-panel contract-board">
+        <div class="board-heading"><div><h2>当前持仓 <span class="live-badge">国内期货 · CNY · PAPER</span></h2><p id="fp-position-note">等待持仓数据</p></div><span id="fp-pending" class="paper-small">—</span></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th scope="col">月份合约</th><th scope="col">方向 / 手数</th><th scope="col">开仓价 / 上次报价</th><th scope="col">固定保护价</th><th scope="col">浮动盈亏 / CNY</th><th scope="col">开仓时间 / 北京</th><th scope="col">源报价时间 / 北京</th></tr></thead><tbody id="fp-positions"></tbody></table></div>
+        <p id="fp-positions-empty" class="paper-empty">尚无持仓。保存参数并启用后，等待日盘新鲜报价与日线信号。</p>
+      </section>
+      <section class="contract-panel contract-board paper-history">
+        <div class="board-heading"><div><h2>已平仓记录</h2><p id="fp-trade-summary">尚无平仓记录</p></div><span id="fp-fees" class="paper-small">累计费用 —</span></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th scope="col">合约 / 方向 / 手数</th><th scope="col">开仓 / 平仓价</th><th scope="col">开仓时间 / 北京</th><th scope="col">平仓时间 / 北京</th><th scope="col">退出原因</th><th scope="col">费用 / CNY</th><th scope="col">净盈亏 / CNY</th></tr></thead><tbody id="fp-trades"></tbody></table></div>
+        <p id="fp-trades-empty" class="paper-empty">模拟成交后记录进出场价格、费用与原因。</p>
+      </section>
+      <footer class="contract-footer"><span>独立人民币模拟 · 本地服务运行时后台检查 · 最近100条平仓记录，汇总含全部历史</span><a href="/futures-radar">返回期货雷达 ↗</a></footer>
+    </main>
+  </div>
+</div>
+<script src="/static/futures-paper.js?v=1"></script>
+</body>
+</html>

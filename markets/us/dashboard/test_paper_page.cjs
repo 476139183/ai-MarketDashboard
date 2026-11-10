@@ -17,7 +17,8 @@ function page(){
   positions:exchange==='binance'||market==='stock'?[]:[{symbol:'BTCUSDT',instrument_id:'BTC-USDT-SWAP',side:'long',contracts:1,quantity:.01,
    entry_price:100,last_price:105,stop_price:98,target_price:104,entry_time:Date.now(),last_quote_at:Date.now(),unrealized_pnl:5,quote_fresh:true}],trades:[]});
  let timerId=0;
- const context=vm.createContext({document:{getElementById:id=>nodes.get(id),createElement:element},
+ const location={search:'',href:''};
+ const context=vm.createContext({location,document:{getElementById:id=>nodes.get(id),createElement:element},
   Date,Intl,AbortController,setTimeout:fn=>{timers.set(++timerId,fn);return timerId;},clearTimeout:id=>timers.delete(id),
   fetch:async(url,options={})=>{requests.push([url,options]);if(fail)throw Error('offline');
    const exchange=options.method==='POST'?JSON.parse(options.body).exchange:url.includes('binance')?'binance':'okx';
@@ -25,7 +26,7 @@ function page(){
    if(options.method==='POST')accounts[exchange]=JSON.parse(options.body).enabled;
    return {ok:true,json:async()=>state(exchange,market)};}});
  vm.runInContext(readFileSync(join(__dirname,'static/paper.js'),'utf8'),context);
- return {nodes,requests,timers,fail(){fail=true;},settle:()=>new Promise(resolve=>setImmediate(resolve))};
+ return {nodes,requests,timers,location,fail(){fail=true;},settle:()=>new Promise(resolve=>setImmediate(resolve))};
 }
 
 test('打开页面只读取账户，显式启用后发送本地模拟控制',async()=>{
@@ -71,3 +72,5 @@ test('选择美股合约自动使用欧易独立账户，并携带市场控制�
  await p.nodes.get('paper-toggle').handlers.click();
  assert.deepEqual(JSON.parse(p.requests.at(-1)[1].body),{enabled:true,exchange:'okx',market:'stock'});
 });
+
+test('选择国内期货跳到独立CNY页面，不再请求USDT账户',async()=>{const p=page();await p.settle();const count=p.requests.length;p.nodes.get('paper-market').value='futures';p.nodes.get('paper-market').handlers.change();assert.equal(p.location.href,'/futures-paper');assert.equal(p.requests.length,count);});

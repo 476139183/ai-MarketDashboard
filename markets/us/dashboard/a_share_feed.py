@@ -34,7 +34,9 @@ def fetch_quote(code):
     fields = text.split('"')[1].split('~')
     if fields[2]!=code:
         raise ValueError('A股报价标的不一致')
+    optional=lambda index:float(fields[index]) if len(fields)>index and fields[index] else None
     return dict(name=fields[1],price=float(fields[3]),previous_close=float(fields[4]),
+                volume=optional(6),bid=optional(9),ask=optional(19),
                 day_high=float(fields[33]),day_low=float(fields[34]),
                 time=datetime.strptime(fields[30],'%Y%m%d%H%M%S').replace(tzinfo=BJ),
                 limits=(float(fields[47]),float(fields[48])))

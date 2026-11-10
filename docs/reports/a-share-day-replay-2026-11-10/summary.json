@@ -1,0 +1,588 @@
+{
+  "counterfactual": true,
+  "as_of": "2026-11-10T12:18:23.864305+08:00",
+  "signal_date": "2026-11-09",
+  "trade_date": "2026-11-10",
+  "scope": "昨日已存档且已通过证券/市值/流动性筛选的候选与观察池；不是重新扫描全市场",
+  "coverage_end": "2026-11-10 11:30",
+  "radar": {
+    "signal_date": "2026-11-09",
+    "generated_at": "2026-11-09T16:00:00+08:00",
+    "strategy_version": "a-setups-v2",
+    "confirmed_count": 6,
+    "market_pass": false,
+    "strategy_candidates": [],
+    "counterfactual": true,
+    "generated_at_kind": "为研究假设昨日16:00生成；不是当时真实名单"
+  },
+  "observations": [
+    {
+      "code": "002149",
+      "name": "西部材料",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 41.0,
+      "last_close": 41.46,
+      "signal_close": 41.51,
+      "from_open_pct": 1.1219512195121961,
+      "high": 42.6,
+      "low": 40.4,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 25.91,
+      "last_close": 26.2,
+      "signal_close": 26.1,
+      "from_open_pct": 1.1192589733693525,
+      "high": 26.25,
+      "low": 25.75,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "002310",
+      "name": "东方新能",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 2.81,
+      "last_close": 2.81,
+      "signal_close": 2.55,
+      "from_open_pct": 0.0,
+      "high": 2.81,
+      "low": 2.81,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "002565",
+      "name": "顺灏股份",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 11.12,
+      "last_close": 10.92,
+      "signal_close": 10.54,
+      "from_open_pct": -1.7985611510791255,
+      "high": 11.18,
+      "low": 10.38,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "002708",
+      "name": "光洋股份",
+      "strategy_rule": "trend_pullback",
+      "plan": {
+        "ma5": 20.21,
+        "ma10": 19.76,
+        "ma20": 17.1985,
+        "bias_ma5": 8.71,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 19.85,
+          "secondary_buy": 19.67,
+          "stop_loss": 16.72,
+          "take_profit": 21.49,
+          "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+        },
+        "checklist": [
+          {
+            "item": "分型确认",
+            "detail": "持续趋势回踩量价条件已满足",
+            "status": "满足"
+          },
+          {
+            "item": "买入区间",
+            "detail": "19.67～19.85；仅下一交易日有效",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "距回踩中心 +11.18%",
+            "status": "不满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损16.72；目标21.49；毛盈亏比0.52",
+            "status": "不满足"
+          }
+        ],
+        "summary": "距离回踩中心超过5%，不追高；区间上沿至目标的毛盈亏比不足1.5",
+        "strategy_version": "a-setups-v2",
+        "strategy_rule": "trend_pullback",
+        "strategy_label": "持续趋势回踩",
+        "pivot": 19.76,
+        "atr14": 2.0243,
+        "risk_reward": 0.524,
+        "rejection_reasons": [
+          "距离回踩中心超过5%，不追高",
+          "区间上沿至目标的毛盈亏比不足1.5"
+        ]
+      },
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 23.52,
+      "last_close": 24.17,
+      "signal_close": 21.97,
+      "from_open_pct": 2.7636054421768863,
+      "high": 24.17,
+      "low": 23.22,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "300006",
+      "name": "莱美药业",
+      "strategy_rule": "trend_pullback",
+      "plan": {
+        "ma5": 9.964,
+        "ma10": 9.877,
+        "ma20": 9.107,
+        "bias_ma5": 12.0,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 9.92,
+          "secondary_buy": 9.83,
+          "stop_loss": 7.9,
+          "take_profit": 11.22,
+          "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+        },
+        "checklist": [
+          {
+            "item": "分型确认",
+            "detail": "持续趋势回踩量价条件已满足",
+            "status": "满足"
+          },
+          {
+            "item": "买入区间",
+            "detail": "9.83～9.92；仅下一交易日有效",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "距回踩中心 +12.99%",
+            "status": "不满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损7.90；目标11.22；毛盈亏比0.64",
+            "status": "不满足"
+          }
+        ],
+        "summary": "距离回踩中心超过5%，不追高；区间上沿至目标的毛盈亏比不足1.5",
+        "strategy_version": "a-setups-v2",
+        "strategy_rule": "trend_pullback",
+        "strategy_label": "持续趋势回踩",
+        "pivot": 9.877,
+        "atr14": 1.3114,
+        "risk_reward": 0.6436,
+        "rejection_reasons": [
+          "距离回踩中心超过5%，不追高",
+          "区间上沿至目标的毛盈亏比不足1.5"
+        ]
+      },
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 11.4,
+      "last_close": 11.23,
+      "signal_close": 11.16,
+      "from_open_pct": -1.4912280701754432,
+      "high": 11.55,
+      "low": 11.09,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "300118",
+      "name": "东方日升",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 10.85,
+      "last_close": 10.82,
+      "signal_close": 10.85,
+      "from_open_pct": -0.2764976958525289,
+      "high": 11.19,
+      "low": 10.51,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "300413",
+      "name": "芒果超媒",
+      "strategy_rule": "trend_pullback",
+      "plan": {
+        "ma5": 32.242,
+        "ma10": 28.177,
+        "ma20": 25.9045,
+        "bias_ma5": 11.04,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 28.31,
+          "secondary_buy": 28.04,
+          "stop_loss": 23.96,
+          "take_profit": 35.76,
+          "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+        },
+        "checklist": [
+          {
+            "item": "分型确认",
+            "detail": "持续趋势回踩量价条件已满足",
+            "status": "满足"
+          },
+          {
+            "item": "买入区间",
+            "detail": "28.04～28.31；仅下一交易日有效",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "距回踩中心 +27.05%",
+            "status": "不满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损23.96；目标35.76；毛盈亏比1.71",
+            "status": "满足"
+          }
+        ],
+        "summary": "距离回踩中心超过5%，不追高",
+        "strategy_version": "a-setups-v2",
+        "strategy_rule": "trend_pullback",
+        "strategy_label": "持续趋势回踩",
+        "pivot": 28.177,
+        "atr14": 2.8079,
+        "risk_reward": 1.7126,
+        "rejection_reasons": [
+          "距离回踩中心超过5%，不追高"
+        ]
+      },
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 34.88,
+      "last_close": 36.38,
+      "signal_close": 35.8,
+      "from_open_pct": 4.3004587155963225,
+      "high": 37.38,
+      "low": 34.55,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "300433",
+      "name": "蓝思科技",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 29.0,
+      "last_close": 28.74,
+      "signal_close": 28.81,
+      "from_open_pct": -0.8965517241379395,
+      "high": 29.28,
+      "low": 28.67,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "600118",
+      "name": "中国卫星",
+      "strategy_rule": "trend_pullback",
+      "plan": {
+        "ma5": 55.652,
+        "ma10": 54.546,
+        "ma20": 52.8505,
+        "bias_ma5": 3.32,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 54.81,
+          "secondary_buy": 54.28,
+          "stop_loss": 49.18,
+          "take_profit": 65.27,
+          "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+        },
+        "checklist": [
+          {
+            "item": "分型确认",
+            "detail": "持续趋势回踩量价条件已满足",
+            "status": "满足"
+          },
+          {
+            "item": "买入区间",
+            "detail": "54.28～54.81；仅下一交易日有效",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "距回踩中心 +5.42%",
+            "status": "不满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损49.18；目标65.27；毛盈亏比1.86",
+            "status": "满足"
+          }
+        ],
+        "summary": "距离回踩中心超过5%，不追高",
+        "strategy_version": "a-setups-v2",
+        "strategy_rule": "trend_pullback",
+        "strategy_label": "持续趋势回踩",
+        "pivot": 54.546,
+        "atr14": 3.5771,
+        "risk_reward": 1.8579,
+        "rejection_reasons": [
+          "距离回踩中心超过5%，不追高"
+        ]
+      },
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 58.48,
+      "last_close": 59.86,
+      "signal_close": 57.5,
+      "from_open_pct": 2.3597811217510367,
+      "high": 60.82,
+      "low": 58.0,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "600879",
+      "name": "航天电子",
+      "strategy_rule": null,
+      "plan": null,
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 13.95,
+      "last_close": 13.94,
+      "signal_close": 13.56,
+      "from_open_pct": -0.07168458781361409,
+      "high": 14.29,
+      "low": 13.76,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "601595",
+      "name": "上海电影",
+      "strategy_rule": "trend_pullback",
+      "plan": {
+        "ma5": 33.734,
+        "ma10": 31.32,
+        "ma20": 29.7255,
+        "bias_ma5": 14.72,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 31.47,
+          "secondary_buy": 31.17,
+          "stop_loss": 27.25,
+          "take_profit": 35.76,
+          "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+        },
+        "checklist": [
+          {
+            "item": "分型确认",
+            "detail": "持续趋势回踩量价条件已满足",
+            "status": "满足"
+          },
+          {
+            "item": "买入区间",
+            "detail": "31.17～31.47；仅下一交易日有效",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "距回踩中心 +23.56%",
+            "status": "不满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损27.25；目标35.76；毛盈亏比1.02",
+            "status": "不满足"
+          }
+        ],
+        "summary": "距离回踩中心超过5%，不追高；区间上沿至目标的毛盈亏比不足1.5",
+        "strategy_version": "a-setups-v2",
+        "strategy_rule": "trend_pullback",
+        "strategy_label": "持续趋势回踩",
+        "pivot": 31.32,
+        "atr14": 2.7071,
+        "risk_reward": 1.0166,
+        "rejection_reasons": [
+          "距离回踩中心超过5%，不追高",
+          "区间上沿至目标的毛盈亏比不足1.5"
+        ]
+      },
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 38.69,
+      "last_close": 42.57,
+      "signal_close": 38.7,
+      "from_open_pct": 10.028431119152238,
+      "high": 42.57,
+      "low": 38.01,
+      "coverage_end": "2026-11-10 11:30"
+    },
+    {
+      "code": "688585",
+      "name": "上纬新材",
+      "strategy_rule": "trend_pullback",
+      "plan": {
+        "ma5": 181.276,
+        "ma10": 173.53,
+        "ma20": 144.929,
+        "bias_ma5": 19.17,
+        "alignment": "多头排列 MA5>MA10>MA20",
+        "chase_risk": true,
+        "plan_ready": false,
+        "sniper": {
+          "ideal_buy": 174.39,
+          "secondary_buy": 172.67,
+          "stop_loss": 138.25,
+          "take_profit": 196.66,
+          "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+        },
+        "checklist": [
+          {
+            "item": "分型确认",
+            "detail": "持续趋势回踩量价条件已满足",
+            "status": "满足"
+          },
+          {
+            "item": "买入区间",
+            "detail": "172.67～174.39；仅下一交易日有效",
+            "status": "满足"
+          },
+          {
+            "item": "不追高",
+            "detail": "距回踩中心 +24.49%",
+            "status": "不满足"
+          },
+          {
+            "item": "结构空间",
+            "detail": "止损138.25；目标196.66；毛盈亏比0.62",
+            "status": "不满足"
+          }
+        ],
+        "summary": "距离回踩中心超过5%，不追高；区间上沿至目标的毛盈亏比不足1.5",
+        "strategy_version": "a-setups-v2",
+        "strategy_rule": "trend_pullback",
+        "strategy_label": "持续趋势回踩",
+        "pivot": 173.53,
+        "atr14": 23.5186,
+        "risk_reward": 0.6162,
+        "rejection_reasons": [
+          "距离回踩中心超过5%，不追高",
+          "区间上沿至目标的毛盈亏比不足1.5"
+        ]
+      },
+      "market_pass": false,
+      "open_samples_in_plan": 0,
+      "first_in_plan": null,
+      "minute_bars": 8,
+      "first_open": 223.97,
+      "last_close": 220.88,
+      "signal_close": 216.02,
+      "from_open_pct": -1.3796490601419853,
+      "high": 236.0,
+      "low": 215.89,
+      "coverage_end": "2026-11-10 11:30"
+    }
+  ],
+  "account": {
+    "version": "cn-candidate-plan-paper-v1",
+    "source": "sina_historical_15m_open",
+    "market": "a_share",
+    "currency": "CNY",
+    "enabled": true,
+    "cash": 100000.0,
+    "config": {
+      "per_stock_budget": 20000.0,
+      "max_positions": 3,
+      "commission_rate": 0.0003,
+      "min_commission": 5.0,
+      "transfer_rate": 1e-05,
+      "stamp_rate": 0.0005,
+      "slippage_ticks": 1,
+      "exit_ma": 10
+    },
+    "positions": [],
+    "trades": [],
+    "pending": {},
+    "used_keys": [],
+    "plans": [],
+    "candidate_snapshot": {
+      "signal_date": "2026-11-09",
+      "generated_at": "2026-11-09T16:00:00+08:00",
+      "market_pass": false,
+      "market_label": null,
+      "strategy_candidates": []
+    },
+    "plan_date": "2026-11-09",
+    "plan_error": null,
+    "scan_attempt_day": null,
+    "scan_error": null,
+    "activated_at": 1794274140000,
+    "updated_at": 1794280500000,
+    "error": null,
+    "note": "没有可执行策略候选，等待合格盘后名单；不使用观察池买入",
+    "fees": 0.0,
+    "realized_pnl": 0.0,
+    "total_trades": 0,
+    "winning_trades": 0,
+    "initial_balance": 100000.0,
+    "available": 100000.0,
+    "market_value": 0.0,
+    "equity": 100000.0,
+    "unrealized_pnl": 0.0,
+    "valuation_fresh": true
+  },
+  "failures": {},
+  "limitations": [
+    "当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。",
+    "逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。",
+    "只用完整16根的15分钟交易日，在每根开盘时采样；没有历史盘口，买卖价用开盘价近似，可能漏掉区间内到价。",
+    "历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。",
+    "与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。",
+    "账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。",
+    "同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。",
+    "名单为今天按昨日完成日线重建，非昨日真实存档；绝不进入前向账户。",
+    "日内只用已完成15分钟K线的开盘采样，至少等下一条新采样报价；不声称真实盘口成交。",
+    "本回放独立10万元空仓起步；今日买入受T+1限制，不能在今天平仓计算胜率。"
+  ]
+}

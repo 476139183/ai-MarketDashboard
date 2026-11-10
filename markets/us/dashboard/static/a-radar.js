@@ -168,9 +168,11 @@
       savePins();
     }
     const stale = data.stale ? '（名单偏旧，建议刷新）' : '';
+    const versionNote = data.configured_strategy_version === 'a-setups-v2' && data.strategy_version !== 'a-setups-v2'
+      ? ' · 分型v2已就绪，下次盘后名单生效；当前显示旧名单' : '';
     const busy = data.status === 'running' ? '正在扫描最近交易日，请稍候…' : '';
     el('radar-status').textContent = busy
-      || `更新于 ${data.generated_at || '—'} · 池内 ${data.scanned ?? '—'} / ${data.universe_size ?? '—'} 只${stale}`;
+      || `更新于 ${data.generated_at || '—'} · 池内 ${data.scanned ?? '—'} / ${data.universe_size ?? '—'} 只${data.strategy_version === 'a-setups-v2' ? ` · 分型确认 ${data.confirmed_count ?? 0} 只（仍需大盘与计划通过）` : ''}${versionNote}${stale}`;
     el('radar-limits').textContent = (data.limitations || []).join(' · ') || el('radar-limits').textContent;
     el('service-dot').classList.toggle('connected', true);
     el('service-label').textContent = data.status === 'running' ? '扫描中' : '名单就绪';

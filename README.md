@@ -1,5 +1,7 @@
 # 观市 Market Studio｜Python 股票行情看板、A股选股雷达与模拟交易
 
+新增[独立引擎回测](docs/features/quant-research.md)：RQAlpha本地复核A股与国内月份期货，提供成本压力和期货风险仓位对照；TqSdk入口在无账号时明确停用。[30组验证记录](docs/reports/quant-engines-2026-11-10/report.md)。网页入口 `/quant-research`。
+
 > **完整源码与研究资料现已公开。** 包含策略实验、回放与逐笔复盘记录；使用权限见 [LICENSE](LICENSE)，公开范围见[发布约定](CONFIDENTIALITY.md)。
 
 **在一个本地工作台中，研究股票量价、观察加密货币合约，并用独立虚拟账户验证交易规则。**
@@ -93,6 +95,8 @@ A股与美股日K、美股分钟线和合约K线支持高低点（HH/HL/LH/LL）
 | A 股盘后复盘 | 7个指数、广度、量能、涨跌分布、板块 | 标明全A／样本范围、涨跌停、事实摘要和下次开盘观察 |
 | 资讯与事件 | A股、美股、数字资产、全球财经 | 本地资讯池、来源状态、关键词筛选、分页与显式采集；依赖DSA |
 | 美股雷达 | 美股原股 / USD | 独立观察池、盘前 / 盘中 / 盘后、新浪分钟 OHLCV、Nasdaq 分时与可选 Massive |
+| A股模拟与复盘 | 沪深普通A股 / CNY | 盘后候选、盘中计划到价、T+1策略卖出；独立账户与近月参数复盘 |
+| 期货模拟 | 国内商品月份合约 / CNY | 独立10万元虚拟账户、双均线20/60、整数手与保证金、日盘采样撮合；默认暂停 |
 | 期货雷达 | 国内12个商品主力连续 / CNY | 分类与历史结构筛选、涨跌幅/量比/持仓变化排序，点击进入期货分析 |
 | 期货分析 | 国内12个商品品种 / CNY | 主力连续与月份合约、日线和5/15/30/60分钟图、SMA20/60、ATR14、量仓变化；不依赖DSA |
 | 合约雷达 | USDT 永续 | 三所独立行情、六个分钟周期及 4 小时方向、结构点位、资金费率与持仓估算 |
@@ -726,6 +730,8 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 | [GitHub 发布与发现](docs/github-discovery.md) | About、Topics 与默认分支发布建议 |
 | [看板说明](markets/us/dashboard/README.md) | 页面、巡检、合约与模拟交易细节 |
 | [资讯与A股复盘](docs/features/news-and-a-review.md) | 新闻来源、时间口径、全A覆盖与网络限制 |
+| [A股模拟与复盘](docs/features/a-share-paper.md) | 盘后计划、T+1执行、逐笔和历史参数对照 |
+| [期货模拟](docs/features/futures-paper.md) | 独立人民币账户、日线基准、月份合约与日盘撮合边界 |
 | [期货雷达](docs/features/futures-radar.md) | 批量观察国内商品、历史结构筛选与数据时效 |
 | [国内商品期货](docs/features/domestic-futures.md) | 品种、主力连续与月份合约、完整K线及量仓分析口径 |
 | [期货策略回测](docs/features/futures-backtest.md) | GitHub参考、两个固定基准、撮合成本、研究边界与离线复跑 |

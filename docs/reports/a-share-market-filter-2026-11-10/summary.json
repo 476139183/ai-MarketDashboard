@@ -1,0 +1,4879 @@
+{
+  "version": "a-market-filter-audit-v1",
+  "sample_sha256": "3dda69b252e73994a5283e4c45c4c3a023884c64d375b9f6e30a19704e703fe0",
+  "limitations": [
+    "当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。",
+    "逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。",
+    "只用完整16根的15分钟交易日，在每根开盘时采样；没有历史盘口，买卖价用开盘价近似，可能漏掉区间内到价。",
+    "历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。",
+    "与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。",
+    "账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。",
+    "同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。"
+  ],
+  "results": [
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 1
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "baseline",
+      "label": "原计划 / MA10",
+      "filter_mode": "strict",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 34,
+        "candidate_signals": 36,
+        "ready_plans": 8
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99363.67,
+        "return_pct": -0.6363300000000072,
+        "monthly_equivalent_pct": -0.21097474542629557,
+        "max_drawdown_pct": 0.7940278133878468,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 21.33,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -0.501039999999997,
+          "end_equity": 99498.96
+        },
+        {
+          "month": "2026-09",
+          "return_pct": -0.13597127045348323,
+          "end_equity": 99363.67
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 99363.67
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 99363.67
+        }
+      ],
+      "trades": [
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1500,
+          "entry_at": 1787884200000,
+          "exit_at": 1788226200000,
+          "entry_price": 12.99,
+          "exit_price": 12.58,
+          "signal_date": "2026-08-27",
+          "stop": 12.6155,
+          "target": 13.99,
+          "entry_costs": {
+            "commission": 5.85,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.04
+          },
+          "exit_costs": {
+            "commission": 5.66,
+            "transfer": 0.19,
+            "stamp": 9.44,
+            "total": 15.29
+          },
+          "fees": 21.33,
+          "net_pnl": -636.33,
+          "return_pct": -3.2647308712105665,
+          "reason": "stop",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-08-27",
+            "generated_at": "2026-08-27T16:00:00+08:00",
+            "lower": 12.919,
+            "upper": 13.044,
+            "stop": 12.6155,
+            "target": 13.99,
+            "signal_close": 13.0,
+            "key": "2026-08-27:002043"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100158.96
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 99498.96
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 99363.67
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "filter_mode": "near_ma20",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 1,
+          "return_pct": -0.6363300000000072,
+          "win_rate_pct": 0.0
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 60,
+        "candidate_signals": 55,
+        "ready_plans": 14
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 98517.7,
+        "return_pct": -1.482300000000003,
+        "monthly_equivalent_pct": -0.49286009402436104,
+        "max_drawdown_pct": 1.6386551937040972,
+        "closed_trades": 1,
+        "win_rate_pct": 0.0,
+        "fees": 27.3,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -0.501039999999997,
+          "end_equity": 99498.96
+        },
+        {
+          "month": "2026-09",
+          "return_pct": -0.13597127045348323,
+          "end_equity": 99363.67
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 99363.67
+        },
+        {
+          "month": "2026-11",
+          "return_pct": -0.851387634937395,
+          "end_equity": 98517.7
+        }
+      ],
+      "trades": [
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1500,
+          "entry_at": 1787884200000,
+          "exit_at": 1788226200000,
+          "entry_price": 12.99,
+          "exit_price": 12.58,
+          "signal_date": "2026-08-27",
+          "stop": 12.6155,
+          "target": 13.99,
+          "entry_costs": {
+            "commission": 5.85,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.04
+          },
+          "exit_costs": {
+            "commission": 5.66,
+            "transfer": 0.19,
+            "stamp": 9.44,
+            "total": 15.29
+          },
+          "fees": 21.33,
+          "net_pnl": -636.33,
+          "return_pct": -3.2647308712105665,
+          "reason": "stop",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-08-27",
+            "generated_at": "2026-08-27T16:00:00+08:00",
+            "lower": 12.919,
+            "upper": 13.044,
+            "stop": 12.6155,
+            "target": 13.99,
+            "signal_close": 13.0,
+            "key": "2026-08-27:002043"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100158.96
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 99498.96
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99363.67
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 98517.7
+        }
+      ],
+      "open_positions": [
+        {
+          "code": "002354",
+          "name": "天娱数科",
+          "shares": 2400,
+          "entry_price": 8.03,
+          "entry_at": 1793673000000,
+          "entry_day": "2026-11-03",
+          "entry_fee": 5.97,
+          "entry_costs": {
+            "commission": 5.78,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 5.97
+          },
+          "costs": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          },
+          "signal_date": "2026-11-02",
+          "plan": {
+            "code": "002354",
+            "name": "天娱数科",
+            "signal_date": "2026-11-02",
+            "generated_at": "2026-11-02T16:00:00+08:00",
+            "lower": 7.927,
+            "upper": 8.04,
+            "stop": 7.4936,
+            "target": 8.83,
+            "signal_close": 7.9,
+            "key": "2026-11-02:002354"
+          },
+          "stop": 7.4936,
+          "target": 8.83,
+          "last_price": 7.68,
+          "quote_at": 1793689200000,
+          "valuation_blocked": false,
+          "unrealized_pnl": -845.97,
+          "sellable_shares": 0
+        }
+      ],
+      "incomplete_minute_days": 44,
+      "filter_mode": "off",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 1,
+          "return_pct": -0.6363300000000072,
+          "win_rate_pct": 0.0
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": -0.851387634937395,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "expanded",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 45,
+        "ready_plans": 19
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 98188.84,
+        "return_pct": -1.8111600000000005,
+        "monthly_equivalent_pct": -0.6028766021464738,
+        "max_drawdown_pct": 2.558369999999995,
+        "closed_trades": 5,
+        "win_rate_pct": 0.0,
+        "fees": 96.16,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -1.8111600000000005,
+          "end_equity": 98188.84
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 98188.84
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 98188.84
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 98188.84
+        }
+      ],
+      "trades": [
+        {
+          "code": "002558",
+          "name": "巨人网络",
+          "shares": 600,
+          "entry_at": 1786412700000,
+          "exit_at": 1786498200000,
+          "entry_price": 29.56,
+          "exit_price": 28.94,
+          "signal_date": "2026-08-10",
+          "stop": 27.6272,
+          "target": 31.31,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.21,
+            "transfer": 0.17,
+            "stamp": 8.68,
+            "total": 14.06
+          },
+          "fees": 19.56,
+          "net_pnl": -391.56,
+          "return_pct": -2.207028717977623,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002558",
+            "name": "巨人网络",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 28.596,
+            "upper": 29.68,
+            "stop": 27.6272,
+            "target": 31.31,
+            "signal_close": 29.79,
+            "key": "2026-08-10:002558"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000592",
+          "name": "平潭发展",
+          "shares": 3000,
+          "entry_at": 1786602600000,
+          "exit_at": 1786930200000,
+          "entry_price": 6.65,
+          "exit_price": 6.46,
+          "signal_date": "2026-08-12",
+          "stop": 5.8805,
+          "target": 7.2135,
+          "entry_costs": {
+            "commission": 5.98,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.18
+          },
+          "exit_costs": {
+            "commission": 5.81,
+            "transfer": 0.19,
+            "stamp": 9.69,
+            "total": 15.69
+          },
+          "fees": 21.87,
+          "net_pnl": -591.87,
+          "return_pct": -2.965848173347805,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "000592",
+            "name": "平潭发展",
+            "signal_date": "2026-08-12",
+            "generated_at": "2026-08-12T16:00:00+08:00",
+            "lower": 6.411,
+            "upper": 6.694,
+            "stop": 5.8805,
+            "target": 7.2135,
+            "signal_close": 6.87,
+            "key": "2026-08-12:000592"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600259",
+          "name": "中稀有色",
+          "shares": 200,
+          "entry_at": 1786933800000,
+          "exit_at": 1787189400000,
+          "entry_price": 88.74,
+          "exit_price": 87.59,
+          "signal_date": "2026-08-14",
+          "stop": 77.2632,
+          "target": 96.81,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.26,
+            "transfer": 0.18,
+            "stamp": 8.76,
+            "total": 14.2
+          },
+          "fees": 19.7,
+          "net_pnl": -249.7,
+          "return_pct": -1.4064832286591376,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "600259",
+            "name": "中稀有色",
+            "signal_date": "2026-08-14",
+            "generated_at": "2026-08-14T16:00:00+08:00",
+            "lower": 86.064,
+            "upper": 89.26,
+            "stop": 77.2632,
+            "target": 96.81,
+            "signal_close": 92.2,
+            "key": "2026-08-14:600259"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300274",
+          "name": "阳光电源",
+          "shares": 100,
+          "entry_at": 1787017500000,
+          "exit_at": 1787189400000,
+          "entry_price": 117.51,
+          "exit_price": 112.95,
+          "signal_date": "2026-08-17",
+          "stop": 109.3342,
+          "target": 124.74,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 0.0,
+            "total": 5.12
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 5.65,
+            "total": 10.76
+          },
+          "fees": 15.88,
+          "net_pnl": -471.88,
+          "return_pct": -4.013909351044392,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "300274",
+            "name": "阳光电源",
+            "signal_date": "2026-08-17",
+            "generated_at": "2026-08-17T16:00:00+08:00",
+            "lower": 114.041,
+            "upper": 118.25,
+            "stop": 109.3342,
+            "target": 124.74,
+            "signal_close": 118.8,
+            "key": "2026-08-17:300274"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 300,
+          "entry_at": 1787117400000,
+          "exit_at": 1787189400000,
+          "entry_price": 57.21,
+          "exit_price": 56.92,
+          "signal_date": "2026-08-18",
+          "stop": 41.8362,
+          "target": 61.88,
+          "entry_costs": {
+            "commission": 5.15,
+            "transfer": 0.17,
+            "stamp": 0.0,
+            "total": 5.32
+          },
+          "exit_costs": {
+            "commission": 5.12,
+            "transfer": 0.17,
+            "stamp": 8.54,
+            "total": 13.83
+          },
+          "fees": 19.15,
+          "net_pnl": -106.15,
+          "return_pct": -0.618289966636223,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-18",
+            "generated_at": "2026-08-18T16:00:00+08:00",
+            "lower": 55.469,
+            "upper": 57.668,
+            "stop": 41.8362,
+            "target": 61.88,
+            "signal_close": 58.5,
+            "key": "2026-08-18:002827"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99478.5
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 99608.44
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99422.26
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 99032.26
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 99527.07
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 99350.95
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 97441.63
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 98188.84
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 98188.84
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "candidate_expanded",
+      "label": "研究对照：纳入收复/突破候选",
+      "filter_mode": "strict",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 5,
+          "return_pct": -1.8111600000000005,
+          "win_rate_pct": 0.0
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "expanded",
+      "diagnostics": {
+        "market_pass_days": 34,
+        "candidate_signals": 140,
+        "ready_plans": 48
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 95264.08,
+        "return_pct": -4.735919999999993,
+        "monthly_equivalent_pct": -1.5923459466427259,
+        "max_drawdown_pct": 4.967644404687874,
+        "closed_trades": 10,
+        "win_rate_pct": 0.0,
+        "fees": 203.92,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -2.430270000000001,
+          "end_equity": 97569.73
+        },
+        {
+          "month": "2026-09",
+          "return_pct": -2.363079204995233,
+          "end_equity": 95264.08
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 95264.08
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 95264.08
+        }
+      ],
+      "trades": [
+        {
+          "code": "002558",
+          "name": "巨人网络",
+          "shares": 600,
+          "entry_at": 1786412700000,
+          "exit_at": 1786498200000,
+          "entry_price": 29.56,
+          "exit_price": 28.94,
+          "signal_date": "2026-08-10",
+          "stop": 27.6272,
+          "target": 31.31,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.21,
+            "transfer": 0.17,
+            "stamp": 8.68,
+            "total": 14.06
+          },
+          "fees": 19.56,
+          "net_pnl": -391.56,
+          "return_pct": -2.207028717977623,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002558",
+            "name": "巨人网络",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 28.596,
+            "upper": 29.68,
+            "stop": 27.6272,
+            "target": 31.31,
+            "signal_close": 29.79,
+            "key": "2026-08-10:002558"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "shares": 2400,
+          "entry_at": 1786067100000,
+          "exit_at": 1786584600000,
+          "entry_price": 8.24,
+          "exit_price": 8.2,
+          "signal_date": "2026-08-06",
+          "stop": 7.9052,
+          "target": 8.715,
+          "entry_costs": {
+            "commission": 5.93,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.13
+          },
+          "exit_costs": {
+            "commission": 5.9,
+            "transfer": 0.2,
+            "stamp": 9.84,
+            "total": 15.94
+          },
+          "fees": 22.07,
+          "net_pnl": -118.07,
+          "return_pct": -0.5968518051392847,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601952",
+            "name": "苏垦农发",
+            "signal_date": "2026-08-06",
+            "generated_at": "2026-08-06T16:00:00+08:00",
+            "lower": 8.167,
+            "upper": 8.272,
+            "stop": 7.9052,
+            "target": 8.715,
+            "signal_close": 8.3,
+            "key": "2026-08-06:601952"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000592",
+          "name": "平潭发展",
+          "shares": 3000,
+          "entry_at": 1786602600000,
+          "exit_at": 1786930200000,
+          "entry_price": 6.65,
+          "exit_price": 6.46,
+          "signal_date": "2026-08-12",
+          "stop": 5.8805,
+          "target": 7.2135,
+          "entry_costs": {
+            "commission": 5.98,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.18
+          },
+          "exit_costs": {
+            "commission": 5.81,
+            "transfer": 0.19,
+            "stamp": 9.69,
+            "total": 15.69
+          },
+          "fees": 21.87,
+          "net_pnl": -591.87,
+          "return_pct": -2.965848173347805,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "000592",
+            "name": "平潭发展",
+            "signal_date": "2026-08-12",
+            "generated_at": "2026-08-12T16:00:00+08:00",
+            "lower": 6.411,
+            "upper": 6.694,
+            "stop": 5.8805,
+            "target": 7.2135,
+            "signal_close": 6.87,
+            "key": "2026-08-12:000592"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600259",
+          "name": "中稀有色",
+          "shares": 200,
+          "entry_at": 1786933800000,
+          "exit_at": 1787189400000,
+          "entry_price": 88.74,
+          "exit_price": 87.59,
+          "signal_date": "2026-08-14",
+          "stop": 77.2632,
+          "target": 96.81,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.26,
+            "transfer": 0.18,
+            "stamp": 8.76,
+            "total": 14.2
+          },
+          "fees": 19.7,
+          "net_pnl": -249.7,
+          "return_pct": -1.4064832286591376,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "600259",
+            "name": "中稀有色",
+            "signal_date": "2026-08-14",
+            "generated_at": "2026-08-14T16:00:00+08:00",
+            "lower": 86.064,
+            "upper": 89.26,
+            "stop": 77.2632,
+            "target": 96.81,
+            "signal_close": 92.2,
+            "key": "2026-08-14:600259"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300274",
+          "name": "阳光电源",
+          "shares": 100,
+          "entry_at": 1787017500000,
+          "exit_at": 1787189400000,
+          "entry_price": 117.51,
+          "exit_price": 112.95,
+          "signal_date": "2026-08-17",
+          "stop": 109.3342,
+          "target": 124.74,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 0.0,
+            "total": 5.12
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 5.65,
+            "total": 10.76
+          },
+          "fees": 15.88,
+          "net_pnl": -471.88,
+          "return_pct": -4.013909351044392,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "300274",
+            "name": "阳光电源",
+            "signal_date": "2026-08-17",
+            "generated_at": "2026-08-17T16:00:00+08:00",
+            "lower": 114.041,
+            "upper": 118.25,
+            "stop": 109.3342,
+            "target": 124.74,
+            "signal_close": 118.8,
+            "key": "2026-08-17:300274"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 300,
+          "entry_at": 1787117400000,
+          "exit_at": 1787189400000,
+          "entry_price": 57.21,
+          "exit_price": 56.92,
+          "signal_date": "2026-08-18",
+          "stop": 41.8362,
+          "target": 61.88,
+          "entry_costs": {
+            "commission": 5.15,
+            "transfer": 0.17,
+            "stamp": 0.0,
+            "total": 5.32
+          },
+          "exit_costs": {
+            "commission": 5.12,
+            "transfer": 0.17,
+            "stamp": 8.54,
+            "total": 13.83
+          },
+          "fees": 19.15,
+          "net_pnl": -106.15,
+          "return_pct": -0.618289966636223,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-18",
+            "generated_at": "2026-08-18T16:00:00+08:00",
+            "lower": 55.469,
+            "upper": 57.668,
+            "stop": 41.8362,
+            "target": 61.88,
+            "signal_close": 58.5,
+            "key": "2026-08-18:002827"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1500,
+          "entry_at": 1787884200000,
+          "exit_at": 1788226200000,
+          "entry_price": 12.99,
+          "exit_price": 12.58,
+          "signal_date": "2026-08-27",
+          "stop": 12.6155,
+          "target": 13.99,
+          "entry_costs": {
+            "commission": 5.85,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.04
+          },
+          "exit_costs": {
+            "commission": 5.66,
+            "transfer": 0.19,
+            "stamp": 9.44,
+            "total": 15.29
+          },
+          "fees": 21.33,
+          "net_pnl": -636.33,
+          "return_pct": -3.2647308712105665,
+          "reason": "stop",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-08-27",
+            "generated_at": "2026-08-27T16:00:00+08:00",
+            "lower": 12.919,
+            "upper": 13.044,
+            "stop": 12.6155,
+            "target": 13.99,
+            "signal_close": 13.0,
+            "key": "2026-08-27:002043"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601099",
+          "name": "太平洋",
+          "shares": 5600,
+          "entry_at": 1788314400000,
+          "exit_at": 1788831000000,
+          "entry_price": 3.57,
+          "exit_price": 3.53,
+          "signal_date": "2026-09-01",
+          "stop": 3.3888,
+          "target": 3.843,
+          "entry_costs": {
+            "commission": 6.0,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.2
+          },
+          "exit_costs": {
+            "commission": 5.93,
+            "transfer": 0.2,
+            "stamp": 9.88,
+            "total": 16.01
+          },
+          "fees": 22.21,
+          "net_pnl": -246.21,
+          "return_pct": -1.2311608044724025,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601099",
+            "name": "太平洋",
+            "signal_date": "2026-09-01",
+            "generated_at": "2026-09-01T16:00:00+08:00",
+            "lower": 3.469,
+            "upper": 3.586,
+            "stop": 3.3888,
+            "target": 3.843,
+            "signal_close": 3.66,
+            "key": "2026-09-01:601099"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 300,
+          "entry_at": 1789005600000,
+          "exit_at": 1789090200000,
+          "entry_price": 65.21,
+          "exit_price": 58.99,
+          "signal_date": "2026-09-09",
+          "stop": 57.9935,
+          "target": 71.8,
+          "entry_costs": {
+            "commission": 5.87,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.07
+          },
+          "exit_costs": {
+            "commission": 5.31,
+            "transfer": 0.18,
+            "stamp": 8.85,
+            "total": 14.34
+          },
+          "fees": 20.41,
+          "net_pnl": -1886.41,
+          "return_pct": -9.639752936649522,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-09-09",
+            "generated_at": "2026-09-09T16:00:00+08:00",
+            "lower": 62.462,
+            "upper": 65.42,
+            "stop": 57.9935,
+            "target": 71.8,
+            "signal_close": 65.61,
+            "key": "2026-09-09:002827"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "603533",
+          "name": "掌阅科技",
+          "shares": 800,
+          "entry_at": 1789353000000,
+          "exit_at": 1789435800000,
+          "entry_price": 24.29,
+          "exit_price": 24.27,
+          "signal_date": "2026-09-11",
+          "stop": 22.0681,
+          "target": 26.292,
+          "entry_costs": {
+            "commission": 5.83,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.02
+          },
+          "exit_costs": {
+            "commission": 5.82,
+            "transfer": 0.19,
+            "stamp": 9.71,
+            "total": 15.72
+          },
+          "fees": 21.74,
+          "net_pnl": -37.74,
+          "return_pct": -0.19415557757425914,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "603533",
+            "name": "掌阅科技",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 24.082,
+            "upper": 24.388,
+            "stop": 22.0681,
+            "target": 26.292,
+            "signal_close": 25.04,
+            "key": "2026-09-11:603533"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 99993.87
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100209.87
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99544.37
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 99578.31
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99304.19
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 98914.19
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 99409.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 99232.88
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 97323.56
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 98229.73
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 97569.73
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 97434.44
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 97372.24
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 97428.24
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 97484.24
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 97204.24
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 97188.23
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 97188.23
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 96147.16
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 95301.82
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 95231.8
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 95264.08
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 95264.08
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "filter_mode": "near_ma20",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 10,
+          "return_pct": -4.735919999999993,
+          "win_rate_pct": 0.0
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 0,
+          "return_pct": 0.0,
+          "win_rate_pct": null
+        }
+      }
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "expanded",
+      "diagnostics": {
+        "market_pass_days": 60,
+        "candidate_signals": 222,
+        "ready_plans": 90
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 92506.14,
+        "return_pct": -7.493859999999996,
+        "monthly_equivalent_pct": -2.5441784284255364,
+        "max_drawdown_pct": 7.687596042186259,
+        "closed_trades": 17,
+        "win_rate_pct": 11.764705882352942,
+        "fees": 361.86,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -2.430270000000001,
+          "end_equity": 97569.73
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.27768858230929894,
+          "end_equity": 97840.67
+        },
+        {
+          "month": "2026-10",
+          "return_pct": -4.587621895884397,
+          "end_equity": 93352.11
+        },
+        {
+          "month": "2026-11",
+          "return_pct": -0.9062141177098249,
+          "end_equity": 92506.14
+        }
+      ],
+      "trades": [
+        {
+          "code": "002558",
+          "name": "巨人网络",
+          "shares": 600,
+          "entry_at": 1786412700000,
+          "exit_at": 1786498200000,
+          "entry_price": 29.56,
+          "exit_price": 28.94,
+          "signal_date": "2026-08-10",
+          "stop": 27.6272,
+          "target": 31.31,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.21,
+            "transfer": 0.17,
+            "stamp": 8.68,
+            "total": 14.06
+          },
+          "fees": 19.56,
+          "net_pnl": -391.56,
+          "return_pct": -2.207028717977623,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002558",
+            "name": "巨人网络",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 28.596,
+            "upper": 29.68,
+            "stop": 27.6272,
+            "target": 31.31,
+            "signal_close": 29.79,
+            "key": "2026-08-10:002558"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "shares": 2400,
+          "entry_at": 1786067100000,
+          "exit_at": 1786584600000,
+          "entry_price": 8.24,
+          "exit_price": 8.2,
+          "signal_date": "2026-08-06",
+          "stop": 7.9052,
+          "target": 8.715,
+          "entry_costs": {
+            "commission": 5.93,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.13
+          },
+          "exit_costs": {
+            "commission": 5.9,
+            "transfer": 0.2,
+            "stamp": 9.84,
+            "total": 15.94
+          },
+          "fees": 22.07,
+          "net_pnl": -118.07,
+          "return_pct": -0.5968518051392847,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601952",
+            "name": "苏垦农发",
+            "signal_date": "2026-08-06",
+            "generated_at": "2026-08-06T16:00:00+08:00",
+            "lower": 8.167,
+            "upper": 8.272,
+            "stop": 7.9052,
+            "target": 8.715,
+            "signal_close": 8.3,
+            "key": "2026-08-06:601952"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000592",
+          "name": "平潭发展",
+          "shares": 3000,
+          "entry_at": 1786602600000,
+          "exit_at": 1786930200000,
+          "entry_price": 6.65,
+          "exit_price": 6.46,
+          "signal_date": "2026-08-12",
+          "stop": 5.8805,
+          "target": 7.2135,
+          "entry_costs": {
+            "commission": 5.98,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.18
+          },
+          "exit_costs": {
+            "commission": 5.81,
+            "transfer": 0.19,
+            "stamp": 9.69,
+            "total": 15.69
+          },
+          "fees": 21.87,
+          "net_pnl": -591.87,
+          "return_pct": -2.965848173347805,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "000592",
+            "name": "平潭发展",
+            "signal_date": "2026-08-12",
+            "generated_at": "2026-08-12T16:00:00+08:00",
+            "lower": 6.411,
+            "upper": 6.694,
+            "stop": 5.8805,
+            "target": 7.2135,
+            "signal_close": 6.87,
+            "key": "2026-08-12:000592"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600259",
+          "name": "中稀有色",
+          "shares": 200,
+          "entry_at": 1786933800000,
+          "exit_at": 1787189400000,
+          "entry_price": 88.74,
+          "exit_price": 87.59,
+          "signal_date": "2026-08-14",
+          "stop": 77.2632,
+          "target": 96.81,
+          "entry_costs": {
+            "commission": 5.32,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 5.5
+          },
+          "exit_costs": {
+            "commission": 5.26,
+            "transfer": 0.18,
+            "stamp": 8.76,
+            "total": 14.2
+          },
+          "fees": 19.7,
+          "net_pnl": -249.7,
+          "return_pct": -1.4064832286591376,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "600259",
+            "name": "中稀有色",
+            "signal_date": "2026-08-14",
+            "generated_at": "2026-08-14T16:00:00+08:00",
+            "lower": 86.064,
+            "upper": 89.26,
+            "stop": 77.2632,
+            "target": 96.81,
+            "signal_close": 92.2,
+            "key": "2026-08-14:600259"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300274",
+          "name": "阳光电源",
+          "shares": 100,
+          "entry_at": 1787017500000,
+          "exit_at": 1787189400000,
+          "entry_price": 117.51,
+          "exit_price": 112.95,
+          "signal_date": "2026-08-17",
+          "stop": 109.3342,
+          "target": 124.74,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 0.0,
+            "total": 5.12
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 5.65,
+            "total": 10.76
+          },
+          "fees": 15.88,
+          "net_pnl": -471.88,
+          "return_pct": -4.013909351044392,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "300274",
+            "name": "阳光电源",
+            "signal_date": "2026-08-17",
+            "generated_at": "2026-08-17T16:00:00+08:00",
+            "lower": 114.041,
+            "upper": 118.25,
+            "stop": 109.3342,
+            "target": 124.74,
+            "signal_close": 118.8,
+            "key": "2026-08-17:300274"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 300,
+          "entry_at": 1787117400000,
+          "exit_at": 1787189400000,
+          "entry_price": 57.21,
+          "exit_price": 56.92,
+          "signal_date": "2026-08-18",
+          "stop": 41.8362,
+          "target": 61.88,
+          "entry_costs": {
+            "commission": 5.15,
+            "transfer": 0.17,
+            "stamp": 0.0,
+            "total": 5.32
+          },
+          "exit_costs": {
+            "commission": 5.12,
+            "transfer": 0.17,
+            "stamp": 8.54,
+            "total": 13.83
+          },
+          "fees": 19.15,
+          "net_pnl": -106.15,
+          "return_pct": -0.618289966636223,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-18",
+            "generated_at": "2026-08-18T16:00:00+08:00",
+            "lower": 55.469,
+            "upper": 57.668,
+            "stop": 41.8362,
+            "target": 61.88,
+            "signal_close": 58.5,
+            "key": "2026-08-18:002827"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1500,
+          "entry_at": 1787884200000,
+          "exit_at": 1788226200000,
+          "entry_price": 12.99,
+          "exit_price": 12.58,
+          "signal_date": "2026-08-27",
+          "stop": 12.6155,
+          "target": 13.99,
+          "entry_costs": {
+            "commission": 5.85,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.04
+          },
+          "exit_costs": {
+            "commission": 5.66,
+            "transfer": 0.19,
+            "stamp": 9.44,
+            "total": 15.29
+          },
+          "fees": 21.33,
+          "net_pnl": -636.33,
+          "return_pct": -3.2647308712105665,
+          "reason": "stop",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-08-27",
+            "generated_at": "2026-08-27T16:00:00+08:00",
+            "lower": 12.919,
+            "upper": 13.044,
+            "stop": 12.6155,
+            "target": 13.99,
+            "signal_close": 13.0,
+            "key": "2026-08-27:002043"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601099",
+          "name": "太平洋",
+          "shares": 5600,
+          "entry_at": 1788314400000,
+          "exit_at": 1788831000000,
+          "entry_price": 3.57,
+          "exit_price": 3.53,
+          "signal_date": "2026-09-01",
+          "stop": 3.3888,
+          "target": 3.843,
+          "entry_costs": {
+            "commission": 6.0,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.2
+          },
+          "exit_costs": {
+            "commission": 5.93,
+            "transfer": 0.2,
+            "stamp": 9.88,
+            "total": 16.01
+          },
+          "fees": 22.21,
+          "net_pnl": -246.21,
+          "return_pct": -1.2311608044724025,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601099",
+            "name": "太平洋",
+            "signal_date": "2026-09-01",
+            "generated_at": "2026-09-01T16:00:00+08:00",
+            "lower": 3.469,
+            "upper": 3.586,
+            "stop": 3.3888,
+            "target": 3.843,
+            "signal_close": 3.66,
+            "key": "2026-09-01:601099"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 300,
+          "entry_at": 1789005600000,
+          "exit_at": 1789090200000,
+          "entry_price": 65.21,
+          "exit_price": 58.99,
+          "signal_date": "2026-09-09",
+          "stop": 57.9935,
+          "target": 71.8,
+          "entry_costs": {
+            "commission": 5.87,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.07
+          },
+          "exit_costs": {
+            "commission": 5.31,
+            "transfer": 0.18,
+            "stamp": 8.85,
+            "total": 14.34
+          },
+          "fees": 20.41,
+          "net_pnl": -1886.41,
+          "return_pct": -9.639752936649522,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-09-09",
+            "generated_at": "2026-09-09T16:00:00+08:00",
+            "lower": 62.462,
+            "upper": 65.42,
+            "stop": 57.9935,
+            "target": 71.8,
+            "signal_close": 65.61,
+            "key": "2026-09-09:002827"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "603533",
+          "name": "掌阅科技",
+          "shares": 800,
+          "entry_at": 1789353000000,
+          "exit_at": 1789435800000,
+          "entry_price": 24.29,
+          "exit_price": 24.27,
+          "signal_date": "2026-09-11",
+          "stop": 22.0681,
+          "target": 26.292,
+          "entry_costs": {
+            "commission": 5.83,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.02
+          },
+          "exit_costs": {
+            "commission": 5.82,
+            "transfer": 0.19,
+            "stamp": 9.71,
+            "total": 15.72
+          },
+          "fees": 21.74,
+          "net_pnl": -37.74,
+          "return_pct": -0.19415557757425914,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "603533",
+            "name": "掌阅科技",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 24.082,
+            "upper": 24.388,
+            "stop": 22.0681,
+            "target": 26.292,
+            "signal_close": 25.04,
+            "key": "2026-09-11:603533"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000592",
+          "name": "平潭发展",
+          "shares": 2500,
+          "entry_at": 1789436700000,
+          "exit_at": 1789524900000,
+          "entry_price": 7.88,
+          "exit_price": 8.61,
+          "signal_date": "2026-09-14",
+          "stop": 6.8678,
+          "target": 8.6,
+          "entry_costs": {
+            "commission": 5.91,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.11
+          },
+          "exit_costs": {
+            "commission": 6.46,
+            "transfer": 0.22,
+            "stamp": 10.76,
+            "total": 17.44
+          },
+          "fees": 23.55,
+          "net_pnl": 1801.45,
+          "return_pct": 9.141580961437848,
+          "reason": "target",
+          "plan": {
+            "code": "000592",
+            "name": "平潭发展",
+            "signal_date": "2026-09-14",
+            "generated_at": "2026-09-14T16:00:00+08:00",
+            "lower": 7.614,
+            "upper": 8.016,
+            "stop": 6.8678,
+            "target": 8.6,
+            "signal_close": 8.1,
+            "key": "2026-09-14:000592"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002242",
+          "name": "九阳股份",
+          "shares": 2100,
+          "entry_at": 1789695900000,
+          "exit_at": 1790559000000,
+          "entry_price": 9.44,
+          "exit_price": 9.82,
+          "signal_date": "2026-09-17",
+          "stop": 8.5647,
+          "target": 10.13,
+          "entry_costs": {
+            "commission": 5.95,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.15
+          },
+          "exit_costs": {
+            "commission": 6.19,
+            "transfer": 0.21,
+            "stamp": 10.31,
+            "total": 16.71
+          },
+          "fees": 22.86,
+          "net_pnl": 775.14,
+          "return_pct": 3.908896301843405,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002242",
+            "name": "九阳股份",
+            "signal_date": "2026-09-17",
+            "generated_at": "2026-09-17T16:00:00+08:00",
+            "lower": 9.041,
+            "upper": 9.48,
+            "stop": 8.5647,
+            "target": 10.13,
+            "signal_close": 9.55,
+            "key": "2026-09-17:002242"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601398",
+          "name": "工商银行",
+          "shares": 2300,
+          "entry_at": 1792465200000,
+          "exit_at": 1792632600000,
+          "entry_price": 8.47,
+          "exit_price": 8.45,
+          "signal_date": "2026-10-19",
+          "stop": 8.0948,
+          "target": 9.03,
+          "entry_costs": {
+            "commission": 5.84,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.03
+          },
+          "exit_costs": {
+            "commission": 5.83,
+            "transfer": 0.19,
+            "stamp": 9.72,
+            "total": 15.74
+          },
+          "fees": 21.77,
+          "net_pnl": -67.77,
+          "return_pct": -0.3477697730233904,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601398",
+            "name": "工商银行",
+            "signal_date": "2026-10-19",
+            "generated_at": "2026-10-19T16:00:00+08:00",
+            "lower": 8.393,
+            "upper": 8.504,
+            "stop": 8.0948,
+            "target": 9.03,
+            "signal_close": 8.6,
+            "key": "2026-10-19:601398"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "603533",
+          "name": "掌阅科技",
+          "shares": 700,
+          "entry_at": 1792463400000,
+          "exit_at": 1792719000000,
+          "entry_price": 28.49,
+          "exit_price": 25.21,
+          "signal_date": "2026-10-19",
+          "stop": 24.4089,
+          "target": 32.91,
+          "entry_costs": {
+            "commission": 5.98,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.18
+          },
+          "exit_costs": {
+            "commission": 5.29,
+            "transfer": 0.18,
+            "stamp": 8.82,
+            "total": 14.29
+          },
+          "fees": 20.47,
+          "net_pnl": -2316.47,
+          "return_pct": -11.611855725398236,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "603533",
+            "name": "掌阅科技",
+            "signal_date": "2026-10-19",
+            "generated_at": "2026-10-19T16:00:00+08:00",
+            "lower": 26.669,
+            "upper": 28.522,
+            "stop": 24.4089,
+            "target": 32.91,
+            "signal_close": 28.85,
+            "key": "2026-10-19:603533"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601398",
+          "name": "工商银行",
+          "shares": 2300,
+          "entry_at": 1792721700000,
+          "exit_at": 1792978200000,
+          "entry_price": 8.54,
+          "exit_price": 8.32,
+          "signal_date": "2026-10-22",
+          "stop": 8.1516,
+          "target": 9.0195,
+          "entry_costs": {
+            "commission": 5.89,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.09
+          },
+          "exit_costs": {
+            "commission": 5.74,
+            "transfer": 0.19,
+            "stamp": 9.57,
+            "total": 15.5
+          },
+          "fees": 21.59,
+          "net_pnl": -527.59,
+          "return_pct": -2.685197390687849,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601398",
+            "name": "工商银行",
+            "signal_date": "2026-10-22",
+            "generated_at": "2026-10-22T16:00:00+08:00",
+            "lower": 8.48,
+            "upper": 8.54,
+            "stop": 8.1516,
+            "target": 9.0195,
+            "signal_close": 8.59,
+            "key": "2026-10-22:601398"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1500,
+          "entry_at": 1792722600000,
+          "exit_at": 1793151000000,
+          "entry_price": 12.63,
+          "exit_price": 12.62,
+          "signal_date": "2026-10-22",
+          "stop": 11.6988,
+          "target": 13.3875,
+          "entry_costs": {
+            "commission": 5.68,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 5.87
+          },
+          "exit_costs": {
+            "commission": 5.68,
+            "transfer": 0.19,
+            "stamp": 9.47,
+            "total": 15.34
+          },
+          "fees": 21.21,
+          "net_pnl": -36.21,
+          "return_pct": -0.19107302197735515,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-10-22",
+            "generated_at": "2026-10-22T16:00:00+08:00",
+            "lower": 12.453,
+            "upper": 12.652,
+            "stop": 11.6988,
+            "target": 13.3875,
+            "signal_close": 12.75,
+            "key": "2026-10-22:002043"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "shares": 1900,
+          "entry_at": 1793154600000,
+          "exit_at": 1793339100000,
+          "entry_price": 10.22,
+          "exit_price": 9.42,
+          "signal_date": "2026-10-27",
+          "stop": 9.4413,
+          "target": 11.69,
+          "entry_costs": {
+            "commission": 5.83,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 6.02
+          },
+          "exit_costs": {
+            "commission": 5.37,
+            "transfer": 0.18,
+            "stamp": 8.95,
+            "total": 14.5
+          },
+          "fees": 20.52,
+          "net_pnl": -1540.52,
+          "return_pct": -7.93100501338034,
+          "reason": "stop",
+          "plan": {
+            "code": "002181",
+            "name": "粤 传 媒",
+            "signal_date": "2026-10-27",
+            "generated_at": "2026-10-27T16:00:00+08:00",
+            "lower": 10.006,
+            "upper": 10.234,
+            "stop": 9.4413,
+            "target": 11.69,
+            "signal_close": 10.4,
+            "key": "2026-10-27:002181"
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 99993.87
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100209.87
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99544.37
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 99578.31
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99304.19
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 98914.19
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 99409.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 99232.88
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 97323.56
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 98070.77
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 98229.73
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 97569.73
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 97434.44
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 97372.24
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 97428.24
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 97484.24
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 97204.24
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 97188.23
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 97188.23
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 96147.16
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 95301.82
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 95231.8
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 95357.97
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 97065.53
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 97065.53
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 97038.38
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 97185.38
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 97269.38
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 97731.38
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 96954.38
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 97840.67
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 98235.46
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 97509.46
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 96030.72
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 95268.47
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 95852.97
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 94877.97
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 95931.61
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 95190.61
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 93352.11
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 93352.11
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 92506.14
+        }
+      ],
+      "open_positions": [
+        {
+          "code": "002354",
+          "name": "天娱数科",
+          "shares": 2400,
+          "entry_price": 8.03,
+          "entry_at": 1793673000000,
+          "entry_day": "2026-11-03",
+          "entry_fee": 5.97,
+          "entry_costs": {
+            "commission": 5.78,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 5.97
+          },
+          "costs": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          },
+          "signal_date": "2026-11-02",
+          "plan": {
+            "code": "002354",
+            "name": "天娱数科",
+            "signal_date": "2026-11-02",
+            "generated_at": "2026-11-02T16:00:00+08:00",
+            "lower": 7.927,
+            "upper": 8.04,
+            "stop": 7.4936,
+            "target": 8.83,
+            "signal_close": 7.9,
+            "key": "2026-11-02:002354"
+          },
+          "stop": 7.4936,
+          "target": 8.83,
+          "last_price": 7.68,
+          "quote_at": 1793689200000,
+          "valuation_blocked": false,
+          "unrealized_pnl": -845.97,
+          "sellable_shares": 0
+        }
+      ],
+      "incomplete_minute_days": 44,
+      "filter_mode": "off",
+      "segments": {
+        "earlier": {
+          "start": "2026-08-04",
+          "end": "2026-09-30",
+          "closed_trades": 12,
+          "return_pct": -2.1593300000000037,
+          "win_rate_pct": 16.666666666666668
+        },
+        "later": {
+          "start": "2026-10-08",
+          "end": "2026-11-03",
+          "closed_trades": 5,
+          "return_pct": -5.452262336306568,
+          "win_rate_pct": 0.0
+        }
+      }
+    }
+  ],
+  "expanded_off_stress": {
+    "config": {
+      "per_stock_budget": 20000.0,
+      "max_positions": 3,
+      "commission_rate": 0.0006,
+      "min_commission": 10.0,
+      "transfer_rate": 2e-05,
+      "stamp_rate": 0.001,
+      "slippage_ticks": 2,
+      "exit_ma": 10
+    },
+    "candidate_rule": "expanded",
+    "diagnostics": {
+      "market_pass_days": 60,
+      "candidate_signals": 222,
+      "ready_plans": 90
+    },
+    "summary": {
+      "initial_capital": 100000.0,
+      "end_equity": 92160.48,
+      "return_pct": -7.83952,
+      "monthly_equivalent_pct": -2.6648072950000823,
+      "max_drawdown_pct": 8.004853676971752,
+      "closed_trades": 16,
+      "win_rate_pct": 12.5,
+      "fees": 679.52,
+      "start": "2026-08-04",
+      "end": "2026-11-03",
+      "calendar_days": 92
+    },
+    "monthly": [
+      {
+        "month": "2026-08",
+        "return_pct": -2.701509999999996,
+        "end_equity": 97298.49
+      },
+      {
+        "month": "2026-09",
+        "return_pct": -0.09160471041226304,
+        "end_equity": 97209.36
+      },
+      {
+        "month": "2026-10",
+        "return_pct": -4.292703912462759,
+        "end_equity": 93036.45
+      },
+      {
+        "month": "2026-11",
+        "return_pct": -0.9415342051421804,
+        "end_equity": 92160.48
+      }
+    ],
+    "trades": [
+      {
+        "code": "002558",
+        "name": "巨人网络",
+        "shares": 600,
+        "entry_at": 1786412700000,
+        "exit_at": 1786498200000,
+        "entry_price": 29.57,
+        "exit_price": 28.93,
+        "signal_date": "2026-08-10",
+        "stop": 27.6272,
+        "target": 31.31,
+        "entry_costs": {
+          "commission": 10.65,
+          "transfer": 0.35,
+          "stamp": 0.0,
+          "total": 11.0
+        },
+        "exit_costs": {
+          "commission": 10.41,
+          "transfer": 0.35,
+          "stamp": 17.36,
+          "total": 28.12
+        },
+        "fees": 39.12,
+        "net_pnl": -423.12,
+        "return_pct": -2.3833718244803697,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "002558",
+          "name": "巨人网络",
+          "signal_date": "2026-08-10",
+          "generated_at": "2026-08-10T16:00:00+08:00",
+          "lower": 28.596,
+          "upper": 29.68,
+          "stop": 27.6272,
+          "target": 31.31,
+          "signal_close": 29.79,
+          "key": "2026-08-10:002558"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "601952",
+        "name": "苏垦农发",
+        "shares": 2400,
+        "entry_at": 1786067100000,
+        "exit_at": 1786584600000,
+        "entry_price": 8.25,
+        "exit_price": 8.19,
+        "signal_date": "2026-08-06",
+        "stop": 7.9052,
+        "target": 8.715,
+        "entry_costs": {
+          "commission": 11.88,
+          "transfer": 0.4,
+          "stamp": 0.0,
+          "total": 12.28
+        },
+        "exit_costs": {
+          "commission": 11.79,
+          "transfer": 0.39,
+          "stamp": 19.66,
+          "total": 31.84
+        },
+        "fees": 44.12,
+        "net_pnl": -188.12,
+        "return_pct": -0.9495121207655052,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-06",
+          "generated_at": "2026-08-06T16:00:00+08:00",
+          "lower": 8.167,
+          "upper": 8.272,
+          "stop": 7.9052,
+          "target": 8.715,
+          "signal_close": 8.3,
+          "key": "2026-08-06:601952"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "000592",
+        "name": "平潭发展",
+        "shares": 3000,
+        "entry_at": 1786602600000,
+        "exit_at": 1786930200000,
+        "entry_price": 6.66,
+        "exit_price": 6.45,
+        "signal_date": "2026-08-12",
+        "stop": 5.8805,
+        "target": 7.2135,
+        "entry_costs": {
+          "commission": 11.99,
+          "transfer": 0.4,
+          "stamp": 0.0,
+          "total": 12.39
+        },
+        "exit_costs": {
+          "commission": 11.61,
+          "transfer": 0.39,
+          "stamp": 19.35,
+          "total": 31.35
+        },
+        "fees": 43.74,
+        "net_pnl": -673.74,
+        "return_pct": -3.369982278256877,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "000592",
+          "name": "平潭发展",
+          "signal_date": "2026-08-12",
+          "generated_at": "2026-08-12T16:00:00+08:00",
+          "lower": 6.411,
+          "upper": 6.694,
+          "stop": 5.8805,
+          "target": 7.2135,
+          "signal_close": 6.87,
+          "key": "2026-08-12:000592"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "600259",
+        "name": "中稀有色",
+        "shares": 200,
+        "entry_at": 1786933800000,
+        "exit_at": 1787189400000,
+        "entry_price": 88.75,
+        "exit_price": 87.58,
+        "signal_date": "2026-08-14",
+        "stop": 77.2632,
+        "target": 96.81,
+        "entry_costs": {
+          "commission": 10.65,
+          "transfer": 0.36,
+          "stamp": 0.0,
+          "total": 11.01
+        },
+        "exit_costs": {
+          "commission": 10.51,
+          "transfer": 0.35,
+          "stamp": 17.52,
+          "total": 28.38
+        },
+        "fees": 39.39,
+        "net_pnl": -273.39,
+        "return_pct": -1.5392705707614602,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "600259",
+          "name": "中稀有色",
+          "signal_date": "2026-08-14",
+          "generated_at": "2026-08-14T16:00:00+08:00",
+          "lower": 86.064,
+          "upper": 89.26,
+          "stop": 77.2632,
+          "target": 96.81,
+          "signal_close": 92.2,
+          "key": "2026-08-14:600259"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "300274",
+        "name": "阳光电源",
+        "shares": 100,
+        "entry_at": 1787017500000,
+        "exit_at": 1787189400000,
+        "entry_price": 117.52,
+        "exit_price": 112.94,
+        "signal_date": "2026-08-17",
+        "stop": 109.3342,
+        "target": 124.74,
+        "entry_costs": {
+          "commission": 10.0,
+          "transfer": 0.24,
+          "stamp": 0.0,
+          "total": 10.24
+        },
+        "exit_costs": {
+          "commission": 10.0,
+          "transfer": 0.23,
+          "stamp": 11.29,
+          "total": 21.52
+        },
+        "fees": 31.76,
+        "net_pnl": -489.76,
+        "return_pct": -4.1638327393421655,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "300274",
+          "name": "阳光电源",
+          "signal_date": "2026-08-17",
+          "generated_at": "2026-08-17T16:00:00+08:00",
+          "lower": 114.041,
+          "upper": 118.25,
+          "stop": 109.3342,
+          "target": 124.74,
+          "signal_close": 118.8,
+          "key": "2026-08-17:300274"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "002827",
+        "name": "高争民爆",
+        "shares": 300,
+        "entry_at": 1787117400000,
+        "exit_at": 1787189400000,
+        "entry_price": 57.22,
+        "exit_price": 56.91,
+        "signal_date": "2026-08-18",
+        "stop": 41.8362,
+        "target": 61.88,
+        "entry_costs": {
+          "commission": 10.3,
+          "transfer": 0.34,
+          "stamp": 0.0,
+          "total": 10.64
+        },
+        "exit_costs": {
+          "commission": 10.24,
+          "transfer": 0.34,
+          "stamp": 17.07,
+          "total": 27.65
+        },
+        "fees": 38.29,
+        "net_pnl": -131.29,
+        "return_pct": -0.7643520502263539,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "002827",
+          "name": "高争民爆",
+          "signal_date": "2026-08-18",
+          "generated_at": "2026-08-18T16:00:00+08:00",
+          "lower": 55.469,
+          "upper": 57.668,
+          "stop": 41.8362,
+          "target": 61.88,
+          "signal_close": 58.5,
+          "key": "2026-08-18:002827"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "002043",
+        "name": "兔 宝 宝",
+        "shares": 1500,
+        "entry_at": 1787884200000,
+        "exit_at": 1788226200000,
+        "entry_price": 13.0,
+        "exit_price": 12.57,
+        "signal_date": "2026-08-27",
+        "stop": 12.6155,
+        "target": 13.99,
+        "entry_costs": {
+          "commission": 11.7,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.09
+        },
+        "exit_costs": {
+          "commission": 11.31,
+          "transfer": 0.38,
+          "stamp": 18.86,
+          "total": 30.55
+        },
+        "fees": 42.64,
+        "net_pnl": -687.64,
+        "return_pct": -3.524173986487352,
+        "reason": "stop",
+        "plan": {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "signal_date": "2026-08-27",
+          "generated_at": "2026-08-27T16:00:00+08:00",
+          "lower": 12.919,
+          "upper": 13.044,
+          "stop": 12.6155,
+          "target": 13.99,
+          "signal_close": 13.0,
+          "key": "2026-08-27:002043"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "601099",
+        "name": "太平洋",
+        "shares": 5500,
+        "entry_at": 1788326100000,
+        "exit_at": 1788831000000,
+        "entry_price": 3.58,
+        "exit_price": 3.52,
+        "signal_date": "2026-09-01",
+        "stop": 3.3888,
+        "target": 3.843,
+        "entry_costs": {
+          "commission": 11.81,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.2
+        },
+        "exit_costs": {
+          "commission": 11.62,
+          "transfer": 0.39,
+          "stamp": 19.36,
+          "total": 31.37
+        },
+        "fees": 43.57,
+        "net_pnl": -373.57,
+        "return_pct": -1.8960826709707543,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "601099",
+          "name": "太平洋",
+          "signal_date": "2026-09-01",
+          "generated_at": "2026-09-01T16:00:00+08:00",
+          "lower": 3.469,
+          "upper": 3.586,
+          "stop": 3.3888,
+          "target": 3.843,
+          "signal_close": 3.66,
+          "key": "2026-09-01:601099"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "002827",
+        "name": "高争民爆",
+        "shares": 300,
+        "entry_at": 1789005600000,
+        "exit_at": 1789090200000,
+        "entry_price": 65.22,
+        "exit_price": 58.98,
+        "signal_date": "2026-09-09",
+        "stop": 57.9935,
+        "target": 71.8,
+        "entry_costs": {
+          "commission": 11.74,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.13
+        },
+        "exit_costs": {
+          "commission": 10.62,
+          "transfer": 0.35,
+          "stamp": 17.69,
+          "total": 28.66
+        },
+        "fees": 40.79,
+        "net_pnl": -1912.79,
+        "return_pct": -9.770034216751037,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "002827",
+          "name": "高争民爆",
+          "signal_date": "2026-09-09",
+          "generated_at": "2026-09-09T16:00:00+08:00",
+          "lower": 62.462,
+          "upper": 65.42,
+          "stop": 57.9935,
+          "target": 71.8,
+          "signal_close": 65.61,
+          "key": "2026-09-09:002827"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "603533",
+        "name": "掌阅科技",
+        "shares": 800,
+        "entry_at": 1789353000000,
+        "exit_at": 1789435800000,
+        "entry_price": 24.3,
+        "exit_price": 24.26,
+        "signal_date": "2026-09-11",
+        "stop": 22.0681,
+        "target": 26.292,
+        "entry_costs": {
+          "commission": 11.66,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.05
+        },
+        "exit_costs": {
+          "commission": 11.64,
+          "transfer": 0.39,
+          "stamp": 19.41,
+          "total": 31.44
+        },
+        "fees": 43.49,
+        "net_pnl": -75.49,
+        "return_pct": -0.38808249002033207,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "603533",
+          "name": "掌阅科技",
+          "signal_date": "2026-09-11",
+          "generated_at": "2026-09-11T16:00:00+08:00",
+          "lower": 24.082,
+          "upper": 24.388,
+          "stop": 22.0681,
+          "target": 26.292,
+          "signal_close": 25.04,
+          "key": "2026-09-11:603533"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "000592",
+        "name": "平潭发展",
+        "shares": 2500,
+        "entry_at": 1789436700000,
+        "exit_at": 1789524900000,
+        "entry_price": 7.89,
+        "exit_price": 8.6,
+        "signal_date": "2026-09-14",
+        "stop": 6.8678,
+        "target": 8.6,
+        "entry_costs": {
+          "commission": 11.83,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.22
+        },
+        "exit_costs": {
+          "commission": 12.9,
+          "transfer": 0.43,
+          "stamp": 21.5,
+          "total": 34.83
+        },
+        "fees": 47.05,
+        "net_pnl": 1727.95,
+        "return_pct": 8.754779041830613,
+        "reason": "target",
+        "plan": {
+          "code": "000592",
+          "name": "平潭发展",
+          "signal_date": "2026-09-14",
+          "generated_at": "2026-09-14T16:00:00+08:00",
+          "lower": 7.614,
+          "upper": 8.016,
+          "stop": 6.8678,
+          "target": 8.6,
+          "signal_close": 8.1,
+          "key": "2026-09-14:000592"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "002242",
+        "name": "九阳股份",
+        "shares": 2100,
+        "entry_at": 1789695900000,
+        "exit_at": 1790559000000,
+        "entry_price": 9.45,
+        "exit_price": 9.81,
+        "signal_date": "2026-09-17",
+        "stop": 8.5647,
+        "target": 10.13,
+        "entry_costs": {
+          "commission": 11.91,
+          "transfer": 0.4,
+          "stamp": 0.0,
+          "total": 12.31
+        },
+        "exit_costs": {
+          "commission": 12.36,
+          "transfer": 0.41,
+          "stamp": 20.6,
+          "total": 33.37
+        },
+        "fees": 45.68,
+        "net_pnl": 710.32,
+        "return_pct": 3.577120969557307,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "002242",
+          "name": "九阳股份",
+          "signal_date": "2026-09-17",
+          "generated_at": "2026-09-17T16:00:00+08:00",
+          "lower": 9.041,
+          "upper": 9.48,
+          "stop": 8.5647,
+          "target": 10.13,
+          "signal_close": 9.55,
+          "key": "2026-09-17:002242"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "601398",
+        "name": "工商银行",
+        "shares": 2300,
+        "entry_at": 1792465200000,
+        "exit_at": 1792632600000,
+        "entry_price": 8.48,
+        "exit_price": 8.44,
+        "signal_date": "2026-10-19",
+        "stop": 8.0948,
+        "target": 9.03,
+        "entry_costs": {
+          "commission": 11.7,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.09
+        },
+        "exit_costs": {
+          "commission": 11.65,
+          "transfer": 0.39,
+          "stamp": 19.41,
+          "total": 31.45
+        },
+        "fees": 43.54,
+        "net_pnl": -135.54,
+        "return_pct": -0.6945038683465796,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "601398",
+          "name": "工商银行",
+          "signal_date": "2026-10-19",
+          "generated_at": "2026-10-19T16:00:00+08:00",
+          "lower": 8.393,
+          "upper": 8.504,
+          "stop": 8.0948,
+          "target": 9.03,
+          "signal_close": 8.6,
+          "key": "2026-10-19:601398"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "603533",
+        "name": "掌阅科技",
+        "shares": 700,
+        "entry_at": 1792463400000,
+        "exit_at": 1792719000000,
+        "entry_price": 28.5,
+        "exit_price": 25.2,
+        "signal_date": "2026-10-19",
+        "stop": 24.4089,
+        "target": 32.91,
+        "entry_costs": {
+          "commission": 11.97,
+          "transfer": 0.4,
+          "stamp": 0.0,
+          "total": 12.37
+        },
+        "exit_costs": {
+          "commission": 10.58,
+          "transfer": 0.35,
+          "stamp": 17.64,
+          "total": 28.57
+        },
+        "fees": 40.94,
+        "net_pnl": -2350.94,
+        "return_pct": -11.776858158625455,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "603533",
+          "name": "掌阅科技",
+          "signal_date": "2026-10-19",
+          "generated_at": "2026-10-19T16:00:00+08:00",
+          "lower": 26.669,
+          "upper": 28.522,
+          "stop": 24.4089,
+          "target": 32.91,
+          "signal_close": 28.85,
+          "key": "2026-10-19:603533"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "002043",
+        "name": "兔 宝 宝",
+        "shares": 1500,
+        "entry_at": 1792722600000,
+        "exit_at": 1793151000000,
+        "entry_price": 12.64,
+        "exit_price": 12.61,
+        "signal_date": "2026-10-22",
+        "stop": 11.6988,
+        "target": 13.3875,
+        "entry_costs": {
+          "commission": 11.38,
+          "transfer": 0.38,
+          "stamp": 0.0,
+          "total": 11.76
+        },
+        "exit_costs": {
+          "commission": 11.35,
+          "transfer": 0.38,
+          "stamp": 18.92,
+          "total": 30.65
+        },
+        "fees": 42.41,
+        "net_pnl": -87.41,
+        "return_pct": -0.46073743290026864,
+        "reason": "ma10_exit",
+        "plan": {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "signal_date": "2026-10-22",
+          "generated_at": "2026-10-22T16:00:00+08:00",
+          "lower": 12.453,
+          "upper": 12.652,
+          "stop": 11.6988,
+          "target": 13.3875,
+          "signal_close": 12.75,
+          "key": "2026-10-22:002043"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      },
+      {
+        "code": "002181",
+        "name": "粤 传 媒",
+        "shares": 1900,
+        "entry_at": 1793154600000,
+        "exit_at": 1793339100000,
+        "entry_price": 10.23,
+        "exit_price": 9.41,
+        "signal_date": "2026-10-27",
+        "stop": 9.4413,
+        "target": 11.69,
+        "entry_costs": {
+          "commission": 11.66,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 12.05
+        },
+        "exit_costs": {
+          "commission": 10.73,
+          "transfer": 0.36,
+          "stamp": 17.88,
+          "total": 28.97
+        },
+        "fees": 41.02,
+        "net_pnl": -1599.02,
+        "return_pct": -8.221584087654668,
+        "reason": "stop",
+        "plan": {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "signal_date": "2026-10-27",
+          "generated_at": "2026-10-27T16:00:00+08:00",
+          "lower": 10.006,
+          "upper": 10.234,
+          "stop": 9.4413,
+          "target": 11.69,
+          "signal_close": 10.4,
+          "key": "2026-10-27:002181"
+        },
+        "config": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        }
+      }
+    ],
+    "curve": [
+      {
+        "date": "2026-08-04",
+        "equity": 100000.0
+      },
+      {
+        "date": "2026-08-04",
+        "equity": 100000.0
+      },
+      {
+        "date": "2026-08-05",
+        "equity": 100000.0
+      },
+      {
+        "date": "2026-08-06",
+        "equity": 100000.0
+      },
+      {
+        "date": "2026-08-07",
+        "equity": 99963.72
+      },
+      {
+        "date": "2026-08-10",
+        "equity": 100179.72
+      },
+      {
+        "date": "2026-08-11",
+        "equity": 99502.72
+      },
+      {
+        "date": "2026-08-12",
+        "equity": 99516.6
+      },
+      {
+        "date": "2026-08-13",
+        "equity": 99166.37
+      },
+      {
+        "date": "2026-08-14",
+        "equity": 98776.37
+      },
+      {
+        "date": "2026-08-17",
+        "equity": 99218.01
+      },
+      {
+        "date": "2026-08-18",
+        "equity": 99035.77
+      },
+      {
+        "date": "2026-08-19",
+        "equity": 97118.13
+      },
+      {
+        "date": "2026-08-20",
+        "equity": 97820.58
+      },
+      {
+        "date": "2026-08-21",
+        "equity": 97820.58
+      },
+      {
+        "date": "2026-08-24",
+        "equity": 97820.58
+      },
+      {
+        "date": "2026-08-25",
+        "equity": 97820.58
+      },
+      {
+        "date": "2026-08-26",
+        "equity": 97820.58
+      },
+      {
+        "date": "2026-08-27",
+        "equity": 97820.58
+      },
+      {
+        "date": "2026-08-28",
+        "equity": 97958.49
+      },
+      {
+        "date": "2026-08-31",
+        "equity": 97298.49
+      },
+      {
+        "date": "2026-09-01",
+        "equity": 97132.94
+      },
+      {
+        "date": "2026-09-02",
+        "equity": 97010.74
+      },
+      {
+        "date": "2026-09-03",
+        "equity": 97065.74
+      },
+      {
+        "date": "2026-09-04",
+        "equity": 97120.74
+      },
+      {
+        "date": "2026-09-07",
+        "equity": 96845.74
+      },
+      {
+        "date": "2026-09-08",
+        "equity": 96759.37
+      },
+      {
+        "date": "2026-09-09",
+        "equity": 96759.37
+      },
+      {
+        "date": "2026-09-10",
+        "equity": 95709.24
+      },
+      {
+        "date": "2026-09-11",
+        "equity": 94846.58
+      },
+      {
+        "date": "2026-09-14",
+        "equity": 94762.53
+      },
+      {
+        "date": "2026-09-15",
+        "equity": 94833.87
+      },
+      {
+        "date": "2026-09-16",
+        "equity": 96499.04
+      },
+      {
+        "date": "2026-09-17",
+        "equity": 96499.04
+      },
+      {
+        "date": "2026-09-18",
+        "equity": 96444.73
+      },
+      {
+        "date": "2026-09-21",
+        "equity": 96591.73
+      },
+      {
+        "date": "2026-09-22",
+        "equity": 96675.73
+      },
+      {
+        "date": "2026-09-23",
+        "equity": 97137.73
+      },
+      {
+        "date": "2026-09-24",
+        "equity": 96360.73
+      },
+      {
+        "date": "2026-09-28",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-09-29",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-09-30",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-08",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-09",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-12",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-13",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-14",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-15",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-16",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-19",
+        "equity": 97209.36
+      },
+      {
+        "date": "2026-10-20",
+        "equity": 97561.9
+      },
+      {
+        "date": "2026-10-21",
+        "equity": 96835.9
+      },
+      {
+        "date": "2026-10-22",
+        "equity": 95318.45
+      },
+      {
+        "date": "2026-10-23",
+        "equity": 95026.12
+      },
+      {
+        "date": "2026-10-26",
+        "equity": 95626.12
+      },
+      {
+        "date": "2026-10-27",
+        "equity": 94651.12
+      },
+      {
+        "date": "2026-10-28",
+        "equity": 95649.42
+      },
+      {
+        "date": "2026-10-29",
+        "equity": 94908.42
+      },
+      {
+        "date": "2026-10-30",
+        "equity": 93036.45
+      },
+      {
+        "date": "2026-11-02",
+        "equity": 93036.45
+      },
+      {
+        "date": "2026-11-03",
+        "equity": 92160.48
+      }
+    ],
+    "open_positions": [
+      {
+        "code": "002354",
+        "name": "天娱数科",
+        "shares": 2400,
+        "entry_price": 8.04,
+        "entry_at": 1793673000000,
+        "entry_day": "2026-11-03",
+        "entry_fee": 11.97,
+        "entry_costs": {
+          "commission": 11.58,
+          "transfer": 0.39,
+          "stamp": 0.0,
+          "total": 11.97
+        },
+        "costs": {
+          "per_stock_budget": 20000.0,
+          "max_positions": 3,
+          "commission_rate": 0.0006,
+          "min_commission": 10.0,
+          "transfer_rate": 2e-05,
+          "stamp_rate": 0.001,
+          "slippage_ticks": 2,
+          "exit_ma": 10
+        },
+        "signal_date": "2026-11-02",
+        "plan": {
+          "code": "002354",
+          "name": "天娱数科",
+          "signal_date": "2026-11-02",
+          "generated_at": "2026-11-02T16:00:00+08:00",
+          "lower": 7.927,
+          "upper": 8.04,
+          "stop": 7.4936,
+          "target": 8.83,
+          "signal_close": 7.9,
+          "key": "2026-11-02:002354"
+        },
+        "stop": 7.4936,
+        "target": 8.83,
+        "last_price": 7.68,
+        "quote_at": 1793689200000,
+        "valuation_blocked": false,
+        "unrealized_pnl": -875.97,
+        "sellable_shares": 0
+      }
+    ],
+    "incomplete_minute_days": 44
+  }
+}
