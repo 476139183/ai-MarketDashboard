@@ -1,0 +1,368 @@
+{
+  "strategy": "breakout_ma20",
+  "forward_start": "2026-11-16",
+  "top_n": 5,
+  "universe_snapshot": "2026-10-28T11:50:39.111082+08:00",
+  "stocks": [
+    {
+      "code": "000559",
+      "name": "万向钱潮",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "000700",
+      "name": "模塑科技",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "000725",
+      "name": "京东方Ａ",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "000823",
+      "name": "超声电子",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "000858",
+      "name": "五 粮 液",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "001309",
+      "name": "德明利",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002050",
+      "name": "三花智控",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002181",
+      "name": "粤 传 媒",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002185",
+      "name": "华天科技",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002249",
+      "name": "大洋电机",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002265",
+      "name": "建设工业",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002354",
+      "name": "天娱数科",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002384",
+      "name": "东山精密",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002428",
+      "name": "云南锗业",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002436",
+      "name": "兴森科技",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002463",
+      "name": "沪电股份",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002472",
+      "name": "双环传动",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002611",
+      "name": "东方精工",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002636",
+      "name": "金安国纪",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002747",
+      "name": "埃斯顿",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "002929",
+      "name": "润建股份",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "003021",
+      "name": "兆威机电",
+      "exchange": "SZ",
+      "board": "深市主板"
+    },
+    {
+      "code": "300006",
+      "name": "莱美药业",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300059",
+      "name": "东方财富",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300115",
+      "name": "长盈精密",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300223",
+      "name": "君正股份",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300296",
+      "name": "利亚德",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300308",
+      "name": "中际旭创",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300364",
+      "name": "中文在线",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300394",
+      "name": "天孚通信",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300502",
+      "name": "新易盛",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300613",
+      "name": "富瀚微",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "300750",
+      "name": "宁德时代",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "301093",
+      "name": "华兰股份",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "301275",
+      "name": "汉朔科技",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "301526",
+      "name": "国际复材",
+      "exchange": "SZ",
+      "board": "创业板"
+    },
+    {
+      "code": "600183",
+      "name": "生益科技",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600276",
+      "name": "恒瑞医药",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600487",
+      "name": "亨通光电",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600580",
+      "name": "卧龙电驱",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600584",
+      "name": "长电科技",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600601",
+      "name": "方正科技",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "600825",
+      "name": "新华传媒",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "601208",
+      "name": "东材科技",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "601899",
+      "name": "紫金矿业",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603119",
+      "name": "浙江荣泰",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603186",
+      "name": "华正新材",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603533",
+      "name": "掌阅科技",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603626",
+      "name": "科森科技",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603667",
+      "name": "五洲新春",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603728",
+      "name": "鸣志电器",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "603986",
+      "name": "兆易创新",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "605488",
+      "name": "福莱新材",
+      "exchange": "SH",
+      "board": "沪市主板"
+    },
+    {
+      "code": "688279",
+      "name": "峰岹科技",
+      "exchange": "SH",
+      "board": "科创板"
+    },
+    {
+      "code": "688392",
+      "name": "骄成超声",
+      "exchange": "SH",
+      "board": "科创板"
+    },
+    {
+      "code": "688485",
+      "name": "九州一轨",
+      "exchange": "SH",
+      "board": "科创板"
+    },
+    {
+      "code": "688825",
+      "name": "长鑫科技",
+      "exchange": "SH",
+      "board": "科创板"
+    },
+    {
+      "code": "688836",
+      "name": "宇树科技-W",
+      "exchange": "SH",
+      "board": "科创板"
+    }
+  ]
+}
