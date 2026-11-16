@@ -11,13 +11,11 @@ def history(close=12):
 
 
 class SimulationSelectionTest(unittest.TestCase):
-    def test_no_breakout_still_returns_observation_without_buy_signal(self):
+    def test_no_breakout_is_not_displayed_as_an_observation(self):
         bars = history(10.5)
         rows, excluded = rank_stocks({'000001': bars}, {'000001': '平安银行'},
                                     [b['date'] for b in bars])
-        self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]['status'], '观察')
-        self.assertIn('未突破此前20日高点', rows[0]['unmet'])
+        self.assertEqual(rows, [])
         self.assertEqual(excluded, {})
 
     def test_breakout_precedes_observation_without_index_filter(self):
@@ -27,6 +25,7 @@ class SimulationSelectionTest(unittest.TestCase):
                               [b['date'] for b in bars])
         self.assertEqual(rows[0]['code'], '000001')
         self.assertEqual(rows[0]['status'], '突破信号')
+        self.assertEqual(len(rows), 1)
 
     def test_stale_and_risk_warning_stocks_cannot_fill_ranking(self):
         bars = history()

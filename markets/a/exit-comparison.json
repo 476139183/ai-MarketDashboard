@@ -1,0 +1,222 @@
+{
+  "scope": "同一事后固定60股池；不是全市场动态组合；保护退出仅日线触价近似，未获独立样本外验证",
+  "data_as_of": "2026-11-13",
+  "results": {
+    "original_ma20": {
+      "year": {
+        "return_pct": 18.12,
+        "max_drawdown_pct": -9.76
+      },
+      "monthly": {
+        "2026-01": {
+          "return_pct": 4.02,
+          "max_drawdown_pct": -1.37
+        },
+        "2026-02": {
+          "return_pct": 2.41,
+          "max_drawdown_pct": -2.58
+        },
+        "2026-03": {
+          "return_pct": -2.59,
+          "max_drawdown_pct": -2.93
+        },
+        "2026-04": {
+          "return_pct": 4.82,
+          "max_drawdown_pct": -3.04
+        },
+        "2026-05": {
+          "return_pct": 9.79,
+          "max_drawdown_pct": -3.44
+        },
+        "2026-06": {
+          "return_pct": 7.02,
+          "max_drawdown_pct": -3.25
+        },
+        "2026-07": {
+          "return_pct": -6.82,
+          "max_drawdown_pct": -7.02
+        },
+        "2026-08": {
+          "return_pct": -0.95,
+          "max_drawdown_pct": -2.94
+        },
+        "2026-09": {
+          "return_pct": -0.79,
+          "max_drawdown_pct": -2.02
+        },
+        "2026-10": {
+          "return_pct": 0.66,
+          "max_drawdown_pct": -1.03
+        },
+        "2026-11": {
+          "return_pct": 0.28,
+          "max_drawdown_pct": -0.82
+        }
+      },
+      "full_months_at_least_5pct": 2,
+      "protective_exits": 0
+    },
+    "faster_ma10": {
+      "year": {
+        "return_pct": 12.99,
+        "max_drawdown_pct": -6.55
+      },
+      "monthly": {
+        "2026-01": {
+          "return_pct": 2.72,
+          "max_drawdown_pct": -1.2
+        },
+        "2026-02": {
+          "return_pct": 0.73,
+          "max_drawdown_pct": -1.52
+        },
+        "2026-03": {
+          "return_pct": -1.37,
+          "max_drawdown_pct": -1.38
+        },
+        "2026-04": {
+          "return_pct": 3.23,
+          "max_drawdown_pct": -1.89
+        },
+        "2026-05": {
+          "return_pct": 6.97,
+          "max_drawdown_pct": -2.92
+        },
+        "2026-06": {
+          "return_pct": 4.91,
+          "max_drawdown_pct": -2.26
+        },
+        "2026-07": {
+          "return_pct": -3.57,
+          "max_drawdown_pct": -3.75
+        },
+        "2026-08": {
+          "return_pct": -0.73,
+          "max_drawdown_pct": -1.83
+        },
+        "2026-09": {
+          "return_pct": -0.85,
+          "max_drawdown_pct": -1.74
+        },
+        "2026-10": {
+          "return_pct": 1.12,
+          "max_drawdown_pct": -1.07
+        },
+        "2026-11": {
+          "return_pct": -0.43,
+          "max_drawdown_pct": -0.63
+        }
+      },
+      "full_months_at_least_5pct": 1,
+      "protective_exits": 0
+    },
+    "protective_ma10": {
+      "year": {
+        "return_pct": 8.96,
+        "max_drawdown_pct": -3.3
+      },
+      "monthly": {
+        "2026-01": {
+          "return_pct": 3.47,
+          "max_drawdown_pct": -0.69
+        },
+        "2026-02": {
+          "return_pct": -0.41,
+          "max_drawdown_pct": -1.15
+        },
+        "2026-03": {
+          "return_pct": -0.06,
+          "max_drawdown_pct": -0.37
+        },
+        "2026-04": {
+          "return_pct": 0.73,
+          "max_drawdown_pct": -1.27
+        },
+        "2026-05": {
+          "return_pct": 3.07,
+          "max_drawdown_pct": -1.49
+        },
+        "2026-06": {
+          "return_pct": 3.3,
+          "max_drawdown_pct": -1.2
+        },
+        "2026-07": {
+          "return_pct": -0.76,
+          "max_drawdown_pct": -0.87
+        },
+        "2026-08": {
+          "return_pct": -1.36,
+          "max_drawdown_pct": -1.52
+        },
+        "2026-09": {
+          "return_pct": -0.36,
+          "max_drawdown_pct": -0.93
+        },
+        "2026-10": {
+          "return_pct": 1.31,
+          "max_drawdown_pct": -0.62
+        },
+        "2026-11": {
+          "return_pct": -0.17,
+          "max_drawdown_pct": -0.61
+        }
+      },
+      "full_months_at_least_5pct": 0,
+      "protective_exits": 1325
+    },
+    "trend_structure_without_flow": {
+      "year": {
+        "return_pct": 11.31,
+        "max_drawdown_pct": -6.39
+      },
+      "monthly": {
+        "2026-01": {
+          "return_pct": 3.02,
+          "max_drawdown_pct": -1.23
+        },
+        "2026-02": {
+          "return_pct": 0.6,
+          "max_drawdown_pct": -1.55
+        },
+        "2026-03": {
+          "return_pct": -1.35,
+          "max_drawdown_pct": -1.35
+        },
+        "2026-04": {
+          "return_pct": 3.22,
+          "max_drawdown_pct": -1.86
+        },
+        "2026-05": {
+          "return_pct": 6.57,
+          "max_drawdown_pct": -2.92
+        },
+        "2026-06": {
+          "return_pct": 3.41,
+          "max_drawdown_pct": -3.23
+        },
+        "2026-07": {
+          "return_pct": -3.51,
+          "max_drawdown_pct": -3.7
+        },
+        "2026-08": {
+          "return_pct": -0.64,
+          "max_drawdown_pct": -1.9
+        },
+        "2026-09": {
+          "return_pct": -0.78,
+          "max_drawdown_pct": -1.67
+        },
+        "2026-10": {
+          "return_pct": 1.12,
+          "max_drawdown_pct": -1.04
+        },
+        "2026-11": {
+          "return_pct": -0.51,
+          "max_drawdown_pct": -0.85
+        }
+      },
+      "flow_status": "无对应历史资金流，仅测试价格结构分支，不代表资金退出策略已验证",
+      "full_months_at_least_5pct": 1
+    }
+  }
+}

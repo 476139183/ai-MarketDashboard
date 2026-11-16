@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""固定股票池的突破策略模拟与每次选股；不连接交易账户。"""
+"""默认全市场动态选股；保留固定池历史对照，不连接交易账户。"""
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
@@ -42,12 +42,14 @@ def rank_stocks(histories, names, calendar):
             unmet.append('收盘未高于MA20')
         if close <= high20:
             unmet.append('未突破此前20日高点')
+        if unmet:
+            continue
         ranked.append({'code': code, 'name': name, 'signal_date': calendar[-1],
                        'status': '突破信号' if entry_signal(bars, 'breakout') else '观察',
                        'close': close, 'ma5': round(ma5, 3), 'ma20': round(ma20, 3),
                        'prior20_high': high20, 'breakout_distance_pct': round((close / high20 - 1) * 100, 3),
                        'unmet': unmet})
-    # 合格信号优先；观察股按缺少条件数、距突破价距离排序，不按历史收益追选。
+    # 只展示合格突破信号，不用观察股凑数。
     ranked.sort(key=lambda x: (len(x['unmet']), -x['breakout_distance_pct'], x['code']))
     return ranked, excluded
 
@@ -68,8 +70,15 @@ def fetch_index(end):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'markets/a/simulation-latest.json')
+    parser.add_argument('--fixed-baseline', action='store_true', help='仅重跑旧60股池历史对照')
     args = parser.parse_args()
     config = json.loads(CONFIG.read_text(encoding='utf-8'))
+    if config.get('universe_mode') == 'full_market' and not args.fixed_baseline:
+        from market_scan import main as scan_main
+        scan_main()
+        return
+    if args.fixed_baseline and config.get('fixed_baseline_config'):
+        config=json.loads((ROOT/config['fixed_baseline_config']).read_text(encoding='utf-8'))
     now = datetime.now(ZoneInfo('Asia/Shanghai'))
     end = as_of_date(now)
     index = fetch_index(end)
@@ -95,8 +104,6 @@ def main():
     names = {code: q['name'] for code, q in current.items()
              if q['quote_time'][:8] >= calendar[-1].replace('-', '')}
     ranked, excluded = rank_stocks(histories, names, calendar)
-    if not ranked:
-        raise ValueError('没有行情及当前名称合格的股票，不生成虚假排名；旧报告保留')
     results = {}
     for label, start in [('historical_replay', None), ('forward_simulation', config['forward_start'])]:
         per_stock = {}
@@ -116,7 +123,7 @@ def main():
             'positions': {c: r['open_position'] for c, r in per_stock.items() if r['open_position']},
             'pending': {c: r['pending'] for c, r in per_stock.items() if r['pending']},
             'by_stock': per_stock, 'curve': curve}
-    report = {'generated_at': now.isoformat(), 'data_as_of': calendar[-1], 'strategy': config['strategy'],
+    report = {'generated_at': now.isoformat(), 'data_as_of': calendar[-1], 'strategy': 'breakout_ma20_fixed_baseline',
               'universe_snapshot': config['universe_snapshot'], 'universe_size': len(stocks),
               'forward_start': config['forward_start'], 'sources': sources,
               'selection': ranked[:config['top_n']], 'eligible_signals': sum(not x['unmet'] for x in ranked),
