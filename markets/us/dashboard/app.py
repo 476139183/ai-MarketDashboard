@@ -20,6 +20,21 @@ WATCHLIST = ROOT / "watchlist.txt"
 ALERTS = ROOT / "cache" / "alerts.json"
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("BOARD_PORT", "8765"))
+MONITOR_PATH = ROOT.parent / ".cache" / "sndk-monitor" / "latest.json"
+
+
+def load_monitor_report(path: Path, now: datetime) -> dict:
+    try:
+        report = json.loads(path.read_text(encoding="utf-8"))
+        generated = datetime.fromisoformat(report["generated_bj"])
+        age = (now.astimezone(timezone.utc) - generated.astimezone(timezone.utc)).total_seconds()
+        fresh = -60 <= age <= 1200
+        report.update(available=True, report_fresh=fresh)
+        if not fresh:
+            report.update(quote_fresh=False, current_price=None, signal="观望", reason="定时分析已超过 20 分钟未更新，请检查采集脚本。")
+        return report
+    except (OSError, ValueError, KeyError, TypeError):
+        return {"available": False, "report_fresh": False, "signal": "观望", "reason": "等待定时脚本生成分析。"}
 
 
 def _load_watchlist() -> list:
@@ -77,6 +92,10 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, data, "text/html; charset=utf-8")
             return
 
+        if path in ("/premarket", "/premarket/"):
+            self._send(200, (STATIC / "premarket.html").read_bytes(), "text/html; charset=utf-8")
+            return
+
         if path in ("/backtest", "/backtest/"):
             report = ROOT / "cache" / "trend-trade-report.html"
             if report.is_file():
@@ -91,6 +110,11 @@ class Handler(BaseHTTPRequestHandler):
                 self._send(200, report.read_bytes(), "text/html; charset=utf-8")
             else:
                 self._send(404, "尚未生成逐笔诊断报告".encode("utf-8"), "text/plain; charset=utf-8")
+            return
+
+        if path == "/api/premarket":
+            result = load_monitor_report(MONITOR_PATH, datetime.now(timezone.utc))
+            self._send(200, json.dumps(result, ensure_ascii=False).encode("utf-8"), "application/json; charset=utf-8")
             return
 
         if path.startswith("/static/"):
