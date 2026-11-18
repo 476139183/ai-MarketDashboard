@@ -73,3 +73,9 @@
 - [逐笔交易复盘与单项调整](reports/crypto-trade-review-2026-11-07/report.md)
 
 以上为指定历史样本结果，不代表未来收益，也不证明已在其他市场有效。
+
+## qianxi全A研究整合记录（2026-11-18）
+
+整合另一目录的 `original_breakout_breadth` 全A动态突破研究与 `breadth_trend` 退出方案。独立入口为 `python3 markets/a/simulation.py`，JSON账本为 `markets/a/paper-account.json`；网页计划模拟仍使用 `markets/us/dashboard/cache/a-share-paper.sqlite3`。两者资金、持仓和历史不合并，不以目录整合为由切换启用状态或交易规则。
+
+该研究按训练区间锁定breakout_desc排序，历史全年+14.11%，7—10月仍为−18.75%，不作为已验证稳定盈利的策略；固定60股仅作旧基线对照。保留全市场扫描、入选变化、趋势退出、真实资金流缺失提示以及各次失败研究记录。目录整合只保存已有能力，没有新增策略发布结论。

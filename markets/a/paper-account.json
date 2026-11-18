@@ -1,0 +1,23 @@
+{
+  "start_date": "2026-11-16",
+  "cash": 1.0,
+  "positions": {},
+  "pending_sells": {},
+  "events": [],
+  "curve": [],
+  "last_day": null,
+  "max_positions": 5,
+  "exit_assessments": {},
+  "missing_position_prices": [],
+  "mode": "forward_simulation",
+  "exit_policy": "breadth_trend",
+  "fee_per_side": 0.0015,
+  "performance": null,
+  "monthly": {},
+  "monthly_target_pct": 5,
+  "completed_months": 0,
+  "completed_months_at_target": 0,
+  "monthly_note": "当月及启动不足整月的月份不计完整月达标次数",
+  "status": "尚无启动后的完整交易日",
+  "entry_profile": "original_breakout_breadth"
+}

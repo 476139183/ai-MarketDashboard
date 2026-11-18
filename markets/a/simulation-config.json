@@ -1,0 +1,13 @@
+{
+  "strategy": "original_breakout_full_market_research",
+  "forward_start": "2026-11-16",
+  "top_n": 5,
+  "universe_mode": "full_market",
+  "exit_policy": "breadth_trend",
+  "monthly_target_pct": 5,
+  "entry_profile": "original_breakout_breadth",
+  "simulation_status": "研究版本：全市场原突破逻辑，全年回放转正，但后段检查及稳定月收益目标未通过",
+  "adjustment_report": "markets/a/original-market-risk-study.json",
+  "selection_ranking": "breakout_desc",
+  "fixed_baseline_config": "markets/a/fixed-baseline-config.json"
+}

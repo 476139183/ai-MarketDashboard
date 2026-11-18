@@ -20,9 +20,11 @@ def entry_signal(bars, entry_rule='breakout'):
     return float(bars[-2]['close']) <= prior_ma20
 
 
-def run(bars, limit_ratio, fee=0.0015, min_entry_date=None, entry_rule='breakout', exit_ma=10, trading_calendar=None, allowed_signal_dates=None):
+def run(bars, limit_ratio, fee=0.0015, min_entry_date=None, entry_rule='breakout', exit_ma=10, trading_calendar=None, allowed_signal_dates=None, protective_exit=False, exit_policy='moving_average', flows=None):
     if entry_rule not in ('breakout', 'reclaim', 'trend') or exit_ma not in (10, 20):
         raise ValueError('未知研究规则')
+    if exit_policy not in ('moving_average', 'trend_flow'):
+        raise ValueError('未知退出规则')
     trades, position, pending = [], None, None
     next_day = {a: b for a, b in zip(trading_calendar, trading_calendar[1:])} if trading_calendar else None
     skipped = 0
@@ -50,6 +52,19 @@ def run(bars, limit_ratio, fee=0.0015, min_entry_date=None, entry_rule='breakout
                 trades.append(position)
                 position = None
                 pending = None
+        if protective_exit and position and i >= 10:
+            from risk_exit import protective_fill
+            prior = bars[max(0, i-10):i]
+            held = [x for x in bars[:i] if x['date'] >= position['entry_date']]
+            fill = protective_fill(bar, position, float(bars[i-1]['close']),
+                                   sum(float(x['close']) for x in prior) / len(prior),
+                                   max([position['entry_price']] + [float(x['close']) for x in held]), limit_ratio)
+            if fill:
+                position.update(exit_signal_date=day, exit_date=day, exit_price=fill['price'],
+                                exit_reason=fill['reason'],
+                                return_pct=round((fill['price'] * (1-fee) / (position['entry_price'] * (1+fee)) - 1) * 100, 3))
+                trades.append(position)
+                position, pending = None, None
         if i < 20:
             continue
         closes = [float(x['close']) for x in bars[i-19:i+1]]
@@ -57,7 +72,13 @@ def run(bars, limit_ratio, fee=0.0015, min_entry_date=None, entry_rule='breakout
         ma10 = sum(closes[-10:]) / 10
         ma20 = sum(closes) / 20
         if position:
-            if not pending and (close < (ma10 if exit_ma == 10 else ma20) or close <= position['entry_price'] * .95):
+            if exit_policy == 'trend_flow':
+                from trend_exit import assess_exit
+                decision = assess_exit(bars[:i+1], position['entry_price'], flows)
+                exit_now = decision['action'] == '退出'
+            else:
+                exit_now = close < (ma10 if exit_ma == 10 else ma20) or close <= position['entry_price'] * .95
+            if not pending and exit_now:
                 pending = {'side': 'sell', 'date': day}
         elif not pending and (min_entry_date is None or day >= min_entry_date) and (allowed_signal_dates is None or day in allowed_signal_dates):
             if entry_signal(bars[i-20:i+1], entry_rule):

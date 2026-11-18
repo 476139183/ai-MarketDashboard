@@ -755,3 +755,7 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 本项目当前完整源码与研究资料已由拥有者授权公开查阅，版权仍归相应权利人所有。使用、修改或再分发的权限以 [LICENSE](LICENSE) 为准；当前没有额外授予 MIT 或其他开源许可。第三方组件与数据保持各自许可和条款。后续发布规则见[发布约定](CONFIDENTIALITY.md)。
 
 本项目用于学习、研究和模拟验证，不构成投资建议，也不保证策略表现。历史图表、示例信号和模拟盈亏均不能视为真实可成交收益。
+
+### 全A动态突破研究（整合的独立入口）
+
+原qianxi目录的全市场动态扫描、市场广度过滤及趋势退出研究已整合，可运行 `python3 markets/a/simulation.py`；固定60股只作历史对照。详见 [A股研究说明](markets/a/README.md) 和 [目录整合记录](docs/repository-consolidation.md)。该入口使用独立JSON模拟账本，网页计划模拟的SQLite账户保持原状态；研究结果尚未通过稳定盈利验证。

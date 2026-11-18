@@ -1,0 +1,50 @@
+{
+  "year_ma20": {
+    "status": "pass",
+    "equity_points": 208,
+    "events_checked": 229,
+    "max_equity_error": 4.440892098500626e-16,
+    "every_buy_from_previous_daily_top5": true,
+    "fills_equal_actual_bar_open": true
+  },
+  "year_structure": {
+    "status": "pass",
+    "equity_points": 208,
+    "events_checked": 341,
+    "max_equity_error": 2.220446049250313e-16,
+    "every_buy_from_previous_daily_top5": true,
+    "fills_equal_actual_bar_open": true
+  },
+  "matched_ma20": {
+    "status": "pass",
+    "equity_points": 113,
+    "events_checked": 155,
+    "max_equity_error": 5.551115123125783e-16,
+    "every_buy_from_previous_daily_top5": true,
+    "fills_equal_actual_bar_open": true
+  },
+  "matched_structure": {
+    "status": "pass",
+    "equity_points": 113,
+    "events_checked": 205,
+    "max_equity_error": 4.440892098500626e-16,
+    "every_buy_from_previous_daily_top5": true,
+    "fills_equal_actual_bar_open": true
+  },
+  "matched_flow": {
+    "status": "pass",
+    "equity_points": 113,
+    "events_checked": 207,
+    "max_equity_error": 4.440892098500626e-16,
+    "every_buy_from_previous_daily_top5": true,
+    "fills_equal_actual_bar_open": true
+  },
+  "matched_flow_cost_x2": {
+    "status": "pass",
+    "equity_points": 113,
+    "events_checked": 207,
+    "max_equity_error": 4.440892098500626e-16,
+    "every_buy_from_previous_daily_top5": true,
+    "fills_equal_actual_bar_open": true
+  }
+}
