@@ -4,7 +4,7 @@ const {join} = require('node:path');
 const {test} = require('node:test');
 const vm = require('node:vm');
 
-function page({saved, failStatus = false, configured = true, modelReady = configured, chosen = true, includeBackend = true, searchResults = []} = {}) {
+function page({saved, failStatus = false, configured = true, modelReady = configured, chosen = true, includeBackend = true, searchResults = [], historyRows = null} = {}) {
   const elements = new Map();
   const html = readFileSync(join(__dirname, 'static/research.html'), 'utf8');
   const element = () => ({textContent: '', innerHTML: '', hidden: false, disabled: false, value: '', dataset: {},
@@ -35,7 +35,7 @@ function page({saved, failStatus = false, configured = true, modelReady = config
       if (url.includes('/config')) data = {configured, connected: configured, model_ready: modelReady,...(includeBackend?{backend:'codex_cli'}:{})};
       if (url.includes('/ai-settings')) data = {backend:'codex_cli',local_available:{codex_cli:true}};
       if (url.includes('/analysis')) data = {task_id: 'task_1', status: 'pending'};
-      if (url.includes('/api/dsa/history?')) data = {stock_name: '英伟达', data: [
+      if (url.includes('/api/dsa/history?')) data = {stock_name: '英伟达', data: historyRows || [
         {date: '2026-10-29', open: 100, high: 104, low: 99, close: 103},
         {date: '2026-10-30', open: 103, high: 106, low: 102, close: 105},
       ]};
@@ -51,6 +51,7 @@ function page({saved, failStatus = false, configured = true, modelReady = config
       return {ok: !(failStatus && url.includes('/status')), json: async () => data};
     },
   });
+  vm.runInContext(readFileSync(join(__dirname, 'static/technical-indicators.js'), 'utf8'), context);
   vm.runInContext(readFileSync(join(__dirname, 'static/research.js'), 'utf8'), context);
   return {elements, requests, timers, storage,
     async settle() {await new Promise(resolve => setImmediate(resolve));},
@@ -199,3 +200,7 @@ test('历史样本面板只在展开时读本地覆盖，不触发数据下载�
  assert.match(p.elements.get('history-samples-list').children[0].textContent,/AAPL.*2010-01-04/);
  assert.equal(p.requests.filter(([,o])=>o.method==='POST').length,0);
 });
+
+test('个股指标短样本不伪造MACD或RSI数值，标记对应日线',async()=>{const p=page();await p.settle();assert.equal(p.elements.get('tech-dif').textContent,'—');assert.equal(p.elements.get('tech-rsi14').textContent,'—');assert.match(p.elements.get('technical-date').textContent,/2026-10-30/);assert.ok(p.requests.every(([url])=>!url.includes('indicators')));});
+
+test('完整个股历史显示指标，缩放显示窗口不改变MACD值',async()=>{const rows=Array.from({length:100},(_,i)=>({date:new Date(Date.UTC(2026,0,1+i)).toISOString().slice(0,10),open:100+i,high:101+i,low:99+i,close:100+i,volume:1000}));const p=page({historyRows:rows});await p.settle();assert.equal(p.elements.get('tech-dif').textContent,'7.00');assert.equal(p.elements.get('tech-rsi14').textContent,'100.00');assert.equal(p.elements.get('tech-volumeRatio').textContent,'1.00 ×');assert.equal(p.elements.get('tech-ma60').textContent,'169.50');await p.elements.get('period-controls').handlers.click({target:{closest:()=>({dataset:{days:'30'}})}});assert.equal(p.elements.get('tech-dif').textContent,'7.00');});

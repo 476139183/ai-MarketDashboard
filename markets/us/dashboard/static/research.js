@@ -153,7 +153,32 @@ function visibleRows(rows, days) {
   return rows.filter(row => row.date >= first);
 }
 
+const TECH_FIELDS=['ma10','ma60','dif','dea','macd','rsi14','bollUpper','bollMid','bollLower','atr14','bias20','volumeRatio'];
+let technicalRows=null,technicalValues=[];
+function indicators(rows){
+  if(technicalRows!==rows){technicalRows=rows;technicalValues=globalThis.TechnicalIndicators?TechnicalIndicators.calculate(rows):[];}
+  return technicalValues;
+}
+function clearTechnical(){
+  TECH_FIELDS.forEach(key=>{el('tech-'+key).textContent='—';});
+  el('technical-date').textContent='等待日线';el('indicator-phase').textContent='本标的尚无可用指标';el('technical-reading').textContent='';technicalRows=null;technicalValues=[];
+}
+function showTechnical(bar,rows){
+  const value=indicators(rows).find(r=>r.date===bar.date)||{};
+  el('technical-date').textContent=bar.date;
+  const today=new Intl.DateTimeFormat('en-CA',{timeZone:/^\d/.test(activeSymbol)?'Asia/Shanghai':'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  const forming=bar.date>=today;
+  el('indicator-phase').textContent=forming?'形成中 · 当日日线尚未作完整收盘确认，指标会变化':'历史已完成日线 · 随光标查看当时的指标';
+  for(const key of TECH_FIELDS){const v=value[key];el('tech-'+key).textContent=v==null?'—':(['dif','dea','macd','atr14'].includes(key)?Number(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4}):number(v))+(key==='bias20'?'%':key==='volumeRatio'?' ×':'');}
+  const notes=[];
+  if(value.dif!=null&&value.dea!=null)notes.push('MACD：DIF'+(value.dif>=value.dea?'位于DEA上方':'位于DEA下方')+'；'+(value.dif>=0?'零轴上方':'零轴下方'));
+  if(value.rsi14!=null)notes.push('RSI：'+(value.rsi14>=70?'高位（趋势可能持续，不能直接据此做空）':value.rsi14<=30?'低位（不等于反转已确认）':'中间区域'));
+  if(value.bias20!=null)notes.push('距MA20 '+number(value.bias20)+'%');
+  el('technical-reading').textContent=notes.join(' · ')||'历史长度不足，等待完整热身；不将缺失数值补为0。';
+}
+
 function showMetrics(bar, rows) {
+  showTechnical(bar,rows);
   el('metrics-date').textContent = bar.date;
   for (const key of ['open', 'high', 'low']) el('metric-' + key).textContent = number(bar[key]);
   el('metric-volume').textContent = bar.volume == null ? '未提供' : Number(bar.volume).toLocaleString('zh-CN', {notation: 'compact', maximumFractionDigits: 2});
@@ -185,8 +210,16 @@ function drawCandles(rows) {
   }
   const volume = chart.addSeries(L.HistogramSeries, {priceFormat: {type: 'volume'}, priceLineVisible: false, lastValueVisible: false}, 1);
   volume.setData(visible.filter(b => b.volume != null).map(b => ({time: b.date, value: b.volume, color: b.close >= b.open ? '#c7e4d6' : '#edcfca'})));
+  const tech=indicators(rows).filter(r=>r.date>=first);
+  if(globalThis.TechnicalIndicators){
+    for(const [key,color] of [['dif','#d3a55a'],['dea','#83a2ce']]){
+      chart.addSeries(L.LineSeries,{color,lineWidth:1,priceLineVisible:false,lastValueVisible:false},2).setData(tech.filter(r=>r[key]!=null).map(r=>({time:r.date,value:r[key]})));
+    }
+    chart.addSeries(L.HistogramSeries,{priceLineVisible:false,lastValueVisible:false},2).setData(tech.filter(r=>r.macd!=null).map(r=>({time:r.date,value:r.macd,color:r.macd>=0?'#cf7770':'#66aa92'})));
+  }
   const panes = chart.panes();
   if (panes[1]) panes[1].setHeight(65);
+  if (panes[2]) panes[2].setHeight(90);
   if(globalThis.MarketStructure){
     dailyStructure=new MarketStructure.Overlay(chart,candles,L,{dark:false});
     dailyStructureControls.bind(dailyStructure,MarketStructure.dailyRows(rows,activeSymbol),{visibleFrom:first,daily:true});
@@ -254,6 +287,7 @@ async function loadDaily(force = false) {
       paintDaily(code, dailyCache);
       return;
     }
+    clearTechnical();
     el('stock-price').textContent = '—'; el('stock-change').textContent = '读取中'; el('stock-asof').textContent = '正在读取日线快照';
     for (const key of ['open', 'high', 'low', 'volume', 'ma5', 'ma20']) el('metric-' + key).textContent = '—';
     el('chart-empty').hidden = false; el('chart-empty').classList.toggle('loading', true);

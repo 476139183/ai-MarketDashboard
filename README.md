@@ -759,3 +759,7 @@ python3 -m unittest discover -s markets/us/dashboard -p 'test_paper*.py'
 ### 全A动态突破研究（整合的独立入口）
 
 原qianxi目录的全市场动态扫描、市场广度过滤及趋势退出研究已整合，可运行 `python3 markets/a/simulation.py`；固定60股只作历史对照。详见 [A股研究说明](markets/a/README.md) 和 [目录整合记录](docs/repository-consolidation.md)。该入口使用独立JSON模拟账本，网页计划模拟的SQLite账户保持原状态；研究结果尚未通过稳定盈利验证。
+
+### 个股技术指标与A股走强雷达
+
+个股研究页新增MACD(12,26,9)副图、RSI14、BOLL(20,2)、ATR14、MA10/60、MA20乖离和相对成交量，随历史K线联动；形成中日线单独标记。A股明日盯盘页新增全市场走强研究，区分底部修复、初步转强、连续走强、温和放量突破、回踩再启动及历史信号跟踪。首次命中按历史日线截断核对，不把历史跟踪冒充今日新信号。该层用于形态发现，后续上涨优势尚未验证，不触发模拟账户买入。[参数、口径与真实采集记录](docs/features/stock-indicators-and-strength-radar.md)。

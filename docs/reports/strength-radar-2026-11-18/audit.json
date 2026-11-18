@@ -1,0 +1,833 @@
+{
+  "rule_version": "a-strength-research-v2",
+  "start": "2026-10-15",
+  "as_of": "2026-11-17",
+  "examples_start": "2026-09-01",
+  "universe_sha256": "b724d22063703296b668fb5552f24017053a18de7ad647fb50686b6cfb52fedc",
+  "examples_universe_sha256": "318e5d40fbedf80e70b5654914d2bff453bdf01d18b01de0234848861685f4ad",
+  "results": {
+    "baseline_eligible": {
+      "signals": 77876,
+      "positive": 31857,
+      "rise5": 12389,
+      "sum_change": -81593.58448170926,
+      "positive_pct": 40.91,
+      "rise5_pct": 15.91,
+      "mean_forward5_pct": -1.048
+    },
+    "v2_any": {
+      "signals": 5622,
+      "positive": 1833,
+      "rise5": 533,
+      "sum_change": -11005.820525710713,
+      "positive_pct": 32.6,
+      "rise5_pct": 9.48,
+      "mean_forward5_pct": -1.958
+    },
+    "pullback_restart": {
+      "signals": 2012,
+      "positive": 766,
+      "rise5": 217,
+      "sum_change": -2925.5497350720966,
+      "positive_pct": 38.07,
+      "rise5_pct": 10.79,
+      "mean_forward5_pct": -1.454
+    },
+    "v1_without_recovery": {
+      "signals": 3737,
+      "positive": 1303,
+      "rise5": 328,
+      "sum_change": -6459.426531895994,
+      "positive_pct": 34.87,
+      "rise5_pct": 8.78,
+      "mean_forward5_pct": -1.729
+    },
+    "steady_rise": {
+      "signals": 2149,
+      "positive": 648,
+      "rise5": 155,
+      "sum_change": -4744.073055636875,
+      "positive_pct": 30.15,
+      "rise5_pct": 7.21,
+      "mean_forward5_pct": -2.208
+    },
+    "early_turn": {
+      "signals": 963,
+      "positive": 313,
+      "rise5": 51,
+      "sum_change": -1173.2708061367923,
+      "positive_pct": 32.5,
+      "rise5_pct": 5.3,
+      "mean_forward5_pct": -1.218
+    },
+    "base_recovery": {
+      "signals": 1936,
+      "positive": 543,
+      "rise5": 208,
+      "sum_change": -4647.553355958632,
+      "positive_pct": 28.05,
+      "rise5_pct": 10.74,
+      "mean_forward5_pct": -2.401
+    },
+    "volume_breakout": {
+      "signals": 473,
+      "positive": 160,
+      "rise5": 33,
+      "sum_change": -409.4914697809043,
+      "positive_pct": 33.83,
+      "rise5_pct": 6.98,
+      "mean_forward5_pct": -0.866
+    }
+  },
+  "same_date_weighted_baseline": {
+    "positive_pct": 40.75,
+    "mean_forward5_pct": -0.982
+  },
+  "examples": [
+    {
+      "code": "300324",
+      "name": "旋极信息",
+      "board": "创业板",
+      "latest_stage": "shape",
+      "latest_reason": "未满足固定走强形态",
+      "latest_metrics": {
+        "change_pct": 4.225,
+        "return3": 12.121,
+        "return5": 11.782,
+        "return20": 3.933,
+        "up_days5": 3,
+        "volume_ratio": 3.197,
+        "bias20": 9.516,
+        "ma5": 3.566,
+        "ma10": 3.417,
+        "ma20": 3.3785,
+        "ma60": 3.5293,
+        "ma20_slope": -0.924,
+        "avg_turnover20": 303079922,
+        "distance_high10": -6.566
+      },
+      "first_eligible_date": "2026-08-17",
+      "events": [
+        {
+          "date": "2026-09-01",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 3.75,
+          "metrics": {
+            "change_pct": 3.878,
+            "return3": 7.45,
+            "return5": 10.294,
+            "return20": -3.351,
+            "up_days5": 5,
+            "volume_ratio": 1.269,
+            "bias20": 2.501,
+            "ma5": 3.564,
+            "ma10": 3.525,
+            "ma20": 3.6585,
+            "ma60": 3.7285,
+            "ma20_slope": -0.948,
+            "avg_turnover20": 124148137,
+            "distance_high10": -1.575
+          },
+          "forward5_close_pct": -4.533
+        },
+        {
+          "date": "2026-09-02",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [],
+          "close": 3.68,
+          "metrics": {
+            "change_pct": -1.867,
+            "return3": 4.249,
+            "return5": 6.977,
+            "return20": -3.916,
+            "up_days5": 4,
+            "volume_ratio": 0.804,
+            "bias20": 0.794,
+            "ma5": 3.612,
+            "ma10": 3.543,
+            "ma20": 3.651,
+            "ma60": 3.7218,
+            "ma20_slope": -0.936,
+            "avg_turnover20": 118786668,
+            "distance_high10": -2.128
+          },
+          "forward5_close_pct": -4.891
+        },
+        {
+          "date": "2026-10-14",
+          "patterns": [
+            "pullback_restart"
+          ],
+          "new_patterns": [
+            "pullback_restart"
+          ],
+          "close": 3.82,
+          "metrics": {
+            "change_pct": 2.688,
+            "return3": 2.688,
+            "return5": 3.804,
+            "return20": 6.704,
+            "up_days5": 3,
+            "volume_ratio": 1.546,
+            "bias20": 5.249,
+            "ma5": 3.712,
+            "ma10": 3.766,
+            "ma20": 3.6295,
+            "ma60": 3.6237,
+            "ma20_slope": 0.805,
+            "avg_turnover20": 270393818,
+            "distance_high10": -7.729
+          },
+          "forward5_close_pct": -2.88
+        },
+        {
+          "date": "2026-11-11",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 3.4,
+          "metrics": {
+            "change_pct": 2.719,
+            "return3": 5.59,
+            "return5": 5.263,
+            "return20": -10.995,
+            "up_days5": 4,
+            "volume_ratio": 1.069,
+            "bias20": 0.325,
+            "ma5": 3.302,
+            "ma10": 3.232,
+            "ma20": 3.389,
+            "ma60": 3.5413,
+            "ma20_slope": -2.936,
+            "avg_turnover20": 187424355,
+            "distance_high10": 1.19
+          },
+          "forward5_close_pct": null
+        }
+      ]
+    },
+    {
+      "code": "301209",
+      "name": "联合化学",
+      "board": "创业板",
+      "latest_stage": "extended",
+      "latest_reason": "涨幅、MA20乖离或近涨停风险过高；等待重新形成结构",
+      "latest_metrics": {
+        "change_pct": 20.009,
+        "return3": 18.188,
+        "return5": 30.443,
+        "return20": 3.864,
+        "up_days5": 4,
+        "volume_ratio": 2.646,
+        "bias20": 18.423,
+        "ma5": 46.356,
+        "ma10": 42.42,
+        "ma20": 44.721,
+        "ma60": 54.3547,
+        "ma20_slope": -4.09,
+        "avg_turnover20": 228647833,
+        "distance_high10": 1.885
+      },
+      "first_eligible_date": "2026-08-17",
+      "events": [
+        {
+          "date": "2026-09-02",
+          "patterns": [
+            "steady_rise"
+          ],
+          "new_patterns": [
+            "steady_rise"
+          ],
+          "close": 59.18,
+          "metrics": {
+            "change_pct": -0.253,
+            "return3": 0.39,
+            "return5": 5.321,
+            "return20": 20.285,
+            "up_days5": 3,
+            "volume_ratio": 0.673,
+            "bias20": 2.529,
+            "ma5": 59.304,
+            "ma10": 58.906,
+            "ma20": 57.72,
+            "ma60": 53.5218,
+            "ma20_slope": 7.59,
+            "avg_turnover20": 224135552,
+            "distance_high10": -6.049
+          },
+          "forward5_close_pct": -0.439
+        },
+        {
+          "date": "2026-09-18",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 61.55,
+          "metrics": {
+            "change_pct": 3.013,
+            "return3": 6.304,
+            "return5": 7.081,
+            "return20": 2.995,
+            "up_days5": 3,
+            "volume_ratio": 1.26,
+            "bias20": 4.467,
+            "ma5": 59.476,
+            "ma10": 59.286,
+            "ma20": 58.918,
+            "ma60": 53.1325,
+            "ma20_slope": -0.342,
+            "avg_turnover20": 125899118,
+            "distance_high10": -0.565
+          },
+          "forward5_close_pct": -3.834
+        },
+        {
+          "date": "2026-09-21",
+          "patterns": [
+            "early_turn",
+            "steady_rise",
+            "volume_breakout",
+            "pullback_restart"
+          ],
+          "new_patterns": [
+            "early_turn",
+            "pullback_restart",
+            "steady_rise",
+            "volume_breakout"
+          ],
+          "close": 62.62,
+          "metrics": {
+            "change_pct": 1.738,
+            "return3": 4.541,
+            "return5": 7.447,
+            "return20": 6.497,
+            "up_days5": 3,
+            "volume_ratio": 1.339,
+            "bias20": 5.94,
+            "ma5": 60.344,
+            "ma10": 59.535,
+            "ma20": 59.109,
+            "ma60": 53.2312,
+            "ma20_slope": 0.216,
+            "avg_turnover20": 126163594,
+            "distance_high10": 0.433
+          },
+          "forward5_close_pct": -4.503
+        },
+        {
+          "date": "2026-09-22",
+          "patterns": [
+            "steady_rise"
+          ],
+          "new_patterns": [],
+          "close": 63.32,
+          "metrics": {
+            "change_pct": 1.118,
+            "return3": 5.975,
+            "return5": 9.361,
+            "return20": 9.229,
+            "up_days5": 4,
+            "volume_ratio": 0.879,
+            "bias20": 6.642,
+            "ma5": 61.428,
+            "ma10": 59.795,
+            "ma20": 59.3765,
+            "ma60": 53.3607,
+            "ma20_slope": 0.986,
+            "avg_turnover20": 125016658,
+            "distance_high10": 0.333
+          },
+          "forward5_close_pct": -2.543
+        },
+        {
+          "date": "2026-09-23",
+          "patterns": [
+            "steady_rise",
+            "volume_breakout",
+            "pullback_restart"
+          ],
+          "new_patterns": [
+            "pullback_restart",
+            "volume_breakout"
+          ],
+          "close": 66.03,
+          "metrics": {
+            "change_pct": 4.28,
+            "return3": 7.279,
+            "return5": 10.234,
+            "return20": 17.512,
+            "up_days5": 4,
+            "volume_ratio": 1.608,
+            "bias20": 10.292,
+            "ma5": 62.654,
+            "ma10": 60.506,
+            "ma20": 59.8685,
+            "ma60": 53.5512,
+            "ma20_slope": 1.762,
+            "avg_turnover20": 126883378,
+            "distance_high10": 2.85
+          },
+          "forward5_close_pct": -3.241
+        },
+        {
+          "date": "2026-09-30",
+          "patterns": [
+            "pullback_restart"
+          ],
+          "new_patterns": [
+            "pullback_restart"
+          ],
+          "close": 61.71,
+          "metrics": {
+            "change_pct": 3.194,
+            "return3": 1.33,
+            "return5": -2.543,
+            "return20": 4.011,
+            "up_days5": 3,
+            "volume_ratio": 1.178,
+            "bias20": 2.71,
+            "ma5": 61.526,
+            "ma10": 61.477,
+            "ma20": 60.0815,
+            "ma60": 54.2015,
+            "ma20_slope": 1.187,
+            "avg_turnover20": 136970364,
+            "distance_high10": -7.62
+          },
+          "forward5_close_pct": -6.368
+        },
+        {
+          "date": "2026-11-12",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 44.81,
+          "metrics": {
+            "change_pct": 7.252,
+            "return3": 11.69,
+            "return5": 12.165,
+            "return20": -20.267,
+            "up_days5": 4,
+            "volume_ratio": 2.998,
+            "bias20": -0.991,
+            "ma5": 41.154,
+            "ma10": 40.504,
+            "ma20": 45.2585,
+            "ma60": 54.8672,
+            "ma20_slope": -8.949,
+            "avg_turnover20": 168358540,
+            "distance_high10": -9.163
+          },
+          "forward5_close_pct": null
+        },
+        {
+          "date": "2026-11-16",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 44.13,
+          "metrics": {
+            "change_pct": -8.254,
+            "return3": 5.625,
+            "return5": 9.995,
+            "return20": -14.094,
+            "up_days5": 4,
+            "volume_ratio": 1.659,
+            "bias20": -1.104,
+            "ma5": 43.884,
+            "ma10": 40.825,
+            "ma20": 44.6225,
+            "ma60": 54.4895,
+            "ma20_slope": -6.287,
+            "avg_turnover20": 198667509,
+            "distance_high10": -15.102
+          },
+          "forward5_close_pct": null
+        }
+      ]
+    },
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "board": "主板",
+      "latest_stage": "extended",
+      "latest_reason": "涨幅、MA20乖离或近涨停风险过高；等待重新形成结构",
+      "latest_metrics": {
+        "change_pct": 10.017,
+        "return3": 18.274,
+        "return5": 19.62,
+        "return20": 53.307,
+        "up_days5": 5,
+        "volume_ratio": 1.215,
+        "bias20": 29.125,
+        "ma5": 28.032,
+        "ma10": 26.576,
+        "ma20": 24.4105,
+        "ma60": 15.4512,
+        "ma20_slope": 10.934,
+        "avg_turnover20": 2490703649,
+        "distance_high10": 7.102
+      },
+      "first_eligible_date": "2026-08-17",
+      "events": [
+        {
+          "date": "2026-09-07",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 8.59,
+          "metrics": {
+            "change_pct": 2.751,
+            "return3": 2.874,
+            "return5": 0.0,
+            "return20": -6.427,
+            "up_days5": 3,
+            "volume_ratio": 1.181,
+            "bias20": -1.247,
+            "ma5": 8.44,
+            "ma10": 8.428,
+            "ma20": 8.6985,
+            "ma60": 8.537,
+            "ma20_slope": -1.712,
+            "avg_turnover20": 58988667,
+            "distance_high10": -2.164
+          },
+          "forward5_close_pct": 9.197
+        },
+        {
+          "date": "2026-09-16",
+          "patterns": [
+            "steady_rise"
+          ],
+          "new_patterns": [
+            "steady_rise"
+          ],
+          "close": 9.29,
+          "metrics": {
+            "change_pct": -1.589,
+            "return3": -4.62,
+            "return5": 9.294,
+            "return20": 4.265,
+            "up_days5": 3,
+            "volume_ratio": 1.933,
+            "bias20": 6.641,
+            "ma5": 9.34,
+            "ma10": 8.915,
+            "ma20": 8.7115,
+            "ma60": 8.6185,
+            "ma20_slope": 0.67,
+            "avg_turnover20": 106570682,
+            "distance_high10": -8.292
+          },
+          "forward5_close_pct": 5.059
+        },
+        {
+          "date": "2026-09-17",
+          "patterns": [
+            "steady_rise",
+            "pullback_restart"
+          ],
+          "new_patterns": [
+            "pullback_restart"
+          ],
+          "close": 9.55,
+          "metrics": {
+            "change_pct": 2.799,
+            "return3": 1.812,
+            "return5": 7.91,
+            "return20": 6.229,
+            "up_days5": 3,
+            "volume_ratio": 2.115,
+            "bias20": 9.274,
+            "ma5": 9.48,
+            "ma10": 9.041,
+            "ma20": 8.7395,
+            "ma60": 8.6408,
+            "ma20_slope": 1.157,
+            "avg_turnover20": 116420035,
+            "distance_high10": -5.726
+          },
+          "forward5_close_pct": -1.675
+        },
+        {
+          "date": "2026-09-21",
+          "patterns": [
+            "pullback_restart"
+          ],
+          "new_patterns": [
+            "pullback_restart"
+          ],
+          "close": 9.5,
+          "metrics": {
+            "change_pct": 0.742,
+            "return3": 2.26,
+            "return5": 1.279,
+            "return20": 15.713,
+            "up_days5": 3,
+            "volume_ratio": 1.059,
+            "bias20": 7.545,
+            "ma5": 9.442,
+            "ma10": 9.239,
+            "ma20": 8.8335,
+            "ma60": 8.6913,
+            "ma20_slope": 1.804,
+            "avg_turnover20": 124127841,
+            "distance_high10": -6.219
+          },
+          "forward5_close_pct": 19.579
+        },
+        {
+          "date": "2026-09-22",
+          "patterns": [
+            "pullback_restart"
+          ],
+          "new_patterns": [],
+          "close": 9.54,
+          "metrics": {
+            "change_pct": 0.421,
+            "return3": -0.105,
+            "return5": 1.059,
+            "return20": 14.115,
+            "up_days5": 3,
+            "volume_ratio": 1.434,
+            "bias20": 7.281,
+            "ma5": 9.462,
+            "ma10": 9.322,
+            "ma20": 8.8925,
+            "ma60": 8.7193,
+            "ma20_slope": 2.301,
+            "avg_turnover20": 130354899,
+            "distance_high10": -5.824
+          },
+          "forward5_close_pct": 31.027
+        },
+        {
+          "date": "2026-09-23",
+          "patterns": [
+            "steady_rise"
+          ],
+          "new_patterns": [
+            "steady_rise"
+          ],
+          "close": 9.76,
+          "metrics": {
+            "change_pct": 2.306,
+            "return3": 3.499,
+            "return5": 5.059,
+            "return20": 16.607,
+            "up_days5": 4,
+            "volume_ratio": 1.737,
+            "bias20": 8.904,
+            "ma5": 9.556,
+            "ma10": 9.448,
+            "ma20": 8.962,
+            "ma60": 8.7483,
+            "ma20_slope": 2.876,
+            "avg_turnover20": 140353018,
+            "distance_high10": -3.653
+          },
+          "forward5_close_pct": 40.881
+        }
+      ]
+    },
+    {
+      "code": "002685",
+      "name": "华东重机",
+      "board": "主板",
+      "latest_stage": "locked",
+      "latest_reason": "一字线，执行条件不可核验",
+      "latest_metrics": {
+        "change_pct": 10.016,
+        "return3": 32.937,
+        "return5": 38.716,
+        "return20": 38.144,
+        "up_days5": 4,
+        "volume_ratio": 1.062,
+        "bias20": 35.724,
+        "ma5": 5.636,
+        "ma10": 5.165,
+        "ma20": 4.9365,
+        "ma60": 5.2005,
+        "ma20_slope": 4.267,
+        "avg_turnover20": 175844518,
+        "distance_high10": 10.016
+      },
+      "first_eligible_date": "2026-08-17",
+      "events": [
+        {
+          "date": "2026-11-09",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 4.69,
+          "metrics": {
+            "change_pct": 1.515,
+            "return3": 1.296,
+            "return5": 3.991,
+            "return20": -7.859,
+            "up_days5": 3,
+            "volume_ratio": 1.841,
+            "bias20": -1.211,
+            "ma5": 4.63,
+            "ma10": 4.624,
+            "ma20": 4.7475,
+            "ma60": 5.2415,
+            "ma20_slope": -2.775,
+            "avg_turnover20": 79227242,
+            "distance_high10": -6.387
+          },
+          "forward5_close_pct": 29.851
+        },
+        {
+          "date": "2026-11-10",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [],
+          "close": 4.83,
+          "metrics": {
+            "change_pct": 2.985,
+            "return3": 2.766,
+            "return5": 7.095,
+            "return20": -5.108,
+            "up_days5": 4,
+            "volume_ratio": 1.766,
+            "bias20": 2.017,
+            "ma5": 4.694,
+            "ma10": 4.635,
+            "ma20": 4.7345,
+            "ma60": 5.23,
+            "ma20_slope": -2.291,
+            "avg_turnover20": 81728620,
+            "distance_high10": -1.829
+          },
+          "forward5_close_pct": 38.716
+        },
+        {
+          "date": "2026-11-11",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [],
+          "close": 4.81,
+          "metrics": {
+            "change_pct": -0.414,
+            "return3": 4.113,
+            "return5": 3.888,
+            "return20": -2.632,
+            "up_days5": 3,
+            "volume_ratio": 0.939,
+            "bias20": 1.734,
+            "ma5": 4.73,
+            "ma10": 4.635,
+            "ma20": 4.728,
+            "ma60": 5.209,
+            "ma20_slope": -1.878,
+            "avg_turnover20": 81350154,
+            "distance_high10": -1.636
+          },
+          "forward5_close_pct": null
+        }
+      ]
+    },
+    {
+      "code": "301313",
+      "name": "凡拓数创",
+      "board": "创业板",
+      "latest_stage": "shape",
+      "latest_reason": "未满足固定走强形态",
+      "latest_metrics": {
+        "change_pct": -13.876,
+        "return3": -22.975,
+        "return5": -29.651,
+        "return20": 14.979,
+        "up_days5": 2,
+        "volume_ratio": 0.971,
+        "bias20": -16.399,
+        "ma5": 67.382,
+        "ma10": 68.03,
+        "ma20": 64.365,
+        "ma60": 43.1225,
+        "ma20_slope": 13.487,
+        "avg_turnover20": 1783943967,
+        "distance_high10": -33.943
+      },
+      "first_eligible_date": "2026-08-17",
+      "events": [
+        {
+          "date": "2026-09-23",
+          "patterns": [
+            "base_recovery"
+          ],
+          "new_patterns": [
+            "base_recovery"
+          ],
+          "close": 31.31,
+          "metrics": {
+            "change_pct": -0.255,
+            "return3": 2.087,
+            "return5": 4.821,
+            "return20": -2.854,
+            "up_days5": 4,
+            "volume_ratio": 0.849,
+            "bias20": -2.141,
+            "ma5": 30.914,
+            "ma10": 30.682,
+            "ma20": 31.995,
+            "ma60": 34.8338,
+            "ma20_slope": -1.799,
+            "avg_turnover20": 163401085,
+            "distance_high10": -8.797
+          },
+          "forward5_close_pct": -10.156
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "total": 5382,
+    "ready": 5338,
+    "missing": 44,
+    "complete": false
+  },
+  "pattern_counts": {
+    "base_recovery": 11,
+    "early_turn": 63,
+    "steady_rise": 113,
+    "volume_breakout": 37,
+    "pullback_restart": 85
+  },
+  "today_matches": 182,
+  "tracking": 1133,
+  "limitations": [
+    "当前证券名单回看，非历史成分；未复权，历史风险警示未还原",
+    "未来5根收盘变化仅为标签，不含交易时机、成本、停牌和排队，不是策略收益",
+    "同股连续信号重叠，不能当作独立样本或未来胜率",
+    "先看到样例后增加修复分型；新增案例仅核对，不改变固定分型阈值，尚非独立样本外验证"
+  ]
+}

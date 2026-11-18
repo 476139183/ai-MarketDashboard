@@ -39,6 +39,7 @@ sys.path.append(str(REPO / 'markets' / 'a'))
 from public_history import audit_history, DEFAULT_DB as PUBLIC_HISTORY_DB
 import radar as a_radar
 import selection_snapshot as a_selection
+import strength_radar as a_strength
 import market_review as a_review
 STATIC = ROOT / "static"
 WATCHLIST = ROOT / "watchlist.txt"
@@ -215,7 +216,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:
         path=urlparse(self.path).path
-        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources','/api/futures/backtest','/api/futures/paper/control','/api/futures/paper/config','/api/a-paper/control','/api/a-paper/config','/api/a-paper/research','/api/quant-research'):
+        if path not in ('/api/dsa/analysis','/api/dsa/ai-settings', '/api/paper/control','/api/news/refresh','/api/news/sources','/api/futures/backtest','/api/futures/paper/control','/api/futures/paper/config','/api/a-paper/control','/api/a-paper/config','/api/a-paper/research','/api/quant-research','/api/a-strength'):
             self._json(404, {'error': 'not found'})
             return
         origin = self.headers.get('Origin')
@@ -229,6 +230,11 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length))
             if not isinstance(body, dict):
                 raise ValueError('请求必须是 JSON 对象')
+            if path == '/api/a-strength':
+                if body:raise ValueError('走强研究扫描不接受账户或策略控制参数')
+                a_strength.SERVICE.start()
+                self._json(202,a_strength.SERVICE.snapshot())
+                return
             if path == '/api/quant-research':
                 self._json(202,quant_jobs.start(body))
                 return
@@ -288,6 +294,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         path = parsed.path
+
+        if path == '/api/a-strength':
+            self._json(200,a_strength.SERVICE.snapshot())
+            return
 
         if path in ('/quant-research','/quant-research/'):
             self._send(200,(STATIC/'quant-research.html').read_bytes(),'text/html; charset=utf-8')
