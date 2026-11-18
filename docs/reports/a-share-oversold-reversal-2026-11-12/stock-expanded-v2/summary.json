@@ -1,0 +1,393 @@
+{
+  "label": "合并独立324只",
+  "generated_at": "2026-11-12T17:42:10.814676+08:00",
+  "rule_version": "a-oversold-reversal-v2",
+  "replay_version": "bar-close-observe-next-open-v2",
+  "symbols": 324,
+  "start": "2026-11-04",
+  "end": "2026-11-11",
+  "sample_sha256": "2a6aae764683572de0a699d9980fe20c5a3e6af842b790d0846231b9ddfe49f1",
+  "results": [
+    {
+      "replay_version": "bar-close-observe-next-open-v2",
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "monthly": [
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-11-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-11",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 0,
+      "case": "baseline"
+    },
+    {
+      "replay_version": "bar-close-observe-next-open-v2",
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 4,
+        "ready_plans": 4
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100215.74,
+        "return_pct": 0.2157399999999976,
+        "monthly_equivalent_pct": 0.8233098377660841,
+        "max_drawdown_pct": 0.3104612612784591,
+        "closed_trades": 1,
+        "win_rate_pct": 100.0,
+        "fees": 18.26,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "monthly": [
+        {
+          "month": "2026-11",
+          "return_pct": 0.2157399999999976,
+          "end_equity": 100215.74
+        }
+      ],
+      "trades": [
+        {
+          "code": "603025",
+          "name": "大豪科技",
+          "shares": 1300,
+          "entry_at": 1793758500002,
+          "exit_at": 1793929500002,
+          "entry_price": 12.04,
+          "exit_price": 12.22,
+          "signal_date": "2026-11-03",
+          "stop": 11.69,
+          "target": 12.74,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.16,
+            "stamp": 0.0,
+            "total": 5.16
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.16,
+            "stamp": 7.94,
+            "total": 13.1
+          },
+          "fees": 18.26,
+          "net_pnl": 215.74,
+          "return_pct": 1.3778999512044332,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "603025",
+            "name": "大豪科技",
+            "signal_date": "2026-11-03",
+            "generated_at": "2026-11-03T16:00:00+08:00",
+            "lower": 11.75,
+            "upper": 12.29,
+            "stop": 11.69,
+            "target": 12.74,
+            "signal_close": 12.02,
+            "key": "2026-11-03:603025",
+            "strategy_version": "a-oversold-reversal-v2",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.5500000000000005,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 11.83,
+            "confirmation": "2026-11-04 10:15",
+            "signal_id": "2026-11-04 10:15",
+            "confirmed_at": 1793758500000,
+            "estimated_net_reward": 878.4,
+            "net_risk_reward": 1.8077793784729368,
+            "estimated_stop_risk": 485.9,
+            "risk_budget": 500.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-11-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-04",
+          "equity": 100293.84
+        },
+        {
+          "date": "2026-11-05",
+          "equity": 100527.84
+        },
+        {
+          "date": "2026-11-06",
+          "equity": 100215.74
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 100215.74
+        },
+        {
+          "date": "2026-11-10",
+          "equity": 100215.74
+        },
+        {
+          "date": "2026-11-11",
+          "equity": 100215.74
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 0,
+      "case": "oversold_reversal",
+      "paired_cost_stress": {
+        "end_equity": 100171.5,
+        "return_pct": 0.1714999999999911,
+        "closed_trades": 1,
+        "win_rate_pct": 100.0,
+        "trades": [
+          {
+            "code": "603025",
+            "shares": 1300,
+            "baseline_net_pnl": 215.74,
+            "stress_net_pnl": 171.5,
+            "stress_fees": 36.5
+          }
+        ]
+      }
+    },
+    {
+      "replay_version": "bar-close-observe-next-open-v2",
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 4,
+        "ready_plans": 4
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100156.77,
+        "return_pct": 0.15677000000000607,
+        "monthly_equivalent_pct": 0.5977733883437031,
+        "max_drawdown_pct": 0.31147696156384075,
+        "closed_trades": 1,
+        "win_rate_pct": 100.0,
+        "fees": 35.23,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "monthly": [
+        {
+          "month": "2026-11",
+          "return_pct": 0.15677000000000607,
+          "end_equity": 100156.77
+        }
+      ],
+      "trades": [
+        {
+          "code": "603025",
+          "name": "大豪科技",
+          "shares": 1200,
+          "entry_at": 1793758500002,
+          "exit_at": 1793929500002,
+          "entry_price": 12.05,
+          "exit_price": 12.21,
+          "signal_date": "2026-11-03",
+          "stop": 11.69,
+          "target": 12.74,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.29,
+            "stamp": 0.0,
+            "total": 10.29
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.29,
+            "stamp": 14.65,
+            "total": 24.94
+          },
+          "fees": 35.23,
+          "net_pnl": 156.77,
+          "return_pct": 1.0833922471491588,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "603025",
+            "name": "大豪科技",
+            "signal_date": "2026-11-03",
+            "generated_at": "2026-11-03T16:00:00+08:00",
+            "lower": 11.75,
+            "upper": 12.29,
+            "stop": 11.69,
+            "target": 12.74,
+            "signal_close": 12.02,
+            "key": "2026-11-03:603025",
+            "strategy_version": "a-oversold-reversal-v2",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.5500000000000005,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 11.83,
+            "confirmation": "2026-11-04 10:15",
+            "signal_id": "2026-11-04 10:15",
+            "confirmed_at": 1793758500000,
+            "estimated_net_reward": 768.14,
+            "net_risk_reward": 1.565811199217237,
+            "estimated_stop_risk": 490.57,
+            "risk_budget": 500.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-11-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-04",
+          "equity": 100253.71
+        },
+        {
+          "date": "2026-11-05",
+          "equity": 100469.71
+        },
+        {
+          "date": "2026-11-06",
+          "equity": 100156.77
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 100156.77
+        },
+        {
+          "date": "2026-11-10",
+          "equity": 100156.77
+        },
+        {
+          "date": "2026-11-11",
+          "equity": 100156.77
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 0,
+      "case": "cost_double"
+    }
+  ],
+  "limitations": [
+    "当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。",
+    "逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。",
+    "只用完整16根的15分钟交易日；收盘样本只观察/准备，不在该收盘价成交，后续开盘样本才尝试撮合。",
+    "相邻收盘与开盘同分钟时，使用边界后1/2毫秒表示模型内先后顺序，不是真实毫秒报价；成交价仍仅取实际K线开盘并计入滑点、费用。没有历史盘口，属于下一根开盘执行假设。",
+    "历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。",
+    "与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。",
+    "账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。",
+    "同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。",
+    "名单来自2026-11-03T17:06:29.382976+08:00的固定存档，排除原44只开发股票及当时名称显示ST/退市的股票。",
+    "不按检验期收益增删证券；非全市场，上市、历史ST及公司行动仍未完全还原。",
+    "数据失败：{\"688798\": \"信号日日线不可用：信号日日线未落地；信号日日线未落地\"}",
+    "名单来自BaoStock指定2026-11-03历史证券名单，排除原44及原124只，按代码SHA256固定取200只；未按检验期表现替换。",
+    "不按检验期收益增删证券；非全市场，上市、历史ST及公司行动仍未完全还原。",
+    "数据失败：{}",
+    "原独立124只与固定新增200只合并；未根据收益排除原样本。"
+  ]
+}

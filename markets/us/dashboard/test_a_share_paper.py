@@ -4,6 +4,8 @@ from datetime import datetime,timedelta
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
+from types import SimpleNamespace
+import sys
 from unittest.mock import patch
 import a_share_paper as P
 
@@ -27,6 +29,246 @@ def observation(now=None,price=9.99,symbol='600000',**updates):
 
 
 class ASharePaperTests(unittest.TestCase):
+    def test_reversal_requires_release_or_explicit_paper_trial_for_live_source(self):
+        from test_oversold_reversal import setup_history,minutes
+        r=radar();r.update(market_pass=False,oversold_reversal_enabled=True,oversold_reversal_market_pass=True)
+        r['strategy_candidates'][0].update(close=12.15,trade_plan=P.M.build_plan(*setup_history(),'测试'))
+        t=clock();pack=observation(t,price=12.1,previous_close=12.15,ask=12.1,upper_limit=14.,lower_limit=10.)
+        for row in pack['daily']:row['close']=12.15
+        pack['minutes']=[dict(b,time='2026-11-09'+b['time'][10:]) for b in minutes()]
+        self.account.set_enabled(True,now=t-10000)
+        with patch.object(P.M,'RELEASED',False),patch.object(P.M,'PAPER_TRIAL',False):
+            self.account.step(r,self.calendar,{'600000':pack},now=t)
+            self.assertEqual(self.account.snapshot()['plans'],[])
+        stale=deepcopy(r);stale['strategy_candidates'][0]['trade_plan']['strategy_version']='a-oversold-reversal-v1'
+        with patch.object(P.M,'RELEASED',False),patch.object(P.M,'PAPER_TRIAL',True):
+            self.account.step(stale,self.calendar,{'600000':pack},now=t)
+            self.assertEqual(self.account.snapshot()['plans'],[])
+        with patch.object(P.M,'RELEASED',False),patch.object(P.M,'PAPER_TRIAL',True):
+            for offset in (5000,10000):
+                pack['quote']['quote_at']=t+offset;self.account.step(r,self.calendar,{'600000':pack},now=t+offset)
+            self.assertEqual(len(self.account.snapshot()['positions']),1)
+
+    def test_reversal_uses_its_mean_target_after_t_plus_one_and_not_legacy_ma10(self):
+        from test_oversold_reversal import setup_history,minutes
+        r=radar();plan=P.M.build_plan(*setup_history(),'测试')
+        r.update(market_pass=False,oversold_reversal_enabled=True,oversold_reversal_market_pass=True)
+        r['strategy_candidates'][0].update(close=12.15,trade_plan=plan)
+        t=int(datetime.fromisoformat('2026-11-09T10:00:05+08:00').timestamp()*1000)
+        pack=observation(t,price=12.1,previous_close=12.15,ask=12.1,bid=12.09,upper_limit=14.,lower_limit=10.)
+        for row in pack['daily']:row['close']=12.15
+        pack['minutes']=[dict(b,time='2026-11-09'+b['time'][10:]) for b in minutes()]
+        self.account.set_enabled(True,now=t-10000)
+        with patch.object(P.M,'RELEASED',True):
+            for offset in (0,5000):
+                pack['quote']['quote_at']=t+offset;self.account.step(r,self.calendar,{'600000':pack},now=t+offset)
+            p=self.account.snapshot()['positions'][0]
+            self.assertEqual(p['target'],12.55)
+            self.assertLessEqual(p['plan']['estimated_stop_risk'],500.)
+            pack['quote'].update(price=12.6,bid=12.59,quote_at=t+10000)
+            self.account.step(r,self.calendar,{'600000':pack},now=t+10000)
+            self.assertEqual(self.account.snapshot()['trades'],[])
+            tomorrow=int(datetime.fromisoformat('2026-11-10T10:00:05+08:00').timestamp()*1000)
+            newer=observation(tomorrow,price=12.4,previous_close=12.2,bid=12.39,upper_limit=14.,lower_limit=10.)
+            for row in newer['daily']:row['close']=13.
+            newer['daily'][-1]['close']=12.2
+            # Last close is below MA10, but the reversal's own target/failure has not occurred.
+            self.account.step({},self.calendar+['2026-11-10'],{'600000':newer},now=tomorrow)
+            self.assertEqual(self.account.snapshot()['trades'],[])
+            newer['quote'].update(price=12.6,bid=12.59,quote_at=tomorrow+5000)
+            self.account.step({},self.calendar+['2026-11-10'],{'600000':newer},now=tomorrow+5000)
+            self.assertEqual(self.account.snapshot()['trades'][0]['reason'],'target')
+
+    def test_reversal_rejects_in_band_quote_when_net_mean_reward_cannot_cover_stop_risk(self):
+        from test_oversold_reversal import setup_history,minutes
+        r=radar();r.update(market_pass=False,oversold_reversal_enabled=True,oversold_reversal_market_pass=True)
+        r['strategy_candidates'][0].update(close=12.15,trade_plan=P.M.build_plan(*setup_history(),'测试',version='a-oversold-reversal-v2'))
+        t=int(datetime.fromisoformat('2026-11-09T10:00:05+08:00').timestamp()*1000)
+        pack=observation(t,price=12.2,previous_close=12.15,ask=12.2,bid=12.19,upper_limit=14.,lower_limit=10.)
+        for row in pack['daily']:row['close']=12.15
+        pack['minutes']=[dict(b,time='2026-11-09'+b['time'][10:]) for b in minutes()]
+        self.account.set_enabled(True,now=t-10000)
+        with patch.object(P.M,'RELEASED',True),patch.object(P.M,'active_version',return_value='a-oversold-reversal-v2'):
+            for offset in (0,5000):
+                pack['quote']['quote_at']=t+offset;self.account.step(r,self.calendar,{'600000':pack},now=t+offset)
+        s=self.account.snapshot();self.assertEqual(s['positions'],[])
+        self.assertIn('净目标空间',s['error'])
+
+    def test_v3_reversal_rejects_mean_target_that_is_positive_only_before_cost_stress(self):
+        from test_oversold_reversal import setup_history,minutes
+        r=radar();r.update(market_pass=False,oversold_reversal_enabled=True,oversold_reversal_market_pass=True)
+        plan=P.M.build_plan(*setup_history(),'测试');plan['sniper'].update(ideal_buy=12.23,take_profit=12.25)
+        r['strategy_candidates'][0].update(close=12.15,trade_plan=plan)
+        t=int(datetime.fromisoformat('2026-11-09T10:00:05+08:00').timestamp()*1000)
+        pack=observation(t,price=12.2,previous_close=12.15,ask=12.2,bid=12.19,upper_limit=14.,lower_limit=10.)
+        for row in pack['daily']:row['close']=12.15
+        pack['minutes']=[dict(b,time='2026-11-09'+b['time'][10:]) for b in minutes()]
+        self.account.set_enabled(True,now=t-10000)
+        with patch.object(P.M,'RELEASED',True):
+            for offset in (0,5000):
+                pack['quote']['quote_at']=t+offset;self.account.step(r,self.calendar,{'600000':pack},now=t+offset)
+        self.assertEqual(self.account.snapshot()['positions'],[])
+
+    def test_historical_prepare_only_cannot_fill_close_or_run_on_live_account(self):
+        with self.assertRaisesRegex(ValueError,'历史'):
+            self.account.step({},[],{},now=clock(),prepare_only=True)
+        historical=P.ASharePaperAccount(Path(self.tmp.name)/'research.sqlite3',source='sina_historical_15m_open')
+        historical.set_enabled(True,now=clock(second=0)-10000)
+        pack=observation(clock(second=0));pack['quote']['source']='sina_historical_15m_open'
+        historical.step(radar(),self.calendar,{'600000':pack},now=clock(second=0),prepare_only=True)
+        pack['quote']['quote_at']=clock(second=5)
+        historical.step(radar(),self.calendar,{'600000':pack},now=clock(second=5),prepare_only=True)
+        self.assertEqual(historical.snapshot()['positions'],[])
+        pack['quote']['quote_at']=clock(second=10)
+        historical.step(radar(),self.calendar,{'600000':pack},now=clock(second=10))
+        self.assertEqual(len(historical.snapshot()['positions']),1)
+
+    def continuation_case(self):
+        if str(P.RADAR_PATH.parent) not in sys.path:sys.path.append(str(P.RADAR_PATH.parent))
+        from test_continuation import history,minutes
+        import continuation as C
+        plan=C.build_plan(*history(),'测试')
+        r=radar();r.update(market_pass=False,continuation_market_pass=True,continuation_enabled=True)
+        r['strategy_candidates'][0].update(close=13.2,trade_plan=plan)
+        t=int(datetime.fromisoformat('2026-11-09T10:15:05+08:00').timestamp()*1000)
+        pack=observation(t,price=13.4,previous_close=13.2,ask=13.4,bid=13.39,upper_limit=15.,lower_limit=11.)
+        for row in pack['daily']:row['close']=13.2
+        pack['minutes']=minutes('2026-11-09')
+        return r,t,pack
+
+    def trend_case(self):
+        from test_continuation import history
+        from test_trend_reclaim import bars
+        r,t,pack=self.continuation_case();r.update(trend_reclaim_enabled=True,trend_reclaim_market_pass=True)
+        r['strategy_candidates'][0]['trade_plan']=P.T.build_plan(*history(),'测试')
+        pack['quote'].update(price=13.18,ask=13.18,bid=13.17)
+        pack['minutes']=[dict(b,time='2026-11-09'+b['time'][10:]) for b in bars()]
+        return r,t,pack
+
+    def test_unreleased_trend_reclaim_blocks_live_buys_and_released_rule_keeps_ma20(self):
+        r,t,pack=self.trend_case();self.account.set_enabled(True,now=t-10000)
+        self.assertEqual(len(P.approved_plans(r,'2026-11-06',t)),1)
+        with patch.object(P.T,'RELEASED',False):
+            for offset in (0,5000):
+                pack['quote']['quote_at']=t+offset;self.account.step(r,self.calendar,{'600000':pack},now=t+offset)
+        self.assertEqual(self.account.snapshot()['positions'],[])
+        with patch.object(P.T,'RELEASED',True):
+            for offset in (10000,15000):
+                pack['quote']['quote_at']=t+offset;self.account.step(r,self.calendar,{'600000':pack},now=t+offset)
+        p=self.account.snapshot()['positions'][0]
+        self.assertEqual(p['costs']['exit_ma'],20);self.assertIsNone(p['target'])
+
+    def test_missing_trend_center_does_not_leave_partially_approved_plan(self):
+        r,t,_=self.trend_case();r['strategy_candidates'][0]['trade_plan']['center']=None
+        self.assertEqual(P.approved_plans(r,'2026-11-06',t),[])
+
+    @patch.object(P.C,'RELEASED',True)
+    def test_overnight_archive_keeps_experimental_admission_flags(self):
+        r,t,pack=self.continuation_case();source=[r]
+        self.account.set_enabled(True,now=clock(day=6,hour=16))
+        runner=P.ASharePaperRunner(self.account,load_radar=lambda:source[0],refresh=lambda:r,
+            fetch=lambda codes:{'600000':pack},calendar=lambda day:self.calendar)
+        runner.tick(now=clock(day=6,hour=16))
+        self.assertTrue(self.account.snapshot()['candidate_snapshot']['continuation_enabled'])
+        source[0]=radar('2026-11-09')
+        runner.tick(now=t);pack['quote']['quote_at']=t+5000;runner.tick(now=t+5000)
+        self.assertEqual(len(self.account.snapshot()['positions']),1)
+
+    @patch.object(P.C,'RELEASED',True)
+    def test_continuation_requires_confirmation_and_limits_cash_and_costed_risk(self):
+        r,t,pack=self.continuation_case()
+        self.account.configure(dict(per_stock_budget=100000))
+        self.account.set_enabled(True,now=t-10000)
+        self.account.step(r,self.calendar,{'600000':pack},now=t)
+        self.assertEqual(self.account.snapshot()['positions'],[])
+        pack['quote']['quote_at']=t+5000
+        self.account.step(r,self.calendar,{'600000':pack},now=t+5000)
+        p=self.account.snapshot()['positions'][0]
+        self.assertEqual(p['plan']['entry_mode'],'continuation')
+        self.assertIsNone(p['target'])
+        self.assertLessEqual(p['plan']['estimated_stop_risk'],250.)
+        self.assertLessEqual(p['entry_price']*p['shares']+p['entry_fee'],50000.)
+        pack['quote'].update(price=13.8,bid=13.79,quote_at=t+10000)
+        self.account.step(r,self.calendar,{'600000':pack},now=t+10000)
+        self.assertEqual(self.account.snapshot()['trades'],[])
+
+    def test_continuation_cannot_buy_on_breakout_alone_or_bad_market_context(self):
+        r,t,pack=self.continuation_case();self.account.set_enabled(True,now=t-10000)
+        pack['minutes']=pack['minutes'][:2]
+        self.account.step(r,self.calendar,{'600000':pack},now=t)
+        pack['quote']['quote_at']=t+5000
+        self.account.step(r,self.calendar,{'600000':pack},now=t+5000)
+        self.assertEqual(self.account.snapshot()['positions'],[])
+        r['continuation_market_pass']=False
+        self.assertEqual(P.approved_plans(r,'2026-11-06',t),[])
+
+    @patch.object(P.C,'RELEASED',True)
+    def test_continuation_t_plus_one_then_small_profit_holds_until_structure_or_stop(self):
+        r,t,pack=self.continuation_case();self.account.set_enabled(True,now=t-10000)
+        self.account.step(r,self.calendar,{'600000':pack},now=t)
+        pack['quote']['quote_at']=t+5000
+        self.account.step(r,self.calendar,{'600000':pack},now=t+5000)
+        p=self.account.snapshot()['positions'][0]
+        pack['quote'].update(price=13.,bid=12.99,quote_at=t+10000)
+        self.account.step(r,self.calendar,{'600000':pack},now=t+10000)
+        self.assertEqual(self.account.snapshot()['trades'],[])
+        tomorrow=int(datetime.fromisoformat('2026-11-10T10:15:05+08:00').timestamp()*1000)
+        newer=observation(tomorrow,price=p['entry_price']+.03,previous_close=13.2,bid=p['entry_price']+.02,upper_limit=15.,lower_limit=11.)
+        for row in newer['daily']:row['close']=13.2
+        newer['minutes']=[]
+        self.account.step({},self.calendar+['2026-11-10'],{'600000':newer},now=tomorrow)
+        self.assertEqual(self.account.snapshot()['trades'],[])
+        newer['quote'].update(price=13.,bid=12.99,quote_at=tomorrow+5000)
+        self.account.step({},self.calendar+['2026-11-10'],{'600000':newer},now=tomorrow+5000)
+        self.assertEqual(self.account.snapshot()['trades'][0]['reason'],'stop')
+
+    def test_unreleased_channel_never_buys_in_live_account_even_if_snapshot_contains_it(self):
+        r,t,pack=self.continuation_case();self.account.set_enabled(True,now=t-10000)
+        with patch.object(P.C,'RELEASED',False):
+            self.account.step(r,self.calendar,{'600000':pack},now=t)
+            pack['quote']['quote_at']=t+5000
+            self.account.step(r,self.calendar,{'600000':pack},now=t+5000)
+        self.assertEqual(self.account.snapshot()['positions'],[])
+
+    def test_stale_execution_daily_is_not_cached_as_success_and_can_retry(self):
+        P.daily_rows.cache_clear()
+        stale=[dict(date='2026-11-05',close=10)]
+        fresh=[dict(date='2026-11-06',close=10)]
+        from unittest.mock import Mock
+        fallback=Mock(side_effect=[ValueError('日线未就绪'),(fresh,'fresh')])
+        try:
+            with patch('feeds.cn.from_sina',return_value=(stale,'stale')), \
+                 patch.object(P,'market_calendar',return_value=self.calendar), \
+                 patch.dict(sys.modules,radar=SimpleNamespace(_current_history=fallback)):
+                with self.assertRaises(ValueError):P.daily_rows('600000','2026-11-09')
+                self.assertEqual(P.daily_rows('600000','2026-11-09'),fresh)
+                self.assertEqual(P.daily_rows('600000','2026-11-09'),fresh)
+                self.assertEqual(fallback.call_count,2)
+        finally:P.daily_rows.cache_clear()
+
+    def test_incomplete_scan_retries_and_never_archives_invalid_empty_list(self):
+        broken = dict(radar('2026-11-09'), data_ready=False, market_pass=False)
+        calls = []
+        source = [broken]
+        runner = P.ASharePaperRunner(self.account, load_radar=lambda: source[0],
+            refresh=lambda: calls.append('scan') or source[0], fetch=lambda codes: {})
+        self.account.set_enabled(True, now=clock(hour=16))
+        runner.tick(now=clock(hour=16))
+        self.assertFalse(self.account.snapshot()['candidate_snapshot'])
+        self.assertIn('日线', self.account.snapshot()['scan_error'])
+        runner.tick(now=clock(hour=16, second=15))
+        self.assertEqual(len(calls), 1)
+        source[0] = dict(radar('2026-11-09'), data_ready=True)
+        runner.tick(now=clock(hour=17))
+        self.assertEqual(self.account.snapshot()['plan_date'], '2026-11-09')
+        self.assertIsNone(self.account.snapshot()['scan_error'])
+
+    def test_enabled_account_does_not_imply_live_worker(self):
+        self.account.set_enabled(True, now=clock())
+        runner = P.ASharePaperRunner(self.account, load_radar=radar)
+        self.assertFalse(runner.snapshot()['runner_alive'])
+        self.assertIsNone(runner.snapshot()['runner_last_tick_at'])
+
     def setUp(self):
         self.tmp=TemporaryDirectory();self.account=P.ASharePaperAccount(Path(self.tmp.name)/'a.sqlite3')
         self.calendar=['2026-11-05','2026-11-06','2026-11-09']
@@ -156,6 +398,18 @@ class ASharePaperTests(unittest.TestCase):
         runner.tick(now=clock(hour=16));self.assertEqual(calls,[])
         self.account.set_enabled(True,now=clock(hour=16));runner.tick(now=clock(hour=16));runner.tick(now=clock(hour=17))
         self.assertEqual(calls,['scan'])
+
+    def test_new_revision_regenerates_same_day_old_archive_once_without_reset(self):
+        self.account.set_enabled(True,now=clock(hour=16))
+        with self.account.transaction() as s:
+            s.update(scan_attempt_day='2026-11-09',candidate_snapshot=radar('2026-11-09'),plan_date='2026-11-09')
+        calls=[]
+        r=dict(radar('2026-11-09'),entry_revision=P.C.ENTRY_REVISION,continuation_market_pass=True)
+        runner=P.ASharePaperRunner(self.account,load_radar=lambda:radar('2026-11-09'),refresh=lambda:calls.append(1) or r)
+        runner.tick(now=clock(hour=16));runner.tick(now=clock(hour=17))
+        s=self.account.snapshot()
+        self.assertEqual(calls,[1]);self.assertEqual(s['candidate_snapshot']['entry_revision'],P.C.ENTRY_REVISION)
+        self.assertEqual(s['cash'],100000);self.assertTrue(s['enabled']);self.assertEqual(s['trades'],[])
 
 
 if __name__=='__main__':unittest.main()

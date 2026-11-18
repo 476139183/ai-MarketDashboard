@@ -38,6 +38,7 @@ sys.path.append(str(ROOT.parent))
 sys.path.append(str(REPO / 'markets' / 'a'))
 from public_history import audit_history, DEFAULT_DB as PUBLIC_HISTORY_DB
 import radar as a_radar
+import selection_snapshot as a_selection
 import market_review as a_review
 STATIC = ROOT / "static"
 WATCHLIST = ROOT / "watchlist.txt"
@@ -121,7 +122,7 @@ def _radar_payload():
     with _RADAR_LOCK:
         state = dict(_RADAR_STATE)
     return {**cached, 'configured_strategy_version': a_radar.STRATEGY_VERSION,
-            'status': state['status'], 'error': state['error']}
+            'status': state['status'], 'error': state['error'],'selection_research':a_selection.load()}
 
 
 def _start_radar_refresh():

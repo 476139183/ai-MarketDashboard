@@ -1,0 +1,512 @@
+{
+  "replay_version": "bar-close-observe-next-open-v2",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0003,
+    "min_commission": 5.0,
+    "transfer_rate": 1e-05,
+    "stamp_rate": 0.0005,
+    "slippage_ticks": 1,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 76,
+    "ready_plans": 76
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 99911.29,
+    "return_pct": -0.08871000000000295,
+    "monthly_equivalent_pct": -0.3370941784865522,
+    "max_drawdown_pct": 0.33475000000000005,
+    "closed_trades": 4,
+    "win_rate_pct": 25.0,
+    "fees": 74.71,
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "calendar_days": 8
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": -0.08871000000000295,
+      "end_equity": 99911.29
+    }
+  ],
+  "trades": [
+    {
+      "code": "002043",
+      "name": "兔 宝 宝",
+      "shares": 700,
+      "entry_at": 1793856600002,
+      "exit_at": 1793943000002,
+      "entry_price": 13.46,
+      "exit_price": 13.31,
+      "signal_date": "2026-11-04",
+      "stop": 13.33,
+      "target": null,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 0.0,
+        "total": 5.09
+      },
+      "exit_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 4.66,
+        "total": 9.75
+      },
+      "fees": 14.84,
+      "net_pnl": -119.84,
+      "return_pct": -1.2712300402351095,
+      "reason": "stop",
+      "plan": {
+        "code": "002043",
+        "name": "兔 宝 宝",
+        "signal_date": "2026-11-04",
+        "generated_at": "2026-11-04T16:00:00+08:00",
+        "lower": 13.33,
+        "upper": 13.51,
+        "stop": 13.27,
+        "target": null,
+        "signal_close": 13.23,
+        "key": "2026-11-04:002043",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 0.5857142857142857,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 13.33,
+        "confirmed_at": 1793856600000,
+        "signal_id": "2026-11-05 13:15",
+        "confirmation": "2026-11-05 13:30",
+        "estimated_stop_risk": 154.82,
+        "risk_budget": 250.0
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      }
+    },
+    {
+      "code": "002372",
+      "name": "伟星新材",
+      "shares": 1100,
+      "entry_at": 1793856600002,
+      "exit_at": 1794188700002,
+      "entry_price": 9.0,
+      "exit_price": 8.89,
+      "signal_date": "2026-11-04",
+      "stop": 8.91,
+      "target": null,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.1,
+        "stamp": 0.0,
+        "total": 5.1
+      },
+      "exit_costs": {
+        "commission": 5.0,
+        "transfer": 0.1,
+        "stamp": 4.89,
+        "total": 9.99
+      },
+      "fees": 15.09,
+      "net_pnl": -136.09,
+      "return_pct": -1.3739386780547396,
+      "reason": "stop",
+      "plan": {
+        "code": "002372",
+        "name": "伟星新材",
+        "signal_date": "2026-11-04",
+        "generated_at": "2026-11-04T16:00:00+08:00",
+        "lower": 8.94,
+        "upper": 9.02,
+        "stop": 8.91,
+        "target": null,
+        "signal_close": 8.8,
+        "key": "2026-11-04:002372",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 0.2707142857142858,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 8.94,
+        "confirmed_at": 1793856600000,
+        "signal_id": "2026-11-05 13:15",
+        "confirmation": "2026-11-05 13:30",
+        "estimated_stop_risk": 125.1,
+        "risk_budget": 249.96977500000003
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      }
+    },
+    {
+      "code": "002181",
+      "name": "粤 传 媒",
+      "shares": 800,
+      "entry_at": 1793934900002,
+      "exit_at": 1794193200002,
+      "entry_price": 11.2,
+      "exit_price": 11.17,
+      "signal_date": "2026-11-05",
+      "stop": 11.19,
+      "target": null,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 0.0,
+        "total": 5.09
+      },
+      "exit_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 4.47,
+        "total": 9.56
+      },
+      "fees": 14.65,
+      "net_pnl": -38.65,
+      "return_pct": -0.4311166982149649,
+      "reason": "stop",
+      "plan": {
+        "code": "002181",
+        "name": "粤 传 媒",
+        "signal_date": "2026-11-05",
+        "generated_at": "2026-11-05T16:00:00+08:00",
+        "lower": 11.05,
+        "upper": 11.27,
+        "stop": 10.95,
+        "target": null,
+        "signal_close": 11.06,
+        "key": "2026-11-05:002181",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 0.965,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 11.05,
+        "confirmed_at": 1793934900000,
+        "signal_id": "2026-11-06 10:45",
+        "confirmation": "2026-11-06 11:15",
+        "estimated_stop_risk": 222.56,
+        "risk_budget": 250.032025
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      }
+    },
+    {
+      "code": "002181",
+      "name": "粤 传 媒",
+      "shares": 800,
+      "entry_at": 1794204900002,
+      "exit_at": 1794361500002,
+      "entry_price": 11.59,
+      "exit_price": 11.69,
+      "signal_date": "2026-11-06",
+      "stop": 11.85,
+      "target": null,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 0.0,
+        "total": 5.09
+      },
+      "exit_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 4.68,
+        "total": 9.77
+      },
+      "fees": 14.86,
+      "net_pnl": 65.14,
+      "return_pct": 0.7021598367591562,
+      "reason": "stop",
+      "plan": {
+        "code": "002181",
+        "name": "粤 传 媒",
+        "signal_date": "2026-11-06",
+        "generated_at": "2026-11-06T16:00:00+08:00",
+        "lower": 11.44,
+        "upper": 11.68,
+        "stop": 11.34,
+        "target": null,
+        "signal_close": 11.25,
+        "key": "2026-11-06:002181",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 0.9900000000000001,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 11.44,
+        "confirmed_at": 1794204900000,
+        "signal_id": "2026-11-09 13:45",
+        "confirmation": "2026-11-09 14:15",
+        "estimated_stop_risk": 222.71,
+        "risk_budget": 249.24335
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      }
+    }
+  ],
+  "curve": [
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 99962.81
+    },
+    {
+      "date": "2026-11-06",
+      "equity": 99832.97
+    },
+    {
+      "date": "2026-11-09",
+      "equity": 99665.25
+    },
+    {
+      "date": "2026-11-10",
+      "equity": 100116.25
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 99911.29
+    }
+  ],
+  "open_positions": [
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "shares": 300,
+      "entry_price": 26.04,
+      "entry_at": 1794204900002,
+      "entry_day": "2026-11-09",
+      "entry_fee": 5.08,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.08,
+        "stamp": 0.0,
+        "total": 5.08
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "signal_date": "2026-11-06",
+      "plan": {
+        "code": "002242",
+        "name": "九阳股份",
+        "signal_date": "2026-11-06",
+        "generated_at": "2026-11-06T16:00:00+08:00",
+        "lower": 25.75,
+        "upper": 26.19,
+        "stop": 25.58,
+        "target": null,
+        "signal_close": 25.1,
+        "key": "2026-11-06:002242",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 1.6757142857142848,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 25.75,
+        "confirmed_at": 1794204900000,
+        "signal_id": "2026-11-09 14:00",
+        "confirmation": "2026-11-09 14:15",
+        "estimated_stop_risk": 155.0,
+        "risk_budget": 249.26355
+      },
+      "stop": 26.17,
+      "target": null,
+      "last_price": 26.59,
+      "quote_at": 1794380400000,
+      "valuation_blocked": false,
+      "unrealized_pnl": 159.92,
+      "sellable_shares": 300
+    },
+    {
+      "code": "002249",
+      "name": "大洋电机",
+      "shares": 1200,
+      "entry_price": 7.92,
+      "entry_at": 1794376800002,
+      "entry_day": "2026-11-11",
+      "entry_fee": 5.1,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.1,
+        "stamp": 0.0,
+        "total": 5.1
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "signal_date": "2026-11-10",
+      "plan": {
+        "code": "002249",
+        "name": "大洋电机",
+        "signal_date": "2026-11-10",
+        "generated_at": "2026-11-10T16:00:00+08:00",
+        "lower": 7.82,
+        "upper": 7.97,
+        "stop": 7.75,
+        "target": null,
+        "signal_close": 7.84,
+        "key": "2026-11-10:002249",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 0.6835714285714286,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 7.82,
+        "confirmed_at": 1794376800000,
+        "signal_id": "2026-11-11 13:30",
+        "confirmation": "2026-11-11 14:00",
+        "estimated_stop_risk": 230.83,
+        "risk_budget": 249.81119999999999
+      },
+      "stop": 7.75,
+      "target": null,
+      "last_price": 7.92,
+      "quote_at": 1794380400000,
+      "valuation_blocked": false,
+      "unrealized_pnl": -5.1,
+      "sellable_shares": 0
+    },
+    {
+      "code": "300085",
+      "name": "银之杰",
+      "shares": 300,
+      "entry_price": 28.53,
+      "entry_at": 1794376800002,
+      "entry_day": "2026-11-11",
+      "entry_fee": 5.09,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.09,
+        "stamp": 0.0,
+        "total": 5.09
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "signal_date": "2026-11-10",
+      "plan": {
+        "code": "300085",
+        "name": "银之杰",
+        "signal_date": "2026-11-10",
+        "generated_at": "2026-11-10T16:00:00+08:00",
+        "lower": 28.47,
+        "upper": 28.76,
+        "stop": 28.19,
+        "target": null,
+        "signal_close": 28.69,
+        "key": "2026-11-10:300085",
+        "strategy_version": "a-continuation-v1",
+        "strategy_rule": "strong_continuation",
+        "entry_mode": "continuation",
+        "atr14": 2.4685714285714284,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "breakout_level": 28.47,
+        "confirmed_at": 1794376800000,
+        "signal_id": "2026-11-11 13:45",
+        "confirmation": "2026-11-11 14:00",
+        "estimated_stop_risk": 119.4,
+        "risk_budget": 249.76845000000003
+      },
+      "stop": 28.19,
+      "target": null,
+      "last_price": 28.5,
+      "quote_at": 1794380400000,
+      "valuation_blocked": false,
+      "unrealized_pnl": -14.09,
+      "sellable_shares": 0
+    }
+  ],
+  "incomplete_minute_days": 0,
+  "case": "continuation_v1",
+  "periods": [
+    {
+      "label": "后段",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99911.29,
+        "return_pct": -0.08871000000000295,
+        "monthly_equivalent_pct": -0.3370941784865522,
+        "max_drawdown_pct": 0.33475000000000005,
+        "closed_trades": 4,
+        "win_rate_pct": 25.0,
+        "fees": 59.44,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      }
+    }
+  ]
+}

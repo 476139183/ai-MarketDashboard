@@ -1,0 +1,90 @@
+{
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0003,
+    "min_commission": 5.0,
+    "transfer_rate": 1e-05,
+    "stamp_rate": 0.0005,
+    "slippage_ticks": 1,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 0,
+    "ready_plans": 0
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 100000.0,
+    "return_pct": 0.0,
+    "monthly_equivalent_pct": 0.0,
+    "max_drawdown_pct": 0,
+    "closed_trades": 0,
+    "win_rate_pct": null,
+    "fees": 0.0,
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "calendar_days": 8
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": 0.0,
+      "end_equity": 100000.0
+    }
+  ],
+  "trades": [],
+  "curve": [
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-06",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-09",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-10",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 100000.0
+    }
+  ],
+  "open_positions": [],
+  "incomplete_minute_days": 0,
+  "case": "setups_v2",
+  "periods": [
+    {
+      "label": "后段",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      }
+    }
+  ]
+}

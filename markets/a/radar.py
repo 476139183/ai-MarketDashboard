@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """A 股盘后雷达：按最近完整交易日扫描，给出次日观察名单。"""
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from collections import Counter
 from datetime import datetime, timedelta
 import json
 from pathlib import Path
@@ -16,6 +17,8 @@ from large_evaluate import market_above_ma20
 from large_universe import exclusion_reason, quotes
 from trade_plan import build_trade_plan
 from stock_setups import VERSION as STRATEGY_VERSION, LABELS as SETUP_LABELS, evaluate_setups, selected_setup
+import continuation as C
+import oversold_reversal as M
 
 OUT = Path(__file__).resolve().parent / 'radar-latest.json'
 HOT = Path(__file__).resolve().parent / 'hot-universe.json'
@@ -67,6 +70,30 @@ def _load_hot(force=False):
 
 
 def _hs300(end):
+    errors=[];best=None
+    for fetch in (lambda:_hs300_tencent(end),lambda:_hs300_sina(end)):
+        try:
+            rows=fetch()
+            rows=[r for r in rows if r['date']<=end]
+            if len(rows)<30 or any(a['date']>=b['date'] for a,b in zip(rows,rows[1:])):
+                raise ValueError('指数日线不足或乱序')
+            if rows[-1]['date']==end:return rows
+            if best is None or rows[-1]['date']>best[-1]['date']:best=rows
+        except Exception as exc:errors.append(str(exc)[:120])
+    if best is not None:return best  # 周末/休市时由调用方明确回退到实际最后交易日。
+    raise ValueError('沪深300日线不可用：'+'；'.join(errors))
+
+
+def _hs300_sina(end):
+    params=urlencode(dict(symbol='sh000300',scale=240,ma='no',datalen=1023))
+    url='https://quotes.sina.cn/cn/api/jsonp_v2.php/var%20x=/CN_MarketData.getKLineData?'+params
+    with urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=20) as response:text=response.read().decode('utf-8')
+    start,stop=text.find('(['),text.rfind('])')
+    if start<0 or stop<0:raise ValueError('新浪指数日线格式异常')
+    return [dict(date=r['day'][:10],close=float(r['close'])) for r in json.loads(text[start+1:stop+1])]
+
+
+def _hs300_tencent(end):
     rows = []
     for start, stop in (('2025-01-01', end), ('2024-01-01', '2024-12-31')):
         if stop < start:
@@ -92,9 +119,42 @@ def _watch_note(category, rules, market_pass):
     return f'次日仅观察：{labels}；大盘沪深300未站上MA20，偏防守'
 
 
-def scan(*, force_hot=False, workers=12, max_stocks=100):
+def _latest_daily(code, board):
+    """腾讯最新窗口未复权日线；成交量由手统一为股，不拼接异源价格。"""
+    prefix = 'bj' if board == '北交所' else ('sh' if code.startswith('6') else 'sz')
+    symbol = prefix + code
+    query = urlencode({'param': f'{symbol},day,,,220,'})
+    url = 'https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?' + query
+    with urlopen(Request(url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=20) as response:
+        raw = json.loads(response.read())['data'][symbol].get('day') or []
+    rows = [dict(date=x[0], open=float(x[1]), close=float(x[2]), high=float(x[3]),
+                 low=float(x[4]), volume=float(x[5]) * 100) for x in raw]
+    return rows, '腾讯最新窗口未复权日线（成交量：股）'
+
+
+def _current_history(stock, signal_date):
+    errors = []
+    for fetch in (lambda: load(stock['code'], signal_date, stock['board'])[:2],
+                  lambda: _latest_daily(stock['code'], stock['board'])):
+        try:
+            bars, source = fetch()
+            bars = [b for b in bars if b['date'] <= signal_date]
+            if not bars or bars[-1]['date'] != signal_date:
+                raise ValueError('信号日日线未落地')
+            if any(a['date'] >= b['date'] for a, b in zip(bars, bars[1:])):
+                raise ValueError('日线重复或乱序')
+            return bars, source
+        except Exception as exc:
+            errors.append(str(exc)[:120])
+    raise ValueError('信号日日线不可用：' + '；'.join(errors))
+
+
+def scan(*, force_hot=False, workers=12, max_stocks=None, enable_continuation=None,enable_reversal=None):
     """扫描最近完整交易日，返回次日观察雷达。"""
     hot = _load_hot(force=force_hot)
+    if enable_continuation is None:enable_continuation=C.RELEASED
+    if enable_reversal is None:enable_reversal=M.RELEASED or M.PAPER_TRIAL
+    if max_stocks is None:max_stocks=200 if enable_continuation or enable_reversal else 100
     now = _now()
     signal_date = as_of_date(now)
     calendar_end = signal_date
@@ -110,7 +170,7 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
 
     def one(stock):
         try:
-            bars, source, _ = load(stock['code'], signal_date, stock['board'])
+            bars, source = _current_history(stock, signal_date)
             return stock['code'], bars, source, None
         except Exception as exc:  # noqa: BLE001 - 单票失败不影响整池
             return stock['code'], None, None, str(exc)
@@ -124,7 +184,7 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
             else:
                 histories[code] = {'bars': bars, 'source': source}
 
-    strategy, watch, excluded = [], [], []
+    strategy, watch, excluded, continuations, reversals = [], [], [], [], []
     for stock in accepted:
         code = stock['code']
         quote = quote_map.get(code)
@@ -139,6 +199,21 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
             continue
         turnover = (sum(float(x['close']) * float(x['volume']) for x in bars[-20:]) / 20
                     if len(bars) >= 20 else None)
+        continuation=C.build_plan(bars,benchmark,name) if enable_continuation and stock['board']!='北交所' else None
+        if continuation:
+            continuations.append(dict(code=code,name=name,board=stock['board'],rules=['strong_continuation'],
+                rule_labels=['强势延续确认'],category='策略候选',strategy_version=C.VERSION,
+                confirmed_rules=[],setup_plans=[],market_pass=True,close=float(bars[-1]['close']),
+                change_pct=None,observe_for='下一交易日',trade_plan=continuation,
+                sniper=continuation['sniper'],checklist=continuation['checklist'],plan_ready=True,
+                summary=continuation['summary'],note=continuation['summary']))
+        reversal=M.build_plan(bars,benchmark,name,version=M.active_version()) if enable_reversal and stock['board']!='北交所' else None
+        if reversal:
+            reversals.append(dict(code=code,name=name,board=stock['board'],rules=['oversold_reversal'],
+                rule_labels=['短期超跌反转'],category='策略候选',strategy_version=M.VERSION,
+                confirmed_rules=[],setup_plans=[],market_pass=True,close=float(bars[-1]['close']),
+                change_pct=None,observe_for='下一交易日',trade_plan=reversal,sniper=reversal['sniper'],
+                checklist=reversal['checklist'],plan_ready=True,summary=reversal['summary'],note=reversal['summary']))
         float_cap = (quote or {}).get('float_cap_yi')
         reason = exclusion_reason(name, float_cap, turnover)
         if reason:
@@ -188,7 +263,18 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
             row['note'] = row['note'] + '；' + plan['summary']
         (strategy if row['category'] == '策略候选' else watch).append(row)
 
-    strategy.sort(key=lambda x: x['code'])
+    existing={r['code'] for r in strategy}
+    reversals=sorted((r for r in reversals if r['code'] not in existing),
+        key=lambda r:(-r['trade_plan']['close_location'],r['trade_plan']['rsi2'],-r['trade_plan']['avg20_turnover'],r['code']))[:M.MAX_CANDIDATES]
+    existing.update(r['code'] for r in reversals)
+    continuations=sorted((r for r in continuations if r['code'] not in existing),
+                         key=lambda r:(-r['trade_plan']['relative_strength'],-r['trade_plan']['avg20_turnover'],r['code']))[:C.MAX_CANDIDATES]
+    added={r['code'] for r in continuations+reversals}
+    legacy_exclusion_summary=dict(Counter(r['reason'] for r in excluded + rejected))
+    strategy.extend(continuations+reversals)
+    watch=[r for r in watch if r['code'] not in added]
+    excluded=[r for r in excluded if r['code'] not in added]
+    strategy.sort(key=lambda x: (x['trade_plan'].get('entry_mode')=='continuation',x['code']))
     watch.sort(key=lambda x: x['code'])
     payload = {
         'title': 'A股盘后雷达',
@@ -196,21 +282,36 @@ def scan(*, force_hot=False, workers=12, max_stocks=100):
         'observe_session': '下一交易日',
         'generated_at': now.isoformat(timespec='seconds'),
         'strategy_version': STRATEGY_VERSION,
+        'entry_revision': M.active_version() if enable_reversal else C.ENTRY_REVISION,
+        'continuation_enabled': enable_continuation,
+        'continuation_market_pass': C.market_allowed(benchmark),
+        'continuation_count': len(continuations),
+        'oversold_reversal_enabled':enable_reversal,
+        'oversold_reversal_market_pass':M.market_allowed(benchmark),
+        'oversold_reversal_paper_trial':bool(enable_reversal and M.PAPER_TRIAL and not M.RELEASED),
+        'reversal_count':len(reversals),
+        'legacy_exclusion_summary': legacy_exclusion_summary,
         'confirmed_count': sum(bool(r['confirmed_rules']) for r in strategy + watch),
         'market_pass': market_pass,
         'market_label': '沪深300收盘站上MA20' if market_pass else '沪深300未站上MA20（偏防守）',
         'universe_size': len(accepted),
         'scanned': len(histories),
+        'data_ready': bool(histories),
+        'daily_ready_count': len(histories),
+        'daily_unavailable_count': len(failures),
         'strategy_count': len(strategy),
         'watch_count': len(watch),
         'strategy_candidates': strategy,
         'watch_pool': watch,
         'excluded_count': len(excluded) + len(rejected),
+        'exclusion_summary': dict(Counter(r['reason'] for r in excluded + rejected)),
         'limitations': [
             '热榜股票池有幸存者/人气偏差，不是全市场扫描',
             '收盘后判断、次日观察；点位为回踩预案，不等于自动下单或保证开盘可买',
             '分型v2：重返MA20确认、持续趋势回踩、放量突破；各自检查量价与计划，仍属待验证研究规则',
             '个股确认与大盘允许交易分开；大盘防守时仅观察，次日须按整分回踩计划到价',
+            '强势延续为独立待确认入口：指数温和走弱时以半预算、0.25%权益风险等待盘中确认；急跌禁入',
+            '超跌反转按昨日均值计划、盘中反转与净空间执行，风险预算0.5%权益；试运行不代表收益已验证',
             '普通A股现货默认只研究做多方向',
             '未完整处理除权、停牌与真实涨跌停队列',
         ],

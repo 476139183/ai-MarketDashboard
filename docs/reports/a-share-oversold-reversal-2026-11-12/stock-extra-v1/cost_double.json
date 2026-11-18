@@ -1,0 +1,136 @@
+{
+  "replay_version": "bar-close-observe-next-open-v2",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0006,
+    "min_commission": 10.0,
+    "transfer_rate": 2e-05,
+    "stamp_rate": 0.001,
+    "slippage_ticks": 2,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 1,
+    "ready_plans": 1
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 100156.77,
+    "return_pct": 0.15677000000000607,
+    "monthly_equivalent_pct": 0.5977733883437031,
+    "max_drawdown_pct": 0.31147696156384075,
+    "closed_trades": 1,
+    "win_rate_pct": 100.0,
+    "fees": 35.23,
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "calendar_days": 8
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": 0.15677000000000607,
+      "end_equity": 100156.77
+    }
+  ],
+  "trades": [
+    {
+      "code": "603025",
+      "name": "大豪科技",
+      "shares": 1200,
+      "entry_at": 1793758500002,
+      "exit_at": 1793929500002,
+      "entry_price": 12.05,
+      "exit_price": 12.21,
+      "signal_date": "2026-11-03",
+      "stop": 11.69,
+      "target": 12.74,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.29,
+        "stamp": 0.0,
+        "total": 10.29
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.29,
+        "stamp": 14.65,
+        "total": 24.94
+      },
+      "fees": 35.23,
+      "net_pnl": 156.77,
+      "return_pct": 1.0833922471491588,
+      "reason": "oversold_reversal_recovered",
+      "plan": {
+        "code": "603025",
+        "name": "大豪科技",
+        "signal_date": "2026-11-03",
+        "generated_at": "2026-11-03T16:00:00+08:00",
+        "lower": 11.75,
+        "upper": 12.29,
+        "stop": 11.69,
+        "target": 12.74,
+        "signal_close": 12.02,
+        "key": "2026-11-03:603025",
+        "strategy_version": "a-oversold-reversal-v1",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 0.5500000000000005,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 11.83,
+        "confirmation": "2026-11-04 10:15",
+        "signal_id": "2026-11-04 10:15",
+        "confirmed_at": 1793758500000,
+        "estimated_stop_risk": 490.57,
+        "risk_budget": 500.0
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      }
+    }
+  ],
+  "curve": [
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 100253.71
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 100469.71
+    },
+    {
+      "date": "2026-11-06",
+      "equity": 100156.77
+    },
+    {
+      "date": "2026-11-09",
+      "equity": 100156.77
+    },
+    {
+      "date": "2026-11-10",
+      "equity": 100156.77
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 100156.77
+    }
+  ],
+  "open_positions": [],
+  "incomplete_minute_days": 0,
+  "case": "cost_double"
+}

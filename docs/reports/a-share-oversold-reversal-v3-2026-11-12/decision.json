@@ -1,0 +1,33 @@
+{
+  "passed": false,
+  "rule_version": "a-oversold-reversal-v3",
+  "replay_version": "bar-close-observe-next-open-v2",
+  "total_closed": 26,
+  "later_closed": 3,
+  "groups": [
+    {
+      "group": "development",
+      "closed_trades": 23,
+      "return_pct": 1.1825399999999986,
+      "stress_return_pct": 1.1609699999999945,
+      "drawdown_pct": 4.576416405314654
+    },
+    {
+      "group": "time-holdout",
+      "closed_trades": 1,
+      "return_pct": 0.28844999999999565,
+      "stress_return_pct": 0.22180999999998896,
+      "drawdown_pct": 0
+    },
+    {
+      "group": "stock-holdout",
+      "closed_trades": 2,
+      "return_pct": 0.3615900000000005,
+      "stress_return_pct": 0.2834699999999968,
+      "drawdown_pct": 0.5846256499885414
+    }
+  ],
+  "reasons": [
+    "后续已平仓不足5笔"
+  ]
+}

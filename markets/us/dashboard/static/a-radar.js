@@ -178,6 +178,23 @@
     el('service-label').textContent = data.status === 'running' ? '扫描中' : '名单就绪';
     renderPins();
     renderBoard();
+    renderSelection(data.selection_research);
+  }
+
+  function renderSelection(screen) {
+    el('selection-panel').hidden=!screen;
+    if(!screen)return;
+    const stages={candidate:'盘后候选',security:'风险证券',suspended:'停牌',data:'数据未就绪',liquidity:'流动性不足',market:'指数急跌防守',range:'价格区间不足',oversold:'未达超跌条件',recovery:'收复不足',plan:'计划空间不足'};
+    el('selection-status').textContent=`信号日 ${screen.signal_date} · 沪深名单 ${screen.total} 只 · 候选 ${screen.candidate_count} 只 · `+Object.entries(screen.stages||{}).map(([k,v])=>`${stages[k]||k} ${v}`).join('；');
+    const rows=(screen.candidates||[]).map(row=>{
+      const box=document.createElement('article');box.className='radar-row radar-row-rich';
+      const link=document.createElement('a');link.href='/research?symbol='+encodeURIComponent(row.code);link.textContent=row.name+' '+row.code;box.appendChild(link);
+      const text=document.createElement('p'),z=row.plan.sniper;
+      text.className='radar-plan-note';text.textContent=`昨日收盘 ${row.plan.signal_close.toFixed(2)} · 计划区 ${z.secondary_buy}～${z.ideal_buy} · 止损 ${z.stop_loss} · 均值目标 ${z.take_profit} · 等待盘中确认`;
+      box.appendChild(text);return box;
+    });
+    if(!rows.length){const note=document.createElement('p');note.textContent='当前采集范围内没有合格计划；请同时查看数据未就绪数量。';rows.push(note);}
+    el('selection-list').replaceChildren(...rows);
   }
 
   async function load(refresh = false) {

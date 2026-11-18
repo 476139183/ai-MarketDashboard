@@ -41,10 +41,12 @@
       </section>
       <section class="contract-panel paper-rules">
         <div class="section-title"><h2>候选与执行计划</h2><a href="/a-radar">查看明日盯盘 ↗</a></div>
+        <p>回踩通道按原规则运行。强势延续先参与历史对照；只有上方明确显示已启用时，才用于当前账户的新买入。</p>
         <p id="ap-plan-status">读取上一交易日盘后策略候选…</p>
         <div id="ap-plans" class="paper-rule-tags"></div>
-        <p>只执行大盘过滤和计划检查通过的「策略候选」，不买观察池。价格回到原计划的MA10至MA5区间，且新报价、资金、涨跌停和整手条件满足后才买入；首次观察后还要等更新报价。</p>
-        <p>当日买入不能卖出。T+1解锁后，只有当前报价触及原计划止损/目标，或上一完整日线收盘跌破配置的退出均线，才尝试卖出；不会到第二天就定时强卖。名单更新不改写持仓计划。</p>
+        <p>两条入场通道分别确认：回踩计划到区间才买；强势延续先看昨日相对强度、趋势和流动性，盘中放量突破开盘区间和均价后，等待后续完整K线回踩守住或再次确认。两者都要等待更新报价、核验盘口、整手与成本，不直接买观察池。</p>
+        <p>延续仓每票最多使用原预算一半，按止损距离和双边成本将计划风险限制在权益的0.25%；指数急跌或追价过远时不买。T+1、隔夜跳空和跌停仍可能令实际损失超过计划风险。</p>
+        <p>当日买入不能卖出。回踩旧仓沿用入场计划；延续新仓不挂固定小目标，按原结构止损、已确认支撑跟随、两根完整15分钟线失守突破位与均价，或完整日线跌破退出均线来管理。T+1解锁后也须符合条件才卖，名单更新不改写旧仓。</p>
         <div class="paper-cost-note">仅连续竞价09:30–11:30、13:00–14:57采样；停牌、涨跌停或盘口缺失会等待，不保证触价成交。除权除息或前收口径不符时暂停该票撮合，保留旧估值，需另行核对。</div>
       </section>
       <section class="contract-panel paper-rules" aria-labelledby="ap-config-title">
@@ -66,7 +68,7 @@
       </section>
       <section class="contract-panel contract-board">
         <div class="board-heading"><div><h2>当前持仓 <span class="live-badge">A股 · CNY · PAPER</span></h2><p id="ap-position-note">等待持仓数据</p></div><span id="ap-pending" class="paper-small">—</span></div>
-        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th>股票 / 候选日期</th><th>持仓 / 可卖股数</th><th>买入价 / 上次报价</th><th>固定止损 / 目标</th><th>浮盈亏 / CNY</th><th>买入时间 / 北京</th><th>源报价时间 / 北京</th></tr></thead><tbody id="ap-positions"></tbody></table></div>
+        <div class="contract-table-wrap"><table class="contract-table"><thead><tr><th>股票 / 候选日期</th><th>持仓 / 可卖股数</th><th>买入价 / 上次报价</th><th>结构止损 / 退出方式</th><th>浮盈亏 / CNY</th><th>买入时间 / 北京</th><th>源报价时间 / 北京</th></tr></thead><tbody id="ap-positions"></tbody></table></div>
         <p id="ap-positions-empty" class="paper-empty">尚无持仓，等待合格候选与盘中计划到价。</p>
       </section>
       <section class="contract-panel contract-board paper-history">
@@ -76,7 +78,7 @@
       </section>
       <section id="a-research" class="contract-panel paper-rules paper-history">
         <div class="section-title"><h2>最近数月历史样本复盘</h2><button id="ar-run" class="outline-button" type="button">运行历史参数对照</button></div>
-        <p>逐日重建当时可见的候选与计划，用15分钟开盘采样近似成交；对照退出均线、成本翻倍与研究候选口径，不根据赢家自动改账户。当前股票池回看有选择偏差，历史盘口及实际涨跌停价不完整。</p>
+        <p>逐日重建当时可见的候选与计划，完整K线收盘只观察，后续开盘才尝试撮合；包含强势延续与日线趋势回踩收复研究，以及成本翻倍对照。研究不会自动改账户。当前股票池回看有选择偏差，历史盘口及实际涨跌停价不完整。</p>
         <div class="bt-form"><label>复盘每票预算 / CNY<input id="ar-budget" type="number" value="20000" min="100" max="100000" step="100"></label><label>复盘最大持仓数<input id="ar-positions" type="number" value="3" min="1" max="10" step="1"></label><label>复盘基准退出均线<select id="ar-exit-ma"><option value="10">MA10</option><option value="20">MA20</option></select></label></div><p>这三项仅用于本次复盘，费税沿用账户已保存参数；不会改动运行配置或持仓。</p><p id="ar-status" role="status">点击后开始读取样本与复盘；不会启用模拟账户。</p>
         <div id="ar-results"></div><button id="ar-export" class="outline-button" type="button" disabled>导出复盘JSON</button>
       </section>
@@ -84,6 +86,6 @@
     </main>
   </div>
 </div>
-<script src="/static/a-paper.js?v=1"></script><script src="/static/a-paper-research.js?v=1"></script>
+<script src="/static/a-paper.js?v=3"></script><script src="/static/a-paper-research.js?v=4"></script>
 </body>
 </html>

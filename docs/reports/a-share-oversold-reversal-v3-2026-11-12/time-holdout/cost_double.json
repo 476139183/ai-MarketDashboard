@@ -1,0 +1,139 @@
+{
+  "replay_version": "bar-close-observe-next-open-v2",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0006,
+    "min_commission": 10.0,
+    "transfer_rate": 2e-05,
+    "stamp_rate": 0.001,
+    "slippage_ticks": 2,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 1,
+    "ready_plans": 1
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 100221.81,
+    "return_pct": 0.22180999999998896,
+    "monthly_equivalent_pct": 0.8465462773433075,
+    "max_drawdown_pct": 0,
+    "closed_trades": 1,
+    "win_rate_pct": 100.0,
+    "fees": 34.19,
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "calendar_days": 8
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": 0.22180999999998896,
+      "end_equity": 100221.81
+    }
+  ],
+  "trades": [
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "shares": 1600,
+      "entry_at": 1793934900002,
+      "exit_at": 1794193200002,
+      "entry_price": 8.37,
+      "exit_price": 8.53,
+      "signal_date": "2026-11-05",
+      "stop": 8.1,
+      "target": 8.55,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.27,
+        "stamp": 0.0,
+        "total": 10.27
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.27,
+        "stamp": 13.65,
+        "total": 23.92
+      },
+      "fees": 34.19,
+      "net_pnl": 221.81,
+      "return_pct": 1.6550181424490034,
+      "reason": "target",
+      "plan": {
+        "code": "601398",
+        "name": "工商银行",
+        "signal_date": "2026-11-05",
+        "generated_at": "2026-11-05T16:00:00+08:00",
+        "lower": 8.23,
+        "upper": 8.47,
+        "stop": 8.1,
+        "target": 8.55,
+        "signal_close": 8.35,
+        "key": "2026-11-05:601398",
+        "strategy_version": "a-oversold-reversal-v3",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 0.25714285714285723,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 8.17,
+        "confirmation": "2026-11-06 11:15",
+        "signal_id": "2026-11-06 11:15",
+        "confirmed_at": 1793934900000,
+        "estimated_net_reward": 221.81,
+        "paired_expected_net_reward": 123.69,
+        "net_risk_reward": 0.4458850962891489,
+        "estimated_stop_risk": 497.46,
+        "risk_budget": 500.0
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      }
+    }
+  ],
+  "curve": [
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-06",
+      "equity": 100101.73
+    },
+    {
+      "date": "2026-11-09",
+      "equity": 100221.81
+    },
+    {
+      "date": "2026-11-10",
+      "equity": 100221.81
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 100221.81
+    }
+  ],
+  "open_positions": [],
+  "incomplete_minute_days": 0,
+  "case": "cost_double"
+}

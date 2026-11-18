@@ -1,6 +1,6 @@
 """昨日存档池→今天已完成分钟的独立反事实回放；不写前向账本。"""
 from concurrent.futures import ThreadPoolExecutor,as_completed
-from datetime import datetime,timedelta
+from datetime import datetime
 import csv
 import gzip
 import json
@@ -11,10 +11,13 @@ import a_share_paper as P
 from stock_setups import evaluate_setups,selected_setup
 
 
-def replay_day(sample,as_of):
+def replay_day(sample,as_of,*,market_filter=True,entry_mode='legacy'):
+    if not isinstance(market_filter,bool):raise ValueError('研究大盘过滤参数必须为布尔值')
+    if entry_mode not in ('legacy','dual','continuation'):raise ValueError('未知入口对照')
     cutoff=datetime.fromisoformat(as_of);signal=sample['signal_date'];today=sample['trade_date']
     if cutoff.tzinfo is None or cutoff.astimezone(P.BJ).date().isoformat()!=today:raise ValueError('回放截止时间必须属于目标日并包含时区')
-    radar=R.setups_radar(sample,signal)
+    radar=(R.setups_radar(sample,signal,market_filter=market_filter) if entry_mode=='legacy' else
+           R.dual_radar(sample,signal,continuation_only=entry_mode=='continuation'))
     radar.update(counterfactual=True,generated_at_kind='为研究假设昨日16:00生成；不是当时真实名单')
     calendar=sample.get('calendar') or [b['date'] for b in sample['benchmark']]
     if calendar[-2:]!=[signal,today]:raise ValueError('信号日和回放日不是已验证的相邻交易日')
@@ -39,25 +42,20 @@ def replay_day(sample,as_of):
         account=P.ASharePaperAccount(Path(tmp)/'research.sqlite3',source=R.HIST_SOURCE)
         account.configure(P.DEFAULTS)
         account.set_enabled(True,now=int(datetime.fromisoformat(today+'T09:29:00+08:00').timestamp()*1000))
+        bar_map={(code,b['time']):b for code,rows in minutes.items() for b in rows}
+        history={code:rows for code,rows in history.items() if rows and rows[-1]['date']==signal}
         for time in times:
-            opened=datetime.fromisoformat(time).replace(tzinfo=P.BJ)-timedelta(minutes=15);stamp=int(opened.timestamp()*1000)
-            packs={}
-            for code,bars in minutes.items():
-                bar=next((b for b in bars if b['time']==time),None);rows=history.get(code,[])
-                if not bar or not rows or rows[-1]['date']!=signal or bar['volume']<=0:continue
-                prior=rows[-1]['close'];px=bar['open'];ratio=.2 if code.startswith(('300','301','688')) else .1
-                lo,hi=P.money(prior*(1-ratio)),P.money(prior*(1+ratio))
-                if not lo*1.005<px<hi*.995:continue
-                packs[code]=dict(daily=rows,quote=dict(symbol=code,name=sample['names'].get(code,code),source=R.HIST_SOURCE,
-                    price=px,bid=px,ask=px,volume=bar['volume'],previous_close=prior,quote_at=stamp,lower_limit=lo,upper_limit=hi))
+            stamp,packs=R.bar_observations(history,bar_map,sample['names'],time)
             account.step(radar,calendar,packs,now=stamp)
+            stamp,packs=R.bar_observations(history,bar_map,sample['names'],time,at_close=True)
+            account.step(radar,calendar,packs,now=stamp,prepare_only=True)
         # Only mark positions after the corresponding bar has closed; never fill at that close.
         with account.transaction() as state:
             for p in state['positions']:
                 bars=minutes.get(p['code'],[])
                 if bars:p.update(last_price=bars[-1]['close'],quote_at=int(datetime.fromisoformat(bars[-1]['time']).replace(tzinfo=P.BJ).timestamp()*1000))
         account_state=account.snapshot(now=int(cutoff.timestamp()*1000),include_all_trades=True)
-    return dict(counterfactual=True,as_of=as_of,signal_date=signal,trade_date=today,scope='昨日已存档且已通过证券/市值/流动性筛选的候选与观察池；不是重新扫描全市场',
+    return dict(replay_version=R.REPLAY_VERSION,counterfactual=True,entry_mode=entry_mode,market_filter=market_filter,as_of=as_of,signal_date=signal,trade_date=today,scope=sample.get('scope','昨日已存档且已通过证券/市值/流动性筛选的候选与观察池；不是重新扫描全市场'),
         coverage_end=max(times) if times else None,radar=radar,observations=observations,account=account_state,
         failures=sample.get('failures',{}),limitations=R.LIMITATIONS+['名单为今天按昨日完成日线重建，非昨日真实存档；绝不进入前向账户。',
         '日内只用已完成15分钟K线的开盘采样，至少等下一条新采样报价；不声称真实盘口成交。',

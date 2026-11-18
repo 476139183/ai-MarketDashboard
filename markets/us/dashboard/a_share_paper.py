@@ -25,6 +25,17 @@ INITIAL_BALANCE=100000.
 DEFAULTS=dict(per_stock_budget=20000.,max_positions=3,commission_rate=.0003,min_commission=5.,
               transfer_rate=.00001,stamp_rate=.0005,slippage_ticks=1,exit_ma=10)
 RADAR_PATH=Path(__file__).resolve().parents[2]/'a'/'radar-latest.json'
+if str(RADAR_PATH.parent) not in sys.path:sys.path.append(str(RADAR_PATH.parent))
+import continuation as C
+import trend_reclaim as T
+import oversold_reversal as M
+ENTRY_RULES={'continuation':C,'trend_reclaim':T,'oversold_reversal':M}
+RADAR_ARCHIVE_FIELDS=('signal_date','generated_at','market_pass','market_label','strategy_candidates',
+    'strategy_version','data_ready','entry_revision','continuation_enabled','continuation_market_pass',
+    'trend_reclaim_enabled','trend_reclaim_market_pass','oversold_reversal_enabled','oversold_reversal_market_pass','oversold_reversal_paper_trial')
+
+
+def scan_revision():return M.active_version() if M.RELEASED or M.PAPER_TRIAL else C.ENTRY_REVISION
 
 
 def milliseconds():return int(time.time()*1000)
@@ -73,8 +84,19 @@ def refresh_radar():
 @lru_cache(maxsize=256)
 def daily_rows(code,today):
     from feeds.cn import from_sina
-    rows,_=from_sina(code,days=60)
-    return [r for r in rows if r['date']<today]
+    previous=market_calendar(today)[-2]
+    try:
+        rows,_=from_sina(code,days=60)
+        rows=[r for r in rows if r['date']<today]
+        if rows and rows[-1]['date']==previous:return rows
+    except Exception:
+        pass
+    path=str(RADAR_PATH.parent)
+    if path not in sys.path:sys.path.append(path)
+    from radar import _current_history
+    # 校验失败必须抛出，不能把滞后日线缓存一整天。
+    rows,_=_current_history(dict(code=code,board='沪深A股'),previous)
+    return rows
 
 
 @lru_cache(maxsize=32)
@@ -87,15 +109,23 @@ def market_calendar(today):
     return days
 
 
+@lru_cache(maxsize=128)
+def minute_rows(code,bucket):
+    from replay import fetch
+    return fetch(code)[2]
+
+
 def fetch_observations(symbols):
     def one(code):
         try:
             rows=daily_rows(code,day(milliseconds()))
+            try:minutes=minute_rows(code,milliseconds()//60000)
+            except Exception:minutes=[]
             quote=A.fetch_quote(code)
             quote=dict(quote,symbol=code,source=SOURCE,quote_at=quote['time'].timestamp()*1000,
                        upper_limit=quote['limits'][0],lower_limit=quote['limits'][1])
             quote.pop('time');quote.pop('limits')
-            return code,dict(quote=quote,daily=rows)
+            return code,dict(quote=quote,daily=rows,minutes=minutes)
         except Exception as exc:return code,dict(error=str(exc)[:180])
     with ThreadPoolExecutor(max_workers=4,thread_name_prefix='a-paper-feed') as pool:return dict(pool.map(one,symbols))
 
@@ -119,16 +149,25 @@ def historical_check(pack,q,now):
 
 
 def approved_plans(radar,previous_day,now):
+    if radar.get('data_ready') is False:raise ValueError('信号日日线未就绪，不能归档为有效空名单')
     generated=datetime.fromisoformat(radar['generated_at'])
     if generated.tzinfo is None:raise ValueError('名单缺少时区')
     local=generated.astimezone(BJ)
     if radar.get('signal_date')!=previous_day or local.date().isoformat()!=previous_day or local.hour*60+local.minute<905 or generated.timestamp()*1000>=now:
         raise ValueError('名单必须在上一交易日盘后生成，旧名单/事后补记不买入')
-    if not radar.get('market_pass'):return []
+    if not any(radar.get(k) for k in ('market_pass','continuation_market_pass','trend_reclaim_market_pass','oversold_reversal_market_pass')):return []
     result=[];seen=set()
     for row in radar.get('strategy_candidates',[]):
         try:
             code=stock_code(row['code']);plan=row['trade_plan'];s=plan['sniper']
+            mode=plan.get('entry_mode');module=ENTRY_RULES.get(mode)
+            if mode not in (None,'legacy') and module is None:continue
+            if module:
+                valid_version=plan.get('strategy_version') in M.VERSIONS if module is M else plan.get('strategy_version')==module.VERSION
+                if radar.get(mode+'_enabled') is not True or not radar.get(mode+'_market_pass') or not valid_version or not finite(plan.get('atr14')) or plan['atr14']<=0:continue
+                if mode=='trend_reclaim' and (not finite(plan.get('center')) or plan['center']<=0):continue
+                if mode=='oversold_reversal' and (not finite(plan.get('reference_low')) or plan['reference_low']<=0):continue
+            elif not radar.get('market_pass'):continue
             if code in seen or row.get('category')!='策略候选' or row.get('market_pass') is not True or row.get('plan_ready') is not True or plan.get('plan_ready') is not True:continue
             values=[s.get(k) for k in ['stop_loss','secondary_buy','ideal_buy','take_profit']]
             if not all(finite(v) and v>0 for v in values) or not values[0]<values[1]<=values[2]<values[3]:continue
@@ -137,6 +176,9 @@ def approved_plans(radar,previous_day,now):
                 target=s['take_profit'],signal_close=row['close'],key=previous_day+':'+code))
             result[-1].update(strategy_version=plan.get('strategy_version',row.get('strategy_version','legacy-ma20-v1')),
                               strategy_rule=plan.get('strategy_rule','legacy'))
+            if module:result[-1].update(entry_mode=mode,atr14=plan['atr14'],budget_factor=getattr(module,'BUDGET_FACTOR',.5),risk_fraction=module.RISK_FRACTION)
+            if mode=='trend_reclaim':result[-1].update(center=plan['center'],exit_ma=20)
+            if mode=='oversold_reversal':result[-1].update(reference_low=plan['reference_low'])
         except (ValueError,TypeError,KeyError):continue
     return result
 
@@ -207,7 +249,8 @@ class ASharePaperAccount:
             return 'ma10_exit'
         return None
 
-    def step(self,radar,calendar,observations,now=None):
+    def step(self,radar,calendar,observations,now=None,*,prepare_only=False):
+        if prepare_only and self.source==SOURCE:raise ValueError('仅历史研究允许收盘观察模式，前向账户必须使用真实新报价')
         now=milliseconds() if now is None else now
         with self.transaction() as s:
             radar=radar if isinstance(radar,dict) else {}
@@ -216,9 +259,17 @@ class ASharePaperAccount:
             if calendar and calendar==sorted(set(calendar)) and calendar[-1]==day(now) and len(calendar)>=2:prev=calendar[-2]
             try:
                 plans=approved_plans(radar,prev,now) if prev else []
-                if prev:s['candidate_snapshot']={k:deepcopy(radar.get(k)) for k in ['signal_date','generated_at','market_pass','market_label','strategy_candidates']}
+                if prev:s['candidate_snapshot']={k:deepcopy(radar.get(k)) for k in RADAR_ARCHIVE_FIELDS}
                 s['plan_error']=None if prev else '交易日序列未更新到今天，暂停新买入'
             except (ValueError,KeyError,TypeError) as exc:plans=[];s['plan_error']=str(exc)
+            if self.source==SOURCE and not C.RELEASED:
+                plans=[p for p in plans if p.get('entry_mode')!='continuation']
+            if self.source==SOURCE and not T.RELEASED:
+                plans=[p for p in plans if p.get('entry_mode')!='trend_reclaim']
+            if self.source==SOURCE and not (M.RELEASED or M.PAPER_TRIAL):
+                plans=[p for p in plans if p.get('entry_mode')!='oversold_reversal']
+            if self.source==SOURCE:
+                plans=[p for p in plans if p.get('entry_mode')!='oversold_reversal' or p.get('strategy_version')==M.active_version()]
             s['plans']=plans;s['plan_date']=radar.get('signal_date')
             checked={}
             for code,pack in observations.items():
@@ -239,8 +290,17 @@ class ASharePaperAccount:
                 if prev is None:
                     issues.append(p['code']+'：交易日序列不可核验，保留持仓并等待')
                     continue
-                reason=self.exit_reason(p,q,rows)
-                if not reason:continue
+                module=ENTRY_RULES.get(p['plan'].get('entry_mode'))
+                if module:
+                    context=observations[p['code']].get('minutes',[]) if module is C else rows
+                    managed=module.manage(p,context,min(now,ts))
+                    p['stop']=max(p['stop'],managed['stop'])
+                    reason='stop' if q['price']<=p['stop'] else 'target' if finite(p.get('target')) and q['price']>=p['target'] else managed['exit_reason']
+                    if not reason and module is C:
+                        daily_position=dict(p,target=float('inf'))
+                        reason=self.exit_reason(daily_position,q,rows)
+                else:reason=self.exit_reason(p,q,rows)
+                if prepare_only or not reason:continue
                 if day(ts)<=p['entry_day']:s['note']='T+1锁定：当前触发退出条件，当日新买不能卖出；后续重新核验策略';continue
                 bid=q.get('bid')
                 if not finite(bid) or bid<=q['lower_limit']:issues.append(p['code']+'：跌停或买一缺失，无法模拟卖出');continue
@@ -262,23 +322,53 @@ class ASharePaperAccount:
                 if code not in checked or any(p['code']==code for p in s['positions']) or plan['key'] in s['used_keys']:continue
                 q,rows=checked[code];ask=q.get('ask');name=q.get('name','')
                 if 'ST' in name.upper() or '退' in name or rows[-1]['date']!=prev or abs(rows[-1]['close']-plan['signal_close'])>.011:continue
+                execution_key=plan['key']
+                module=ENTRY_RULES.get(plan.get('entry_mode'))
+                if module:
+                    decision=module.assess(plan,observations[code].get('minutes',[]),min(now,q['quote_at']))
+                    if not decision['ready']:
+                        s['pending'].pop(code,None);issues.append(code+'：'+decision['reason']);continue
+                    plan=dict(plan,**{k:v for k,v in decision.items() if k not in ('ready','reason')})
+                    execution_key+=':'+decision['signal_id']
                 if not finite(ask) or not plan['lower']<=ask<=plan['upper'] or ask>=q['upper_limit']:
                     s['pending'].pop(code,None);continue
                 price=self.fill(ask,True,cfg)
                 if not plan['lower']<=price<=plan['upper'] or not q['lower_limit']<price<q['upper_limit']:s['pending'].pop(code,None);continue
                 pending=s['pending'].get(code);ts=q['quote_at']
-                if not pending or pending['key']!=plan['key']:
-                    s['pending'][code]=dict(key=plan['key'],quote_at=ts,observed_at=now);continue
+                if not pending or pending['key']!=execution_key:
+                    s['pending'][code]=dict(key=execution_key,quote_at=ts,observed_at=now);continue
+                if prepare_only:continue
                 if ts<=max(pending['quote_at'],pending['observed_at'],s['activated_at']):continue
                 budget=min(cfg['per_stock_budget'],s['cash']);shares=min(100000,int(budget/price/100)*100)
+                risk_budget=None
+                if module:
+                    budget=min(cfg['per_stock_budget']*getattr(module,'BUDGET_FACTOR',.5),s['cash'])
+                    equity=s['cash']+sum(p['shares']*p['last_price'] for p in s['positions'])
+                    risk_budget=equity*module.RISK_FRACTION
+                    stop_fill=self.fill(plan['stop'],False,cfg)
+                    shares=min(shares,int(budget/price/100)*100,int(risk_budget/max(price-stop_fill,.01)/100)*100)
                 while shares>=minimum_shares(code):
                     fees=self.costs(money(price*shares),True,cfg)
-                    if price*shares+fees['total']<=budget:break
+                    risk=money(shares*(price-stop_fill)+fees['total']+self.costs(money(stop_fill*shares),False,cfg)['total']) if risk_budget is not None else 0
+                    if price*shares+fees['total']<=budget and (risk_budget is None or risk<=risk_budget):break
                     shares-=100
                 if shares<minimum_shares(code):issues.append(code+'：资金不足以覆盖最小买入股数及费用');continue
+                required_rr=M.net_rr(plan['strategy_version']) if module is M else getattr(module,'MIN_NET_RR',0) if module else 0
+                if required_rr or (module is M and required_rr is not None):
+                    target_fill=self.fill(plan['target'],False,cfg)
+                    net_reward=money((target_fill-price)*shares-fees['total']-self.costs(money(target_fill*shares),False,cfg)['total'])
+                    stress=dict(cfg)
+                    for field in ('commission_rate','min_commission','transfer_rate','stamp_rate','slippage_ticks'):stress[field]*=2
+                    stress_entry=money(price+cfg['slippage_ticks']*.01)
+                    stress_exit=self.fill(plan['target'],False,stress)
+                    stress_reward=money((stress_exit-stress_entry)*shares-self.costs(money(stress_entry*shares),True,stress)['total']-self.costs(money(stress_exit*shares),False,stress)['total'])
+                    if (required_rr==0 and stress_reward<=0) or (required_rr and net_reward<risk*required_rr):
+                        s['pending'].pop(code,None);issues.append(code+('：双倍成本后的净目标空间不足' if required_rr==0 else '：净目标空间不足以覆盖止损风险'));continue
+                    plan.update(estimated_net_reward=net_reward,paired_expected_net_reward=stress_reward,net_risk_reward=net_reward/risk if risk>0 else 0)
+                if risk_budget is not None:plan.update(estimated_stop_risk=risk,risk_budget=risk_budget)
                 s['cash']=money(s['cash']-price*shares-fees['total']);s['fees']=money(s['fees']+fees['total'])
                 s['positions'].append(dict(code=code,name=name,shares=shares,entry_price=price,entry_at=ts,entry_day=day(ts),
-                    entry_fee=fees['total'],entry_costs=fees,costs=deepcopy(cfg),signal_date=plan['signal_date'],plan=deepcopy(plan),
+                    entry_fee=fees['total'],entry_costs=fees,costs=dict(cfg,exit_ma=plan.get('exit_ma',cfg['exit_ma'])),signal_date=plan['signal_date'],plan=deepcopy(plan),
                     stop=plan['stop'],target=plan['target'],last_price=q['price'],quote_at=ts,valuation_blocked=False))
                 s['used_keys'].append(plan['key']);s['pending'].pop(code,None);s['note']='计划到价，已按后续新报价模拟买入：'+code
             s['error']='；'.join(issues) or None
@@ -289,25 +379,30 @@ class ASharePaperRunner:
     def __init__(self,account,load_radar=load_radar,refresh=refresh_radar,fetch=fetch_observations,calendar=market_calendar):
         self.account=account;self.load_radar=load_radar;self.refresh=refresh;self.fetch=fetch;self.calendar=calendar
         self.error=None;self.lock=threading.Lock();self.thread=None;self.stop_event=threading.Event()
+        self.last_tick_at=None
     def tick(self,now=None):
         explicit_now=now is not None
         now=milliseconds() if now is None else now;s=self.account.snapshot(now=now);self.error=None
+        self.last_tick_at=now
         if not s['enabled'] and not s['positions']:self.error=None;return
         local=datetime.fromtimestamp(now/1000,BJ)
         try:radar=self.load_radar()
         except (ValueError,OSError):radar={}
         if not session(now):
-            if s['enabled'] and local.weekday()<5 and local.hour*60+local.minute>=910 and s['scan_attempt_day']!=day(now):
+            retry_due=s.get('scan_error') and now>=s.get('scan_retry_after',0)
+            revision_due=(s.get('scan_entry_revision')!=scan_revision() or s.get('scan_continuation_enabled') is not C.RELEASED or s.get('scan_reversal_enabled',False)!=(M.RELEASED or M.PAPER_TRIAL)) and not s.get('scan_error')
+            if s['enabled'] and local.weekday()<5 and local.hour*60+local.minute>=910 and (s['scan_attempt_day']!=day(now) or retry_due or revision_due):
                 with self.account.transaction() as state:state['scan_attempt_day']=day(now)
                 try:
-                    if radar.get('signal_date')!=day(now):radar=self.refresh()
+                    if radar.get('signal_date')!=day(now) or radar.get('data_ready') is False or radar.get('entry_revision')!=scan_revision() or radar.get('continuation_enabled') is not C.RELEASED or radar.get('oversold_reversal_enabled',False)!=(M.RELEASED or M.PAPER_TRIAL):radar=self.refresh()
                     effective=now if explicit_now else milliseconds()
                     approved_plans(radar,day(effective),effective+1)
                     with self.account.transaction() as state:
-                        snapshot={k:deepcopy(radar.get(k)) for k in ['signal_date','generated_at','market_pass','market_label','strategy_candidates']}
-                        state.update(candidate_snapshot=snapshot,plan_date=radar.get('signal_date'),scan_error=None,note='盘后候选已归档，等待下一交易日计划到价')
+                        snapshot={k:deepcopy(radar.get(k)) for k in RADAR_ARCHIVE_FIELDS}
+                        state.update(candidate_snapshot=snapshot,plan_date=radar.get('signal_date'),scan_error=None,scan_retry_after=0,scan_entry_revision=scan_revision(),scan_continuation_enabled=C.RELEASED,scan_reversal_enabled=M.RELEASED or M.PAPER_TRIAL,note='盘后候选已归档，等待下一交易日计划到价/反转确认')
                 except Exception as exc:
-                    with self.account.transaction() as state:state['scan_error']=str(exc)[:180]
+                    with self.account.transaction() as state:
+                        state.update(scan_error=str(exc)[:180],scan_retry_after=now+15*60*1000)
             self.error=None;return
         try:calendar=self.calendar(day(now))
         except Exception as exc:calendar=[];self.error=str(exc)[:180]
@@ -333,9 +428,17 @@ class ASharePaperRunner:
             self.stop_event.wait(15)
     def snapshot(self,include_all_trades=False):
         s=self.account.snapshot(include_all_trades=include_all_trades)
-        try:r=self.load_radar();s['source_plan_date']=r.get('signal_date');s['source_candidate_count']=len(r.get('strategy_candidates',[]));s['market_label']=r.get('market_label')
+        try:
+            r=self.load_radar();s['source_plan_date']=r.get('signal_date');s['source_candidate_count']=len(r.get('strategy_candidates',[]));s['market_label']=r.get('market_label')
+            s['source_data_ready']=r.get('data_ready');s['source_exclusion_summary']=r.get('exclusion_summary',{})
+            s['source_continuation_count']=r.get('continuation_count',0);s['source_entry_revision']=r.get('entry_revision')
+            s['source_continuation_enabled']=r.get('continuation_enabled',False)
+            s['source_reversal_count']=r.get('reversal_count',0);s['source_reversal_enabled']=r.get('oversold_reversal_enabled',False)
+            s['source_reversal_paper_trial']=r.get('oversold_reversal_paper_trial',False)
         except (ValueError,OSError,TypeError):s['source_plan_date']=None;s['source_candidate_count']=0
-        return dict(s,runner_error=self.error)
+        return dict(s,runner_error=self.error,runner_alive=bool(self.thread and self.thread.is_alive()),runner_last_tick_at=self.last_tick_at,
+                    active_entry_revision=M.active_version() if M.RELEASED or M.PAPER_TRIAL else T.ENTRY_REVISION if T.RELEASED else C.ENTRY_REVISION if C.RELEASED else 'a-setups-v2',
+                    continuation_released=C.RELEASED,trend_reclaim_released=T.RELEASED,oversold_reversal_released=M.RELEASED,oversold_reversal_paper_trial=M.PAPER_TRIAL)
 
 
 ACCOUNT=ASharePaperAccount(Path(__file__).parent/'cache'/'a-share-paper.sqlite3')

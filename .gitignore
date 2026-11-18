@@ -8,6 +8,7 @@ venv/
 .env
 .cache/
 docs/reports/a-share-day-replay-*/input.json.gz
+docs/reports/a-share-opportunity-audit-*/input.json.gz
 markets/us/.cache/
 markets/us/dashboard/cache/
 *.log

@@ -1,0 +1,37 @@
+{
+  "passed": false,
+  "rule_version": "a-trend-reclaim-v1",
+  "replay_version": "bar-close-observe-next-open-v2",
+  "total_closed": 12,
+  "later_closed": 0,
+  "groups": [
+    {
+      "group": "development",
+      "closed_trades": 12,
+      "return_pct": -1.479380000000008,
+      "stress_return_pct": -1.9737400000000016,
+      "drawdown_pct": 2.264229999999996
+    },
+    {
+      "group": "time-holdout",
+      "closed_trades": 0,
+      "return_pct": -0.11505000000000543,
+      "stress_return_pct": 0.0,
+      "drawdown_pct": 0.11899529968566241
+    },
+    {
+      "group": "stock-holdout",
+      "closed_trades": 0,
+      "return_pct": 0.0,
+      "stress_return_pct": 0.0,
+      "drawdown_pct": 0
+    }
+  ],
+  "reasons": [
+    "development：收益未改善基线",
+    "development：双倍成本后亏损",
+    "time-holdout：收益未改善基线",
+    "合计已平仓不足20笔",
+    "后续已平仓不足5笔"
+  ]
+}

@@ -1,0 +1,2615 @@
+{
+  "generated_at": "2026-11-12T16:07:22.882823+08:00",
+  "entry_revision": "a-dual-entry-v3",
+  "sample_sha256": "e74f2f99d50abf970ed582f7506f5f5070ab971d29649bb937042e0f221841dc",
+  "symbols": 44,
+  "start": "2026-08-04",
+  "end": "2026-11-03",
+  "results": [
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 8
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "setups_v2",
+      "periods": [
+        {
+          "label": "前段",
+          "summary": {
+            "initial_capital": 100000.0,
+            "end_equity": 100000.0,
+            "return_pct": 0.0,
+            "monthly_equivalent_pct": 0.0,
+            "max_drawdown_pct": 0,
+            "closed_trades": 0,
+            "win_rate_pct": null,
+            "fees": 0,
+            "start": "2026-08-04",
+            "end": "2026-09-30",
+            "calendar_days": 58
+          }
+        },
+        {
+          "label": "后段",
+          "summary": {
+            "initial_capital": 100000.0,
+            "end_equity": 100000.0,
+            "return_pct": 0.0,
+            "monthly_equivalent_pct": 0.0,
+            "max_drawdown_pct": 0,
+            "closed_trades": 0,
+            "win_rate_pct": null,
+            "fees": 0,
+            "start": "2026-09-30",
+            "end": "2026-11-03",
+            "calendar_days": 35
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 463,
+        "ready_plans": 463
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99919.68,
+        "return_pct": -0.0803200000000115,
+        "monthly_equivalent_pct": -0.02658040519317728,
+        "max_drawdown_pct": 0.32833300897377926,
+        "closed_trades": 7,
+        "win_rate_pct": 42.857142857142854,
+        "fees": 100.32,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0722700000000076,
+          "end_equity": 100072.27
+        },
+        {
+          "month": "2026-09",
+          "return_pct": -0.15247980284649465,
+          "end_equity": 99919.68
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 99919.68
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 99919.68
+        }
+      ],
+      "trades": [
+        {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "shares": 1000,
+          "entry_at": 1786428000000,
+          "exit_at": 1786590000000,
+          "entry_price": 9.26,
+          "exit_price": 9.34,
+          "signal_date": "2026-08-10",
+          "stop": 9.38,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 0.0,
+            "total": 5.09
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 4.67,
+            "total": 9.76
+          },
+          "fees": 14.85,
+          "net_pnl": 65.15,
+          "return_pct": 0.703177195256603,
+          "reason": "stop",
+          "plan": {
+            "code": "002181",
+            "name": "粤 传 媒",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 9.21,
+            "upper": 9.3,
+            "stop": 9.16,
+            "target": null,
+            "signal_close": 9.2,
+            "key": "2026-08-10:002181",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.48071428571428554,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 9.21,
+            "confirmed_at": 1786427100000,
+            "signal_id": "2026-08-11 13:15",
+            "confirmation": "2026-08-11 13:45",
+            "estimated_stop_risk": 124.76,
+            "risk_budget": 250.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "603533",
+          "name": "掌阅科技",
+          "shares": 400,
+          "entry_at": 1786502700000,
+          "exit_at": 1786590000000,
+          "entry_price": 22.88,
+          "exit_price": 22.81,
+          "signal_date": "2026-08-11",
+          "stop": 22.84,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 0.0,
+            "total": 5.09
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 4.56,
+            "total": 9.65
+          },
+          "fees": 14.74,
+          "net_pnl": -42.74,
+          "return_pct": -0.4667421637223179,
+          "reason": "stop",
+          "plan": {
+            "code": "603533",
+            "name": "掌阅科技",
+            "signal_date": "2026-08-11",
+            "generated_at": "2026-08-11T16:00:00+08:00",
+            "lower": 22.72,
+            "upper": 23.08,
+            "stop": 22.59,
+            "target": null,
+            "signal_close": 22.5,
+            "key": "2026-08-11:603533",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 1.2864285714285726,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 22.72,
+            "confirmed_at": 1786501800000,
+            "signal_id": "2026-08-12 10:00",
+            "confirmation": "2026-08-12 10:30",
+            "estimated_stop_risk": 134.7,
+            "risk_budget": 250.06227500000003
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 100,
+          "entry_at": 1786688100000,
+          "exit_at": 1786943700000,
+          "entry_price": 56.33,
+          "exit_price": 57.08,
+          "signal_date": "2026-08-13",
+          "stop": 57.32,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.06,
+            "stamp": 0.0,
+            "total": 5.06
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.06,
+            "stamp": 2.85,
+            "total": 7.91
+          },
+          "fees": 12.97,
+          "net_pnl": 62.03,
+          "return_pct": 1.1002011330138382,
+          "reason": "stop",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-13",
+            "generated_at": "2026-08-13T16:00:00+08:00",
+            "lower": 56.2,
+            "upper": 57.35,
+            "stop": 55.82,
+            "target": null,
+            "signal_close": 55.1,
+            "key": "2026-08-13:002827",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 3.742142857142858,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 56.2,
+            "confirmed_at": 1786687200000,
+            "signal_id": "2026-08-14 13:15",
+            "confirmation": "2026-08-14 14:00",
+            "estimated_stop_risk": 64.91,
+            "risk_budget": 250.056025
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 200,
+          "entry_at": 1788157800000,
+          "exit_at": 1788228000000,
+          "entry_price": 33.68,
+          "exit_price": 33.74,
+          "signal_date": "2026-08-28",
+          "stop": 33.36,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.07,
+            "stamp": 0.0,
+            "total": 5.07
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.07,
+            "stamp": 3.37,
+            "total": 8.44
+          },
+          "fees": 13.51,
+          "net_pnl": -1.51,
+          "return_pct": -0.022400004747020873,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-08-28",
+            "generated_at": "2026-08-28T16:00:00+08:00",
+            "lower": 33.5,
+            "upper": 33.79,
+            "stop": 33.36,
+            "target": null,
+            "signal_close": 34.65,
+            "key": "2026-08-28:601899",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 1.3678571428571433,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 33.5,
+            "confirmed_at": 1788156900000,
+            "signal_id": "2026-08-31 13:45",
+            "confirmation": "2026-08-31 14:15",
+            "estimated_stop_risk": 79.48,
+            "risk_budget": 250.15085
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000410",
+          "name": "沈阳机床",
+          "shares": 1900,
+          "entry_at": 1788157800000,
+          "exit_at": 1788404400000,
+          "entry_price": 5.22,
+          "exit_price": 5.3,
+          "signal_date": "2026-08-28",
+          "stop": 5.31,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 5.1
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 5.04,
+            "total": 10.14
+          },
+          "fees": 15.24,
+          "net_pnl": 136.76,
+          "return_pct": 1.3781983452751658,
+          "reason": "stop",
+          "plan": {
+            "code": "000410",
+            "name": "沈阳机床",
+            "signal_date": "2026-08-28",
+            "generated_at": "2026-08-28T16:00:00+08:00",
+            "lower": 5.16,
+            "upper": 5.23,
+            "stop": 5.12,
+            "target": null,
+            "signal_close": 5.2,
+            "key": "2026-08-28:000410",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.232142857142857,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 5.15,
+            "confirmed_at": 1788156900000,
+            "signal_id": "2026-08-31 13:30",
+            "confirmation": "2026-08-31 14:15",
+            "estimated_stop_risk": 224.05,
+            "risk_budget": 250.21110000000002
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601099",
+          "name": "太平洋",
+          "shares": 2700,
+          "entry_at": 1788403500000,
+          "exit_at": 1788500700000,
+          "entry_price": 3.6,
+          "exit_price": 3.58,
+          "signal_date": "2026-09-02",
+          "stop": 3.59,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 5.1
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 4.83,
+            "total": 9.93
+          },
+          "fees": 15.03,
+          "net_pnl": -69.03,
+          "return_pct": -0.709812752568097,
+          "reason": "stop",
+          "plan": {
+            "code": "601099",
+            "name": "太平洋",
+            "signal_date": "2026-09-02",
+            "generated_at": "2026-09-02T16:00:00+08:00",
+            "lower": 3.58,
+            "upper": 3.6,
+            "stop": 3.56,
+            "target": null,
+            "signal_close": 3.56,
+            "key": "2026-09-02:601099",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.11571428571428576,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 3.58,
+            "confirmed_at": 1788402600000,
+            "signal_id": "2026-09-03 10:00",
+            "confirmation": "2026-09-03 10:30",
+            "estimated_stop_risk": 149.99,
+            "risk_budget": 250.71707500000002
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 100,
+          "entry_at": 1790144100000,
+          "exit_at": 1790215200000,
+          "entry_price": 78.65,
+          "exit_price": 76.48,
+          "signal_date": "2026-09-22",
+          "stop": 78.04,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.08,
+            "stamp": 0.0,
+            "total": 5.08
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.08,
+            "stamp": 3.82,
+            "total": 8.9
+          },
+          "fees": 13.98,
+          "net_pnl": -230.98,
+          "return_pct": -2.934912986907375,
+          "reason": "stop",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-09-22",
+            "generated_at": "2026-09-22T16:00:00+08:00",
+            "lower": 77.68,
+            "upper": 79.25,
+            "stop": 77.04,
+            "target": null,
+            "signal_close": 74.28,
+            "key": "2026-09-22:002827",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 4.510714285714284,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 77.5,
+            "confirmed_at": 1790143200000,
+            "signal_id": "2026-09-23 13:15",
+            "confirmation": "2026-09-23 14:00",
+            "estimated_stop_risk": 176.01,
+            "risk_budget": 250.37665
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99954.91
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100025.82
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100022.41
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100058.35
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100072.27
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100153.83
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100248.83
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100133.59
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100221.58
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 99919.68
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "continuation_v1",
+      "periods": [
+        {
+          "label": "前段",
+          "summary": {
+            "initial_capital": 100000.0,
+            "end_equity": 99919.68,
+            "return_pct": -0.0803200000000115,
+            "monthly_equivalent_pct": -0.042158737147746095,
+            "max_drawdown_pct": 0.32833300897377926,
+            "closed_trades": 7,
+            "win_rate_pct": 42.857142857142854,
+            "fees": 100.32,
+            "start": "2026-08-04",
+            "end": "2026-09-30",
+            "calendar_days": 58
+          }
+        },
+        {
+          "label": "后段",
+          "summary": {
+            "initial_capital": 99919.68,
+            "end_equity": 99919.68,
+            "return_pct": 0.0,
+            "monthly_equivalent_pct": 0.0,
+            "max_drawdown_pct": 0,
+            "closed_trades": 0,
+            "win_rate_pct": null,
+            "fees": 0,
+            "start": "2026-09-30",
+            "end": "2026-11-03",
+            "calendar_days": 35
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 468,
+        "ready_plans": 468
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99919.68,
+        "return_pct": -0.0803200000000115,
+        "monthly_equivalent_pct": -0.02658040519317728,
+        "max_drawdown_pct": 0.32833300897377926,
+        "closed_trades": 7,
+        "win_rate_pct": 42.857142857142854,
+        "fees": 100.32,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0722700000000076,
+          "end_equity": 100072.27
+        },
+        {
+          "month": "2026-09",
+          "return_pct": -0.15247980284649465,
+          "end_equity": 99919.68
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 99919.68
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 99919.68
+        }
+      ],
+      "trades": [
+        {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "shares": 1000,
+          "entry_at": 1786428000000,
+          "exit_at": 1786590000000,
+          "entry_price": 9.26,
+          "exit_price": 9.34,
+          "signal_date": "2026-08-10",
+          "stop": 9.38,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 0.0,
+            "total": 5.09
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 4.67,
+            "total": 9.76
+          },
+          "fees": 14.85,
+          "net_pnl": 65.15,
+          "return_pct": 0.703177195256603,
+          "reason": "stop",
+          "plan": {
+            "code": "002181",
+            "name": "粤 传 媒",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 9.21,
+            "upper": 9.3,
+            "stop": 9.16,
+            "target": null,
+            "signal_close": 9.2,
+            "key": "2026-08-10:002181",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.48071428571428554,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 9.21,
+            "confirmed_at": 1786427100000,
+            "signal_id": "2026-08-11 13:15",
+            "confirmation": "2026-08-11 13:45",
+            "estimated_stop_risk": 124.76,
+            "risk_budget": 250.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "603533",
+          "name": "掌阅科技",
+          "shares": 400,
+          "entry_at": 1786502700000,
+          "exit_at": 1786590000000,
+          "entry_price": 22.88,
+          "exit_price": 22.81,
+          "signal_date": "2026-08-11",
+          "stop": 22.84,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 0.0,
+            "total": 5.09
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 4.56,
+            "total": 9.65
+          },
+          "fees": 14.74,
+          "net_pnl": -42.74,
+          "return_pct": -0.4667421637223179,
+          "reason": "stop",
+          "plan": {
+            "code": "603533",
+            "name": "掌阅科技",
+            "signal_date": "2026-08-11",
+            "generated_at": "2026-08-11T16:00:00+08:00",
+            "lower": 22.72,
+            "upper": 23.08,
+            "stop": 22.59,
+            "target": null,
+            "signal_close": 22.5,
+            "key": "2026-08-11:603533",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 1.2864285714285726,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 22.72,
+            "confirmed_at": 1786501800000,
+            "signal_id": "2026-08-12 10:00",
+            "confirmation": "2026-08-12 10:30",
+            "estimated_stop_risk": 134.7,
+            "risk_budget": 250.06227500000003
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 100,
+          "entry_at": 1786688100000,
+          "exit_at": 1786943700000,
+          "entry_price": 56.33,
+          "exit_price": 57.08,
+          "signal_date": "2026-08-13",
+          "stop": 57.32,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.06,
+            "stamp": 0.0,
+            "total": 5.06
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.06,
+            "stamp": 2.85,
+            "total": 7.91
+          },
+          "fees": 12.97,
+          "net_pnl": 62.03,
+          "return_pct": 1.1002011330138382,
+          "reason": "stop",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-13",
+            "generated_at": "2026-08-13T16:00:00+08:00",
+            "lower": 56.2,
+            "upper": 57.35,
+            "stop": 55.82,
+            "target": null,
+            "signal_close": 55.1,
+            "key": "2026-08-13:002827",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 3.742142857142858,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 56.2,
+            "confirmed_at": 1786687200000,
+            "signal_id": "2026-08-14 13:15",
+            "confirmation": "2026-08-14 14:00",
+            "estimated_stop_risk": 64.91,
+            "risk_budget": 250.056025
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 200,
+          "entry_at": 1788157800000,
+          "exit_at": 1788228000000,
+          "entry_price": 33.68,
+          "exit_price": 33.74,
+          "signal_date": "2026-08-28",
+          "stop": 33.36,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.07,
+            "stamp": 0.0,
+            "total": 5.07
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.07,
+            "stamp": 3.37,
+            "total": 8.44
+          },
+          "fees": 13.51,
+          "net_pnl": -1.51,
+          "return_pct": -0.022400004747020873,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-08-28",
+            "generated_at": "2026-08-28T16:00:00+08:00",
+            "lower": 33.5,
+            "upper": 33.79,
+            "stop": 33.36,
+            "target": null,
+            "signal_close": 34.65,
+            "key": "2026-08-28:601899",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 1.3678571428571433,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 33.5,
+            "confirmed_at": 1788156900000,
+            "signal_id": "2026-08-31 13:45",
+            "confirmation": "2026-08-31 14:15",
+            "estimated_stop_risk": 79.48,
+            "risk_budget": 250.15085
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000410",
+          "name": "沈阳机床",
+          "shares": 1900,
+          "entry_at": 1788157800000,
+          "exit_at": 1788404400000,
+          "entry_price": 5.22,
+          "exit_price": 5.3,
+          "signal_date": "2026-08-28",
+          "stop": 5.31,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 5.1
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 5.04,
+            "total": 10.14
+          },
+          "fees": 15.24,
+          "net_pnl": 136.76,
+          "return_pct": 1.3781983452751658,
+          "reason": "stop",
+          "plan": {
+            "code": "000410",
+            "name": "沈阳机床",
+            "signal_date": "2026-08-28",
+            "generated_at": "2026-08-28T16:00:00+08:00",
+            "lower": 5.16,
+            "upper": 5.23,
+            "stop": 5.12,
+            "target": null,
+            "signal_close": 5.2,
+            "key": "2026-08-28:000410",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.232142857142857,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 5.15,
+            "confirmed_at": 1788156900000,
+            "signal_id": "2026-08-31 13:30",
+            "confirmation": "2026-08-31 14:15",
+            "estimated_stop_risk": 224.05,
+            "risk_budget": 250.21110000000002
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601099",
+          "name": "太平洋",
+          "shares": 2700,
+          "entry_at": 1788403500000,
+          "exit_at": 1788500700000,
+          "entry_price": 3.6,
+          "exit_price": 3.58,
+          "signal_date": "2026-09-02",
+          "stop": 3.59,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 5.1
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 4.83,
+            "total": 9.93
+          },
+          "fees": 15.03,
+          "net_pnl": -69.03,
+          "return_pct": -0.709812752568097,
+          "reason": "stop",
+          "plan": {
+            "code": "601099",
+            "name": "太平洋",
+            "signal_date": "2026-09-02",
+            "generated_at": "2026-09-02T16:00:00+08:00",
+            "lower": 3.58,
+            "upper": 3.6,
+            "stop": 3.56,
+            "target": null,
+            "signal_close": 3.56,
+            "key": "2026-09-02:601099",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.11571428571428576,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 3.58,
+            "confirmed_at": 1788402600000,
+            "signal_id": "2026-09-03 10:00",
+            "confirmation": "2026-09-03 10:30",
+            "estimated_stop_risk": 149.99,
+            "risk_budget": 250.71707500000002
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 100,
+          "entry_at": 1790144100000,
+          "exit_at": 1790215200000,
+          "entry_price": 78.65,
+          "exit_price": 76.48,
+          "signal_date": "2026-09-22",
+          "stop": 78.04,
+          "target": null,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.08,
+            "stamp": 0.0,
+            "total": 5.08
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.08,
+            "stamp": 3.82,
+            "total": 8.9
+          },
+          "fees": 13.98,
+          "net_pnl": -230.98,
+          "return_pct": -2.934912986907375,
+          "reason": "stop",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-09-22",
+            "generated_at": "2026-09-22T16:00:00+08:00",
+            "lower": 77.68,
+            "upper": 79.25,
+            "stop": 77.04,
+            "target": null,
+            "signal_close": 74.28,
+            "key": "2026-09-22:002827",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 4.510714285714284,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 77.5,
+            "confirmed_at": 1790143200000,
+            "signal_id": "2026-09-23 13:15",
+            "confirmation": "2026-09-23 14:00",
+            "estimated_stop_risk": 176.01,
+            "risk_budget": 250.37665
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99954.91
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100025.82
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100022.41
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100058.35
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100084.44
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100072.27
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100153.83
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100248.83
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100133.59
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100150.66
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100221.58
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99919.68
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 99919.68
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "dual_v3",
+      "periods": [
+        {
+          "label": "前段",
+          "summary": {
+            "initial_capital": 100000.0,
+            "end_equity": 99919.68,
+            "return_pct": -0.0803200000000115,
+            "monthly_equivalent_pct": -0.042158737147746095,
+            "max_drawdown_pct": 0.32833300897377926,
+            "closed_trades": 7,
+            "win_rate_pct": 42.857142857142854,
+            "fees": 100.32,
+            "start": "2026-08-04",
+            "end": "2026-09-30",
+            "calendar_days": 58
+          }
+        },
+        {
+          "label": "后段",
+          "summary": {
+            "initial_capital": 99919.68,
+            "end_equity": 99919.68,
+            "return_pct": 0.0,
+            "monthly_equivalent_pct": 0.0,
+            "max_drawdown_pct": 0,
+            "closed_trades": 0,
+            "win_rate_pct": null,
+            "fees": 0,
+            "start": "2026-09-30",
+            "end": "2026-11-03",
+            "calendar_days": 35
+          }
+        }
+      ]
+    },
+    {
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 468,
+        "ready_plans": 468
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 99818.56,
+        "return_pct": -0.18143999999999938,
+        "monthly_equivalent_pct": -0.06006452092092163,
+        "max_drawdown_pct": 0.31139406669465974,
+        "closed_trades": 6,
+        "win_rate_pct": 50.0,
+        "fees": 169.44,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": -0.02942999999999696,
+          "end_equity": 99970.57
+        },
+        {
+          "month": "2026-09",
+          "return_pct": -0.15205474971284882,
+          "end_equity": 99818.56
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 99818.56
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 99818.56
+        }
+      ],
+      "trades": [
+        {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "shares": 1000,
+          "entry_at": 1786428000000,
+          "exit_at": 1786590000000,
+          "entry_price": 9.27,
+          "exit_price": 9.33,
+          "signal_date": "2026-08-10",
+          "stop": 9.38,
+          "target": null,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 10.19
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.19,
+            "stamp": 9.33,
+            "total": 19.52
+          },
+          "fees": 29.71,
+          "net_pnl": 30.29,
+          "return_pct": 0.326394179429516,
+          "reason": "stop",
+          "plan": {
+            "code": "002181",
+            "name": "粤 传 媒",
+            "signal_date": "2026-08-10",
+            "generated_at": "2026-08-10T16:00:00+08:00",
+            "lower": 9.21,
+            "upper": 9.3,
+            "stop": 9.16,
+            "target": null,
+            "signal_close": 9.2,
+            "key": "2026-08-10:002181",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.48071428571428554,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 9.21,
+            "confirmed_at": 1786427100000,
+            "signal_id": "2026-08-11 13:15",
+            "confirmation": "2026-08-11 13:45",
+            "estimated_stop_risk": 159.51,
+            "risk_budget": 250.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "603533",
+          "name": "掌阅科技",
+          "shares": 400,
+          "entry_at": 1786502700000,
+          "exit_at": 1786590000000,
+          "entry_price": 22.89,
+          "exit_price": 22.8,
+          "signal_date": "2026-08-11",
+          "stop": 22.84,
+          "target": null,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 10.18
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.18,
+            "stamp": 9.12,
+            "total": 19.3
+          },
+          "fees": 29.48,
+          "net_pnl": -65.48,
+          "return_pct": -0.7143651990251119,
+          "reason": "stop",
+          "plan": {
+            "code": "603533",
+            "name": "掌阅科技",
+            "signal_date": "2026-08-11",
+            "generated_at": "2026-08-11T16:00:00+08:00",
+            "lower": 22.72,
+            "upper": 23.08,
+            "stop": 22.59,
+            "target": null,
+            "signal_close": 22.5,
+            "key": "2026-08-11:603533",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 1.2864285714285726,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 22.72,
+            "confirmed_at": 1786501800000,
+            "signal_id": "2026-08-12 10:00",
+            "confirmation": "2026-08-12 10:30",
+            "estimated_stop_risk": 157.39,
+            "risk_budget": 250.024525
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 100,
+          "entry_at": 1786688100000,
+          "exit_at": 1786943700000,
+          "entry_price": 56.34,
+          "exit_price": 57.07,
+          "signal_date": "2026-08-13",
+          "stop": 57.32,
+          "target": null,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.11,
+            "stamp": 0.0,
+            "total": 10.11
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.11,
+            "stamp": 5.71,
+            "total": 15.82
+          },
+          "fees": 25.93,
+          "net_pnl": 47.07,
+          "return_pct": 0.8339667370054802,
+          "reason": "stop",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-08-13",
+            "generated_at": "2026-08-13T16:00:00+08:00",
+            "lower": 56.2,
+            "upper": 57.35,
+            "stop": 55.82,
+            "target": null,
+            "signal_close": 55.1,
+            "key": "2026-08-13:002827",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 3.742142857142858,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 56.2,
+            "confirmed_at": 1786687200000,
+            "signal_id": "2026-08-14 13:15",
+            "confirmation": "2026-08-14 14:00",
+            "estimated_stop_risk": 79.8,
+            "risk_budget": 249.912025
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 200,
+          "entry_at": 1788157800000,
+          "exit_at": 1788228000000,
+          "entry_price": 33.69,
+          "exit_price": 33.73,
+          "signal_date": "2026-08-28",
+          "stop": 33.36,
+          "target": null,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 10.13
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.13,
+            "stamp": 6.75,
+            "total": 16.88
+          },
+          "fees": 27.01,
+          "net_pnl": -19.01,
+          "return_pct": -0.2817076730886927,
+          "reason": "ma10_exit",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-08-28",
+            "generated_at": "2026-08-28T16:00:00+08:00",
+            "lower": 33.5,
+            "upper": 33.79,
+            "stop": 33.36,
+            "target": null,
+            "signal_close": 34.65,
+            "key": "2026-08-28:601899",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 1.3678571428571433,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 33.5,
+            "confirmed_at": 1788156900000,
+            "signal_id": "2026-08-31 13:45",
+            "confirmation": "2026-08-31 14:15",
+            "estimated_stop_risk": 96.93,
+            "risk_budget": 249.91925
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000410",
+          "name": "沈阳机床",
+          "shares": 1700,
+          "entry_at": 1788157800000,
+          "exit_at": 1788404400000,
+          "entry_price": 5.23,
+          "exit_price": 5.29,
+          "signal_date": "2026-08-28",
+          "stop": 5.31,
+          "target": null,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 10.18
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.18,
+            "stamp": 8.99,
+            "total": 19.17
+          },
+          "fees": 29.35,
+          "net_pnl": 72.65,
+          "return_pct": 0.8161839216822939,
+          "reason": "stop",
+          "plan": {
+            "code": "000410",
+            "name": "沈阳机床",
+            "signal_date": "2026-08-28",
+            "generated_at": "2026-08-28T16:00:00+08:00",
+            "lower": 5.16,
+            "upper": 5.23,
+            "stop": 5.12,
+            "target": null,
+            "signal_close": 5.2,
+            "key": "2026-08-28:000410",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 0.232142857142857,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 5.15,
+            "confirmed_at": 1788156900000,
+            "signal_id": "2026-08-31 13:30",
+            "confirmation": "2026-08-31 14:15",
+            "estimated_stop_risk": 250.02,
+            "risk_budget": 250.02970000000002
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002827",
+          "name": "高争民爆",
+          "shares": 100,
+          "entry_at": 1790144100000,
+          "exit_at": 1790215200000,
+          "entry_price": 78.66,
+          "exit_price": 76.47,
+          "signal_date": "2026-09-22",
+          "stop": 78.04,
+          "target": null,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.16,
+            "stamp": 0.0,
+            "total": 10.16
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.15,
+            "stamp": 7.65,
+            "total": 17.8
+          },
+          "fees": 27.96,
+          "net_pnl": -246.96,
+          "return_pct": -3.1355381302563683,
+          "reason": "stop",
+          "plan": {
+            "code": "002827",
+            "name": "高争民爆",
+            "signal_date": "2026-09-22",
+            "generated_at": "2026-09-22T16:00:00+08:00",
+            "lower": 77.68,
+            "upper": 79.25,
+            "stop": 77.04,
+            "target": null,
+            "signal_close": 74.28,
+            "key": "2026-09-22:002827",
+            "strategy_version": "a-continuation-v1",
+            "strategy_rule": "strong_continuation",
+            "entry_mode": "continuation",
+            "atr14": 4.510714285714284,
+            "budget_factor": 0.5,
+            "risk_fraction": 0.0025,
+            "breakout_level": 77.5,
+            "confirmed_at": 1790143200000,
+            "signal_id": "2026-09-23 13:15",
+            "confirmation": "2026-09-23 14:00",
+            "estimated_stop_risk": 192.01,
+            "risk_budget": 250.1638
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 99939.81
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100001.63
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99964.81
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 99994.7
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100011.88
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 99970.57
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100033.69
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100118.69
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100065.52
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100130.36
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99818.56
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 99818.56
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "dual_v3_cost_double",
+      "periods": [
+        {
+          "label": "前段",
+          "summary": {
+            "initial_capital": 100000.0,
+            "end_equity": 99818.56,
+            "return_pct": -0.18143999999999938,
+            "monthly_equivalent_pct": -0.09525798269927055,
+            "max_drawdown_pct": 0.31139406669465974,
+            "closed_trades": 6,
+            "win_rate_pct": 50.0,
+            "fees": 169.44,
+            "start": "2026-08-04",
+            "end": "2026-09-30",
+            "calendar_days": 58
+          }
+        },
+        {
+          "label": "后段",
+          "summary": {
+            "initial_capital": 99818.56,
+            "end_equity": 99818.56,
+            "return_pct": 0.0,
+            "monthly_equivalent_pct": 0.0,
+            "max_drawdown_pct": 0,
+            "closed_trades": 0,
+            "win_rate_pct": null,
+            "fees": 0,
+            "start": "2026-09-30",
+            "end": "2026-11-03",
+            "calendar_days": 35
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。",
+    "逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。",
+    "只用完整16根的15分钟交易日，在每根开盘时采样；没有历史盘口，买卖价用开盘价近似，可能漏掉区间内到价。",
+    "历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。",
+    "与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。",
+    "账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。",
+    "同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。",
+    "请求最近3个月；本地日线/指数截止2026-11-03，公共分钟覆盖后实际区间2026-08-04至2026-11-03。",
+    "请求46票，可用44票；失败：无",
+    "固定规则后按日期分段展示，当前历史池仍有选择偏差；后段不是严格样本外。",
+    "分钟开盘采样只使用该时刻之前已完成K线的成交量及结构，首次确认后须等待后续新采样。",
+    "风险预算按计划止损及双边成本估算；T+1、隔夜跳空和跌停可能令实际损失超过预算。"
+  ]
+}

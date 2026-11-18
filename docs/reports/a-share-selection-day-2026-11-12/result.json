@@ -1,0 +1,417 @@
+{
+  "replay_version": "bar-close-observe-next-open-limits-v3",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0003,
+    "min_commission": 5.0,
+    "transfer_rate": 1e-05,
+    "stamp_rate": 0.0005,
+    "slippage_ticks": 1,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 18,
+    "ready_plans": 18
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 99331.9,
+    "return_pct": -0.6681000000000048,
+    "monthly_equivalent_pct": null,
+    "max_drawdown_pct": 0.6681000000000058,
+    "closed_trades": 0,
+    "win_rate_pct": null,
+    "fees": 16.1,
+    "start": "2026-11-12",
+    "end": "2026-11-12",
+    "calendar_days": 1
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": -0.6681000000000048,
+      "end_equity": 99331.9
+    }
+  ],
+  "trades": [],
+  "curve": [
+    {
+      "date": "2026-11-12",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-12",
+      "equity": 99331.9
+    }
+  ],
+  "open_positions": [
+    {
+      "code": "000807",
+      "name": "云铝股份",
+      "shares": 500,
+      "entry_price": 23.69,
+      "entry_at": 1794449700002,
+      "entry_day": "2026-11-12",
+      "entry_fee": 5.12,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.12,
+        "stamp": 0.0,
+        "total": 5.12
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "signal_date": "2026-11-11",
+      "plan": {
+        "code": "000807",
+        "name": "云铝股份",
+        "signal_date": "2026-11-11",
+        "generated_at": "2026-11-11T16:00:00+08:00",
+        "lower": 23.03,
+        "upper": 23.79,
+        "stop": 22.8,
+        "target": 24.36,
+        "signal_close": 23.41,
+        "key": "2026-11-11:000807",
+        "strategy_version": "a-oversold-reversal-v3",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 0.7728571428571429,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 23.0,
+        "confirmation": "2026-11-12 10:15",
+        "signal_id": "2026-11-12 10:15",
+        "confirmed_at": 1794449700000,
+        "estimated_net_reward": 313.67,
+        "paired_expected_net_reward": 287.35,
+        "net_risk_reward": 0.6732127143562338,
+        "estimated_stop_risk": 465.93,
+        "risk_budget": 500.0
+      },
+      "stop": 22.8,
+      "target": 24.36,
+      "last_price": 23.31,
+      "quote_at": 1794466800000,
+      "valuation_blocked": false,
+      "unrealized_pnl": -195.12,
+      "sellable_shares": 0
+    },
+    {
+      "code": "000933",
+      "name": "神火股份",
+      "shares": 600,
+      "entry_price": 24.68,
+      "entry_at": 1794449700002,
+      "entry_day": "2026-11-12",
+      "entry_fee": 5.15,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.15,
+        "stamp": 0.0,
+        "total": 5.15
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "signal_date": "2026-11-11",
+      "plan": {
+        "code": "000933",
+        "name": "神火股份",
+        "signal_date": "2026-11-11",
+        "generated_at": "2026-11-11T16:00:00+08:00",
+        "lower": 24.1,
+        "upper": 24.8,
+        "stop": 23.93,
+        "target": 25.09,
+        "signal_close": 24.45,
+        "key": "2026-11-11:000933",
+        "strategy_version": "a-oversold-reversal-v3",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 0.7078571428571426,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 24.11,
+        "confirmation": "2026-11-12 10:15",
+        "signal_id": "2026-11-12 10:15",
+        "confirmed_at": 1794449700000,
+        "estimated_net_reward": 222.18,
+        "paired_expected_net_reward": 192.36,
+        "net_risk_reward": 0.46925887595835003,
+        "estimated_stop_risk": 473.47,
+        "risk_budget": 499.9494
+      },
+      "stop": 23.93,
+      "target": 25.09,
+      "last_price": 24.31,
+      "quote_at": 1794466800000,
+      "valuation_blocked": false,
+      "unrealized_pnl": -227.15,
+      "sellable_shares": 0
+    },
+    {
+      "code": "000951",
+      "name": "中国重汽",
+      "shares": 1000,
+      "entry_price": 18.81,
+      "entry_at": 1794452400002,
+      "entry_day": "2026-11-12",
+      "entry_fee": 5.83,
+      "entry_costs": {
+        "commission": 5.64,
+        "transfer": 0.19,
+        "stamp": 0.0,
+        "total": 5.83
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "signal_date": "2026-11-11",
+      "plan": {
+        "code": "000951",
+        "name": "中国重汽",
+        "signal_date": "2026-11-11",
+        "generated_at": "2026-11-11T16:00:00+08:00",
+        "lower": 18.45,
+        "upper": 19.13,
+        "stop": 18.37,
+        "target": 19.31,
+        "signal_close": 18.79,
+        "key": "2026-11-11:000951",
+        "strategy_version": "a-oversold-reversal-v3",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 0.7121428571428571,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 18.55,
+        "confirmation": "2026-11-12 11:00",
+        "signal_id": "2026-11-12 11:00",
+        "confirmed_at": 1794452400000,
+        "estimated_net_reward": 468.54,
+        "paired_expected_net_reward": 427.08,
+        "net_risk_reward": 0.9954110898661569,
+        "estimated_stop_risk": 470.7,
+        "risk_budget": 499.58865
+      },
+      "stop": 18.37,
+      "target": 19.31,
+      "last_price": 18.57,
+      "quote_at": 1794466800000,
+      "valuation_blocked": false,
+      "unrealized_pnl": -245.83,
+      "sellable_shares": 0
+    }
+  ],
+  "incomplete_minute_days": 0,
+  "individual_checks": {
+    "000933": {
+      "single_stock_would_enter": true,
+      "issues": [
+        "000933：等待两根完整15分钟线确认反转",
+        "000933：尚未收复前线高点和估算均价",
+        "000933：等待连续竞价30秒内有效报价"
+      ]
+    },
+    "000807": {
+      "single_stock_would_enter": true,
+      "issues": [
+        "000807：等待两根完整15分钟线确认反转",
+        "000807：尚未收复前线高点和估算均价",
+        "000807：等待连续竞价30秒内有效报价"
+      ]
+    },
+    "002648": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "002648：等待两根完整15分钟线确认反转",
+        "002648：尚未收复前线高点和估算均价",
+        "002648：等待连续竞价30秒内有效报价",
+        "002648：14:30后不新开超跌反转仓"
+      ]
+    },
+    "002493": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "002493：等待两根完整15分钟线确认反转",
+        "002493：尚未收复前线高点和估算均价",
+        "002493：等待连续竞价30秒内有效报价",
+        "002493：14:30后不新开超跌反转仓"
+      ]
+    },
+    "000612": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "000612：等待两根完整15分钟线确认反转",
+        "000612：尚未收复前线高点和估算均价",
+        "000612：等待连续竞价30秒内有效报价",
+        "000612：14:30后不新开超跌反转仓"
+      ]
+    },
+    "002532": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "002532：等待两根完整15分钟线确认反转",
+        "002532：尚未收复前线高点和估算均价",
+        "002532：等待连续竞价30秒内有效报价",
+        "002532：14:30后不新开超跌反转仓"
+      ]
+    },
+    "601628": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "601628：等待两根完整15分钟线确认反转",
+        "601628：尚未收复前线高点和估算均价",
+        "601628：等待连续竞价30秒内有效报价",
+        "601628：14:30后不新开超跌反转仓"
+      ]
+    },
+    "603659": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "603659：等待两根完整15分钟线确认反转",
+        "603659：尚未收复前线高点和估算均价",
+        "603659：等待连续竞价30秒内有效报价",
+        "603659：14:30后不新开超跌反转仓"
+      ]
+    },
+    "600595": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "600595：等待两根完整15分钟线确认反转",
+        "600595：尚未收复前线高点和估算均价",
+        "600595：等待连续竞价30秒内有效报价",
+        "600595：14:30后不新开超跌反转仓"
+      ]
+    },
+    "000792": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "000792：等待两根完整15分钟线确认反转",
+        "000792：尚未收复前线高点和估算均价",
+        "000792：等待连续竞价30秒内有效报价",
+        "000792：14:30后不新开超跌反转仓"
+      ]
+    },
+    "600219": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "600219：等待两根完整15分钟线确认反转",
+        "600219：尚未收复前线高点和估算均价",
+        "600219：等待连续竞价30秒内有效报价",
+        "600219：14:30后不新开超跌反转仓"
+      ]
+    },
+    "000951": {
+      "single_stock_would_enter": true,
+      "issues": [
+        "000951：等待两根完整15分钟线确认反转",
+        "000951：尚未收复前线高点和估算均价",
+        "000951：等待连续竞价30秒内有效报价"
+      ]
+    },
+    "000408": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "000408：等待两根完整15分钟线确认反转",
+        "000408：尚未收复前线高点和估算均价",
+        "000408：等待连续竞价30秒内有效报价",
+        "000408：14:30后不新开超跌反转仓"
+      ]
+    },
+    "601857": {
+      "single_stock_would_enter": true,
+      "issues": [
+        "601857：等待两根完整15分钟线确认反转",
+        "601857：尚未收复前线高点和估算均价",
+        "601857：等待连续竞价30秒内有效报价"
+      ]
+    },
+    "000893": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "000893：等待两根完整15分钟线确认反转",
+        "000893：尚未收复前线高点和估算均价",
+        "000893：等待连续竞价30秒内有效报价",
+        "000893：14:30后不新开超跌反转仓"
+      ]
+    },
+    "300014": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "300014：等待两根完整15分钟线确认反转",
+        "300014：尚未收复前线高点和估算均价",
+        "300014：等待连续竞价30秒内有效报价",
+        "300014：14:30后不新开超跌反转仓"
+      ]
+    },
+    "600918": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "600918：等待两根完整15分钟线确认反转",
+        "600918：尚未收复前线高点和估算均价",
+        "600918：等待连续竞价30秒内有效报价",
+        "600918：14:30后不新开超跌反转仓"
+      ]
+    },
+    "600871": {
+      "single_stock_would_enter": false,
+      "issues": [
+        "600871：等待两根完整15分钟线确认反转",
+        "600871：尚未收复前线高点和估算均价",
+        "600871：等待连续竞价30秒内有效报价",
+        "600871：14:30后不新开超跌反转仓"
+      ]
+    }
+  },
+  "signal_date": "2026-11-11",
+  "trade_date": "2026-11-12",
+  "frozen_codes": [
+    "000807",
+    "002648",
+    "000612",
+    "002532",
+    "002493",
+    "000933",
+    "601628",
+    "000951",
+    "000792",
+    "600595",
+    "603659",
+    "600219",
+    "000408",
+    "601857",
+    "600871",
+    "600918",
+    "000893",
+    "300014"
+  ],
+  "failures": {},
+  "execution_enabled": false
+}

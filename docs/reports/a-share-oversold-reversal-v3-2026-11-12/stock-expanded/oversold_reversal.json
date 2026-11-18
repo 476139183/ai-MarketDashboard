@@ -1,0 +1,226 @@
+{
+  "replay_version": "bar-close-observe-next-open-v2",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0003,
+    "min_commission": 5.0,
+    "transfer_rate": 1e-05,
+    "stamp_rate": 0.0005,
+    "slippage_ticks": 1,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 4,
+    "ready_plans": 4
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 100361.59,
+    "return_pct": 0.3615900000000005,
+    "monthly_equivalent_pct": 1.3827281354761745,
+    "max_drawdown_pct": 0.5846256499885414,
+    "closed_trades": 2,
+    "win_rate_pct": 100.0,
+    "fees": 31.41,
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "calendar_days": 8
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": 0.3615900000000005,
+      "end_equity": 100361.59
+    }
+  ],
+  "trades": [
+    {
+      "code": "603025",
+      "name": "大豪科技",
+      "shares": 1300,
+      "entry_at": 1793758500002,
+      "exit_at": 1793929500002,
+      "entry_price": 12.04,
+      "exit_price": 12.22,
+      "signal_date": "2026-11-03",
+      "stop": 11.69,
+      "target": 12.74,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.16,
+        "stamp": 0.0,
+        "total": 5.16
+      },
+      "exit_costs": {
+        "commission": 5.0,
+        "transfer": 0.16,
+        "stamp": 7.94,
+        "total": 13.1
+      },
+      "fees": 18.26,
+      "net_pnl": 215.74,
+      "return_pct": 1.3778999512044332,
+      "reason": "oversold_reversal_recovered",
+      "plan": {
+        "code": "603025",
+        "name": "大豪科技",
+        "signal_date": "2026-11-03",
+        "generated_at": "2026-11-03T16:00:00+08:00",
+        "lower": 11.75,
+        "upper": 12.29,
+        "stop": 11.69,
+        "target": 12.74,
+        "signal_close": 12.02,
+        "key": "2026-11-03:603025",
+        "strategy_version": "a-oversold-reversal-v3",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 0.5500000000000005,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 11.83,
+        "confirmation": "2026-11-04 10:15",
+        "signal_id": "2026-11-04 10:15",
+        "confirmed_at": 1793758500000,
+        "estimated_net_reward": 878.4,
+        "paired_expected_net_reward": 833.82,
+        "net_risk_reward": 1.8077793784729368,
+        "estimated_stop_risk": 485.9,
+        "risk_budget": 500.0
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      }
+    },
+    {
+      "code": "301279",
+      "name": "金道科技",
+      "shares": 300,
+      "entry_at": 1793844900002,
+      "exit_at": 1793929500002,
+      "entry_price": 19.67,
+      "exit_price": 20.2,
+      "signal_date": "2026-11-04",
+      "stop": 18.16,
+      "target": 20.88,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.06,
+        "stamp": 0.0,
+        "total": 5.06
+      },
+      "exit_costs": {
+        "commission": 5.0,
+        "transfer": 0.06,
+        "stamp": 3.03,
+        "total": 8.09
+      },
+      "fees": 13.15,
+      "net_pnl": 145.85,
+      "return_pct": 2.4694974314517624,
+      "reason": "oversold_reversal_recovered",
+      "plan": {
+        "code": "301279",
+        "name": "金道科技",
+        "signal_date": "2026-11-04",
+        "generated_at": "2026-11-04T16:00:00+08:00",
+        "lower": 18.75,
+        "upper": 20.21,
+        "stop": 18.16,
+        "target": 20.88,
+        "signal_close": 19.48,
+        "key": "2026-11-04:301279",
+        "strategy_version": "a-oversold-reversal-v3",
+        "strategy_rule": "oversold_reversal",
+        "entry_mode": "oversold_reversal",
+        "atr14": 1.4792857142857136,
+        "budget_factor": 1.0,
+        "risk_fraction": 0.005,
+        "reference_low": 18.53,
+        "confirmation": "2026-11-05 10:15",
+        "signal_id": "2026-11-05 10:15",
+        "confirmed_at": 1793844900000,
+        "estimated_net_reward": 346.75,
+        "paired_expected_net_reward": 327.49,
+        "net_risk_reward": 0.7396071070537296,
+        "estimated_stop_risk": 468.83,
+        "risk_budget": 503.0942
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      }
+    }
+  ],
+  "curve": [
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 100293.84
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 100951.78
+    },
+    {
+      "date": "2026-11-06",
+      "equity": 100361.59
+    },
+    {
+      "date": "2026-11-09",
+      "equity": 100361.59
+    },
+    {
+      "date": "2026-11-10",
+      "equity": 100361.59
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 100361.59
+    }
+  ],
+  "open_positions": [],
+  "incomplete_minute_days": 0,
+  "case": "oversold_reversal",
+  "paired_cost_stress": {
+    "end_equity": 100298.2,
+    "return_pct": 0.298200000000004,
+    "closed_trades": 2,
+    "win_rate_pct": 100.0,
+    "trades": [
+      {
+        "code": "603025",
+        "shares": 1300,
+        "baseline_net_pnl": 215.74,
+        "stress_net_pnl": 171.5,
+        "stress_fees": 36.5
+      },
+      {
+        "code": "301279",
+        "shares": 300,
+        "baseline_net_pnl": 145.85,
+        "stress_net_pnl": 126.7,
+        "stress_fees": 26.3
+      }
+    ]
+  }
+}

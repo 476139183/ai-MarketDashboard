@@ -1,0 +1,1115 @@
+{
+  "replay_version": "bar-close-observe-next-open-v2",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0006,
+    "min_commission": 10.0,
+    "transfer_rate": 2e-05,
+    "stamp_rate": 0.001,
+    "slippage_ticks": 2,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 8,
+    "candidate_signals": 155,
+    "ready_plans": 155
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 98026.26,
+    "return_pct": -1.9737400000000016,
+    "monthly_equivalent_pct": -0.6573570548623286,
+    "max_drawdown_pct": 2.2827400000000053,
+    "closed_trades": 11,
+    "win_rate_pct": 9.090909090909092,
+    "fees": 292.74,
+    "start": "2026-08-04",
+    "end": "2026-11-03",
+    "calendar_days": 92
+  },
+  "monthly": [
+    {
+      "month": "2026-08",
+      "return_pct": -1.2551199999999985,
+      "end_equity": 98744.88
+    },
+    {
+      "month": "2026-09",
+      "return_pct": -0.8804000774521259,
+      "end_equity": 97875.53
+    },
+    {
+      "month": "2026-10",
+      "return_pct": -0.005384389744811369,
+      "end_equity": 97870.26
+    },
+    {
+      "month": "2026-11",
+      "return_pct": 0.1593946925245726,
+      "end_equity": 98026.26
+    }
+  ],
+  "trades": [
+    {
+      "code": "000591",
+      "name": "太阳能",
+      "shares": 1000,
+      "entry_at": 1785899700002,
+      "exit_at": 1786499100002,
+      "entry_price": 4.58,
+      "exit_price": 4.42,
+      "signal_date": "2026-08-04",
+      "stop": 4.38,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.09,
+        "stamp": 0.0,
+        "total": 10.09
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.09,
+        "stamp": 4.42,
+        "total": 14.51
+      },
+      "fees": 24.6,
+      "net_pnl": -184.6,
+      "return_pct": -4.021707635362269,
+      "reason": "trend_reclaim_ma20_exit",
+      "plan": {
+        "code": "000591",
+        "name": "太阳能",
+        "signal_date": "2026-08-04",
+        "generated_at": "2026-08-04T16:00:00+08:00",
+        "lower": 4.54,
+        "upper": 4.58,
+        "stop": 4.38,
+        "target": null,
+        "signal_close": 4.56,
+        "key": "2026-08-04:000591",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.11928571428571441,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 4.55,
+        "exit_ma": 20,
+        "confirmed_at": 1785899700000,
+        "signal_id": "2026-08-05 11:15",
+        "confirmation": "2026-08-05 11:15",
+        "estimated_stop_risk": 244.54,
+        "risk_budget": 250.0
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "002043",
+      "name": "兔 宝 宝",
+      "shares": 300,
+      "entry_at": 1786512600002,
+      "exit_at": 1786671900002,
+      "entry_price": 12.79,
+      "exit_price": 12.43,
+      "signal_date": "2026-08-11",
+      "stop": 12.15,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.08,
+        "stamp": 0.0,
+        "total": 10.08
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.07,
+        "stamp": 3.73,
+        "total": 13.8
+      },
+      "fees": 23.88,
+      "net_pnl": -131.88,
+      "return_pct": -3.428054524470508,
+      "reason": "trend_reclaim_ma20_exit",
+      "plan": {
+        "code": "002043",
+        "name": "兔 宝 宝",
+        "signal_date": "2026-08-11",
+        "generated_at": "2026-08-11T16:00:00+08:00",
+        "lower": 12.64,
+        "upper": 12.92,
+        "stop": 12.15,
+        "target": null,
+        "signal_close": 12.68,
+        "key": "2026-08-11:002043",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.5664285714285716,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 12.646,
+        "exit_ma": 20,
+        "confirmed_at": 1786512600000,
+        "signal_id": "2026-08-12 13:30",
+        "confirmation": "2026-08-12 13:30",
+        "estimated_stop_risk": 221.79,
+        "risk_budget": 249.5385
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "002372",
+      "name": "伟星新材",
+      "shares": 700,
+      "entry_at": 1786514400002,
+      "exit_at": 1786671900002,
+      "entry_price": 8.67,
+      "exit_price": 8.32,
+      "signal_date": "2026-08-11",
+      "stop": 8.41,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.12,
+        "stamp": 0.0,
+        "total": 10.12
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.12,
+        "stamp": 5.82,
+        "total": 15.94
+      },
+      "fees": 26.06,
+      "net_pnl": -271.06,
+      "return_pct": -4.458869046835726,
+      "reason": "stop",
+      "plan": {
+        "code": "002372",
+        "name": "伟星新材",
+        "signal_date": "2026-08-11",
+        "generated_at": "2026-08-11T16:00:00+08:00",
+        "lower": 8.58,
+        "upper": 8.72,
+        "stop": 8.41,
+        "target": null,
+        "signal_close": 8.59,
+        "key": "2026-08-11:002372",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.28214285714285686,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 8.628,
+        "exit_ma": 20,
+        "confirmed_at": 1786514400000,
+        "signal_id": "2026-08-12 14:00",
+        "confirmation": "2026-08-12 14:00",
+        "estimated_stop_risk": 222.11,
+        "risk_budget": 249.6108
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "000591",
+      "name": "太阳能",
+      "shares": 1300,
+      "entry_at": 1786515300002,
+      "exit_at": 1786671900002,
+      "entry_price": 4.51,
+      "exit_price": 4.33,
+      "signal_date": "2026-08-11",
+      "stop": 4.37,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.12,
+        "stamp": 0.0,
+        "total": 10.12
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.11,
+        "stamp": 5.63,
+        "total": 15.74
+      },
+      "fees": 25.86,
+      "net_pnl": -259.86,
+      "return_pct": -4.424564796905223,
+      "reason": "stop",
+      "plan": {
+        "code": "000591",
+        "name": "太阳能",
+        "signal_date": "2026-08-11",
+        "generated_at": "2026-08-11T16:00:00+08:00",
+        "lower": 4.48,
+        "upper": 4.52,
+        "stop": 4.37,
+        "target": null,
+        "signal_close": 4.48,
+        "key": "2026-08-11:000591",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.10142857142857149,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 4.488,
+        "exit_ma": 20,
+        "confirmed_at": 1786515300000,
+        "signal_id": "2026-08-12 14:15",
+        "confirmation": "2026-08-12 14:15",
+        "estimated_stop_risk": 233.89,
+        "risk_budget": 249.558
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "002249",
+      "name": "大洋电机",
+      "shares": 700,
+      "entry_at": 1787034600002,
+      "exit_at": 1787103900002,
+      "entry_price": 7.46,
+      "exit_price": 7.14,
+      "signal_date": "2026-08-17",
+      "stop": 7.2,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.1,
+        "stamp": 0.0,
+        "total": 10.1
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.1,
+        "stamp": 5.0,
+        "total": 15.1
+      },
+      "fees": 25.2,
+      "net_pnl": -249.2,
+      "return_pct": -4.762905907761701,
+      "reason": "stop",
+      "plan": {
+        "code": "002249",
+        "name": "大洋电机",
+        "signal_date": "2026-08-17",
+        "generated_at": "2026-08-17T16:00:00+08:00",
+        "lower": 7.4,
+        "upper": 7.48,
+        "stop": 7.2,
+        "target": null,
+        "signal_close": 7.55,
+        "key": "2026-08-17:002249",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.18285714285714297,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 7.406000000000001,
+        "exit_ma": 20,
+        "confirmed_at": 1787034600000,
+        "signal_id": "2026-08-18 14:30",
+        "confirmation": "2026-08-18 14:30",
+        "estimated_stop_risk": 221.23,
+        "risk_budget": 247.88150000000002
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "601899",
+      "name": "紫金矿业",
+      "shares": 100,
+      "entry_at": 1787812200002,
+      "exit_at": 1788141600002,
+      "entry_price": 34.65,
+      "exit_price": 33.05,
+      "signal_date": "2026-08-26",
+      "stop": 33.12,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.07,
+        "stamp": 0.0,
+        "total": 10.07
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.07,
+        "stamp": 3.31,
+        "total": 13.38
+      },
+      "fees": 23.45,
+      "net_pnl": -183.45,
+      "return_pct": -5.279030350467759,
+      "reason": "stop",
+      "plan": {
+        "code": "601899",
+        "name": "紫金矿业",
+        "signal_date": "2026-08-26",
+        "generated_at": "2026-08-26T16:00:00+08:00",
+        "lower": 34.29,
+        "upper": 34.97,
+        "stop": 33.12,
+        "target": null,
+        "signal_close": 34.47,
+        "key": "2026-08-26:601899",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 1.3771428571428577,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 34.336,
+        "exit_ma": 20,
+        "confirmed_at": 1787812200000,
+        "signal_id": "2026-08-27 14:30",
+        "confirmation": "2026-08-27 14:30",
+        "estimated_stop_risk": 178.45,
+        "risk_budget": 247.2585
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "000410",
+      "name": "沈阳机床",
+      "shares": 700,
+      "entry_at": 1787812200002,
+      "exit_at": 1789004700002,
+      "entry_price": 5.17,
+      "exit_price": 5.15,
+      "signal_date": "2026-08-26",
+      "stop": 5.02,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.07,
+        "stamp": 0.0,
+        "total": 10.07
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.07,
+        "stamp": 3.61,
+        "total": 13.68
+      },
+      "fees": 23.75,
+      "net_pnl": -37.75,
+      "return_pct": -1.0402114040236203,
+      "reason": "trend_reclaim_ma20_exit",
+      "plan": {
+        "code": "000410",
+        "name": "沈阳机床",
+        "signal_date": "2026-08-26",
+        "generated_at": "2026-08-26T16:00:00+08:00",
+        "lower": 5.09,
+        "upper": 5.21,
+        "stop": 4.9,
+        "target": null,
+        "signal_close": 5.16,
+        "key": "2026-08-26:000410",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.24714285714285703,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 5.088,
+        "exit_ma": 20,
+        "confirmed_at": 1787812200000,
+        "signal_id": "2026-08-27 14:30",
+        "confirmation": "2026-08-27 14:30",
+        "estimated_stop_risk": 226.56,
+        "risk_budget": 247.228325
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "601099",
+      "name": "太平洋",
+      "shares": 1400,
+      "entry_at": 1788487200002,
+      "exit_at": 1789091100002,
+      "entry_price": 3.62,
+      "exit_price": 3.39,
+      "signal_date": "2026-09-03",
+      "stop": 3.49,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.1,
+        "stamp": 0.0,
+        "total": 10.1
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.09,
+        "stamp": 4.75,
+        "total": 14.84
+      },
+      "fees": 24.94,
+      "net_pnl": -346.94,
+      "return_pct": -6.832082865638722,
+      "reason": "stop",
+      "plan": {
+        "code": "601099",
+        "name": "太平洋",
+        "signal_date": "2026-09-03",
+        "generated_at": "2026-09-03T16:00:00+08:00",
+        "lower": 3.59,
+        "upper": 3.63,
+        "stop": 3.49,
+        "target": null,
+        "signal_close": 3.57,
+        "key": "2026-09-03:601099",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.11285714285714292,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 3.59,
+        "exit_ma": 20,
+        "confirmed_at": 1788487200000,
+        "signal_id": "2026-09-04 10:00",
+        "confirmation": "2026-09-04 10:00",
+        "estimated_stop_risk": 235.06,
+        "risk_budget": 247.12470000000002
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "300085",
+      "name": "银之杰",
+      "shares": 100,
+      "entry_at": 1789005600002,
+      "exit_at": 1789091100002,
+      "entry_price": 32.17,
+      "exit_price": 29.36,
+      "signal_date": "2026-09-09",
+      "stop": 30.98,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.06,
+        "stamp": 0.0,
+        "total": 10.06
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.06,
+        "stamp": 2.94,
+        "total": 13.0
+      },
+      "fees": 23.06,
+      "net_pnl": -304.06,
+      "return_pct": -9.422198533649825,
+      "reason": "stop",
+      "plan": {
+        "code": "300085",
+        "name": "银之杰",
+        "signal_date": "2026-09-09",
+        "generated_at": "2026-09-09T16:00:00+08:00",
+        "lower": 31.84,
+        "upper": 32.6,
+        "stop": 30.98,
+        "target": null,
+        "signal_close": 31.59,
+        "key": "2026-09-09:300085",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 1.5592857142857142,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 31.848000000000003,
+        "exit_ma": 20,
+        "confirmed_at": 1789005600000,
+        "signal_id": "2026-09-10 10:00",
+        "confirmation": "2026-09-10 10:00",
+        "estimated_stop_risk": 144.22,
+        "risk_budget": 246.40025000000003
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "600039",
+      "name": "四川路桥",
+      "shares": 700,
+      "entry_at": 1789006500002,
+      "exit_at": 1789437600002,
+      "entry_price": 9.3,
+      "exit_price": 9.01,
+      "signal_date": "2026-09-09",
+      "stop": 9.04,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.13,
+        "stamp": 0.0,
+        "total": 10.13
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.13,
+        "stamp": 6.31,
+        "total": 16.44
+      },
+      "fees": 26.57,
+      "net_pnl": -229.57,
+      "return_pct": -3.520942067106023,
+      "reason": "stop",
+      "plan": {
+        "code": "600039",
+        "name": "四川路桥",
+        "signal_date": "2026-09-09",
+        "generated_at": "2026-09-09T16:00:00+08:00",
+        "lower": 9.23,
+        "upper": 9.35,
+        "stop": 9.04,
+        "target": null,
+        "signal_close": 9.24,
+        "key": "2026-09-09:600039",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.2600000000000003,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 9.222,
+        "exit_ma": 20,
+        "confirmed_at": 1789006500000,
+        "signal_id": "2026-09-10 10:15",
+        "confirmation": "2026-09-10 10:15",
+        "estimated_stop_risk": 222.57,
+        "risk_budget": 246.3276
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "shares": 600,
+      "entry_at": 1789539300002,
+      "exit_at": 1792734300002,
+      "entry_price": 8.14,
+      "exit_price": 8.31,
+      "signal_date": "2026-09-15",
+      "stop": 8.34,
+      "target": null,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.1,
+        "stamp": 0.0,
+        "total": 10.1
+      },
+      "exit_costs": {
+        "commission": 10.0,
+        "transfer": 0.1,
+        "stamp": 4.99,
+        "total": 15.09
+      },
+      "fees": 25.19,
+      "net_pnl": 76.81,
+      "return_pct": 1.5694407551950305,
+      "reason": "stop",
+      "plan": {
+        "code": "601398",
+        "name": "工商银行",
+        "signal_date": "2026-09-15",
+        "generated_at": "2026-09-15T16:00:00+08:00",
+        "lower": 8.08,
+        "upper": 8.16,
+        "stop": 7.84,
+        "target": null,
+        "signal_close": 8.13,
+        "key": "2026-09-15:601398",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.16571428571428573,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 8.112,
+        "exit_ma": 20,
+        "confirmed_at": 1789539300000,
+        "signal_id": "2026-09-16 14:15",
+        "confirmation": "2026-09-16 14:15",
+        "estimated_stop_risk": 216.88,
+        "risk_budget": 244.50407500000003
+      },
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      }
+    }
+  ],
+  "curve": [
+    {
+      "date": "2026-08-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-08-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-08-05",
+      "equity": 99959.91
+    },
+    {
+      "date": "2026-08-06",
+      "equity": 99889.91
+    },
+    {
+      "date": "2026-08-07",
+      "equity": 99859.91
+    },
+    {
+      "date": "2026-08-10",
+      "equity": 99889.91
+    },
+    {
+      "date": "2026-08-11",
+      "equity": 99889.91
+    },
+    {
+      "date": "2026-08-12",
+      "equity": 99795.08
+    },
+    {
+      "date": "2026-08-13",
+      "equity": 99478.08
+    },
+    {
+      "date": "2026-08-14",
+      "equity": 99152.6
+    },
+    {
+      "date": "2026-08-17",
+      "equity": 99152.6
+    },
+    {
+      "date": "2026-08-18",
+      "equity": 99135.5
+    },
+    {
+      "date": "2026-08-19",
+      "equity": 98903.4
+    },
+    {
+      "date": "2026-08-20",
+      "equity": 98903.4
+    },
+    {
+      "date": "2026-08-21",
+      "equity": 98903.4
+    },
+    {
+      "date": "2026-08-24",
+      "equity": 98903.4
+    },
+    {
+      "date": "2026-08-25",
+      "equity": 98903.4
+    },
+    {
+      "date": "2026-08-26",
+      "equity": 98903.4
+    },
+    {
+      "date": "2026-08-27",
+      "equity": 98868.26
+    },
+    {
+      "date": "2026-08-28",
+      "equity": 98904.26
+    },
+    {
+      "date": "2026-08-31",
+      "equity": 98744.88
+    },
+    {
+      "date": "2026-09-01",
+      "equity": 98772.88
+    },
+    {
+      "date": "2026-09-02",
+      "equity": 98807.88
+    },
+    {
+      "date": "2026-09-03",
+      "equity": 98877.88
+    },
+    {
+      "date": "2026-09-04",
+      "equity": 98748.78
+    },
+    {
+      "date": "2026-09-07",
+      "equity": 98685.78
+    },
+    {
+      "date": "2026-09-08",
+      "equity": 98706.78
+    },
+    {
+      "date": "2026-09-09",
+      "equity": 98601.78
+    },
+    {
+      "date": "2026-09-10",
+      "equity": 98545.91
+    },
+    {
+      "date": "2026-09-11",
+      "equity": 97853.07
+    },
+    {
+      "date": "2026-09-14",
+      "equity": 97909.07
+    },
+    {
+      "date": "2026-09-15",
+      "equity": 97801.63
+    },
+    {
+      "date": "2026-09-16",
+      "equity": 97773.53
+    },
+    {
+      "date": "2026-09-17",
+      "equity": 97791.53
+    },
+    {
+      "date": "2026-09-18",
+      "equity": 97749.53
+    },
+    {
+      "date": "2026-09-21",
+      "equity": 97773.53
+    },
+    {
+      "date": "2026-09-22",
+      "equity": 97779.53
+    },
+    {
+      "date": "2026-09-23",
+      "equity": 97761.53
+    },
+    {
+      "date": "2026-09-24",
+      "equity": 97785.53
+    },
+    {
+      "date": "2026-09-28",
+      "equity": 97797.53
+    },
+    {
+      "date": "2026-09-29",
+      "equity": 97803.53
+    },
+    {
+      "date": "2026-09-30",
+      "equity": 97875.53
+    },
+    {
+      "date": "2026-10-08",
+      "equity": 97893.53
+    },
+    {
+      "date": "2026-10-09",
+      "equity": 97839.53
+    },
+    {
+      "date": "2026-10-12",
+      "equity": 97971.53
+    },
+    {
+      "date": "2026-10-13",
+      "equity": 98001.53
+    },
+    {
+      "date": "2026-10-14",
+      "equity": 97977.53
+    },
+    {
+      "date": "2026-10-15",
+      "equity": 98007.53
+    },
+    {
+      "date": "2026-10-16",
+      "equity": 97995.53
+    },
+    {
+      "date": "2026-10-19",
+      "equity": 98067.53
+    },
+    {
+      "date": "2026-10-20",
+      "equity": 98055.53
+    },
+    {
+      "date": "2026-10-21",
+      "equity": 97977.53
+    },
+    {
+      "date": "2026-10-22",
+      "equity": 98061.53
+    },
+    {
+      "date": "2026-10-23",
+      "equity": 97878.44
+    },
+    {
+      "date": "2026-10-26",
+      "equity": 97966.26
+    },
+    {
+      "date": "2026-10-27",
+      "equity": 97795.26
+    },
+    {
+      "date": "2026-10-28",
+      "equity": 97717.26
+    },
+    {
+      "date": "2026-10-29",
+      "equity": 97888.26
+    },
+    {
+      "date": "2026-10-30",
+      "equity": 97870.26
+    },
+    {
+      "date": "2026-11-02",
+      "equity": 97822.26
+    },
+    {
+      "date": "2026-11-03",
+      "equity": 98026.26
+    }
+  ],
+  "open_positions": [
+    {
+      "code": "002043",
+      "name": "兔 宝 宝",
+      "shares": 300,
+      "entry_price": 12.91,
+      "entry_at": 1792982700002,
+      "entry_day": "2026-10-26",
+      "entry_fee": 10.08,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.08,
+        "stamp": 0.0,
+        "total": 10.08
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      },
+      "signal_date": "2026-10-23",
+      "plan": {
+        "code": "002043",
+        "name": "兔 宝 宝",
+        "signal_date": "2026-10-23",
+        "generated_at": "2026-10-23T16:00:00+08:00",
+        "lower": 12.75,
+        "upper": 12.96,
+        "stop": 12.2,
+        "target": null,
+        "signal_close": 12.85,
+        "key": "2026-10-23:002043",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.579285714285714,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 12.68,
+        "exit_ma": 20,
+        "confirmed_at": 1792982700000,
+        "signal_id": "2026-10-26 10:45",
+        "confirmation": "2026-10-26 10:45",
+        "estimated_stop_risk": 242.8,
+        "risk_budget": 244.6961
+      },
+      "stop": 12.2,
+      "target": null,
+      "last_price": 13.43,
+      "quote_at": 1793689200000,
+      "valuation_blocked": false,
+      "unrealized_pnl": 145.92,
+      "sellable_shares": 300
+    },
+    {
+      "code": "601398",
+      "name": "工商银行",
+      "shares": 600,
+      "entry_price": 8.57,
+      "entry_at": 1792995300002,
+      "entry_day": "2026-10-26",
+      "entry_fee": 10.1,
+      "entry_costs": {
+        "commission": 10.0,
+        "transfer": 0.1,
+        "stamp": 0.0,
+        "total": 10.1
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 20
+      },
+      "signal_date": "2026-10-23",
+      "plan": {
+        "code": "601398",
+        "name": "工商银行",
+        "signal_date": "2026-10-23",
+        "generated_at": "2026-10-23T16:00:00+08:00",
+        "lower": 8.51,
+        "upper": 8.59,
+        "stop": 8.23,
+        "target": null,
+        "signal_close": 8.32,
+        "key": "2026-10-23:601398",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 0.19214285714285698,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 8.508,
+        "exit_ma": 20,
+        "confirmed_at": 1792995300000,
+        "signal_id": "2026-10-26 14:15",
+        "confirmation": "2026-10-26 14:15",
+        "estimated_stop_risk": 241.13,
+        "risk_budget": 244.9634
+      },
+      "stop": 8.23,
+      "target": null,
+      "last_price": 8.59,
+      "quote_at": 1793689200000,
+      "valuation_blocked": false,
+      "unrealized_pnl": 1.9,
+      "sellable_shares": 600
+    }
+  ],
+  "incomplete_minute_days": 44,
+  "case": "cost_double"
+}

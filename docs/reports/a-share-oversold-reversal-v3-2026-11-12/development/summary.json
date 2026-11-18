@@ -1,0 +1,3967 @@
+{
+  "label": "开发44只",
+  "generated_at": "2026-11-12T17:49:00.650715+08:00",
+  "rule_version": "a-oversold-reversal-v3",
+  "replay_version": "bar-close-observe-next-open-v2",
+  "symbols": 44,
+  "start": "2026-08-04",
+  "end": "2026-11-03",
+  "sample_sha256": "e74f2f99d50abf970ed582f7506f5f5070ab971d29649bb937042e0f221841dc",
+  "results": [
+    {
+      "replay_version": "bar-close-observe-next-open-v2",
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 8
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-10",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 100000.0
+        }
+      ],
+      "trades": [],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 100000.0
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "baseline"
+    },
+    {
+      "replay_version": "bar-close-observe-next-open-v2",
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 77,
+        "ready_plans": 77
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 101182.54,
+        "return_pct": 1.1825399999999986,
+        "monthly_equivalent_pct": 0.38969653653844194,
+        "max_drawdown_pct": 4.576416405314654,
+        "closed_trades": 23,
+        "win_rate_pct": 34.78260869565217,
+        "fees": 384.46,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 2.171579999999995,
+          "end_equity": 102171.58
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 3.1536852028714923,
+          "end_equity": 105393.75
+        },
+        {
+          "month": "2026-10",
+          "return_pct": -3.9956923441854975,
+          "end_equity": 101182.54
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 101182.54
+        }
+      ],
+      "trades": [
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1200,
+          "entry_at": 1786070700002,
+          "exit_at": 1786585500002,
+          "entry_price": 12.47,
+          "exit_price": 12.68,
+          "signal_date": "2026-08-06",
+          "stop": 12.09,
+          "target": 12.99,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.15,
+            "stamp": 0.0,
+            "total": 5.15
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.15,
+            "stamp": 7.61,
+            "total": 12.76
+          },
+          "fees": 17.91,
+          "net_pnl": 234.09,
+          "return_pct": 1.5638162487515994,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-08-06",
+            "generated_at": "2026-08-06T16:00:00+08:00",
+            "lower": 12.31,
+            "upper": 12.82,
+            "stop": 12.09,
+            "target": 12.99,
+            "signal_close": 12.65,
+            "key": "2026-08-06:002043",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.6842857142857143,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 12.27,
+            "confirmation": "2026-08-07 10:45",
+            "signal_id": "2026-08-07 10:45",
+            "confirmed_at": 1786070700000,
+            "estimated_net_reward": 593.9,
+            "paired_expected_net_reward": 551.83,
+            "net_risk_reward": 1.2231741978003872,
+            "estimated_stop_risk": 485.54,
+            "risk_budget": 500.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300413",
+          "name": "芒果超媒",
+          "shares": 700,
+          "entry_at": 1786338900002,
+          "exit_at": 1786674600002,
+          "entry_price": 16.11,
+          "exit_price": 15.43,
+          "signal_date": "2026-08-07",
+          "stop": 15.48,
+          "target": 16.31,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 0.0,
+            "total": 5.11
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 5.4,
+            "total": 10.51
+          },
+          "fees": 15.62,
+          "net_pnl": -491.62,
+          "return_pct": -4.357518230189211,
+          "reason": "stop",
+          "plan": {
+            "code": "300413",
+            "name": "芒果超媒",
+            "signal_date": "2026-08-07",
+            "generated_at": "2026-08-07T16:00:00+08:00",
+            "lower": 15.73,
+            "upper": 16.17,
+            "stop": 15.48,
+            "target": 16.31,
+            "signal_close": 16.0,
+            "key": "2026-08-07:300413",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.5542857142857143,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 15.62,
+            "confirmation": "2026-08-10 13:15",
+            "signal_id": "2026-08-10 13:15",
+            "confirmed_at": 1786338900000,
+            "estimated_net_reward": 117.07,
+            "paired_expected_net_reward": 87.14,
+            "net_risk_reward": 0.252507387356297,
+            "estimated_stop_risk": 463.63,
+            "risk_budget": 501.35425000000004
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600575",
+          "name": "淮河能源",
+          "shares": 4800,
+          "entry_at": 1786936500002,
+          "exit_at": 1787289300002,
+          "entry_price": 3.36,
+          "exit_price": 3.26,
+          "signal_date": "2026-08-14",
+          "stop": 3.27,
+          "target": 3.4,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.16,
+            "stamp": 0.0,
+            "total": 5.16
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.16,
+            "stamp": 7.82,
+            "total": 12.98
+          },
+          "fees": 18.14,
+          "net_pnl": -498.14,
+          "return_pct": -3.0876778014970405,
+          "reason": "stop",
+          "plan": {
+            "code": "600575",
+            "name": "淮河能源",
+            "signal_date": "2026-08-14",
+            "generated_at": "2026-08-14T16:00:00+08:00",
+            "lower": 3.3,
+            "upper": 3.37,
+            "stop": 3.27,
+            "target": 3.4,
+            "signal_close": 3.35,
+            "key": "2026-08-14:600575",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.10357142857142858,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 3.3,
+            "confirmation": "2026-08-17 11:15",
+            "signal_id": "2026-08-17 11:15",
+            "confirmed_at": 1786936500000,
+            "estimated_net_reward": 125.54,
+            "paired_expected_net_reward": 11.14,
+            "net_risk_reward": 0.25201750511904286,
+            "estimated_stop_risk": 498.14,
+            "risk_budget": 498.71235
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002636",
+          "name": "金安国纪",
+          "shares": 100,
+          "entry_at": 1787277600002,
+          "exit_at": 1787797800002,
+          "entry_price": 62.92,
+          "exit_price": 67.24,
+          "signal_date": "2026-08-20",
+          "stop": 58.24,
+          "target": 66.28,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.06,
+            "stamp": 0.0,
+            "total": 5.06
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.07,
+            "stamp": 3.36,
+            "total": 8.43
+          },
+          "fees": 13.49,
+          "net_pnl": 418.51,
+          "return_pct": 6.646117394466623,
+          "reason": "target",
+          "plan": {
+            "code": "002636",
+            "name": "金安国纪",
+            "signal_date": "2026-08-20",
+            "generated_at": "2026-08-20T16:00:00+08:00",
+            "lower": 59.21,
+            "upper": 64.21,
+            "stop": 58.24,
+            "target": 66.28,
+            "signal_close": 61.71,
+            "key": "2026-08-20:002636",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 5.019285714285713,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 59.5,
+            "confirmation": "2026-08-21 10:00",
+            "signal_id": "2026-08-21 10:00",
+            "confirmed_at": 1787277600000,
+            "estimated_net_reward": 321.56,
+            "paired_expected_net_reward": 306.11,
+            "net_risk_reward": 0.6670954089994399,
+            "estimated_stop_risk": 482.03,
+            "risk_budget": 497.00655
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300413",
+          "name": "芒果超媒",
+          "shares": 900,
+          "entry_at": 1787711400002,
+          "exit_at": 1788313500002,
+          "entry_price": 14.16,
+          "exit_price": 21.02,
+          "signal_date": "2026-08-25",
+          "stop": 13.69,
+          "target": 14.63,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 5.13
+          },
+          "exit_costs": {
+            "commission": 5.68,
+            "transfer": 0.19,
+            "stamp": 9.46,
+            "total": 15.33
+          },
+          "fees": 20.46,
+          "net_pnl": 6153.54,
+          "return_pct": 48.266352292274064,
+          "reason": "target",
+          "plan": {
+            "code": "300413",
+            "name": "芒果超媒",
+            "signal_date": "2026-08-25",
+            "generated_at": "2026-08-25T16:00:00+08:00",
+            "lower": 13.84,
+            "upper": 14.3,
+            "stop": 13.69,
+            "target": 14.63,
+            "signal_close": 14.07,
+            "key": "2026-08-25:300413",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.4778571428571427,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 13.81,
+            "confirmation": "2026-08-26 10:30",
+            "signal_id": "2026-08-26 10:30",
+            "confirmed_at": 1787711400000,
+            "estimated_net_reward": 397.16,
+            "paired_expected_net_reward": 362.33,
+            "net_risk_reward": 0.8857072768225508,
+            "estimated_stop_risk": 448.41,
+            "risk_budget": 495.5657
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002249",
+          "name": "大洋电机",
+          "shares": 1900,
+          "entry_at": 1787711400002,
+          "exit_at": 1788486300002,
+          "entry_price": 6.71,
+          "exit_price": 6.76,
+          "signal_date": "2026-08-25",
+          "stop": 6.47,
+          "target": 6.94,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 5.13
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 6.42,
+            "total": 11.55
+          },
+          "fees": 16.68,
+          "net_pnl": 78.32,
+          "return_pct": 0.6140755974731322,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "002249",
+            "name": "大洋电机",
+            "signal_date": "2026-08-25",
+            "generated_at": "2026-08-25T16:00:00+08:00",
+            "lower": 6.59,
+            "upper": 6.79,
+            "stop": 6.47,
+            "target": 6.94,
+            "signal_close": 6.69,
+            "key": "2026-08-25:002249",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.20928571428571432,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 6.53,
+            "confirmation": "2026-08-26 10:30",
+            "signal_id": "2026-08-26 10:30",
+            "confirmed_at": 1787711400000,
+            "estimated_net_reward": 401.16,
+            "paired_expected_net_reward": 346.33,
+            "net_risk_reward": 0.8163780296709335,
+            "estimated_stop_risk": 491.39,
+            "risk_budget": 495.68635
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 300,
+          "entry_at": 1788400800002,
+          "exit_at": 1788487200002,
+          "entry_price": 33.37,
+          "exit_price": 33.92,
+          "signal_date": "2026-09-02",
+          "stop": 31.86,
+          "target": 33.91,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 5.1
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.1,
+            "stamp": 5.09,
+            "total": 10.19
+          },
+          "fees": 15.29,
+          "net_pnl": 149.71,
+          "return_pct": 1.4946935433951338,
+          "reason": "target",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-09-02",
+            "generated_at": "2026-09-02T16:00:00+08:00",
+            "lower": 32.31,
+            "upper": 33.58,
+            "stop": 31.86,
+            "target": 33.91,
+            "signal_close": 32.95,
+            "key": "2026-09-02:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 1.2964285714285708,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 32.19,
+            "confirmation": "2026-09-03 10:00",
+            "signal_id": "2026-09-03 10:00",
+            "confirmed_at": 1788400800000,
+            "estimated_net_reward": 143.71,
+            "paired_expected_net_reward": 122.43,
+            "net_risk_reward": 0.30512972950019107,
+            "estimated_stop_risk": 470.98,
+            "risk_budget": 529.05625
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300274",
+          "name": "阳光电源",
+          "shares": 100,
+          "entry_at": 1788488100002,
+          "exit_at": 1789091100002,
+          "entry_price": 88.94,
+          "exit_price": 84.44,
+          "signal_date": "2026-09-03",
+          "stop": 84.68,
+          "target": 90.4,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 0.0,
+            "total": 5.09
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.08,
+            "stamp": 4.22,
+            "total": 9.3
+          },
+          "fees": 14.39,
+          "net_pnl": -464.39,
+          "return_pct": -5.218398735151571,
+          "reason": "stop",
+          "plan": {
+            "code": "300274",
+            "name": "阳光电源",
+            "signal_date": "2026-09-03",
+            "generated_at": "2026-09-03T16:00:00+08:00",
+            "lower": 85.21,
+            "upper": 89.07,
+            "stop": 84.68,
+            "target": 90.4,
+            "signal_close": 87.08,
+            "key": "2026-09-03:300274",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 5.28714285714286,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 86.01,
+            "confirmation": "2026-09-04 10:15",
+            "signal_id": "2026-09-04 10:15",
+            "confirmed_at": 1788488100000,
+            "estimated_net_reward": 130.3,
+            "paired_expected_net_reward": 113.6,
+            "net_risk_reward": 0.29519710013593115,
+            "estimated_stop_risk": 441.4,
+            "risk_budget": 530.2220500000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1000,
+          "entry_at": 1789353900002,
+          "exit_at": 1789524000002,
+          "entry_price": 11.28,
+          "exit_price": 10.65,
+          "signal_date": "2026-09-11",
+          "stop": 10.82,
+          "target": 11.5,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 0.0,
+            "total": 5.11
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.11,
+            "stamp": 5.33,
+            "total": 10.44
+          },
+          "fees": 15.55,
+          "net_pnl": -645.55,
+          "return_pct": -5.720369584346098,
+          "reason": "stop",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 10.96,
+            "upper": 11.38,
+            "stop": 10.82,
+            "target": 11.5,
+            "signal_close": 11.18,
+            "key": "2026-09-11:002043",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.45857142857142846,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 10.94,
+            "confirmation": "2026-09-14 10:45",
+            "signal_id": "2026-09-14 10:45",
+            "confirmed_at": 1789353900000,
+            "estimated_net_reward": 194.03,
+            "paired_expected_net_reward": 158.06,
+            "net_risk_reward": 0.39954286184955623,
+            "estimated_stop_risk": 485.63,
+            "risk_budget": 527.5287999999999
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2500,
+          "entry_at": 1789351200002,
+          "exit_at": 1789609500002,
+          "entry_price": 5.35,
+          "exit_price": 5.76,
+          "signal_date": "2026-09-11",
+          "stop": 5.16,
+          "target": 5.51,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 5.13
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.14,
+            "stamp": 7.2,
+            "total": 12.34
+          },
+          "fees": 17.47,
+          "net_pnl": 1007.53,
+          "return_pct": 7.530046419578882,
+          "reason": "target",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 5.25,
+            "upper": 5.41,
+            "stop": 5.16,
+            "target": 5.51,
+            "signal_close": 5.33,
+            "key": "2026-09-11:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.16357142857142845,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 5.21,
+            "confirmation": "2026-09-14 10:00",
+            "signal_id": "2026-09-14 10:00",
+            "confirmed_at": 1789351200000,
+            "estimated_net_reward": 357.85,
+            "paired_expected_net_reward": 290.73,
+            "net_risk_reward": 0.6925682214050706,
+            "estimated_stop_risk": 516.7,
+            "risk_budget": 527.85445
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 400,
+          "entry_at": 1789351200002,
+          "exit_at": 1789610400002,
+          "entry_price": 32.32,
+          "exit_price": 30.92,
+          "signal_date": "2026-09-11",
+          "stop": 31.14,
+          "target": 33.5,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 5.13
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 6.18,
+            "total": 11.3
+          },
+          "fees": 16.43,
+          "net_pnl": -576.43,
+          "return_pct": -4.4570030611306,
+          "reason": "stop",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 31.65,
+            "upper": 32.87,
+            "stop": 31.14,
+            "target": 33.5,
+            "signal_close": 32.26,
+            "key": "2026-09-11:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 1.223571428571428,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 31.45,
+            "confirmation": "2026-09-14 10:00",
+            "signal_id": "2026-09-14 10:00",
+            "confirmed_at": 1789351200000,
+            "estimated_net_reward": 451.04,
+            "paired_expected_net_reward": 426.08,
+            "net_risk_reward": 0.9158544509421702,
+            "estimated_stop_risk": 492.48,
+            "risk_budget": 527.9001000000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002249",
+          "name": "大洋电机",
+          "shares": 3100,
+          "entry_at": 1789612200002,
+          "exit_at": 1789955100002,
+          "entry_price": 6.31,
+          "exit_price": 6.43,
+          "signal_date": "2026-09-16",
+          "stop": 6.19,
+          "target": 6.42,
+          "entry_costs": {
+            "commission": 5.87,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.07
+          },
+          "exit_costs": {
+            "commission": 5.98,
+            "transfer": 0.2,
+            "stamp": 9.97,
+            "total": 16.15
+          },
+          "fees": 22.22,
+          "net_pnl": 349.78,
+          "return_pct": 1.7875951790431575,
+          "reason": "target",
+          "plan": {
+            "code": "002249",
+            "name": "大洋电机",
+            "signal_date": "2026-09-16",
+            "generated_at": "2026-09-16T16:00:00+08:00",
+            "lower": 6.24,
+            "upper": 6.38,
+            "stop": 6.19,
+            "target": 6.42,
+            "signal_close": 6.31,
+            "key": "2026-09-16:002249",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.1514285714285713,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 6.23,
+            "confirmation": "2026-09-17 10:30",
+            "signal_id": "2026-09-17 10:30",
+            "confirmed_at": 1789612200000,
+            "estimated_net_reward": 287.83,
+            "paired_expected_net_reward": 203.71,
+            "net_risk_reward": 0.6779010339386231,
+            "estimated_stop_risk": 424.59,
+            "risk_budget": 526.82785
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "688009",
+          "name": "中国通号",
+          "shares": 4300,
+          "entry_at": 1789624800002,
+          "exit_at": 1789955100002,
+          "entry_price": 4.63,
+          "exit_price": 4.63,
+          "signal_date": "2026-09-16",
+          "stop": 4.54,
+          "target": 4.72,
+          "entry_costs": {
+            "commission": 5.97,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 6.17
+          },
+          "exit_costs": {
+            "commission": 5.97,
+            "transfer": 0.2,
+            "stamp": 9.95,
+            "total": 16.12
+          },
+          "fees": 22.29,
+          "net_pnl": -22.29,
+          "return_pct": -0.11192472873693773,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "688009",
+            "name": "中国通号",
+            "signal_date": "2026-09-16",
+            "generated_at": "2026-09-16T16:00:00+08:00",
+            "lower": 4.6,
+            "upper": 4.66,
+            "stop": 4.54,
+            "target": 4.72,
+            "signal_close": 4.63,
+            "key": "2026-09-16:688009",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.07428571428571436,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 4.56,
+            "confirmation": "2026-09-17 14:00",
+            "signal_id": "2026-09-17 14:00",
+            "confirmed_at": 1789624800000,
+            "estimated_net_reward": 321.42,
+            "paired_expected_net_reward": 212.89,
+            "net_risk_reward": 0.7112006018498032,
+            "estimated_stop_risk": 451.94,
+            "risk_budget": 526.6425
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600487",
+          "name": "亨通光电",
+          "shares": 300,
+          "entry_at": 1790737200002,
+          "exit_at": 1791423900002,
+          "entry_price": 55.73,
+          "exit_price": 55.23,
+          "signal_date": "2026-09-29",
+          "stop": 54.28,
+          "target": 65.61,
+          "entry_costs": {
+            "commission": 5.02,
+            "transfer": 0.17,
+            "stamp": 0.0,
+            "total": 5.19
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.17,
+            "stamp": 8.28,
+            "total": 13.45
+          },
+          "fees": 18.64,
+          "net_pnl": -168.64,
+          "return_pct": -1.0083597471686223,
+          "reason": "oversold_reversal_failed",
+          "plan": {
+            "code": "600487",
+            "name": "亨通光电",
+            "signal_date": "2026-09-29",
+            "generated_at": "2026-09-29T16:00:00+08:00",
+            "lower": 55.08,
+            "upper": 59.14,
+            "stop": 54.28,
+            "target": 65.61,
+            "signal_close": 57.11,
+            "key": "2026-09-29:600487",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 4.079285714285714,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 55.3,
+            "confirmation": "2026-09-30 11:00",
+            "signal_id": "2026-09-30 11:00",
+            "confirmed_at": 1790737200000,
+            "estimated_net_reward": 2939.87,
+            "paired_expected_net_reward": 2912.76,
+            "net_risk_reward": 6.4401629827597535,
+            "estimated_stop_risk": 456.49,
+            "risk_budget": 528.2597000000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 400,
+          "entry_at": 1790734500002,
+          "exit_at": 1791522900002,
+          "entry_price": 29.86,
+          "exit_price": 30.48,
+          "signal_date": "2026-09-29",
+          "stop": 28.75,
+          "target": 30.34,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 0.0,
+            "total": 5.12
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.12,
+            "stamp": 6.1,
+            "total": 11.22
+          },
+          "fees": 16.34,
+          "net_pnl": 231.66,
+          "return_pct": 1.9387201735357917,
+          "reason": "target",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-09-29",
+            "generated_at": "2026-09-29T16:00:00+08:00",
+            "lower": 28.96,
+            "upper": 29.96,
+            "stop": 28.75,
+            "target": 30.34,
+            "signal_close": 29.46,
+            "key": "2026-09-29:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 1.0050000000000001,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 29.01,
+            "confirmation": "2026-09-30 10:15",
+            "signal_id": "2026-09-30 10:15",
+            "confirmed_at": 1790734500000,
+            "estimated_net_reward": 171.69,
+            "paired_expected_net_reward": 147.39,
+            "net_risk_reward": 0.37003750161644894,
+            "estimated_stop_risk": 463.98,
+            "risk_budget": 528.4653
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600487",
+          "name": "亨通光电",
+          "shares": 100,
+          "entry_at": 1791772200002,
+          "exit_at": 1791855900002,
+          "entry_price": 51.58,
+          "exit_price": 47.79,
+          "signal_date": "2026-10-09",
+          "stop": 48.63,
+          "target": 55.65,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.05,
+            "stamp": 0.0,
+            "total": 5.05
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.05,
+            "stamp": 2.39,
+            "total": 7.44
+          },
+          "fees": 12.49,
+          "net_pnl": -391.49,
+          "return_pct": -7.582533579957583,
+          "reason": "stop",
+          "plan": {
+            "code": "600487",
+            "name": "亨通光电",
+            "signal_date": "2026-10-09",
+            "generated_at": "2026-10-09T16:00:00+08:00",
+            "lower": 50.96,
+            "upper": 54.65,
+            "stop": 48.63,
+            "target": 55.65,
+            "signal_close": 52.95,
+            "key": "2026-10-09:600487",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 3.997142857142856,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 49.63,
+            "confirmation": "2026-10-12 10:30",
+            "signal_id": "2026-10-12 10:30",
+            "confirmed_at": 1791772200000,
+            "estimated_net_reward": 393.11,
+            "paired_expected_net_reward": 378.23,
+            "net_risk_reward": 1.274138657504943,
+            "estimated_stop_risk": 308.53,
+            "risk_budget": 528.7804
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2800,
+          "entry_at": 1791772200002,
+          "exit_at": 1791855900002,
+          "entry_price": 5.43,
+          "exit_price": 5.22,
+          "signal_date": "2026-10-09",
+          "stop": 5.26,
+          "target": 5.64,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.15,
+            "stamp": 0.0,
+            "total": 5.15
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.15,
+            "stamp": 7.31,
+            "total": 12.46
+          },
+          "fees": 17.61,
+          "net_pnl": -605.61,
+          "return_pct": -3.981879329219582,
+          "reason": "stop",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-10-09",
+            "generated_at": "2026-10-09T16:00:00+08:00",
+            "lower": 5.39,
+            "upper": 5.58,
+            "stop": 5.26,
+            "target": 5.64,
+            "signal_close": 5.5,
+            "key": "2026-10-09:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.22785714285714276,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 5.32,
+            "confirmation": "2026-10-12 10:30",
+            "signal_id": "2026-10-12 10:30",
+            "confirmed_at": 1791772200000,
+            "estimated_net_reward": 541.81,
+            "paired_expected_net_reward": 467.65,
+            "net_risk_reward": 1.0386466021278635,
+            "estimated_stop_risk": 521.65,
+            "risk_budget": 528.75015
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002185",
+          "name": "华天科技",
+          "shares": 600,
+          "entry_at": 1791772200002,
+          "exit_at": 1791855900002,
+          "entry_price": 15.68,
+          "exit_price": 14.54,
+          "signal_date": "2026-10-09",
+          "stop": 14.92,
+          "target": 16.47,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 0.0,
+            "total": 5.09
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.09,
+            "stamp": 4.36,
+            "total": 9.45
+          },
+          "fees": 14.54,
+          "net_pnl": -698.54,
+          "return_pct": -7.420942538528793,
+          "reason": "stop",
+          "plan": {
+            "code": "002185",
+            "name": "华天科技",
+            "signal_date": "2026-10-09",
+            "generated_at": "2026-10-09T16:00:00+08:00",
+            "lower": 15.45,
+            "upper": 16.25,
+            "stop": 14.92,
+            "target": 16.47,
+            "signal_close": 15.85,
+            "key": "2026-10-09:002185",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.8092857142857142,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 15.13,
+            "confirmation": "2026-10-12 10:30",
+            "signal_id": "2026-10-12 10:30",
+            "confirmed_at": 1791772200000,
+            "estimated_net_reward": 452.87,
+            "paired_expected_net_reward": 425.74,
+            "net_risk_reward": 0.9501101437113186,
+            "estimated_stop_risk": 476.65,
+            "risk_budget": 528.5844000000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002185",
+          "name": "华天科技",
+          "shares": 500,
+          "entry_at": 1791943200002,
+          "exit_at": 1792028700002,
+          "entry_price": 15.3,
+          "exit_price": 14.2,
+          "signal_date": "2026-10-13",
+          "stop": 14.31,
+          "target": 15.77,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.08,
+            "stamp": 0.0,
+            "total": 5.08
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.07,
+            "stamp": 3.55,
+            "total": 8.62
+          },
+          "fees": 13.7,
+          "net_pnl": -563.7,
+          "return_pct": -7.363737544219003,
+          "reason": "stop",
+          "plan": {
+            "code": "002185",
+            "name": "华天科技",
+            "signal_date": "2026-10-13",
+            "generated_at": "2026-10-13T16:00:00+08:00",
+            "lower": 14.87,
+            "upper": 15.55,
+            "stop": 14.31,
+            "target": 15.77,
+            "signal_close": 15.29,
+            "key": "2026-10-13:002185",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.8414285714285714,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 14.53,
+            "confirmation": "2026-10-14 10:00",
+            "signal_id": "2026-10-14 10:00",
+            "confirmed_at": 1791943200000,
+            "estimated_net_reward": 215.9,
+            "paired_expected_net_reward": 191.81,
+            "net_risk_reward": 0.420259669476184,
+            "estimated_stop_risk": 513.73,
+            "risk_budget": 520.3022
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600487",
+          "name": "亨通光电",
+          "shares": 100,
+          "entry_at": 1791943200002,
+          "exit_at": 1792028700002,
+          "entry_price": 50.97,
+          "exit_price": 45.84,
+          "signal_date": "2026-10-13",
+          "stop": 46.47,
+          "target": 52.0,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.05,
+            "stamp": 0.0,
+            "total": 5.05
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.05,
+            "stamp": 2.29,
+            "total": 7.34
+          },
+          "fees": 12.39,
+          "net_pnl": -525.39,
+          "return_pct": -10.297625464274164,
+          "reason": "stop",
+          "plan": {
+            "code": "600487",
+            "name": "亨通光电",
+            "signal_date": "2026-10-13",
+            "generated_at": "2026-10-13T16:00:00+08:00",
+            "lower": 47.79,
+            "upper": 50.98,
+            "stop": 46.47,
+            "target": 52.0,
+            "signal_close": 49.83,
+            "key": "2026-10-13:600487",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 4.08142857142857,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 47.5,
+            "confirmation": "2026-10-14 10:00",
+            "signal_id": "2026-10-14 10:00",
+            "confirmed_at": 1791943200000,
+            "estimated_net_reward": 89.3,
+            "paired_expected_net_reward": 74.6,
+            "net_risk_reward": 0.19269776876267747,
+            "estimated_stop_risk": 463.42,
+            "risk_budget": 520.2518
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2700,
+          "entry_at": 1791946800002,
+          "exit_at": 1792028700002,
+          "entry_price": 5.3,
+          "exit_price": 5.02,
+          "signal_date": "2026-10-13",
+          "stop": 5.13,
+          "target": 5.47,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.14,
+            "stamp": 0.0,
+            "total": 5.14
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.14,
+            "stamp": 6.78,
+            "total": 11.92
+          },
+          "fees": 17.06,
+          "net_pnl": -773.06,
+          "return_pct": -5.400296469332469,
+          "reason": "stop",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-10-13",
+            "generated_at": "2026-10-13T16:00:00+08:00",
+            "lower": 5.23,
+            "upper": 5.42,
+            "stop": 5.13,
+            "target": 5.47,
+            "signal_close": 5.35,
+            "key": "2026-10-13:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.23999999999999982,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 5.19,
+            "confirmation": "2026-10-14 11:00",
+            "signal_id": "2026-10-14 11:00",
+            "confirmed_at": 1791946800000,
+            "estimated_net_reward": 414.34,
+            "paired_expected_net_reward": 342.7,
+            "net_risk_reward": 0.8234265386832011,
+            "estimated_stop_risk": 503.19,
+            "risk_budget": 519.41155
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2600,
+          "entry_at": 1792118700002,
+          "exit_at": 1792635300002,
+          "entry_price": 5.11,
+          "exit_price": 4.89,
+          "signal_date": "2026-10-15",
+          "stop": 4.93,
+          "target": 5.28,
+          "entry_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 5.13
+          },
+          "exit_costs": {
+            "commission": 5.0,
+            "transfer": 0.13,
+            "stamp": 6.36,
+            "total": 11.49
+          },
+          "fees": 16.62,
+          "net_pnl": -588.62,
+          "return_pct": -4.428667840883356,
+          "reason": "stop",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-10-15",
+            "generated_at": "2026-10-15T16:00:00+08:00",
+            "lower": 4.96,
+            "upper": 5.16,
+            "stop": 4.93,
+            "target": 5.28,
+            "signal_close": 5.05,
+            "key": "2026-10-15:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.22357142857142845,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 4.99,
+            "confirmation": "2026-10-16 10:45",
+            "signal_id": "2026-10-16 10:45",
+            "confirmed_at": 1792118700000,
+            "estimated_net_reward": 398.88,
+            "paired_expected_net_reward": 329.78,
+            "net_risk_reward": 0.7811068029608741,
+            "estimated_stop_risk": 510.66,
+            "risk_budget": 510.99145
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 600,
+          "entry_at": 1792559700002,
+          "exit_at": 1792637100002,
+          "entry_price": 28.97,
+          "exit_price": 28.29,
+          "signal_date": "2026-10-20",
+          "stop": 28.31,
+          "target": 29.62,
+          "entry_costs": {
+            "commission": 5.21,
+            "transfer": 0.17,
+            "stamp": 0.0,
+            "total": 5.38
+          },
+          "exit_costs": {
+            "commission": 5.09,
+            "transfer": 0.17,
+            "stamp": 8.49,
+            "total": 13.75
+          },
+          "fees": 19.13,
+          "net_pnl": -427.13,
+          "return_pct": -2.4565518209183903,
+          "reason": "stop",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-10-20",
+            "generated_at": "2026-10-20T16:00:00+08:00",
+            "lower": 28.6,
+            "upper": 29.39,
+            "stop": 28.31,
+            "target": 29.62,
+            "signal_close": 29.06,
+            "key": "2026-10-20:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.9349999999999997,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 28.55,
+            "confirmation": "2026-10-21 13:15",
+            "signal_id": "2026-10-21 13:15",
+            "confirmed_at": 1792559700000,
+            "estimated_net_reward": 364.23,
+            "paired_expected_net_reward": 332.44,
+            "net_risk_reward": 0.8648873269536723,
+            "estimated_stop_risk": 421.13,
+            "risk_budget": 510.5758
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0003,
+            "min_commission": 5.0,
+            "transfer_rate": 1e-05,
+            "stamp_rate": 0.0005,
+            "slippage_ticks": 1,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 99886.85
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100314.74
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100178.74
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100490.74
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99941.98
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 99742.47
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 99689.31
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 99593.31
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 99545.31
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 99545.31
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 99321.27
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 98994.27
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 99353.27
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 99107.01
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 99670.58
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 99605.58
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 102171.58
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 105250.58
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 105602.25
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 106035.15
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 105988.32
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 106020.32
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 105930.32
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 105845.32
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 105738.32
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 105580.02
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 105371.65
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 104848.65
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 105114.21
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 105310.33
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 105711.33
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 105693.06
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 105693.06
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 105693.06
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 105693.06
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 105693.06
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 105693.06
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 105393.75
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 105323.3
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 105756.08
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 104995.79
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 104060.44
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 103196.17
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 102198.29
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 102245.16
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 102063.16
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 102011.16
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 101971.78
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 101182.54
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 101182.54
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "oversold_reversal",
+      "paired_cost_stress": {
+        "end_equity": 100158.4,
+        "return_pct": 0.15840000000000298,
+        "closed_trades": 23,
+        "win_rate_pct": 34.78260869565217,
+        "trades": [
+          {
+            "code": "002043",
+            "shares": 1200,
+            "baseline_net_pnl": 234.09,
+            "stress_net_pnl": 192.2,
+            "stress_fees": 35.8
+          },
+          {
+            "code": "300413",
+            "shares": 700,
+            "baseline_net_pnl": -491.62,
+            "stress_net_pnl": -521.24,
+            "stress_fees": 31.24
+          },
+          {
+            "code": "600575",
+            "shares": 4800,
+            "baseline_net_pnl": -498.14,
+            "stress_net_pnl": -612.23,
+            "stress_fees": 36.23
+          },
+          {
+            "code": "002636",
+            "shares": 100,
+            "baseline_net_pnl": 418.51,
+            "stress_net_pnl": 403.02,
+            "stress_fees": 26.98
+          },
+          {
+            "code": "300413",
+            "shares": 900,
+            "baseline_net_pnl": 6153.54,
+            "stress_net_pnl": 6115.1,
+            "stress_fees": 40.9
+          },
+          {
+            "code": "002249",
+            "shares": 1900,
+            "baseline_net_pnl": 78.32,
+            "stress_net_pnl": 23.65,
+            "stress_fees": 33.35
+          },
+          {
+            "code": "601899",
+            "shares": 300,
+            "baseline_net_pnl": 149.71,
+            "stress_net_pnl": 128.43,
+            "stress_fees": 30.57
+          },
+          {
+            "code": "300274",
+            "shares": 100,
+            "baseline_net_pnl": -464.39,
+            "stress_net_pnl": -480.79,
+            "stress_fees": 28.79
+          },
+          {
+            "code": "002043",
+            "shares": 1000,
+            "baseline_net_pnl": -645.55,
+            "stress_net_pnl": -681.08,
+            "stress_fees": 31.08
+          },
+          {
+            "code": "000725",
+            "shares": 2500,
+            "baseline_net_pnl": 1007.53,
+            "stress_net_pnl": 940.06,
+            "stress_fees": 34.94
+          },
+          {
+            "code": "601899",
+            "shares": 400,
+            "baseline_net_pnl": -576.43,
+            "stress_net_pnl": -600.87,
+            "stress_fees": 32.87
+          },
+          {
+            "code": "002249",
+            "shares": 3100,
+            "baseline_net_pnl": 349.78,
+            "stress_net_pnl": 265.61,
+            "stress_fees": 44.39
+          },
+          {
+            "code": "688009",
+            "shares": 4300,
+            "baseline_net_pnl": -22.29,
+            "stress_net_pnl": -130.56,
+            "stress_fees": 44.56
+          },
+          {
+            "code": "600487",
+            "shares": 300,
+            "baseline_net_pnl": -168.64,
+            "stress_net_pnl": -193.26,
+            "stress_fees": 37.26
+          },
+          {
+            "code": "601899",
+            "shares": 400,
+            "baseline_net_pnl": 231.66,
+            "stress_net_pnl": 207.33,
+            "stress_fees": 32.67
+          },
+          {
+            "code": "600487",
+            "shares": 100,
+            "baseline_net_pnl": -391.49,
+            "stress_net_pnl": -405.98,
+            "stress_fees": 24.98
+          },
+          {
+            "code": "000725",
+            "shares": 2800,
+            "baseline_net_pnl": -605.61,
+            "stress_net_pnl": -679.18,
+            "stress_fees": 35.18
+          },
+          {
+            "code": "002185",
+            "shares": 600,
+            "baseline_net_pnl": -698.54,
+            "stress_net_pnl": -725.08,
+            "stress_fees": 29.08
+          },
+          {
+            "code": "002185",
+            "shares": 500,
+            "baseline_net_pnl": -563.7,
+            "stress_net_pnl": -587.39,
+            "stress_fees": 27.39
+          },
+          {
+            "code": "600487",
+            "shares": 100,
+            "baseline_net_pnl": -525.39,
+            "stress_net_pnl": -539.77,
+            "stress_fees": 24.77
+          },
+          {
+            "code": "000725",
+            "shares": 2700,
+            "baseline_net_pnl": -773.06,
+            "stress_net_pnl": -844.09,
+            "stress_fees": 34.09
+          },
+          {
+            "code": "000725",
+            "shares": 2600,
+            "baseline_net_pnl": -588.62,
+            "stress_net_pnl": -657.21,
+            "stress_fees": 33.21
+          },
+          {
+            "code": "601899",
+            "shares": 600,
+            "baseline_net_pnl": -427.13,
+            "stress_net_pnl": -458.27,
+            "stress_fees": 38.27
+          }
+        ]
+      }
+    },
+    {
+      "replay_version": "bar-close-observe-next-open-v2",
+      "config": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0006,
+        "min_commission": 10.0,
+        "transfer_rate": 2e-05,
+        "stamp_rate": 0.001,
+        "slippage_ticks": 2,
+        "exit_ma": 10
+      },
+      "candidate_rule": "trend",
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 77,
+        "ready_plans": 77
+      },
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 101160.97,
+        "return_pct": 1.1609699999999945,
+        "monthly_equivalent_pct": 0.38261567928874474,
+        "max_drawdown_pct": 4.864852207140602,
+        "closed_trades": 21,
+        "win_rate_pct": 38.095238095238095,
+        "fees": 676.03,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "monthly": [
+        {
+          "month": "2026-08",
+          "return_pct": 2.530800000000011,
+          "end_equity": 102530.8
+        },
+        {
+          "month": "2026-09",
+          "return_pct": 2.7301162187362227,
+          "end_equity": 105330.01
+        },
+        {
+          "month": "2026-10",
+          "return_pct": -3.9580742468361962,
+          "end_equity": 101160.97
+        },
+        {
+          "month": "2026-11",
+          "return_pct": 0.0,
+          "end_equity": 101160.97
+        }
+      ],
+      "trades": [
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1100,
+          "entry_at": 1786070700002,
+          "exit_at": 1786585500002,
+          "entry_price": 12.48,
+          "exit_price": 12.67,
+          "signal_date": "2026-08-06",
+          "stop": 12.09,
+          "target": 12.99,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.27,
+            "stamp": 0.0,
+            "total": 10.27
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.28,
+            "stamp": 13.94,
+            "total": 24.22
+          },
+          "fees": 34.49,
+          "net_pnl": 174.51,
+          "return_pct": 1.270247272764329,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-08-06",
+            "generated_at": "2026-08-06T16:00:00+08:00",
+            "lower": 12.31,
+            "upper": 12.82,
+            "stop": 12.09,
+            "target": 12.99,
+            "signal_close": 12.65,
+            "key": "2026-08-06:002043",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.6842857142857143,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 12.27,
+            "confirmation": "2026-08-07 10:45",
+            "signal_id": "2026-08-07 10:45",
+            "confirmed_at": 1786070700000,
+            "estimated_net_reward": 504.17,
+            "paired_expected_net_reward": 425.39,
+            "net_risk_reward": 1.039911719813539,
+            "estimated_stop_risk": 484.82,
+            "risk_budget": 500.0
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300413",
+          "name": "芒果超媒",
+          "shares": 700,
+          "entry_at": 1786338900002,
+          "exit_at": 1786674600002,
+          "entry_price": 16.12,
+          "exit_price": 15.42,
+          "signal_date": "2026-08-07",
+          "stop": 15.48,
+          "target": 16.31,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.23,
+            "stamp": 0.0,
+            "total": 10.23
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.22,
+            "stamp": 10.79,
+            "total": 21.01
+          },
+          "fees": 31.24,
+          "net_pnl": -521.24,
+          "return_pct": -4.6150999227038945,
+          "reason": "stop",
+          "plan": {
+            "code": "300413",
+            "name": "芒果超媒",
+            "signal_date": "2026-08-07",
+            "generated_at": "2026-08-07T16:00:00+08:00",
+            "lower": 15.73,
+            "upper": 16.17,
+            "stop": 15.48,
+            "target": 16.31,
+            "signal_close": 16.0,
+            "key": "2026-08-07:300413",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.5542857142857143,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 15.62,
+            "confirmation": "2026-08-10 13:15",
+            "signal_id": "2026-08-10 13:15",
+            "confirmed_at": 1786338900000,
+            "estimated_net_reward": 87.14,
+            "paired_expected_net_reward": 27.31,
+            "net_risk_reward": 0.1766578141788473,
+            "estimated_stop_risk": 493.27,
+            "risk_budget": 501.15864999999997
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002636",
+          "name": "金安国纪",
+          "shares": 100,
+          "entry_at": 1787277600002,
+          "exit_at": 1787797800002,
+          "entry_price": 62.93,
+          "exit_price": 67.23,
+          "signal_date": "2026-08-20",
+          "stop": 58.24,
+          "target": 66.28,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.13,
+            "stamp": 0.0,
+            "total": 10.13
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.13,
+            "stamp": 6.72,
+            "total": 16.85
+          },
+          "fees": 26.98,
+          "net_pnl": 403.02,
+          "return_pct": 6.393966172361985,
+          "reason": "target",
+          "plan": {
+            "code": "002636",
+            "name": "金安国纪",
+            "signal_date": "2026-08-20",
+            "generated_at": "2026-08-20T16:00:00+08:00",
+            "lower": 59.21,
+            "upper": 64.21,
+            "stop": 58.24,
+            "target": 66.28,
+            "signal_close": 61.71,
+            "key": "2026-08-20:002636",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 5.019285714285713,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 59.5,
+            "confirmation": "2026-08-21 10:00",
+            "signal_id": "2026-08-21 10:00",
+            "confirmed_at": 1787277600000,
+            "estimated_net_reward": 306.11,
+            "paired_expected_net_reward": 275.24,
+            "net_risk_reward": 0.6158287565131672,
+            "estimated_stop_risk": 497.07,
+            "risk_budget": 498.26635000000005
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300413",
+          "name": "芒果超媒",
+          "shares": 900,
+          "entry_at": 1787711400002,
+          "exit_at": 1788313500002,
+          "entry_price": 14.17,
+          "exit_price": 21.01,
+          "signal_date": "2026-08-25",
+          "stop": 13.69,
+          "target": 14.63,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.26,
+            "stamp": 0.0,
+            "total": 10.26
+          },
+          "exit_costs": {
+            "commission": 11.35,
+            "transfer": 0.38,
+            "stamp": 18.91,
+            "total": 30.64
+          },
+          "fees": 40.9,
+          "net_pnl": 6115.1,
+          "return_pct": 47.91174041741687,
+          "reason": "target",
+          "plan": {
+            "code": "300413",
+            "name": "芒果超媒",
+            "signal_date": "2026-08-25",
+            "generated_at": "2026-08-25T16:00:00+08:00",
+            "lower": 13.84,
+            "upper": 14.3,
+            "stop": 13.69,
+            "target": 14.63,
+            "signal_close": 14.07,
+            "key": "2026-08-25:300413",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.4778571428571427,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 13.81,
+            "confirmation": "2026-08-26 10:30",
+            "signal_id": "2026-08-26 10:30",
+            "confirmed_at": 1787711400000,
+            "estimated_net_reward": 362.33,
+            "paired_expected_net_reward": 292.7,
+            "net_risk_reward": 0.7504608438101944,
+            "estimated_stop_risk": 482.81,
+            "risk_budget": 497.47955
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002249",
+          "name": "大洋电机",
+          "shares": 1700,
+          "entry_at": 1787711400002,
+          "exit_at": 1788486300002,
+          "entry_price": 6.72,
+          "exit_price": 6.75,
+          "signal_date": "2026-08-25",
+          "stop": 6.47,
+          "target": 6.94,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.23,
+            "stamp": 0.0,
+            "total": 10.23
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.23,
+            "stamp": 11.48,
+            "total": 21.71
+          },
+          "fees": 31.94,
+          "net_pnl": 19.06,
+          "return_pct": 0.16669246639257737,
+          "reason": "oversold_reversal_recovered",
+          "plan": {
+            "code": "002249",
+            "name": "大洋电机",
+            "signal_date": "2026-08-25",
+            "generated_at": "2026-08-25T16:00:00+08:00",
+            "lower": 6.59,
+            "upper": 6.79,
+            "stop": 6.47,
+            "target": 6.94,
+            "signal_close": 6.69,
+            "key": "2026-08-25:002249",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.20928571428571432,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 6.53,
+            "confirmation": "2026-08-26 10:30",
+            "signal_id": "2026-08-26 10:30",
+            "confirmed_at": 1787711400000,
+            "estimated_net_reward": 307.77,
+            "paired_expected_net_reward": 207.61,
+            "net_risk_reward": 0.6275641287060071,
+            "estimated_stop_risk": 490.42,
+            "risk_budget": 497.7007
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 300,
+          "entry_at": 1788400800002,
+          "exit_at": 1788487200002,
+          "entry_price": 33.38,
+          "exit_price": 33.91,
+          "signal_date": "2026-09-02",
+          "stop": 31.86,
+          "target": 33.91,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.2,
+            "stamp": 0.0,
+            "total": 10.2
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.2,
+            "stamp": 10.17,
+            "total": 20.37
+          },
+          "fees": 30.57,
+          "net_pnl": 128.43,
+          "return_pct": 1.2811994972167355,
+          "reason": "target",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-09-02",
+            "generated_at": "2026-09-02T16:00:00+08:00",
+            "lower": 32.31,
+            "upper": 33.58,
+            "stop": 31.86,
+            "target": 33.91,
+            "signal_close": 32.95,
+            "key": "2026-09-02:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 1.2964285714285708,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 32.19,
+            "confirmation": "2026-09-03 10:00",
+            "signal_id": "2026-09-03 10:00",
+            "confirmed_at": 1788400800000,
+            "estimated_net_reward": 122.43,
+            "paired_expected_net_reward": 79.87,
+            "net_risk_reward": 0.24887181363580926,
+            "estimated_stop_risk": 491.94,
+            "risk_budget": 530.7208
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "300274",
+          "name": "阳光电源",
+          "shares": 100,
+          "entry_at": 1788488100002,
+          "exit_at": 1789091100002,
+          "entry_price": 88.95,
+          "exit_price": 84.43,
+          "signal_date": "2026-09-03",
+          "stop": 84.68,
+          "target": 90.4,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.18,
+            "stamp": 0.0,
+            "total": 10.18
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.17,
+            "stamp": 8.44,
+            "total": 18.61
+          },
+          "fees": 28.79,
+          "net_pnl": -480.79,
+          "return_pct": -5.398992496502036,
+          "reason": "stop",
+          "plan": {
+            "code": "300274",
+            "name": "阳光电源",
+            "signal_date": "2026-09-03",
+            "generated_at": "2026-09-03T16:00:00+08:00",
+            "lower": 85.21,
+            "upper": 89.07,
+            "stop": 84.68,
+            "target": 90.4,
+            "signal_close": 87.08,
+            "key": "2026-09-03:300274",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 5.28714285714286,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 86.01,
+            "confirmation": "2026-09-04 10:15",
+            "signal_id": "2026-09-04 10:15",
+            "confirmed_at": 1788488100000,
+            "estimated_net_reward": 113.6,
+            "paired_expected_net_reward": 80.21,
+            "net_risk_reward": 0.24813245380280458,
+            "estimated_stop_risk": 457.82,
+            "risk_budget": 531.5944000000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "shares": 1000,
+          "entry_at": 1789353900002,
+          "exit_at": 1789524000002,
+          "entry_price": 11.29,
+          "exit_price": 10.64,
+          "signal_date": "2026-09-11",
+          "stop": 10.82,
+          "target": 11.5,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.23,
+            "stamp": 0.0,
+            "total": 10.23
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.21,
+            "stamp": 10.64,
+            "total": 20.85
+          },
+          "fees": 31.08,
+          "net_pnl": -681.08,
+          "return_pct": -6.0271339609901755,
+          "reason": "stop",
+          "plan": {
+            "code": "002043",
+            "name": "兔 宝 宝",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 10.96,
+            "upper": 11.38,
+            "stop": 10.82,
+            "target": 11.5,
+            "signal_close": 11.18,
+            "key": "2026-09-11:002043",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.45857142857142846,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 10.94,
+            "confirmation": "2026-09-14 10:45",
+            "signal_id": "2026-09-14 10:45",
+            "confirmed_at": 1789353900000,
+            "estimated_net_reward": 158.06,
+            "paired_expected_net_reward": 86.17,
+            "net_risk_reward": 0.3032326139088729,
+            "estimated_stop_risk": 521.25,
+            "risk_budget": 528.69795
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2200,
+          "entry_at": 1789351200002,
+          "exit_at": 1789609500002,
+          "entry_price": 5.36,
+          "exit_price": 5.75,
+          "signal_date": "2026-09-11",
+          "stop": 5.16,
+          "target": 5.51,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.24,
+            "stamp": 0.0,
+            "total": 10.24
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.25,
+            "stamp": 12.65,
+            "total": 22.9
+          },
+          "fees": 33.14,
+          "net_pnl": 824.86,
+          "return_pct": 6.989012255300689,
+          "reason": "target",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 5.25,
+            "upper": 5.41,
+            "stop": 5.16,
+            "target": 5.51,
+            "signal_close": 5.33,
+            "key": "2026-09-11:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.16357142857142845,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 5.21,
+            "confirmation": "2026-09-14 10:00",
+            "signal_id": "2026-09-14 10:00",
+            "confirmed_at": 1789351200000,
+            "estimated_net_reward": 253.44,
+            "paired_expected_net_reward": 132.98,
+            "net_risk_reward": 0.4913722905114584,
+            "estimated_stop_risk": 515.78,
+            "risk_budget": 529.09915
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 400,
+          "entry_at": 1789351200002,
+          "exit_at": 1789610400002,
+          "entry_price": 32.33,
+          "exit_price": 30.91,
+          "signal_date": "2026-09-11",
+          "stop": 31.14,
+          "target": 33.5,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.26,
+            "stamp": 0.0,
+            "total": 10.26
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.25,
+            "stamp": 12.36,
+            "total": 22.61
+          },
+          "fees": 32.87,
+          "net_pnl": -600.87,
+          "return_pct": -4.642697643224599,
+          "reason": "stop",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-09-11",
+            "generated_at": "2026-09-11T16:00:00+08:00",
+            "lower": 31.65,
+            "upper": 32.87,
+            "stop": 31.14,
+            "target": 33.5,
+            "signal_close": 32.26,
+            "key": "2026-09-11:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 1.223571428571428,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 31.45,
+            "confirmation": "2026-09-14 10:00",
+            "signal_id": "2026-09-14 10:00",
+            "confirmed_at": 1789351200000,
+            "estimated_net_reward": 426.08,
+            "paired_expected_net_reward": 376.17,
+            "net_risk_reward": 0.8242030331166821,
+            "estimated_stop_risk": 516.96,
+            "risk_budget": 529.1904499999999
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002249",
+          "name": "大洋电机",
+          "shares": 3100,
+          "entry_at": 1789612200002,
+          "exit_at": 1789955100002,
+          "entry_price": 6.32,
+          "exit_price": 6.42,
+          "signal_date": "2026-09-16",
+          "stop": 6.19,
+          "target": 6.42,
+          "entry_costs": {
+            "commission": 11.76,
+            "transfer": 0.39,
+            "stamp": 0.0,
+            "total": 12.15
+          },
+          "exit_costs": {
+            "commission": 11.94,
+            "transfer": 0.4,
+            "stamp": 19.9,
+            "total": 32.24
+          },
+          "fees": 44.39,
+          "net_pnl": 265.61,
+          "return_pct": 1.354866189046707,
+          "reason": "target",
+          "plan": {
+            "code": "002249",
+            "name": "大洋电机",
+            "signal_date": "2026-09-16",
+            "generated_at": "2026-09-16T16:00:00+08:00",
+            "lower": 6.24,
+            "upper": 6.38,
+            "stop": 6.19,
+            "target": 6.42,
+            "signal_close": 6.31,
+            "key": "2026-09-16:002249",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.1514285714285713,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 6.23,
+            "confirmation": "2026-09-17 10:30",
+            "signal_id": "2026-09-17 10:30",
+            "confirmed_at": 1789612200000,
+            "estimated_net_reward": 203.71,
+            "paired_expected_net_reward": 35.55,
+            "net_risk_reward": 0.400893454559767,
+            "estimated_stop_risk": 508.14,
+            "risk_budget": 526.905
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600487",
+          "name": "亨通光电",
+          "shares": 300,
+          "entry_at": 1790737200002,
+          "exit_at": 1791423900002,
+          "entry_price": 55.74,
+          "exit_price": 55.22,
+          "signal_date": "2026-09-29",
+          "stop": 54.28,
+          "target": 65.61,
+          "entry_costs": {
+            "commission": 10.03,
+            "transfer": 0.33,
+            "stamp": 0.0,
+            "total": 10.36
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.33,
+            "stamp": 16.57,
+            "total": 26.9
+          },
+          "fees": 37.26,
+          "net_pnl": -193.26,
+          "return_pct": -1.155007422742518,
+          "reason": "oversold_reversal_failed",
+          "plan": {
+            "code": "600487",
+            "name": "亨通光电",
+            "signal_date": "2026-09-29",
+            "generated_at": "2026-09-29T16:00:00+08:00",
+            "lower": 55.08,
+            "upper": 59.14,
+            "stop": 54.28,
+            "target": 65.61,
+            "signal_close": 57.11,
+            "key": "2026-09-29:600487",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 4.079285714285714,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 55.3,
+            "confirmation": "2026-09-30 11:00",
+            "signal_id": "2026-09-30 11:00",
+            "confirmed_at": 1790737200000,
+            "estimated_net_reward": 2912.76,
+            "paired_expected_net_reward": 2858.52,
+            "net_risk_reward": 6.056011809468366,
+            "estimated_stop_risk": 480.97,
+            "risk_budget": 527.98185
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 400,
+          "entry_at": 1790734500002,
+          "exit_at": 1791522900002,
+          "entry_price": 29.87,
+          "exit_price": 30.47,
+          "signal_date": "2026-09-29",
+          "stop": 28.75,
+          "target": 30.34,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.24,
+            "stamp": 0.0,
+            "total": 10.24
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.24,
+            "stamp": 12.19,
+            "total": 22.43
+          },
+          "fees": 32.67,
+          "net_pnl": 207.33,
+          "return_pct": 1.7337835668125074,
+          "reason": "target",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-09-29",
+            "generated_at": "2026-09-29T16:00:00+08:00",
+            "lower": 28.96,
+            "upper": 29.96,
+            "stop": 28.75,
+            "target": 30.34,
+            "signal_close": 29.46,
+            "key": "2026-09-29:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 1.0050000000000001,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 29.01,
+            "confirmation": "2026-09-30 10:15",
+            "signal_id": "2026-09-30 10:15",
+            "confirmed_at": 1790734500000,
+            "estimated_net_reward": 147.39,
+            "paired_expected_net_reward": 98.8,
+            "net_risk_reward": 0.3020534470038528,
+            "estimated_stop_risk": 487.96,
+            "risk_budget": 528.23305
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600487",
+          "name": "亨通光电",
+          "shares": 100,
+          "entry_at": 1791772200002,
+          "exit_at": 1791855900002,
+          "entry_price": 51.59,
+          "exit_price": 47.78,
+          "signal_date": "2026-10-09",
+          "stop": 48.63,
+          "target": 55.65,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 10.1
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.1,
+            "stamp": 4.78,
+            "total": 14.88
+          },
+          "fees": 24.98,
+          "net_pnl": -405.98,
+          "return_pct": -7.85397844885957,
+          "reason": "stop",
+          "plan": {
+            "code": "600487",
+            "name": "亨通光电",
+            "signal_date": "2026-10-09",
+            "generated_at": "2026-10-09T16:00:00+08:00",
+            "lower": 50.96,
+            "upper": 54.65,
+            "stop": 48.63,
+            "target": 55.65,
+            "signal_close": 52.95,
+            "key": "2026-10-09:600487",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 3.997142857142856,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 49.63,
+            "confirmation": "2026-10-12 10:30",
+            "signal_id": "2026-10-12 10:30",
+            "confirmed_at": 1791772200000,
+            "estimated_net_reward": 378.23,
+            "paired_expected_net_reward": 348.45,
+            "net_risk_reward": 1.1707732309787655,
+            "estimated_stop_risk": 323.06,
+            "risk_budget": 528.3034
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2400,
+          "entry_at": 1791772200002,
+          "exit_at": 1791855900002,
+          "entry_price": 5.44,
+          "exit_price": 5.21,
+          "signal_date": "2026-10-09",
+          "stop": 5.26,
+          "target": 5.64,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.26,
+            "stamp": 0.0,
+            "total": 10.26
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.25,
+            "stamp": 12.5,
+            "total": 22.75
+          },
+          "fees": 33.01,
+          "net_pnl": -585.01,
+          "return_pct": -4.477256690131682,
+          "reason": "stop",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-10-09",
+            "generated_at": "2026-10-09T16:00:00+08:00",
+            "lower": 5.39,
+            "upper": 5.58,
+            "stop": 5.26,
+            "target": 5.64,
+            "signal_close": 5.5,
+            "key": "2026-10-09:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.22785714285714276,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 5.32,
+            "confirmation": "2026-10-12 10:30",
+            "signal_id": "2026-10-12 10:30",
+            "confirmed_at": 1791772200000,
+            "estimated_net_reward": 397.98,
+            "paired_expected_net_reward": 268.06,
+            "net_risk_reward": 0.7756533941413787,
+            "estimated_stop_risk": 513.09,
+            "risk_budget": 528.2429
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002185",
+          "name": "华天科技",
+          "shares": 600,
+          "entry_at": 1791772200002,
+          "exit_at": 1791855900002,
+          "entry_price": 15.69,
+          "exit_price": 14.53,
+          "signal_date": "2026-10-09",
+          "stop": 14.92,
+          "target": 16.47,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.19,
+            "stamp": 0.0,
+            "total": 10.19
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.17,
+            "stamp": 8.72,
+            "total": 18.89
+          },
+          "fees": 29.08,
+          "net_pnl": -725.08,
+          "return_pct": -7.693817718021389,
+          "reason": "stop",
+          "plan": {
+            "code": "002185",
+            "name": "华天科技",
+            "signal_date": "2026-10-09",
+            "generated_at": "2026-10-09T16:00:00+08:00",
+            "lower": 15.45,
+            "upper": 16.25,
+            "stop": 14.92,
+            "target": 16.47,
+            "signal_close": 15.85,
+            "key": "2026-10-09:002185",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.8092857142857142,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 15.13,
+            "confirmation": "2026-10-12 10:30",
+            "signal_id": "2026-10-12 10:30",
+            "confirmed_at": 1791772200000,
+            "estimated_net_reward": 425.74,
+            "paired_expected_net_reward": 371.51,
+            "net_risk_reward": 0.8458802725954183,
+            "estimated_stop_risk": 503.31,
+            "risk_budget": 527.9516000000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "002185",
+          "name": "华天科技",
+          "shares": 400,
+          "entry_at": 1791943200002,
+          "exit_at": 1792028700002,
+          "entry_price": 15.31,
+          "exit_price": 14.19,
+          "signal_date": "2026-10-13",
+          "stop": 14.31,
+          "target": 15.77,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.12,
+            "stamp": 0.0,
+            "total": 10.12
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.11,
+            "stamp": 5.68,
+            "total": 15.79
+          },
+          "fees": 25.91,
+          "net_pnl": -473.91,
+          "return_pct": -7.725802560106422,
+          "reason": "stop",
+          "plan": {
+            "code": "002185",
+            "name": "华天科技",
+            "signal_date": "2026-10-13",
+            "generated_at": "2026-10-13T16:00:00+08:00",
+            "lower": 14.87,
+            "upper": 15.55,
+            "stop": 14.31,
+            "target": 15.77,
+            "signal_close": 15.29,
+            "key": "2026-10-13:002185",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.8414285714285714,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 14.53,
+            "confirmation": "2026-10-14 10:00",
+            "signal_id": "2026-10-14 10:00",
+            "confirmed_at": 1791943200000,
+            "estimated_net_reward": 149.45,
+            "paired_expected_net_reward": 106.92,
+            "net_risk_reward": 0.3443945154971771,
+            "estimated_stop_risk": 433.95,
+            "risk_budget": 519.7230500000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "600487",
+          "name": "亨通光电",
+          "shares": 100,
+          "entry_at": 1791943200002,
+          "exit_at": 1792028700002,
+          "entry_price": 50.98,
+          "exit_price": 45.83,
+          "signal_date": "2026-10-13",
+          "stop": 46.47,
+          "target": 52.0,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.1,
+            "stamp": 0.0,
+            "total": 10.1
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.09,
+            "stamp": 4.58,
+            "total": 14.67
+          },
+          "fees": 24.77,
+          "net_pnl": -539.77,
+          "return_pct": -10.566942698850843,
+          "reason": "stop",
+          "plan": {
+            "code": "600487",
+            "name": "亨通光电",
+            "signal_date": "2026-10-13",
+            "generated_at": "2026-10-13T16:00:00+08:00",
+            "lower": 47.79,
+            "upper": 50.98,
+            "stop": 46.47,
+            "target": 52.0,
+            "signal_close": 49.83,
+            "key": "2026-10-13:600487",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 4.08142857142857,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 47.5,
+            "confirmation": "2026-10-14 10:00",
+            "signal_id": "2026-10-14 10:00",
+            "confirmed_at": 1791943200000,
+            "estimated_net_reward": 74.6,
+            "paired_expected_net_reward": 45.2,
+            "net_risk_reward": 0.15611920308052904,
+            "estimated_stop_risk": 477.84,
+            "risk_budget": 519.6324500000001
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2400,
+          "entry_at": 1791946800002,
+          "exit_at": 1792028700002,
+          "entry_price": 5.31,
+          "exit_price": 5.01,
+          "signal_date": "2026-10-13",
+          "stop": 5.13,
+          "target": 5.47,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.25,
+            "stamp": 0.0,
+            "total": 10.25
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.24,
+            "stamp": 12.02,
+            "total": 22.26
+          },
+          "fees": 32.51,
+          "net_pnl": -752.51,
+          "return_pct": -5.90007252484466,
+          "reason": "stop",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-10-13",
+            "generated_at": "2026-10-13T16:00:00+08:00",
+            "lower": 5.23,
+            "upper": 5.42,
+            "stop": 5.13,
+            "target": 5.47,
+            "signal_close": 5.35,
+            "key": "2026-10-13:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.23999999999999982,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 5.19,
+            "confirmation": "2026-10-14 11:00",
+            "signal_id": "2026-10-14 11:00",
+            "confirmed_at": 1791946800000,
+            "estimated_net_reward": 302.41,
+            "paired_expected_net_reward": 172.91,
+            "net_risk_reward": 0.5897690927529449,
+            "estimated_stop_risk": 512.76,
+            "risk_budget": 518.84195
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "000725",
+          "name": "京东方Ａ",
+          "shares": 2200,
+          "entry_at": 1792118700002,
+          "exit_at": 1792635300002,
+          "entry_price": 5.12,
+          "exit_price": 4.88,
+          "signal_date": "2026-10-15",
+          "stop": 4.93,
+          "target": 5.28,
+          "entry_costs": {
+            "commission": 10.0,
+            "transfer": 0.23,
+            "stamp": 0.0,
+            "total": 10.23
+          },
+          "exit_costs": {
+            "commission": 10.0,
+            "transfer": 0.21,
+            "stamp": 10.74,
+            "total": 20.95
+          },
+          "fees": 31.18,
+          "net_pnl": -559.18,
+          "return_pct": -4.959806567721254,
+          "reason": "stop",
+          "plan": {
+            "code": "000725",
+            "name": "京东方Ａ",
+            "signal_date": "2026-10-15",
+            "generated_at": "2026-10-15T16:00:00+08:00",
+            "lower": 4.96,
+            "upper": 5.16,
+            "stop": 4.93,
+            "target": 5.28,
+            "signal_close": 5.05,
+            "key": "2026-10-15:000725",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.22357142857142845,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 4.99,
+            "confirmation": "2026-10-16 10:45",
+            "signal_id": "2026-10-16 10:45",
+            "confirmed_at": 1792118700000,
+            "estimated_net_reward": 275.97,
+            "paired_expected_net_reward": 156.03,
+            "net_risk_reward": 0.5594931576279778,
+            "estimated_stop_risk": 493.25,
+            "risk_budget": 510.8921
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        },
+        {
+          "code": "601899",
+          "name": "紫金矿业",
+          "shares": 600,
+          "entry_at": 1792559700002,
+          "exit_at": 1792637100002,
+          "entry_price": 28.98,
+          "exit_price": 28.28,
+          "signal_date": "2026-10-20",
+          "stop": 28.31,
+          "target": 29.62,
+          "entry_costs": {
+            "commission": 10.43,
+            "transfer": 0.35,
+            "stamp": 0.0,
+            "total": 10.78
+          },
+          "exit_costs": {
+            "commission": 10.18,
+            "transfer": 0.34,
+            "stamp": 16.97,
+            "total": 27.49
+          },
+          "fees": 38.27,
+          "net_pnl": -458.27,
+          "return_pct": -2.633920309355024,
+          "reason": "stop",
+          "plan": {
+            "code": "601899",
+            "name": "紫金矿业",
+            "signal_date": "2026-10-20",
+            "generated_at": "2026-10-20T16:00:00+08:00",
+            "lower": 28.6,
+            "upper": 29.39,
+            "stop": 28.31,
+            "target": 29.62,
+            "signal_close": 29.06,
+            "key": "2026-10-20:601899",
+            "strategy_version": "a-oversold-reversal-v3",
+            "strategy_rule": "oversold_reversal",
+            "entry_mode": "oversold_reversal",
+            "atr14": 0.9349999999999997,
+            "budget_factor": 1.0,
+            "risk_fraction": 0.005,
+            "reference_low": 28.55,
+            "confirmation": "2026-10-21 13:15",
+            "signal_id": "2026-10-21 13:15",
+            "confirmed_at": 1792559700000,
+            "estimated_net_reward": 332.44,
+            "paired_expected_net_reward": 268.91,
+            "net_risk_reward": 0.7350476485285339,
+            "estimated_stop_risk": 452.27,
+            "risk_budget": 510.40095
+          },
+          "config": {
+            "per_stock_budget": 20000.0,
+            "max_positions": 3,
+            "commission_rate": 0.0006,
+            "min_commission": 10.0,
+            "transfer_rate": 2e-05,
+            "stamp_rate": 0.001,
+            "slippage_ticks": 2,
+            "exit_ma": 10
+          }
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-04",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-05",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-06",
+          "equity": 100000.0
+        },
+        {
+          "date": "2026-08-07",
+          "equity": 99879.73
+        },
+        {
+          "date": "2026-08-10",
+          "equity": 100263.5
+        },
+        {
+          "date": "2026-08-11",
+          "equity": 100129.5
+        },
+        {
+          "date": "2026-08-12",
+          "equity": 100415.5
+        },
+        {
+          "date": "2026-08-13",
+          "equity": 99870.28
+        },
+        {
+          "date": "2026-08-14",
+          "equity": 99653.27
+        },
+        {
+          "date": "2026-08-17",
+          "equity": 99653.27
+        },
+        {
+          "date": "2026-08-18",
+          "equity": 99653.27
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 99653.27
+        },
+        {
+          "date": "2026-08-20",
+          "equity": 99653.27
+        },
+        {
+          "date": "2026-08-21",
+          "equity": 99724.14
+        },
+        {
+          "date": "2026-08-24",
+          "equity": 99397.14
+        },
+        {
+          "date": "2026-08-25",
+          "equity": 99756.14
+        },
+        {
+          "date": "2026-08-26",
+          "equity": 99483.65
+        },
+        {
+          "date": "2026-08-27",
+          "equity": 100027.8
+        },
+        {
+          "date": "2026-08-28",
+          "equity": 99966.8
+        },
+        {
+          "date": "2026-08-31",
+          "equity": 102530.8
+        },
+        {
+          "date": "2026-09-01",
+          "equity": 105607.8
+        },
+        {
+          "date": "2026-09-02",
+          "equity": 105957.16
+        },
+        {
+          "date": "2026-09-03",
+          "equity": 106333.96
+        },
+        {
+          "date": "2026-09-04",
+          "equity": 106256.7
+        },
+        {
+          "date": "2026-09-07",
+          "equity": 106288.7
+        },
+        {
+          "date": "2026-09-08",
+          "equity": 106198.7
+        },
+        {
+          "date": "2026-09-09",
+          "equity": 106113.7
+        },
+        {
+          "date": "2026-09-10",
+          "equity": 106006.7
+        },
+        {
+          "date": "2026-09-11",
+          "equity": 105838.09
+        },
+        {
+          "date": "2026-09-14",
+          "equity": 105593.36
+        },
+        {
+          "date": "2026-09-15",
+          "equity": 105079.36
+        },
+        {
+          "date": "2026-09-16",
+          "equity": 105270.51
+        },
+        {
+          "date": "2026-09-17",
+          "equity": 105337.85
+        },
+        {
+          "date": "2026-09-18",
+          "equity": 105523.85
+        },
+        {
+          "date": "2026-09-21",
+          "equity": 105646.61
+        },
+        {
+          "date": "2026-09-22",
+          "equity": 105646.61
+        },
+        {
+          "date": "2026-09-23",
+          "equity": 105646.61
+        },
+        {
+          "date": "2026-09-24",
+          "equity": 105646.61
+        },
+        {
+          "date": "2026-09-28",
+          "equity": 105646.61
+        },
+        {
+          "date": "2026-09-29",
+          "equity": 105646.61
+        },
+        {
+          "date": "2026-09-30",
+          "equity": 105330.01
+        },
+        {
+          "date": "2026-10-08",
+          "equity": 105243.11
+        },
+        {
+          "date": "2026-10-09",
+          "equity": 105660.68
+        },
+        {
+          "date": "2026-10-12",
+          "equity": 104894.13
+        },
+        {
+          "date": "2026-10-13",
+          "equity": 103944.61
+        },
+        {
+          "date": "2026-10-14",
+          "equity": 103127.14
+        },
+        {
+          "date": "2026-10-15",
+          "equity": 102178.42
+        },
+        {
+          "date": "2026-10-16",
+          "equity": 102190.19
+        },
+        {
+          "date": "2026-10-19",
+          "equity": 102036.19
+        },
+        {
+          "date": "2026-10-20",
+          "equity": 101992.19
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 101937.41
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 101160.97
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 101160.97
+        }
+      ],
+      "open_positions": [],
+      "incomplete_minute_days": 44,
+      "case": "cost_double"
+    }
+  ],
+  "limitations": [
+    "当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。",
+    "逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。",
+    "只用完整16根的15分钟交易日；收盘样本只观察/准备，不在该收盘价成交，后续开盘样本才尝试撮合。",
+    "相邻收盘与开盘同分钟时，使用边界后1/2毫秒表示模型内先后顺序，不是真实毫秒报价；成交价仍仅取实际K线开盘并计入滑点、费用。没有历史盘口，属于下一根开盘执行假设。",
+    "历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。",
+    "与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。",
+    "账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。",
+    "同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。",
+    "请求最近3个月；本地日线/指数截止2026-11-03，公共分钟覆盖后实际区间2026-08-04至2026-11-03。",
+    "请求46票，可用44票；失败：无"
+  ]
+}

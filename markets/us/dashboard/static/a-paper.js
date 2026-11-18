@@ -6,7 +6,8 @@
   const stamp=value=>Number.isFinite(value)?new Date(value).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}):'未提供';
   const fields=['per_stock_budget','max_positions','exit_ma','slippage_ticks','commission_rate','min_commission','transfer_rate','stamp_rate'];
   const ratios=['commission_rate','transfer_rate','stamp_rate'];
-  const reasons={stop:'计划止损',target:'计划止盈',ma10_exit:'完整日线跌破退出均线'};
+  const reasons={stop:'结构止损',target:'计划止盈',ma10_exit:'完整日线跌破退出均线',continuation_structure_exit:'两根完整15分钟线失守突破位与均价',oversold_reversal_failed:'完整日线失守原反转低点',oversold_reversal_recovered:'短期超跌已经修复'};
+  const modeName=p=>({continuation:'强势延续',trend_reclaim:'趋势回踩收复',oversold_reversal:'超跌反转'}[p?.entry_mode]||'回踩计划');
   let state=null,busy=false,dirty=false,formLoaded=false,timer,controller;
   function locks(verified=true){
     const editable=verified&&state&&!state.enabled&&!state.positions.length&&!busy;
@@ -21,17 +22,24 @@
   }
   function render(){
     el('ap-toggle').textContent=state.enabled?'暂停新买入':'启用A股自动模拟';
-    el('ap-running').textContent=state.enabled?'A股自动模拟运行中 · 盘后准备/盘中执行':state.positions.length?'新买入暂停 · 旧持仓按T+1与策略管理':'A股自动模拟尚未启用';
-    el('ap-status').textContent=[state.runner_error||state.error,state.scan_error,state.note,'最近检查 '+stamp(state.updated_at)].filter(Boolean).join(' · ');
+    const age=Date.now()-state.runner_last_tick_at;
+    const live=state.runner_alive===true&&Number.isFinite(state.runner_last_tick_at)&&age>=0&&age<120000;
+    el('ap-running').textContent=(state.enabled||state.positions.length)&&!live?'后台心跳待核实 · 账户启用状态不代表正在执行':state.enabled?'A股自动模拟运行中 · 盘后准备/盘中执行':state.positions.length?'新买入暂停 · 旧持仓按T+1与策略管理':'A股自动模拟尚未启用';
+    el('ap-status').textContent=[state.runner_error||state.error,state.scan_error,state.note,'后台心跳 '+stamp(state.runner_last_tick_at),'账户更新 '+stamp(state.updated_at)].filter(Boolean).join(' · ');
     el('ap-equity-label').textContent=state.valuation_fresh?'估算权益 / CNY':'上次估算权益 / CNY';
     for(const [id,value] of [['equity',state.equity],['cash',state.cash],['realized',state.realized_pnl],['unrealized',state.unrealized_pnl]])el('ap-'+id).textContent=num(value);
     el('ap-value').textContent='股票市值 '+num(state.market_value)+' CNY';
     el('ap-win-rate').textContent='已平仓胜率 '+(state.total_trades?num(100*state.winning_trades/state.total_trades)+'%':'—');
     el('ap-pending').textContent=Object.keys(state.pending||{}).length+' 个计划等待后续报价';
     el('ap-plan-status').textContent='盘后名单 '+(state.source_plan_date||state.plan_date||'未生成')+' · 策略候选 '+(state.source_candidate_count||0)+' 个 · '+(state.market_label||'')+(state.plan_error?' · '+state.plan_error:'');
-    el('ap-plans').innerHTML=(state.plans||[]).map(p=>`<span>${esc(p.name)} ${esc(p.code)} · 回踩 ${num(p.lower)}–${num(p.upper)}</span>`).join('');
+    if(state.source_entry_revision)el('ap-plan-status').textContent+=state.source_continuation_enabled?' · 回踩＋强势延续（待盘中确认 '+(state.source_continuation_count||0)+'只）':' · 强势延续待验证，尚未启用';
+    if(state.source_reversal_enabled)el('ap-plan-status').textContent+=' · 超跌反转 '+(state.source_reversal_count||0)+'只'+(state.source_reversal_paper_trial?' · 模拟试运行，未完成收益验证':'');
+    if(state.source_data_ready===false)el('ap-plan-status').textContent+=' · 日线未就绪，等待重试';
+    const exclusions=Object.entries(state.source_exclusion_summary||{}).map(([reason,count])=>reason+' '+count+'只');
+    if(exclusions.length)el('ap-plan-status').textContent+=' · 排除：'+exclusions.join('；');
+    el('ap-plans').innerHTML=(state.plans||[]).map(p=>`<span>${esc(p.name)} ${esc(p.code)} · ${p.entry_mode==='continuation'?'强势延续：等待放量突破后确认':modeName(p)+' '+num(p.lower)+'–'+num(p.upper)}</span>`).join('');
     el('ap-position-note').textContent=state.valuation_fresh?'上次报价估值；新买持仓T+1解锁后仍需符合策略才卖出':'报价过期或口径待核对，保留上次估值，未假定可卖出';
-    el('ap-positions').innerHTML=state.positions.map(p=>`<tr><td>${esc(p.name)} ${esc(p.code)}<small>候选 ${esc(p.signal_date)}</small></td><td>${num(p.shares)} / ${num(p.sellable_shares)}<small>${p.sellable_shares?'满足T+1，仍须策略触发':'T+1锁定'}</small></td><td>${num(p.entry_price)}<small>${num(p.last_price)}</small></td><td>${num(p.stop)}<small>${num(p.target)}</small></td><td>${num(p.unrealized_pnl)}</td><td>${stamp(p.entry_at)}</td><td>${stamp(p.quote_at)}</td></tr>`).join('');
+    el('ap-positions').innerHTML=state.positions.map(p=>`<tr><td>${esc(p.name)} ${esc(p.code)}<small>候选 ${esc(p.signal_date)} · ${modeName(p.plan)}</small></td><td>${num(p.shares)} / ${num(p.sellable_shares)}<small>${p.sellable_shares?'满足T+1，仍须策略触发':'T+1锁定'}</small></td><td>${num(p.entry_price)}<small>${num(p.last_price)}</small></td><td>${num(p.stop)}<small>${p.plan?.entry_mode==='continuation'?'结构跟随退出':num(p.target)}</small></td><td>${num(p.unrealized_pnl)}</td><td>${stamp(p.entry_at)}</td><td>${stamp(p.quote_at)}</td></tr>`).join('');
     el('ap-positions-empty').hidden=state.positions.length>0;
     el('ap-trades').innerHTML=[...state.trades].reverse().map(t=>`<tr><td>${esc(t.name)} ${esc(t.code)}<small>${num(t.shares)} 股 · 候选 ${esc(t.signal_date)}</small></td><td>${num(t.entry_price)}<small>${num(t.exit_price)}</small></td><td>${stamp(t.entry_at)}</td><td>${stamp(t.exit_at)}</td><td>${esc(reasons[t.reason]||t.reason)}</td><td>${num(t.fees)}</td><td>${num(t.net_pnl)}<small>${num(t.return_pct)}%</small></td></tr>`).join('');
     el('ap-trades-empty').hidden=state.trades.length>0;
@@ -54,7 +62,7 @@
       state=data;if(action==='config'){dirty=false;formLoaded=false;}
       render();verified=true;
       if(action==='config')el('ap-config-status').textContent='配置已保存，账户仍暂停；可手动启用';
-    }catch(error){el('ap-status').textContent='读取 / 控制失败：'+error.message+' · 保留上次快照，运行状态待核实';}
+    }catch(error){el('ap-running').textContent='连接中断 · 运行状态待核实';el('ap-status').textContent='读取 / 控制失败：'+error.message+' · 保留上次快照，运行状态待核实';}
     finally{clearTimeout(timeout);busy=false;locks(verified);timer=setTimeout(()=>request(),5000);}
   }
   function changed(){dirty=true;locks();el('ap-config-status').textContent='参数尚未保存，请先保存再启用';}

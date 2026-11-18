@@ -1,0 +1,132 @@
+{
+  "replay_version": "bar-close-observe-next-open-v2",
+  "config": {
+    "per_stock_budget": 20000.0,
+    "max_positions": 3,
+    "commission_rate": 0.0003,
+    "min_commission": 5.0,
+    "transfer_rate": 1e-05,
+    "stamp_rate": 0.0005,
+    "slippage_ticks": 1,
+    "exit_ma": 10
+  },
+  "candidate_rule": "trend",
+  "diagnostics": {
+    "market_pass_days": 0,
+    "candidate_signals": 17,
+    "ready_plans": 17
+  },
+  "summary": {
+    "initial_capital": 100000.0,
+    "end_equity": 99884.95,
+    "return_pct": -0.11505000000000543,
+    "monthly_equivalent_pct": -0.43702355463396403,
+    "max_drawdown_pct": 0.11899529968566241,
+    "closed_trades": 0,
+    "win_rate_pct": null,
+    "fees": 5.05,
+    "start": "2026-11-04",
+    "end": "2026-11-11",
+    "calendar_days": 8
+  },
+  "monthly": [
+    {
+      "month": "2026-11",
+      "return_pct": -0.11505000000000543,
+      "end_equity": 99884.95
+    }
+  ],
+  "trades": [],
+  "curve": [
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-04",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-05",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-06",
+      "equity": 100000.0
+    },
+    {
+      "date": "2026-11-09",
+      "equity": 100003.95
+    },
+    {
+      "date": "2026-11-10",
+      "equity": 99953.95
+    },
+    {
+      "date": "2026-11-11",
+      "equity": 99884.95
+    }
+  ],
+  "open_positions": [
+    {
+      "code": "601318",
+      "name": "中国平安",
+      "shares": 100,
+      "entry_price": 54.51,
+      "entry_at": 1794201300002,
+      "entry_day": "2026-11-09",
+      "entry_fee": 5.05,
+      "entry_costs": {
+        "commission": 5.0,
+        "transfer": 0.05,
+        "stamp": 0.0,
+        "total": 5.05
+      },
+      "costs": {
+        "per_stock_budget": 20000.0,
+        "max_positions": 3,
+        "commission_rate": 0.0003,
+        "min_commission": 5.0,
+        "transfer_rate": 1e-05,
+        "stamp_rate": 0.0005,
+        "slippage_ticks": 1,
+        "exit_ma": 20
+      },
+      "signal_date": "2026-11-06",
+      "plan": {
+        "code": "601318",
+        "name": "中国平安",
+        "signal_date": "2026-11-06",
+        "generated_at": "2026-11-06T16:00:00+08:00",
+        "lower": 54.21,
+        "upper": 54.68,
+        "stop": 52.18,
+        "target": null,
+        "signal_close": 54.5,
+        "key": "2026-11-06:601318",
+        "strategy_version": "a-trend-reclaim-v1",
+        "strategy_rule": "trend_reclaim",
+        "entry_mode": "trend_reclaim",
+        "atr14": 1.138571428571429,
+        "budget_factor": 0.5,
+        "risk_fraction": 0.0025,
+        "center": 54.114,
+        "exit_ma": 20,
+        "confirmed_at": 1794201300000,
+        "signal_id": "2026-11-09 13:15",
+        "confirmation": "2026-11-09 13:15",
+        "estimated_stop_risk": 246.71,
+        "risk_budget": 250.0
+      },
+      "stop": 52.18,
+      "target": null,
+      "last_price": 53.41,
+      "quote_at": 1794380400000,
+      "valuation_blocked": false,
+      "unrealized_pnl": -115.05,
+      "sellable_shares": 100
+    }
+  ],
+  "incomplete_minute_days": 0,
+  "case": "trend_reclaim"
+}

@@ -19,15 +19,20 @@ from daily_strategy import entry_signal
 from trade_plan import build_trade_plan
 from replay import fetch as fetch_minutes
 from stock_setups import VERSION as SETUP_VERSION, evaluate_setups, selected_setup
+import continuation as C
+import trend_reclaim as T
+import oversold_reversal as M
 
 CACHE=REPO/'.cache'/'a-paper-research'
 END_TIMES=['09:45','10:00','10:15','10:30','10:45','11:00','11:15','11:30','13:15','13:30','13:45','14:00','14:15','14:30','14:45','15:00']
 HIST_SOURCE='sina_historical_15m_open'
+REPLAY_VERSION='bar-close-observe-next-open-limits-v3'
 LIMITATIONS=[
  '当前热榜/大盘过滤后股票池回看，存在选择、幸存者及当前名称筛选偏差；不是当时真实全市场选股。',
  '逐日重算此前可见日线与计划，属于反事实研究，不声称当时已保存这些候选名单。',
- '只用完整16根的15分钟交易日，在每根开盘时采样；没有历史盘口，买卖价用开盘价近似，可能漏掉区间内到价。',
- '历史实际涨跌停价不可得，按普通板块10%/20%估算并排除临近边界；不完整复原ST、新股、停牌、除权、分红和订单队列。',
+ '只用完整16根的15分钟交易日；收盘样本只观察/准备，不在该收盘价成交，后续开盘样本才尝试撮合。',
+ '相邻收盘与开盘同分钟时，使用边界后1/2毫秒表示模型内先后顺序，不是真实毫秒报价；成交价仍仅取实际K线开盘并计入滑点、费用。没有历史盘口，属于下一根开盘执行假设。',
+ '历史涨跌停按普通板块10%/20%估算；临近涨停不假定可买、临近跌停不假定可卖，保留反方向退出报价。没有真实盘口，不完整复原ST、新股、停牌、除权、分红和订单队列。',
  '与前向模拟共用计划、T+1及费税账目，但行情采样和历史限制更粗；结果不能直接认定为前向真实成交胜率。',
  '账户期末不强卖，权益含按未复权日线收盘估值的持仓，尚未扣未来卖出费税；胜率只统计已平仓交易。',
  '同一批数据比较参数是样本内探索，不自动选择赢家或修改任何运行账户。']
@@ -50,6 +55,30 @@ def metrics(curve,trades,fees):
     return out,months
 
 
+def fixed_execution_stress(result):
+    """固定原成交时间、数量和标记价，仅将费税与滑点翻倍。"""
+    equity=result['summary']['end_equity'];rows=[]
+    def stressed(cfg):
+        out=dict(cfg)
+        for k in ('commission_rate','min_commission','transfer_rate','stamp_rate','slippage_ticks'):out[k]*=2
+        return out
+    for t in result['trades']:
+        cfg=t['config'];stress=stressed(cfg);extra_tick=cfg['slippage_ticks']*.01
+        entry=P.money(t['entry_price']+extra_tick);exit=P.money(t['exit_price']-extra_tick);qty=t['shares']
+        if exit<=0:raise ValueError('固定成交压力价无效')
+        fees=P.ASharePaperAccount.costs(P.money(entry*qty),True,stress)['total']+P.ASharePaperAccount.costs(P.money(exit*qty),False,stress)['total']
+        pnl=P.money(P.money(exit*qty)-entry*qty-fees)
+        equity+=pnl-t['net_pnl']
+        rows.append(dict(code=t['code'],shares=qty,baseline_net_pnl=t['net_pnl'],stress_net_pnl=pnl,stress_fees=P.money(fees)))
+    for p in result['open_positions']:
+        cfg=p['costs'];stress=stressed(cfg);entry=P.money(p['entry_price']+cfg['slippage_ticks']*.01);qty=p['shares']
+        fees=P.ASharePaperAccount.costs(P.money(entry*qty),True,stress)['total']
+        equity-=(entry-p['entry_price'])*qty+fees-p['entry_fee']
+    equity=P.money(equity);initial=result['summary']['initial_capital']
+    return dict(end_equity=equity,return_pct=(equity/initial-1)*100,closed_trades=len(rows),
+                win_rate_pct=100*sum(t['stress_net_pnl']>0 for t in rows)/len(rows) if rows else None,trades=rows)
+
+
 def reconstructed_radar(sample,signal_date,candidate_rule='trend'):
     bench=[b for b in sample['benchmark'] if b['date']<=signal_date]
     market_pass=len(bench)>=20 and bench[-1]['close']>sum(b['close'] for b in bench[-20:])/20
@@ -65,11 +94,12 @@ def reconstructed_radar(sample,signal_date,candidate_rule='trend'):
     return dict(signal_date=signal_date,generated_at=signal_date+'T16:00:00+08:00',market_pass=market_pass,strategy_candidates=candidates)
 
 
-def setups_radar(sample,signal_date):
+def setups_radar(sample,signal_date,*,market_filter=True):
     bench=[b for b in sample['benchmark'] if b['date']<=signal_date]
-    passed=len(bench)>=20 and bench[-1]['close']>sum(b['close'] for b in bench[-20:])/20
+    passed=len(bench)>=20 and (not market_filter or bench[-1]['close']>sum(b['close'] for b in bench[-20:])/20)
     required=[b['date'] for b in bench[-25:]];candidates=[];confirmed=0
     for code,full in sorted(sample['daily'].items()):
+        if 'legacy_eligible' in sample and code not in sample['legacy_eligible']:continue
         rows=[r for r in full if r['date']<=signal_date]
         if len(rows)<25 or [r['date'] for r in rows[-25:]]!=required:continue
         setups=evaluate_setups(rows);setup=selected_setup(setups)
@@ -79,6 +109,85 @@ def setups_radar(sample,signal_date):
             strategy_version=SETUP_VERSION,market_pass=True,plan_ready=True,trade_plan=setup['plan']))
     return dict(signal_date=signal_date,generated_at=signal_date+'T16:00:00+08:00',strategy_version=SETUP_VERSION,
         confirmed_count=confirmed,market_pass=passed,strategy_candidates=candidates)
+
+
+def dual_radar(sample,signal_date,*,continuation_only=False):
+    radar=setups_radar(sample,signal_date)
+    if continuation_only:radar['strategy_candidates']=[]
+    bench=[b for b in sample['benchmark'] if b['date']<=signal_date]
+    existing={r['code'] for r in radar['strategy_candidates']};extra=[]
+    for code,full in sample['daily'].items():
+        if code in existing:continue
+        name=sample['names'].get(code,code)
+        try:P.stock_code(code)
+        except ValueError:continue
+        rows=[r for r in full if r['date']<=signal_date]
+        plan=C.build_plan(rows,bench,name)
+        if plan:extra.append(dict(code=code,name=name,close=rows[-1]['close'],category='策略候选',
+            market_pass=True,plan_ready=True,trade_plan=plan))
+    extra.sort(key=lambda r:(-r['trade_plan']['relative_strength'],-r['trade_plan']['avg20_turnover'],r['code']))
+    radar['strategy_candidates'].extend(extra[:C.MAX_CANDIDATES])
+    radar.update(continuation_market_pass=C.market_allowed(bench),continuation_enabled=True,entry_revision=C.ENTRY_REVISION)
+    return radar
+
+
+def reclaim_radar(sample,signal_date,*,include_legacy=False):
+    radar=setups_radar(sample,signal_date)
+    if not include_legacy:radar['strategy_candidates']=[]
+    existing={r['code'] for r in radar['strategy_candidates']};extra=[]
+    bench=[b for b in sample['benchmark'] if b['date']<=signal_date]
+    for code,full in sample['daily'].items():
+        if code in existing:continue
+        try:P.stock_code(code)
+        except ValueError:continue
+        rows=[r for r in full if r['date']<=signal_date];name=sample['names'].get(code,code)
+        plan=T.build_plan(rows,bench,name)
+        if plan:extra.append(dict(code=code,name=name,close=rows[-1]['close'],category='策略候选',market_pass=True,plan_ready=True,trade_plan=plan))
+    extra.sort(key=lambda r:(r['trade_plan']['pullback_distance'],-r['trade_plan']['relative_strength'],r['code']))
+    radar['strategy_candidates'].extend(extra[:T.MAX_CANDIDATES])
+    radar.update(trend_reclaim_enabled=True,trend_reclaim_market_pass=T.market_allowed(bench),entry_revision=T.ENTRY_REVISION)
+    return radar
+
+
+def reversal_radar(sample,signal_date,*,include_legacy=True,version=M.VERSION):
+    radar=setups_radar(sample,signal_date)
+    if not include_legacy:radar['strategy_candidates']=[]
+    existing={r['code'] for r in radar['strategy_candidates']};extra=[]
+    bench=[b for b in sample['benchmark'] if b['date']<=signal_date]
+    for code,full in sample['daily'].items():
+        if code in existing:continue
+        try:P.stock_code(code)
+        except ValueError:continue
+        rows=[r for r in full if r['date']<=signal_date];name=sample['names'].get(code,code)
+        plan=M.build_plan(rows,bench,name,version=version)
+        if plan:extra.append(dict(code=code,name=name,close=rows[-1]['close'],category='策略候选',market_pass=True,plan_ready=True,trade_plan=plan))
+    extra.sort(key=lambda r:(-r['trade_plan']['close_location'],r['trade_plan']['rsi2'],-r['trade_plan']['avg20_turnover'],r['code']))
+    radar['strategy_candidates'].extend(extra[:M.MAX_CANDIDATES])
+    radar.update(oversold_reversal_enabled=True,oversold_reversal_market_pass=M.market_allowed(bench),entry_revision=version)
+    return radar
+
+
+def bar_observations(history,minute_map,names,bar_time,*,at_close=False):
+    """已完成收盘只能观察；开盘执行只读取当根open和已完成前缀。"""
+    finish=datetime.fromisoformat(bar_time).replace(tzinfo=P.BJ)
+    boundary=finish if at_close else finish-timedelta(minutes=15)
+    stamp=int(boundary.timestamp()*1000)+(1 if at_close else 2)
+    observations={}
+    for code,rows in history.items():
+        bar=minute_map.get((code,bar_time))
+        if not bar or not rows:continue
+        known=[minute_map[(code,bar_time[:10]+' '+e)] for e in END_TIMES
+               if (code,bar_time[:10]+' '+e) in minute_map and
+               datetime.fromisoformat(bar_time[:10]+'T'+e).replace(tzinfo=P.BJ)<=boundary]
+        volume=sum(float(r['volume']) for r in known)
+        if volume<=0:continue
+        px=float(bar['close'] if at_close else bar['open']);prior=rows[-1]['close']
+        ratio=.2 if code.startswith(('300','301','688')) else .1
+        lo,hi=P.money(prior*(1-ratio)),P.money(prior*(1+ratio))
+        if not lo<=px<=hi:continue
+        observations[code]=dict(daily=rows,quote=dict(symbol=code,source=HIST_SOURCE,name=names.get(code,code),price=px,
+            bid=px if px>lo*1.005 else None,ask=px if px<hi*.995 else None,volume=volume,previous_close=prior,quote_at=stamp,lower_limit=lo,upper_limit=hi),minutes=known)
+    return stamp,observations
 
 
 def replay(sample,config,candidate_rule='trend',account_factory=None,radar_factory=None):
@@ -110,18 +219,12 @@ def replay(sample,config,candidate_rule='trend',account_factory=None,radar_facto
             diagnostics['candidate_signals']+=len(radar['strategy_candidates'])
             diagnostics['ready_plans']+=sum(p['plan_ready'] for p in radar['strategy_candidates'])
             history={code:[r for r in rows if r['date']<d] for code,rows in sample['daily'].items()}
+            history={code:rows for code,rows in history.items() if rows and rows[-1]['date']==previous}
             for end in END_TIMES:
-                finish=datetime.fromisoformat(d+'T'+end+':00+08:00');now=int((finish-timedelta(minutes=15)).timestamp()*1000)
-                observations={}
-                for code,rows in history.items():
-                    bar=bars.get((code,d+' '+end))
-                    if not bar or not rows or rows[-1]['date']!=previous or bar.get('volume',0)<=0 or bar['high']<=bar['low']:continue
-                    px=bar['open'];prior=rows[-1]['close'];ratio=.2 if code.startswith(('300','301','688')) else .1
-                    lo,hi=P.money(prior*(1-ratio)),P.money(prior*(1+ratio))
-                    if not lo*1.005<px<hi*.995:continue
-                    observations[code]=dict(daily=rows,quote=dict(symbol=code,source=HIST_SOURCE,name=sample['names'].get(code,code),price=px,
-                        bid=px,ask=px,volume=bar['volume'],previous_close=prior,quote_at=now,lower_limit=lo,upper_limit=hi))
+                now,observations=bar_observations(history,bars,sample['names'],d+' '+end)
                 account.step(radar,calendar[:index+1],observations,now=now)
+                now,observations=bar_observations(history,bars,sample['names'],d+' '+end,at_close=True)
+                account.step(radar,calendar[:index+1],observations,now=now,prepare_only=True)
             # Valuation only: historical daily close is now known, without generating a fill.
             with account.transaction() as state:
                 for p in state['positions']:
@@ -130,7 +233,7 @@ def replay(sample,config,candidate_rule='trend',account_factory=None,radar_facto
             out=account.snapshot(now=now,include_all_trades=True);curve.append(dict(date=d,equity=out['equity']))
         out=account.snapshot(now=now,include_all_trades=True)
     summary,months=metrics(curve,out['trades'],out['fees'])
-    return dict(config=config,candidate_rule=candidate_rule,diagnostics=diagnostics,summary=summary,monthly=months,trades=out['trades'],curve=curve,open_positions=out['positions'],incomplete_minute_days=missing_days)
+    return dict(replay_version=REPLAY_VERSION,config=config,candidate_rule=candidate_rule,diagnostics=diagnostics,summary=summary,monthly=months,trades=out['trades'],curve=curve,open_positions=out['positions'],incomplete_minute_days=missing_days)
 
 
 def compare(sample,config):
@@ -144,8 +247,15 @@ def compare(sample,config):
     for key,label,cfg in [('setups_v2','分型v2 / MA'+str(config['exit_ma']),config),('setups_v2_cost_double','分型v2：费税与滑点翻倍',stress)]:
         results.append(dict(replay(sample,cfg,radar_factory=setups_radar),case=key,label=label,strategy_version=SETUP_VERSION))
     results.append(dict(replay(sample,config,candidate_rule='expanded'),case='candidate_expanded',label='研究对照：纳入收复/突破候选'))
+    for key,label,cfg,factory in [
+        ('continuation_v1','研究：强势延续确认 / 结构跟随',config,lambda s,d:dual_radar(s,d,continuation_only=True)),
+        ('dual_v3','研究：回踩＋强势延续',config,dual_radar),
+        ('dual_v3_cost_double','研究双入口：费税与滑点翻倍',stress,dual_radar)]:
+        results.append(dict(replay(sample,cfg,radar_factory=factory),case=key,label=label,strategy_version=C.ENTRY_REVISION))
+    for key,label,cfg in [('trend_reclaim_v1','研究：日线趋势回踩收复',config),('trend_reclaim_cost_double','研究：趋势回踩收复 / 成本翻倍',stress)]:
+        results.append(dict(replay(sample,cfg,radar_factory=lambda s,d:reclaim_radar(s,d,include_legacy=True)),case=key,label=label,strategy_version=T.VERSION))
     encoded=json.dumps(sample,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
-    return dict(version='a-candidate-research-v2',results=results,sample_sha256=hashlib.sha256(encoded).hexdigest(),
+    return dict(version='a-candidate-research-v3',replay_version=REPLAY_VERSION,results=results,sample_sha256=hashlib.sha256(encoded).hexdigest(),
         symbols=list(sample['daily']),start=sample['start'],end=sample['end'],limitations=LIMITATIONS+sample.get('limitations',[]))
 
 
@@ -211,19 +321,24 @@ class ResearchJobs:
         try:
             def progress(text):
                 with self.lock:self.jobs[key]['progress']=text
-            sample=collect(months,size,progress);progress('正在按相同账本规则复盘四个方案')
+            sample=collect(months,size,progress);progress('正在按相同账本规则复盘既有策略和研究候选')
             result=compare(sample,config);CACHE.mkdir(parents=True,exist_ok=True)
             (CACHE/'latest-result.json').write_text(json.dumps(result,ensure_ascii=False,allow_nan=False))
             with self.lock:self.jobs[key].update(status='done',result=result)
         except Exception as exc:
             with self.lock:self.jobs[key].update(status='failed',error=str(exc)[:240])
     def snapshot(self,key=None):
+        value=None
         with self.lock:
             if key:
                 if key not in self.jobs:raise KeyError('复盘任务不存在或服务已重启')
-                return dict(self.jobs[key])
-        file=CACHE/'latest-result.json'
-        return dict(status='idle',result=json.loads(file.read_text()) if file.exists() else None)
+                value=dict(self.jobs[key])
+        if value is None:
+            file=CACHE/'latest-result.json'
+            value=dict(status='idle',result=json.loads(file.read_text()) if file.exists() else None)
+        result=value.get('result')
+        value.update(current_replay_version=REPLAY_VERSION,needs_rerun=bool(result and result.get('replay_version')!=REPLAY_VERSION))
+        return value
 
 
 JOBS=ResearchJobs()
