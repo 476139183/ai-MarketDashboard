@@ -1,0 +1,14 @@
+﻿code,name,entry_date,exit_date,entry_price,exit_price,qty,net_pnl,reason,signal_before_entry,t_plus_one,entry_inside_zone,whole_lot,exit_trigger
+603500,祥和实业,2026-10-20,2026-10-22,10.77,10.23,400,-228.13,daily_stop_proxy,True,True,True,True,True
+301608,博实结,2026-10-20,2026-10-23,53.35,52.59,100,-88.73,ma10_exit_next_open,True,True,True,True,True
+600573,惠泉啤酒,2026-10-22,2026-10-23,13.09,12.43,400,-276.59,gap_stop,True,True,True,True,True
+603883,老百姓,2026-10-20,2026-10-26,14.66,14.09,200,-125.47,ma10_exit_next_open,True,True,True,True,True
+002043,兔 宝 宝,2026-10-23,2026-10-28,12.67,12.62,600,-43.94,ma10_exit_next_open,True,True,True,True,True
+000400,许继电气,2026-10-23,2026-10-30,22.6,21.42,200,-248.23,gap_stop,True,True,True,True,True
+603767,中马传动,2026-10-28,2026-10-30,16.31,15.5,200,-173.61,daily_stop_proxy,True,True,True,True,True
+601328,交通银行,2026-10-30,2026-11-03,8.56,8.18,600,-240.55,daily_stop_proxy,True,True,True,True,True
+601857,中国石油,2026-10-30,2026-11-05,13.61,12.86,300,-237.01,daily_stop_proxy,True,True,True,True,True
+002315,焦点科技,2026-11-03,2026-11-13,28.01,28.04,100,-8.46,ma10_exit_next_open,True,True,True,True,True
+002150,正泰电源,2026-11-13,2026-11-16,20.62,19.75,200,-186.05,ma10_exit_next_open,True,True,True,True,True
+600977,中国电影,2026-10-26,2026-11-18,14.66,15.29,400,238.82,ma10_exit_next_open,True,True,True,True,True
+002351,漫步者,2026-11-05,2026-11-19,11.67,11.95,300,72.13,ma10_exit_next_open,True,True,True,True,True

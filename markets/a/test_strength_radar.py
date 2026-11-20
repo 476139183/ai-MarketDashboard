@@ -14,6 +14,57 @@ def bars(kind='trend'):
         rows.append(dict(date=(start+timedelta(days=i)).isoformat(),open=previous,high=p*1.005,low=previous*.995,close=p,volume=8e6))
     return rows
 class StrengthTests(unittest.TestCase):
+    def test_extended_trend_without_prior_v2_hit_is_kept_as_structure_tracking(self):
+        rows=bars();price=10.
+        for row in rows:
+            previous=price;price*=1.02
+            row.update(open=previous,high=price*1.005,low=previous*.995,close=price,volume=8e6)
+        stock=dict(code='002242',name='趋势样例',board='主板')
+        report=S.screen([stock],{stock['code']:rows},rows[-1]['date'])
+        self.assertEqual(report['items'],[])
+        self.assertEqual(len(report['tracking_items']),1)
+        item=report['tracking_items'][0]
+        self.assertEqual(item['tracking_basis'],'trend_structure')
+        self.assertTrue(item['first_structure_date'])
+        self.assertIsNone(item['first_signal_date'])
+        self.assertTrue(item['trend_context']['active'])
+        self.assertFalse(item['execution_enabled'])
+
+    def test_structure_only_and_old_pattern_tracking_can_be_sorted_together(self):
+        old=bars();old[-1]['volume']=1000
+        trend=deepcopy(old);price=10.
+        for row in trend:
+            previous=price;price*=1.02
+            row.update(open=previous,high=price*1.005,low=previous*.995,close=price,volume=8e6)
+        stocks=[dict(code='600001',name='旧形态',board='主板'),dict(code='600002',name='持续趋势',board='主板')]
+        report=S.screen(stocks,{'600001':old,'600002':trend},trend[-1]['date'])
+        self.assertEqual(len(report['tracking_items']),2)
+
+    def test_reclaim_research_zone_needs_right_side_confirmation_and_no_future_suffix(self):
+        from test_stock_setups import rising
+        rows=rising()
+        for row in rows:row['volume']=8e6
+        rows[-2]['volume']=5e6
+        rows[-1].update(open=13.15,close=13.5,high=13.55,low=13.08)
+        stock=dict(code='600001',name='趋势样例',board='主板');day=rows[-1]['date']
+        result=S.evaluate(stock,rows,day)['trend_context']
+        self.assertEqual(result['state'],'entry_confirmed',result)
+        self.assertLess(result['stop'],result['lower']);self.assertLess(result['lower'],result['upper'])
+        self.assertIsNone(result['target'])
+        self.assertFalse(result['execution_enabled'])
+        future=dict(rows[-1],date='2027-01-01',close=999.,high=1000.)
+        self.assertEqual(result,S.evaluate(stock,rows+[future],day)['trend_context'])
+        rows[-1].update(open=13.2,close=13.1,high=13.55,low=13.08)
+        self.assertNotEqual(S.evaluate(stock,rows,day)['trend_context']['state'],'entry_confirmed')
+
+    def test_reclaim_requires_contraction_during_the_pullback(self):
+        from test_stock_setups import rising
+        rows=rising()
+        for row in rows:row['volume']=8e6
+        rows[-1].update(open=13.15,close=13.5,high=13.55,low=13.08)
+        result=S.evaluate(dict(code='600001',name='样例',board='主板'),rows,rows[-1]['date'])
+        self.assertNotEqual(result['trend_context']['state'],'entry_confirmed')
+
     def test_continuous_strength_does_not_need_fresh_twenty_day_breakout(self):
         rows=bars();rows[-10]['high']=rows[-1]['close']*1.1
         r=S.evaluate({'code':'300324','name':'样例','board':'创业板'},rows,rows[-1]['date'])

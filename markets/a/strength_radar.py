@@ -13,8 +13,40 @@ BJ=ZoneInfo('Asia/Shanghai')
 ROOT=Path(__file__).resolve().parents[2]
 CACHE=ROOT/'.cache/a-strength-radar'
 LATEST=CACHE/'latest.json'
-VERSION='a-strength-research-v2'
+VERSION='a-strength-research-v3'
+TREND_VERSION='a-trend-structure-v1'
 LABELS={'base_recovery':'底部修复（高风险）','early_turn':'初步转强','steady_rise':'连续走强','volume_breakout':'温和放量突破','pullback_restart':'回踩再启动'}
+
+
+def trend_context(rows,metrics,limit):
+    """Research state, calculated after the caller validates the historical prefix."""
+    from stock_setups import cent
+    result=dict(version=TREND_VERSION,active=False,state='not_trending',execution_enabled=False)
+    c=[float(r['close']) for r in rows];m=metrics;last=rows[-1]
+    if not (m['ma5']>m['ma10']>m['ma20'] and m['ma20_slope']>0 and c[-1]>m['ma20'] and m['return20']>2):return result
+    result.update(active=True,state='wait_confirmation',reason='趋势仍在；等待缩量回踩后的收复或放量突破确认')
+    atr=sum(max(float(b['high'])-float(b['low']),abs(float(b['high'])-float(a['close'])),abs(float(b['low'])-float(a['close']))) for a,b in zip(rows[-15:-1],rows[-14:]))/14
+    if atr<=0:return result
+    result.update(atr14=atr,distance_ma5_atr=(c[-1]-m['ma5'])/atr)
+    if last['high']==last['low'] or m['change_pct']>=limit*.9:
+        result.update(state='wait_pullback',reason='一字或近涨停，保留趋势跟踪；不假定可追入');return result
+    if c[-1]>m['ma5']+1.5*atr:
+        result.update(state='wait_pullback',reason='距离MA5超过1.5ATR，保留趋势，等待回踩');return result
+    touch=any(float(rows[i]['low'])<=sum(c[i-4:i+1])/5+.5*atr and
+              float(rows[i]['volume'])<=sum(float(r['volume']) for r in rows[i-5:i])/5*.9
+              for i in range(len(rows)-3,len(rows)-1))
+    strength=(c[-1]-float(last['low']))/(float(last['high'])-float(last['low']))
+    reclaim=touch and c[-1]>float(rows[-2]['high']) and c[-1]>=float(last['open']) and strength>=.6 and .8<=m['volume_ratio']<=2.5
+    breakout=c[-1]>max(float(r['high']) for r in rows[-21:-1]) and strength>=.6 and 1.2<=m['volume_ratio']<=3
+    if not (reclaim or breakout):return result
+    stop=cent(max(min(float(r['low']) for r in rows[-3:]),m['ma10'])-.25*atr)
+    lower,upper=cent(c[-1]-.5*atr,True),cent(min(c[-1]+.25*atr,m['ma5']+1.5*atr))
+    if not 0<stop<lower<upper or upper-lower<.009999 or (upper-stop)/upper>.08:
+        result.update(reason='趋势确认但价格区间或计划风险不合格');return result
+    result.update(state='entry_confirmed',reason='回踩后收复前日高点' if reclaim else '放量突破此前20日高点',
+                  rule='pullback_reclaim' if reclaim else 'volume_breakout',lower=lower,upper=upper,stop=stop,
+                  target=None,risk_fraction=.0025,exit_rule='收盘失守MA10后观察后续新报价退出；T+1')
+    return result
 
 
 def evaluate(stock, rows, signal_date):
@@ -67,11 +99,12 @@ def evaluate(stock, rows, signal_date):
     metrics=dict(change_pct=round(change,3),return3=round(ret3,3),return5=round(ret5,3),return20=round(ret20,3),
         up_days5=up,volume_ratio=round(vr,3),bias20=round(bias,3),ma5=round(ma5,4),ma10=round(ma10,4),ma20=round(ma20,4),ma60=round(ma60,4),
         ma20_slope=round(ma20_slope,3),avg_turnover20=round(amount20),distance_high10=round((price/high10-1)*100,3))
-    if locked:return dict(stage='locked',reason='一字线，执行条件不可核验',patterns=[],metrics=metrics,close=price,score=0,execution_enabled=False,risk_note='一字线仅保留历史跟踪，不假定可以排队成交')
-    if extended:return dict(stage='extended',reason='涨幅、MA20乖离或近涨停风险过高；等待重新形成结构',patterns=[],metrics=metrics,close=price,score=0,execution_enabled=False,risk_note='过热跟踪，不能当作当前新机会')
+    context=trend_context(rows,metrics,limit)
+    if locked:return dict(stage='locked',reason='一字线，执行条件不可核验',patterns=[],metrics=metrics,close=price,score=0,execution_enabled=False,trend_context=context,risk_note='一字线仅保留历史跟踪，不假定可以排队成交')
+    if extended:return dict(stage='extended',reason='涨幅、MA20乖离或近涨停风险过高；等待重新形成结构',patterns=[],metrics=metrics,close=price,score=0,execution_enabled=False,trend_context=context,risk_note=context.get('reason','过热跟踪，不能当作当前新机会'))
     score=round(20*len(patterns)+up*3+max(0,6-abs(bias-3))*2+min(2,vr)*4,2)
     return dict(stage='matched' if patterns else 'shape',reason=' / '.join(LABELS[p] for p in patterns) or '未满足固定走强形态',patterns=patterns,
-        metrics=metrics,close=price,score=score,execution_enabled=False,
+        metrics=metrics,close=price,score=score,execution_enabled=False,trend_context=context,
         risk_note='底部修复：MA20仍向下，不能当作已成趋势，回落风险较高' if 'base_recovery' in patterns else '近5日上涨偏快，留意回踩' if ret5>8 else '与市场指数及事件分别核对，不代表后续必涨')
 
 
@@ -86,8 +119,10 @@ def screen(stocks,histories,signal_date):
         if result['stage'] not in ('shape','extended','locked'):continue
         rows=[r for r in histories[result['code']] if r['date']<=signal_date]
         # 仅回看最近5个完整日线，历史信号不能冒充今日命中。
-        if any(evaluate(result,rows[:i+1],rows[i]['date'])['stage']=='matched' for i in range(max(59,len(rows)-6),len(rows)-1)):
-            tracking.append(dict(result,tracking=True))
+        if (result.get('trend_context') or {}).get('active'):
+            tracking.append(dict(result,tracking=True,tracking_basis='trend_structure'))
+        elif any(evaluate(result,rows[:i+1],rows[i]['date'])['stage']=='matched' for i in range(max(59,len(rows)-6),len(rows)-1)):
+            tracking.append(dict(result,tracking=True,tracking_basis='prior_pattern'))
     for item in items+tracking:
         rows=[r for r in histories[item['code']] if r['date']<=signal_date]
         recent=rows[-20:];window=recent[0]['date'];events=replay_stock(item,rows,start=window)
@@ -95,9 +130,13 @@ def screen(stocks,histories,signal_date):
         for row in reversed(recent):
             if row['date'] not in dates:break
             continuous+=1
-        item.update(first_signal_date=events[0]['date'] if events else signal_date,latest_signal_date=events[-1]['date'] if events else signal_date,tracking_patterns=events[-1]['patterns'] if events else [],matched_sessions_last20=len(events),continuing_sessions=continuous,first_signal_scope='最近20根日线内首现')
+        item.update(first_signal_date=events[0]['date'] if events else None,latest_signal_date=events[-1]['date'] if events else None,tracking_patterns=events[-1]['patterns'] if events else [],matched_sessions_last20=len(events),continuing_sessions=continuous,first_signal_scope='最近20根日线内首现')
+        if item.get('tracking_basis')=='trend_structure':
+            structures=[rows[i]['date'] for i in range(max(59,len(rows)-20),len(rows)) if evaluate(item,rows[:i+1],rows[i]['date']).get('trend_context',{}).get('active')]
+            item['first_structure_date']=structures[0] if structures else None
+            item['latest_structure_date']=structures[-1] if structures else None
     items.sort(key=lambda r:(-r['score'],r['code']))
-    tracking.sort(key=lambda r:(r['latest_signal_date'],r['code']),reverse=True)
+    tracking.sort(key=lambda r:(r.get('latest_structure_date') or r.get('latest_signal_date') or '',r['code']),reverse=True)
     ready=len(results)-counts['data']
     return dict(kind='a_share_strength_research',rule_version=VERSION,signal_date=signal_date,execution_enabled=False,validation_status='research_only',
         generated_at=datetime.now(BJ).isoformat(timespec='seconds'),items=items,tracking_items=tracking,stages=dict(counts),

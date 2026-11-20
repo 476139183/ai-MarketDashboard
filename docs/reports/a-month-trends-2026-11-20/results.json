@@ -1,0 +1,1549 @@
+{
+  "baseline": {
+    "period_split": "2026-11-03",
+    "period_quality": {
+      "first_half": {
+        "complete": 1215,
+        "positive_pct": 36.872,
+        "gain5_pct": 13.169,
+        "mean_pct": -2.3308,
+        "median_pct": -2.3069,
+        "non_positive_pct": 63.128,
+        "same_date_universe_mean_pct": -2.7137,
+        "same_date_universe_positive_pct": 33.555
+      },
+      "second_half": {
+        "complete": 1458,
+        "positive_pct": 19.479,
+        "gain5_pct": 7.682,
+        "mean_pct": -5.6985,
+        "median_pct": -5.3064,
+        "non_positive_pct": 80.521,
+        "same_date_universe_mean_pct": -3.4722,
+        "same_date_universe_positive_pct": 31.622
+      }
+    },
+    "start": "2026-10-20",
+    "end": "2026-11-19",
+    "sessions": 23,
+    "source_universe": 5579,
+    "risk_excluded": 197,
+    "eligible": 5382,
+    "evaluated": 5363,
+    "network_failures": 0,
+    "data_issues": {
+      "月初基准或期末收盘缺失": 19
+    },
+    "sample_sha256": "e41d8dfd0d513945785b9464b1bf35ff30334e71dad84e905970cbb9b4efc60a",
+    "rule_version": "a-strength-research-v2",
+    "plan_revision": "a-pullback-wait-v1",
+    "trends": {
+      "stocks": 151,
+      "any_signal": 114,
+      "coverage_pct": 75.497,
+      "early70": 58,
+      "early70_pct": 38.411,
+      "remaining5": 93,
+      "plan_ready": 124,
+      "market_allowed_plan": 0,
+      "plan_next_open": 0
+    },
+    "winners15": {
+      "stocks": 118,
+      "any_signal": 77,
+      "coverage_pct": 65.254,
+      "early70": 47,
+      "early70_pct": 39.831,
+      "remaining5": 72,
+      "plan_ready": 99,
+      "market_allowed_plan": 0,
+      "plan_next_open": 0
+    },
+    "winners30": {
+      "stocks": 25,
+      "any_signal": 12,
+      "coverage_pct": 48.0,
+      "early70": 10,
+      "early70_pct": 40.0,
+      "remaining5": 12,
+      "plan_ready": 23,
+      "market_allowed_plan": 0,
+      "plan_next_open": 0
+    },
+    "by_board": {
+      "创业板": {
+        "stocks": 31,
+        "any_signal": 17,
+        "coverage_pct": 54.839,
+        "early70": 12,
+        "early70_pct": 38.71,
+        "remaining5": 17,
+        "plan_ready": 24,
+        "market_allowed_plan": 0,
+        "plan_next_open": 0
+      },
+      "沪市主板": {
+        "stocks": 40,
+        "any_signal": 32,
+        "coverage_pct": 80.0,
+        "early70": 19,
+        "early70_pct": 47.5,
+        "remaining5": 28,
+        "plan_ready": 35,
+        "market_allowed_plan": 0,
+        "plan_next_open": 0
+      },
+      "深市主板": {
+        "stocks": 28,
+        "any_signal": 17,
+        "coverage_pct": 60.714,
+        "early70": 10,
+        "early70_pct": 35.714,
+        "remaining5": 17,
+        "plan_ready": 25,
+        "market_allowed_plan": 0,
+        "plan_next_open": 0
+      },
+      "科创板": {
+        "stocks": 19,
+        "any_signal": 11,
+        "coverage_pct": 57.895,
+        "early70": 6,
+        "early70_pct": 31.579,
+        "remaining5": 10,
+        "plan_ready": 15,
+        "market_allowed_plan": 0,
+        "plan_next_open": 0
+      }
+    },
+    "quality_first_signal": {
+      "complete": 2673,
+      "positive_pct": 27.385,
+      "gain5_pct": 10.176,
+      "mean_pct": -4.1677,
+      "median_pct": -3.7669,
+      "non_positive_pct": 72.615,
+      "same_date_universe_mean_pct": -3.1274,
+      "same_date_universe_positive_pct": 32.501
+    },
+    "quality_all_signals": {
+      "complete": 6487,
+      "positive_pct": 28.873,
+      "gain5_pct": 8.741,
+      "mean_pct": -3.6481,
+      "median_pct": -2.9437,
+      "non_positive_pct": 71.127,
+      "same_date_universe_mean_pct": -2.5107,
+      "same_date_universe_positive_pct": 36.285
+    },
+    "patterns": {
+      "base_recovery": {
+        "label": "底部修复（高风险）",
+        "winner_coverage": 36,
+        "winner_coverage_pct": 30.508,
+        "early70_winners": 27,
+        "quality": {
+          "complete": 1820,
+          "positive_pct": 23.022,
+          "gain5_pct": 9.396,
+          "mean_pct": -5.0528,
+          "median_pct": -4.8711,
+          "non_positive_pct": 76.978,
+          "same_date_universe_mean_pct": -3.5595,
+          "same_date_universe_positive_pct": 31.009
+        }
+      },
+      "early_turn": {
+        "label": "初步转强",
+        "winner_coverage": 21,
+        "winner_coverage_pct": 17.797,
+        "early70_winners": 4,
+        "quality": {
+          "complete": 469,
+          "positive_pct": 31.77,
+          "gain5_pct": 4.904,
+          "mean_pct": -2.1067,
+          "median_pct": -1.8122,
+          "non_positive_pct": 68.23,
+          "same_date_universe_mean_pct": -0.9739,
+          "same_date_universe_positive_pct": 43.865
+        }
+      },
+      "steady_rise": {
+        "label": "连续走强",
+        "winner_coverage": 45,
+        "winner_coverage_pct": 38.136,
+        "early70_winners": 13,
+        "quality": {
+          "complete": 868,
+          "positive_pct": 29.608,
+          "gain5_pct": 8.641,
+          "mean_pct": -3.2499,
+          "median_pct": -2.7907,
+          "non_positive_pct": 70.392,
+          "same_date_universe_mean_pct": -2.0709,
+          "same_date_universe_positive_pct": 36.768
+        }
+      },
+      "volume_breakout": {
+        "label": "温和放量突破",
+        "winner_coverage": 18,
+        "winner_coverage_pct": 15.254,
+        "early70_winners": 6,
+        "quality": {
+          "complete": 314,
+          "positive_pct": 35.35,
+          "gain5_pct": 7.006,
+          "mean_pct": -1.5056,
+          "median_pct": -1.4334,
+          "non_positive_pct": 64.65,
+          "same_date_universe_mean_pct": -0.3986,
+          "same_date_universe_positive_pct": 47.29
+        }
+      },
+      "pullback_restart": {
+        "label": "回踩再启动",
+        "winner_coverage": 50,
+        "winner_coverage_pct": 42.373,
+        "early70_winners": 18,
+        "quality": {
+          "complete": 963,
+          "positive_pct": 38.629,
+          "gain5_pct": 12.357,
+          "mean_pct": -2.0951,
+          "median_pct": -1.4755,
+          "non_positive_pct": 61.371,
+          "same_date_universe_mean_pct": -2.0297,
+          "same_date_universe_positive_pct": 38.166
+        }
+      }
+    },
+    "missed_reason_stock_counts": {
+      "涨幅、MA20乖离或近涨停风险过高；等待重新形成结构": 36,
+      "未满足固定走强形态": 32,
+      "近20日估算日均成交额不足5000万元": 13,
+      "一字线，执行条件不可核验": 3,
+      "不足连续60根市场日线": 2
+    },
+    "stages": {
+      "liquidity": 28165,
+      "shape": 81528,
+      "matched": 7181,
+      "extended": 4235,
+      "locked": 73
+    }
+  },
+  "v3": {
+    "version": "a-strength-research-v3",
+    "trend_version": "a-trend-structure-v1",
+    "trends": {
+      "stocks": 151,
+      "structure_seen": 146,
+      "confirmed": 60,
+      "next_open_in_zone": 56,
+      "early70": 16,
+      "remaining5": 27
+    },
+    "winners15": {
+      "stocks": 118,
+      "structure_seen": 108,
+      "confirmed": 24,
+      "next_open_in_zone": 22,
+      "early70": 4,
+      "remaining5": 9
+    },
+    "quality_first": {
+      "complete": 368,
+      "positive_pct": 37.22826086956522,
+      "mean_pct": -2.109888093071593,
+      "median_pct": -1.3723295367613797,
+      "gain5_pct": 7.336956521739131,
+      "baseline_positive_pct": 38.01933445728839,
+      "baseline_mean_pct": -2.046039979100086
+    },
+    "quality_all": {
+      "complete": 550,
+      "positive_pct": 35.090909090909086,
+      "mean_pct": -1.8964406131618263,
+      "median_pct": -1.3379973638069365,
+      "gain5_pct": 7.2727272727272725,
+      "baseline_positive_pct": 41.0018144418735,
+      "baseline_mean_pct": -1.5463402875875245
+    },
+    "quality_early": {
+      "complete": 201,
+      "positive_pct": 42.28855721393035,
+      "mean_pct": -0.9058097418075076,
+      "median_pct": -0.6809185129410089,
+      "gain5_pct": 9.45273631840796,
+      "baseline_positive_pct": 41.504469207730864,
+      "baseline_mean_pct": -1.4740144084726012
+    },
+    "quality_late": {
+      "complete": 167,
+      "positive_pct": 31.137724550898206,
+      "mean_pct": -3.559108144593037,
+      "median_pct": -2.990329846139883,
+      "gain5_pct": 4.790419161676647,
+      "baseline_positive_pct": 33.82465131454025,
+      "baseline_mean_pct": -2.7345258455439447
+    }
+  },
+  "portfolio": {
+    "baseline": {
+      "exit_ma": 10,
+      "stop_mode": "structure",
+      "confirm_bars": 1,
+      "model": "daily_bar_exploratory_v1",
+      "stress": 1,
+      "return_pct": -1.5509100000000053,
+      "max_close_drawdown_pct": 1.9099609345420505,
+      "closed_trades": 13,
+      "winning_trades": 2,
+      "open_positions": [
+        {
+          "code": "603014",
+          "name": "威高血净",
+          "entry_date": "2026-11-16",
+          "signal_date": "2026-11-13",
+          "entry_price": 34.89,
+          "entry_fee": 5.03,
+          "qty": 100,
+          "stop": 33.58,
+          "last_price": 34.38,
+          "ma_exit": true,
+          "rule": "pullback_reclaim"
+        },
+        {
+          "code": "600801",
+          "name": "华新建材",
+          "entry_date": "2026-11-18",
+          "signal_date": "2026-11-17",
+          "entry_price": 27.13,
+          "entry_fee": 5.03,
+          "qty": 100,
+          "stop": 25.84,
+          "last_price": 27.61,
+          "ma_exit": false,
+          "rule": "pullback_reclaim"
+        },
+        {
+          "code": "600566",
+          "name": "济川药业",
+          "entry_date": "2026-11-19",
+          "signal_date": "2026-11-18",
+          "entry_price": 31.51,
+          "entry_fee": 5.03,
+          "qty": 100,
+          "stop": 29.79,
+          "last_price": 31.64,
+          "ma_exit": false,
+          "rule": "volume_breakout"
+        }
+      ],
+      "trades": [
+        {
+          "code": "603500",
+          "name": "祥和实业",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 10.77,
+          "entry_fee": 5.04,
+          "qty": 400,
+          "stop": 10.24,
+          "last_price": 10.54,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-22",
+          "exit_price": 10.23,
+          "exit_fee": 7.09,
+          "net_pnl": -228.13,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "301608",
+          "name": "博实结",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 53.35,
+          "entry_fee": 5.05,
+          "qty": 100,
+          "stop": 51.31,
+          "last_price": 53.17,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-23",
+          "exit_price": 52.59,
+          "exit_fee": 7.68,
+          "net_pnl": -88.73,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "600573",
+          "name": "惠泉啤酒",
+          "entry_date": "2026-10-22",
+          "signal_date": "2026-10-21",
+          "entry_price": 13.09,
+          "entry_fee": 5.05,
+          "qty": 400,
+          "stop": 12.52,
+          "last_price": 12.44,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-23",
+          "exit_price": 12.43,
+          "exit_fee": 7.54,
+          "net_pnl": -276.59,
+          "reason": "gap_stop"
+        },
+        {
+          "code": "603883",
+          "name": "老百姓",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 14.66,
+          "entry_fee": 5.03,
+          "qty": 200,
+          "stop": 13.86,
+          "last_price": 14.31,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-26",
+          "exit_price": 14.09,
+          "exit_fee": 6.44,
+          "net_pnl": -125.47,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "entry_date": "2026-10-23",
+          "signal_date": "2026-10-22",
+          "entry_price": 12.67,
+          "entry_fee": 5.08,
+          "qty": 600,
+          "stop": 12.3,
+          "last_price": 12.6,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-28",
+          "exit_price": 12.62,
+          "exit_fee": 8.86,
+          "net_pnl": -43.94,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "000400",
+          "name": "许继电气",
+          "entry_date": "2026-10-23",
+          "signal_date": "2026-10-22",
+          "entry_price": 22.6,
+          "entry_fee": 5.05,
+          "qty": 200,
+          "stop": 21.81,
+          "last_price": 22.2,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-30",
+          "exit_price": 21.42,
+          "exit_fee": 7.18,
+          "net_pnl": -248.23,
+          "reason": "gap_stop"
+        },
+        {
+          "code": "603767",
+          "name": "中马传动",
+          "entry_date": "2026-10-28",
+          "signal_date": "2026-10-27",
+          "entry_price": 16.31,
+          "entry_fee": 5.03,
+          "qty": 200,
+          "stop": 15.51,
+          "last_price": 16.73,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-30",
+          "exit_price": 15.5,
+          "exit_fee": 6.58,
+          "net_pnl": -173.61,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "601328",
+          "name": "交通银行",
+          "entry_date": "2026-10-30",
+          "signal_date": "2026-10-29",
+          "entry_price": 8.56,
+          "entry_fee": 5.05,
+          "qty": 600,
+          "stop": 8.19,
+          "last_price": 8.57,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-03",
+          "exit_price": 8.18,
+          "exit_fee": 7.5,
+          "net_pnl": -240.55,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "601857",
+          "name": "中国石油",
+          "entry_date": "2026-10-30",
+          "signal_date": "2026-10-29",
+          "entry_price": 13.61,
+          "entry_fee": 5.04,
+          "qty": 300,
+          "stop": 12.87,
+          "last_price": 13.62,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-05",
+          "exit_price": 12.86,
+          "exit_fee": 6.97,
+          "net_pnl": -237.01,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "002315",
+          "name": "焦点科技",
+          "entry_date": "2026-11-03",
+          "signal_date": "2026-11-02",
+          "entry_price": 28.01,
+          "entry_fee": 5.03,
+          "qty": 100,
+          "stop": 26.26,
+          "last_price": 28.09,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-13",
+          "exit_price": 28.04,
+          "exit_fee": 6.43,
+          "net_pnl": -8.46,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002150",
+          "name": "正泰电源",
+          "entry_date": "2026-11-13",
+          "signal_date": "2026-11-12",
+          "entry_price": 20.62,
+          "entry_fee": 5.04,
+          "qty": 200,
+          "stop": 19.5,
+          "last_price": 19.85,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-16",
+          "exit_price": 19.75,
+          "exit_fee": 7.01,
+          "net_pnl": -186.05,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "600977",
+          "name": "中国电影",
+          "entry_date": "2026-10-26",
+          "signal_date": "2026-10-23",
+          "entry_price": 14.66,
+          "entry_fee": 5.06,
+          "qty": 400,
+          "stop": 14.18,
+          "last_price": 15.33,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-18",
+          "exit_price": 15.29,
+          "exit_fee": 8.12,
+          "net_pnl": 238.82,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002351",
+          "name": "漫步者",
+          "entry_date": "2026-11-05",
+          "signal_date": "2026-11-04",
+          "entry_price": 11.67,
+          "entry_fee": 5.04,
+          "qty": 300,
+          "stop": 10.99,
+          "last_price": 11.96,
+          "ma_exit": true,
+          "rule": "volume_breakout",
+          "exit_date": "2026-11-19",
+          "exit_price": 11.95,
+          "exit_fee": 6.83,
+          "net_pnl": 72.13,
+          "reason": "ma10_exit_next_open"
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-10-20",
+          "equity": 100364.88,
+          "cash": 87409.88,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100119.88,
+          "cash": 87409.88,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99420.74,
+          "cash": 86253.74,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99477.39,
+          "cash": 84337.39,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99727.89,
+          "cash": 81279.89,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99149.89,
+          "cash": 81279.89,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99346.0,
+          "cash": 85576.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99362.0,
+          "cash": 85576.0,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 98923.15,
+          "cash": 83717.15,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99105.15,
+          "cash": 83717.15,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 98811.62,
+          "cash": 85811.62,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-04",
+          "equity": 98768.62,
+          "cash": 85811.62,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-05",
+          "equity": 99167.61,
+          "cash": 86156.61,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-06",
+          "equity": 99177.61,
+          "cash": 86156.61,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 98922.61,
+          "cash": 86156.61,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-10",
+          "equity": 99337.61,
+          "cash": 86156.61,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-11",
+          "equity": 99214.61,
+          "cash": 86156.61,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-12",
+          "equity": 98846.61,
+          "cash": 86156.61,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-13",
+          "equity": 99269.14,
+          "cash": 84825.14,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-16",
+          "equity": 99168.1,
+          "cash": 85274.1,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-17",
+          "equity": 98621.1,
+          "cash": 85274.1,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-18",
+          "equity": 98447.95,
+          "cash": 88663.95,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-19",
+          "equity": 98449.09,
+          "cash": 89086.09,
+          "positions": 3
+        }
+      ],
+      "rejected": {
+        "最多3仓": 647,
+        "预算或风险不足最小买入股数": 2
+      }
+    },
+    "double_cost": {
+      "exit_ma": 10,
+      "stop_mode": "structure",
+      "confirm_bars": 1,
+      "model": "daily_bar_exploratory_v1",
+      "stress": 2,
+      "return_pct": -1.520940000000004,
+      "max_close_drawdown_pct": 1.8573142411698222,
+      "closed_trades": 13,
+      "winning_trades": 2,
+      "open_positions": [
+        {
+          "code": "603014",
+          "name": "威高血净",
+          "entry_date": "2026-11-16",
+          "signal_date": "2026-11-13",
+          "entry_price": 34.9,
+          "entry_fee": 10.07,
+          "qty": 100,
+          "stop": 33.58,
+          "last_price": 34.38,
+          "ma_exit": true,
+          "rule": "pullback_reclaim"
+        },
+        {
+          "code": "600801",
+          "name": "华新建材",
+          "entry_date": "2026-11-18",
+          "signal_date": "2026-11-17",
+          "entry_price": 27.14,
+          "entry_fee": 10.05,
+          "qty": 100,
+          "stop": 25.84,
+          "last_price": 27.61,
+          "ma_exit": false,
+          "rule": "pullback_reclaim"
+        },
+        {
+          "code": "600566",
+          "name": "济川药业",
+          "entry_date": "2026-11-19",
+          "signal_date": "2026-11-18",
+          "entry_price": 31.52,
+          "entry_fee": 10.06,
+          "qty": 100,
+          "stop": 29.79,
+          "last_price": 31.64,
+          "ma_exit": false,
+          "rule": "volume_breakout"
+        }
+      ],
+      "trades": [
+        {
+          "code": "603500",
+          "name": "祥和实业",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 10.78,
+          "entry_fee": 10.09,
+          "qty": 400,
+          "stop": 10.24,
+          "last_price": 10.54,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-22",
+          "exit_price": 10.22,
+          "exit_fee": 14.17,
+          "net_pnl": -248.26,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "301608",
+          "name": "博实结",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 53.36,
+          "entry_fee": 10.11,
+          "qty": 100,
+          "stop": 51.31,
+          "last_price": 53.17,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-23",
+          "exit_price": 52.58,
+          "exit_fee": 15.36,
+          "net_pnl": -103.47,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "600573",
+          "name": "惠泉啤酒",
+          "entry_date": "2026-10-22",
+          "signal_date": "2026-10-21",
+          "entry_price": 13.1,
+          "entry_fee": 10.08,
+          "qty": 300,
+          "stop": 12.52,
+          "last_price": 12.44,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-23",
+          "exit_price": 12.42,
+          "exit_fee": 13.8,
+          "net_pnl": -227.88,
+          "reason": "gap_stop"
+        },
+        {
+          "code": "603883",
+          "name": "老百姓",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 14.67,
+          "entry_fee": 10.06,
+          "qty": 200,
+          "stop": 13.86,
+          "last_price": 14.31,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-26",
+          "exit_price": 14.08,
+          "exit_fee": 12.87,
+          "net_pnl": -140.93,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "entry_date": "2026-10-23",
+          "signal_date": "2026-10-22",
+          "entry_price": 12.68,
+          "entry_fee": 10.13,
+          "qty": 500,
+          "stop": 12.3,
+          "last_price": 12.6,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-28",
+          "exit_price": 12.61,
+          "exit_fee": 16.43,
+          "net_pnl": -61.56,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "000400",
+          "name": "许继电气",
+          "entry_date": "2026-10-23",
+          "signal_date": "2026-10-22",
+          "entry_price": 22.61,
+          "entry_fee": 10.09,
+          "qty": 200,
+          "stop": 21.81,
+          "last_price": 22.2,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-30",
+          "exit_price": 21.41,
+          "exit_fee": 14.37,
+          "net_pnl": -264.46,
+          "reason": "gap_stop"
+        },
+        {
+          "code": "603767",
+          "name": "中马传动",
+          "entry_date": "2026-10-28",
+          "signal_date": "2026-10-27",
+          "entry_price": 16.32,
+          "entry_fee": 10.07,
+          "qty": 200,
+          "stop": 15.51,
+          "last_price": 16.73,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-30",
+          "exit_price": 15.49,
+          "exit_fee": 13.16,
+          "net_pnl": -189.23,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "601328",
+          "name": "交通银行",
+          "entry_date": "2026-10-30",
+          "signal_date": "2026-10-29",
+          "entry_price": 8.57,
+          "entry_fee": 10.09,
+          "qty": 500,
+          "stop": 8.19,
+          "last_price": 8.57,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-03",
+          "exit_price": 8.17,
+          "exit_fee": 14.17,
+          "net_pnl": -224.26,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "601857",
+          "name": "中国石油",
+          "entry_date": "2026-10-30",
+          "signal_date": "2026-10-29",
+          "entry_price": 13.62,
+          "entry_fee": 10.05,
+          "qty": 200,
+          "stop": 12.87,
+          "last_price": 13.62,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-05",
+          "exit_price": 12.85,
+          "exit_fee": 12.62,
+          "net_pnl": -176.67,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "002315",
+          "name": "焦点科技",
+          "entry_date": "2026-11-03",
+          "signal_date": "2026-11-02",
+          "entry_price": 28.02,
+          "entry_fee": 10.06,
+          "qty": 100,
+          "stop": 26.26,
+          "last_price": 28.09,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-13",
+          "exit_price": 28.03,
+          "exit_fee": 12.86,
+          "net_pnl": -21.92,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002150",
+          "name": "正泰电源",
+          "entry_date": "2026-11-13",
+          "signal_date": "2026-11-12",
+          "entry_price": 20.63,
+          "entry_fee": 10.04,
+          "qty": 100,
+          "stop": 19.5,
+          "last_price": 19.85,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-16",
+          "exit_price": 19.74,
+          "exit_fee": 12.01,
+          "net_pnl": -111.05,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "600977",
+          "name": "中国电影",
+          "entry_date": "2026-10-26",
+          "signal_date": "2026-10-23",
+          "entry_price": 14.67,
+          "entry_fee": 10.12,
+          "qty": 400,
+          "stop": 14.18,
+          "last_price": 15.33,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-18",
+          "exit_price": 15.28,
+          "exit_fee": 16.23,
+          "net_pnl": 217.65,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002351",
+          "name": "漫步者",
+          "entry_date": "2026-11-05",
+          "signal_date": "2026-11-04",
+          "entry_price": 11.68,
+          "entry_fee": 10.07,
+          "qty": 300,
+          "stop": 10.99,
+          "last_price": 11.96,
+          "ma_exit": true,
+          "rule": "volume_breakout",
+          "exit_date": "2026-11-19",
+          "exit_price": 11.94,
+          "exit_fee": 13.65,
+          "net_pnl": 54.28,
+          "reason": "ma10_exit_next_open"
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-10-20",
+          "equity": 100342.74,
+          "cash": 87387.74,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 100097.74,
+          "cash": 87387.74,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99444.49,
+          "cash": 87521.49,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99449.11,
+          "cash": 85594.11,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99642.12,
+          "cash": 82519.12,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99129.12,
+          "cash": 82519.12,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99303.62,
+          "cash": 85533.62,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99319.62,
+          "cash": 85533.62,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 98815.95,
+          "cash": 85856.95,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 98985.95,
+          "cash": 85856.95,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 98715.72,
+          "cash": 87115.72,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-04",
+          "equity": 98710.72,
+          "cash": 87115.72,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-05",
+          "equity": 99170.03,
+          "cash": 86159.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-06",
+          "equity": 99180.03,
+          "cash": 86159.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 98925.03,
+          "cash": 86159.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-10",
+          "equity": 99340.03,
+          "cash": 86159.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-11",
+          "equity": 99217.03,
+          "cash": 86159.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-12",
+          "equity": 98849.03,
+          "cash": 86159.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-13",
+          "equity": 99335.13,
+          "cash": 86876.13,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-16",
+          "equity": 99232.05,
+          "cash": 85338.05,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-17",
+          "equity": 98685.05,
+          "cash": 85338.05,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-18",
+          "equity": 98493.77,
+          "cash": 88709.77,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-19",
+          "equity": 98479.06,
+          "cash": 89116.06,
+          "positions": 3
+        }
+      ],
+      "rejected": {
+        "最多3仓": 647,
+        "预算或风险不足最小买入股数": 2
+      }
+    },
+    "hindsight_only": {
+      "exit_ma": 10,
+      "stop_mode": "structure",
+      "confirm_bars": 1,
+      "model": "daily_bar_exploratory_v1",
+      "stress": 1,
+      "return_pct": -0.22075999999999762,
+      "max_close_drawdown_pct": 1.0676600000000034,
+      "closed_trades": 10,
+      "winning_trades": 1,
+      "open_positions": [
+        {
+          "code": "002293",
+          "name": "罗莱生活",
+          "entry_date": "2026-11-12",
+          "signal_date": "2026-11-11",
+          "entry_price": 12.41,
+          "entry_fee": 5.1,
+          "qty": 800,
+          "stop": 12.13,
+          "last_price": 13.24,
+          "ma_exit": false,
+          "rule": "pullback_reclaim"
+        },
+        {
+          "code": "603014",
+          "name": "威高血净",
+          "entry_date": "2026-11-13",
+          "signal_date": "2026-11-12",
+          "entry_price": 34.19,
+          "entry_fee": 5.07,
+          "qty": 200,
+          "stop": 33.05,
+          "last_price": 34.38,
+          "ma_exit": true,
+          "rule": "pullback_reclaim"
+        },
+        {
+          "code": "300498",
+          "name": "温氏股份",
+          "entry_date": "2026-11-16",
+          "signal_date": "2026-11-13",
+          "entry_price": 17.21,
+          "entry_fee": 5.05,
+          "qty": 300,
+          "stop": 16.61,
+          "last_price": 17.54,
+          "ma_exit": false,
+          "rule": "pullback_reclaim"
+        }
+      ],
+      "trades": [
+        {
+          "code": "301395",
+          "name": "仁信新材",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 12.72,
+          "entry_fee": 5.05,
+          "qty": 400,
+          "stop": 12.25,
+          "last_price": 12.53,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-22",
+          "exit_price": 12.49,
+          "exit_fee": 7.55,
+          "net_pnl": -104.6,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002032",
+          "name": "苏 泊 尔",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 43.33,
+          "entry_fee": 5.04,
+          "qty": 100,
+          "stop": 41.58,
+          "last_price": 41.78,
+          "ma_exit": true,
+          "rule": "volume_breakout",
+          "exit_date": "2026-10-26",
+          "exit_price": 41.98,
+          "exit_fee": 7.14,
+          "net_pnl": -147.18,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "603345",
+          "name": "安井食品",
+          "entry_date": "2026-10-26",
+          "signal_date": "2026-10-23",
+          "entry_price": 82.29,
+          "entry_fee": 5.08,
+          "qty": 100,
+          "stop": 81.07,
+          "last_price": 82.3,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-10-27",
+          "exit_price": 81.06,
+          "exit_fee": 9.13,
+          "net_pnl": -137.21,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "000400",
+          "name": "许继电气",
+          "entry_date": "2026-10-20",
+          "signal_date": "2026-10-19",
+          "entry_price": 22.72,
+          "entry_fee": 5.05,
+          "qty": 200,
+          "stop": 21.55,
+          "last_price": 22.2,
+          "ma_exit": true,
+          "rule": "volume_breakout",
+          "exit_date": "2026-10-30",
+          "exit_price": 21.42,
+          "exit_fee": 7.18,
+          "net_pnl": -272.23,
+          "reason": "gap_stop"
+        },
+        {
+          "code": "300498",
+          "name": "温氏股份",
+          "entry_date": "2026-10-22",
+          "signal_date": "2026-10-21",
+          "entry_price": 15.81,
+          "entry_fee": 5.03,
+          "qty": 200,
+          "stop": 15.0,
+          "last_price": 15.67,
+          "ma_exit": true,
+          "rule": "volume_breakout",
+          "exit_date": "2026-11-02",
+          "exit_price": 15.59,
+          "exit_fee": 6.59,
+          "net_pnl": -55.62,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "600025",
+          "name": "华能水电",
+          "entry_date": "2026-10-30",
+          "signal_date": "2026-10-29",
+          "entry_price": 10.72,
+          "entry_fee": 5.05,
+          "qty": 500,
+          "stop": 10.31,
+          "last_price": 10.54,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-06",
+          "exit_price": 10.5,
+          "exit_fee": 7.68,
+          "net_pnl": -122.73,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002293",
+          "name": "罗莱生活",
+          "entry_date": "2026-11-02",
+          "signal_date": "2026-10-30",
+          "entry_price": 12.1,
+          "entry_fee": 5.05,
+          "qty": 400,
+          "stop": 11.62,
+          "last_price": 12.13,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-10",
+          "exit_price": 12.13,
+          "exit_fee": 7.47,
+          "net_pnl": -0.52,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "603369",
+          "name": "今世缘",
+          "entry_date": "2026-10-27",
+          "signal_date": "2026-10-26",
+          "entry_price": 31.25,
+          "entry_fee": 5.03,
+          "qty": 100,
+          "stop": 29.27,
+          "last_price": 32.58,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-12",
+          "exit_price": 32.49,
+          "exit_fee": 6.66,
+          "net_pnl": 112.31,
+          "reason": "ma10_exit_next_open"
+        },
+        {
+          "code": "002867",
+          "name": "周大生",
+          "entry_date": "2026-11-10",
+          "signal_date": "2026-11-09",
+          "entry_price": 11.79,
+          "entry_fee": 5.04,
+          "qty": 300,
+          "stop": 11.15,
+          "last_price": 11.47,
+          "ma_exit": false,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-12",
+          "exit_price": 11.14,
+          "exit_fee": 6.7,
+          "net_pnl": -206.74,
+          "reason": "daily_stop_proxy"
+        },
+        {
+          "code": "603658",
+          "name": "安图生物",
+          "entry_date": "2026-11-06",
+          "signal_date": "2026-11-05",
+          "entry_price": 39.45,
+          "entry_fee": 5.04,
+          "qty": 100,
+          "stop": 38.01,
+          "last_price": 38.22,
+          "ma_exit": true,
+          "rule": "pullback_reclaim",
+          "exit_date": "2026-11-13",
+          "exit_price": 38.85,
+          "exit_fee": 6.98,
+          "net_pnl": -72.02,
+          "reason": "ma10_exit_next_open"
+        }
+      ],
+      "curve": [
+        {
+          "date": "2026-10-20",
+          "equity": 99807.86,
+          "cash": 86019.86,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-21",
+          "equity": 99702.86,
+          "cash": 86019.86,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-22",
+          "equity": 99837.28,
+          "cash": 87841.28,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-23",
+          "equity": 99755.28,
+          "cash": 87841.28,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-26",
+          "equity": 99814.06,
+          "cash": 83798.06,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-27",
+          "equity": 99600.9,
+          "cash": 88764.9,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-28",
+          "equity": 99442.9,
+          "cash": 88764.9,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-29",
+          "equity": 99507.9,
+          "cash": 88764.9,
+          "positions": 3
+        },
+        {
+          "date": "2026-10-30",
+          "equity": 99515.67,
+          "cash": 87676.67,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-02",
+          "equity": 99619.03,
+          "cash": 85943.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-03",
+          "equity": 99753.03,
+          "cash": 85943.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-04",
+          "equity": 99645.03,
+          "cash": 85943.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-05",
+          "equity": 99653.03,
+          "cash": 85943.03,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-06",
+          "equity": 99571.31,
+          "cash": 87235.31,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 99437.31,
+          "cash": 87235.31,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-10",
+          "equity": 99327.8,
+          "cash": 88537.8,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-11",
+          "equity": 99141.8,
+          "cash": 88537.8,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-12",
+          "equity": 98932.34,
+          "cash": 85182.34,
+          "positions": 2
+        },
+        {
+          "date": "2026-11-13",
+          "equity": 99113.29,
+          "cash": 82217.29,
+          "positions": 2
+        },
+        {
+          "date": "2026-11-16",
+          "equity": 99400.24,
+          "cash": 77049.24,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-17",
+          "equity": 99611.24,
+          "cash": 77049.24,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-18",
+          "equity": 99617.24,
+          "cash": 77049.24,
+          "positions": 3
+        },
+        {
+          "date": "2026-11-19",
+          "equity": 99779.24,
+          "cash": 77049.24,
+          "positions": 3
+        }
+      ],
+      "rejected": {
+        "预算或风险不足最小买入股数": 7,
+        "最多3仓": 94
+      },
+      "warning": "仅用于诊断：使用月末已知151只趋势股白名单，包含未来信息，禁止作为策略验证或发布依据。"
+    },
+    "fixed_fill_double_cost": {
+      "return_pct": -1.8087799999999987,
+      "extra_cost": 257.87
+    }
+  },
+  "limitations": [
+    "当前证券快照存在幸存者及历史ST偏差；未复权数据不能完整还原公司行动。",
+    "候选研究来自本月结果归纳；前后半段均已接触，不是严格未见数据验证。",
+    "入场覆盖使用次日开盘代理、日线一字线与成交量保守排除，没有盘口或逐笔成交。",
+    "5日统计为固定持有标签，含每边0.15%成本及1分滑点，不是账户收益。",
+    "组合为日线近似模型，最多3仓、单票最多1万元、每笔计划风险0.25%，T+1，原均线退出与止损；不代表已运行。",
+    "本次新入口仍未通过检验，execution_enabled=False，不修改既有账户或发布自动买入。"
+  ]
+}
