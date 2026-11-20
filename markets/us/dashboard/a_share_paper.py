@@ -1,5 +1,6 @@
 """A-share candidate-plan paper trading. Independent cash account, T+1 and no shorting."""
 from concurrent.futures import ThreadPoolExecutor
+from collections import Counter
 from contextlib import contextmanager
 from copy import deepcopy
 from datetime import datetime
@@ -29,8 +30,9 @@ if str(RADAR_PATH.parent) not in sys.path:sys.path.append(str(RADAR_PATH.parent)
 import continuation as C
 import trend_reclaim as T
 import oversold_reversal as M
+from stock_setups import PLAN_REVISION as SETUP_PLAN_REVISION
 ENTRY_RULES={'continuation':C,'trend_reclaim':T,'oversold_reversal':M}
-RADAR_ARCHIVE_FIELDS=('signal_date','generated_at','market_pass','market_label','strategy_candidates',
+RADAR_ARCHIVE_FIELDS=('signal_date','generated_at','market_pass','market_label','strategy_candidates','plan_revision',
     'strategy_version','data_ready','entry_revision','continuation_enabled','continuation_market_pass',
     'trend_reclaim_enabled','trend_reclaim_market_pass','oversold_reversal_enabled','oversold_reversal_market_pass','oversold_reversal_paper_trial')
 
@@ -72,6 +74,20 @@ def load_radar():
     data=json.loads(RADAR_PATH.read_text()) if RADAR_PATH.exists() else {}
     if not isinstance(data,dict):raise ValueError('候选名单结构无效')
     return data
+
+
+def radar_diagnostics(radar):
+    # Diagnose the actual paper source, not the separate full-market research radar.
+    rows=radar.get('strategy_candidates',[])+radar.get('watch_pool',[])
+    legacy=[r for r in rows if not (r.get('trade_plan') or {}).get('entry_mode')]
+    confirmed=[r for r in legacy if r.get('confirmed_rules')]
+    ready=[r for r in confirmed if (r.get('trade_plan') or {}).get('plan_ready')]
+    reasons=Counter(reason for r in confirmed for reason in
+                    dict.fromkeys((r.get('trade_plan') or {}).get('rejection_reasons',[])))
+    return dict(universe=radar.get('universe_size'),scanned=radar.get('scanned'),
+                excluded=radar.get('excluded_count'),confirmed=len(confirmed),
+                ready_before_market=len(ready),market_blocked=len(ready) if radar.get('market_pass') is False else 0,
+                plan_rejections=dict(reasons))
 
 
 def refresh_radar():
@@ -176,6 +192,7 @@ def approved_plans(radar,previous_day,now):
                 target=s['take_profit'],signal_close=row['close'],key=previous_day+':'+code))
             result[-1].update(strategy_version=plan.get('strategy_version',row.get('strategy_version','legacy-ma20-v1')),
                               strategy_rule=plan.get('strategy_rule','legacy'))
+            if plan.get('plan_revision'):result[-1]['plan_revision']=plan['plan_revision']
             if module:result[-1].update(entry_mode=mode,atr14=plan['atr14'],budget_factor=getattr(module,'BUDGET_FACTOR',.5),risk_fraction=module.RISK_FRACTION)
             if mode=='trend_reclaim':result[-1].update(center=plan['center'],exit_ma=20)
             if mode=='oversold_reversal':result[-1].update(reference_low=plan['reference_low'])
@@ -390,16 +407,16 @@ class ASharePaperRunner:
         except (ValueError,OSError):radar={}
         if not session(now):
             retry_due=s.get('scan_error') and now>=s.get('scan_retry_after',0)
-            revision_due=(s.get('scan_entry_revision')!=scan_revision() or s.get('scan_continuation_enabled') is not C.RELEASED or s.get('scan_reversal_enabled',False)!=(M.RELEASED or M.PAPER_TRIAL)) and not s.get('scan_error')
+            revision_due=(s.get('scan_entry_revision')!=scan_revision() or s.get('scan_plan_revision')!=SETUP_PLAN_REVISION or s.get('scan_continuation_enabled') is not C.RELEASED or s.get('scan_reversal_enabled',False)!=(M.RELEASED or M.PAPER_TRIAL)) and not s.get('scan_error')
             if s['enabled'] and local.weekday()<5 and local.hour*60+local.minute>=910 and (s['scan_attempt_day']!=day(now) or retry_due or revision_due):
                 with self.account.transaction() as state:state['scan_attempt_day']=day(now)
                 try:
-                    if radar.get('signal_date')!=day(now) or radar.get('data_ready') is False or radar.get('entry_revision')!=scan_revision() or radar.get('continuation_enabled') is not C.RELEASED or radar.get('oversold_reversal_enabled',False)!=(M.RELEASED or M.PAPER_TRIAL):radar=self.refresh()
+                    if radar.get('signal_date')!=day(now) or radar.get('data_ready') is False or radar.get('entry_revision')!=scan_revision() or radar.get('plan_revision')!=SETUP_PLAN_REVISION or radar.get('continuation_enabled') is not C.RELEASED or radar.get('oversold_reversal_enabled',False)!=(M.RELEASED or M.PAPER_TRIAL):radar=self.refresh()
                     effective=now if explicit_now else milliseconds()
                     approved_plans(radar,day(effective),effective+1)
                     with self.account.transaction() as state:
                         snapshot={k:deepcopy(radar.get(k)) for k in RADAR_ARCHIVE_FIELDS}
-                        state.update(candidate_snapshot=snapshot,plan_date=radar.get('signal_date'),scan_error=None,scan_retry_after=0,scan_entry_revision=scan_revision(),scan_continuation_enabled=C.RELEASED,scan_reversal_enabled=M.RELEASED or M.PAPER_TRIAL,note='盘后候选已归档，等待下一交易日计划到价/反转确认')
+                        state.update(candidate_snapshot=snapshot,plan_date=radar.get('signal_date'),scan_error=None,scan_retry_after=0,scan_entry_revision=scan_revision(),scan_plan_revision=SETUP_PLAN_REVISION,scan_continuation_enabled=C.RELEASED,scan_reversal_enabled=M.RELEASED or M.PAPER_TRIAL,note='盘后候选已归档，等待下一交易日计划到价/反转确认')
                 except Exception as exc:
                     with self.account.transaction() as state:
                         state.update(scan_error=str(exc)[:180],scan_retry_after=now+15*60*1000)
@@ -431,12 +448,14 @@ class ASharePaperRunner:
         try:
             r=self.load_radar();s['source_plan_date']=r.get('signal_date');s['source_candidate_count']=len(r.get('strategy_candidates',[]));s['market_label']=r.get('market_label')
             s['source_data_ready']=r.get('data_ready');s['source_exclusion_summary']=r.get('exclusion_summary',{})
+            s['source_diagnostics']=radar_diagnostics(r)
             s['source_continuation_count']=r.get('continuation_count',0);s['source_entry_revision']=r.get('entry_revision')
             s['source_continuation_enabled']=r.get('continuation_enabled',False)
             s['source_reversal_count']=r.get('reversal_count',0);s['source_reversal_enabled']=r.get('oversold_reversal_enabled',False)
             s['source_reversal_paper_trial']=r.get('oversold_reversal_paper_trial',False)
         except (ValueError,OSError,TypeError):s['source_plan_date']=None;s['source_candidate_count']=0
         return dict(s,runner_error=self.error,runner_alive=bool(self.thread and self.thread.is_alive()),runner_last_tick_at=self.last_tick_at,
+                    active_plan_revision=SETUP_PLAN_REVISION,
                     active_entry_revision=M.active_version() if M.RELEASED or M.PAPER_TRIAL else T.ENTRY_REVISION if T.RELEASED else C.ENTRY_REVISION if C.RELEASED else 'a-setups-v2',
                     continuation_released=C.RELEASED,trend_reclaim_released=T.RELEASED,oversold_reversal_released=M.RELEASED,oversold_reversal_paper_trial=M.PAPER_TRIAL)
 

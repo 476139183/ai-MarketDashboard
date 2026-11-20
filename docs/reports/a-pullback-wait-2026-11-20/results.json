@@ -1,0 +1,234 @@
+{
+  "plan_revision": "a-pullback-wait-v1",
+  "cases": [
+    {
+      "code": "002242",
+      "name": "九阳股份",
+      "old_plan_ready": false,
+      "new_plan_ready": true,
+      "selected_rule": "trend_pullback",
+      "warnings": [
+        "昨日收盘距离回踩中心超过5%，等待回踩；区间外不买入"
+      ],
+      "reasons": [],
+      "levels": {
+        "ideal_buy": 27.86,
+        "secondary_buy": 27.6,
+        "stop_loss": 24.35,
+        "take_profit": 34.47,
+        "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+      }
+    },
+    {
+      "code": "600519",
+      "name": "贵州茅台",
+      "old_plan_ready": false,
+      "new_plan_ready": false,
+      "selected_rule": "trend_pullback",
+      "warnings": [],
+      "reasons": [
+        "区间上沿至目标的毛盈亏比不足1.5"
+      ],
+      "levels": {
+        "ideal_buy": 1447.12,
+        "secondary_buy": 1432.73,
+        "stop_loss": 1391.31,
+        "take_profit": 1480.6,
+        "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+      }
+    },
+    {
+      "code": "600619",
+      "name": "海立股份",
+      "old_plan_ready": false,
+      "new_plan_ready": true,
+      "selected_rule": "trend_pullback",
+      "warnings": [
+        "昨日收盘距离回踩中心超过5%，等待回踩；区间外不买入"
+      ],
+      "reasons": [],
+      "levels": {
+        "ideal_buy": 12.61,
+        "secondary_buy": 12.5,
+        "stop_loss": 11.54,
+        "take_profit": 14.58,
+        "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+      }
+    },
+    {
+      "code": "600863",
+      "name": "华能蒙电",
+      "old_plan_ready": false,
+      "new_plan_ready": false,
+      "selected_rule": "trend_pullback",
+      "warnings": [
+        "昨日收盘距离回踩中心超过5%，等待回踩；区间外不买入"
+      ],
+      "reasons": [
+        "区间上沿至目标的毛盈亏比不足1.5"
+      ],
+      "levels": {
+        "ideal_buy": 5.4,
+        "secondary_buy": 5.36,
+        "stop_loss": 5.07,
+        "take_profit": 5.62,
+        "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+      }
+    },
+    {
+      "code": "688347",
+      "name": "华虹宏力",
+      "old_plan_ready": false,
+      "new_plan_ready": true,
+      "selected_rule": "trend_pullback",
+      "warnings": [
+        "昨日收盘距离回踩中心超过5%，等待回踩；区间外不买入"
+      ],
+      "reasons": [],
+      "levels": {
+        "ideal_buy": 174.0,
+        "secondary_buy": 172.28,
+        "stop_loss": 145.52,
+        "take_profit": 228.36,
+        "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+      }
+    },
+    {
+      "code": "688981",
+      "name": "中芯国际",
+      "old_plan_ready": false,
+      "new_plan_ready": true,
+      "selected_rule": "trend_pullback",
+      "warnings": [
+        "昨日收盘距离回踩中心超过5%，等待回踩；区间外不买入"
+      ],
+      "reasons": [],
+      "levels": {
+        "ideal_buy": 112.2,
+        "secondary_buy": 111.09,
+        "stop_loss": 102.3,
+        "take_profit": 130.32,
+        "note": "持续趋势回踩独立回踩区间；整分报价；1.5ATR保护与上方空间检查"
+      }
+    }
+  ],
+  "results": [
+    {
+      "sample": "development",
+      "old_summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "old_diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 8
+      },
+      "new_summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "new_diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 13,
+        "ready_plans": 13
+      }
+    },
+    {
+      "sample": "later",
+      "old_summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "old_diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      },
+      "new_summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "new_diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      }
+    },
+    {
+      "sample": "recent",
+      "old_summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-12",
+        "end": "2026-11-19",
+        "calendar_days": 8
+      },
+      "old_diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      },
+      "new_summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-12",
+        "end": "2026-11-19",
+        "calendar_days": 8
+      },
+      "new_diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      }
+    }
+  ]
+}

@@ -29,6 +29,8 @@
     el('fp-balance').textContent='账户余额 '+num(state.balance)+' CNY';
     el('fp-detail').href='/futures?'+new URLSearchParams({symbol:state.config.symbol,period:'day'});
     el('fp-pending').textContent=state.pending?'已观察日线信号，等待后续新报价':'无待成交信号';
+    const signal=state.signal_diagnostics;
+    if(signal&&!signal.error)el('fp-pending').textContent+=' · 完整日线 '+signal.history_date+' · SMA20 '+num(signal.sma20)+' / SMA60 '+num(signal.sma60)+' · '+(signal.side===1?'偏多':signal.side===-1?'偏空':'空仓')+' · 检查于 '+stamp(signal.observed_at);
     el('fp-position-note').textContent=state.valuation_fresh?'按最后收到的源最新价估值；非盘口成交保证':'报价过期，保留上次估值；等待有效日盘新报价';
     el('fp-positions').innerHTML=state.positions.map(p=>`<tr><td>${esc(p.symbol)}</td><td>${p.side===1?'做多':'做空'} · ${num(p.lots)} 手</td><td>${num(p.entry_price)}<small>${num(p.last_price)}</small></td><td>${num(p.stop)}</td><td>${num(p.unrealized_pnl)}</td><td>${stamp(p.entry_at)}</td><td>${stamp(p.quote_at)}</td></tr>`).join('');
     el('fp-positions-empty').hidden=state.positions.length>0;

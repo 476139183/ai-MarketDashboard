@@ -1,7 +1,7 @@
 """Independent CNY forward simulator for domestic month contracts; no broker calls."""
 from contextlib import contextmanager
 from copy import deepcopy
-from datetime import datetime
+from datetime import date, datetime, timedelta
 import json
 import math
 from pathlib import Path
@@ -17,6 +17,28 @@ VERSION = 'cn-futures-paper-sma-v1'
 INITIAL_BALANCE = 100000.0
 CONFIG_KEYS = {'symbol','strategy','lots','multiplier','tick_size','margin_rate',
                'max_margin_fraction','fee_fixed','fee_rate','close_today_factor','slippage_ticks'}
+
+# Verified 2026 daytime closures; weekends remain closed even on government make-up workdays.
+# SHFE: https://www.shfe.cn/publicnotice/notice/202512/t20251217_829805.html
+# INE: https://www.ine.cn/services/calenderandholidays/holiday/
+# DCE: 大商所发〔2025〕437号 (2026年部分节假日休市安排).
+HOLIDAYS_2026 = (('01-01','01-03'),('02-15','02-23'),('04-04','04-06'),
+                 ('05-01','05-05'),('06-19','06-21'),('09-25','09-27'),('10-01','10-07'))
+
+
+def closed_day(dt):
+    return dt.weekday()>=5 or (dt.year==2026 and any(a<=dt.strftime('%m-%d')<=b for a,b in HOLIDAYS_2026))
+
+
+def previous_session(stamp):
+    today=datetime.fromtimestamp(stamp/1000,F.BJ).date()
+    if today.year!=2026:raise ValueError('期货交易日历未核验该年份，暂停新信号')
+    if closed_day(today):raise ValueError('当天不是期货日盘交易日')
+    previous=today-timedelta(days=1)
+    while closed_day(previous):previous-=timedelta(days=1)
+    # Jan 5, 2026 anchors to the explicitly verified Dec 31, 2025 session.
+    if previous<date(2025,12,31):raise ValueError('期货交易日历历史边界未核验')
+    return previous.isoformat()
 
 
 def milliseconds():return int(time.time()*1000)
@@ -40,7 +62,7 @@ def day(stamp):return datetime.fromtimestamp(stamp/1000,F.BJ).date().isoformat()
 def in_day_session(stamp):
     dt=datetime.fromtimestamp(stamp/1000,F.BJ)
     seconds=dt.hour*3600+dt.minute*60+dt.second
-    return dt.weekday()<5 and any(a<=seconds<b for a,b in ((9*3600,10*3600+15*60),
+    return not closed_day(dt) and any(a<=seconds<b for a,b in ((9*3600,10*3600+15*60),
            (10*3600+30*60,11*3600+30*60),(13*3600+30*60,15*3600)))
 
 
@@ -59,10 +81,14 @@ def quote_valid(packet,cfg,now):
 
 def daily_signal(packet,now):
     bars=packet.get('candles') or []
-    # A current source day anchors the preceding bars; old daily data cannot open a new position.
-    if not bars or day(bars[-1]['time'])!=day(now):
-        raise ValueError('等待源当日日线，不能用旧日线补造新信号')
+    expected=previous_session(now)
+    # Some providers publish only completed sessions. A forming candle is optional;
+    # yesterday's verified session is mandatory, and today's price still comes from a fresh quote.
+    if not bars or any(day(b['time'])>day(now) for b in bars):
+        raise ValueError('期货日线为空或含未来数据')
     history=[b for b in bars if b.get('complete') and day(b['time'])<day(now)]
+    if not history or day(history[-1]['time'])!=expected:
+        raise ValueError('等待上一交易日完整日线：'+expected+'，拒绝滞后历史')
     if len(history)<60:raise ValueError('至少需要60根此前完整日线')
     last_time=0
     for bar in history:
@@ -72,7 +98,9 @@ def daily_signal(packet,now):
         last_time=bar['time']
     distance=2*B.atr(history)
     if not finite(distance) or distance<=0:raise ValueError('ATR无效，暂不生成信号')
-    return dict(side=B.signal('sma',history,0),signal_at=history[-1]['time'],distance=distance)
+    return dict(side=B.signal('sma',history,0),signal_at=history[-1]['time'],distance=distance,
+                history_date=expected,sma20=sum(b['close'] for b in history[-20:])/20,
+                sma60=sum(b['close'] for b in history[-60:])/60)
 
 
 class FuturesPaperAccount:
@@ -177,9 +205,12 @@ class FuturesPaperAccount:
             q=packet['quote'];ts=q['quote_at'];price=q['price']
             if ts<=state['last_quote_at']:return
             state['last_quote_at']=ts;state['error']=None
-            try:signal=daily_signal(packet,now)
+            try:
+                signal=daily_signal(packet,now)
+                state['signal_diagnostics']=dict(signal,observed_at=now)
             except (ValueError,KeyError,TypeError,OverflowError) as exc:
                 signal=None;state['error']=str(exc)[:180];state['pending']=None
+                state['signal_diagnostics']=dict(error=state['error'],observed_at=now)
             if state['positions']:
                 p=state['positions'][0];p.update(last_price=price,quote_at=ts)
                 totals=self.totals(state)

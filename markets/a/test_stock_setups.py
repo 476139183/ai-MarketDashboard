@@ -17,6 +17,18 @@ def rising():
 
 
 class StockSetupTests(unittest.TestCase):
+    def test_distant_signal_close_keeps_valid_pullback_plan_but_warns_to_wait(self):
+        rows=rising();rows[-1].update(open=14.,close=14.1,high=14.15,low=13.9,volume=2000.)
+        plan=S.build_setup_plan(rows,'trend_pullback')
+        self.assertGreater(rows[-1]['close'],plan['pivot']*1.05)
+        self.assertGreaterEqual(plan['risk_reward'],1.5)
+        self.assertTrue(plan['plan_ready'],plan['rejection_reasons'])
+        self.assertTrue(plan['chase_risk'])
+        self.assertIn('等待回踩','；'.join(plan['warnings']))
+        self.assertEqual(plan['plan_revision'],S.PLAN_REVISION)
+        self.assertTrue(all(c['status']!='不满足' for c in plan['checklist']))
+        self.assertLess(plan['sniper']['ideal_buy'],rows[-1]['close'])
+
     def test_sustained_uptrend_can_qualify_without_ma20_cross(self):
         rows=rising();out=S.evaluate_setups(rows)
         self.assertIn('trend_pullback',[p['rule'] for p in out])

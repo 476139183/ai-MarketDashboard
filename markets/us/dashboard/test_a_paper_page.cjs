@@ -9,6 +9,11 @@ function page(){
  return{nodes,requests,settle:()=>new Promise(r=>setImmediate(r)),reply(i,data,ok=true){pending[i]({ok,json:async()=>data});}};
 }
 const state=(enabled=false)=>({market:'a_share',currency:'CNY',enabled,cash:100000,equity:100000,market_value:0,unrealized_pnl:0,positions:[],plans:[],trades:[],total_trades:0,winning_trades:0,realized_pnl:0,fees:0,valuation_fresh:true,source_candidate_count:0,config:{per_stock_budget:20000,max_positions:3,commission_rate:.0003,min_commission:5,transfer_rate:.00001,stamp_rate:.0005,slippage_ticks:1,exit_ma:10}});
+test('未开仓时展示热榜范围与计划大盘拦截，不能误称全市场无机会',async()=>{
+ const p=page(),s=state();s.source_diagnostics={universe:100,confirmed:2,ready_before_market:1,market_blocked:1,plan_rejections:{'距离回踩中心超过5%，不追高':1}};
+ p.reply(0,s);await p.settle();const text=p.nodes.get('ap-plan-status').textContent;
+ assert.match(text,/热榜.*100/);assert.match(text,/量价确认 2/);assert.match(text,/大盘拦截 1/);assert.match(text,/不追高.*1只/);
+});
 test('反转试运行必须显示验证状态及独立计划名称',async()=>{
  const p=page(),s=state();s.source_reversal_enabled=true;s.source_reversal_paper_trial=true;s.source_reversal_count=3;
  s.plans=[{name:'测试',code:'600000',entry_mode:'oversold_reversal',lower:10,upper:11}];

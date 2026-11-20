@@ -37,6 +37,12 @@
     if(state.source_data_ready===false)el('ap-plan-status').textContent+=' · 日线未就绪，等待重试';
     const exclusions=Object.entries(state.source_exclusion_summary||{}).map(([reason,count])=>reason+' '+count+'只');
     if(exclusions.length)el('ap-plan-status').textContent+=' · 排除：'+exclusions.join('；');
+    const diagnostic=state.source_diagnostics;
+    if(diagnostic){
+      el('ap-plan-status').textContent+=' · 最新盘后扫描：热榜池 '+(diagnostic.universe??'未知')+'只（全A研究雷达独立） · 量价确认 '+diagnostic.confirmed+'只 · 计划合格 '+diagnostic.ready_before_market+'只 · 大盘拦截 '+diagnostic.market_blocked+'只';
+      const rejected=Object.entries(diagnostic.plan_rejections||{}).map(([reason,count])=>reason+' '+count+'只');
+      if(rejected.length)el('ap-plan-status').textContent+=' · 计划未通过：'+rejected.join('；');
+    }
     el('ap-plans').innerHTML=(state.plans||[]).map(p=>`<span>${esc(p.name)} ${esc(p.code)} · ${p.entry_mode==='continuation'?'强势延续：等待放量突破后确认':modeName(p)+' '+num(p.lower)+'–'+num(p.upper)}</span>`).join('');
     el('ap-position-note').textContent=state.valuation_fresh?'上次报价估值；新买持仓T+1解锁后仍需符合策略才卖出':'报价过期或口径待核对，保留上次估值，未假定可卖出';
     el('ap-positions').innerHTML=state.positions.map(p=>`<tr><td>${esc(p.name)} ${esc(p.code)}<small>候选 ${esc(p.signal_date)} · ${modeName(p.plan)}</small></td><td>${num(p.shares)} / ${num(p.sellable_shares)}<small>${p.sellable_shares?'满足T+1，仍须策略触发':'T+1锁定'}</small></td><td>${num(p.entry_price)}<small>${num(p.last_price)}</small></td><td>${num(p.stop)}<small>${p.plan?.entry_mode==='continuation'?'结构跟随退出':num(p.target)}</small></td><td>${num(p.unrealized_pnl)}</td><td>${stamp(p.entry_at)}</td><td>${stamp(p.quote_at)}</td></tr>`).join('');

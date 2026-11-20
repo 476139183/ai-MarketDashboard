@@ -16,7 +16,7 @@ from hot_source import fetch_names, fetch_rank, now as hot_now
 from large_evaluate import market_above_ma20
 from large_universe import exclusion_reason, quotes
 from trade_plan import build_trade_plan
-from stock_setups import VERSION as STRATEGY_VERSION, LABELS as SETUP_LABELS, evaluate_setups, selected_setup
+from stock_setups import VERSION as STRATEGY_VERSION, PLAN_REVISION, LABELS as SETUP_LABELS, evaluate_setups, selected_setup
 import continuation as C
 import oversold_reversal as M
 
@@ -282,6 +282,7 @@ def scan(*, force_hot=False, workers=12, max_stocks=None, enable_continuation=No
         'observe_session': '下一交易日',
         'generated_at': now.isoformat(timespec='seconds'),
         'strategy_version': STRATEGY_VERSION,
+        'plan_revision': PLAN_REVISION,
         'entry_revision': M.active_version() if enable_reversal else C.ENTRY_REVISION,
         'continuation_enabled': enable_continuation,
         'continuation_market_pass': C.market_allowed(benchmark),

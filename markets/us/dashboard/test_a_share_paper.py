@@ -29,6 +29,48 @@ def observation(now=None,price=9.99,symbol='600000',**updates):
 
 
 class ASharePaperTests(unittest.TestCase):
+    def test_distant_yesterday_close_waits_for_in_band_quote_and_records_revision(self):
+        from test_stock_setups import rising
+        import stock_setups as S
+        rows=rising();rows[-1].update(open=14.,close=14.1,high=14.15,low=13.9,volume=2000.)
+        plan=S.build_setup_plan(rows,'trend_pullback');r=radar()
+        r['strategy_candidates'][0].update(close=14.1,plan_ready=plan['plan_ready'],trade_plan=plan)
+        self.account.set_enabled(True,now=clock())
+        for sec,price in [(0,14.1),(5,14.1),(10,plan['sniper']['ideal_buy']-.01),(15,plan['sniper']['ideal_buy']-.01)]:
+            pack=observation(clock(second=sec),price=price,previous_close=14.1,upper_limit=20.,lower_limit=5.)
+            pack['daily'][-1]['close']=14.1
+            self.account.step(r,self.calendar,{'600000':pack},now=clock(second=sec))
+            if sec<15:self.assertEqual(self.account.snapshot()['positions'],[])
+        position=self.account.snapshot()['positions'][0]
+        self.assertEqual(position['plan']['plan_revision'],S.PLAN_REVISION)
+        self.assertLessEqual(position['entry_price'],plan['sniper']['ideal_buy'])
+
+    def test_runner_refreshes_old_plan_revision_only_after_close(self):
+        old=dict(radar('2026-11-09'),entry_revision=P.scan_revision(),continuation_enabled=P.C.RELEASED,
+                 oversold_reversal_enabled=False,plan_revision='old')
+        calls=[];new=dict(old,plan_revision=P.SETUP_PLAN_REVISION)
+        self.account.set_enabled(True,now=clock(hour=16))
+        with self.account.transaction() as s:
+            s.update(scan_attempt_day='2026-11-09',scan_entry_revision=P.scan_revision(),
+                     scan_continuation_enabled=P.C.RELEASED,scan_reversal_enabled=False,scan_plan_revision='old')
+        runner=P.ASharePaperRunner(self.account,load_radar=lambda:old,refresh=lambda:calls.append(1) or new)
+        runner.tick(now=clock(hour=16));runner.tick(now=clock(hour=17))
+        state=self.account.snapshot()
+        self.assertEqual(calls,[1]);self.assertEqual(state['candidate_snapshot']['plan_revision'],P.SETUP_PLAN_REVISION)
+        self.assertEqual(state['scan_plan_revision'],P.SETUP_PLAN_REVISION)
+
+    def test_snapshot_explains_market_and_plan_blocks_without_turning_watch_into_orders(self):
+        source=radar();source.update(universe_size=100,scanned=95,excluded_count=52,market_pass=False,strategy_candidates=[])
+        source['watch_pool']=[dict(confirmed_rules=['trend_pullback'],plan_ready=True,trade_plan=dict(plan_ready=True)),
+            dict(confirmed_rules=['trend_pullback'],plan_ready=False,trade_plan=dict(rejection_reasons=['距离回踩中心超过5%，不追高'])),
+            dict(confirmed_rules=[],plan_ready=False,trade_plan=dict(summary='仅原始观察信号'))]
+        runner=P.ASharePaperRunner(self.account,load_radar=lambda:source)
+        state=runner.snapshot();d=state['source_diagnostics']
+        self.assertEqual(d['universe'],100);self.assertEqual(d['confirmed'],2)
+        self.assertEqual(d['ready_before_market'],1);self.assertEqual(d['market_blocked'],1)
+        self.assertEqual(d['plan_rejections']['距离回踩中心超过5%，不追高'],1)
+        self.assertEqual(state['plans'],[]);self.assertEqual(state['positions'],[])
+
     def test_reversal_requires_release_or_explicit_paper_trial_for_live_source(self):
         from test_oversold_reversal import setup_history,minutes
         r=radar();r.update(market_pass=False,oversold_reversal_enabled=True,oversold_reversal_market_pass=True)

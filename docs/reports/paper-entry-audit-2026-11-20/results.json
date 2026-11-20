@@ -1,0 +1,937 @@
+{
+  "samples": {
+    "development": {
+      "path": ".cache/a-paper-research/sample-latest.json.gz",
+      "sha256": "478f8fab497691af2b21a3d55fa31fd099fb22bfb63a1335773c18b2c0755228",
+      "start": "2026-08-04",
+      "end": "2026-11-03",
+      "symbols": 44,
+      "limitations": [
+        "请求最近3个月；本地日线/指数截止2026-11-03，公共分钟覆盖后实际区间2026-08-04至2026-11-03。",
+        "请求46票，可用44票；失败：无"
+      ]
+    },
+    "later": {
+      "path": ".cache/a-stock-holdout-nov04-11/sample.json.gz",
+      "sha256": "d5946c4b498cbc907ad6b642317516d3e8b1cc5d1e55901f848db4b71fd31328",
+      "start": "2026-11-04",
+      "end": "2026-11-11",
+      "symbols": 124,
+      "limitations": [
+        "名单来自2026-11-03T17:06:29.382976+08:00的固定存档，排除原44只开发股票及当时名称显示ST/退市的股票。",
+        "不按检验期收益增删证券；非全市场，上市、历史ST及公司行动仍未完全还原。",
+        "数据失败：{\"688798\": \"信号日日线不可用：信号日日线未落地；信号日日线未落地\"}"
+      ]
+    },
+    "recent": {
+      "path": ".cache/paper-opening-audit/recent/sample.json.gz",
+      "sha256": "674548c52c800fc82681135ea10b6aeff46eae2975940367ce7c50691e4e6201",
+      "start": "2026-11-12",
+      "end": "2026-11-19",
+      "symbols": 124,
+      "limitations": [
+        "名单来自2026-11-03T17:06:29.382976+08:00的固定存档，排除原44只开发股票及当时名称显示ST/退市的股票。",
+        "不按检验期收益增删证券；非全市场，上市、历史ST及公司行动仍未完全还原。",
+        "数据失败：{\"688798\": \"信号日日线不可用：信号日日线未落地；信号日日线未落地\"}",
+        "固定原124只股票，未按新检验期间涨幅更换；失败股票不补入替代标的。"
+      ]
+    }
+  },
+  "results": [
+    {
+      "sample": "development",
+      "case": "baseline",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "diagnostics": {
+        "market_pass_days": 8,
+        "candidate_signals": 8,
+        "ready_plans": 8
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "trades": []
+      },
+      "closed_trade_audit": [],
+      "incomplete_minute_days": 44
+    },
+    {
+      "sample": "development",
+      "case": "no_market_veto",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 97314.7,
+        "return_pct": -2.6853000000000016,
+        "monthly_equivalent_pct": -0.8965143876780823,
+        "max_drawdown_pct": 3.6263109386176717,
+        "closed_trades": 9,
+        "win_rate_pct": 22.22222222222222,
+        "fees": 186.3,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "diagnostics": {
+        "market_pass_days": 60,
+        "candidate_signals": 38,
+        "ready_plans": 38
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 96784.59,
+        "return_pct": -3.2154100000000074,
+        "closed_trades": 9,
+        "win_rate_pct": 22.22222222222222,
+        "trades": [
+          {
+            "code": "601099",
+            "shares": 5700,
+            "baseline_net_pnl": -249.84,
+            "stress_net_pnl": -385.62,
+            "stress_fees": 43.62
+          },
+          {
+            "code": "601952",
+            "shares": 2400,
+            "baseline_net_pnl": -165.93,
+            "stress_net_pnl": -235.82,
+            "stress_fees": 43.82
+          },
+          {
+            "code": "601952",
+            "shares": 2300,
+            "baseline_net_pnl": 231.0,
+            "stress_net_pnl": 163.03,
+            "stress_fees": 43.97
+          },
+          {
+            "code": "601952",
+            "shares": 2100,
+            "baseline_net_pnl": -777.52,
+            "stress_net_pnl": -841.02,
+            "stress_fees": 43.02
+          },
+          {
+            "code": "601318",
+            "shares": 300,
+            "baseline_net_pnl": -72.99,
+            "stress_net_pnl": -97.98,
+            "stress_fees": 37.98
+          },
+          {
+            "code": "002181",
+            "shares": 2000,
+            "baseline_net_pnl": -221.2,
+            "stress_net_pnl": -282.4,
+            "stress_fees": 42.4
+          },
+          {
+            "code": "600183",
+            "shares": 100,
+            "baseline_net_pnl": -310.47,
+            "stress_net_pnl": -329.94,
+            "stress_fees": 34.94
+          },
+          {
+            "code": "300413",
+            "shares": 800,
+            "baseline_net_pnl": -1292.13,
+            "stress_net_pnl": -1328.24,
+            "stress_fees": 40.24
+          },
+          {
+            "code": "002043",
+            "shares": 1500,
+            "baseline_net_pnl": 173.78,
+            "stress_net_pnl": 122.58,
+            "stress_fees": 42.42
+          }
+        ]
+      },
+      "closed_trade_audit": [
+        {
+          "code": "601099",
+          "name": "太平洋",
+          "signal_date": "2026-08-05",
+          "entry_at": 1785993300002,
+          "exit_at": 1786326300002,
+          "entry_price": 3.45,
+          "exit_price": 3.41,
+          "net_pnl": -249.84,
+          "fees": 21.84,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-06",
+          "entry_at": 1786068900002,
+          "exit_at": 1786585500002,
+          "entry_price": 8.2,
+          "exit_price": 8.14,
+          "net_pnl": -165.93,
+          "fees": 21.93,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-20",
+          "entry_at": 1787278500002,
+          "exit_at": 1787535900002,
+          "entry_price": 8.46,
+          "exit_price": 8.57,
+          "net_pnl": 231.0,
+          "fees": 22.0,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-28",
+          "entry_at": 1788142500002,
+          "exit_at": 1788399900002,
+          "entry_price": 9.41,
+          "exit_price": 9.05,
+          "net_pnl": -777.52,
+          "fees": 21.52,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601318",
+          "name": "中国平安",
+          "signal_date": "2026-09-01",
+          "entry_at": 1788314400002,
+          "exit_at": 1788831900002,
+          "entry_price": 56.66,
+          "exit_price": 56.48,
+          "net_pnl": -72.99,
+          "fees": 18.99,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "signal_date": "2026-09-11",
+          "entry_at": 1789351200002,
+          "exit_at": 1789436700002,
+          "entry_price": 9.54,
+          "exit_price": 9.44,
+          "net_pnl": -221.2,
+          "fees": 21.2,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "600183",
+          "name": "生益科技",
+          "signal_date": "2026-09-11",
+          "entry_at": 1789351200002,
+          "exit_at": 1789695900002,
+          "entry_price": 146.52,
+          "exit_price": 143.59,
+          "net_pnl": -310.47,
+          "fees": 17.47,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "300413",
+          "name": "芒果超媒",
+          "signal_date": "2026-10-12",
+          "entry_at": 1791873900002,
+          "exit_at": 1792633500002,
+          "entry_price": 23.61,
+          "exit_price": 22.02,
+          "net_pnl": -1292.13,
+          "fees": 20.13,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "signal_date": "2026-10-23",
+          "entry_at": 1792980000002,
+          "exit_at": 1793151900002,
+          "entry_price": 12.53,
+          "exit_price": 12.66,
+          "net_pnl": 173.78,
+          "fees": 21.22,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        }
+      ],
+      "incomplete_minute_days": 44
+    },
+    {
+      "sample": "development",
+      "case": "broader_pool_no_veto",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 97314.7,
+        "return_pct": -2.6853000000000016,
+        "monthly_equivalent_pct": -0.8965143876780823,
+        "max_drawdown_pct": 3.6263109386176717,
+        "closed_trades": 9,
+        "win_rate_pct": 22.22222222222222,
+        "fees": 186.3,
+        "start": "2026-08-04",
+        "end": "2026-11-03",
+        "calendar_days": 92
+      },
+      "diagnostics": {
+        "market_pass_days": 60,
+        "candidate_signals": 38,
+        "ready_plans": 38
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 96784.59,
+        "return_pct": -3.2154100000000074,
+        "closed_trades": 9,
+        "win_rate_pct": 22.22222222222222,
+        "trades": [
+          {
+            "code": "601099",
+            "shares": 5700,
+            "baseline_net_pnl": -249.84,
+            "stress_net_pnl": -385.62,
+            "stress_fees": 43.62
+          },
+          {
+            "code": "601952",
+            "shares": 2400,
+            "baseline_net_pnl": -165.93,
+            "stress_net_pnl": -235.82,
+            "stress_fees": 43.82
+          },
+          {
+            "code": "601952",
+            "shares": 2300,
+            "baseline_net_pnl": 231.0,
+            "stress_net_pnl": 163.03,
+            "stress_fees": 43.97
+          },
+          {
+            "code": "601952",
+            "shares": 2100,
+            "baseline_net_pnl": -777.52,
+            "stress_net_pnl": -841.02,
+            "stress_fees": 43.02
+          },
+          {
+            "code": "601318",
+            "shares": 300,
+            "baseline_net_pnl": -72.99,
+            "stress_net_pnl": -97.98,
+            "stress_fees": 37.98
+          },
+          {
+            "code": "002181",
+            "shares": 2000,
+            "baseline_net_pnl": -221.2,
+            "stress_net_pnl": -282.4,
+            "stress_fees": 42.4
+          },
+          {
+            "code": "600183",
+            "shares": 100,
+            "baseline_net_pnl": -310.47,
+            "stress_net_pnl": -329.94,
+            "stress_fees": 34.94
+          },
+          {
+            "code": "300413",
+            "shares": 800,
+            "baseline_net_pnl": -1292.13,
+            "stress_net_pnl": -1328.24,
+            "stress_fees": 40.24
+          },
+          {
+            "code": "002043",
+            "shares": 1500,
+            "baseline_net_pnl": 173.78,
+            "stress_net_pnl": 122.58,
+            "stress_fees": 42.42
+          }
+        ]
+      },
+      "closed_trade_audit": [
+        {
+          "code": "601099",
+          "name": "太平洋",
+          "signal_date": "2026-08-05",
+          "entry_at": 1785993300002,
+          "exit_at": 1786326300002,
+          "entry_price": 3.45,
+          "exit_price": 3.41,
+          "net_pnl": -249.84,
+          "fees": 21.84,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-06",
+          "entry_at": 1786068900002,
+          "exit_at": 1786585500002,
+          "entry_price": 8.2,
+          "exit_price": 8.14,
+          "net_pnl": -165.93,
+          "fees": 21.93,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-20",
+          "entry_at": 1787278500002,
+          "exit_at": 1787535900002,
+          "entry_price": 8.46,
+          "exit_price": 8.57,
+          "net_pnl": 231.0,
+          "fees": 22.0,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601952",
+          "name": "苏垦农发",
+          "signal_date": "2026-08-28",
+          "entry_at": 1788142500002,
+          "exit_at": 1788399900002,
+          "entry_price": 9.41,
+          "exit_price": 9.05,
+          "net_pnl": -777.52,
+          "fees": 21.52,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "601318",
+          "name": "中国平安",
+          "signal_date": "2026-09-01",
+          "entry_at": 1788314400002,
+          "exit_at": 1788831900002,
+          "entry_price": 56.66,
+          "exit_price": 56.48,
+          "net_pnl": -72.99,
+          "fees": 18.99,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "002181",
+          "name": "粤 传 媒",
+          "signal_date": "2026-09-11",
+          "entry_at": 1789351200002,
+          "exit_at": 1789436700002,
+          "entry_price": 9.54,
+          "exit_price": 9.44,
+          "net_pnl": -221.2,
+          "fees": 21.2,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "600183",
+          "name": "生益科技",
+          "signal_date": "2026-09-11",
+          "entry_at": 1789351200002,
+          "exit_at": 1789695900002,
+          "entry_price": 146.52,
+          "exit_price": 143.59,
+          "net_pnl": -310.47,
+          "fees": 17.47,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "300413",
+          "name": "芒果超媒",
+          "signal_date": "2026-10-12",
+          "entry_at": 1791873900002,
+          "exit_at": 1792633500002,
+          "entry_price": 23.61,
+          "exit_price": 22.02,
+          "net_pnl": -1292.13,
+          "fees": 20.13,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "002043",
+          "name": "兔 宝 宝",
+          "signal_date": "2026-10-23",
+          "entry_at": 1792980000002,
+          "exit_at": 1793151900002,
+          "entry_price": 12.53,
+          "exit_price": 12.66,
+          "net_pnl": 173.78,
+          "fees": 21.22,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        }
+      ],
+      "incomplete_minute_days": 44
+    },
+    {
+      "sample": "later",
+      "case": "baseline",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "trades": []
+      },
+      "closed_trade_audit": [],
+      "incomplete_minute_days": 0
+    },
+    {
+      "sample": "later",
+      "case": "no_market_veto",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "diagnostics": {
+        "market_pass_days": 6,
+        "candidate_signals": 1,
+        "ready_plans": 1
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "trades": []
+      },
+      "closed_trade_audit": [],
+      "incomplete_minute_days": 0
+    },
+    {
+      "sample": "later",
+      "case": "broader_pool_no_veto",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 104111.02,
+        "return_pct": 4.11102000000001,
+        "monthly_equivalent_pct": 16.565352417818335,
+        "max_drawdown_pct": 0.34673940999453734,
+        "closed_trades": 2,
+        "win_rate_pct": 100.0,
+        "fees": 62.98,
+        "start": "2026-11-04",
+        "end": "2026-11-11",
+        "calendar_days": 8
+      },
+      "diagnostics": {
+        "market_pass_days": 6,
+        "candidate_signals": 17,
+        "ready_plans": 17
+      },
+      "open_positions": 3,
+      "fixed_execution_double_cost": {
+        "end_equity": 103910.04,
+        "return_pct": 3.9100399999999924,
+        "closed_trades": 2,
+        "win_rate_pct": 100.0,
+        "trades": [
+          {
+            "code": "603389",
+            "shares": 400,
+            "baseline_net_pnl": 2909.28,
+            "stress_net_pnl": 2878.57,
+            "stress_fees": 45.43
+          },
+          {
+            "code": "600189",
+            "shares": 2300,
+            "baseline_net_pnl": 162.06,
+            "stress_net_pnl": 94.14,
+            "stress_fees": 43.86
+          }
+        ]
+      },
+      "closed_trade_audit": [
+        {
+          "code": "603389",
+          "name": "亚振家居",
+          "signal_date": "2026-11-03",
+          "entry_at": 1793769300002,
+          "exit_at": 1794188700002,
+          "entry_price": 45.41,
+          "exit_price": 52.74,
+          "net_pnl": 2909.28,
+          "fees": 22.72,
+          "reason": "target",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "600189",
+          "name": "泉阳泉",
+          "signal_date": "2026-11-05",
+          "entry_at": 1793930400002,
+          "exit_at": 1794188700002,
+          "entry_price": 8.46,
+          "exit_price": 8.54,
+          "net_pnl": 162.06,
+          "fees": 21.94,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        }
+      ],
+      "incomplete_minute_days": 0
+    },
+    {
+      "sample": "recent",
+      "case": "baseline",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-12",
+        "end": "2026-11-19",
+        "calendar_days": 8
+      },
+      "diagnostics": {
+        "market_pass_days": 0,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "trades": []
+      },
+      "closed_trade_audit": [],
+      "incomplete_minute_days": 0
+    },
+    {
+      "sample": "recent",
+      "case": "no_market_veto",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "monthly_equivalent_pct": 0.0,
+        "max_drawdown_pct": 0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "fees": 0.0,
+        "start": "2026-11-12",
+        "end": "2026-11-19",
+        "calendar_days": 8
+      },
+      "diagnostics": {
+        "market_pass_days": 6,
+        "candidate_signals": 0,
+        "ready_plans": 0
+      },
+      "open_positions": 0,
+      "fixed_execution_double_cost": {
+        "end_equity": 100000.0,
+        "return_pct": 0.0,
+        "closed_trades": 0,
+        "win_rate_pct": null,
+        "trades": []
+      },
+      "closed_trade_audit": [],
+      "incomplete_minute_days": 0
+    },
+    {
+      "sample": "recent",
+      "case": "broader_pool_no_veto",
+      "summary": {
+        "initial_capital": 100000.0,
+        "end_equity": 95666.78,
+        "return_pct": -4.333220000000004,
+        "monthly_equivalent_pct": -15.510602593594724,
+        "max_drawdown_pct": 4.333220000000001,
+        "closed_trades": 3,
+        "win_rate_pct": 0.0,
+        "fees": 69.22,
+        "start": "2026-11-12",
+        "end": "2026-11-19",
+        "calendar_days": 8
+      },
+      "diagnostics": {
+        "market_pass_days": 6,
+        "candidate_signals": 14,
+        "ready_plans": 14
+      },
+      "open_positions": 1,
+      "fixed_execution_double_cost": {
+        "end_equity": 95407.59,
+        "return_pct": -4.592410000000003,
+        "closed_trades": 3,
+        "win_rate_pct": 0.0,
+        "trades": [
+          {
+            "code": "300426",
+            "shares": 1700,
+            "baseline_net_pnl": -3147.36,
+            "stress_net_pnl": -3200.73,
+            "stress_fees": 38.73
+          },
+          {
+            "code": "603609",
+            "shares": 3100,
+            "baseline_net_pnl": -517.95,
+            "stress_net_pnl": -601.89,
+            "stress_fees": 43.89
+          },
+          {
+            "code": "002522",
+            "shares": 4000,
+            "baseline_net_pnl": -661.74,
+            "stress_net_pnl": -763.45,
+            "stress_fees": 43.45
+          }
+        ]
+      },
+      "closed_trade_audit": [
+        {
+          "code": "300426",
+          "name": "华智数媒",
+          "signal_date": "2026-11-11",
+          "entry_at": 1794447900002,
+          "exit_at": 1794879900002,
+          "entry_price": 11.45,
+          "exit_price": 9.61,
+          "net_pnl": -3147.36,
+          "fees": 19.36,
+          "reason": "stop",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "603609",
+          "name": "禾丰股份",
+          "signal_date": "2026-11-16",
+          "entry_at": 1794897000002,
+          "exit_at": 1795052700002,
+          "entry_price": 6.44,
+          "exit_price": 6.28,
+          "net_pnl": -517.95,
+          "fees": 21.95,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        },
+        {
+          "code": "002522",
+          "name": "浙江众成",
+          "signal_date": "2026-11-17",
+          "entry_at": 1794967200002,
+          "exit_at": 1795052700002,
+          "entry_price": 4.97,
+          "exit_price": 4.81,
+          "net_pnl": -661.74,
+          "fees": 21.74,
+          "reason": "ma10_exit",
+          "checks": {
+            "signal_precedes_entry": true,
+            "t_plus_one": true,
+            "entry_in_plan": true,
+            "board_lot": true,
+            "fee_sum": true
+          }
+        }
+      ],
+      "incomplete_minute_days": 0
+    }
+  ],
+  "release_decision": "A股不切换：取消大盘过滤在原样本亏损；扩池方案最新时段亏损，尚不支持发布。期货修复数据时序阻断，保持双均线策略。"
+}

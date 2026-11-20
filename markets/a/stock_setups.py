@@ -5,6 +5,7 @@ from daily_strategy import entry_signal
 from trade_plan import build_trade_plan
 
 VERSION='a-setups-v2'
+PLAN_REVISION='a-pullback-wait-v1'
 LABELS={'ma20_reclaim':'重返MA20确认','trend_pullback':'持续趋势回踩','volume_breakout':'放量突破确认'}
 PRIORITY=('trend_pullback','ma20_reclaim','volume_breakout')
 
@@ -42,17 +43,19 @@ def build_setup_plan(rows,rule):
     issues=[]
     if atr<=0 or not 0<stop<lower<=upper<target:issues.append('止损、买入区间与目标结构无效')
     if upper-lower<.009999:issues.append('整分区间不足一档滑点空间')
-    if closes[-1]>pivot*1.05:issues.append('距离回踩中心超过5%，不追高')
     if rr<1.5:issues.append('区间上沿至目标的毛盈亏比不足1.5')
+    distant=closes[-1]>pivot*1.05
+    warnings=['昨日收盘距离回踩中心超过5%，等待回踩；区间外不买入'] if distant else []
     base.update(strategy_version=VERSION,strategy_rule=rule,strategy_label=LABELS[rule],plan_ready=not issues,
+                plan_revision=PLAN_REVISION,warnings=warnings,
                 pivot=round(pivot,4),atr14=round(atr,4),risk_reward=round(rr,4),rejection_reasons=issues,
-                chase_risk=closes[-1]>pivot*1.05,
-                summary='；'.join(issues) if issues else LABELS[rule]+'：次日仅在回踩区间内观察买入')
+                chase_risk=distant,
+                summary='；'.join(issues) if issues else LABELS[rule]+'：次日仅在回踩区间内观察买入'+('；'+warnings[0] if warnings else ''))
     base['sniper']=dict(ideal_buy=upper,secondary_buy=lower,stop_loss=stop,take_profit=target,
         note=LABELS[rule]+'独立回踩区间；整分报价；1.5ATR保护与上方空间检查')
     base['checklist']=[dict(item='分型确认',detail=LABELS[rule]+'量价条件已满足',status='满足'),
         dict(item='买入区间',detail=f'{lower:.2f}～{upper:.2f}；仅下一交易日有效',status='满足' if upper-lower>=.009999 else '不满足'),
-        dict(item='不追高',detail=f'距回踩中心 {(closes[-1]/pivot-1)*100:+.2f}%',status='不满足' if base['chase_risk'] else '满足'),
+        dict(item='入场纪律',detail=f'昨日收盘距回踩中心 {(closes[-1]/pivot-1)*100:+.2f}%；次日报价及含滑点成交价均须在买入区间内',status='等待回踩' if distant else '满足'),
         dict(item='结构空间',detail=f'止损{stop:.2f}；目标{target:.2f}；毛盈亏比{rr:.2f}',status='满足' if rr>=1.5 and stop>0 else '不满足')]
     return base
 

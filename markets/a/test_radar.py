@@ -96,6 +96,7 @@ class RadarTests(unittest.TestCase):
              mock.patch.object(radar,'as_of_date',return_value=last):
             result=radar.scan()
             self.assertEqual(result['strategy_version'],'a-setups-v2')
+            self.assertEqual(result['plan_revision'],radar.PLAN_REVISION)
             self.assertEqual(result['strategy_count'],1)
             r=result['strategy_candidates'][0]
             self.assertIn('trend_pullback',r['rules'])

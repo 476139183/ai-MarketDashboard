@@ -19,7 +19,11 @@ def packet(now=None, price=3000, direction=1, symbol='RB2701'):
     now=clock() if now is None else now
     today=datetime.fromtimestamp(now/1000,F.BJ).replace(hour=0,minute=0,second=0,microsecond=0)
     values=list(range(2900,2965)) if direction>0 else list(range(3065,3000,-1))
-    bars=[dict(time=int((today-timedelta(days=65-i)).timestamp()*1000),open=v,high=v+2,low=v-2,close=v,volume=100,open_interest=100,complete=True) for i,v in enumerate(values)]
+    dates=[];cursor=today
+    while len(dates)<65:
+        cursor-=timedelta(days=1)
+        if cursor.weekday()<5:dates.append(cursor)
+    bars=[dict(time=int(dt.timestamp()*1000),open=v,high=v+2,low=v-2,close=v,volume=100,open_interest=100,complete=True) for dt,v in zip(reversed(dates),values)]
     bars.append(dict(time=int(today.timestamp()*1000),open=price,high=price+1,low=price-1,close=price,volume=100,open_interest=100,complete=False))
     return dict(symbol=symbol,source=F.SOURCE,period='day',candles=bars,quote=dict(F.identity(symbol),price=price,quote_at=now,volume=100,open_interest=100,error=None))
 
@@ -84,11 +88,37 @@ class FuturesPaperTests(unittest.TestCase):
         self.account.step(packet(symbol='AU2701'),now=clock())
         state=self.account.snapshot();self.assertEqual(state['positions'],[]);self.assertIsNone(state['pending'])
 
-    def test_no_new_positions_when_daily_anchor_or_complete_history_missing(self):
+    def test_no_new_positions_when_previous_session_or_complete_history_missing(self):
         self.enable()
-        for data in [dict(packet(),candles=packet()['candles'][:-1]),dict(packet(),candles=packet()['candles'][-10:])]:
+        for data in [dict(packet(),candles=packet()['candles'][:-2]),dict(packet(),candles=packet()['candles'][-10:])]:
             self.account.step(data,now=clock());self.account.step(dict(data,quote=packet(clock(second=5))['quote']),now=clock(second=5))
         self.assertEqual(self.account.snapshot()['positions'],[])
+
+    def test_end_of_day_provider_can_enter_without_a_forming_today_candle(self):
+        self.enable()
+        for sec in (0,5):
+            data=packet(clock(second=sec));data['candles'].pop()
+            self.account.step(data,now=clock(second=sec))
+        state=self.account.snapshot(now=clock(second=5))
+        self.assertEqual(len(state['positions']),1)
+        self.assertEqual(P.day(state['positions'][0]['signal_at']),'2026-11-06')
+
+    def test_calendar_skips_holidays_but_not_missing_completed_sessions(self):
+        now=int(datetime(2026,10,8,10,tzinfo=F.BJ).timestamp()*1000)
+        data=packet(now);data['candles']=[b for b in data['candles'] if P.day(b['time'])<='2026-09-30']
+        self.assertEqual(P.day(P.daily_signal(data,now)['signal_at']),'2026-09-30')
+        with self.assertRaisesRegex(ValueError,'上一交易日'):
+            P.daily_signal(dict(data,candles=data['candles'][:-1]),now)
+
+    def test_future_daily_bars_and_unverified_calendar_cannot_open(self):
+        data=packet();data['candles'][-1]['time']+=86400000
+        with self.assertRaises(ValueError):P.daily_signal(data,clock())
+        unknown=int(datetime(2027,1,4,10,tzinfo=F.BJ).timestamp()*1000)
+        with self.assertRaisesRegex(ValueError,'日历'):P.daily_signal(packet(unknown),unknown)
+
+    def test_holiday_weekday_is_not_a_session_even_with_fresh_quote(self):
+        now=int(datetime(2026,10,2,10,tzinfo=F.BJ).timestamp()*1000)
+        self.assertFalse(P.quote_valid(packet(now),P.normalize_config({}),now))
 
     def test_pause_blocks_new_entries_but_existing_stops_keep_working(self):
         self.enter();self.account.set_enabled(False,now=clock(second=6))
